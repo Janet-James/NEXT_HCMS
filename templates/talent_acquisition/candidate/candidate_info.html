@@ -1,0 +1,165 @@
+<div class="page-content padding-0">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="" id="form_wizard_1">
+				<div class="portlet-title">
+				
+				<div class="col-md-2">
+				
+					<div class="caption">
+						<span class="caption-subject bold uppercase">Candidate </span>
+					</div>
+					</div>
+					<div class="col-md-6" style="margin-top: -2px;"><span style="cursor:pointer; font-size: 24px;margin-left: -134px;color:#9aa8fe" data-toggle="tooltip" data-placement="bottom" title="Resume Content Extract"  class="resume_extracts animated fadeIn infinite" onclick="resumeParserModal()"><i class="nf nf-data-access"></i></span>
+					<span
+							id="candidate_emp_status"></span>
+					</div>
+					<div class="col-md-4">
+						<!-- <div class="col-md-3">
+							<span id="profile_name" style="display:none;"></span>
+							</div> -->
+
+						<!-- <div class="col-md-4" style="display: none">
+							<div class="btn-padding">
+								<button id="add_to_employee"
+									onclick="changeCandidatetoEmployee()" type='button'
+									class='btn btn-success btn-eql-wid btn-animate'>Add to
+									Employee</button>
+							</div>
+						</div> -->
+
+
+						<div class="col-md-12 pull-right">
+							<div class="row">
+								<div class="col-md-4">
+									<ul class="list-inline pull-right">
+										<li><div class="caption margin-top-10">
+												<i data-toggle="tooltip" data-placement="top" title=""
+													class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div></li>
+									</ul>
+								</div>
+								<div class="col-md-8">
+									<div class="form-group">
+										<select id="ta_candidate_list" name="ta_candidate_list"
+											class="form-control select2" required>
+											<option value="0">-- Select Candidate--</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+					</div>
+
+					<div action="#" id="formwizard" method="POST">
+						<div class="form-wizard bordernavigaton">
+							<div id="tab_formwizard" class="form-body">
+								<ul class="nav nav-pills nav-justified steps ">
+									<li class="dtBox"><a class="step" href="#pills-tab1"
+										id="tab_primary" data-toggle="tab"><span class="number">
+												<i class="nf nf-employee-portal"></i>
+										</span><span class="desc"> <i class="fa fa-check"></i> Basic
+												Information
+										</span></a></li>
+
+									<li class=''><a class="step" href="#pills-tab3"
+										id="tab_education" data-toggle="tab"><span class="number">
+												<i class="nf nf-university"></i>
+										</span> <span class="desc"> <i class="fa fa-check"></i>
+												Educational Details
+										</span> </a></li>
+									<li class='dtBox3'><a class="step" href="#pills-tab4"
+										id="tab_experience" data-toggle="tab"><span class="number">
+												<i class="nf nf-experience"></i>
+										</span> <span class="desc"> <i class="fa fa-check"></i>
+												Professional Experience
+										</span> </a></li>
+									<li class='dtBox4'><a class="step" href="#pills-tab5"
+										id="tab_certification" data-toggle="tab"><span
+											class="number"> <i class="nf nf-certificate"></i>
+										</span> <span class="desc"> <i class="fa fa-check"></i>
+												Certification
+										</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab6"
+										id="tab_skills" data-toggle="tab"><span class="number">
+												<i class="nf nf-skills"></i>
+										</span> <span class="desc"> <i class="fa fa-skills"></i>
+												Skills
+										</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab7"
+										id="tab_others" data-toggle="tab"><span class="number">
+												<i class="nf nf-skills"></i>
+										</span> <span class="desc"> <i class="fa fa-skills"></i>
+												Candidate Status
+										</span> </a></li>
+								</ul>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="tab-content">
+								<!-- tab1 content start -->
+								<div class="clearfix" style="padding: 10px;"></div>
+								<div class="tab-pane" id="pills-tab1">
+									<div class="row">{% include "./basic_info.html" %}</div>
+								</div>
+								<!-- tab1 content end -->
+
+								<!-- tab2 content start -->
+								<div class="tab-pane" id="pills-tab3">
+									<div class="row">{% include "./candidate_education.html" %}</div>
+								</div>
+								<!-- tab2 content end -->
+								<!-- tab3 content start -->
+								<div class="tab-pane" id="pills-tab4">
+									<div class="row">{% include "./candidate_experience.html" %}</div>
+								</div>
+								<!-- tab3 content end -->
+								<!-- tab4 content start -->
+								<div class="tab-pane" id="pills-tab5">
+									<div class="row">{% include "./candidate_certification.html" %}</div>
+								</div>
+								<!-- tab4 content end -->
+								<!-- tab5 content start -->
+								<div class="tab-pane" id="pills-tab6">
+									<div class="row">{% include "./candidate_skill.html" %}</div>
+								</div>
+								<!-- tab5 content end -->
+								<!-- tab6 content start -->
+								<div class="tab-pane" id="pills-tab7">
+									<div class="row">{% include "./candidate_others.html" %}
+									</div>
+								</div>
+								<!-- tab6 content end -->
+								<div class="clearfix"></div>
+
+								<div class="col-md-12">
+									<ul class="pager wizard top_for_pre_button">
+										<li class="previous first" style="display: none;"><a
+											href="#">First</a></li>
+										<li class="previous"><a
+											class="btn blue button-previous pre_button"
+											id="candidate_pre" title='Previous' href="#"
+											style="display: block;"><i
+												class="nf nf-double-arrow-right"></i></a></li>
+										<li class="next last" style="display: none;"><a href="#">Last</a></li>
+										<li class="next"><a class="btn green button-next"
+											href="#" id="candidate_last" title='Next'><i
+												class="nf nf-double-arrow-left"></i></a></li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

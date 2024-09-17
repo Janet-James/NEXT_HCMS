@@ -1,0 +1,153 @@
+NTree='NTree'
+all_teamname_query='all_teamname_query'
+groupcode_details_query='groupcode_details_query'
+individualemp_details_query='individualemp_details_query'
+allemp_details_query='allemp_details_query'
+teamemp_details_query='teamemp_details_query'
+individualteam_details_query='individualteam_details_query'
+individualemp_name_query='individualemp_name_query'
+allemp_name_query='allemp_name_query'
+teamemp_name_query='teamemp_name_query'
+teamview_empinfo_query='teamview_empinfo_query'
+create_objective_query='create_objective_query'
+update_objective_query='update_objective_query'
+select_kr_query='select_kr_query'
+delete_objective_query='delete_objective_query'
+delete_keyresults_query='delete_keyresults_query'
+create_keyresult_query='create_keyresult_query'
+update_keyresult_query='update_keyresult_query'
+teamview_query='teamview_query'
+update_empty_team_query='update_empty_team_query'
+insert_ntree_team_query='insert_ntree_team_query'
+update_ntree_team_query='update_ntree_team_query'
+update_team_query='update_team_query'
+ntree_team_existcheck_query='ntree_team_existcheck_query'
+max_orderid_query='max_orderid_query'
+already_existteam_query='already_existteam_query'
+insert_team_query='insert_team_query'
+team_name_query='team_name_query'
+team_emp_image_query='team_emp_image_query'
+individual_emp_image_query='individual_emp_image_query'
+emp_details_query='emp_details_query'
+view_teamname_query='view_teamname_query'
+team_details_query='team_details_query'
+#Chart config start
+individual_com_exp_query='individual_com_exp_query'
+individual_combined_chart_query='individual_combined_chart_query'
+individual_risk_query='individual_risk_query'
+individual_exceeded_query='individual_exceeded_query'
+individual_completed_query='individual_completed_query'
+individual_ontrack_query='individual_ontrack_query'
+
+all_com_exp_query='all_com_exp_query'
+all_combined_chart_query='all_combined_chart_query'
+all_risk_query='all_risk_query'
+all_exceeded_query='all_exceeded_query'
+all_ontrack_query='all_ontrack_query'
+all_completed_query='all_completed_query'
+
+team_com_exp_query='team_com_exp_query'
+team_combined_chart_query='team_combined_chart_query'
+team_risk_query='team_risk_query'
+team_exceeded_query='team_exceeded_query'
+team_completed_query='team_completed_query'
+team_ontrack_query='team_ontrack_query'
+
+ntree_access_rights_role_dropdown = "ntree_access_rights_role_dropdown"
+ntree_access_rights_data_fetch = "ntree_access_rights_data_fetch"
+ntree_access_rights_roleId_fetch_based_roles = "ntree_access_rights_roleId_fetch_based_roles"
+ntree_access_rights_roleId_fetch_based_role = "ntree_access_rights_roleId_fetch_based_role"
+role_data_fetch_based_id = "role_data_fetch_based_id"
+role_data_fetch_based_ids = "role_data_fetch_based_ids"
+delete_ntree_access_rights_based_role_level = "delete_ntree_access_rights_based_role_level"
+delete_ntree_access_rights_based_roles_level = "delete_ntree_access_rights_based_roles_level"
+delete_ntree_access_rights_based_level = "delete_ntree_access_rights_based_level"
+insert_ntree_access_rights = "insert_ntree_access_rights"
+
+null = "null"
+status = "status"
+application_json = "application/json"
+levelname = "levelname"
+role = "role"
+role_common_data = "role_common_data"
+role_detail = "role_detail"
+access_rights_data = "access_rights_data"
+NTree_access_rights_html = "NTree/access_rights.html"
+
+team_details='team_details'
+employee_details='employee_details'
+all_employee_details='all_employee_details'
+tree_details='tree_details'
+member_list='member_list'
+employee_info='employee_info'
+message='message'
+status='status'
+team_id='team_id'
+objective_id='objective_id'
+keyresult_id='keyresult_id'
+user_id='user_id'
+User='USSER'
+Project_Manager='PMNGR'
+Team_Leads='TMLDS'
+Manager='MNGER'
+Hr_Manager='HRMGR'
+db_connection='Unable to create database connection'
+chart_values='chart_values'
+risk_details='risk_details'
+exceeded_details='exceeded_details'
+completed_details='completed_details'
+ontrack_details='ontrack_details'
+alltrack_details='alltrack_details'
+max_order='max_order'
+status_NTE1='NTE-001'
+status_NTE2='NTE-002'
+status_NTE3='NTE-003'
+status_NTE4='NTE-004'
+msg_delete_success='Deleted Successfully'
+msg_update_success='Updated Successfully'
+Success='Success'
+msg_update_obj='Updated Objective Successfully'
+msg_create_newteam='New Team Created Successfully'
+msg_already_exist='Team Already Exist'
+team_emp_details='team_emp_details'
+user_group='user_group'
+column_value='column_value'
+column_name='column_name'
+team_name='team_name'
+team_tree_list='team_tree_list'
+update_teamid_list='update_teamid_list'
+
+strUAMLink ='http://192.168.10.236:8000'
+strAppName = 'NTree' 
+strAppClient = 'NTree_Admin' 
+create='create'
+update='update'
+delete='delete'
+view='view'
+team_info='team_info'
+teambased_user_query='teambased_user_query'
+already_existobjective_query='already_existobjective_query'
+msg_objective_already_exist='Objective already exist'
+msg_updateobjective_already_exist='Objective already exist cannot update'
+already_existobjective_update_query='already_existobjective_update_query'
+already_existkeyresult_update_query='already_existkeyresult_update_query'
+msg_kr_already_exist='Keyresult already exist'
+
+msg_kr_delete_success='Remove keyresults and try again'
+all_tree_teamname_query='all_tree_teamname_query'
+
+fetch_organization_details_view='fetch_organization_details_view'
+
+team_detail_check='team_detail_check'
+remove_team_query='remove_team_query'
+org_unit_id_fetch='org_unit_id_fetch'
+
+
+#    dashboard
+org_total_objective='org_total_objective'
+expected_completed='expected_completed'
+all_stage_objective='all_stage_objective'
+completed_stages='completed_stages'
+organization_objective='organization_objective'
+
+okr_teamview_query='okr_teamview_query'

@@ -1,0 +1,38 @@
+/* NEXT UX2.0 | CUSTOM-KENDO.CSS
+// Version    0.2 | Build 2
+// Released on | 25 Oct 2017
+// © 2017-2018 | www.nexttechnosolutions.com
+=====================================================*/
+
+.k-ie8 .k-upload-button, .k-ie9 .k-upload-button, .k-upload-sync .k-upload-button {
+    margin: 0em;    text-transform: capitalize;box-shadow: none;    height: 35px; border-top-left-radius: 0px;    border-bottom-left-radius: 0px;
+}
+.k-button {width:auto;height:auto;}
+.k-button.k-upload-action:active:hover {color: #fff;
+    border-color: #ef5350;
+    background-color: #ef5350;
+    box-shadow: none !important;}
+.k-button.k-upload-action:hover {color: #ef5350;}
+.k-widget .k-button.k-state-active, .k-widget .k-button:active {
+    color: #fff;
+    background-color: #0288d1;
+    border-color: #0288d1;
+}
+.k-widget .k-button.k-state-active:hover, .k-widget .k-button:active:hover {
+     color: #fff;
+    background-color: #0288d1;
+    border-color: #0288d1;
+	cursor:pointer;
+}
+.k-file-name{    font-weight: normal;}
+.k-button input:hover, .k-button span {cursor: pointer;display: block;}
+.k-upload-files {padding: 0px;
+    margin-top: 35px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 0px;
+    border-top-color: #757575;
+    margin-bottom: -1px;}
+html .k-upload {    min-height: 33px;    border-top-color: #fff;    border-left-color: #fff;    border-right-color: #fff;border-bottom-color: #757575;}
+.k-upload-button {    float: right;height: 40px;}
+.k-upload-button.btn-file {top: 0px;   }

@@ -1,0 +1,282 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+<!-- custom css start -->
+{% block links %}
+<!-- datatable css -->
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}" rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}" rel="stylesheet" type="text/css" />
+<!-- date timepicker css -->
+<link href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HREmployeeLeaveRequest" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent"> 
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row eqheight">
+					<!-- form dev start --> 
+						<div class="col-md-4 ">
+							<div class="portlet light bordered">
+								<div class="portlet-title">
+									<div class="caption">
+										<span class="caption-subject bold uppercase"> Raise
+											Leave Request</span>
+									</div>
+								</div>
+								<div class="portlet-body form">
+									<form role="form" id="leave_request">
+										<div class="form-body ">
+											{%csrf_token%} 
+											<div class="row "> 
+												<div class="form-set-select">
+													<input type="hidden" id="Employee_id"
+														name="leave_employee_id_id" value="{{current_employee}}">
+												</div>
+												 
+												{% if company_id%}
+												<div class="form-set-select">
+													<input type="hidden" id="company_id"
+														name="leave_company_id_id" value="{{company_id.id}}">
+												</div>
+												{% endif%}
+												<div class="col-md-12 col-sm-12">
+												{% if role == "HCM" %}
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Employee <span class="asterisk"> *</span>
+													</label> <select id="onbehalf_employee" name="onbehalf_employee" required
+														data-error=".errorTxt2"
+														class="form-control select2 select2-hidden-accessible"
+														tabindex="-1" aria-hidden="true">
+														<option value="0">--Select Employee--</option> {% for i in employee %}  
+														<h1> {{i.id}}</h1>
+														<option value={{i.id}}>{{i.name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt0 errormessage"></span> 
+												</div> 
+												{% endif %}
+												
+												
+												<div class="form-group">
+														<label for="single" class="control-label black_font">
+															Leave Type <span class="asterisk">*</span> 
+														</label> <select id="leave_type" name="leave_type" required 
+															data-error=".errorTxt3"
+															class="form-control select2 select2-hidden-accessible"
+															tabindex="-1" aria-hidden="true">
+															<option value="0">--Select Leave Type--</option>
+														</select> <span class="errorTxt3 errormessage"></span> 
+													</div> 
+													
+													<div class="form-group" >
+													<div id="from_to_date_div">
+														 <div class="col-md-6 input-icon" style="padding-left: 0px;">
+															<div class="form-group input-icon">
+															<label>From Date<span class="asterisk"> *</span></label> <i class="fa fa-calendar cicon"></i> 
+															<!-- <input
+																placeholder="From Date"
+																class="form-control form-control-inline" type="text"
+																data-field="date" id="from_leave" name="from_leave"
+																readonly="" required data-error=".errorTxt0">
+															<span class="errorTxt0 errormessage"></span> <span
+																id="from_date_invalid" class="errorTxt0 errormessage"></span> -->
+															<!-- <div id="leave_from"
+																class="dtpicker-overlay dtpicker-mobile"
+																style="display: none;"> 
+																<div class="dtpicker-bg">
+																			<div class="dtpicker-cont"> 
+																		<div class="dtpicker-content">
+																			<div class="dtpicker-subcontent"></div>
+																		</div>
+																	</div>  
+																</div>  
+															</div>  -->
+															<span 
+															style="cursor: text" placeholder="From Date"
+															id="from_leave_span" data-field="date"
+															class="form-control date"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="From Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class"
+															name="from_leave"
+															placeholder="From Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="from_leave" type="hidden" readonly
+															data-error=".errorTxt1">
+														<div id="leave_from"></div>
+
+														<span id="from_date_invalid" class="errorTxt1 errormessage"></span>
+													</div>
+														<div class="clear"></div>
+																
+															<label>To Date<span class="asterisk"> *</span></label> <i class="fa fa-calendar cicon"
+																></i>  
+																<span
+															style="cursor: text" placeholder="To Date"
+															id="to_leave_span" data-field="date"
+															class="form-control date"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="To Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class"
+															name="to_leave"
+															placeholder="To Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="to_leave" type="hidden" readonly
+															data-error=".errorTxt0">
+														<div id="leave_to"></div>
+														<span id="to_date_invalid"
+																class=" errorTxt0 errormessage"></span>
+															<!-- <div id="leave_to"
+																class="dtpicker-overlay dtpicker-mobile"   
+																style="display: none;">  
+																<div class="dtpicker-bg">
+																	<div class="dtpicker-cont"> 
+																		<div class="dtpicker-content">
+																			<div class="dtpicker-subcontent"></div>
+																		</div> 
+																	</div>
+																</div>
+															</div> -->
+														</div> 
+														</div>
+														<div id="day_type_id">
+														<div class="col-md-6 input-icon" style="padding-left: 0px;">
+														<div>														
+														<label for="single" class="control-label ">
+														         Day Type </label> <select id="from_date_type" name="from_date_type" required 
+															class="form-control select2 select2-hidden-accessible1"
+															tabindex="-1" aria-hidden="true">
+															<option value="0">--Select Day Type--</option>
+															<!-- <option value="3">whole Day</option>
+															<option value="1">Forenoon</option>
+															<option value="2">Afternoon</option> -->
+														</select> 
+														</div>
+														<div>  
+														<label for="single" class="control-label black_font">
+															Day Type 
+														</label> <select id="to_date_type" name="to_date_type" required 
+															class="form-control select2 select2-hidden-accessible"
+															tabindex="-1" aria-hidden="true">
+															 <option value="0">--Select Day Type--</option>  
+														</select>  
+														</div>
+														</div>
+														</div>  
+														
+												    </div> 
+													<div class="clearfix"></div> 
+													<br>
+													<div class="form-group">
+														<label> Reasons <span class="asterisk">*</span></label>
+														<div class="input-icon">
+															<i class="nf nf-description"></i> 
+																<textarea class="form-control" id="leave_discription"
+																name="leave_discription" placeholder="Reasons" rows="1"
+																data-error=".errorTxt2" maxlength="150"></textarea>
+																<span
+																class="errorTxt2 errormessage"></span>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6 col-sm-6">
+													<div class="form-group">
+														<label>Leave Balance</label>
+														<div class="input-icon">
+															<i class="nf nf-leave-balance"></i> <input
+																id="leave_balance_input" class="form-control"
+																placeholder=" " disabled="" type="text">
+														</div>
+													</div>												
+												</div>
+												<div class="col-md-6 col-sm-6">
+													<div class="form-group">
+														<div class="input-icon">
+															<i class="nf nf-leave-days" style="margin-top: 35px;"></i>
+															<label>Duration (<span id='duration_text'></span>)</label> <input
+																id="leave_duration_days" class="form-control"
+																placeholder=" " disabled="" type="text">
+														</div>
+													</div>
+												</div>
+											</div> 
+											<div class="clearfix"></div>
+											<div class="row">
+											<div class="col-sm-12">
+											<div class="form-group" align="right">
+												<div id="leave_request_btn"></div>
+											</div>
+											</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					<!-- form dev end -->
+					<!-- table dev start -->
+					<div class="col-md-8">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption ">
+									<span class="caption-subject bold uppercase">Raised Leave
+										Request Details</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<table class="table table-striped table-bordered table-hover"
+									id="leave_details">
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- table dev end -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<!-- body content end -->
+
+<!-- custom js link start -->
+{% block scripts %} 
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}" type="text/javascript"></script>
+<!-- select2 js -->
+<script src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}" type="text/javascript"></script>
+<!-- date timepicker js -->
+<script src="{%  static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}" type="text/javascript"></script>
+<script> 
+$("#leave_from").DateTimePicker({
+	
+    	//dateTimeFormat: "dd-mm-YYYY hh:mm:ss",
+    		timeFormat: "HH:mm",
+    
+});
+$("#leave_to").DateTimePicker({
+		dateTimeFormat: "dd-mm-YYYY hh:mm:ss"
+});
+</script>
+<!-- dev js -->
+<script src="{% static  '/dev/hrms_foundation/js/employee_management/organization.js' %}" type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+<script src="{% static  'dev/hrms_foundation/js/attendance_management/leave_request.js' %}" 
+	type="text/javascript"></script>
+
+{% endblock %}
+<!-- custom js link end -->

@@ -1,0 +1,18 @@
+{{#if GROUP}}
+  {{#if GROUP.length}}
+    {{#each GROUP}}
+
+
+    {{#ifMention this}}
+      <div class='chatGroup item' id={{id}}><div class="img-name"><span class="group-top-msg">{{unread}}</span><img src={{ip name}}><span class="group-member-list">{{mention}}</span><span class='username'>{{name}}</span></div></div>
+
+      {{else}}
+      {{#ifUnread this}}
+
+      <div class='chatGroup item' id={{id}}><div class="img-name"><span class="group-top-msg">{{unread}}</span><img src={{ip name}}><span class='username'>{{name}}</span></div></div>
+
+      {{/ifUnread}}
+      {{/ifMention}}
+    {{/each}}
+  {{/if}}
+{{/if}}

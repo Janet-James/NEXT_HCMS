@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Exit_Management/exit_management">
+		<!-- 07-Sep-2018 || TRU || Fetch data for employee list selection field start -->
+		<query id="sp_process" query_name="sp_process" description="sp process list">
+        	<![CDATA[ select id, employee_id,(name||' '||last_name) as emp_name, is_active from employee_info order by name; ]]>
+        </query>
+        
+        <query id="sp_dropdown_query" query_name="sp_dropdown_query" description="sp_dropdown_query">
+        	<![CDATA[  select {column} from {table} where is_active {condition}
+        	]]>
+        </query>
+        <query id="report_search_query" query_name="report_search_query" description="report_search_query">
+        	<![CDATA[ 
+        	select t.id,ROW_NUMBER() OVER  (ORDER BY t.id asc),coalesce(e.name,'')||' '||coalesce (e.last_name,'') as name,
+			(select case when not dep_status and not dep_appr_status and not hr_status and not hr_appr_status then 'Requested' when  dep_status and dep_appr_status and not hr_status and not hr_appr_status then 'Department Approved'
+			when dep_status and not dep_appr_status and not hr_status then 'Department Rejected'
+			when dep_status and hr_status and dep_status and not   hr_appr_status then 'HR Rejected'
+			when dep_status and hr_status then 'HR Approved'
+			end as status)
+			from  {table}  t inner join  employee_info e on t.emp_id=e.id  inner join organization_info oi on oi.id =t.org_id where t.is_active {condition}
+        	]]>
+        </query>   
+        <query id="sp_fetch_division_drop_down" description="sp_fetch_division_drop_down">
+        	<![CDATA[select id, name from team_details_info where org_unit_id=%s and is_active]]>
+        </query>
+        
+         <!-- Listing Organization -->
+        <query id="hrms_org_list" query_name="hrms_org_list"
+			description="hrms Org list">
+          <![CDATA[select id,name from organization_info where is_active order by name]]>
+		</query>  
+		
+		<query id="employee_list_fetch_sel" query_name="employee_list_fetch_sel" description="Fetch data for employee list selection field">
+        	<![CDATA[ select id, employee_id,(name||' '||last_name) as emp_name, is_active from employee_info order by name; ]]>
+        </query>
+		
+		<query id="sp_transfer_request_data_table" query_name="sp_transfer_request_data_table" description="Fetch transfer request table">        
+			<![CDATA[ select * from (select transfer.id,(emp.name||' '||emp.last_name) as emp_name,(select refitems_name from reference_items where id=transfer.category_id) as transfer_category,
+			(select refitems_name from reference_items where id=transfer.type_id)as transfer_type,to_char(transfer.req_date, 'DD-MM-YYYY') as transfer_date, 
+			case when transfer.transfer_status = true then 'Approved' else 'Not Approved' end as status from sp_transfer_details transfer
+			inner join employee_info emp on emp.id=transfer.emp_id where transfer.is_active)a ]]>
+        </query>
+        
+        <query id="sp_transfer_request_table_click" query_name="sp_transfer_request_table_click" description="Transfer request table click">
+        	<![CDATA[ select emp.org_id_id forg_id,emp.org_unit_id_id forg_unit_id,emp.team_name_id fdivi_id,transfer.id,transfer.emp_id,transfer.type_id,transfer.category_id,transfer.reason_id,transfer.org_id,transfer.org_unit_id,transfer.transfer_status,
+				transfer.org_unit_div_id,to_char(transfer.req_date, 'DD-MM-YYYY') as req_date,emp_notes,other_reason from sp_transfer_details transfer
+				inner join employee_info emp on emp.id = transfer.emp_id where transfer.id = %s ]]>
+        </query>
+		
+		<query id="sp_promotion_request_data_table" query_name="sp_promotion_request_data_table" description="Fetch promotion request table">        
+			<![CDATA[  select * from (select promotion.id,(emp.name||' '||emp.last_name) as emp_name,(select (emp1.name||' '||emp1.last_name) as nominated_by from employee_info emp1 where id=promotion.nominated_emp_id),
+			to_char(promotion.req_date, 'DD-MM-YYYY') as promotion_date,(select role_title from hcms_ti_role_details where id=promotion.role_id) as role from sp_promotion_details promotion
+			inner join employee_info emp on emp.id=promotion.emp_id)p ]]>
+        </query>
+        
+        <query id="sp_promotion_request_table_click" query_name="sp_promotion_request_table_click" description="Promotion request table click">
+        	<![CDATA[ select emp.org_id_id forg_id,emp.org_unit_id_id forg_unit_id,emp.team_name_id fdivi_id,promotion.id,promotion.emp_id,promotion.nominated_emp_id,promotion.org_id,promotion.org_unit_id,
+				promotion.org_unit_div_id,to_char(promotion.req_date, 'DD-MM-YYYY') as req_date,promotion.role_id from sp_promotion_details promotion 
+				inner join employee_info emp on emp.id = promotion.emp_id  
+	        	where promotion.id = %s ]]>
+	        </query>
+        
+        <query id="sp_demotion_request_data_table" query_name="sp_demotion_request_data_table" description="Fetch demotion request table">        
+			<![CDATA[  select * from (select demotion.id,(emp.name||' '||emp.last_name) as emp_name,
+			(select (emp1.name||' '||emp1.last_name) as requested_by from employee_info emp1 where id=demotion.request_emp_id),
+			(select refitems_name from reference_items where id=demotion.reason_id) as reason,
+			case when demotion_status = true then 'Approved' else 'Not Approved' end as status from sp_demotion_details demotion
+			inner join employee_info emp on emp.id=demotion.emp_id)p
+			 ]]>
+        </query> 
+        
+        <query id="sp_demotion_request_table_click" query_name="sp_demotion_request_table_click" description="Demotion request table click">
+        	<![CDATA[ select emp.org_id_id forg_id,emp.org_unit_id_id forg_unit_id,emp.team_name_id fdivi_id,demotion.id,demotion.emp_id,demotion.request_emp_id,demotion.org_id,demotion.org_unit_id,demotion.status_id,demotion.reason_id,demotion.emp_notes,
+			demotion.org_unit_div_id,to_char(demotion.request_date, 'DD-MM-YYYY') as request_date,to_char(demotion.effective_date, 'DD-MM-YYYY') as effective_date,demotion.role_id from sp_demotion_details demotion
+			inner join employee_info emp on emp.id = demotion.emp_id 
+			where demotion.id = %s ]]>
+        </query>
+		<query id="employee_details" query_name="employee_details" description="employee_details">
+        	<![CDATA[ select e.id, coalesce(e.name||' '|| e.last_name) as name,to_char(age(now(),date_of_birth),'YY-MM-DD')  as age ,hr.name as role,ai.name as img from employee_info e inner join attachment_info ai on ai.id=e.image_id_id inner join hcms_role hr on hr.id=e.role_id_id
+where e.is_active and ai.is_active and hr.is_active and e.id=%s ]]>
+        </query>
+        <query id="employee_talent_data" query_name="employee_talent_data" description="employee_talent_data">
+        	<![CDATA[
+select id,coalesce(career_id,0) as carrer_direction,coalesce(role_id,0) as proposed_role,mobility,coalesce(activity,'') as activity, coalesce(description,'') activity_desc, coalesce(to_char(completion_date ,'DD-MM-YYYY'),'') as completion_date,
+coalesce(age_id,0) as age_of_worker,coalesce(time_id,0) as current_role, coalesce(salary_id,0)as salary_level,coalesce(work_load_id,0)as workload ,
+coalesce(finding_job_id,0)as prospects,coalesce(has_pay_id,0)as pay_rise ,coalesce(displinary_id,0)as displinary_actions , coalesce(sick_id,0)as too_sick_leave,
+coalesce(work_late_early_id,0)as  late_early_leaveing, coalesce(not_received_id,0)as recevied_promotions , coalesce(dperformance_id,0)as decreasing_perfomance,
+coalesce(disengagement_id,0)as disengagement, coalesce(poor_id,0)as poor_attitude, coalesce(problems_id,0)as problems_managers,
+coalesce(commuting_id,0)as cummuting_problems, coalesce(criticality_id,0)as role_criticality, coalesce(promotion_id,0)as next_role,coalesce(readiness_id,0)as ready_promotion,
+coalesce(succeed_id,0)as employes_succeed,coalesce(successor_id,0)as successor_readiness ,completion_status,coalesce(avg,0 )as filght_risk_persent
+ from  sp_talent_profiling_details   where is_active  and emp_id=%s]]>  
+        </query>
+        <query id="professional_experience" query_name="professional_experience" description="professional_experience">
+        	<![CDATA[ select position ,employer,to_char(start_date,'DD-MM-YYY') as start_date,to_char(end_date,'DD-MM-YYY') as end_date from hrms_professional_experience   where is_active and emp_id_id=%s]]>
+        </query>
+        <query id="certificate_details" query_name="certificate_details" description="certificate_details">  
+        	<![CDATA[ select certification_no ,issued_by,to_char(start_date,'DD-MM-YYY') as start_date,to_char(end_date,'DD-MM-YYY') as end_date,certificate_status from  hrms_certifications where is_active and emp_id_id=%s]]>
+        </query> 
+        <query id="accolades_details_query" query_name="accolades_details_query" description="accolades_details_query">
+        	<![CDATA[select ca_accolades_title,ca_accolades_year,ca_accolades_quarter,ca_accolades_desc,(e.name||' '||e.last_name) as emp_name from hcms_tm_comp_assess_accolades  inner join employee_info e on e.id= ca_accolades_awarded_by  where is_active and ca_accolades_employee_id=%s]]>
+        </query> 
+        
+        
+ 	</queries>
+</data>  

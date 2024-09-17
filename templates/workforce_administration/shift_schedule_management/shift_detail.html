@@ -1,0 +1,1908 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{%block links %}
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'%}" rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/workforce_administration/shift_schedule_management/css/shift_schedule.css' %}" rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}" rel="stylesheet" type="text/css" />
+	
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="Shift & Scheduling" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<span class="caption-subject  bold uppercase">WorkTime Management  </span>
+						</div>
+					</div>
+					<div action="#" id="formwizardShift" method="POST">
+						<div class="form-wizard ">
+							<div id="tab_formwizard" class="form-body">
+								<ul class="nav nav-pills nav-justified steps">
+									<li class="dtBox" ><a class="step" href="#shift_detail"
+										id="tab_shift_detai" data-toggle="tab"><span class="number">
+												<i class="nf nf-employee-portal"></i>
+										</span><span class="desc"> <i class="fa fa-check"></i> WorkTime Detail
+												
+										</span></a></li>
+									<li class="dtBox1" onclick="employee_mapping();"><a class="step"
+										href="#shift_employee_mapping" id="tab_employee_mapping"
+										data-toggle="tab"><span class="number"> <i
+												class="nf nf-personal-information"></i>
+										</span> <span class="desc"> <i
+												class="nf nf-personal-information"></i> Employee Mapping
+										</span></a></li>
+									<!-- <li class='' onclick="shift_roster();"><a class="step" href="#shift_roster"
+										id="tab_shift_roster" data-toggle="tab"><span class="number">
+												<i class="nf nf-university"></i>
+										</span> <span class="desc"> <i class="fa fa-check"></i> Shift
+												Roster
+										</span> </a></li> -->
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="tab-content">
+								<!-- tab1 content start -->
+								<div class="clearfix" style="padding: 10px;"></div>
+								<div class="tab-pane" id="shift_detail">
+									<div class="eqheight">
+										<div class="col-sm-5 col-xs-12">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject  bold uppercase"></span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+													<form class="formValidate" id="shift_master_form">
+														{% csrf_token %}
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Organization<span
+																		class="required">*</span></label> <select id="organization"
+																		name="organization" class="form-control select2"
+																		data-error=".errorTxt7">
+																		<option value="0">--Select--</option> {% for i in organization %}
+																		
+																		<option value={{i.id}}>{{i.name}}</option> {% endfor %}
+																		
+																	</select><span class="errorTxt7 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Organization Unit<span
+																		class="required">*</span></label> 
+																	<select id="organization_unit"
+														name="organization_unit"
+														class="form-control select2-multiple" multiple
+														data-error=".errorTxt8" data-placeholder="Organization unit">
+													</select>
+																	<span class="errorTxt8 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Division<span
+																		class="required">*</span></label> 
+																	<select id="division"
+														name="division"
+														class="form-control select2-multiple" multiple
+														data-error="errorTxt9" data-placeholder="Division">
+													</select>
+																	<span class="errorTxt9 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">WorkTime<span
+																		class="required">*</span></label> <input type="text"
+																		id="shift_name" name="shift_name" class="form-control"
+																		placeholder="WorkTime" data-error=".errorTxt0">
+																	<span class="errorTxt0 errormessage" id="error_message"></span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label black_font">Description  <small>(Within 800 Characters)</small>
+																	</label>
+																	<div class="clearfix"></div>
+																	<textarea class="form-control" rows="4"  maxlength="800"
+																		placeholder="WorkTime Description" id="shift_description"
+																		name="shift_description" data-error=".errorTxt1"></textarea>
+																	<span class="errorTxt1 errormessage" id="error_message"></span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Start Time<span
+																		class="required">*</span></label> 
+																				<span style="cursor: text" placeholder="Set the Start Time" id="start_time_span"
+																	  data-field="time" class="form-control datetime" onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span" contentEditable="false" data-text="Set the Start Time"s></span>
+															<input class="form-control form-control-inline date_input_class "
+																		name="start_time" placeholder="Set the Start Time" onchange="DatePickerInputUpdate(this)"	
+																		id="shift_start" type="hidden" 
+																		readonly data-error=".errorTxt2">
+																				<div id="start_time"></div>
+																				<span class="errorTxt2 errormessage"
+																					id="error_message"></span>
+																</div>
+															</div>
+
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">End Time<span
+																		class="required">*</span></label> <span style="cursor: text" placeholder="Set the End Time" id="end_time_span"
+																	  data-field="time" class="form-control datetime" onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span" contentEditable="false" data-text="Set the End Time"></span>
+															<input class="form-control form-control-inline date_input_class "
+																		name="end_time" placeholder="Set the End Time" onchange="DatePickerInputUpdate(this)"	
+																		id="shift_end" type="hidden" 
+																		readonly data-error=".errorTxt3">
+																				<div id="end_time"></div>
+																				<span class="errorTxt3 errormessage"
+																					id="end_date_error_message"></span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Hours to work Half
+																		Day<span class="required">*</span>
+																	</label> <span style="cursor: text" placeholder="Set the Hours to Work Half Day" id="work_half_day_span"
+																	  data-field="time" class="form-control datetime" onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span" contentEditable="false" data-text="Set the Hours to Work Half Day"></span>
+															<input class="form-control form-control-inline date_input_class "
+																		name="half_full_day" placeholder="Set the Hours to Work Half Day" onchange="DatePickerInputUpdate(this)"	
+																		id="work_half_day" type="hidden" 
+																		readonly data-error=".errorTxt6">
+																				<div id="half_day"></div>
+																				<span class="errorTxt6 errormessage"
+																					id="error_message_half_day"></span>
+																</div>
+															</div>
+
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Hours to work Full
+																		Day<span class="required">*</span>
+																	</label> 
+																	<span style="cursor: text" placeholder="Set the Hours to Work Full Day" id="work_full_day_span"
+																	  data-field="time" class="form-control datetime" onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span" contentEditable="false" data-text="Set the Hours to Work Full Day"></span>
+															<input class="form-control form-control-inline date_input_class "
+																		name="work_full_day" placeholder="Set the Hours to Work Full Day" onchange="DatePickerInputUpdate(this)"	
+																		id="work_full_day" type="hidden" 
+																		readonly data-error=".errorTxt5">
+																				
+																	<div id="full_day">
+																		<span class="errorTxt5 errormessage"
+																			id="error_message_full_day"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<!-- <div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Allow Sign-in
+																		before Shift start time</label> <input
+																		class="form-control form-control-inline"
+																		name="allow_before_shift"
+																		placeholder="Allow sign-in before shift start"
+																		id="allow_shift_start" type="text" data-field="time"
+																		readonly data-error=".errorTxt4">
+																	<div id="allow_shift_start"></div>
+																	<span class="errorTxt4 errormessage" id="error_message"></span>
+																</div>
+															</div> -->
+															<div class="col-sm-6 col-xs-12">
+																		<div class="form-group">
+																			<label>WorkTime Status</label>
+																			<div class="mt-checkbox-inline">
+																				<label class="label-cbx"> <input
+																					id="shift_active" type="checkbox" value=True
+																					class="invisible" name="shift_active" checked />
+																					<div class="checkbox">
+																						<svg width="20px" height="20px"
+																							viewBox="0 0 20 20">
+                        <path
+																								d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																					</div>
+																					<span>Active</span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+														</div>
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Weekend Definition</label>
+																	<table width="100%" border="0"
+																		class="table table-bordered table-hover" id="schedule_table">
+																		<tbody >
+																			<tr>
+																				<td width="11%" rowspan="2" class="tablestyle-head">Days</td>
+																				<td colspan="6" class="tablestyle-head">Weeks</td>
+																				<!--       <td width="5%" class="tablestyle-head">Menu Permission</td>
+ -->
+																			</tr>
+																			<tr>
+																				<td width="5%" class="tablestyle">All</td>
+																				<td width="5%" class="tablestyle">1st</td>
+																				<td width="5%" class="tablestyle">2nd</td>
+																				<td width="5%" class="tablestyle">3rd</td>
+																				<td width="5%" class="tablestyle">4th</td>
+																				<td width="5%" class="tablestyle">5th</td>
+																			</tr>
+																			<tr>
+																				<td>Sunday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Sunady-1" type="checkbox" value="Sunady-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Sunady-2" type="checkbox" value="Sunady-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Sunady-3" type="checkbox" value="Sunady-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Sunady-4" type="checkbox" value="Sunady-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Sunady-5" type="checkbox" value="Sunady-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Monday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Monday-1" type="checkbox" value="Monday-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Monday-2" type="checkbox" value="Monday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Monday-3" type="checkbox" value="Monday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Monday-4" type="checkbox" value="Monday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Monday-5" type="checkbox" value="Monday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Tuesday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Tuesday-1" type="checkbox" value="Tuesday-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Tuesday-2" type="checkbox" value="Tuesday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Tuesday-3" type="checkbox" value="Tuesday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Tuesday-4" type="checkbox" value="Tuesday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Tuesday-5" type="checkbox" value="Tuesday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Wednesday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Wednesday-1" type="checkbox" value="Wednesday-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Wednesday-2" type="checkbox" value="Wednesday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Wednesday-3" type="checkbox" value="Wednesday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Wednesday-4" type="checkbox" value="Wednesday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Wednesday-5" type="checkbox" value="Wednesday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Thursday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Thursday-1" type="checkbox" value="Thursday-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Thursday-2" type="checkbox" value="Thursday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Thursday-3" type="checkbox" value="Thursday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Thursday-4" type="checkbox" value="Thursday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Thursday-5" type="checkbox" value="Thursday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Friday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Friday-1" type="checkbox" value="Friday-1"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Friday-2" type="checkbox" value="Friday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Friday-3" type="checkbox" value="Friday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Friday-4" type="checkbox" value="Friday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Friday-5" type="checkbox" value="Friday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Saturday</td>
+																				<td class="tablecheck "><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Saturday-1" type="checkbox" value="Saturday-1"
+																						class="invisible day_check"  name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Saturday-2" type="checkbox" value="Saturday-2"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Saturday-3" type="checkbox" value="Saturday-3"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Saturday-4" type="checkbox" value="Saturday-4"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="Saturday-5" type="checkbox" value="Saturday-5"
+																						class="invisible day_check" name="test" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</form>
+													<div class="row">
+													<div class="col-sm-12">
+													<div id="shift_master_button" class="text-right"></div>
+													</div>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-7 col-xs-12">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption font-dark">
+														<span class="caption-subject bold uppercase"> WorkTime Details </span>
+													</div>
+													<div class="tools"></div>
+												</div>
+												<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="shift_master_table">
+
+														<tbody>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="shift_employee_mapping">
+									<div class="eqheight">
+										<div class="col-sm-5 col-xs-12">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject  bold uppercase"></span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+													<form class="formValidate" id="employee_mapping_form">
+														{% csrf_token %}
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label for="orgList" class="control-label black_font">Organization
+																		<span class="required">*</span>
+																	</label> <select id="orgList" name="orgList"
+																		class="form-control select2" data-error=".errorTxt10">
+																		<option value="0">--Select--</option> {% for i in organization %}
+																		<option value={{i.id}}>{{i.name}}</option> {% endfor %}
+																	</select><span class="errorTxt10 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label for="orgUnitList"
+																		class="control-label black_font">Organization
+																		Unit<span class="required">*</span>
+																	</label> <select id="orgUnitList" name="orgUnitList"
+																		class="form-control select2" data-error=".errorTxt11" data-placeholder="Organization Unit"
+																		multiple>
+																	</select><span class="errorTxt11 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label for="role_name_list"
+																		class="control-label black_font">Division
+																	</label> <select id="division_name_list" name="division_name_list"
+																		multiple class="form-control select2-multiple"
+																		data-error=".errorTxt13" data-placeholder="Division">
+																	</select>
+																</div>
+															</div>
+															
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label for="shift_name_list"
+																		class="control-label black_font">WorkTime<span
+																		class="required">*</span>
+																	</label> <select id="shift_name_list" name="shift_name_list" 
+																		class="form-control select2" data-error=".errorTxt12">
+																		<option value="0">--Select--</option>
+																	</select><span class="errorTxt12 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+															
+														</div>
+														<div class="row">
+															<div class="col-md-12 col-sm-12">
+																<div class="form-group">
+																	<label for="employee_name"
+																		class="control-label black_font">Employee Name<span
+																		class="required">*</span>
+																	</label> <select id="employee_name"
+																		class="form-control select2-multiple"
+																		name="employee_name" multiple data-error=".errorTxt14" >
+																	</select><span class="errorTxt14 errormessage" id="error_message">
+																	</span>
+																</div>
+															</div>
+														</div>
+													</form>
+													<div class="row">
+														<div class="col-sm-12">
+															<div id="group_employee_mapping_btn" class="text-right"></div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-7 col-xs-12">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption font-dark">
+														<span class="caption-subject bold uppercase"> WorkTime Details </span>
+													</div>
+													<div class="tools"></div>
+												</div>
+												<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="shift_details_master_table">
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="tab-pane" id="shift_roster">
+									<div class="row eqheight">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject  bold uppercase"></span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+													<form class="formValidate" id="shift_roster_form">
+														{% csrf_token %}
+														<div class="row">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Roster Name<span
+																		class="required">*</span></label> <input type="text"
+																		id="roster_name" name="roster_name"
+																		class="form-control" placeholder="Roster name"
+																		data-error=".errorTxt0"> <span
+																		class="errorTxt0 errormessage" id="error_message"></span>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class=" col-sm-12">
+																<div class="form-group">
+																	<label class="control-label black_font">
+																		Description </label>
+																	<div class="clearfix"></div>
+																	<textarea class="form-control" rows="4"
+																		data-placeholder="Description" id="roster_description"
+																		name="roster_description" data-error=".errorTxt1"></textarea>
+																	<span class="errorTxt1 errormessage" id="error_message"></span>
+																</div>
+															</div>
+														</div>
+													<!-- 	<div class="row">
+															<div class="col-md-12">
+																<div class="form-group">
+																<label class="control-label"> Start Date</label>
+																	<div class="col-md-9 input-icon">
+																		<i class="fa fa-calendar cicon"></i> <input
+																			class="form-control form-control-inline" type="text"
+																			data-field="date" readonly>
+																		<div id="roster_start_date"></div>
+																	</div>
+																</div>
+																</div>
+																</div> -->
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Repeats <span
+																		class="required">*</span></label>
+																	<div class="mt-radio-inline">
+																		<div class="radio">
+																			<label> <input type="radio"
+																				name="roster_repeats" id="roster_repeats_week"
+																				value="Week"> <span class="cr"><i
+																					class="cr-icon fa fa-circle"></i></span> Weekly
+																			</label>
+																		</div>
+																		<div class="radio">
+																			<label> <input type="radio"
+																				name="roster_repeats" id="roster_repeats_month"
+																				value="Month"> <span class="cr"><i
+																					class="cr-icon fa fa-circle"></i></span> Monthly
+																			</label>
+																		</div>
+
+																	</div>
+																	<span class="errorTxt2 errormessage" id="error_message"></span>
+																</div>
+															</div>
+
+
+														</div>
+														<div class="row" id="monthly_view">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<label for="roster_monthly"
+																		class="control-label black_font">Repeats Every<span
+																		class="required">*</span></label>
+																	<table width="100%" border="0"
+																		class="table table-bordered table-hover"
+																		id="roster_monthly_calendar">
+																		<tbody>
+																			<tr>
+																				<td width="11%" rowspan="2" class="tablestyle-head">Days</td>
+																				<td colspan="6" class="tablestyle-head">Weeks</td>
+																				<!--       <td width="5%" class="tablestyle-head">Menu Permission</td>
+ -->
+																			</tr>
+																			<tr>
+																				<td width="5%" class="tablestyle">All</td>
+																				<td width="5%" class="tablestyle">1st</td>
+																				<td width="5%" class="tablestyle">2nd</td>
+																				<td width="5%" class="tablestyle">3rd</td>
+																				<td width="5%" class="tablestyle">4th</td>
+																				<td width="5%" class="tablestyle">5th</td>
+																			</tr>
+																			<tr>
+																				<td>Sunday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="1"
+																						class="invisible all_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Sunday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Sunday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Sunday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Sunday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Sunday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Monday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-all"
+																						class="invisible all_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Monday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Tuesday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Tuesday-all" class="invisible all_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Tuesday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Tuesday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Tuesday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Tuesday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Tuesday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Wednesday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-all" class="invisible all_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-1" class="invisible day_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-2" class="invisible day_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-3" class="invisible day_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-4" class="invisible day_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Wednesday-5" class="invisible day_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Thursday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Thursday-all" class="invisible all_check"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Thursday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Thursday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Thursday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Thursday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Thursday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Friday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-all"
+																						class="invisible all_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Friday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																			<tr>
+																				<td>Saturday</td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox"
+																						value="Saturday-all" class="invisible all_check 	"
+																						name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Saturday-1"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Saturday-2"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Saturday-3"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Saturday-4"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																				<td class="tablecheck"><label class="label-cbx">
+																						<input id="cbx" type="checkbox" value="Saturday-5"
+																						class="invisible day_check" name="monthly_roster_pattern" />
+																						<div class="checkbox">
+																							<svg width="20px" height="20px"
+																								viewBox="0 0 20 20">
+                        <path
+																									d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																						</div>
+
+																				</label></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+
+														<div class="row" id="weekly_view">
+															<div class="col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Repeats Every<span
+																		class="required">*</span></label>
+
+																	<div class="mt-checkbox-inline">
+																		<label class="label-cbx"> <input id="sunday"
+																			type="checkbox" value="Sunday" class="invisible"
+																			name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Sunday</span>
+																		</label> <label class="label-cbx"> <input id="monday"
+																			type="checkbox" value="Monday" class="invisible"
+																			name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Monday</span>
+																		</label> <label class="label-cbx"> <input id="tuesday"
+																			type="checkbox" value="Tuesday" class="invisible"
+																			name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Tuesday</span>
+																		</label> <label class="label-cbx"> <input
+																			id="wednesday" type="checkbox" value="Wednesday"
+																			class="invisible" name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Wednesday</span>
+																		</label> <label class="label-cbx"> <input
+																			id="thursday" type="checkbox" value="Thursday"
+																			class="invisible" name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Thursday</span>
+																		</label> <label class="label-cbx"> <input id="friday"
+																			type="checkbox" value="Friday" class="invisible"
+																			name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Friday</span>
+																		</label> <label class="label-cbx"> <input
+																			id="saturday" type="checkbox" value="Saturday"
+																			class="invisible" name="roster_weekly" />
+																			<div class="checkbox">
+																				<svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path
+																						d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+																			</div> <span>Saturday</span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Ends <span
+																		class="required">*</span>
+																	</label>
+																	<div class="mt-radio-list">
+																		<div class="radio">
+																			<label> <input type="radio"
+																				name="roster_end_option" id="roster_never_end"
+																				value="Never"> <span class="cr"><i
+																					class="cr-icon fa fa-circle"></i></span> Never
+																			</label>
+																		</div>
+																		<div class="radio">
+																			<label> <input type="radio"
+																				name="roster_end_option" id="roster_shift_no_opt"
+																				value="Occurence"> <span
+																				class="cr"><i class="cr-icon fa fa-circle"></i></span>
+																				After Specific No of Shifts
+																			</label>
+																		</div>
+																		<div class="radio">
+																			<label> <input type="radio"
+																				name="roster_end_option" id="roster_spec_date"
+																				value="Date"> <span class="cr"><i
+																					class="cr-icon fa fa-circle"></i></span> On a Specific
+																				Date
+																			</label>
+																		</div>
+																	</div>
+
+																</div>
+															</div>
+
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group" id="shift_no_div">
+																	<label class="control-label">No of Shifts <span
+																		class="required">*</span>
+																	</label> <input  type="number"
+																		id="roster_no_of_shift" name="roster_no_of_shift"
+																		class="form-control" placeholder="No of Shifts" data-error=".errorTxt5">
+																	<div id="full_day">
+																		<span class="errorTxt5 errormessage"
+																			id="error_message"></span>
+																	</div>
+																</div>
+																<div class="form-group" id="sepcific_end_date_div">
+																	<label class="control-label ">Specific End Date</label>
+																	<div class=" input-icon">
+																		<i class="fa fa-calendar cicon"></i> <input
+																			class="form-control form-control-inline" type="text"
+																			data-field="date" id="roster_specific_end_date" readonly>
+																		<div id="roster_specific_date"></div>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+														<div class="row">
+														<h3> Shift Rotation </h3>
+														
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Rotation From <span class="required">*</span></label> <select
+																		id="roster_shift_rotation_from"
+																		name="roster_shift_rotation_from"
+																		class="form-control select2" data-error=".errorTxt7">
+																		<option value="0">--Select--</option>
+																		{% if shift_details %} {% if shift_details.shift_info %}
+																		{% for i in shift_details.shift_info %}
+																		<option value="{{i.id}}">{{i.shift_name}}</option> {%endfor%} {% endif %} {% endif %}
+																	</select> <span class="errorTxt4 errormessage"
+																		id="error_message"></span>
+																</div>
+															</div>
+															<div class="col-md-6 col-sm-12">
+																<div class="form-group">
+																	<label class="control-label">Rotation To
+																	 <span class="required">*</span></label> <select
+																		id="roster_shift_rotation_to"
+																		name="roster_shift_rotation_to"
+																		class="form-control select2" data-error=".errorTxt7">
+																		<option value="0">--Select--</option>
+																		{% if shift_details %} {% if shift_details.shift_info %}
+																		{% for i in shift_details.shift_info %}
+																		<option value="{{i.id}}">{{i.shift_name}}</option> {%endfor%} {% endif %} {% endif %}
+																	</select> <span class="errorTxt4 errormessage"
+																		id="error_message"></span>
+																</div>
+															</div>
+
+														</div>
+														
+															
+													</form>
+													<div class="row">
+														<div id="shift_roster_button" class="text-right"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+											<div class="portlet light bordered">
+												<div class="portlet-title">
+													<div class="caption font-dark">
+														<span class="caption-subject bold uppercase"> Shift
+															Details </span>
+													</div>
+													<div class="tools"></div>
+												</div>
+												<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="shift_roster_table">
+			
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="clearfix"></div>
+					
+								<div class="col-md-12">
+									<!-- <ul class="pager wizard top_for_pre_button">
+											<li class="previous first" style="display: none;"><a href="#">First</a></li>
+											<li class="previous"><a class="btn blue button-previous pre_button" id="shift_pre" title='Previous' href="#" style="display: block;"><i class="nf nf-double-arrow-right"></i></a></li>
+											<li class="next last" style="display: none;"><a href="#">Last</a></li>
+											<li class="next"><a class="btn green button-next" href="#" id="shift_last" title='Next'><i class="nf nf-double-arrow-left"></i></a></li>
+										</ul> -->
+		   						 </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+<!-- END CONTENT BODY -->
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %}
+<!--  Link for css single select 2 -->
+<script src="{% static 'ui/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/components-select2.min.js' %}" type="text/javascript"></script>
+<!-- link for databales --> 
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}" type="text/javascript"></script>
+<!-- link for common dev js start-->
+<script src="{% static 'dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}" type="text/javascript"></script>
+<!--jquery alert notification-->
+<script src="{% static '/ui/plugins/jquery-notification/js/jquery-notification.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/bootstrap-confirmation/js/bootstrap-confirmation.min.js' %}" type="text/javascript"></script>
+<!-- link for shift master dev -->
+<script src="{% static 'dev/workforce_administration/shift_schedule_management/js/common.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/workforce_administration/shift_schedule_management/js/shift_master.js' %}" type="text/javascript"></script>
+<!-- link for shift master dev -->
+<script src="{% static 'dev/workforce_administration/shift_schedule_management/js/employee_mapping_common.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/workforce_administration/shift_schedule_management/js/employee_mappping.js' %}" type="text/javascript"></script>
+<script src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/workforce_administration/shift_schedule_management/js/formWizardWF.js' %}" type="text/javascript"></script>
+{% endblock %}

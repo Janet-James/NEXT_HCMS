@@ -1,0 +1,168 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- Single and multi select Dropdown-->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/system_admin/css/sysadmin.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="SysParam" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated"> 
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row eqheight">
+					<div class="col-sm-4 col-xs-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									 <span
+										class="caption-subject  bold uppercase">Manage System
+										Parameter</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<form class="formValidate" id="sysparam_form" novalidate>
+									{% csrf_token %}
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label for="module_name" class="control-label black_font">Module
+													Name <span class="required" aria-required="true"> *
+												</span>
+												</label> <select id="module_name" name="module_name"
+													class="form-control select2 hide_error" data-error=".errorTxt0">
+													<option></option> 
+													{% for data in module_list %}
+														<option value="{{ data.module_name }}">{{ data.module_name }}</option> 
+													{% endfor %}
+												</select> <span class="errorTxt0 span-error"></span>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label for="sys_param_var_type"
+													class="control-label black_font">System Parameter
+													Type <span class="required" aria-required="true"> *
+												</span>
+												</label> <select id="sys_param_var_type" name="sys_param_var_type"
+													class="form-control select2 hide_error" data-error=".errorTxt1">
+													<option></option>
+												</select> <span class="errorTxt1 span-error"></span>
+											</div>
+										</div>
+									</div>
+									<div class="row">   
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label for="sysparam_name" class="control-label black_font">System Parameter Name<span class="required" aria-required="true">*</span>
+												</label> <select id="sysparam_name" name="sysparam_name"
+													class="form-control select2 hide_error" data-error=".errorTxt2">
+													<option></option>
+												</select> <span class="errorTxt2 span-error"></span>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label> Variable Name <span class="required"
+													aria-required="true"> * </span></label>
+												<div class="input-icon">
+													<i class="fa fa-user"></i> <input type="text"
+														readonly="readonly" name="sys_param_var_name"
+														id="sys_param_var_name" class="form-control"
+														placeholder="Variable Name" data-error=".errorTxt3" /> <span
+														class="errorTxt3 span-error"></span>
+												</div>
+											</div>
+										</div> 
+									</div>
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+											<div class="form-group">
+												<label> System Parameter Value <span
+													class="required" aria-required="true"> * </span></label>
+												<div class="input-icon">
+													<i class="fa fa-user"></i> <input type="text"
+														name="sys_param_val" id="sys_param_val"
+														class="form-control" placeholder="System Parameter Value"
+														data-error=".errorTxt4" /> <span
+														class="errorTxt4 span-error"></span>
+												</div>
+											</div>
+										</div>
+										<input type="hidden" id="sysparam_id" name="sysparam_id"></input>
+									</div>
+								</form>
+								<div class="row">
+									<div class="col-sm-12">
+										<div id="bottom_btns"
+											class="padding_top_bottom pagintion_button_right">
+											{% if "Alert & Notification" in request.session.Create %}
+											<button type="button"
+												class="btn btn-success btn-eql-wid btn-animate"
+												onclick="action_for_sysparam('update')">Update</button>
+											{% endif %}
+											<button type="button"
+												class="btn btn-warning btn-eql-wid btn-animate"
+												onclick="action_for_sysparam('clear')">Cancel /
+												Clear</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8 col-xs-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption font-dark">
+									<span class="caption-subject bold uppercase"> System
+										Parameters </span>
+								</div>
+								<div class="tools"></div>
+							</div>
+							<div class="portlet-body">
+								<table
+									class="table table-striped table-bordered table-hover order-column"
+									id="sysparam_table">
+									<tbody id="sysparam_table_tbody">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER --> 
+{% endblock %} {% block scripts %}
+<!-- Single and multi select Dropdown-->
+<script src="{% static '/ui/plugins/select2/js/select2.full.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/system_admin/js/sysparam_info.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{% block links %}{% endblock %}
+{% block content %} {% nav_tags breadcrum_title="Dashboard" %} 
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+    <div class="page-container" id="maincontent">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content"></div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}{% block scripts %} {% endblock %}

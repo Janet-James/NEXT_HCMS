@@ -1,0 +1,265 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+
+<!-- custom css start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- date timepicker css -->
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="TAOnBorading" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container emp_formwizard" id="maincontent ">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+		
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered" id="form_wizard_1">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">On Boarding</span>
+																	</div>
+							<div class="row">
+							<!-- <div class="col-md-3">
+							<span id="profile_name" style="display:none;"></span>
+							</div> -->
+								
+							
+									<div class="col-md-4" style="display:none">
+										<div class="btn-padding">	 									
+											<button id="add_to_employee" onclick="changeCandidatetoEmployee()" type='button' class='btn btn-success btn-eql-wid btn-animate'>Add to Employee</button>										
+										</div>
+									</div>
+
+									<div class="col-md-4 pull-right">
+										<div class="row">
+											<div class="col-md-4">  
+												<ul class="list-inline pull-right">
+													<li><div class="caption margin-top-10">
+															<i data-toggle="tooltip" data-placement="top" title=""
+																class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+														</div></li>
+												</ul>
+											</div>
+											<div class="col-md-8">
+											<form role="form" id="on_boarding_form">
+												<div class="form-group">
+													<select id="join_candidate" name="join_candidate"
+														class="form-control select2" required>
+														<option value="0">-- Select Employee--</option> 
+													</select>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							
+							<div action="#" id="formwizard"	method="POST">
+								<div class="form-wizard "> 
+									<div id="tab_formwizard" class="form-body">
+											<ul class="nav nav-pills nav-justified steps">
+											<li class='dtBox5'><a class="step" href="#pills-tab1"
+													id="tab_compliance" data-toggle="tab"><span
+														class="number"> <i class="nf nf-knowledge"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Compliance
+													</span> </a>
+												</li>
+												<li id=''><a class="step" href="#pills-tab3"
+													id="tab_assert" data-toggle="tab"><span
+														class="number"> <i
+															class="nf nf-manage-competencies"></i>
+													</span> <span class="desc"> <i class="fa fa-skills"></i>
+															Asset Details
+													</span> </a>
+													</li>
+												<li class=''><a class="step" href="#pills-tab4"
+													id="tab_culture" data-toggle="tab"><span
+														class="number"> <i
+															class="nf nf-organizational-level"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Culture
+													</span> </a>
+												</li>
+												<li class='dtBox4'><a class="step" href="#pills-tab5"
+													id="tab_clarification" data-toggle="tab"><span class="number">
+															<i class="nf nf-work-culture"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Clarification
+													</span> </a>
+												 </li>
+												<li class="dtBox"><a class="step" href="#pills-tab6"
+													id="tab_connection" data-toggle="tab"><span class="number">
+															<i class="nf nf-work-summary"></i>
+													</span><span class="desc"> <i class="fa fa-check"></i>
+															Connection
+													</span></a>
+												 </li>
+
+												
+												
+												
+
+												
+											</ul>
+										</div>
+								</div>
+							<div id="progress_bar">
+									<div id="myProgress">
+										<div id="myBar"></div>
+									</div>
+							</div>
+							
+									 
+									<div class="row">
+					<div class="tab-content">
+						<!-- tab1 content start -->
+						<div class="clearfix" style="padding: 10px;"></div>
+						<div class="tab-pane" id="pills-tab1">
+							<div class="row">
+							{% include "./on_boarding/compliance.html" %}
+							</div>
+						</div>
+						<!-- tab1 content end -->
+						
+						<!-- tab2 content start -->
+						<div class="tab-pane" id="pills-tab3">
+							<div class="row">
+								{% include "./on_boarding/assert.html" %}
+							</div>
+						</div>
+						<!-- tab2 content end -->
+						<!-- tab3 content start -->
+						<div class="tab-pane" id="pills-tab4">
+							<div class="row">
+								{% include "./on_boarding/culture.html" %}
+							</div>
+						</div>  
+						<!-- tab3 content end -->
+						<!-- tab4 content start -->
+						<div class="tab-pane" id="pills-tab5">
+							<div class="row">
+								{% include "./on_boarding/clarification.html" %}
+							</div>
+						</div>
+						<!-- tab4 content end -->
+						<!-- tab5 content start -->
+						<div class="tab-pane" id="pills-tab6">
+							<div class="row">
+							{% include "./on_boarding/connection.html" %}
+							</div>
+						</div>
+						<!-- tab5 content end -->
+						
+					<div class="clearfix"></div>
+						<div class="col-md-12">
+							<ul class="pager wizard top_for_pre_button">
+									<li class="previous first" style="display: none;"><a href="#">First</a></li>
+									<li class="previous"><a class="btn blue button-previous pre_button" id="on_boarding_pre" title='Previous' href="#" style="display: block;"><i class="nf nf-double-arrow-right"></i></a></li>
+									<li class="next last" style="display: none;"><a href="#">Last</a></li>
+									<li class="next"><a class="btn green button-next" href="#" id="on_boarding_last" title='Next'><i class="nf nf-double-arrow-left"></i></a></li>
+								</ul>
+   						 </div>
+					</div>
+					</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- employee list toggle start -->
+					<div id="switcher1" style="display:none">
+						<div class="switcher-toggle1 popup_zindex"> 
+							<div data-toggle="tooltip" data-placement="bottom"
+								title="Profile Search" class="tooltips usersearch_icon "
+								id="usersearch_icon"></div>
+						</div>
+						<div class="switcher-content1 userprofile_wrap">
+							<!-- <span class="ExpIcon usersearch"><i class="fa fa-search"></i></span> -->
+							<div class="userprofile_inner">
+								<!-- <div data-placement="bottom" title="Grid View" href="#myModal1"
+									class="tooltips userprofile_grid" data-toggle="modal"></div> -->
+								<ul id="vcarousel" class="elastislide-list">
+								</ul> 
+							</div>
+						</div>
+					</div> 
+					<!-- employee list toggle end -->
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}
+<!-- body content end -->
+
+<!-- custom js link start -->
+{% block scripts %}
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/formwizard_on_boarding.js' %}"
+	type="text/javascript"></script>
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script> 
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script 
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- date timepicker js --> 
+<script
+	src="{%  static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+	type="text/javascript"></script>
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script> 
+
+<!-- dev js -->
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+<script src='/static/dev/talent_acquisition/js/ta_on_boarding.js'></script>
+{% endblock %}
+<!-- custom js link end -->

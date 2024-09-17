@@ -1,0 +1,39 @@
+
+.cutom-summer-note{ float:none; margin:0px auto; }
+.cutom-summer-note .note-editor.note-frame{width: 871px;margin: 0px auto;}
+
+.select2-search__field {
+    width: 100% !important;
+}
+.dt_col_hide {display: none;}
+.cutom-summer-note{ float:none; margin:0px auto; }
+.cutom-summer-note .note-editor.note-frame{width: 871px;margin: 0px auto;}
+.custom-add-btn {
+position: absolute !important;
+    bottom: -2px;
+    right: 0px;
+    background-image: url(/static/ui/images/accordion-plusminus.png);
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 25px;
+    background-size: 60%;
+    background-position: top center;
+    background-color: transparent;
+}
+.note-popover .note-popover-content, .note-popover, .note-btn-group {
+	z-index:10099 !important;
+}
+.note-popover-content.note-children-container {
+    left: 0 !important;
+    min-width: auto !important;
+}
+.note-popover.bottom .note-popover-arrow {
+	margin-left:-5px;
+}
+.note-tooltip {
+    z-index: 10101 !important;
+}
+#header_encrypted_image, #footer_encrypted_image {
+    margin-bottom: 10px !important;
+    margin-top: 10px;
+}

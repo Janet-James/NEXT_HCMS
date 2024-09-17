@@ -1,0 +1,36 @@
+<!-- {{#if CHANNEL}}
+  {{#if CHANNEL.length}}
+    {{#each CHANNEL}}
+
+
+    {{#ifMention this}}
+    <li>
+      <button type=button class=chatChannel id={{id}}>{{name}}</button> <label class=user_mention> @{{mention}} </label> <label class=unread_msg> {{unread}} </label>
+    </li>
+      {{else}}
+      {{#ifUnread this}}
+    <li>
+      <button type=button class=chatChannel id={{id}}>{{name}}</button> <label class=unread_msg> {{unread}} </label>
+    </li>
+      {{else}}
+    <li>
+      <button type=button class=chatChannel id={{id}}>{{name}}</button>
+    </li>
+      {{/ifUnread}}
+      {{/ifMention}}
+    {{/each}}
+  {{/if}}
+{{/if}} -->
+{{#if CHANNEL}}
+  {{#if CHANNEL.length}}
+    {{#each CHANNEL}}
+    {{#ifMention this}}
+      <div class='chatChannel item' id={{id}}><div class="img-name"><span class="group-top-msg">{{unread}}</span><img src={{ip name}}><span class="group-member-list">{{mention}}</span><span class='username'>{{name}}</span></div></div>
+      {{else}}
+      {{#ifUnread this}}
+    <div class='chatChannel item' id={{id}}><div class="img-name"><span class="group-top-msg">{{unread}}</span><img src={{ip name}}><span class='username'>{{name}}</span></div></div>
+      {{/ifUnread}}
+      {{/ifMention}}
+    {{/each}}
+  {{/if}}
+{{/if}}

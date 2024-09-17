@@ -1,0 +1,11 @@
+id,created_date,modified_date,is_active,kpi_definition,kpi_plan,kpi_starting_perf,kpi_units,created_by_id,kpi_custom_rating_scheme_id_id,kpi_measure_frequency_refitem_id,kpi_role_id,modified_by_id
+1,2/13/2018 16:27,2/13/2018 16:27,TRUE,Average number of days between publishing of advertisement and tender submission deadline,28,60,Days,1,1,207,1,1
+2,2/13/2018 16:27,2/13/2018 16:27,TRUE,Percentage of cases Tender Opening Committee(TOC)included at least ONE member from the Tender Evaluation Committee(TEC),1,1,Count,1,1,208,1,1
+3,2/13/2018 16:27,2/13/2018 16:27,TRUE,Percentage of cases TEC included two external members outside the ministry  or division,2,1,Count,1,1,207,1,1
+4,2/13/2018 16:27,2/13/2018 16:27,TRUE,Average number of days between tender opening and completion of evaluation,21,90,Days,1,1,208,1,1
+5,2/13/2018 16:27,2/13/2018 16:27,TRUE,Average number of days taken between submission of tender evaluation report and approval of contract ,14,60,Days,1,1,207,1,1
+6,2/13/2018 16:27,2/13/2018 16:27,TRUE,Percentage of tenders approved by the proper financial delegated authority,100,50,Percentage,1,1,208,1,1
+7,2/13/2018 16:27,2/13/2018 16:27,TRUE,Average number of days between final approval and notification of award (NOA] - 7 days but before the expiry of the tender validity period,7,90,Days,1,1,207,1,1
+8,2/13/2018 16:27,2/13/2018 16:27,TRUE,Percentage of contracts having liquidated damage imposed for delayed delivery/completion,1,10,Details,1,1,208,1,1
+9,2/13/2018 16:27,2/13/2018 16:27,TRUE,Average number of days taken to release payment from the dateof certificate of PM/ engineer ,28,60,Days,1,1,207,1,1
+10,2/13/2018 16:27,2/13/2018 16:27,TRUE,Percentage of contracts where interest for delayed payments was made,0,80,Details,1,1,208,1,1

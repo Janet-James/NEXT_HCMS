@@ -1,0 +1,213 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css link -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css link -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- datetime css -->
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- file upload css link -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css link -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HREmployeePayroll" %}
+<!-- body container start -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<!-- form div start -->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> My Payslip
+										 </span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<form role="form" id="my_payslip_form">
+									<div class="form-body">
+									<div class="row">
+										{%csrf_token%}
+										
+										<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Employee<span class="asterisk"> *</span>
+													</label> <select id="employe_name"
+														name="employee_id" class="form-control select2"
+														data-error=".errorTxt1">
+														<option value="0">--Select Employee--</option> 
+														{% for i in employee_data %}
+															<option value='{{i.id}}' selected>{{i.name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt1 errormessage errorTxts clear3"></span>
+												</div>
+											</div>	
+											<!-- <div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Rule Category<span class="asterisk"> *</span>
+													</label> <select id="tds_rule_category"
+														name="tds_category" class="form-control"
+														data-error=".errorTxt2">
+														<option value="0">--Select Category--</option> 
+														{% for i in salary_category_data %}
+														    {% if i.refitems_code == "DEDCN" %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+															{% endif %}
+														{% endfor %}
+													</select> <span id="tds_category_clear" class="errorTxt2 errormessage errorTxts"></span>
+												</div>
+											</div>	 -->
+										
+											<div class="clearfix"></div>
+											
+											<div class="clearfix"></div>
+												<div class="col-md-6">
+														<div class="form-group">
+															<label>From <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="dtimepicker1"
+																	name="from_date"  placeholder="From Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt4"> <span id="dob_error"
+																	class="errorTxt4 errormessage"></span>
+																	<div class='tab_my_payslip'></div>
+															</div>
+														</div>
+													</div>			
+											<div class="col-md-6">
+														<div class="form-group">
+															<label>To <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="dtimepicker2"
+																	name="to_date"  placeholder="To Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt5"> <span id="per_to_error"
+																	class="errorTxt5 errormessage"></span>
+																	<div class='tab_my_payslip'></div>
+															</div>
+														</div>
+													</div>
+											
+												
+													
+																
+												<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding" id='my_payslip_view_btn'></div>
+											<span id="my_payslip_download" style="display:none">download</span>
+										</div>
+									</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<!-- END SAMPLE FORM PORTLET-->
+					</div>
+					
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<!-- <div class="form-group" align="right">
+				<div class="btn-padding" id='tax_declaration_btn'></div>
+			</div> -->
+			<!-- END CONTENT -->
+		</div>
+	</div>
+
+	<!-- body container end -->
+	{% endblock %}
+	<!-- body content end -->
+	<!-- custom script start -->
+	{% block scripts %}
+	<!-- datatable js -->
+	<script
+		src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+		type="text/javascript"></script>
+	<!-- select2 js -->
+	<script
+		src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+		type="text/javascript"></script>
+	<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+		type="text/javascript"></script>
+	<!-- file input js -->
+	<script
+		src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+		type="text/javascript"></script>
+	<!-- datatable custom js -->
+	<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+		type="text/javascript"></script>
+	<!-- date picker.js -->
+	<script
+		src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+		type="text/javascript"></script>
+	<script>
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	if (dd < 10) {
+	  dd = '0' + dd;
+	} 
+	if (mm < 10) {
+	  mm = '0' + mm;
+	} 
+	
+	if(mm > '01'){
+		mm = mm - 1
+	}else{
+		mm = mm
+	}
+	var max_date = yyyy + '-' + mm + '-' + dd
+	$(".tab_my_payslip").DateTimePicker({
+		//hideIfNoNext: true,
+		//maxDate: "2019-01-01",
+		dateFormat : "MMM yyyy",
+		minDate: new Date('2019-01-01'),
+		maxDate: new Date(max_date)
+	});
+	/* $("#payslip_to_dt").DateTimePicker({
+		dateFormat : "dd-mm-YYYY"
+	}); */
+</script>
+	<!-- dev js -->
+	<script
+		src="{% static  '/dev/hrms_foundation/js/payroll/my_payslip.js' %}"
+		type="text/javascript"></script>
+	{% endblock %}
+	<!-- custom script end -->

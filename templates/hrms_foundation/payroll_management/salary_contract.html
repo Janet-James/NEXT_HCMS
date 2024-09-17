@@ -1,0 +1,817 @@
+
+{% block links %}
+
+<style>
+.select2-container--open {
+	z-index: 20052 !important;
+}
+.table-scrollable {
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    /* border: 1px solid #e7ecf1; */
+    margin: 10px 0!important;
+    }
+</style>
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+
+					<div class="col-md-6">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Salary Contract </span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<form role="form" id="salary_contract_form">
+									<div class="form-body">
+									<div class="row">
+										{%csrf_token%}
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Organization<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_company_name"
+														name="company_id_id" class="form-control select2"
+														data-error=".errorTxt0">
+														<option value="0">--Select Organization--</option> 
+														{% for i in organization_data %}
+															<option value='{{i.id}}'>{{i.name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt0 errormessage errorTxts clear1"></span>
+												</div>
+											</div>	
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Organization Unit<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_organization_unit"
+														name="organization_unit_id_id" class="form-control select2"
+														data-error=".errorTxt25">
+														<option value="0">--Select Organization Unit--</option> 
+<!-- 														{% for i in organization_unit_data %}
+															<option value='{{i.id}}'>{{i.orgunit_name}}</option> 
+														{% endfor %} -->
+													</select> <span class="errorTxt25 errormessage errorTxts clear6"></span>
+												</div>
+											</div>		
+											<div class="clearfix"></div>		
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Division<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_dep_name"
+														name="department_id_id" class="form-control select2"
+														data-error=".errorTxt1">
+														<option value="0">--Select Division--</option> 
+														<!-- {% for i in team_data %}
+															<option value='{{i.id}}'>{{i.team_name}}</option> 
+														{% endfor %} -->
+													</select> <span class="errorTxt1 errormessage errorTxts clear2"></span>
+												</div>
+											</div>
+                                              <div class="col-md-6">
+													<div class="form-group">
+														<label for="multiple" class="control-label black_font">Employee<span class="asterisk"> *</span>
+															</label> <select id="hr_salary_con_employee_name"
+															name="employee_id_id"
+															class="form-control select2-multiple" multiple="multiple" data-error=".errorTxt2">
+															<option value="0">--Select Employee--</option> 
+															<!-- {% for i in employee_data %} 
+															<option value='{{i.id}}'>{{i.employee_name}}</option> 
+															{% endfor %} -->
+														</select><span class="errorTxt2 errormessage errorTxts clear3"></span>
+													</div>
+												</div>				
+												<!-- <div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Employee<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_employee_name"
+														name="employee_id_id" class="form-control select2"
+														data-error=".errorTxt2">
+														<option value="0">--Select Employee--</option> 
+														{% for i in employee_data %}
+															<option value='{{i.id}}'>{{i.employee_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt2 errormessage errorTxts clear3"></span>
+												</div>
+											</div>	 -->
+											<div class="clearfix"></div>			
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Contract Type<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_contract_type"
+														name="contract_type_id_id" class="form-control select2"
+														data-error=".errorTxt3">
+														<option value="0">--Select Contract Type--</option> 
+														{% for i in contract_type_data %}
+															<option value='{{i.id}}' data-code={{i.refitems_code}}>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt3 errormessage errorTxts clear4"></span>
+												</div>
+											</div>	
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Job Title<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Job Title"
+															id="hr_salary_con_job_title"
+															name="job_title" type="text" required
+															data-error=".errorTxt4"> <span
+															class="errorTxt4 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>			
+											<div class="clearfix"></div>
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Structure<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_structure"
+														name="salary_structure_id_id" class="form-control select2"
+														data-error=".errorTxt5">
+														<option value="0">--Select Salary Structure--</option> 
+														{% for i in structure_name_data %}
+															<option value='{{i.id}}' data-code={{i.structure_code}}>{{i.structure_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt5 errormessage errorTxts clear5"></span>
+												</div>
+											</div>	
+										
+										<div class="col-md-6">
+												<div class="form-group">
+													<label>Monthly CTC<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="CTC"
+															id="hr_salary_con_basic"
+															name="base_amount" type="text" required
+															data-error=".errorTxt6"> <span
+															class="errorTxt6 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>	
+											<div class="clearfix"></div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Base Currency<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_con_base_currency"
+														name="base_currency_id" class="form-control select2"
+														data-error=".errorTxt7">
+														<option value="0">--Select Base Currency--</option> 
+														{% for i in currency_type_data %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt7 errormessage errorTxts clear6"></span>
+												</div>
+											</div>	
+												<div class="col-md-6">
+														<div class="form-group">
+															<label>Effective From Date <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="contract_dtimepicker1"
+																	name="contract_effective_from_date"  placeholder="Effective From Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt36">
+																	<div class="tab_salary_contract"></div> <span id="eff_error"
+																	class="errorTxt36 errormessage"></span>
+																	
+															</div>
+														</div>
+													</div>		
+													<div class="clearfix"></div>	
+											<div class="col-md-6">
+														<div class="form-group">
+															<label>Effective To Date <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="contract_dtimepicker2"
+																	name="contract_effective_to_date"  placeholder="Effective To Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt37">
+																	<div class="tab_salary_contract"></div> <span id="eff_error"
+																	class="errorTxt37 errormessage"></span>
+																	
+															</div>
+														</div>
+													</div>
+													<div class="clearfix"></div>
+													<div class="tabbable-line">
+											<ul class="nav nav-tabs ">
+												<li class="active"><a href="#individual_tab"
+													data-toggle="tab" aria-expanded="false"> Individual Benefits </a></li>
+												<!-- <li class=""><a href="#tab_15_2" data-toggle="tab"
+													aria-expanded="true"> Employee Benefits </a></li> -->
+											</ul>
+											<div class="tab-content">
+												<div class="tab-pane active" id="#individual_tab">
+												<label class="btn btn-success btn-eql-wid btn-animate"
+					id="hr_individual_benefit" onclick="individual_benefit()" data-dismiss="modal" aria-hidden="true">Manage Individual Benefits</label>
+														<div class="portlet-body">
+															<table
+																class="table table-striped table-bordered table-hover"
+																id="individual_emp_benft_datatable">
+																<tbody id="individual_emp_benft_databody"></tbody>
+															</table>
+														</div>
+													</div>
+												<!-- <div class="tab-pane" id="tab_15_2">
+												</div> -->
+											</div>
+										</div>
+													<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding" id='salary_contract_btn'></div>
+										</div>
+									</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- END SAMPLE FORM PORTLET-->
+					</div>
+				
+					<div class="col-md-6">
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"
+										id='popupYesNoCallback'> Salary Contract Details</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<table class="table table-striped table-bordered table-hover"
+									id="salary_contract_details">
+								</table>
+							</div>
+						</div>
+						<!-- END EXAMPLE TABLE PORTLET-->
+					</div>
+					
+					
+					
+				
+
+
+<div id="individual_benefit_popup" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="portlet-body form">
+											<form role="form" id="individual_emp_benefit_formValidate">
+											<div class="row">
+											<div class="col-md-6">
+											<div class="form-body">
+												{%csrf_token%}
+												<div class="col-md-6">
+												<div class="form-group">
+													<label>Benefit Name<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Benefit Name"
+															id="emp_benefit_name"
+															name="benefit_name" type="text" required
+															data-error=".errorTxt21"> <span
+															class="errorTxt21 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>	
+										
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														 Rule Category<span class="asterisk"> *</span>
+													</label> <select id="salary_rule_categorys"
+														name="salary_rule_category_id" class="form-control  salarys"
+														data-error=".errorTxt22">
+														<option value="0">--Select Salary Rule--</option> 
+														{% for i in salary_category_data %}
+														    {% if i.refitems_code == "ALLWC" or i.refitems_code == "DEDCN" %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+															{% endif %}
+														{% endfor %}
+													</select> <span id="salary_category_clear" class="errorTxt22 errormessage errorTxts"></span>
+												</div>
+											</div>	
+											<div class="clearfix"></div>
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Periodicity<span class="asterisk"> *</span>
+													</label> <select id="hr_salary_periodicity"
+														name="periodicity_id" class="form-control select2" data-error=".errorTxt23">
+														<option value="0">--Select periodicity--</option> 
+														{% for i in periodicity_info %}
+															<option value='{{i.id}}' data-code={{i.refitems_code}}>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span id="salary_category_clear" class="errorTxt23 errormessage errorTxts"></span>
+												</div>
+											</div>
+												<div class="clearfix"></div>
+												<div class="col-md-6">
+														<div class="form-group">
+															<label>Effective From Date <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="benefit_dtimepicker1"
+																	name="benefit_effective_from_date"  placeholder="Effective From Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt26">
+																	<div id="dtboxdate" class="dtboxdate"></div>
+																	<span id="eff_error" class="errorTxt26 errormessage"></span>
+																	
+															</div>
+														</div>
+														
+													</div>	
+													<div class="clearfix"></div>		
+											<div class="col-md-6">
+														<div class="form-group">
+															<label>Effective To Date <span class="asterisk"> *</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="benefit_dtimepicker2"
+																	name="benefit_effective_to_date"  placeholder="Effective To Date"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt27"><div id="dtboxdate" class="dtboxdate"></div> <span id="eff_error"
+																	class="errorTxt27 errormessage"></span>
+															</div>
+														</div>
+													</div>
+													<div class="clearfix"></div>		
+											<div class="col-md-6">	
+										<div class="form-group">
+											<label>Validation Criteria?</label>
+											<div class="mt-radio-inline">
+												<div class="radio">
+													<label> <input name="hr_salary_rule_benefit"
+														id="hr_individual_emp_yes" value="Yes" type="radio"> <span
+														class="cr"><i class="cr-icon fa fa-circle"></i>
+															<div></div></span>Yes
+													</label>
+												</div>
+												<div class="radio">
+													<label> <input name="hr_salary_rule_benefit"
+														id="hr_individual_emp_no" value="No" type="radio">
+														<span class="cr"><i class="cr-icon fa fa-circle"></i>
+															<div></div></span>No
+													</label>
+												</div>
+											</div>
+										</div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="col-md-6" id="individual_expressions_div">
+										<div class="form-group">
+													<label> Expressions</label>
+													<div class="input-icon">
+														<i class="nf nf-eployee-directories-address"></i>
+														<textarea class="form-control" id="salary_rule_expressions_benefit"
+															name="salary_rule_validation" placeholder="Expressions" rows="1"
+															data-error=".errorTxt28"></textarea>
+														<span class="errorTxt28 errormessage"></span>
+													</div>
+												</div>
+												</div>
+												
+												<div class="col-md-6 txt-right" id="vaidation_criteria_view_benefit">
+													<button class="btn btn-success"
+														id='hr_vaidation_criteria_view_benefit'>
+														<i class="nf nf-update" aria-hidden="true"></i>
+													</button>
+												</div>
+												<div class="clearfix"></div>
+									<div class="col-md-6" id="calculation_type_div">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Calculation Type<span class="asterisk"> *</span>
+													</label> <select id="computation_amount_type_benefit"
+														name="calculation_type_id" class="form-control select2 salarys"
+														data-error=".errorTxt29">
+														<option value="0">--Select Calculation Type--</option> 
+														{% for i in salary_calculation_data %}
+															<option value='{{i.id}}' data-code={{i.refitems_code}}>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt29 errormessage errorTxts"></span>
+												</div>
+											</div>					
+										<div class="clearfix"></div>
+										
+											<div class="col-md-6" id="salary_rule_value_div_benefit">
+												<div class="form-group">
+													<label>Value<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Value"
+															id="computation_quantity_benefit"
+															name="salary_rule_compute_quantity" type="text" 
+															data-error=".errorTxt30"> <span
+															class="errorTxt30 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-2"
+												id="percentage_div_benefit">
+												<div class="form-group">
+													<label>%
+													</label>
+												</div>
+											</div>
+											<div class="col-md-6" id="salary_benefit_component_div">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Component<span class="asterisk"> *</span>
+													</label> <select id="cal_salary_rule_component_ben"
+														name="cal_salary_rule_component" class="form-control select2"
+														data-error=".errorTxt31">
+														<option value="0">--Select Salary Component--</option> 
+														{% for i in salary_component_data %}
+															<option value='{{i.id}}' data-code={{i.refitems_code}}>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt31 errormessage errorTxts"></span>
+												</div>
+											</div>	
+											<div class="clearfix"></div>
+                                       <div class="col-md-6" id="cal_salary_rule_ben_expressions_div">
+										<div class="form-group">
+													<label> Expressions</label>
+													<div class="input-icon">
+														<i class="nf nf-eployee-directories-address"></i>
+														<textarea class="form-control" id="cal_salary_rule_expressions_ben"
+															name="cal_salary_rule_expressions" placeholder="Expressions" rows="1"
+															data-error=".errorTxt28"></textarea>
+														<span class="errorTxt28 errormessage"></span>
+													</div>
+												</div>
+												</div>
+												
+											<div class="clearfix"></div>
+											<div class="col-md-6" id="value_ass_criteria_view_benefit">
+												<div class="form-group" >
+													<button class="btn btn-success"
+														id="value_ass_criteria_view_benefit"><i class="nf nf-update" aria-hidden="true"></i></button>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="mt-checkbox-inline">
+													<label class="label-cbx">
+                    <input id="individual_emp_benft_act";" value="1" class="invisible" name="activate" type="checkbox">
+                    <div class="checkbox">
+                      <svg width="20px" height="20px" viewBox="0 0 20 20">
+                        <path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+                        <polyline points="4 11 8 15 16 6"></polyline>
+                      </svg>
+                    </div>
+                    <span>Activate</span>
+                    </label>
+												</div>
+											</div>
+										</div>
+												<div class="clearfix"></div>
+												</div>
+												</div>
+												</div>
+											</form>
+											</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-eql-wid btn-animate"
+					id="individual_emp_ben_select" data-dismiss="modal" aria-hidden="true">Select</button>
+				<button class="btn btn-warning btn-animate btn-eql-wid btn-animate"
+					id="individual_emp_ben_cancel" onclick="individual_emp_benefit_clear()"  aria-hidden="true">Cancel / Clear</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div id="benefit_validation_criteria_model" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="portlet-body form">
+											<form role="form" id="salary_rule_validation_criteria">
+											<div class="form-body">
+												{%csrf_token%}
+												<div
+													class="col-md-5">
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_open_bracket_benefit' value="(">
+														<i class="fa fa-open-bracket" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_close_bracket_benefit' value=")">
+														<i class="fa fa-close-bracket" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_plus_benefit' value="+">
+														<i class="nf nf-plus" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_minus_benefit' value="-">
+														<i class="nf nf-minus" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_multiply_benefit' value="*">
+														<i class="nf nf-close" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_divide_benefit' value="/">
+														<i class="fa fa-divide" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_percentage_benefit' value="%">
+														<i class="nf nf-percentage" aria-hidden="true"></i>
+													</button>
+												</div>
+												<br></br>
+												<div
+													class="col-md-5">
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_greater_benefit' value=">">
+														<i class="fa fa-angle-right" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_lesser_benefit' value="<">
+														<i class="fa fa-angle-left" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_greaterequal_benefit' value=">=">
+														<i class="fa fa-angle-rightequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_lesserequal_benefit' value="<=">
+														<i class="fa fa-angle-leftequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_equal_benefit' value="==">
+														<i class="fa fa-equal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_notequal_benefit' value="!=">
+														<i class="fa fa-notequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success benefit_validation_btn"
+														id='validation_criteria_and_benefit' value="and">
+														<i class="fa fa-angle-and" aria-hidden="true"></i>
+													</button>
+												</div>
+												<br></br>
+												<div class="col-md-4">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Component<span class="asterisk"> *</span>
+													</label> <select id="benefit_salary_rule_component"
+														name="salary_rule_component" class="form-control select2"
+														>
+														<option value="0">--Select Salary Component--</option> 
+														{% for i in salary_component_data %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> 
+												</div>
+											</div>
+												<div class="col-md-4">
+												<div class="form-group">
+													<label>Number <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-organization"></i> <input
+															class="form-control" placeholder="Number"
+															id="salary_rule_validation_value" name="salary_rule_validation_value"
+															rows="1" type="text"> 
+													</div>
+												</div>
+											</div>
+												<div class="clearfix"></div>
+												<div class="col-md-4 txt-right">
+													<button class="btn btn-success"
+														id='benefit_validation_criteria_create'>
+														<i class="nf nf-plus" aria-hidden="true"></i>
+													</button>
+												</div>
+												<div class="clearfix"></div>
+												<div class="col-md-4">
+													<textarea class="form-control" id="salary_rule_validation_exp_benefit"
+															name="validation_expression" placeholder="Expressions" rows="1"
+															data-error=".errorTxt34" readonly></textarea>
+												</div>
+												<!-- <div class="clearfix"></div>
+												<div class="nt-large-8 nt-medium-8 nt-small-12 nt-xsmall-12">
+													<textarea class="expressions  salary"
+														id="salary_rule_validation_exp_code" readonly></textarea>
+												</div> -->
+												
+												<div class="col-md-4 txt-right">
+													<button class="btn btn-warning btn-animate btn-eql-wid btn-animate"
+														id='validation_criteria_benefit_clear'>Clear
+													</button>
+												</div>
+												<div class="clearfix"></div>
+												</div>
+											</form>
+											</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-eql-wid btn-animate"
+					id="hr_validation_criteria_benefit_select" data-dismiss="modal" aria-hidden="true">Select</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="value_criteria_model_benefit" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="portlet-body form">
+											<form role="form" id="value_criteria_form">
+											<div class="form-body">
+												{%csrf_token%}
+												<div
+													class="col-md-5">
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_open_bracket' value="(">
+														<i class="fa fa-open-bracket" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_close_bracket' value=")">
+														<i class="fa fa-close-bracket" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_plus' value="+">
+														<i class="nf nf-plus" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_minus' value="-">
+														<i class="nf nf-minus" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_multiply' value="*">
+														<i class="nf nf-close" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_divide' value="/">
+														<i class="fa fa-divide" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_percentage' value="%">
+														<i class="nf nf-percentage" aria-hidden="true"></i>
+													</button>
+												</div>
+												<br></br>
+												<div
+													class="col-md-5">
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_greater' value=">">
+														<i class="fa fa-angle-right" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_lesser' value="<">
+														<i class="fa fa-angle-left" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_greaterequal' value=">=">
+														<i class="fa fa-angle-rightequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_lesserequal' value="<=">
+														<i class="fa fa-angle-leftequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_equal' value="==">
+														<i class="fa fa-equal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_notequal' value="!=">
+														<i class="fa fa-notequal" aria-hidden="true"></i>
+													</button>
+													<button
+														class="btn btn-success value_ass_btn_benefit"
+														id='validation_criteria_and' value="and">
+														<i class="fa fa-angle-and" aria-hidden="true"></i>
+													</button>
+												</div>
+												<br></br>
+												<div class="col-md-4">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Component<span class="asterisk"> *</span>
+													</label> <select id="value_ass_salary_rule_component_benefit"
+														name="value_ass_salary_rule_component" class="form-control select2"
+														>
+														<option value="0">--Select Salary Component--</option> 
+														{% for i in salary_component_data %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> 
+												</div>
+											</div>
+												<div class="col-md-4">
+												<div class="form-group">
+													<label>Number <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-organization"></i> <input
+															class="form-control" placeholder="Number"
+															id="value_ass_salary_rule_validation_value_ben" name="value_ass_salary_rule_validation_value"
+															rows="1" type="text"> 
+													</div>
+												</div>
+											</div>
+												<div class="clearfix"></div>
+												<div class="col-md-4 txt-right">
+													<button class="btn btn-success"
+														id='benefit_value_ass_criteria_create'>
+														<i class="nf nf-plus" aria-hidden="true"></i>
+													</button>
+												</div>
+												<div class="clearfix"></div>
+												<div class="col-md-4">
+													<textarea class="form-control" id="value_ass_salary_rule_exp_ben"
+															name="assignment_expression" placeholder="Expressions" rows="1"
+															readonly></textarea>
+												</div>
+												<!-- <div class="clearfix"></div>
+												<div class="nt-large-8 nt-medium-8 nt-small-12 nt-xsmall-12">
+													<textarea class="expressions  salary"
+														id="salary_rule_validation_exp_code" readonly></textarea>
+												</div> -->
+												<!-- <div class="clearfix"></div> -->
+												<div class="col-md-4 txt-right">
+													<button class="btn btn-warning btn-animate btn-eql-wid btn-animate"
+														id='value_ass_criteria_clear_benefit'>Clear
+													</button>
+												</div>
+												<div class="clearfix"></div>
+												</div>
+											</form>
+											</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-eql-wid btn-animate"
+					id="hr_value_criteria_select_ben" data-dismiss="modal" aria-hidden="true">Select</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- body container end -->

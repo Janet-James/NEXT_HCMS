@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Talent Assessment Reports">
+		<!-- Entity details data fetching start -->
+		<query id="ta_reports_entity_info_fetch" query_name="ta_reports_entity_info_fetch"
+			description="Entity details data fetching">
+          <![CDATA[select id,report_master_entity,report_master_code from hcms_ta_report_master where is_active=True]]>
+		</query>
+		<!-- Entity details data fetching end -->
+		
+		<!-- Dynamic field data fetch based on entity start -->
+		<query id="dynamic_field_data" query_name="dynamic_field_data"
+			description="Dynamic field data fetch based on entity">
+          <![CDATA[select htrc.id,htrc.report_config_filter_name,ri.refitems_name,ri.refitems_code from hcms_ta_report_config htrc inner join reference_items ri on htrc.report_config_filter_type_id = ri.id where report_config_master_id_id={0} and ri.is_active = true and htrc.is_active = true order by report_config_ref_sequence]]>
+		</query>
+		<!-- Dynamic field data fetch based on entity end -->
+		
+		<!-- Reference Item details data fetching based on reference item name start -->
+		<query id="reference_item_data_fetch" query_name="reference_item_data_fetch"
+			description="Reference Item details data fetching based on reference item name">
+          <![CDATA[select ri.id,ri.refitems_name from reference_items ri inner join reference_item_category ric on ric.id = ri.refitems_category_id where refitem_category_name ilike '%{0}%' and ri.is_active = true and ric.is_active = true]]>
+		</query>
+		<!-- Reference Item details data fetching based on reference item name end -->
+		
+		<!-- Role Search details data fetching start -->
+		<query id="role_search_data_fetch" query_name="role_search_data_fetch"
+			description="Particular Group details data fetching">
+          <![CDATA[select htrd.id,ROW_NUMBER () OVER (ORDER BY htrd.role_title),'<div class="mt-checkbox-inline"><label class="label-cbx"><input id="cbx" type="checkbox" value="option2" class="invisible" name="test"/><div class="checkbox">
+<svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+<polyline points="4 11 8 15 16 6"></polyline></svg></div></label></div>',htrd.role_title,htrd.role_req_work_exp,htrd.role_pref_edu,htrd.role_need,htrd.role_resp from hcms_ti_role_details htrd where htrd.role_title ilike '%{0}%' and htrd.is_active = true]]>
+		</query>
+		<!-- Role Search details data fetching end -->
+		
+		<!-- OrgUnit Search details data fetching start -->
+		<query id="orgUnit_search_data_fetch" query_name="orgUnit_search_data_fetch"
+			description="OrgUnit Search details data fetching start">
+          <![CDATA[select oui.id,ROW_NUMBER () OVER (ORDER BY oui.orgunit_name),'<input type="checkbox"/>',ori.name,oui.orgunit_name,CASE WHEN oui.parent_orgunit_id!=0 THEN (select orui.orgunit_name from organization_unit_info orui where orui.id = oui.parent_orgunit_id)   ELSE ''
+       END as parent_orgunit_name from organization_unit_info oui inner join organization_info ori on ori.id = oui.organization_id where oui.orgunit_name ilike '%{0}%' and ori.is_active = true and oui.is_active = true and orui.is_active = true]]>
+		</query>
+		<!-- OrgUnit Search details data fetching end -->		
+	</queries>
+</data>

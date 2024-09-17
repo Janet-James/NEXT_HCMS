@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="recording_details">
+		<query id="details_save" query_name="details_save"
+			description="details_save">
+        	<![CDATA[insert into hcms_im_incident_record (incident_subject,incident_date,
+incident_description,incident_type_id,incident_severity_type_id,
+incident_location,incident_category_id,incident_trigger_info,
+incident_reported_by_id,incident_reported_mode_id,incident_risk_details,is_active,created_by_id,created_date,incident_resolution_status) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		<query id="involver_partie_save" query_name="involver_partie_save"
+			description="involver_partie_save">
+        	<![CDATA[insert into hcms_im_incident_involved_parties (incident_detail_record_id,incident_involved_employee_id,incident_involved_party_type,created_by_id,created_date,is_active)
+values (%s,%s,%s,%s,now(),%s)]]>
+		</query>
+		<query id="file_details" query_name="file_details"
+			description="file_details">
+        	<![CDATA[insert into hcms_im_incident_evidence_attachments (incident_detail_record_id,name,path,extension,created_by_id,created_date,is_active,source)
+values (%s,%s,%s,%s,%s,now(),%s,%s)]]>
+		</query>
+		<query id="kamban_view" query_name="kamban_view"
+			description="kamban_view">
+        	<![CDATA[select ref_item.refitems_name as name,rec.incident_type_id as incident_type_id,rec.incident_resolution_status as status,rec.id,rec.incident_location as location,rec.incident_subject as subject from hcms_im_incident_record as rec 
+inner join reference_items as ref_item on ref_item.id=rec.incident_type_id
+where rec.is_active='True' and ref_item.is_active='True']]>
+		</query>
+		<query id="stage_update" query_name="stage_update"
+			description="stage_update">
+        	<![CDATA[update hcms_im_incident_record set incident_resolution_status=%s, modified_date=now(), modified_by_id=%s where id=%s]]>
+		</query>
+		
+		<query id="acc_details_view" query_name="acc_details_view"
+			description="acc_details_view">
+        	<![CDATA[
+select inc_det.incident_reported_mode_id as mode,inc_det.incident_location as location,emp_info.name as employee_name,inc_det.incident_reported_by_id as reported_by_id,inc_det.incident_severity_type_id,ref_item2.refitems_name as incident_serverity,ref_item1.refitems_name as incident_type,inc_det.incident_code,inc_det.incident_description,inc_det.incident_trigger_info,inc_det.incident_risk_details,inc_det.incident_resolution_status,
+ inc_det.incident_category_id as cat_id,ref_item.refitems_name as cat_name,inc_det.incident_type_id,inc_det.incident_subject,
+to_char(inc_det.incident_date,'DD-MM-YYYY') as incident_date
+from hcms_im_incident_record as inc_det
+inner join reference_items as ref_item on ref_item.id=inc_det.incident_category_id 
+inner join  reference_items as ref_item1 on ref_item1.id=inc_det.incident_type_id
+inner join  reference_items as ref_item2 on ref_item2.id=inc_det.incident_severity_type_id
+inner join employee_info as emp_info on emp_info.id=inc_det.incident_reported_by_id
+where inc_det.is_active='True' and  emp_info.is_active='True' and ref_item.is_active='True' and inc_det.id=%s
+        	]]>
+		</query>
+		<query id="involved_person" query_name="involved_person"
+			description="involved_person">
+        	<![CDATA[select emp_info.name, involed.incident_involved_employee_id,involed.incident_involved_party_type 
+from hcms_im_incident_involved_parties as involed 
+inner join employee_info as emp_info on emp_info.id=involed.incident_involved_employee_id
+where involed.incident_detail_record_id=%s and involed.is_active='True' and emp_info.is_active='True']]>
+		</query>
+		<query id="details_update" query_name="details_update"
+			description="details_update">
+        	<![CDATA[update hcms_im_incident_record set incident_subject=%s,incident_date=%s,incident_description=%s,
+        	incident_type_id=%s,incident_severity_type_id=%s,incident_location=%s,incident_category_id=%s,incident_trigger_info=%s,
+incident_reported_by_id=%s,incident_reported_mode_id=%s,incident_risk_details=%s,is_active=%s,modified_by_id=%s,modified_date=now(),
+incident_resolution_status=%s where id=%s]]>
+		</query>
+		<query id="remove_file" query_name="remove_file"
+			description="remove_file">
+        	<![CDATA[update hcms_im_incident_evidence_attachments set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s and source='incident' and id in %s]]>
+		</query>
+		<query id="remove_stage_change" query_name="remove_stage_change"
+			description="remove_stage_change">
+        	<![CDATA[update hcms_im_incident_evidence_attachments set is_active='False', modified_date=now(), modified_by_id=%s where source='incident' and incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="record_remove_stage_change" query_name="record_remove_stage_change"
+			description="record_remove_stage_change">
+        	<![CDATA[update hcms_im_incident_record set is_active='False', modified_date=now(), modified_by_id=%s where id=%s]]>
+		</query>
+		
+		<query id="involed_remove_stage_change" query_name="involed_remove_stage_change"
+			description="involed_remove_stage_change">
+        	<![CDATA[update hcms_im_incident_involved_parties set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="investigation_save" query_name="investigation_save"
+			description="investigation_save">
+        	<![CDATA[insert into hcms_im_investigation_team_info (incident_detail_record_id,investigation_team_member_id,created_by_id,created_date,is_active)
+values (%s,%s,%s,now(),%s)]]>
+		</query>
+		
+		<query id="investigation_question_save" query_name="investigation_question_save"
+			description="investigation_question_save">
+        	<![CDATA[insert into hcms_im_investigation_question_answer (incident_detail_record_id,investigation_question,investigation_answer,created_by_id,created_date,is_active)
+values (%s,%s,%s,%s,now(),%s)]]>
+		</query>
+		
+		<query id="team_details" query_name="team_details"
+			description='team_details'>
+        	<![CDATA[select emp_info.name, invest.investigation_team_member_id,invest.id
+from hcms_im_investigation_team_info as invest 
+inner join employee_info as emp_info on emp_info.id=invest.investigation_team_member_id
+where invest.incident_detail_record_id=%s and invest.is_active='True' and emp_info.is_active='True']]>
+		</query>
+		
+		<query id="qa_details" query_name="qa_details"
+			description='qa_details'>
+        	<![CDATA[select investigation_question,investigation_answer,id
+from hcms_im_investigation_question_answer
+where incident_detail_record_id=%s and is_active='True']]>
+		</query>
+		
+		<query id="attachment_details" query_name="attachment_details"
+			description='attachment_details'>
+        	<![CDATA[select name,path,id
+from hcms_im_incident_evidence_attachments
+where incident_detail_record_id=%s and is_active='True' and source='investigation']]>
+		</query>
+		
+		<query id="invest_remove_file" query_name="invest_remove_file"
+			description="invest_remove_file">
+        	<![CDATA[update hcms_im_incident_evidence_attachments set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s and source='investigation' and id in %s]]>
+		</query>
+		
+		<query id="remove_team_info" query_name="remove_team_info"
+			description="remove_team_info">
+        	<![CDATA[delete from hcms_im_investigation_team_info where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="remove_invest_team_infotable" query_name="remove_invest_team_infotable"
+			description="remove_invest_team_infotable">
+        	<![CDATA[update hcms_im_investigation_team_info set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="remove_qa" query_name="remove_qa"
+			description="remove_qa">
+        	<![CDATA[update hcms_im_investigation_question_answer set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="remove_invest_file" query_name="remove_invest_file"
+			description="remove_invest_file">
+        	<![CDATA[update hcms_im_incident_evidence_attachments set is_active='False', modified_date=now(), modified_by_id=%s where source='investigation' and incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="corrective_action_item_insert" query_name="corrective_action_item_insert"
+			description="corrective_action_item_insert">
+        	<![CDATA[insert into hcms_im_corrective_action_log (incident_detail_record_id,action_item_summary,owner_id,status,created_by_id,created_date,is_active)
+values (%s,%s,%s,%s,%s,now(),%s)]]>
+		</query>
+		<query id="corrective_action_details" query_name="corrective_action_details"
+			description="corrective_action_details">
+        	<![CDATA[select emp_info.name,emp_info.id as employee_id,act.id as action_iterm_id,act.action_item_summary,act.owner_id,act.status from hcms_im_corrective_action_log as act
+        	inner join employee_info as emp_info on emp_info.id=act.owner_id
+        	where act.is_active=True and  emp_info.is_active='True' and act.incident_detail_record_id=%s]]>
+		</query>
+		<query id="remove_action_data" query_name="remove_action_data"
+			description="remove_action_data">
+        	<![CDATA[update hcms_im_corrective_action_log set is_active='False', modified_date=now(), modified_by_id=%s where id=%s and incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="update_action_data" query_name="update_action_data"
+			description="update_action_data">
+        	<![CDATA[update hcms_im_corrective_action_log set action_item_summary=%s,owner_id=%s,status=%s,is_active='True', modified_date=now(), modified_by_id=%s where id=%s and incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="remove_corrective_action" query_name="remove_corrective_action"
+			description="remove_corrective_action">
+        	<![CDATA[update hcms_im_corrective_action_log set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="solution_proposal_save" query_name="solution_proposal_save"
+			description="solution_proposal_save">
+        	<![CDATA[insert into hcms_im_solution_proposal (incident_detail_record_id,corrective_measure,preventive_measure,created_by_id,created_date,is_active)
+values (%s,%s,%s,%s,now(),%s)]]>
+		</query>
+		
+		<query id="solution_proposal_check" query_name="solution_proposal_check"
+			description="solution_proposal_check">
+        	<![CDATA[select id from  hcms_im_solution_proposal where incident_detail_record_id=%s and is_active='True']]>
+		</query>
+		
+		<query id="solution_proposal_update" query_name="solution_proposal_update"
+			description="solution_proposal_update">
+        	<![CDATA[update hcms_im_solution_proposal set corrective_measure=%s,
+        	preventive_measure=%s,is_active='True', modified_date=now(), modified_by_id=%s where id=%s and incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="solution_proposal_details" query_name="solution_proposal_details"
+			description="solution_proposal_details">
+        	<![CDATA[select id,incident_detail_record_id,corrective_measure,preventive_measure from  hcms_im_solution_proposal where incident_detail_record_id=%s and is_active='True']]>
+		</query>
+		
+		<query id="remove_solution_proposal" query_name="remove_corrective_action"
+			description="remove_corrective_action">
+        	<![CDATA[update hcms_im_solution_proposal set is_active='False', modified_date=now(), modified_by_id=%s where incident_detail_record_id=%s]]>
+		</query>
+		
+		<query id="injury_details_save" query_name="injury_details_save"
+			description="Injury Detail Save">
+        	<![CDATA[insert into hcms_im_incident_injury (incident_injury_type_id,body_part_type_id,
+            body_part_laterality_id,illness_id,treatment,injury_notes,incident_detail_record_id,is_active,created_by_id,created_date) 
+            values ({0},{1},{2},{3},{4},'{5}',{6},{7},{8},'{9}') returning id]]>
+		</query>
+		
+		<query id="injury_details_update" query_name="injury_details_update"
+			description="Injury Detail Update">
+        	<![CDATA[update hcms_im_incident_injury set incident_injury_type_id = {0},body_part_type_id = {1},
+            body_part_laterality_id = {2},illness_id = {3},treatment = {4},injury_notes = '{5}',is_active = {6},modified_by_id = {7},modified_date = '{8}' 
+            where incident_detail_record_id = {9} returning id]]>
+		</query>
+		
+		<query id="injury_details_delete" query_name="injury_details_delete"
+			description="Injury Detail Delete">
+        	<![CDATA[delete from hcms_im_incident_injury where incident_detail_record_id = {0}]]>
+		</query>
+		
+		<query id="injury_details_view" query_name="injury_details_view"
+			description="Injury Detail View">
+        	<![CDATA[select * from hcms_im_incident_injury where incident_detail_record_id = {0}]]>
+		</query>
+		
+		<query id="impact_analysis_save" query_name="impact_analysis_save"
+			description="Impact Analysis Save">
+        	<![CDATA[insert into hcms_im_impact_analysis (environmental_financial_value,environmental_impact_detail,
+            hr_financial_value,hr_impact_detail,materials_financial_value,materials_impact_detail,machinery_financial_value,machinery_impact_detail,
+            analysis_date,other_risks,business_impact,business_activities_affected,minimum_recovery_time,environmental_currency_id,hr_currency_id,
+            machinery_currency_id,materials_currency_id,incident_detail_record_id,is_active,created_by_id,created_date) 
+            values ({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19},'{20}') returning id]]>
+		</query>
+		
+		<query id="impact_analysis_update" query_name="impact_analysis_update"
+			description="Impact Analysis Update">
+        	<![CDATA[update hcms_im_impact_analysis set environmental_financial_value = {0},environmental_impact_detail = {1},
+            hr_financial_value = {2},hr_impact_detail = {3},materials_financial_value = {4},materials_impact_detail = {5},machinery_financial_value = {6},
+            machinery_impact_detail = {7},analysis_date = {8},other_risks = {9},business_impact = {10},business_activities_affected = {11},
+            minimum_recovery_time = {12},environmental_currency_id = {13},hr_currency_id = {14},machinery_currency_id = {15},materials_currency_id = {16},
+            is_active = {17},modified_by_id = {18},modified_date = '{19}' where incident_detail_record_id = {20} returning id]]>
+		</query>
+		
+		<query id="impact_analysis_delete" query_name="impact_analysis_delete"
+			description="Impact Analysis Delete">
+        	<![CDATA[delete from hcms_im_impact_analysis where incident_detail_record_id = {0}]]>
+		</query>
+		
+		<query id="impact_analysis_view" query_name="impact_analysis_view"
+			description="Impact Analysis View">
+        	<![CDATA[select * from hcms_im_impact_analysis where incident_detail_record_id = {0}]]>
+		</query>
+		</queries>
+</data>

@@ -1,0 +1,335 @@
+<!-- 									<h3 class="block">Employee Information</h3>
+ -->									<div class="clearfix"></div>
+								<form role="form" id="employee_primary_details_form">
+									<div class="form-body">
+										{%csrf_token%}
+										<div class="col-md-12 ">
+											<div class="col-md-3 col-sm-12">
+												<div class="form-group">
+													<label>First Name <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="First Name" id="employee_name"
+															name="employee_name" type="text" required
+															data-error=".errorTxt0" autofocus maxlength="50"> <span
+															class="errorTxt0 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>Middle Name
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Middle Name" id="middle_name"
+															name="middle_name" type="text"
+															data-error=".errorTxt37" autofocus maxlength="50"> <span
+															class="errorTxt37 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>Last Name <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Last Name" id="last_name" placeholder="Last Name" id="last_name"
+															name="last_name" type="text" required
+															data-error=".errorTxt45" autofocus maxlength="50"> <span
+															class="errorTxt45 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>Short Name </label>
+													<div class="input-icon">
+														<i class="nf nf-address book"></i> <input
+															class="form-control" placeholder="Short Name"
+															id="short_name" name="short_name" type="text" maxlength="25">
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Date of Joining <span class="asterisk">*</span></label>
+													<div class=" input-icon">
+														<i class="nf nf-calendar"></i> <input id="date_of_joining"
+															name="date_of_joining" placeholder="Date of Joining"
+															class="form-control form-control-inline" data-field="date"
+															size="16" value="" type="text" data-error=".errorTxt48">
+															<div id="dtBox"></div>
+															<span
+															class="errorTxt48 errormessage"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-12">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Gender <span class="asterisk">*</span>
+															</label> <select id="gender" name="gender"
+																class="form-control select2" required
+																data-error=".errorTxt30">
+																<option value="0">-- Select Gender--</option> 
+																{% for i in gender_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt30 errormessage"></span>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="single" class="control-label black_font"> 
+																Title <span class="asterisk">*</span>
+															</label> <select id="title" name="title"
+																class="form-control select2" required
+																data-error=".errorTxt41">
+																<option value="0">-- Select Title --</option> 
+																{% for i in title_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt41 errormessage"></span>
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+																								
+												<div class="form-group">
+													<label>Email</label>
+													<div class="input-icon">
+														<i class="nf nf-email"></i> <input class="form-control"
+															placeholder="Email" id="email" name="email" type="text"
+															data-error=".errorTxt17" maxlength="100"> <span
+															class="errorTxt17 errormessage"></span>
+													</div>
+												</div>
+												<div class="row">
+												<div class="col-md-12">
+												<div class="form-group">
+															<label>Phone Number</label>
+															<div class="input-icon">
+																<i class="nf nf-phone"></i> <input class="form-control"
+																	placeholder="Phone Number" id="work_phone"
+																	name="work_phone" type="text" data-error=".errorTxt18" maxlength="11">
+																<span class="errorTxt18 errormessage" ></span>
+															</div>
+												</div>	</div></div>
+												
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Select Organization <span class="asterisk">*</span>
+													</label> <select id="organization_id" name="organization_id"
+														class="form-control select2" required
+														data-error=".errorTxt3">
+														<option value="0">--Select Organization--</option> 
+														{% for i in organization_info %}
+															<option value={{i.id}}>{{i.name}}</option> 
+														{% endfor %}
+													</select> <span class="errorTxt3 errormessage"></span>
+												</div>
+												
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Reporting To</label> <select id="reporting_officer"
+																name="reporting_officer" class="form-control select2">
+																<option value="0">--Select Reporting Officer--</option>
+																{% for code,name in reporting_officer_info %}
+																	<option value='{{name}}'>{{name}}</option>
+																{% endfor %}
+															</select> 
+														</div>
+											</div>
+											<div class="col-md-3 col-sm-12">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Date of Birth  <span class="asterisk">*</span></label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="date_of_birth"
+																	name="date_of_birth"  placeholder="Date of Birth"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt36"> <span id="dob_error"
+																	class="errorTxt36 errormessage"></span>
+																	<div id="dtBox"></div>
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>Place of Birth </label>
+															<div class="input-icon">
+																<i class="nf nf-place-birth"></i> <input
+																	class="form-control" placeholder="Place of Birth"
+																	id="place_of_birth" name="place_of_birth" type="text"
+																	data-error=".errorTxt35" maxlength="50"> <span 
+																	class="errorTxt35 errormessage"></span>
+															</div>
+														</div>
+													</div>
+												</div>												
+												<div class="form-group">
+													<label> Current Address</label>
+													<div class="input-icon">
+														<i class="nf nf-eployee-directories-address"></i>
+														<textarea class="form-control" id="working_address"
+															name="working_address" placeholder="Address" rows="1"
+															data-error=".errorTxt34" maxlength="250"></textarea>
+														<span class="errorTxt34 errormessage"></span>
+													</div>
+													
+												</div>
+												
+												<div class="form-group">
+															<label>Mobile Number <span class="asterisk">*</span>
+															</label>
+															<div class="input-icon">
+																<i class="nf nf-mobile"></i> <input class="form-control"
+																	placeholder="Mobile Number (eg:1234567890)" id="work_mobile"
+																	name="work_mobile" type="text" required
+																	data-error=".errorTxt1" maxlength="10"> <span
+																	class="errorTxt1 errormessage"></span>
+															</div>
+												</div>
+
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Select Organization Unit <span class="asterisk">*</span>
+															</label> <select id="org_unit_id" name="org_unit_id"
+																class="form-control select2" required
+																data-error=".errorTxt4">
+																<option value="0">--Select Org Unit--</option>
+															</select> <span class="errorTxt4 errormessage"></span> 
+														</div>
+														<a id='select_org' href="#"
+																class="btn blue btn-animate right-side-search"><i
+																class="nf nf-search" title='Search by Org Unit'></i></a>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+												<div class="form-group">
+															<label>Employee Matrix Id </label>
+															<div class="input-icon">
+																<i class="nf nf-phone"></i> <input class="form-control"
+																	placeholder="Employee Matrix Id" id="emp_file_no"
+																	name="emp_file_no" type="text"  maxlength="50" data-error=".errorTxt55">
+																<span class="errorTxt55 errormessage"></span>
+															</div>
+												</div>												
+												<div class="form-group" style='display:none'>
+													<label>Employee ID <span class="asterisk">*</span></label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input
+															class="form-control input_hide" placeholder="Employee ID"
+															id="employee_id" name="employee_id" 
+															data-error=".errorTxt5" type="text" readonly> <span
+															class="errorTxt5 errormessage"></span>
+														<span class="txt-info" style="display: inline-block;">( Note : Organization & unit based auto generate )</span>
+													</div>
+												</div>
+											
+											</div>
+											<div class="col-md-3 col-sm-12">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Country of Birth <span class="asterisk">*</span>
+															</label> <select id="country_of_birth" name="country_of_birth"
+																class="form-control select2"  data-error=".errorTxt53">
+																<option value="0">--Select Country of Birth--</option> 
+																{% for i in country %}
+																	<option value={{i.id}}>{{i.country_name}}</option> 
+																{% endfor %}
+															</select><span class="errorTxt53 errormessage">
+														</div>
+													</div>
+												</div>
+												<div class="clearfix"></div>
+												<div class="form-group">
+													<label> Permanent Address</label>
+														<div class="input-icon">
+															<i class="nf nf-eployee-directories-address"></i>
+															<textarea class="form-control" id="permanent_address"
+																name="permanent_address" placeholder="Permanent Address"
+																rows="1" data-error=".errorTxt33" maxlength="250"></textarea>
+															<span class="errorTxt33 errormessage"></span>
+														</div>
+												</div>
+												<div class="clearfix"></div>
+												<div class="form-group">
+															<label>Emergency Contact No<span class="asterisk">*</span> <span class='addmore_popup' onclick='addExtraMobileNumber();'><i class="nf nf-add"></i></span></label>
+															<div class="input-icon">
+																<i class="nf nf-phone"></i> <input class="form-control"
+																	placeholder="Emer.Cont.No (eg:1234567890)" id="emergency_contact_no"
+																	name="emergency_contact_no" type="text"  maxlength="10" required data-error=".errorTxt46">
+																<span class="errorTxt46 errormessage"></span>
+															</div>
+												</div>
+												
+												<div class="clearfix"></div>
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Select Division <span class="asterisk">*</span></label> <select id="team_id" name="team_id"
+															class="form-control select2" required data-error=".errorTxt43">
+															<option value="0">--Select Division--</option> 																																
+															</select> 		
+															<span class="errorTxt43 errormessage"></span>												
+												</div>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										
+										
+										<div class="col-md-12 ">
+										<div class="col-md-6">
+										<div class="">
+													<label class="upload-label control-label ">Profile
+														Image Upload </label>
+													<div class="clearfix"></div>
+													<div class="col-md-9 padding-0">
+														<div class="fileinput fileinput-new"
+															data-provides="fileinput">
+															<div class="fileinput-new thumbnail"
+																style="width: 120px; height: 80px;">
+																<img id="user_image"
+																	src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+																	alt="" />
+															</div>
+															<div class="fileinput-preview fileinput-exists thumbnail"
+																style="max-width: 200px; max-height: 150px;"></div>
+															<div>
+																<span class="btn green btn-file"> <span
+																	class="fileinput-new upload_click_data_img"> Upload Image </span> <span
+																	class="fileinput-exists"> Change </span> <input
+																	type="file" id='profile_image' name="image"
+																	onchange="encodeImagetoBase64(this)">
+																</span> <a href="javascript:;" class="btn red fileinput-exists"
+																	data-dismiss="fileinput"> <span
+																	class="fileinput-exists">Remove </span></a>
+															</div>
+														</div>
+													</div>
+													<span class="txt-info" style="display: inline-block;">( Note : Please upload jpg,jpeg or png and image size should be less than 1MB )</span>
+												</div>
+										
+										</div>
+										
+										<div class="col-md-6">
+										
+										<div class="form-group addbtn_margin" align="right">
+												<div class="btn-padding" id='hrms_employee_btn'></div>
+											</div>
+											
+										</div>
+										
+										
+											</div>
+											
+											
+											
+										<div class="clearfix"></div>
+									</div>
+								</form>

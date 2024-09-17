@@ -1,0 +1,27 @@
+<!-- {{#if USER}}
+  {{#if USER.length}}
+    {{#each USER}}
+
+      {{#userOrder order}}
+      <li>
+      <button type=button class=chatUser id={{id}}>{{uname}}<span class= user-status-lbl > {{status}}</span> </button> <label class=unread_msg>{{order}}</label>
+      </li>
+      {{else}}
+      <li>
+      <button type=button class=chatUser id={{id}}>{{uname}}<span class= user-status-lbl > {{status}}</span> </button>
+      </li>
+      {{/userOrder}}
+
+    {{/each}}
+  {{/if}}
+{{/if}} -->
+
+{{#if USER}}
+  {{#if USER.length}}
+    {{#each USER}}
+      {{#userOrder order}}
+      <div class='chatUser item' id={{id}}><div class="img-name"><span class="group-top-msg">{{order}}</span><img class='{{color status}}' src={{ip uname}}><span class='username'>{{uname}}</span></div></div>
+      {{/userOrder}}
+    {{/each}}
+  {{/if}}
+{{/if}}

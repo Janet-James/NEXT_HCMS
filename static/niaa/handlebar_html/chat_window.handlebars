@@ -1,0 +1,66 @@
+
+  {{#if HISTORY}}
+    {{#if HISTORY.length}}
+      {{#each HISTORY}}
+      {{#if dayFirstMsg}}
+        {{{dayFirstMsg}}}
+      {{/if}}
+      {{#if RoomUnreadTag}}
+        {{{RoomUnreadTag}}}
+      {{/if}}
+      {{#if mid}}
+    {{#if groupingclass}}
+    <li class='{{msg-align uid}} message-data {{groupingclass}}' id={{mid}} data-timestamp={{ts}} data-msg_type={{msg_type}}>
+    {{else}}
+   <li class='{{msg-align uid}} message-data' id={{mid}} data-timestamp={{ts}} data-msg_type={{msg_type}}>
+     {{/if}}
+      <img src={{avatar}} alt="">
+      <div class="date-time {{type msg_type}}">
+         <div class="send-name">{{uname}}</div>
+         <div class="mesg-bg">{{{msg}}}</div>
+         <div class="sent-editor-sec">
+            <a href="#"><i class="fa fa-ellipsis-v"></i></a>
+            <ul>
+              {{#if isOwner}}
+                 <li> <a href="#" class="edit_msg_btn" data-toggle="tooltip" title="Edit Message"><i class="fa fa-edit"></i></a> </li>
+                 <li> <a href="#" id="btnShowHide" class="reply_msg_btn" data-toggle="tooltip" title="Reply" ><i class="fa fa-reply"></i></a> </li>
+                 <li> <a href="#" id="btnShowHide1" class="fwd_msg_btn" data-toggle="tooltip" title="Forward"><i class="fa fa-share"></i></a> </li>
+                 <li> <a onclick="JSalert()" href="#" class="delete_msg_btn" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></a> </li>
+               {{else}}
+                  <li> <a href="#" id="btnShowHide" class="reply_msg_btn" data-toggle="tooltip" title="Reply"><i class="fa fa-reply"></i></a> </li>
+                  <li> <a href="#" id="btnShowHide1" class="fwd_msg_btn" data-toggle="tooltip" title="Forward"><i class="fa fa-share"></i></a> </li>
+               {{/if}}
+            </ul>
+            <div class="forword-msg-box">
+                <div class="forword-msg-box-inner">
+                   <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control user_search_box" placeholder="Search">
+                    <span class="input-group-addon">
+                            <i class="fa fa-search"></i>
+                    </span>
+                </div>
+                    <div class="searc-result-list" id="fwd_selected_room"></div>
+                    <div class="forword-search-result">
+                            <ul id="style-3" class="force-overflow forward_msg_list">
+                            </ul>
+
+                    </div>
+                    <div class="buttons-btm">
+                            <span id="fwd_cancel_btn" class="cancle-btnm"><i class="fa fa-times"></i></span>
+                            <span id="fwd_submit_btn" class="save-btnm"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+                        </div>
+
+                </div>
+             </div>
+         </div>
+         {{#if isEdited}}
+         <div class=edit-time><i class='fa fa-edit'></i><p class=user-message>{{isEdited}}</p></div>
+         {{/if}}
+         <div class="rec-time">{{ct}}</div>
+      </div>
+   </li>
+   {{/if}}
+
+   {{/each}}
+   {{/if}}
+   {{/if}}

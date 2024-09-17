@@ -1,0 +1,9 @@
+<html>
+  <body>
+    {% if user.is_anonymous %}
+    <a href="{% url 'oidc_auth_request' %}">Login</a>
+    {% else %}
+    <a href="{% url 'oidc_end_session' %}">Logout</a>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="TalentAcquisition">
+	<!-- Job opeing and Offer management Start  -->
+	<query id="job_openings_table_query" query_name="job_openings_table_query"
+			description="job_openings_table_query">
+        	<![CDATA[ 
+			select  jo.id,ROW_NUMBER() OVER  (ORDER BY jo.id asc),jo.job_title, to_char(jo.date_opened,'DD-MM-YYYY ') as date_opened,to_char(jo.target_date,'DD-MM-YYYY ') as target_date,jo.number_of_positions,coalesce(jo.job_publish,'') from ta_job_openings_info jo 
+			where jo.is_active
+		]]>
+		</query>
+		<query id="job_openings_table_query_row" query_name="job_openings_table_query_row"
+			description="job_openings_table_query_row">
+        	<![CDATA[ 
+			select  jo.id,ROW_NUMBER() OVER  (ORDER BY jo.id asc),jo.job_title, to_char(jo.date_opened,'DD-MM-YYYY ') as date_opened,to_char(jo.target_date,'DD-MM-YYYY ') as target_date,jo.number_of_positions,
+			jo.assigned_recruiter_id,jo.job_type_id,jo.contact_no_id,jo.work_experience_id,jo.job_opening_status_id,jo.number_of_positions,jo.org_id,jo.job_description,jo.org_unit_id,jo.job_boards_id,jo.department_id,jo.shift_id,jo.salary,jo.job_location,jo.job_resource_config_id,jo.recruiter_id,jo.key_skills,jo.job_short_description,
+			jo.doc_name,jo.doc_name||'.'||ati.format show_doc_name,jo.attachment_id,coalesce(jo.job_publish,'') as job_publish,logo_type_id,job_cat_id from ta_job_openings_info jo 
+			left join attachment_info ati on ati.id = jo.attachment_id
+			where jo.id=%s and jo.is_active
+		]]>
+		</query>
+		<query id="offer_candidate_table_query" query_name="offer_candidate_table_query"
+			description="offer_candidate_table_query"> 
+        	<![CDATA[select * from(select  oi.id,ROW_NUMBER() OVER (ORDER BY oi.id asc),coalesce(tci.first_name,'')||' '||coalesce(tci.last_name,'') as candidate_name,coalesce(rr.refitems_name,'In Progress') as refitems_name
+			from ta_offer_info oi left join reference_items rr  on rr.id=oi.offer_release_id 
+			left join ta_candidate_info tci on tci.id = oi.candidate_id
+			where oi.is_active and tci.is_active)a 
+		]]>
+		</query>
+		<query id="offer_candidate_details" query_name="offer_candidate_details"
+			description="offer_candidate_details"> 
+        	<![CDATA[ 
+			select  oi.id,ROW_NUMBER() OVER (ORDER BY oi.id asc),tci.id as candidate_id,coalesce(tci.first_name,'')||' '||coalesce(tci.last_name,'') as name,tci.address,tci.primary_email
+			,tci.secondary_email,tci.phone_no,tci.mobile_no,coalesce(oi.offer_release_id,0) as offer_release_id,oi.cost_to_employee_id,oi.doc_download_name
+			from ta_offer_info oi right join ta_candidate_info tci on tci.id = oi.candidate_id
+			where oi.id=%s and oi.is_active
+		]]>
+		</query>	
+	    <query id="offer_candidate_table_query_row_candidate" query_name="offer_candidate_table_query_row_candidate"
+			description="offer_candidate_table_query_row_candidate">
+        	<![CDATA[select  oi.id,ROW_NUMBER() OVER (ORDER BY oi.id asc),tci.id as candidate_id,coalesce(tci.first_name,'')||' '||coalesce(tci.last_name,'') as name,tci.address,tci.primary_email
+			,tci.secondary_email,tci.phone_no,tci.mobile_no,oi.offer_release_id,oi.cost_to_employee_id
+			from ta_offer_info oi right join ta_candidate_info tci on tci.id = oi.candidate_id
+			where tci.id=%s and tci.is_active
+		]]>
+		</query>	
+			<query id="offer_candidate_table_query_row" query_name="offer_candidate_table_query_row"
+			description="offer_candidate_table_query_row">
+        	<![CDATA[select  oi.id,ROW_NUMBER() OVER (ORDER BY oi.id asc),tci.id as candidate_id,coalesce(tci.first_name,'')||' '||coalesce(tci.last_name,'') as name,tci.address,tci.primary_email
+			,tci.secondary_email,tci.phone_no,tci.mobile_no,coalesce(oi.offer_release_id,0) as offer_release_id,oi.cost_to_employee_id,coalesce(oi.job_title_id,0) as job_title_id,oi.ctc
+			from ta_offer_info oi right join ta_candidate_info tci on tci.id = oi.candidate_id
+			where oi.id=%s and oi.is_active
+			]]>
+		</query>
+		<query id="offer_candidate_dropdown_query" query_name="offer_candidate_dropdown_query"
+			description="offer_candidate_dropdown_query"> 
+        	<![CDATA[select tci.id,coalesce(tci.first_name,'')||' '||coalesce(tci.last_name,'') as name from ta_candidate_info tci
+			inner join employee_info ei on ei.id = tci.employee_id order by name 	
+		]]>	
+		</query>  
+		<query id="on_boarding_table_query" query_name="on_boarding_table_query"
+			description="on_boarding_table_query">
+        	<![CDATA[select ci.id,ROW_NUMBER() OVER (ORDER BY ci.id asc),coalesce(ci.first_name,'')||' '||coalesce(ci.last_name,'') as name,ci.primary_email from ta_boarding_info  tbi 
+		left join ta_candidate_info ci on ci.id = tbi.candidate_id where tbi.is_active
+		]]>
+		</query>
+		<query id="candidate_dropdown_query" query_name="candidate_dropdown_query"
+			description="candidate_dropdown_query">    
+        	<![CDATA[
+			select ci.id,tbi.connection,tbi.culture,tbi.clarification,tbi.compiliance from ta_boarding_info  tbi 
+			left join ta_candidate_info ci on ci.id = tbi.candidate_id where tbi.is_active and ci.id = %s 
+		]]>  
+		</query>
+		<query id="candidate_asset_details_query" query_name="candidate_asset_details_query"
+			description="candidate_asset_details_query">
+        	<![CDATA[
+			select ai.id,ROW_NUMBER() OVER (ORDER BY ci.id asc) as rno,al.asset_serial as asset_serial,al.asset_model_code as asset_model,ra.refitems_name as asset_name,to_char(ai.given_date, 'DD-MM-YYYY') as given_date 
+			from hcms_am_asset_list al inner join hrms_assets_info ai on ai.asset_id=al.id inner join employee_info ei on ei.id=ai.emp_id_id
+			inner join reference_items ra on ra.id=asset_model_type_refitem_id
+			inner join ta_candidate_info ci on ci.employee_id=ei.id
+			inner join ta_boarding_info bi on bi.candidate_id=ci.id where  ci.id=%s and al.is_active and ai.is_active order by refitems_name
+		]]>
+		</query>
+		<!-- Check Candidate name name already exists -->  
+		<query id="ta_check_offer_name" name="ta_check_offer_name"
+			description="check offer name">
+		<![CDATA[select * from ta_offer_info where candidate_id=%s and is_active ]]> 
+		</query>
+		
+		<query id="ta_offer_count" name="ta_offer_count"
+			description="ta_offer_count"> 
+		<![CDATA[select count(*) from ta_offer_info oi {inner_qry} inner join ta_candidate_info tci on tci.id = oi.candidate_id   where oi.is_active  and tci.is_active {condition}]]>
+		</query>
+		<query id="ta_offer_details" name="ta_offer_details"
+			description="ta_offer_details">  
+		<![CDATA[select oi.id,ji.job_title,coalesce(ci.first_name,'')||' '||coalesce(ci.last_name,'') as name ,ce.refitems_name as cost_to_employee {col} from ta_offer_info oi 
+	inner join ta_job_openings_info ji on ji.id=oi.job_title_id inner join ta_candidate_info ci on ci.id=oi.candidate_id 
+	{inr_join}
+ 	inner join reference_items ce on ce.id=oi.cost_to_employee_id where oi.is_active and ci.is_active {condition}
+		 ]]>
+		</query>
+		<query id="ta_offer_details_row" name="ta_offer_details_row"
+			description="ta_offer_details_row">
+		<![CDATA[select oi.id,ji.job_title,coalesce(ci.first_name,'')||' '||coalesce(ci.last_name,'') as name ,ce.refitems_name as cost_to_employee,ci.primary_email,ci.mobile_no {col}  from ta_offer_info oi 
+				inner join ta_job_openings_info ji on ji.id=oi.job_title_id inner join ta_candidate_info ci on ci.id=oi.candidate_id 
+				{inr_join}
+				inner join reference_items ce on ce.id=oi.cost_to_employee_id where oi.id=%s and oi.is_active]]>
+		</query>
+		
+	 <!-- Job opeing and Offer management End  -->
+		<!-- country drop down -->
+		<query id="ta_country_drop_down" name="ta_country_drop_down" 
+			description="hrms country drop down">
+		<![CDATA[select id,country_name from country_info where is_active]]>
+		</query>
+		
+		<query id="ta_fetch_candidate_info" name="ta_fetch_candidate_info"
+			description="hrms fetch candidate info"> 
+		<![CDATA[select id,UPPER(coalesce(first_name,'')||' '||coalesce(last_name,'')) as candidate_name from ta_candidate_info where is_active]]>
+		</query>
+		
+		<query id="ta_change_candidate_info" name="ta_change_candidate_info"
+			description="ta change candidate info">
+		<![CDATA[select can.id::text as id, first_name, last_name, can.primary_email, can.secondary_email, can.phone_no, can.mobile_no,
+	 can.languages_known, can.street, can.postal_code, can.city, coalesce(can.country_id,0) as country_id, coalesce(can.province_id,0) as province_id, 
+	 coalesce(can.gender_id,0) as gender_id, coalesce(can.title_id,0) as title_id,coalesce(can.job_opening_id,0) as job_opening_id,can.address,
+	 to_char(can.date_of_birth, 'DD-MM-YYYY') as date_of_birth, coalesce(can.candidate_status_id,0) as candidate_status, coalesce(can.hired_id,0) as candidate_hired,
+	 coalesce(can.interview_id,0) as candidate_interview,coalesce(can.offer_release_id,0) as offer_release, coalesce(can.screening_id,0) as screening, 
+	 coalesce(can.source_of_hire_id,0) as source_of_hire,can.current_employer,can.current_job_title,can.current_salary,can.expected_salary,
+	 can.skype_id,coalesce(can.referral_by_id,0) as referral_by_id,coalesce(can.employee_id,0) as employee_id,can.hire_status  from ta_candidate_info can where id=%s and is_active]]>
+		</query>
+		<!-- Candidate fetch educational details start --> 
+		<query id="ta_fetch_candidate_education_details" name="hrms_fetch_candidate_education_details"
+			description="hrms fetch candidate education details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),university,year_of_passed_out,institution_name,duration,cgpa,percentage,course_name from ta_candidate_educational_info where is_active and candidate_id=%s]]>
+		</query>
+		<!-- Candidate fetch educational details end -->
+		
+		<!-- Candidate fetch experience details start -->
+		<query id="ta_fetch_candidate_experience_details" name="ta_fetch_candidate_experience_details"
+			description="ta fetch candidate experience details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),employer,position,to_char(start_date, 'DD-MM-YYYY') as start_date ,to_char(end_date, 'DD-MM-YYYY') as end_date,previous_employee_id, hr_contact_no,reason_for_relieving,experience from ta_candidate_experience_info where is_active and candidate_id=%s]]>
+		</query>
+		<!-- Candidate fetch experience details end -->
+		
+		<!-- Candidate fetch certification details start -->
+		<query id="ta_fetch_candidate_certification_details" name="hrms_candidate_certification_details"
+			description="ta fetch candidate certification details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),description,certification_no,issued_by,to_char(start_date, 'DD-MM-YYYY') as start_date,to_char(end_date, 'DD-MM-YYYY') as end_date from ta_candidate_certification_info where is_active and candidate_id=%s]]>
+		</query>
+		<!-- Candidate fetch certification details end -->		
+		
+		<!-- Candidate fetch skill details start -->
+		<query id="ta_fetch_candidate_skill_details" name="ta_fetch_candidate_skill_details"
+			description="ta fetch candidate skill details">
+		<![CDATA[select skills.id,ROW_NUMBER() OVER(ORDER BY skills.id asc),skills.skill_name,skills.experience,skills.rating,ref.refitems_name as skill_type,
+                 skills.skill_type_id from ta_candidate_skill_info skills left join reference_items ref on ref.id=skills.skill_type_id where skills.is_active and skills.candidate_id=%s]]>
+		</query>
+		<!-- Candidate fetch skill details end -->
+		
+		<!-- branding details data fetching start -->	
+		<query id="ta_branding_list" query_name="ta_branding_list"
+			description="ta branding list">
+          <![CDATA[select tbi.id,row_number() over(order by tbi.id),oi.name,tbi.name policy_name,ati.name doc_id,tbi.doc_name doc_name,tbi.doc_id get_doc_id,tbi.org_id,tbi.description,tbi.name brand_name,tbi.doc_name||'.'||ati.format show_doc_name 
+		,policy_procedure_id as proc_id,standard_id from ta_branding_info tbi
+		inner join organization_info oi on oi.id = tbi.org_id
+		inner join attachment_info ati on ati.id = tbi.doc_id
+		where tbi.is_active]]>
+		</query>
+		<!-- branding details data fetching end -->	
+		
+		<!-- Recruitment Start -->
+		<!-- job title drop down start-->
+		<query id="ta_job_title_drop_down" name="ta_job_title_drop_down"
+			description="ta job title drop down">
+		<![CDATA[select id,job_title from ta_job_openings_info where is_active]]>
+		</query>
+		<!-- job title drop down end -->
+		
+		<!-- interviewer drop down start -->			
+		<query id="ta_interviewer_drop_down" name="ta_interviewer_drop_down"
+			description="ta interviewer drop down">
+		<![CDATA[select id,UPPER(COALESCE(name, '') || ' ' || COALESCE(last_name, '')) as interviewer_name from employee_info where is_active]]>
+		</query>
+		<!-- interviewer drop down end -->
+		
+		<!-- Interview data table -->
+		<query id="ta_fetch_recruitment_info" name="ta_fetch_recruitment_info"
+			description="ta_fetch_recruitment_info">
+		<![CDATA[select * from(
+		select int.id,ROW_NUMBER() OVER(ORDER BY int.id asc), coalesce((select refitems_name from reference_items where id=int.interview_type_id),'') as interview_type, (select UPPER(coalesce(first_name,'')||' '||coalesce(last_name,'')) 
+		as candidate_name from ta_candidate_info where id=int.candidate_name_id) as candidate_name,
+		coalesce(
+		(select array_to_string(array
+		(select coalesce(name, '') || coalesce(last_name, '')  as name from employee_info  where id
+		in (select unnest(string_to_array(interviewer_ids, ','))::int  from ta_interview_info where id=int.id) order by name), ', ')),'') as interviewer_name, to_char(int.interview_date, 'DD-MM-YYYY') as interview_date,(select job_title from ta_job_openings_info where id=int.job_title_id) as job_title,
+		(select refitems_name from reference_items where id=int.interview_status_id) as interview_status, 
+		(select refitems_name from reference_items where id=int.rating_id) as rating from ta_interview_info int inner join ta_candidate_info can on int.candidate_name_id=can.id where int.is_active and can.is_active
+		)a]]>					
+		</query>
+		
+		<query id="ta_recruitment_table_click" name="ta_recruitment_table_click"
+			description="ta recruitment table click">
+		<![CDATA[
+		select int.id, coalesce(int.interview_type_id,0) as interview_type_id, coalesce(int.interview_status_id,0) as interview_status_id,int.job_title_id,(select id from ta_candidate_info where id=candidate_name_id) as candidate_id,
+		int.comments, to_char(int.interview_date, 'DD-MM-YYYY') as interview_date ,to_char(int.from_time, 'HH:MM') as from_time , to_char(int.to_time, 'HH:MM') as to_time,
+		interviewer_ids, int.rating_id as rating,int.doc_name,int.attachment_id,int.doc_name||'.'||atti.format as show_doc_name from ta_interview_info int 
+		left join attachment_info atti on atti.id = int.attachment_id
+		where int.id=%s]]>					
+		</query>		
+		<!-- Interview data table --> 
+		<!-- Recruitment End -->
+		
+		<!-- Tools & Tech details data fetching start -->	 
+		<query id="ta_tt_list" query_name="ta_tt_list" 
+			description="ta tools and tech list"> 
+          <![CDATA[
+          select tti.id,ROW_NUMBER() OVER(ORDER BY tti.id asc),oi.name as name,tti.name,tti.description,tti.api,tti.api,tti.type_id,tti.org_id 
+			from ta_tools_tech_info tti inner join organization_info oi on oi.id = tti.org_id  where tti.is_active 
+           ]]>
+		</query> 
+		<!-- Tools & Tech details data fetching end -->	 
+		
+		     
+		<!-- Changing Candidate to Employee Start -->
+		  
+		<!-- Change Candidate Basic info -->		
+		<query id="ta_change_candidate_basic_info" query_name="ta_change_candidate_basic_info"
+			description="ta change candidate basic info">
+          <![CDATA[INSERT INTO employee_info (name,last_name,employee_gender_id,title_id,date_of_birth,work_phone,work_mobile,work_email,country_id,is_active,physically_challenged,is_spouse_same_org,is_id_card_provided,is_employee_active,is_payroll_active)
+			SELECT first_name,last_name,gender_id,title_id,date_of_birth,phone_no,mobile_no,primary_email,country_id,True,False,False,False,True,False
+			FROM ta_candidate_info WHERE id = %s RETURNING id]]>
+		</query>
+		
+		<!-- Change Candidate Educational info -->		
+		<query id="ta_change_candidate_educational_info" query_name="ta_change_candidate_educational_info"
+			description="ta change candidate educational info">
+          <![CDATA[INSERT INTO hrms_education_details (university,year_of_passed_out,institution_name,duration,cgpa,percentage,course_name,is_active,certificate_status,created_date,emp_id_id)
+		SELECT university,year_of_passed_out,institution_name,duration,cgpa,percentage,course_name,True,False,now(),%s
+		FROM ta_candidate_educational_info WHERE id = %s RETURNING id]]>
+		</query>
+		
+		<!-- Change Candidate Experience info -->	
+		<query id="ta_change_candidate_experience_info" query_name="ta_change_candidate_experience_info"
+			description="ta change candidate experience info">
+          <![CDATA[INSERT INTO hrms_professional_experience (position,employer,start_date,end_date,previous_employee_id,hr_contact_no,is_active,certificate_status,created_date,emp_id_id)
+		SELECT position,employer,start_date,end_date,previous_employee_id,hr_contact_no,True,False,now(),%s
+		FROM ta_candidate_experience_info WHERE id = %s RETURNING id]]>
+		</query>
+		
+		<!-- Change Candidate Skills info -->	
+		<query id="ta_change_candidate_skills_info" query_name="ta_change_candidate_skills_info"
+			description="ta change candidate skills info">
+          <![CDATA[INSERT INTO hrms_skills (skill_name,experience,rating,skill_type_id,created_date,is_active,emp_id_id)
+		SELECT skill_name,experience,rating,skill_type_id,now(),True,%s
+		FROM ta_candidate_skill_info WHERE id = %s RETURNING id]]>
+		</query>
+		
+		<!-- Change Candidate Certification info -->	
+		<query id="ta_change_candidate_certification_info" query_name="ta_change_candidate_certification_info"
+			description="ta change candidate certification info">
+          <![CDATA[INSERT INTO hrms_certifications (description,certification_no,start_date,end_date,created_date,is_active,certificate_status,emp_id_id)
+		SELECT description,certification_no,start_date,end_date,now(),True,False,%s
+		FROM ta_candidate_certification_info WHERE id = %s RETURNING id]]>
+		</query>
+		
+		<!-- Update Employee ID in Candiate -->		
+		<query id="ta_update_emp_id_candidate" query_name="ta_update_emp_id_candidate"
+			description="ta update employee id in candidate">
+          <![CDATA[UPDATE ta_candidate_info SET employee_id=%s,hire_status='Moved to Employee',candidate_status_id=672,is_active=False where id=%s RETURNING id]]>
+		</query>
+		
+		<!-- Check candidate already moved to employee -->
+			<query id="ta_check_employee_id" query_name="ta_check_employee_id"
+			description="ta check employee already moved to employee">
+          <![CDATA[select employee_id from ta_candidate_info where id=%s and is_active]]>
+		</query>		
+		<!-- Changing Candidate to Employee End -->
+		
+		<!-- Candidate Others Query Start -->
+		<!-- Candidate others data table-->
+		<query id="ta_fetch_candidate_other_details" query_name="ta_fetch_candidate_other_details"
+			description="fetch candidate other details">
+			 <![CDATA[select can.id, ROW_NUMBER() OVER(ORDER BY can.id asc), UPPER(COALESCE(can.first_name, '') || ' ' || COALESCE(can.last_name, '')) as candidate_name, (select refitems_name from reference_items where id=can.candidate_status_id) from ta_candidate_info can where can.id=%s and can.is_active]]>
+		</query>	
+		<!-- Candidate others table click-->
+		<query id="ta_candidate_other_table_click" query_name="ta_candidate_other_table_click"
+			description="canidate others table click">
+			 <![CDATA[select coalesce(can.candidate_status_id,0) as candidate_status, coalesce(can.hired_id,0) as candidate_hired,
+			  coalesce(can.interview_id,0) as candidate_interview,coalesce(can.offer_release_id,0) as offer_release, coalesce(can.screening_id,0) as screening, coalesce(can.source_of_hire_id,0) as source_of_hire from ta_candidate_info can where id=%s and is_active]]>
+		</query>		
+		<!-- Candidate Others Query End -->
+		
+		<!-- Inactivate Employee -->
+		<query id="ta_remove_emp_id_candidate" query_name="ta_remove_emp_id_candidate"
+			description="ta_remove_emp_id_candidate">
+			 <![CDATA[UPDATE ta_candidate_info SET employee_id=null,hire_status=%s where id=%s and is_active]]>
+		</query>	
+		
+		<query id="ta_candidate_inactive_emp_id" query_name="ta_candidate_inactive_emp_id"
+			description="ta_candidate_inactive_emp_id">
+			 <![CDATA[UPDATE employee_info SET is_active=False where id=%s]]>
+		</query>	
+		
+		<query id="ta_inactive_employee_education_info" query_name="ta_inactive_employee_education_info"
+			description="inactive employee education info">
+			 <![CDATA[UPDATE hrms_education_details SET is_active=False where emp_id_id=%s and is_active]]>
+		</query>
+		
+		<query id="ta_inactive_employee_experience_info" query_name="ta_inactive_employee_experience_info"
+			description="inactive employee experience info">
+			 <![CDATA[UPDATE hrms_professional_experience SET is_active=False where emp_id_id=%s and is_active]]>
+		</query>
+		
+		<query id="ta_inactive_employee_skills_info" query_name="ta_inactive_employee_skills_info"
+			description="inactive employee skills info">
+			 <![CDATA[UPDATE hrms_skills SET is_active=False where emp_id_id=%s and is_active]]>
+		</query>
+		
+		<query id="ta_inactive_employee_certification_info" query_name="ta_inactive_employee_certification_info"
+			description="inactive employee certification info">
+			 <![CDATA[UPDATE hrms_certifications SET is_active=False where emp_id_id=%s and is_active]]>
+		</query>
+		
+		<query id="ta_candidate_check_offer_status" query_name="ta_candidate_check_offer_status"
+			description="ta candidate check offer status">
+			 <![CDATA[select id from ta_offer_info where candidate_id=%s and is_active]]>
+		</query>
+		
+		<query id="ta_fetch_referral_by_employee" query_name="ta_fetch_referral_by_employee"
+			description="ta candidate fetch referral by employee">
+			 <![CDATA[select emp.id,UPPER(COALESCE(emp.name, '') || ' ' || COALESCE(emp.last_name, '')) as name from employee_info emp inner join ta_job_openings_info job on job.org_id = emp.org_id_id]]>
+		</query>
+		
+		<query id="ta_fetch_reference_id" query_name="ta_fetch_reference_id"
+			description="ta fetch candidate status">
+			 <![CDATA[select id from reference_items where refitems_name=%s]]>
+		</query>
+		
+		<!-- 	report query   -->
+		<query id="job_opening_report_list" query_name="job_opening_report_list"
+			description="ta fetch job opening status">
+			 <![CDATA[	select id, ROW_NUMBER() OVER(ORDER BY id asc),job_title,to_char(date_opened,'DD-MM-YYYY') open_date,
+			to_char(target_date,'DD-MM-YYYY') target_date,salary,number_of_positions,job_location from ta_job_openings_info	where ]]>
+		</query>
+		<query id="job_candidate_report_list" query_name="job_candidate_report_list"
+			description="ta fetch job candidate status">
+			 <![CDATA[select tci.id, ROW_NUMBER() OVER(ORDER BY tci.id asc), tci.first_name, tci.last_name, tci.primary_email,tjoi.job_title,tci.address,
+			coalesce(ai.name,'') from ta_candidate_info tci
+			left join ta_job_openings_info tjoi on tci.job_opening_id = tjoi.id
+			left join ta_interview_info tii on tii.candidate_name_id = tci.id
+			left join attachment_info ai on ai.id = tii.attachment_id
+			where ]]>
+		</query>
+		
+		<query id="job_interview_report_list" query_name="job_interview_report_list"
+			description="ta fetch job interview status">
+			 <![CDATA[select tci.id, ROW_NUMBER() OVER(ORDER BY tci.id asc), tci.first_name ||' '||tci.last_name,coalesce(ri.refitems_name,''),
+			(select refitems_name from reference_items where id=rating_id) as rating,
+			to_char(tii.interview_date,'DD-MM-YYYY') from ta_candidate_info tci
+			left join ta_job_openings_info tjoi on tci.job_opening_id = tjoi.id
+			left join ta_interview_info tii on tci.id = tii.candidate_name_id
+			left join reference_items ri on ri.id = tii.interview_status_id
+			where ]]>
+		</query>
+		
+		<query id="job_offer_report_list" query_name="job_offer_report_list"
+			description="ta fetch job offer status">
+			 <![CDATA[select tci.id, ROW_NUMBER() OVER(ORDER BY tci.id asc), tci.first_name ||' '||tci.last_name,tjoi.job_title,coalesce(ri.refitems_name,'') from ta_candidate_info tci
+			inner join ta_job_openings_info tjoi on tci.job_opening_id = tjoi.id
+			inner join ta_offer_info toi on toi.candidate_id = tci.id
+			left join reference_items ri on ri.id = toi.offer_release_id where]]>
+		</query>
+				
+		<query id="ta_list_candidate_info" query_name="ta_list_canidate_info"
+			description="list candidate info">
+			<![CDATA[select can.id,coalesce(can.first_name,'')||' '||coalesce(can.last_name,'') as candidate_name, coalesce((select refitems_name from reference_items where id=can.candidate_status_id),'') as candidate_status,
+			(select job_title from ta_job_openings_info where id=can.job_opening_id), (select count(*) from ta_candidate_experience_info where candidate_id=can.id) as experience from ta_candidate_info can where is_active order by candidate_name
+			]]>
+		</query>
+		
+		<query id="ta_list_candidate_status" query_name="ta_list_candidate_status"
+			description="ta_list_candidate_status">
+			<![CDATA[select can.id,coalesce(can.first_name,'')||' '||coalesce(can.last_name,'') as candidate_name, coalesce((select refitems_name from reference_items where id=can.candidate_status_id),'') as candidate_status,(select job_title from ta_job_openings_info where id=can.job_opening_id) 
+			    from ta_candidate_info can where can.candidate_status_id IN (select id from reference_items where refitems_code=%s) and can.is_active]]>
+		</query>
+		
+		
+		<query id="ta_list_candidate_source_of_hire" query_name="ta_list_candidate_source_of_hire"
+			description="ta_list_candidate_source_of_hire">
+			<![CDATA[select can.id,coalesce(can.first_name,'')||' '||coalesce(can.last_name,'') as candidate_name, coalesce((select refitems_name from reference_items where id=can.candidate_status_id),'') as candidate_status,
+			(select job_title from ta_job_openings_info where id=can.job_opening_id) from ta_candidate_info can where source_of_hire_id IN (select id from reference_items where refitems_code=%s) and can.is_active]]>
+		</query>
+		
+		
+		<query id="ta_list_candidate_website" query_name="ta_list_candidate_website"
+			description="ta_list_candidate_website">
+			<![CDATA[select can.id,coalesce(can.first_name,'')||' '||coalesce(can.last_name,'') as candidate_name, coalesce((select refitems_name from reference_items where id=can.candidate_status_id),'') as candidate_status,(select job_title from ta_job_openings_info where id=can.job_opening_id) 
+            from ta_candidate_info can where can.source_of_hire_id IN (select id from reference_items where refitems_code=%s or refitems_code=%s or refitems_code=%s or refitems_code=%s) and can.is_active order by id
+			]]>
+		</query>
+				
+		<query id="ta_view_candidate_info" query_name="ta_view_candidate_info"
+			description="ta_view_candidate_info">
+			<![CDATA[select can.first_name,can.last_name,(select refitems_name from reference_items where id=can.gender_id) as gender,(select refitems_name from reference_items where id=can.title_id) as title,
+            can.primary_email,coalesce(NULLIF(can.secondary_email  ,''),'No Data Found') as secondary_email,coalesce(NULLIF(can.phone_no,''),'No Data Found') as phone_no,can.mobile_no,
+            coalesce(NULLIF(can.languages_known,''),'No Data Found') as languages_known,coalesce(NULLIF(can.street,''),'No Data Found') as street, 
+            coalesce(NULLIF(can.postal_code,''),'No Data Found') as postal_code,coalesce(NULLIF(can.city,''),'No Data Found') as city,
+            (select state_name from state_info where id=can.province_id) as province,(select country_name from country_info where id=can.country_id) as country,
+            coalesce(NULLIF(can.current_job_title,''),'No Data Found') as current_job_title,
+            coalesce(NULLIF(can.current_employer,''),'No Data Found') as current_employer,coalesce(NULLIF(can.current_salary,''),'No Data Found') as current_salary,
+            coalesce(NULLIF(can.expected_salary,''),'No Data Found') as expected_salary,coalesce(NULLIF(can.additional_info,''),'No Data Found') as additional_info,
+            coalesce(NULLIF(can.skype_id,''),'No Data Found') as skype_id,coalesce((select refitems_name from reference_items where id=can.candidate_status_id),'No Data Found') as candidate_status
+            from ta_candidate_info can where can.id=%s and can.is_active]]>
+		</query>
+		
+		<query id="ta_view_candidate_educational" query_name="ta_view_candidate_educational"
+			description="ta_view_candidate_educational">
+			<![CDATA[select university,coalesce(NULLIF(institution_name,''),'No Data Found') as institution_name,coalesce(NULLIF(course_name,''),'No Data Found') as course_name,coalesce(NULLIF(duration,''),'No Data Found') as duration from ta_candidate_educational_info where candidate_id=%s]]>
+		</query>		
+		
+		<query id="ta_view_candidate_experience" query_name="ta_view_candidate_experience"
+			description="ta_view_candidate_experience">
+			<![CDATA[select position,employer,coalesce(to_char(start_date,'DD-MM-YYYY'),'No Data Found') as start_date,coalesce(to_char(end_date,'DD-MM-YYYY'),'No Data Found') as end_date,coalesce(reason_for_relieving,'No Data Found') as reason_for_relieving from ta_candidate_experience_info
+			where candidate_id=%s]]>
+		</query>
+		
+		<query id="ta_view_candidate_experience" query_name="ta_view_candidate_experience"
+			description="ta_view_candidate_experience">
+			<![CDATA[select position,employer,coalesce(to_char(start_date,'DD-MM-YYYY'),'No Data Found') as start_date,coalesce(to_char(end_date,'DD-MM-YYYY'),'No Data Found') as end_date,coalesce(reason_for_relieving,'No Data Found') as reason_for_relieving from ta_candidate_experience_info
+			where candidate_id=%s]]>
+		</query>
+		
+		<query id="ta_view_candidate_experience" query_name="ta_view_candidate_experience"
+			description="ta_view_candidate_experience">
+			<![CDATA[select position,employer,coalesce(to_char(start_date,'DD-MM-YYYY'),'No Data Found') as start_date,coalesce(to_char(end_date,'DD-MM-YYYY'),'No Data Found') as end_date,coalesce(reason_for_relieving,'No Data Found') as reason_for_relieving from ta_candidate_experience_info
+			where candidate_id=%s]]>
+		</query>
+		
+		<query id="ta_interview_check_already_exists" query_name="ta_interview_check_already_exists"
+			description="ta interview check already exists">
+			<![CDATA[select * from ta_interview_info where candidate_name_id=%s and job_title_id=%s]]>	
+		</query>
+		
+		<query id="ta_interview_check_offer_status" query_name="ta_interview_check_offer_status"
+			description="ta interview check offer status">
+			<![CDATA[select * from ta_offer_info where candidate_id=%s and job_title_id=%s]]>
+		</query>
+		
+		<query id="ta_fetch_candidate_job_opening" query_name="ta_fetch_candidate_job_opening"
+			description="ta_fetch_candidate_job_opening">
+			<![CDATA[select can.job_opening_id,job.job_title from ta_candidate_info can inner join ta_job_openings_info job on can.job_opening_id=job.id where can.id=%s]]>			
+		</query>	
+		
+		<query id="candidate_hired_report_list" query_name="candidate_hired_report_list"
+			description="ta fetch candidate hired report list">
+			 <![CDATA[select tci.id, ROW_NUMBER() OVER(ORDER BY tci.id asc), tci.first_name, tci.last_name, tci.primary_email,
+	 (select refitems_name from reference_items where id=tci.hired_id),(select refitems_name from reference_items where id=tci.source_of_hire_id) from ta_candidate_info tci
+	 left join ta_job_openings_info tjoi on tci.job_opening_id = tjoi.id inner join employee_info emp on emp.id=tci.employee_id
+	 where]]>
+		</query>
+		
+	</queries>
+</data>		
+

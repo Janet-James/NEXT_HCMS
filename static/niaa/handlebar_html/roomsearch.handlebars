@@ -1,0 +1,37 @@
+{{#if room}}
+  {{#if room.user}}
+    {{#if room.user.length}}
+      {{#each room.user}}
+      {{#if hided}}
+    <div class='chatUser item' id={{id}}><div class="img-name hide-con-list"><img class='{{color status}}' src={{ip username}}><span class='username'>{{username}}</span><i class="fa fa-lock"></i></div></div>
+      {{else}}
+    <div class='chatUser item' id={{id}}><div class="img-name"><img class='{{color status}}' src={{ip username}}><span class='username'>{{username}}</span></div></div>
+      {{/if}}
+      {{/each}}
+    {{/if}}
+  {{/if}}
+
+  {{#if  room.channel}}
+    {{#if  room.channel.length}}
+      {{#each  room.channel}}
+    {{#if hided}}
+<div class='chatChannel item' id={{id}}><div class="img-name hide-con-list"><img src={{ip name}}><span class='username'>{{name}}</span><i class="fa fa-lock"></i></div></div>
+    {{else}}
+    <div class='chatChannel item' id={{id}}><div class="img-name"><img src={{ip name}}><span class='username'>{{name}}</span></div></div>
+    {{/if}}
+      {{/each}}
+    {{/if}}
+  {{/if}}
+
+  {{#if  room.group}}
+    {{#if  room.group.length}}
+      {{#each  room.group}}
+      {{#if hided}}
+      <div class='chatGroup item' id={{id}}><div class="img-name hide-con-list"><img src={{ip name}}><span class='username'>{{name}}</span><i class="fa fa-lock"></i></div></div>
+      {{else}}
+    <div class='chatGroup item' id={{id}}><div class="img-name"><img src={{ip name}}><span class='username'>{{name}}</span></div></div>
+        {{/if}}
+      {{/each}}
+    {{/if}}
+  {{/if}}
+{{/if}}

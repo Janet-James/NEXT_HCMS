@@ -1,0 +1,158 @@
+body {
+	font-family: arial;
+}
+
+.overall-outer-div {
+	width: 880px;
+	margin: 0 auto;
+}
+
+.front-page-sec {
+	width: 260px;
+	margin: 0px 1.708% 7px;
+	padding: 0px;
+	background: url(/home/next/HCMS-next_hcms/static/new_id_card_images/Id-bg.jpg) no-repeat;
+	background-position: center bottom;
+	float: left;
+	height: 400px;
+	position:relative !important;
+	overflow: hidden;
+	border: 1px solid transparent;
+}
+.back-page-sec {
+	display: inline-block;
+	width: 260px;
+	height:400px;
+	padding: 0px;
+	background:url(/home/next/HCMS-next_hcms/static/new_id_card_images/back-bg.jpg) no-repeat;
+	float: left;
+	vertical-align: top;
+	margin: 0px 1.708% 7px;
+	overflow: hidden;
+	position: relative;
+	border: 1px solid transparent;
+}
+
+.two-div-sec {
+	height: 400px;
+	position: relative;
+	overflow: hidden;
+}
+
+.left-name-sec {
+	display: inline-block;
+	-webkit-transform: rotate(-90deg);
+	position: absolute;
+	padding: 0;
+	left: -162px;
+	top: 158px;
+	font-size: 18px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin:0;
+	width:360px;
+}
+
+.left-name-sec span {
+	font-size: 16px;
+}
+
+.left-name-sec2 {
+	display: inline-block;
+	-webkit-transform: rotate(-90deg);
+	position: absolute;
+	right: -22px;
+	top: 10.8%;
+	font-size:11px;
+}
+.right-img-sec {
+   position: relative;
+   bottom:0;
+}
+.right-img-sec img {
+	width:90%;
+	position: absolute;
+    right:0;
+    top:50px;
+}
+h4 {
+	font-weight: 600
+}
+
+footer {
+	position: relative;
+	z-index: 3;
+	bottom: 0px;
+}
+footer img {
+	width:100%;
+	position: absolute;
+	bottom:0px;
+}
+.for-you {
+	width: 50%;
+	height: auto;
+	padding: 40px 10px;
+}
+
+.myself {
+	width: 86%;
+	text-align: right;
+	margin: 0px;
+	position: absolute;
+	top:65px;
+	right:10px;
+}
+.for-you span, .myself span {
+	font-size:10px !important;
+	line-height:14px !important;
+}
+
+.back-page-sec h2 {
+	margin: 0px 0px 10px 0px;
+}
+
+br {
+	margin: 0;
+}
+
+.back-page-sec h2 {
+	margin: 0px 0px 8px 0px;
+	font-size:12px;
+}
+
+.page-break {
+	display: none;
+}
+
+.page-break {
+	display: block;
+	page-break-before: always;
+}
+.front-side {
+   clear:both;
+   margin-bottom:100px;
+}
+.back-footer {
+	position: relative;
+	z-index: 3;
+	bottom: 0px;
+}
+.back-footer img {
+	width:100%;
+	position: absolute;
+	bottom: 1px;
+}
+.clearfix {
+	clear: both;
+}
+.blood {
+	background: url(/home/next/HCMS-next_hcms/static/new_id_card_images/blood.png) no-repeat;
+	width: 30px;
+	height: 50px !important;
+	height: auto;
+	text-align: center;
+	color: #fff;
+	display: block;
+	padding-top: 25px;
+}

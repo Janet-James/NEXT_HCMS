@@ -1,0 +1,410 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css' %}"
+	type="text/javascript" />
+<link
+	href="{% static 'ui/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Range slider -->
+<link
+	href="{% static 'ui/plugins/ion.rangeslider/css/ion.rangeSlider.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static 'ui/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css' %}"
+	rel="stylesheet" type="text/css" />
+<!--summernote-->
+<link
+	href="{% static '/ui/plugins/bootstrap-summernote/css/summernote.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Custom CSS -->
+<link href="{% static '/dev/talent_management/css/talent_management.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/talent_management/css/tm_competency.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TMCompetencyAssessment" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN REPORT FORM -->
+				<div class="row">
+					<!-- BEGIN PANELS PORTLET-->
+					<div class="col-md-12 col-sm-12">
+						<div class="portlet-title">
+							<div class="caption">
+								<h1>COMPETENCY ASSESSMENT</h1>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-sm-12">
+									<div class="row">
+										<div class="col-md-1 col-sm-2"
+											style="margin-top: 10px; text-align: right;">
+											<i data-toggle="tooltip" data-placement="top" title=""
+												class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+										</div>
+										<div class="col-md-2 col-sm-6">
+											<div class="form-group">
+												<select id="tm_competency_sel_org"
+													name="tm_competency_sel_org"
+													class="form-control select2 hide_error"
+													onchange="get_org_unit_list($(this).val());">
+													<option></option>
+													{% for data in tm_org %}
+													<option value="{{ data.id }}">{{ data.name }}</option>
+													{%endfor %}
+												</select>
+											</div>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<select id="tm_competency_sel_org_unit"
+													name="tm_competency_sel_org_unit"
+													class="form-control select2 hide_error" disabled="disabled"
+													onchange="get_division_list($(this).val());">
+													<option></option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<select id="tm_competency_sel_dept"
+													name="tm_competency_sel_dept"
+													class="form-control select2 hide_error" disabled="disabled"
+													onchange="get_emp_list($(this).val());">
+													<option></option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-3 col-sm-6">
+											<div class="form-group">
+												<select id="tm_competency_sel_emp"
+													name="tm_competency_sel_emp"
+													class="form-control select2 hide_error" disabled="disabled"
+													onchange="get_compt_emp_role_id($(this).val());">
+													<option></option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet-body" id="year_qtr_sel_div" style="display: none;">
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="row">
+											<div class="col-md-5 col-sm-5"></div>
+											<div class="col-md-1 col-sm-1"
+												style="margin-top: 10px; text-align: right;">
+												<i data-toggle="tooltip" data-placement="top" title=""
+													class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="form-group">
+													<select id="tm_compt_emp_year" name="tm_compt_emp_year"
+														class="form-control select2 hide_error"
+														disabled="disabled"
+														onchange="get_ca_emp_quarter($(this).val());">
+														<option></option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="form-group">
+													<select id="tm_compt_emp_quarter"
+														name="tm_compt_emp_quarter"
+														class="form-control select2 hide_error"
+														disabled="disabled">
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="portlet-body" id="tab_div" style="display: none;">
+								<div class="form-wizard">
+									<div id="tab_formwizard" class="form-body">
+										<ul class="nav nav-pills nav-justified steps tab-pane_steps">
+											<li class="active"><a class="step"
+												href="#sa_technical_skills" id="image_tech_skills"
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-manage-competencies"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Technical Skills
+												</span> </a></li>
+											<li><a class="step" href="#sa_functional_skills"
+												id="image_func_skills" data-toggle="tab"><span
+													class="number"> <i class="nf nf-manage-role"></i>
+												</span><span class="desc"> <i class="fa fa-check"></i>
+														Functional Skills
+												</span></a></li>
+											<li><a class="step" href="#sa_behaviour_skills"
+												id="image_behav_skills" data-toggle="tab"><span
+													class="number"> <i class="nf nf-address"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Behaviour Skills
+												</span> </a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="row">
+									<div class="tab-content">
+										<div class="tab-pane active" id="sa_technical_skills">
+											<div class="row">
+												<form id="tm_tech_form">
+													<div class="col-md-12">
+														<!-- BEGIN PANELS PORTLET-->
+														<div class="portlet light bordered">
+															<div class="portlet-title">
+																<div class="caption">
+																	<span class="caption-subject  bold uppercase">COMPETENTCY
+																		RATINGS</span>
+																</div>
+															</div>
+															<div class="portlet-body">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<div class="row">
+																			<div class="col-lg-3"></div>
+																			<div class="col-lg-9">
+																				<div class='row rating-small-label'>
+																					<div class="col-sm-2">
+																						<label>Significant Development Needed</label>
+																					</div>
+																					<div class="col-sm-2">
+																						<label>Acquiring</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Developing</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Applying</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: right;">
+																						<label>Mastering</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: right;">
+																						<label>Role Model</label>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row rating-panel">
+																			<div id="div_tech_slider"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label><b>Performance History</b></label>
+																<div class="summernote" id="tm_tech_perf_history"></div>
+															</div>
+															<div class="col-sm-6">
+																<label><b>Work Areas</b></label>
+																<div class="summernote" id="tm_tech_work_areas"></div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane" id="sa_functional_skills">
+											<div class="row">
+												<form id="tm_func_form">
+													<div class="col-md-12">
+														<!-- BEGIN PANELS PORTLET-->
+														<div class="portlet light bordered">
+															<div class="portlet-title">
+																<div class="caption">
+																	<span class="caption-subject  bold uppercase">COMPETENTCY
+																		RATINGS</span>
+																</div>
+
+															</div>
+															<div class="portlet-body">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<div class="row">
+																			<div class="col-lg-3"></div>
+																			<div class="col-lg-9">
+																				<div class='row rating-small-label'>
+																					<div class="col-sm-2">
+																						<label>Significant Development Needed</label>
+																					</div>
+																					<div class="col-sm-2">
+																						<label>Acquiring</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Developing</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Applying</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: right;">
+																						<label>Mastering</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: right;">
+																						<label>Role Model</label>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row rating-panel">
+																			<div id="div_func_slider"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label><b>Performance History</b></label>
+																<div class="summernote" id="tm_func_perf_history"></div>
+															</div>
+															<div class="col-sm-6">
+																<label><b>Work Areas</b></label>
+																<div class="summernote" id="tm_func_work_areas"></div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane" id="sa_behaviour_skills">
+											<div class="row">
+												<form id="tm_behav_form">
+													<div class="col-md-12">
+														<!-- BEGIN PANELS PORTLET-->
+														<div class="portlet light bordered">
+															<div class="portlet-title">
+																<div class="caption">
+																	<span class="caption-subject  bold uppercase">COMPETENTCY
+																		RATINGS</span>
+																</div>
+															</div>
+															<div class="portlet-body ">
+																<div class="row">
+																	<div class="col-sm-12">
+																		<div class="row">
+																			<div class="col-lg-3"></div>
+																			<div class="col-lg-9">
+																				<div class='row rating-small-label'>
+																					<div class="col-sm-2">
+																						<label>Significant Development Needed</label>
+																					</div>
+																					<div class="col-sm-2">
+																						<label>Acquiring</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Developing</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Applying</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Mastering</label>
+																					</div>
+																					<div class="col-sm-2" style="text-align: center;">
+																						<label>Role Model</label>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="row rating-panel">
+																			<div id="div_behav_slider"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label><b>Performance History</b></label>
+																<div class="summernote" id="tm_behav_perf_history"></div>
+															</div>
+															<div class="col-sm-6">
+																<label><b>Work Areas</b></label>
+																<div class="summernote" id="tm_behav_work_areas"></div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="pull-right margin-top-30" id="tm_comp_btns_div">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-small-12 col-lg-12"
+									id="tm_compt_nodata_div" style="display: block;">
+									<h3 class="no-data">No data available</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- END PANELS PORTLET-->
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<script type="text/javascript">
+	var user_details = "{{ user_details }}";
+	var empl_details = "{{ emp_details }}";
+	user_details = user_details.replace(/&#39;/g, '\"');
+	empl_details = empl_details.replace(/u&#39;/g, '\"');
+	empl_details = empl_details.replace(/&#39;/g, '\"');
+</script>
+{% endblock %} {% block scripts %}
+<!-- Single and multi select Dropdown-->
+<script src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/bootstrap-wizard/js/form-wizard.min.js' %}"
+	type="text/javascript"></script>
+
+<!-- Range slider -->
+<script
+	src="{% static '/ui/plugins/ion.rangeslider/js/ion.rangeSlider.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/ion.rangeslider/js/components-ion-sliders.min.js' %}"
+	type="text/javascript"></script>
+
+<!--summernote-->
+<script
+	src="{% static '/ui/plugins/bootstrap-summernote/js/summernote.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/talent_management/js/tm_competency.js' %}"
+	type="text/javascript"></script>
+<!--summernote-->
+{% endblock %}

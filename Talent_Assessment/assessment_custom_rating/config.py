@@ -1,0 +1,5 @@
+talent_assessment = "Talent_Assessment/assessment_custom_rating"
+custom_rating_name_existence_check="custom_rating_name_existence_check"
+custom_rating_update_name_existence_check="custom_rating_update_name_existence_check"
+custom_rating_detail_fetch="custom_rating_detail_fetch"
+custom_rating_detail_fetch_by_id="custom_rating_detail_fetch_by_id"

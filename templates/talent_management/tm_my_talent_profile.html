@@ -1,0 +1,462 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/tooltip/css/tooltip.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/talent_management.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/talent_profile.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/profile_skills.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/tm_accolades.css'  %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TMMyTalentProfile" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1 id="top_title">MY TALENT PROFILE</h1>
+				<div id="profile_grid" class="">
+					<div class="profile_grid">
+						<div data-toggle="tooltip" data-placement="bottom" title=""
+							class="profile_grid_icon " id="usersearch_icon"
+							data-original-title="Profile" style="right: 90px;"></div>
+					</div>
+					<div class="profile_grid_content1 profile_grid_wrap">
+						<div class="profile_grid_content">
+							<h1>
+								Talent Profile <i
+									class="nf nf-job-close-one pull-right switcher-close"></i>
+							</h1>
+							<div class="profile_item">
+								<img id="profile_img"
+									src="https://192.168.10.60/media/user_profile/no_data.png">
+								<span class="name">-</span> <span class="position">-</span>
+							</div>
+							<hr class="divide_line">
+							<ul class="profile-ul">
+								<li><span class="profile-li"><i
+										class="fa fa-envelope-o"></i></span><span id="profile_email">-</span></li>
+								<li><span class="profile-li"><i class="fa fa-phone"></i></span>
+									<span id="profile_mobile">-</span></li>
+								<li><span class="profile-li"><i
+										class="fa fa-map-marker"></i></span><span id="profile_location">-</span></li>
+							</ul>
+							<hr class="divide_line">
+							<ul class="profile-ul profile-ul-li">
+								<li><a href="#"><span class="profile-li"><i
+											class="nf nf-user"></i></span> <span class="headstyle">My
+											Talent Profile</span></a></li>
+								<li><a href="#"><span class="profile-li"><i
+											class="nf nf-trophy"></i></span> <span class="headstyle">My
+											Accolades</span></a></li>
+								<li><a href="#"><span class="profile-li"><i
+											class="nf nf-skills"></i></span> <span class="headstyle">My
+											Skills</span></a></li>
+								<li><a href="#"><span class="profile-li"><i
+											class="nf nf-career-development"></i></span> <span class="headstyle">My
+											Performance</span></a></li>
+								<li><a href="#"><span class="profile-li"><i
+											class="nf nf-communication"></i></span> <span class="headstyle">My
+											Feedback</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div id="tm_perform_potential">
+					<div id="tm_year_slider"></div>
+					<div id="performance_table_full">
+						<div class="row">
+							<div class="col-sm-6">
+								<h1>PERFORMANCE & POTENTIAL</h1>
+							</div>
+							<div class="col-sm-4 pull-right sel_quarter">
+								<div class="form-group">
+									<div class="form-group">
+										<select id="tm_sel_quarter" name="tm_sel_quarter"
+											class="form-control select2"
+											onchange="get_per_pot_values($(this).val());">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive" id="performance_table">
+							<table width="100%" border="0" class="performance_table">
+								<tbody>
+									<tr>
+										<td colspan="6" class="tablehead">PERFORMANCE</td>
+									</tr>
+									<tr>
+										<td width="2%" rowspan="4" class="vertical">
+											<div class="vertical tablehead">POTENTIAL</div>
+										</td>
+										<td width="26%" colspan="2" class="tdtitle style1">Below</td>
+										<td width="15%" class="tdtitle style2">Meets</td>
+										<td width="15%" class="tdtitle style3">Exceeds</td>
+									</tr>
+									<tr>
+										<td width="2%" class="vertical style3">
+											<div class="vertical">High</div>
+										</td>
+										<td width="15%" id="pt_td_1_1">Needs development</td>
+										<td id="pt_td_1_2">Rising and developing contributor and performer</td>
+										<td id="pt_td_1_3">Star with Potential</td>
+									</tr>
+									<tr>
+										<td width="2%" class="vertical style2">
+											<div class="vertical">Medium</div>
+										</td>
+										<td id="pt_td_2_1">Not yet performing at required level</td>
+										<td id="pt_td_2_2">Contributor</td>
+										<td id="pt_td_2_3">Consistent Exceptional Delivery</td>
+									</tr>
+									<tr>
+										<td width="2%" class="vertical style1">
+											<div class="vertical">Low</div>
+										</td>
+										<td id="pt_td_3_1">Questionable Fit/Poor Performance</td>
+										<td id="pt_td_3_2">Sound Performance</td>
+										<td id="pt_td_3_3">Expert</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-12 col-small-12 col-lg-12"
+						id="my_perf_pot_nodata_div" style="display: none;">
+						<h3 class="no-data">No data available</h3>
+					</div>
+				</div>
+
+				<div id="my_accolades" style="display: none;">
+					<div class="row">
+						<div class="col-md-12 col-small-12 col-lg-12"
+							id="my_accolt_nodata_div" style="display: none;">
+							<h3 class="no-data">No data available</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="portlet-body">
+							<div id="accolades_main_div">
+								<div id="accolades_list_div" style="cursor: pointer;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="tm_profile_skills" class="row" style="display: none;">
+					<div class="col-md-12 col-sm-12 hide_skills_year">
+						<div class="col-md-6 col-sm-12"></div>
+						<div class="col-md-2 col-sm-2"
+							style="margin-top: 10px; text-align: right;">
+							<i data-toggle="tooltip" data-placement="top" title="Select Year"
+								class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<div class="form-group">
+								<select id="my_skills_year" class="form-control select2">
+								</select>
+							</div>
+						</div>
+					</div>
+					<div id="Total_skills_data" class="col-md-12 col-sm-12">
+						<div class="col-md-4 col-sm-12">
+							<div id="TECMP" class="bullet-chart"></div>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<div id="FNCMP" class="bullet-chart"></div>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<div id="BHCMP" class="bullet-chart"></div>
+						</div>
+					</div>
+					<div class="col-md-12 col-small-12 col-lg-12" id="Total_skills_no_data"
+						style="display: none;">
+						<h3 class="no-data">No data available</h3>
+					</div>
+					<div class="clearfix"></div>
+					<br>
+					<div class="col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase">TECHNICAL
+										SKILLS</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="row" id="tech_skill"></div>
+								<div class="row">
+									<div class="col-md-12 col-small-12 col-lg-12"
+										id="tech_nodata_div" style="display: none;">
+										<h3 class="no-data">No data available</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase">FUNCTIONAL
+										SKILLS</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="row" id="func_skill"></div>
+								<div class="row">
+									<div class="col-md-12 col-small-12 col-lg-12"
+										id="func_nodata_div" style="display: none;">
+										<h3 class="no-data">No data available</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase">BEHAVIOURAL
+										SKILLS</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="row" id="behv_skill"></div>
+								<div class="row">
+									<div class="col-md-12 col-small-12 col-lg-12"
+										id="behav_nodata_div" style="display: none;">
+										<h3 class="no-data">No data available</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div id="tm_my_performance" class="row" style="display: none;">
+					<div class="col-md-12 col-sm-12" id="tm_my_perf_div">
+						<div class="row" id="tm_my_perf">
+							<div class="col-md-12 col-sm-12">
+								<div class="col-md-2 col-sm-12"></div>
+								<div class="col-md-2 col-sm-2"
+									style="margin-top: 10px; text-align: right;">
+									<i data-toggle="tooltip" data-placement="top" title="Select Year"
+										class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+								</div>
+								<div class="col-md-4 col-sm-12">
+									<div class="form-group">
+										<select id="my_perf_year" class="form-control select2"
+											onchange="my_perf_year_chng($(this).val());">
+										</select>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-12">
+									<div class="form-group">
+										<select id="my_perf_quarter" class="form-control select2"
+											onchange="my_perf_quarter_chng($(this).val());">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 col-small-12 col-lg-12" id="my_perf_no_data">
+								<h3 class="no-data">No data available</h3>
+							</div>
+							<div class="col-md-12 col-small-12 col-lg-12" id="my_perf_data">
+								<div class="col-md-6 col-sm-12">
+									<h3>Overall Rating Chart</h3>
+									<div id="tm_my_perf_overall_chart"></div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<h3>Overall Scores with Comparison</h3>
+									<div id="tm_my_perf_comp_chart"></div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<h3 id="selected_kra">Selected KRA Scores</h3>
+									<div class="col-md-12 col-sm-12" id="tm_my_perf_selected_chart" ></div>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<h3 id="selected_kra_comp">Selected KRA Scores with Comparison</h3>
+									<div class="col-md-12 col-sm-12" id="tm_my_perf_selected_scores" ></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tm_my_feedback" class="row" style="display: none;">
+					<div class="col-md-12 col-sm-12" id="tm_my_fdbk_div"  >
+						<div class="row">
+							<div class="col-md-12 col-sm-12 hide_my_feedback">
+								<div class="col-md-2 col-sm-12"></div>
+								<div class="col-md-2 col-sm-2"
+									style="margin-top: 10px; text-align: right;">
+									<i data-toggle="tooltip" data-placement="top" title="Select Year"
+										class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+								</div>
+								<div class="col-md-4 col-sm-12">
+										<div class="form-group"><select id="my_fdbk_year"
+											class="form-control select2" name="my_fdbk_year"
+											onchange="get_fdbk_quarter($(this).val())">
+										</select></div>
+								</div>
+									<div class="col-md-4 col-sm-12">
+										<div class="form-group"><select id="my_fdbk_quarter"
+											name="my_fdbk_quarter" class="form-control select2"
+											onchange="feedback_display($(this).val())">
+										</select></div>
+								</div>
+							</div>
+							<div class="col-md-12 col-small-12 col-lg-12"
+								id="my_fdbk_no_data" style="display: none;">
+								<h3 class="no-data">No data available</h3>
+							</div>
+							<div class="col-md-12 col-small-12 col-lg-12" id="my_fdbk_data">
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>DEPARTMENT HEAD GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="dept_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="dept_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>SENIOR OFFICER GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="senior_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="senior_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>REPORTING OFFICER GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="repo_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="repo_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+								
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>PEER HEAD GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="peer_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="peer_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>SUBORDINATE HEAD GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="subordinate_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="subordinate_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<h1>SELF HEAD GUIDING POINTS</h1>
+										</div>
+									</div>
+									<div class="row">
+										<div class="portlet-body">
+											<div id="self_feedback_list" style="cursor: pointer; display: none;"></div>
+										</div>
+										<div class="col-md-12 col-small-12 col-lg-12" id="self_feedback_no_data" style="display: none;">
+											<h3 class="no-data">No data available</h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/tooltip/js/tooltip.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/jquery-validation/js/jquery.validate.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/jquery-validation/js/additional-methods.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/gauge.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/talent_management/js/talent_profile.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/talent_management/js/my_talent_profile.js'  %}"
+	type="text/javascript"></script>
+{% endblock %}

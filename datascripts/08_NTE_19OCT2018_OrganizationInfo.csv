@@ -1,0 +1,9 @@
+id,created_date,modified_date,is_active,name,mobile_number,telephone_number,email,fax,address1,address2,website,latitude,longitude,legal_name,short_name,location,pincode,corporate_identity_number,country_id,created_by_id,logo_id,modified_by_id,state_id
+1,2018-09-21 22:05:43.346276+05:30,2018-09-21 22:05:43.346316+05:30,f,DEFAULT,,042-2971111,appadmin@nexttechnosolutions.com,,Coimbatore,,,,,DEFAULT,,Tamilnadu,641,,1,1,,1,1
+2,2018-09-22 01:47:31.960341+05:30,2018-09-22 01:47:31.960381+05:30,t,NEXT TECHNO ENTERPRISES PVT LTD,,422-2971111,hcm@nexttechnosolutions.com,91-4222971114,"Module No: 308/1,Third Floor
+ELCOT IT/ITES-SEZ, TIDEL Park, COIMBATORE-641 014","Module No: 308/1,Third Floor
+ELCOT IT/ITES-SEZ, TIDEL Park, COIMBATORE-641 014",http://nexttechnosolutions.com/,,,NEXT INC,NEXT,,14,,1,1,160,1,1
+3,2018-09-22 01:54:59.456643+05:30,2018-09-22 01:54:59.45672+05:30,t,GREEN TELEMED INDIA PVT LTD,,422-2971111,hcm@nexttechnosolutions.com,91-422-2971114,"19E 403, GREEN Maestros Apartment, Thanneer Pandal, Coimbatore-641004","19E 403, GREEN Maestros Apartment, Thanneer Pandal, Coimbatore-641004",www.greentelemed.co.in,,,GREEN TELEMED INDIA PVT LTD,GTL,,4,,1,1,159,1,1
+4,2018-09-22 01:56:47.669567+05:30,2018-09-22 01:56:47.669652+05:30,t,GREEN MAESTROS ENERTECH PVT LIMITED,,422-2971111,hcm@nexttechnosolutions.com,91-422-2971114,"19E,404, GREEN Maestros Apartment, Thaneer Pandal,
+Peelamedu, Coimbatore - 641004","19E,404, GREEN Maestros Apartment, Thaneer Pandal,
+Peelamedu, Coimbatore - 641004",,,,GREEN Maestros EnerTech Pvt Limited,GML,,4,,1,1,158,1,1

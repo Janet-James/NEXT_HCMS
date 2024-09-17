@@ -1,0 +1,4 @@
+id,created_date,modified_date,is_active,perm_start_month,perm_request_count,perm_request_per_day,perm_max_hour,created_by_id,emp_shift_id,modified_by_id,perm_period_id
+1,2018-06-07 12:17:10.207883+05:30,2018-06-07 12:38:25.62721+05:30,t,7,2,1,01:00:00,1,1,1,474
+2,2018-06-07 12:17:57.555414+05:30,2018-06-07 12:38:25.62721+05:30,t,7,4,2,02:00:00,1,2,1,474
+3,2018-06-07 12:19:13.218557+05:30,2018-06-07 12:38:25.62721+05:30,t,7,2.5,1,01:00:00,1,3,1,474

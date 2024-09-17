@@ -1,0 +1,324 @@
+									<input type="hidden" id="emp_id" name="emp_id">
+									<div class="clearfix" ></div>
+									<form role="form" id="employee_personal_details_form">
+									<div class="form-body">
+										{%csrf_token%}											
+										<div class="col-md-12">											
+											<div class="col-md-3 ">											
+												<div class="form-group">
+													<label>No. of Dependents</label>
+													<div class="input-icon">
+													  <i class="nf nf-customer"></i>
+													  <input class="form-control"
+															placeholder="No.of Dependents" id="no_of_dependents" name="no_of_dependents" 
+															type="text" data-error=".errorTxt45" maxlength="2">
+													  <span	class="errorTxt45 errormessage"></span>			
+													</div>		
+												</div>
+											</div>
+											
+											<div class="col-md-3 padding-0">
+												<div class="col-md-12 padding-0">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Marital Status</label> <select id="emp_martial_status" name="emp_martial_status"
+															class="form-control select2">
+															<option value="0">--Select Martial Status--</option> 
+															{% for i in marital_status_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+															{% endfor %}															
+															</select> 		
+														</div>	
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label>No. of Children
+															</label>
+															<div class="input-icon">
+															  <i class="nf nf-number-children"></i>
+															  <input class="form-control"
+																	placeholder="No of Children" id="no_of_children" name="no_of_children"
+																	type="text" data-error=".errorTxt22" disabled maxlength="2"> <span
+																	class="errorTxt22 errormessage"></span>	
+															</div>		
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 ">	
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Blood Group</label> <select id="blood_group" name="blood_group"
+															class="form-control select2">
+															<option value="0">--Select Blood Group--</option> 
+															{% for i in blood_group_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+															{% endfor %}															
+															</select> 		
+												</div>	
+											</div>
+											<div class="col-md-3 padding-0">
+												<div class="col-md-12">
+														<label for="single" class="control-label black_font">
+															Differently Abled Details</label>
+												</div>
+																				<div class="col-md-3">
+													<div class="form-group">
+														<div class="mt-checkbox-inline">
+															<label class="label-cbx" style="margin:0px;">   Yes <input
+																id="physically_challenged" value="option1" class="invisible"
+																name="test" type="checkbox">
+																<div class="checkbox margin-checkbox">
+																	<svg width="20px" height="20px" viewBox="0 0 20 20">
+								<path
+																			d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+								<polyline points="4 11 8 15 16 6"></polyline>
+								</svg>
+																</div>
+								
+															</label>
+														</div>
+													</div>
+												</div>	
+												<div class="col-md-9">	
+													<div class="form-group">
+																<select id="disability_category" name="disability_category"
+																class="form-control select2" disabled>
+																<option value="0">--Select Category--</option> 
+																{% for i in disability_category_info %}
+																		<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}															
+																</select> 		
+													</div>	
+												</div>
+											</div>
+										</div>		
+										<div class="col-md-12">
+											<div class="col-md-3 ">
+												<div class="form-group">
+													<label>Father's Name</label>
+													<div class="input-icon">
+													  <i class="nf nf-customer"></i>
+													  <input class="form-control"
+															placeholder="Father's Name" id="father_name" name="father_name"
+															type="text" data-error=".errorTxt38" maxlength="50"> <span
+															class="errorTxt38 errormessage"></span>
+													</div>		
+												</div>
+											</div>
+											 <div class="col-md-3 ">											
+												<div class="form-group">
+													<label>Spouse Name  </label>
+													<div class="input-icon">
+													  <i class="nf nf-customer"></i>
+													  <input class="form-control"
+															placeholder="Spouse Name" id="spouse_name" name="spouse_name"
+															type="text" data-error=".errorTxt36" disabled maxlength="50">  <span
+															class="errorTxt36 errormessage"></span>
+													</div>		
+												</div>
+											</div>	
+											
+											
+											
+											<div class="col-md-3 ">
+												<div class="form-group">
+													<label>Aadhar Number</label>
+													<div class="input-icon">
+													  <i class="nf nf-pan-number"></i>
+													  <input class="form-control"
+															placeholder="Aadhar Number" id="citizenship_no" name="citizenship_no"
+															type="text" data-error=".errorTxt23" maxlength="12"> <span
+															class="errorTxt23 errormessage"></span>
+													</div>		
+												</div>
+											</div>	
+											<div class="col-md-3">
+												<div class="form-group">
+														<label>Differently Abled Percentage</label>
+														<select id="disability_percentage" name="disability_percentage"
+															class="form-control select2" disabled>
+																	<option value="0">--Select Percentage--</option>
+																{% for i in disability_percentage_info %}
+																		<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}															
+														</select>
+												</div>
+											</div>																			
+										</div>	
+										<div class="col-md-12">
+											<div class="col-md-3 ">
+												<div class="form-group">
+													<label>Mother's Name</label>
+													<div class="input-icon">
+													  <i class="nf nf-mother"></i>
+													  <input class="form-control"
+															placeholder="Mother's Name" id="mother_name" name="mother_name"
+															type="text" data-error=".errorTxt37" maxlength="50"> <span
+															class="errorTxt37 errormessage"></span>
+													</div>		
+												</div>
+											</div>
+											<div class="col-md-3 ">											
+													<div class="form-group">
+														<label>Spouse Date of Birth</label>
+														<div class=" input-icon">
+															<i class="nf nf-calendar"></i> <input id="spouse_dob" name="spouse_dob"
+																placeholder="Spouse Date of Birth" class="form-control form-control-inline" data-date-end-date="0d"
+																value="" type="text" data-field="date" disabled>
+																<div id="dtBox1"></div>
+														</div>
+													</div>									
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label>Provident Fund Number </label>
+													<div class="input-icon">
+													  <i class="nf nf-pan-number"></i>
+													  <input class="form-control"
+															placeholder="Provident Fund Number" id="provident_fund_uan_no" name="provident_fund_uan_no"
+															type="text"  maxlength="22"> 	
+													</div>	
+												</div>
+											</div>
+											
+											<div class="col-md-3 ">
+													<div class="form-group">
+													<label>PAN </label>
+													<div class="input-icon">
+													  <i class="nf nf-pan-number"></i>
+													  <input class="form-control"
+															placeholder="PAN" id="pan_no" name="pan_no" 
+															type="text"  maxlength="10"> 
+													</div>		
+												</div>
+											</div>																					
+										</div>		
+										<div class="col-md-12">
+											
+											<div class="col-md-3 ">
+												   <div class="form-group">
+															<label>Father's Date of Birth </label>
+															<div class="input-icon">
+																<i class="nf nf-calendar"></i> <input id="father_dob"
+																	name="father_dob" placeholder="Father's Date of Birth" 
+																	class="form-control form-control-inline" data-field="date" data-date-end-date="0d"
+																	size="16" value="" type="text">
+																	<div id="dtBox1"></div>
+															</div>
+												   </div>
+											</div>
+																						
+											<div class="col-md-3 padding-0">
+												<div class="col-md-5">
+													<div class="form-group" style="margin:25px 0px 0px 0px;">
+														
+														
+														<div class="mt-checkbox-inline" style="padding:0;">
+															<label class="label-cbx"> Same Org <input
+																id="spouse_same_org" value="option1" class="invisible"
+																name="test" type="checkbox">
+																<div class="checkbox margin-checkbox">
+																	<svg width="20px" height="20px" viewBox="0 0 20 20">
+																<path
+																			d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+																<polyline points="4 11 8 15 16 6"></polyline>
+																</svg>
+																</div>
+								
+															</label>
+														</div>
+													</div>
+												</div>										
+												<div class="col-md-7">	
+													 <div class="form-group">													 
+													 <label for="single" class="control-label black_font">
+															Spouse Employer</label>
+													 	<div class="input-icon">
+															<i class="nf nf-organization"></i> <input class="form-control"
+																placeholder="Spouse Employer" id="spouse_employer"
+																name="spouse_employer" type="text">
+														</div>
+													 </div>													
+												</div>
+											</div>											
+											<div class="col-md-3">
+												<div class="form-group">
+													<label>License Number</label>
+													<div class="input-icon">
+													  <i class="nf nf-pan-number"></i>
+													  <input class="form-control"
+															placeholder="License Number" id="license_no" name="license_no"
+															type="text" data-error=".errorTxt46" > <span
+															class="errorTxt46 errormessage"></span>
+													</div>	
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+															<label>UAN</label>
+															<div class="input-icon">
+																<i class="nf nf-phone"></i> <input class="form-control"
+																	placeholder="UAN" id="uan"
+																	name="uan" type="text"  maxlength="50" data-error=".errorTxt56">
+																<span class="errorTxt56 errormessage"></span>
+															</div>
+												</div>
+												</div>
+										</div>	
+										<div class="col-md-12">
+											<div class="col-md-3">
+												<div class="form-group">
+													<label>Mother's Date of Birth </label>
+														<div class="input-icon">
+															<i class="nf nf-calendar"></i> <input id="mother_dob" name="mother_dob"
+																placeholder="Mother's Date of Birth"  class="form-control form-control-inline" data-date-end-date="0d"
+																value="" type="text" data-field="date">
+																<div id="dtBox1"></div>
+														</div>
+												</div>
+											</div>
+											<div class="col-md-3 ">											
+												<div class="form-group">
+													<label> Spouse Contact Number </label>
+													<div class="input-icon">
+													  <i class="nf nf-mobile"></i>
+													  <input class="form-control"
+															placeholder="Spouse Contact Number" id="spouse_contact_no" name="spouse_contact_no"
+															type="text" data-error=".errorTxt21" disabled maxlength="10"> <span
+															class="errorTxt21 errormessage"></span>	
+													</div>		
+												</div>
+											</div>
+											<div class="col-md-3 ">											
+												<div class="form-group">
+													<label> Personal Email ID <span class='addmore_popup' onclick='addExtraEmailIds();'><i class="nf nf-add"></i></span></label>
+													<div class="input-icon">
+													  <i class="nf nf-mobile"></i>
+													  <input class="form-control"
+															placeholder="Personal Email ID" id="personal_email_id" name="personal_email_id"
+															type="text" data-error=".errorTxt71" maxlength="100"> <span
+															class="errorTxt71 errormessage"></span>	
+													</div>		
+												</div>
+											</div>	
+										</div>
+										<div class="clearfix"></div>
+										<div class="form-group" align="right">
+													<div class="btn-padding">	
+														{% if 'Employee Details' in get_add_records %}															
+														<!-- Indicates caution should be taken with this action -->
+														<button type="button" id="employee_personal_edit_button"
+															class="btn-primary btn-animate btn-eql-wid  btn">Update</button>
+														<!-- Indicates a dangerous or potentially negative action -->
+														<button type="button" id="employee_personal_delete_button"
+															class="btn-animate btn-eql-wid  btn btn-danger">Remove</button>
+														<button type="button" id="employee_personal_cancel_button"
+															class="btn-warning btn-animate btn-eql-wid  btn">Cancel / Clear</button>	
+														{% endif %}																												
+													</div>
+										</div>		
+									</div>
+									</form>
+

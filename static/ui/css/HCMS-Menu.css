@@ -1,0 +1,342 @@
+/* General CSS Starts Mathi 04/12/2018 */
+.no-padding {padding: 0px;}
+.padding-left-10 {padding-left: 10px;}
+.padding-left-20 {padding-left: 20px;}
+.padding-left-30 {padding-left: 30px;}
+.padding-left-40 {padding-left: 40px;}
+.padding-left-50 {padding-left: 50px;}
+.padding-left-60 {padding-left: 60px;}
+.padding-left-70 {padding-left: 70px;}
+.padding-left-80 {padding-left: 80px;}
+.padding-left-90 {padding-left: 90px;}
+.padding-left-100 {padding-left: 100px;}
+.padding-right-10 {padding-right: 10px;}
+.padding-right-20 {padding-right: 20px;}
+.padding-right-30 {padding-right: 30px;}
+.padding-right-40 {padding-right: 40px;}
+.padding-right-50 {padding-right: 50px;}
+.padding-right-60 {padding-right: 60px;}
+.padding-right-70 {padding-right: 70px;}
+.padding-right-80 {padding-right: 80px;}
+.padding-right-90 {padding-right: 90px;}
+.padding-right-100 {padding-right: 100px;}
+.padding-top-10 {padding-top: 10px;}
+.padding-top-20 {padding-top: 20px;}
+.padding-top-30 {padding-top: 30px;}
+.padding-top-40 {padding-top: 40px;}
+.padding-top-50 {padding-top: 50px;}
+.padding-top-60 {padding-top: 60px;}
+.padding-top-70 {padding-top: 70px;}
+.padding-top-80 {padding-top: 80px;}
+.padding-top-90 {padding-top: 90px;}
+.padding-top-100 {padding-top: 100px;}
+.padding-bottom-10 {padding-bottom: 10px;}
+.padding-bottom-20 {padding-bottom: 20px;}
+.padding-bottom-30 {padding-bottom: 30px;}
+.padding-bottom-40 {padding-bottom: 40px;}
+.padding-bottom-50 {padding-bottom: 50px;}
+.padding-bottom-60 {padding-bottom: 60px;}
+.padding-bottom-70 {padding-bottom: 70px;}
+.padding-bottom-80 {padding-bottom: 80px;}
+.padding-bottom-90 {padding-bottom: 90px;}
+.padding-bottom-100 {padding-bottom: 100px;}
+.margin-bottom-10 {margin-bottom: 10px;}
+.margin-bottom-20 {margin-bottom: 20px;}
+.margin-bottom-30 {margin-bottom: 30px;}
+.margin-bottom-40 {margin-bottom: 40px;}
+.margin-bottom-50 {margin-bottom: 50px;}
+.margin-bottom-60 {margin-bottom: 60px;}
+.margin-bottom-70 {margin-bottom: 70px;}
+.margin-bottom-80 {margin-bottom: 80px;}
+.margin-bottom-90 {margin-bottom: 90px;}
+.margin-bottom-100 {margin-bottom: 100px;}
+.margin-right-10 {margin-right: 10px;}
+.margin-right-20 {margin-right: 20px;}
+.margin-right-30 {margin-right: 30px;}
+.margin-right-40 {margin-right: 40px;}
+.margin-right-50 {margin-right: 50px;}
+.margin-right-60 {margin-right: 60px;}
+.margin-right-70 {margin-right: 70px;}
+.margin-right-80 {margin-right: 80px;}
+.margin-right-90 {margin-right: 90px;}
+.margin-right-100 {margin-right: 100px;}
+.no-display {display: none !important;}
+.no-bgcolor {background: transparent;}
+.auto-height{height:auto !important;}
+.transparent-btn {background: transparent;border:0px;}
+.overflow-x-auto {overflow-x:auto; }
+.no-border {border-left:0px !important;border-right:0px !important;border-top:0px !important;border-bottom:0px !important;}
+ 
+/* Menu CSS Starts Mathi 05/17/2018 */
+ 
+.menu-wrapper .animating-img img {text-align: center;position: absolute;left: 0px;right: 0px;margin: 0 auto;width: 580px;top: 30px;}
+.menu-wrapper .animating-img {text-align: center;position: relative;}
+.menu-wrapper .animating-img img.rotating-img  {
+    -webkit-animation:spin2 350s linear infinite;
+    -moz-animation:spin2 350s linear infinite;
+    animation:spin2 350s linear infinite;
+}
+ 
+@-moz-keyframes spin2 { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin2 { 100% { -webkit-transform: rotate(180deg); } }
+@keyframes spin2 { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } } 
+ 
+.menu-panel{position: absolute;top: 150px;/* width: 730px; */margin: 0 auto;height:80vh;left: 0px;right: 0px;width: 600px;}
+.menu-panel.ui-widget-content{border: 0px solid #dddddd;background: transparent;}
+ 
+/* Mobile Menu CSS Starts Mathi 06/04/2018 */
+.mobile-menu .navbar {background-color: #ffffff;}
+.mobile-menubar ul.nav li.dropdown{display: block;width:100%;text-align: center;border-bottom: 1px solid #26cfb78a;}
+.mobile-menubar ul.nav li.dropdown a i{display: block; width: 100%; line-height: 25px;font-size: 30px; background: -webkit-gradient(linear, left top, left bottom, from(#57c3ff), to(#2ce7c7)); -webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.mobile-menubar ul.nav li.dropdown a:hover i {}
+.mobile-menubar ul.nav li.dropdown ul.dropdown-menu {right: 0;text-align: center;margin: 0 auto !important;border: 1px solid #f7f7f7;width: 50%;}
+.mobile-menubar ul.nav li.dropdown ul.dropdown-menu li a{font-size: 12px !important;padding: 10px 0px !important;border-bottom: 1px solid #ea8ecc91 !important;}
+.mobile-menubar ul.nav {width: 100%;}
+.mobile-menu .navbar-default .navbar-nav>.open>a, .mobile-menu .navbar-default .navbar-nav>.open>a:focus, .mobile-menu .navbar-default .navbar-nav>.open>a:hover {background-color: #ffffff;font-size: 13px;color: #353839;padding: 15px 0px;}
+.mobile-menu .navbar-default .navbar-nav>.open>a i, .mobile-menu .navbar-default .navbar-nav>.open>a:focus i, .mobile-menu .navbar-default .navbar-nav>.open>a:hover i{text-shadow: 0px 0px 0px #ea8ecc, 0 0 1px #ea8ecc;color: #ea8ecc;transition: 0.5s ; transform: translate(0px,-5px);}
+ 
+@media (max-width:991px) {.mobile-menu {display:block;}    .web-menu {display:none;}.mobile-menubar .navbar-nav {margin: 0;}.wide-menu {padding: 0px;}}
+@media (min-width:992px) {.mobile-menu {display:none;} .web-menu {display:block;}}
+ 
+/* Menu 1 CSS Starts Mathi 05/18/2018 */
+.menu1 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.menu1 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu1 ul.menu-list li:first-child {font-size: 109px;color:#fff;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu1 ul.menu-list li:nth-child(2){left: 5px;top: 5px;}
+.menu1 ul.menu-list li .white-bg {font-size: 99px;color:#fff;}
+.menu1 ul.menu-list li:nth-child(3) {left: 25px;top: 30px;font-size: 60px;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu1{height: 82px;position: absolute;top: -60px;width: 90px;left: 140px;}
+ 
+/* Menu 2 CSS Starts Mathi 05/18/2018 */
+.menu2 ul.menu-list {position: absolute;margin: 0px;top: -30px;left: -10px;}
+.menu2 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu2 ul.menu-list li:first-child {font-size: 149px;color:#fff;background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu2 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu2 ul.menu-list li .white-bg {font-size: 137px;color:#fff;}
+.menu2 ul.menu-list li:nth-child(3) {left: 40px;top: 40px;font-size: 75px;background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu2{height: 115px;position: absolute;top: 70px;width: 135px;left: 250px;}
+ 
+/* Menu 3 CSS Starts Mathi 05/18/2018 */
+.menu3 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.menu3 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu3 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu3 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu3 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu3 ul.menu-list li:nth-child(3) {left: 30px;top: 39px;font-size: 70px;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu3{height: 80px;position: absolute;top: -90px;width: 85px;left: 270px;}
+ 
+/* Menu 4 CSS Starts Mathi 05/18/2018 */
+.menu4 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.menu4 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu4 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu4 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu4 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu4 ul.menu-list li:nth-child(3) {left: 35px;top: 41px;font-size: 60px;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu4{height: 80px;position: absolute;top: 340px;width: 85px;left: 88px;}
+ 
+/* Menu 5 CSS Starts Mathi 05/18/2018 */
+.menu5 ul.menu-list {position: absolute;margin: 0px;top: -30px;left: -10px;}
+.menu5 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu5 ul.menu-list li:first-child {font-size: 149px;color:#fff;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu5 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu5 ul.menu-list li .white-bg {font-size: 137px;color:#fff;}
+.menu5 ul.menu-list li:nth-child(3) {left: 40px;top: 40px;font-size: 75px;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu5{height: 120px;position: absolute;top: 50px;width: 140px;left: 38px;}
+ 
+/* Menu 6 CSS Starts Mathi 05/18/2018 */
+.menu6 ul.menu-list {position: absolute;margin: 0px;top: -25px;left: -15px;}
+.menu6 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu6 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu6 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu6 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu6 ul.menu-list li:nth-child(3) {left: 30px;top: 39px;font-size: 70px;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu6{height: 97px;position: absolute;top: 70px;width: 105px;left: 480px;}
+ 
+/* Menu 7 CSS Starts Mathi 05/18/2018 */
+.menu7 ul.menu-list {position: absolute;margin: 0px;top: -30px;left: -10px;}
+.menu7 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu7 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu7 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu7 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu7 ul.menu-list li:nth-child(3) {left: 35px;top: 41px;font-size: 60px;background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu7{height: 143px;position: absolute;top: 340px;width: 129px;left: 420px;}
+ 
+/* Menu 8 CSS Starts Mathi 05/18/2018 */
+.menu8 ul.menu-list {position: absolute;margin: 0px;top: -30px;left: -10px;}
+.menu8 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu8 ul.menu-list li:first-child {font-size: 150px;color:#fff;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu8 ul.menu-list li:nth-child(2){left: 7px;top: 8px;}
+.menu8 ul.menu-list li .white-bg {font-size: 136px;color:#fff;}
+.menu8 ul.menu-list li:nth-child(3) {left: 43px;top: 50px;font-size: 65px;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu8{height: 110px;position: absolute;top: 380px;width: 130px;left: 248px;}
+ 
+/* Menu 9 CSS Starts Mathi 05/18/2018 */
+.menu9 ul.menu-list {position: absolute;margin: 0px;top: -23px;left: -10px;}
+.menu9 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu9 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu9 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu9 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu9 ul.menu-list li:nth-child(3) {left: 30px;top: 39px;font-size: 70px;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu9{height: 70px;position: absolute;top: 230px;width: 84px;left: 260px;}
+ 
+/* Menu 10 CSS Starts Mathi 05/18/2018 */
+.menu10 ul.menu-list {position: absolute;margin: 0px;top: -23px;left: -10px;}
+.menu10 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu10 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu10 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu10 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu10 ul.menu-list li:nth-child(3) {left: 35px;top: 41px;font-size: 60px;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu10{height: 100px;position: absolute;top: 200px;width: 115px;left: 30px;}
+ 
+/* Menu 11 CSS Starts Mathi 05/18/2018 */
+.menu11 ul.menu-list {position: absolute;margin: 0px;top: -27px;left: 0px;}
+.menu11 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu11 ul.menu-list li:first-child {font-size: 109px;color:#fff;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu11 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu11 ul.menu-list li .white-bg {font-size: 99px;color:#fff;}
+.menu11 ul.menu-list li:nth-child(3) {left: 25px;top: 30px;font-size: 60px;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu11{height: 50px;position: absolute;top: -40px;width: 115px;left: 405px;}
+
+/* Menu 12 CSS Starts Mathi 05/18/2018 */
+.menu12 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.menu12 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.menu12 ul.menu-list li:first-child {font-size: 130px;color:#fff;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top:0px;}
+.menu12 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.menu12 ul.menu-list li .white-bg {font-size: 118px;color:#fff;}
+.menu12 ul.menu-list li:nth-child(3) {left: 35px;top: 41px;font-size: 60px;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.menu12{height: 80px;position: absolute;top: 200px;width: 85px;left: 468px;}
+ 
+.menu-icons:hover ul.menu-list li:nth-child(2) {opacity: 0.3;cursor: pointer;}
+.menu-icons:hover ul.menu-list li:nth-child(3) {cursor: pointer;}
+.menu-icons:hover ul.menu-list li:nth-child(3) {background: linear-gradient(to right,#ffffff 0,#ffffff 100%);-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;}
+ 
+.size1 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.size1 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.size1 ul.menu-list li:first-child {font-size:120px;color:#fff;left: 0px;top:0px;}
+.size1 ul.menu-list li:nth-child(2){left: 5px;top: 5px;}
+.size1 ul.menu-list li .white-bg {font-size:110px;color:#fff;}
+.size1 ul.menu-list li:nth-child(3) {left: 30px;top: 35px;font-size: 60px;}
+.size1{height: 100px;position: absolute;top: -10px;width: 100px;left: 170px;}
+ 
+.size2 ul.menu-list {position: absolute;margin: 0px;top: -30px;left: -10px;}
+.size2 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.size2 ul.menu-list li:first-child {font-size: 154px;color:#fff;left: 0px;top:0px;}
+.size2 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.size2 ul.menu-list li .white-bg {font-size: 142px;color:#fff;}
+.size2 ul.menu-list li:nth-child(3) {left: 45px;top: 50px;font-size: 65px;}
+.size2{height: 115px;position: absolute;top: -36px;width: 135px;left: 310px;}
+ 
+.size3 ul.menu-list {position: absolute;margin: 0px;top: -20px;left: -10px;}
+.size3 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.size3 ul.menu-list li:first-child {font-size: 104px;color:#fff;left: 0px;top:0px;}
+.size3 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.size3 ul.menu-list li .white-bg {font-size: 93px;color:#fff;}
+.size3 ul.menu-list li:nth-child(3) {left: 27px;top: 29px;font-size: 55px;}
+.size3{height: 80px;position: absolute;top: 30px;width: 85px;left: 460px;}
+ 
+.size4 ul.menu-list {position: absolute;margin: 0px;top: -40px;left: -10px;}
+.size4 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.size4 ul.menu-list li:first-child {font-size: 180px;color:#fff;left: 0px;top:0px;}
+.size4 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.size4 ul.menu-list li .white-bg {font-size: 168px;color:#fff;}
+.size4 ul.menu-list li:nth-child(3) {left: 45px;top: 50px;font-size: 88px;}
+.size4{height: 135px;position: absolute;top: 272px;width: 160px;left: 449px;}
+ 
+.size5 ul.menu-list {position: absolute;margin: 0px;top: -40px;left: -10px;}
+.size5 ul.menu-list li {list-style: none;position: absolute;left: 0px;top: 0px;}
+.size5 ul.menu-list li:first-child {font-size: 190px;color:#fff;left: 0px;top:0px;}
+.size5 ul.menu-list li:nth-child(2){left: 6px;top: 7px;}
+.size5 ul.menu-list li .white-bg {font-size: 178px;color:#fff;}
+.size5 ul.menu-list li:nth-child(3) {left: 45px;top: 50px;font-size: 100px;}
+.size5{height: 150px;position: absolute;top: 135px;width: 170px;left: 167px;}
+ 
+.color1 ul.menu-list li:first-child {background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+.color1 ul.menu-list li:nth-child(3) {background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);;-webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+ 
+.color2 ul.menu-list li:first-child {background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.color2 ul.menu-list li:nth-child(3) {background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+ 
+.color3 ul.menu-list li:first-child {background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.color3 ul.menu-list li:nth-child(3) {background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+ 
+.color4 ul.menu-list li:first-child {background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.color4 ul.menu-list li:nth-child(3) {background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+ 
+.color5 ul.menu-list li:first-child {background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.color5 ul.menu-list li:nth-child(3) {background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+ 
+.main-menu {background: #fff;border-radius: 2px !important;box-shadow: 0px 1px 6px #ddd;padding: 4px 2px 8px 2px;position: absolute;top: -33px;text-align: center;z-index: 1;font-size: 14px;font-weight: 600;line-height: 14px;left: 0px;right: 0px;cursor: pointer;min-width: 100px;}
+.main-menu i {display:block;margin-bottom: -18px;color:#fff;text-shadow: 0px 2px 6px #ddd;}
+ 
+.menu-icons .dropdown-menu {top:85px;}
+.menu-icons .dropdown-submenu .dropdown-menu{top:0px;}
+.menu-panel .main-menu {display: none;}
+.menu-panel:hover .main-menu {display: block;}
+ 
+.dropdown-menu li.menu-options {display: block;width:100%;border-bottom: 1px solid #fda284;}    
+.dropdown-menu li.menu-options a {display: inline-block;padding: 11px 7px 6px 5px;float: right;}
+.dropdown-menu li.menu-options span {display: block;text-align: right;min-height: 36px;}
+.dropdown-menu li.menu-options a:hover {color:#fc7c4f;}
+ 
+.mt-radio-inline.color-group .radio.color-1:first-child label {padding-left: 0px;}
+.mt-radio-inline.color-group .radio label {padding-left: 0px;}
+.color-group .radio label>input:checked~span.radio-img {border: 0px !important;box-shadow: none !important;}
+ 
+.color-group .color-1, .color-group .color-2, .color-group .color-3, .color-group .color-4{position: relative;min-width: 100px;min-height: 40px;}
+.color-group .color-1 .nf-hex-img {font-size:60px; color: #fff;background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top: 0px;position: absolute;}
+.color-group .color-1 .nf-hex-img.hex-bg{font-size:70px;left: 5px;top: 5px;background: linear-gradient(to right,#ffffff 0,#ffffff 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size:50px;}
+.color-group .color-2 .nf-hex-img {font-size:60px; color: #fff;background: linear-gradient(to right,#5bf 0,#d2c3fc 74%,#d2c3fc 74%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top: 0px;position: absolute;}
+.color-group .color-2 .nf-hex-img.hex-bg{font-size:70px;left: 5px;top: 5px;background: linear-gradient(to right,#ffffff 0,#ffffff 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size:50px;}
+.color-group .color-3 .nf-hex-img {font-size:60px; color: #fff;background: linear-gradient(to right,#f6d166 0,#fda284 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top: 0px;position: absolute;}
+.color-group .color-3 .nf-hex-img.hex-bg{font-size:70px;left: 5px;top: 5px;background: linear-gradient(to right,#ffffff 0,#ffffff 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size:50px;}
+.color-group .color-4 .nf-hex-img {font-size:60px; color: #fff;background: linear-gradient(to right,#57c3ff 0,#2ce7c7 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;left: 0px;top: 0px;position: absolute;}
+.color-group .color-4 .nf-hex-img.hex-bg{font-size:70px;left: 5px;top: 5px;background: linear-gradient(to right,#ffffff 0,#ffffff 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-size:50px;}
+ 
+.radio-img{position: absolute;top: -23px;left: 20px;}
+ 
+/*Dynamic sub menu's adding CSS Mathi 05/25/2018 */
+.show-second-level-details, .show-third-level-details {display: none;}
+.split-line {border-top: 1px solid #fda284;}
+.remove-third-level {color:#000;padding-top: 20px;    display: inline-block;}
+.remove-third-level:hover {color:#fda284;cursor: pointer;}
+.delete-second-level {color:#000;padding-top: 20px;    display: inline-block;}
+.delete-second-level:hover {color:#fda284;cursor: pointer;}
+.enter-second-level {margin-top:20px;}
+.third-level-details i {padding-right: 10px;margin-left: 10px;}
+.add-third-level {margin-bottom: 30px;}
+.second-level-wrapper-panel {max-height: 350px;overflow-x: hidden;overflow-y: auto;}
+.third-level-menus .third-menu{border: 0px solid #c5c5c5;background: #ffffff;cursor: move;}
+.sortable-main .second-level-wrapper{border: 0px solid #c5c5c5;background: #ffffff;cursor: move;}
+ 
+/*Dynamic sub menu's Edit CSS Mathi 05/28/2018 */
+.third-level-editmenu {padding: 0px;}
+.third-level-editmenu li{display: inline-block;padding-right: 10px;position: relative;}
+.sortable {list-style-type: none;margin: 0;padding: 0;width: 100%;}
+.sortable li {margin: 0px;padding: 0.4em;font-size: 1.4em;height: auto;background: #fff;border: 0px;cursor: move;width: auto;margin: 0px 20px 10px 0px;}
+.sortable li span { position: absolute; margin-left: -1.3em; }
+.main-menu-name {font-size: 16px;padding-left: 0px;}
+.accordion-second-level-menu {margin-top:20px;}
+.accordion-second-level-menu .panel-body {padding:10px 0px 0px 0px;}
+.accordion-second-level-menu .form-group {margin-bottom: 0px;}
+.accordion-second-level-menu h4.panel-title .form-control{border-bottom: 0px !important;padding: 0px;font-size: 16px;}
+.third-level-editmenu .delete-third-menu {position: absolute; right:0px;color:#000;display: none; font-size: 12px;top:18px;}
+.third-level-editmenu li:hover .delete-third-menu {display: block;cursor: pointer;}
+.third-level-editmenu li .delete-third-menu:hover {color:#fda284;}
+.accordion-second-level-menu .delete-second-menu {float: right;color:#000;font-size: 14px;position: absolute;right: 40px;top: 0px;display: none;text-shadow:none;}
+.accordion-second-level-menu .panel-default:hover .delete-second-menu {display: block;cursor: pointer;}
+.accordion-second-level-menu .panel-default .delete-second-menu:hover {color:#fda284;}
+ 
+/*Innerpages Menu CSS Mathi 06/01/2018 */
+.menu-toggle {position: absolute;left: -450px;z-index:3;padding-top: 40px;width:600px;background: #fff;height: 950px;}
+.menu-toggle-open {left:0px; -webkit-transition: left 1s; -moz-transition: left 1s; transition: left 1s;}
+.RS-data { margin-left:160px;background-image: url("../images/innerpage-bg.jpg"); background-repeat: repeat-y; -webkit-transition:all ease 1s;     -moz-transition:all ease 1s; transition:all ease 1s;min-height: 950px;    padding-bottom: 0;}
+.RS-data .page-content {padding-left: 30px; }
+.page-content-wrapper {margin-bottom: 0px;}
+.page-content {padding:20px 0px 80px 0px;}
+.page-container {    padding-top: 0px;padding-bottom: 0px; margin-bottom:0}
+.RS-data-expand {/*margin-right: -800px;*/margin-right: 0px;-webkit-transition:all ease 1s;-moz-transition:all ease 1s;transition:all ease 1s;margin-left: 600px;}
+@media (max-width:991px) {
+    .LS-menu{width: auto;position: relative;left: unset;height:auto;}
+    .RS-data {margin: 0px;background-image: none;}
+}

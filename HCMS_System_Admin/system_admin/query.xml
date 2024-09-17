@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="HCMS SysAdmin Management">
+		<!-- Role details data fetching start -->
+		<query id="role_details_data_fetch" query_name="role_details_data_fetch"
+			description="Role details data fetching">
+          <![CDATA[select *, row_number() over() from (select id, name, description, case when is_active then 'Active' else 'Inactive' end as is_active from hcms_role where is_active = True order by id asc)a]]>
+		</query>
+		<!-- Role details data fetching end -->
+		
+		<!-- Particular role details data fetching start -->
+		<query id="particular_role_details_data" query_name="particular_role_details_data"
+			description="Particular role details data fetching">
+          <![CDATA[select id as role_id, name as role_name, description as role_description, org_id, org_unit_id, role_ids as group_roles from hcms_role where is_active = True and id=%s]]>
+		</query>
+		<!-- Particular role details data fetching end -->
+		
+		<!-- Group details data fetching start -->
+		<query id="group_details_data_fetch" query_name="group_details_data_fetch"
+			description="Group details data fetching">
+          <![CDATA[select *, row_number() over() from (select id, name from auth_group order by id desc)a]]>
+		</query>
+		<!-- Group details data fetching end -->
+		
+		<!-- Particular Group details data fetching start -->
+		<query id="particular_group_details_data" query_name="particular_group_details_data"
+			description="Particular Group details data fetching">
+          <![CDATA[select id as grp_id, name as grp_name from auth_group where id=%s]]>
+		</query>
+		<!-- Particular Group details data fetching end -->
+		
+		<!-- Reference item category details data fetching start -->
+		<query id="refitemcat_details_data_fetch" query_name="refitemcat_details_data_fetch"
+			description="Reference item category details data fetching">
+          <![CDATA[select *, row_number() over() from (select id, refitem_category_name as refitemcat_name, refitem_category_code as refitemcat_code, refitem_category_desc as refitemcat_description 
+          			from reference_item_category where is_active=True order by id asc)a]]>
+		</query>
+		<!-- Reference item category details data fetching end -->
+		
+		<!-- Particular Reference item category details data fetching start -->
+		<query id="particular_refitemcat_details_data" query_name="particular_refitemcat_details_data"
+			description="Particular Reference item category details data fetching">
+          <![CDATA[select id as refitemcat_id, refitem_category_name as refitemcat_name, refitem_category_code as refitemcat_code, refitem_category_desc as refitemcat_description 
+          			from reference_item_category where is_active=True and id=%s]]>
+		</query>
+		<!-- Particular Reference item category details data fetching end -->
+		
+		<!-- Reference item details data fetching start -->
+		<query id="refitem_details_data_fetch" query_name="refitem_details_data_fetch"
+			description="Reference item details data fetching">
+          <![CDATA[select *, row_number() over() from (select ri.id, ri.refitems_name as refitem_name, ri.refitems_code as refitem_code, ric.refitem_category_name as refitem_category_name, 
+					case when ri.is_systemdata then 'Yes' else 'No' end as system_data from reference_items ri 
+					inner join reference_item_category ric on ric.id = ri.refitems_category_id
+					where ri.is_active=True and ric.is_active=True order by id asc)a]]>
+		</query>
+		<!-- Reference item details data fetching end -->
+		
+		<!-- Particular Reference item details data fetching start -->
+		<query id="particular_refitem_details_data" query_name="particular_refitem_details_data"
+			description="Particular Reference item details data fetching">
+          <![CDATA[select ri.id as refitem_id, ri.refitems_name as refitem_name, ri.refitems_code as refitem_code, ri.refitems_desc as refitem_description, 
+					ric.id refitemcat_id, ri.is_systemdata system_data from reference_items ri 
+					inner join reference_item_category ric on ric.id = ri.refitems_category_id
+					where ri.is_active=True and ric.is_active=True and ri.id=%s]]>
+		</query>
+		<!-- Particular Reference item details data fetching end -->
+		
+		<!-- Reference item link details data fetching start -->
+		<query id="refitemlink_details_data_fetch" query_name="refitemlink_details_data_fetch"
+			description="Reference item link details data fetching">
+          <![CDATA[select a.from_refitem, b.to_refitem, a.from_refitemcat_id, b.to_refitemcat_id, a.from_refitem_id, row_number() over() from 
+					(select ri.refitems_name as from_refitem, ri.refitems_category_id as from_refitemcat_id, ril.from_refitems_category_id as from_refitem_id from reference_items_link ril
+					inner join reference_items ri on ri.id = ril.from_refitems_category_id
+					group by ri.refitems_name, ri.refitems_category_id, ril.from_refitems_category_id)a
+					inner join 
+					(select array_agg(ri.refitems_name) as to_refitem, ri.refitems_category_id as to_refitemcat_id, ril.from_refitems_category_id as from_refitem_id from reference_items_link ril
+					inner join reference_items ri on ri.id = ril.to_refitems_category_id
+					group by ril.from_refitems_category_id, ri.refitems_category_id)b
+					on a.from_refitem_id = b.from_refitem_id]]>
+		</query>
+		<!-- Reference item link details data fetching end -->
+		
+		<!-- Particular Reference item link details data fetching start -->
+		<query id="particular_refitemlink__details_data" query_name="particular_refitemlink__details_data"
+			description="Particular Reference item link details data fetching">
+          <![CDATA[select array_agg(to_refitems_category_id) as to_ref_id from reference_items_link where from_refitems_category_id =%s]]>
+		</query>
+		<!-- Particular Reference item link details data fetching end -->
+		
+		<!-- Permission details data fetching start -->
+		<query id="permission_details_data_fetch" query_name="permission_details_data_fetch"
+			description="Permission details data fetching">
+          <![CDATA[select *, row_number() over() from (select id, name as permission_name, code as permission_code, module_name, html_name from hcms_permission 
+					where is_active = True order by id asc)a]]>
+		</query>
+		<!-- Permission details data fetching end -->
+		
+		<!-- Particular Permission details data fetching start -->
+		<query id="particular_permission_details_data" query_name="particular_permission_details_data"
+			description="Particular Permission details data fetching">
+          <![CDATA[select id as permission_id, name as permission_name, code as permission_code, description as permission_description, module_name, html_name from hcms_permission 
+					where is_active = True and id=%s]]>
+		</query>
+		<!-- Particular Permission details data fetching end -->
+		
+		<!-- User details data fetching start -->
+		<query id="usr_details_data_fetch" query_name="usr_details_data_fetch"
+			description="User details data fetching">
+          <![CDATA[select *, row_number() over() from (select au.id, au.username, au.first_name, au.last_name, case when au.is_active then 'Active' else 'Inactive' end as is_active, hr.name as role_name, array_agg(ag.name) as group_name from auth_user au
+					left join auth_user_groups aug on aug.user_id = au.id
+					left join auth_group ag on ag.id = aug.group_id
+					left join hcms_role hr on hr.id = au.role_id
+					where hr.is_active=True
+					group by au.id, hr.name order by id asc)a]]>
+		</query>
+		<!-- User details data fetching end -->
+		
+		<!-- Role details data fetching for user registration start -->
+		<query id="particular_role_record_data" query_name="particular_role_record_data"
+			description="Role details data fetching for user registration">
+          <![CDATA[select id, name from hcms_role  where org_id = %s and org_unit_id = %s and is_active = True order by id]]>
+		</query>
+		<!-- Role details data fetching for user registration end -->
+		
+		<!-- Particular User details data fetching start -->
+		<query id="particular_usr_details_data" query_name="particular_usr_details_data"
+			description="Particular User details data fetching">
+          <![CDATA[select au.id as usr_id, au.username as usr_name, au.first_name, au.last_name, au.email as usr_email, au.role_id,au.group_id as grp_id, hr.org_id, hr.org_unit_id, array_agg(aug.group_id) as group_id, au.is_active as usr_active from auth_user au
+					left join auth_user_groups aug on aug.user_id = au.id
+					inner join hcms_role hr on hr.id = au.role_id
+					where au.id = %s group by au.id, hr.org_id, hr.org_unit_id]]>
+		</query>
+		<!-- Particular User details data fetching end -->
+		
+		<!-- User permissions details data fetching start -->
+		<query id="usr_permissions_data" query_name="usr_permissions_data"
+			description="User permissions details data fetching">
+          <![CDATA[select id, name from hcms_permission where name not in ('Hide', 'Show') and is_active = True order by id asc]]>
+		</query>
+		<!-- User permissions details data fetching end -->
+		
+		<!-- User roles details data fetching start -->
+		<query id="usr_roles_data" query_name="usr_roles_data"
+			description="User roles details data fetching">
+          <![CDATA[select id, role_title as name from hcms_ti_role_details
+					where id in (select unnest(role_ids) from hcms_role where id = %s and is_active)
+					and is_active and role_org_id = %s and %s = any(role_org_unit)]]>
+		</query>
+		<!-- User roles details data fetching end -->
+		
+		<!-- User access details data fetching start -->
+		<query id="usr_access_data" query_name="usr_access_data"
+			description="User access details data fetching">
+          <![CDATA[select rpr.group_id  as role_id, hr.name as role_name, rpr.permission_id, rpr.access_datas as access_datas from hcms_role hr
+					inner join role_permission_rel rpr on rpr.role_id = hr.id
+					where rpr.role_id=%s and rpr.group_id in %s]]>
+		</query>
+		<!-- User access details data fetching end -->
+		
+		<!-- Sysparam details data fetching start -->
+		<query id="sysparam_details_data_fetch" query_name="sysparam_details_data_fetch"
+			description="Sysparam details data fetching">
+          <![CDATA[select row_number() over(), * from (select id, module_name, sys_param_name, sys_param_var_name, sys_param_val, sys_param_type from system_param_info 
+          			where is_active=True order by id asc)a]]>
+		</query>
+		<!-- Sysparam details data fetching end -->
+		
+		<!-- Particular Sysparam details data fetching start -->
+		<query id="particular_sysparam_details_data" query_name="particular_sysparam_details_data"
+			description="Particular Sysparam details data fetching">
+          <![CDATA[select id as sysparam_id, module_name, sys_param_type as sys_param_var_type, sys_param_name as sysparam_name, sys_param_var_name, sys_param_val from system_param_info 
+					where is_active=True and id=%s ]]>
+		</query>
+		<!-- Particular Sysparam details data fetching end -->
+		
+		<!-- Country details data fetching start -->
+		<query id="country_details_data_fetch" query_name="country_details_data_fetch"
+			description="Country details data fetching">
+          <![CDATA[select id, country_name ,is_active as country_active from country_info order by country_name asc]]>
+		</query>
+		<!-- Country details active data fetching end -->
+		<query id="country_details_data_fetch_active" query_name="country_details_data_fetch_active"
+			description="Country details data fetching">
+          <![CDATA[select id, country_name ,is_active as country_active from country_info where is_active order by country_name asc]]>
+		</query>
+		<!-- Country details active data fetching end --> 
+		<!-- Particular Country details data fetching start -->
+		<query id="particular_country_details_data" query_name="particular_country_details_data"
+			description="Particular Country details data fetching">
+          <![CDATA[select id as country_id, country_name, is_active as country_active from country_info where id = %s order by country_name]]>
+		</query>
+		<!-- Particular Country details data fetching end -->
+		
+		<!-- State details data fetching start -->
+		<query id="state_details_data_fetch" query_name="state_details_data_fetch"
+			description="State details data fetching">
+          <![CDATA[select id, state_name ,is_active as state_active from state_info order by state_name asc]]>
+		</query>
+		<!-- State details data fetching end -->
+		
+		<!-- Particular State details data fetching start -->
+		<query id="particular_state_details_data" query_name="particular_state_details_data"
+			description="Particular State details data fetching">
+          <![CDATA[select id as state_id, state_name, is_active as state_active, country_id as country_data from state_info where id = %s ]]>
+		</query>
+		<!-- Particular State details data fetching end -->
+		
+		<!-- 22-OCt-2018 || SMI || Fetching Roles list from Talent Inventory Start -->
+		<query id="ti_roles_list_fetch" query_name="ti_roles_list_fetch"
+			description="Fetching Roles list from Talent Inventory">
+          <![CDATA[select id, role_title from hcms_ti_role_details where role_org_id = %s and %s = any(role_org_unit) order by id]]>
+		</query>
+		<!-- 22-OCt-2018 || SMI || Fetching Roles list from Talent Inventory End -->
+		
+		<!-- 22-OCt-2018 || SMI || Fetching Already Selected Roles list from Talent Inventory Start -->
+		<query id="ti_selected_roles_fetch" query_name="ti_selected_roles_fetch"   
+			description="Fetching Already Selected Roles list from Talent Inventory">
+          <![CDATA[select unnest(role_ids) as id from hcms_role where is_active and org_id = %s and org_unit_id = %s]]>
+		</query>
+		<!-- 22-OCt-2018 || SMI || Fetching Already Selected Roles list from Talent Inventory End -->
+		
+		<!-- 23-OCt-2018 || SMI || Fetching Already Selected Roles excluding selected group's role from Talent Inventory Start -->
+		<query id="ti_sel_ex_roles_fetch" query_name="ti_sel_ex_roles_fetch"
+			description="Fetching Already Selected Roles excluding selected group's role from Talent Inventory">
+          <![CDATA[select unnest(role_ids) as id from hcms_role where is_active and id != %s]]>
+		</query>
+		<!-- 23-OCt-2018 || SMI || Fetching Already Selected Roles excluding selected group's role from Talent Inventory End -->
+		
+		<!-- 23-OCt-2018 || SMI || Fetching User Role Groups when Org. Unit is selected Start -->
+		<query id="usr_role_grps_fetch" query_name="usr_role_grps_fetch"
+			description="Fetching User Role Groups when Org. Unit is selected">
+          <![CDATA[select id, name from hcms_role where org_id = %s and org_unit_id = %s and is_active order by name]]>
+		</query>
+		<!-- 23-OCt-2018 || SMI || Fetching User Role Groups when Org. Unit is selected End -->
+		
+	</queries>
+</data>

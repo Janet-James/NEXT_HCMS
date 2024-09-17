@@ -1,0 +1,375 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- date time picker css -->
+<link
+	href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- file input css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- vertical slider css -->
+<link href="{% static '/ui/plugins/vertical_slider/css/vslider.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+    rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/common-hcms.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<style>
+
+
+#logpayrollswitcher {position: fixed;right: -10px;top: 70px;display: block;/* background: #fff; */width: 60px;padding: 0px;/* box-shadow: 0 1px 5px rgba(0,0,0,0.1); */transition: 0.4s;z-index: 99999;}
+#logpayrollswitcher.open {    right: 0px;    border: 1px solid #fadeaf;    border-right: none;}
+#logpayrollswitcher .logswitcher-toggle {position: absolute;left: -40px;display: block;width: 40px;height: 40px;font-size: 21px;line-height: 40px;background: #fff;color: #222;text-align: center;cursor: pointer;border: 1px solid #fadeaf;top: -1px;}
+/* COLORS */
+#logpayrollswitcher {position: fixed;right: -300px;bottom: 70px;display: block; background: #fff; width:320px;padding: 0px;/* box-shadow: 0 1px 5px rgba(0,0,0,0.1); */transition: 0.4s;z-index: 10050; top:30px;}
+.profile_log { padding: 10px 20px;}
+.profile_log h1 span { color: #fe8550; font-size:16px; }
+.profile_log_item {margin-bottom: 10px;border-bottom: 1px solid #efefef; padding-bottom:10px;    height: 84vh;    overflow: auto;}
+.profile_log_item ul { list-style: none; padding: 0; margin: 0;}
+.profile_log_item h1 {font-size: 14px !important;color: #50c8f6;margin-bottom: 5px !important;}
+ul.heading_icon li { color:#4cccf0; list-style: none; float: left; margin-left: 10px;}
+ul.heading_icon .filtericon {color:#fdcbb3 !important;}
+.profile_log_item ul li p {     margin-top: 0;    margin-bottom: 5px;}
+.logicon {background: -webkit-linear-gradient(#f6d166, #fda284);    background-clip: border-box;-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.heading_icon {position: relative; float:right;margin-top: -18%; }
+
+
+.profile_log_item .firststyle {
+    width: 130px;
+
+}
+
+.profile_log_item table tr{     margin-bottom: 10px;    display: block;}
+
+.profile_log_item .secondstyle{}
+
+.heading_icon label:after  {
+border: none !important;
+position: absolute !important;
+top: -40px;
+right: 3.5% !important;
+top: 10px;
+}
+.heading_icon label:after  {
+	
+	
+content: "\f002";
+font-family: FontAwesome;
+font-style: normal;
+font-weight: normal;
+text-decoration: inherit;
+position: absolute;
+font-size: 16px;
+color: #d277fe;
+cursor: pointer;
+right: 0;
+z-index: 1;
+}
+
+.heading_icon input {
+    width: 0px !important;
+    transition: 0.5s;
+    border-bottom: none !important;
+}
+
+.heading_icon input:focus {
+    width: 290px !important;
+    transition: 0.5s;
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid #efefef;
+    padding-left: 20px;
+    border-bottom: 1px solid #efefef !important;
+}
+
+
+div.dataTables_wrapper div.dataTables_filter label {
+   /* right: 0px !important;*/
+    top: -41px;
+}
+</style>
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HREmployeePayroll" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container emp_formwizard" id="maincontent ">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+			<h1>Payroll</h1>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered" id="form_wizard_1">
+							<div class="portlet-title">
+							<div action="#" id="formwizard"
+								method="POST">
+								<div class="form-wizard ">
+									<div id="tab_formwizard" class="form-body">
+										<ul class="nav nav-pills payRollTabs nav-justified steps">
+								<li class="dtBox" ><a class="step" href="#pills-tab1" id="tab_contribution" data='pills-tab1' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-employee-portal"></i></span><span class="desc"> <i
+											class="fa fa-check"></i> Contribution Register
+									</span></a></li>
+								<li class="dtBox1"><a class="step" href="#pills-tab2" id="tab_payment_advice" data='pills-tab2' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-personal-information"></i> </span> <span class="desc"> <i
+											class="nf nf-personal-information"></i> Payment Advice
+									</span></a></li>
+								
+								
+								<li class=''><a class="step" href="#pills-tab3" id="salary_rule_tab" data='pills-tab3' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-university"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Salary Rule
+									</span> </a></li>
+								<li class='dtBox3'><a class="step" href="#pills-tab4" id="tab_salary_structure" data='pills-tab4' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-experience"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Salary Structure
+									</span> </a></li>
+								<li class=''><a class="step" href="#pills-tab5" id="tab_salary_contract" data='pills-tab5' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-certificate"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Salary Contract
+									</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab6" id="tab_payslip" data='pills-tab6' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-salary-payslip"></i> </span> <span class="desc"> <i
+											class="fa fa-skills"></i> Payslip
+									</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab7" id="tab_tds" data='pills-tab7' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-salary-payslip"></i> </span> <span class="desc"> <i
+											class="fa fa-skills"></i> TDS
+									</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab8" id="tab_report" data='pills-tab8' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-salary-payslip"></i> </span> <span class="desc"> <i
+											class="fa fa-skills"></i> Payslip Report
+									</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab9" id="tab_bankformat" data='pills-tab9' data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-salary-payslip"></i> </span> <span class="desc"> <i
+											class="fa fa-skills"></i> Bank Format
+									</span> </a></li>
+									
+								<!-- <li class=''><a class="step" href="#pills-tab7" id="tab_asset" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-assess-behavioral-completencies"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Asset & Allocation
+									</span> </a></li>
+									
+									<li class='dtBox2'><a class="step" href="#pills-tab8" id="tab_hr" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-hr-administration"></i> </span> <span class="desc"> <i
+											class="nf nf-settings"></i> Employee Settings
+									</span> </a></li> -->
+									
+							</ul>
+									</div>
+								</div>
+							
+					
+					<div class="row">
+					<div class="tab-content">
+						<!-- tab1 content start -->
+						<div class="clearfix" style="padding: 10px;"></div>
+						<div class="tab-pane payroll" id="pills-tab1">
+							<div class="row">
+								{% include "./contribution_register.html" %}
+							</div>
+						</div>
+						<!-- tab1 content end -->
+						<!-- tab2 content start -->
+						<div class="tab-pane payroll" id="pills-tab2">
+							<div class="row">
+								{% include "./payment_advices.html" %}
+							</div>
+						</div>
+						<!-- tab2 content end -->
+						<!-- tab3 content start -->
+						<div class="tab-pane payroll" id="pills-tab3">
+							<div class="row">
+								{% include "./salary_rule.html" %}
+							</div>
+						</div>
+						<!-- tab3 content end -->
+						<!-- tab4 content start -->
+						<div class="tab-pane payroll" id="pills-tab4">
+							<div class="row">
+								{% include "./salary_structure.html" %}
+							</div>
+						</div>
+						<!-- tab4 content end -->
+						<!-- tab5 content start -->
+						<div class="tab-pane payroll" id="pills-tab5">
+							<div class="row">
+								{% include "./salary_contract.html" %}
+							</div>
+						</div>
+						<!-- tab5 content end -->
+						<!-- tab6 content start -->
+						<div class="tab-pane payroll" id="pills-tab6">
+							<div class="row">
+								{% include "./payslip.html" %}
+							</div>
+						</div>
+						<!-- tab6 content end -->
+						<!-- tab7 content start -->
+						<div class="tab-pane payroll" id="pills-tab7">
+							<div class="row">
+								{% include "./tds.html" %}
+							</div>
+						</div>
+						<!-- tab7 content end -->
+						<!-- tab8 content start -->
+						<div class="tab-pane payroll" id="pills-tab8">
+							<div class="row">
+								{% include "./report.html" %}
+							</div>
+						</div>
+						<!-- tab8 content end -->
+						<!-- tab9 content start -->
+						<div class="tab-pane payroll" id="pills-tab9">
+							<div class="row">
+								{% include "./bank_format.html" %}
+							</div>
+						</div>
+						<!-- tab9 content end -->
+
+						
+					<div class="clearfix"></div>
+					
+						<div class="col-md-12">
+							<ul class="pager wizard top_for_pre_button">
+									<li class="previous first" style="display: none;"><a href="#">First</a></li>
+									<li class="previous"><a class="btn blue button-previous pre_button" id="employee_pre" title='Previous' href="#" style="display: block;"><i class="nf nf-double-arrow-right"></i></a></li>
+									<li class="next last" style="display: none;"><a href="#">Last</a></li>
+									<li class="next"><a class="btn green button-next" href="#" id="employee_last" title='Next'><i class="nf nf-double-arrow-left"></i></a></li>
+								</ul>
+   						 </div>
+   						 
+					</div>
+					</div>
+							</div>
+						</div>
+						{% include 'logger_payroll.html' %}
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<!-- body content end -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- datetime js -->
+<script
+	src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}"
+	type="text/javascript"></script>
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/form_wizard_payroll.js' %}"
+	type="text/javascript"></script>
+<!-- datatable js -->
+
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+	
+<!-- vslider js  -->
+<script
+	src="{% static  '/ui/plugins/vertical_slider/js/jquery.vslider.js' %}"
+	type="text/javascript"></script>
+<!-- dev js -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/contribution_register.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/payment_advice.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/salary_rule.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/salary_structure.js' %}"
+	type="text/javascript"></script>	
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/salary_contract.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/hrms_foundation/js/payroll/numberToWords.min.js' %}"></script>
+<script src="{% static '/dev/hrms_foundation/js/payroll/jspdf.min.js' %}"></script>
+<script src="{% static '/dev/hrms_foundation/js/payroll/jspdf_debug.js' %}"></script> 
+<script src="{% static '/dev/hrms_foundation/js/payroll/auto_table.js' %}"></script>	
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/payslip.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/tds.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/report.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/bank_format.js' %}"
+	type="text/javascript"></script>	
+	
+	
+{% endblock %}
+<!-- custom script end -->

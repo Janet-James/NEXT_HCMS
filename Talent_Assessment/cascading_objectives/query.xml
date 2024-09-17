@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Cascading">
+		<!-- Reference Items data fetching start -->
+		<query id="refitems_data_objtyp" query_name="refitems_data_objtyp"
+			description="Reference Items data Objective Type">
+          <![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id 
+           where refitem_category_code = 'BSCRD' and rfitm.is_active=True and rfctg.is_active=True order by rfitm.refitems_name]]>
+		</query>
+		
+		<query id="objective_drop_down1" query_name="objective_drop_down1"
+			description="data Objective Type">
+          <![CDATA[select id,strategic_objective_description from HCMS_TA_Strategic_Objectives where is_active=True]]>
+		</query>
+		<query id="objective_drop_down2" query_name="objective_drop_down2"
+			description="data Objective Type">
+          <![CDATA[select id,strategic_objective_driver from HCMS_TA_Strategic_Objectives where is_active=True]]>
+		</query>
+		
+		<query id="refitems_data_cury" query_name="refitems_data_cury"
+			description="data Currency Type">
+          <![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  where 
+          refitem_category_code = 'CUREN' and rfitm.is_active=True and rfctg.is_active=True order by rfitm.refitems_name]]>
+		</query>
+		
+		<query id="refitems_data_assign" query_name="refitems_data_assign"
+			description="data Assign Type">
+          <![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id
+            where refitem_category_code = 'ASGIN' and rfitm.is_active=True and rfctg.is_active=True order by rfitm.refitems_name]]>
+		</query>
+		
+		<query id="refitems_data_tark" query_name="refitems_data_tark"
+			description="data Track Type">
+          <![CDATA[ select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  
+          where refitem_category_code = 'KPITY' and rfitm.is_active=True and  rfctg.is_active=True order by rfitm.refitems_name]]>
+		</query>
+		<query id="refitems_data_track" query_name="refitems_data_track"
+			description="data Track Type">
+          <![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id 
+           where refitem_category_code = 'TRATY' and rfitm.is_active=True and rfctg.is_active=True order by rfitm.refitems_name]]>
+		</query>
+		<query id="custom_rating" query_name="custom_rating"
+			description="custom_rating">
+          <![CDATA[select id,custom_rating_scheme_name from HCMS_TI_Custom_Rating_Scheme  where is_active=True]]>
+		</query>
+		<!-- Reference Items data fetching end -->
+		
+		
+			<query id="linked_obj_update1" query_name="linked_obj_update1"
+			description="Linked Objective Update">
+          <![CDATA[select strategic_objective_child_id from HCMS_TA_Linked_Objectives  where is_active=True and strategic_objective_parent_id = %s]]>
+		</query>
+		
+		<query id="linked_obj_update2" query_name="linked_obj_update2"
+			description="Linked Objective Update">
+          <![CDATA[select id,strategic_objective_description from HCMS_TA_Strategic_Objectives where  is_active=True and id not in (%s)]]>
+		</query>
+		<query id="linked_obj_update_id" query_name="linked_obj_update_id"
+			description="linked_obj_update_id">
+          <![CDATA[update HCMS_TA_Linked_Objectives set is_active=False where strategic_objective_parent_id =%s]]>
+		</query>
+		<query id="linked_obj_delete" query_name="linked_obj_delete"
+			description="linked_obj_delete">
+          <![CDATA[update HCMS_TA_Linked_Objectives set is_active=False where strategic_objective_parent_id =%s]]>
+		</query>
+		<query id="strategic_obj_data" query_name="strategic_obj_data"
+			description="strategic_obj_data">
+          <![CDATA[select id,strategic_objective_driver,strategic_objective_description,to_char(strategic_objective_start_date, 'DD-MM-YYYY') AS start_date,
+        to_char(strategic_objective_end_date, 'DD-MM-YYYY') AS end_date,strategic_objective_expected_outcome from  hcms_ta_strategic_objectives where is_active=True]]>
+		</query>
+		<query id="objective_delete" query_name="objective_delete"
+			description="objective_delete">
+          <![CDATA[select id from hcms_ta_kpi where is_active=True and hcms_tm_strategic_objectives_id=%s]]>
+		</query>
+		<query id="cascading_date" query_name="cascading_date"
+			description="cascading_date">
+          <![CDATA[select id,strategic_objective_description from HCMS_TA_Strategic_Objectives where is_active=True]]>
+		</query>
+		
+		<query id="cascading_date_date" query_name="cascading_date_date"
+			description="cascading_date_date">
+          <![CDATA[select DISTINCT to_char(strategic_objective_start_date ,'Mon YYYY') as start_date,to_char(strategic_objective_start_date ,'MM-YYYY')as eff_start_date from HCMS_TA_Strategic_Objectives where is_active=True]]>
+		</query>
+		
+		<query id="cascading_obj_select" query_name="cascading_obj_select"
+			description="cascading_obj_select">
+          <![CDATA[select id,strategic_objective_description,strategic_objective_driver_exist_id from 
+ HCMS_TA_Strategic_Objectives where is_active=True and to_char(strategic_objective_start_date ,'MM-YYYY') =%s  order by id]]>
+		</query>
+		
+		<query id="ta_cascading" query_name="ta_cascading"
+			description="ta_cascading">
+          <![CDATA[select id,strategic_objective_description,strategic_objective_driver_exist_id from 
+ HCMS_TA_Strategic_Objectives where is_active=True and to_char(strategic_objective_start_date ,'MM-YYYY') = (SELECT to_char(CURRENT_DATE,'MM-YYYY'))  order by id]]>
+		</query>
+		<query id="org_unit_role" query_name="org_unit_role"
+			description="org_unit_role">
+          <![CDATA[select re.id,re.role_title from hcms_ti_role_details re where re.role_org_unit_type_id = %s and is_active=True]]>
+		</query>
+		<query id="obj_row_click_objective" query_name="obj_row_click_objective"
+			description="obj_row_click_objective">
+          <![CDATA[ select t.id,t.strategic_objective_driver_exist_id,t.strategic_bsc_perspective_type_refitem_id,t.strategic_objective_budget_currency_type_ref_id,t.strategic_objective_driver,t.strategic_objective_description,
+t.strategic_objective_action_to_achieve,to_char(t.strategic_objective_start_date,'DD-MM-YYYY') as start_date,to_char(t.strategic_objective_end_date,'DD-MM-YYYY') as end_date,
+refi1.refitems_name as pes,t.strategic_objective_expected_outcome,t.strategic_objective_budget,refi3.refitems_name as currency from HCMS_TA_Strategic_Objectives t 
+  left join reference_items refi1 on refi1.id=t.strategic_bsc_perspective_type_refitem_id left join reference_items refi3 on refi3.id=t.strategic_objective_budget_currency_type_ref_id where 
+  t.is_active=True and t.id = %s]]>
+		</query>
+		<query id="obj_row_click_kpi" query_name="obj_row_click_kpi"
+			description="obj_row_click_kpi">
+          <![CDATA[select k.id,k.kpi_description,k.kpi_target_type as target_type,k.kpi_custom_rating_scheme_id,k.kpi_target_value,refi2.refitems_name as scheme,k.kpi_tracking_type_id from HCMS_TA_KPI k 
+  left join reference_items refi2 on refi2.id=k.kpi_custom_rating_scheme_id  where k.hcms_tm_strategic_objectives_id =%s and k.is_active=True and refi2.is_active=True]]>
+		</query>
+		<query id="obj_row_click_rel" query_name="obj_row_click_rel"
+			description="obj_row_click_rel">
+          <![CDATA[select r.id,r.strategic_objective_orgunit_id as org_id,r.strategic_objective_role_id_id as role_id,re.role_title as role_data,runit.orgunit_name as org_data from 
+hcms_ta_objective_orgunit_rel r left join organization_unit_info runit on runit.id=r.strategic_objective_orgunit_id left join hcms_ti_role_details re on 
+re.id=r.strategic_objective_role_id_id where r.strategic_objective_id = %s and r.is_active= True and runit.is_active=True and re.is_active=True]]>
+		</query>
+		<query id="str_obj_update_string" query_name="str_obj_update_string"
+			description="str_obj_update_string">
+          <![CDATA[select strategic_objective_description from hcms_ta_strategic_objectives where strategic_objective_description ilike %s
+        and is_active=True strategic_objective_start_date::date >= %s and strategic_objective_end_date <= %s and  not id = %s]]>
+		</query>
+		<query id="str_obj_update_obj_id" query_name="str_obj_update_obj_id"
+			description="str_obj_update_obj_id">
+          <![CDATA[select  strategic_objective_driver from hcms_ta_strategic_objectives where id=%s and is_active=True]]>
+		</query>
+		<query id="obj_update_assign_remove" query_name="obj_update_assign_remove"
+			description="obj_update_assign_remove">
+          <![CDATA[select strategic_objective_orgunit_id from hcms_ta_objective_orgunit_rel where strategic_objective_id = %s and is_active=True]]>
+		</query>
+		<query id="obj_update_assign_update" query_name="obj_update_assign_update"
+			description="obj_update_assign_update">
+          <![CDATA[update hcms_ta_objective_orgunit_rel set is_active=False where strategic_objective_orgunit_id=%s and strategic_objective_id=%s]]>
+		</query>
+		<query id="obj_update_assign_exist" query_name="obj_update_assign_exist"
+			description="obj_update_assign_exist">
+          <![CDATA[select id from  hcms_ta_objective_orgunit_rel where strategic_objective_orgunit_id=%s and strategic_objective_id=%s and is_active=True]]>
+		</query>
+		
+		<query id="obj_update_assign_exist_old" query_name="obj_update_assign_exist_old"
+			description="obj_update_assign_exist_old">
+          <![CDATA[update hcms_ta_objective_orgunit_rel set strategic_objective_orgunit_id=%s,strategic_objective_id=%s,strategic_objective_role_id_id=%s,is_active=True where id =%s]]>
+		</query>
+			<query id="obj_update_assign_exist_new" query_name="obj_update_assign_exist_new"
+			description="obj_update_assign_exist_new">
+          <![CDATA[insert into hcms_ta_objective_orgunit_rel (strategic_objective_orgunit_id,strategic_objective_id,strategic_objective_role_id_id,is_active) values(%s,%s,%s,%s)]]>
+		</query>
+		<query id="obj_update_assign_delete" query_name="obj_update_assign_delete"
+			description="obj_update_assign_delete">
+          <![CDATA[update hcms_ta_objective_orgunit_rel set is_active=False where strategic_objective_id=%s]]>
+		</query>
+		<query id="obj_update_str_except" query_name="obj_update_str_except"
+			description="obj_update_str_except">
+          <![CDATA[select strategic_objective_description from hcms_ta_strategic_objectives where strategic_objective_description ilike %s
+        and is_active=True and strategic_objective_start_date::date >= %s and strategic_objective_end_date <= %s]]>
+		</query>
+		<query id="obj_update_str_except_str" query_name="obj_update_str_except_str"
+			description="obj_update_str_except_str">
+          <![CDATA[select  strategic_objective_driver from hcms_ta_strategic_objectives where id=%s and is_active=True]]>
+		</query>
+		<query id="obj_kpi_add" query_name="obj_kpi_add"
+			description="obj_kpi_add">
+          <![CDATA[insert into hcms_ta_objective_orgunit_rel (strategic_objective_orgunit_id,strategic_objective_id,strategic_objective_role_id_id,is_active) values(%s,%s,%s,%s)]]>
+		</query>
+		<query id="obj_update_str_comparition" query_name="obj_update_str_comparition"
+			description="obj_update_str_comparition">
+          <![CDATA[select strategic_objective_description,strategic_objective_start_date,strategic_objective_end_date from hcms_ta_strategic_objectives
+where strategic_objective_description ilike %s and is_active=True and ( %s BETWEEN strategic_objective_start_date::date and strategic_objective_end_date::date  or
+%s   BETWEEN strategic_objective_start_date::date and strategic_objective_end_date::date)]]>
+		</query>
+		<query id="obj_update_str_comparition_except" query_name="obj_update_str_comparition_except"
+			description="obj_update_str_comparition_except">
+          <![CDATA[select strategic_objective_description,strategic_objective_start_date,strategic_objective_end_date from hcms_ta_strategic_objectives
+where strategic_objective_description ilike %s and not id= %s 
+ and is_active=True and ( %s BETWEEN strategic_objective_start_date::date and strategic_objective_end_date::date  or
+%s   BETWEEN strategic_objective_start_date::date and strategic_objective_end_date::date) ]]>
+		</query>
+		<query id="objective_delete_data" query_name="objective_delete_data"
+			description="Objective Delete">
+          <![CDATA[select to_char(strategic_objective_end_date,'YYYY-MM-DD')as end_date from HCMS_TA_Strategic_Objectives where id =%s]]>
+		</query>
+		
+		<query id="select_exits_id" query_name="select_exits_id"
+			description="Select Exist Id">
+          <![CDATA[ select id,strategic_objective_driver_exist_id from HCMS_TA_Strategic_Objectives where is_active=True and to_char(strategic_objective_start_date ,'MM-YYYY') = (SELECT to_char(CURRENT_DATE,'MM-YYYY')) 
+ and  strategic_objective_driver_exist_id is not null order by id]]>
+		</query>
+		<query id="select_exits_id_date" query_name="select_exits_id_date"
+			description="Select Exist Id date">
+          <![CDATA[select id,strategic_objective_driver_exist_id from HCMS_TA_Strategic_Objectives where is_active=True and to_char(strategic_objective_start_date ,'MM-YYYY') = %s 
+ and  strategic_objective_driver_exist_id is not null order by id]]>
+		</query>
+	</queries>
+</data>

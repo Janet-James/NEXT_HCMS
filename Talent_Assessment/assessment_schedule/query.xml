@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Schedule">
+		<!-- Reference Items data fetching start -->
+		<query id="employee_type_fetch" query_name="employee_type_fetch" description="Reference Items data Employee Type">
+          <![CDATA[select ri.id,ri.refitems_name from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where ric.refitem_category_code = 'EMPTY' and ri.is_active=true and ric.is_active=true order by ri.refitems_name]]>
+		</query>
+		<query id="assessment_category_fetch" query_name="assessment_category_fetch"
+			description="Reference Items data Assessment Category">
+          <![CDATA[select ri.id,ri.refitems_name from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where ric.refitem_category_code = 'ASCAT' and ri.is_active=true and ric.is_active=true order by ri.refitems_name]]>
+		</query>
+		<query id="employee_detail_fetch" query_name="employee_detail_fetch"
+			description="Employee Detail Fetch">
+          <![CDATA[select id,name from employee_info where type_id_id=%s and is_active=True]]>
+		</query>
+		<query id="assessor_type_fetch" query_name="assessor_type_fetch"
+			description="Assessor Type Fetch">
+          <![CDATA[select ri.id,ri.refitems_name from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where (ric.refitem_category_code = 'ASMTY' or ric.refitem_category_code = 'EXAST')  and ri.is_active=true and ric.is_active=true order by ri.refitems_code]]>
+		</query>
+		<!-- <query id="assessment_schedule_update" query_name="assessment_schedule_update"
+			description="Assessment Schedule Update">
+          <![CDATA[update HCMS_TA_Assessment_Schedule set assessment_schedule_name=%s,assessment_schedule_employee_type_id=%s,assessment_schedule_assessment_category_refitem_id=%s,
+        assessment_schedule_cycle_starts=%s,assessment_schedule_cycle_ends=%s,assessment_schedule_objective_setting_day_count=%s,assessment_objective_setting_date=%s,is_active=%s,modified_by_id=%s, modified_date=now() where id=%s]]>
+		</query> -->
+		<query id="assessment_schedule_update" query_name="assessment_schedule_update"
+			description="Assessment Schedule Update">
+          <![CDATA[update HCMS_TA_Assessment_Schedule set assessment_schedule_name=%s,assessment_schedule_assessment_category_refitem_id=%s,
+        assessment_schedule_cycle_starts=%s,assessment_schedule_cycle_ends=%s,assessment_schedule_objective_setting_day_count=%s,assessment_objective_setting_date=%s,is_active=%s,modified_by_id=%s, modified_date=now() where id=%s]]>
+		</query>
+		<query id="assessment_schedule_details_delete" query_name="assessment_schedule_details_delete"
+			description="Schedule Detail Delete">
+          <![CDATA[DELETE FROM HCMS_TA_Assessment_Schedule_Details WHERE assessment_schedule_id=%s]]>
+		</query>
+		<query id="assessment_schedule_detail_insert" query_name="assessment_schedule_detail_insert"
+			description="Schedule Detail Insert">
+          <![CDATA[insert into HCMS_TA_Assessment_Schedule_Details (assessment_schedule_id,assessment_schedule_employee_id,assessment_assessor_type_refitem_id,
+        assessment_schedule_assess_type_day_count,assessment_schedule_start_date,is_active,created_by_id, created_date) values (%s,%s,%s,%s,%s,%s,%s,now())]]>
+		</query>
+<!-- 		<query id="assessment_schedule_insert" query_name="assessment_schedule_insert"
+			description="Schedule Detail Insert">
+          <![CDATA[insert into HCMS_TA_Assessment_Schedule (assessment_schedule_name,assessment_schedule_employee_type_id,assessment_schedule_assessment_category_refitem_id,
+        assessment_schedule_cycle_starts,assessment_schedule_cycle_ends,assessment_schedule_objective_setting_day_count,assessment_objective_setting_date,is_active,created_by_id, created_date) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query> -->
+		<query id="assessment_schedule_insert" query_name="assessment_schedule_insert"
+			description="Schedule Detail Insert">
+          <![CDATA[insert into HCMS_TA_Assessment_Schedule (assessment_schedule_name,assessment_schedule_assessment_category_refitem_id,
+        assessment_schedule_cycle_starts,assessment_schedule_cycle_ends,assessment_schedule_objective_setting_day_count,assessment_objective_setting_date,is_active,created_by_id, created_date) values (%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+<!-- 		<query id="assessment_schedule_detail_fetch" query_name="assessment_schedule_detail_fetch"
+			description="Schedule Detail Fetch">
+          <![CDATA[select asd.id as schedule_id,asd.assessment_schedule_name as schedule_name,ri.refitems_name as employee_type,
+ric.refitems_name as assessment_category,to_char(assessment_schedule_cycle_starts,'DD-MM-YYYY') as cycle_starts from
+HCMS_TA_Assessment_Schedule asd inner join reference_items ri on asd.assessment_schedule_employee_type_id=ri.id
+inner join reference_items ric on asd.assessment_schedule_assessment_category_refitem_id=ric.id where asd.is_active =TRUE and ri.is_active=true and ric.is_active=true order by asd.id desc]]>
+		</query> -->
+		<query id="assessment_schedule_detail_fetch" query_name="assessment_schedule_detail_fetch"
+			description="Schedule Detail Fetch">
+          <![CDATA[select asd.id as schedule_id,asd.assessment_schedule_name as schedule_name,ric.refitems_name as assessment_category,to_char(assessment_schedule_cycle_starts,'DD-MM-YYYY') as cycle_starts from
+HCMS_TA_Assessment_Schedule asd inner join reference_items ric on asd.assessment_schedule_assessment_category_refitem_id=ric.id where asd.is_active =TRUE and ric.is_active=true order by asd.id desc]]>
+		</query>
+		<!-- <query id="assessment_schedule_fetch_by_id" query_name="assessment_schedule_fetch_by_id"
+			description="Schedule Detail Fetch By Id">
+          <![CDATA[select assessment_schedule_name as schedule_name,assessment_schedule_employee_type_id as employee_type,
+assessment_schedule_assessment_category_refitem_id as assessment_category,assessment_schedule_objective_setting_day_count as objective_day_count,to_char(assessment_schedule_cycle_starts, 'DD-MM-YYYY') as cycle_starts from
+HCMS_TA_Assessment_Schedule where id=%s and is_active =TRUE]]>
+		</query> -->
+		<query id="assessment_schedule_fetch_by_id" query_name="assessment_schedule_fetch_by_id"
+			description="Schedule Detail Fetch By Id">
+          <![CDATA[select assessment_schedule_name as schedule_name,assessment_schedule_assessment_category_refitem_id as assessment_category,assessment_schedule_objective_setting_day_count as objective_day_count,to_char(assessment_schedule_cycle_starts, 'DD-MM-YYYY') as cycle_starts from
+HCMS_TA_Assessment_Schedule where id=%s and is_active =TRUE]]>
+		</query>
+		<query id="assessment_schedule_detail_fetch_by_id" query_name="assessment_schedule_detail_fetch_by_id"
+			description="Schedule Child Detail Fetch By Id">
+          <![CDATA[select array(select distinct assessment_schedule_employee_id from hcms_ta_assessment_schedule_details where assessment_schedule_id=%s and is_active=true) 
+as employee_ids, ri.refitems_name,assessment_assessor_type_refitem_id,assessment_schedule_assess_type_day_count,to_char(assessment_schedule_start_date, 'DD-MM-YYYY') as assessment_schedule_start_date from 
+hcms_ta_assessment_schedule_details asd inner join reference_items ri on asd.assessment_assessor_type_refitem_id=ri.id where assessment_schedule_id=%s and assessment_schedule_employee_id=%s and asd.is_active=true and ri.is_active=true]]>
+		</query>
+			<query id="assessment_schedule_employee_detail" query_name="assessment_schedule_employee_detail"
+			description="Schedule Employee Detail Fetch By Id">
+          <![CDATA[select distinct sd.assessment_schedule_employee_id as id, ei.name from hcms_ta_assessment_schedule_details sd left join employee_info ei on sd.assessment_schedule_employee_id=ei.id where sd.assessment_schedule_id=%s and 
+          ei.is_active=true and sd.is_active=true ]]>
+		</query>
+		<query id="assessment_schedule_remove" query_name="assessment_schedule_remove"
+			description="Schedule Remove">
+          <![CDATA[UPDATE HCMS_TA_Assessment_Schedule SET is_active = FALSE WHERE id=%s]]>
+		</query>
+		<query id="assessment_schedule_detail_remove" query_name="assessment_schedule_detail_remove"
+			description="Schedule Detail Remove">
+          <![CDATA[UPDATE HCMS_TA_Assessment_Schedule_Details SET is_active=FALSE where assessment_schedule_id=%s]]>
+		</query>
+	</queries>
+</data>

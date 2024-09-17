@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="HCMS">
+		<!-- User Permissions fetching for menu hide/show -->
+		<query id="usr_permission_data_fetch" query_name="usr_permission_data_fetch"
+			description="User Permissions fetching for menu hide/show">
+          <![CDATA[select array_agg(hp.code) as permission_code from auth_user au
+                    inner join hcms_role hr on hr.id = au.role_id
+                    inner join role_permission_rel rpr on rpr.role_id = hr.id
+                    inner join hcms_permission hp on hp.id = rpr.permission_id
+                    where au.id = %s]]>
+		</query>
+		<!-- User Permissions fetching for menu hide/show -->
+		
+        <query id="user_role_okr_access" query_name="user_role_okr_access" description="user_role_okr_access">
+        	<![CDATA[select levels from okr_accessrights  where role_id=(select role_id from auth_user where id=%s)]]>
+        </query>
+        <query id="employee_user_rel_id_fetch" query_name="employee_user_rel_id_fetch"
+				description="employee_user_rel_id_fetch">
+	        	<![CDATA[select emp.id,CONCAT(ref1.refitems_name,emp.name, ' ' ,emp.last_name ) as name from employee_info emp inner join reference_items as ref1 on ref1.id=emp.title_id
+where  emp.related_user_id_id ={0}  and emp.is_active and ref1.is_active ]]>
+			</query>
+		
+	</queries>
+</data>

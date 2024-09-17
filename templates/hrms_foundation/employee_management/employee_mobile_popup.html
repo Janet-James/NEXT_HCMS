@@ -1,0 +1,82 @@
+<!--  modal start here -->
+<div id="employeeEmergencyNo" class="modal fade " style='overflow: hidden'
+	role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Add More Emergency Contact No.</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<div class="portlet-body form">
+					<form role="form" id='employee_emergency_contact_form'>
+						{%csrf_token%}
+						<div class="form-body ">
+							<div class="row ">
+								<div class="col-md-6 ">
+									<div class="form-group">
+										<label>Emergency Contact Name 1</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Contact Name 1" name='emp_emer_name1' id='emp_emer_name1' maxlength="50" minlength="5" type="text" data-error=".errorTxt101">
+										</div>
+										<span class="errorTxt101 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Contact Name 2</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Contact Name 2" name='emp_emer_name2' id='emp_emer_name2' maxlength="50" minlength="5" type="text" data-error=".errorTxt102">
+										</div>
+										<span class="errorTxt102 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Contact Name 2</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Contact Name 3" name='emp_emer_name3' id='emp_emer_name3' maxlength="50" minlength="5" type="text" data-error=".errorTxt103">
+										</div>
+										<span class="errorTxt103 errormessage"></span>
+									</div>
+								</div>
+								<div class="col-md-6 ">
+									<div class="form-group">
+										<label>Emergency Contact No. 1</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Contact No. 1" name='emp_emer_no1' id='emp_emer_no1' maxlength="10" minlength="10" type="text" data-error=".errorTxt104">
+										</div>
+										<span class="errorTxt104 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Contact No. 2</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Contact No. 2" name='emp_emer_no2'  id='emp_emer_no2' maxlength="10" minlength="10" type="text" data-error=".errorTxt105">
+										</div>
+										<span class="errorTxt105 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Contact No. 3</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Contact No. 3" name='emp_emer_no2'  id='emp_emer_no3' maxlength="10" minlength="10" type="text" data-error=".errorTxt106">
+										</div>
+										<span class="errorTxt106 errormessage"></span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn-animate btn-eql-wid  btn btn-success"
+					 onclick="addMoreContanctNumbers()">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->

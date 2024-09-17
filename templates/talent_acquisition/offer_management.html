@@ -1,0 +1,349 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+
+<!-- custom css start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- date timepicker css -->
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Talent Acquisition css -->
+<link href="{% static '/ui/css/talent_acquisition.css' %}"
+	rel="stylesheet" type="text/css" />
+
+{% endblock %}
+<!-- custom css end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="TAOfferManagement" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row eqheight">
+					<div class="col-md-12 ">
+						<div class="portlet light bordered datatable_view">
+							<div class="">
+								<div class="portlet-title">
+									<div class="caption">
+										<h1 class="caption-subject  bold uppercase">Offer Management</h1>
+
+									</div>
+								</div>
+								<div action="#" id="formwizardShift" method="POST"
+									class="talent_acquisition_wrapper">
+									<div class="form-wizard  ">
+										<div id="tab_formwizard" class="form-body">
+											<ul class="nav nav-pills nav-justified steps">
+												<li class="active"><a class="step" href="#tab1"
+													id="tab1" data-toggle="tab" aria-expanded="true">
+
+														<div class="createtask_item">
+															<div class="tab_createtask">
+																<i class="fa fa-plus"></i>
+															</div>
+															<span class="spantext paddingtop">Create Offer</span>
+														</div>
+												</a></li>
+												<li class="tab_item_menu" id="all"  data-id='Job Offers'><a class="step"
+													href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-users-1"></i>
+															<div id="all_Offer"></div>
+														</div> <span class="spantext">Job Offers</span>
+
+												</a></li>
+												<li class="tab_item_menu " id="offer_made" data-id='Job Offers Made'><a
+													class="step" href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+														<div class="tab_item activetab">
+															<i class="nf nf-job-offers-made"></i>
+															<div id="Offer_Made"></div>
+														</div> <span class="spantext">Job Offers Made</span>
+
+												</a></li>
+												<li class="tab_item_menu" id="offer_accept" data-id='Job Offers Accepted'><a
+													class="step" href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf nf-job-offers-approved"></i>
+															<div id="Offer_Accepted"></div>
+														</div> <span class="spantext">Job Offers Accepted</span>
+
+												</a></li>
+												<li class="tab_item_menu" id="offer_declined" data-id='Job Offers Declined'><a
+													class="step" href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-job-offers-rejected"></i>
+															<div id="Offer_Declined"></div>
+														</div> <span class="spantext">Job Offers Declined</span>
+
+												</a></li>
+
+												<li class="tab_item_menu tab_menu_active"
+													id="offer_withdrawn" data-id='Job Offers Withdrawn'><a class="step" href="#tab2"
+													id="tab2" data-toggle="tab" aria-expanded="true">
+														<div class="tab_item ">
+
+															<i class="nf nf-job-offers-withdrown"></i>
+															<div id="Offer_Withdrawn"></div>
+														</div> <span class="spantext">Job Offers Withdrawn</span>
+												</a></li>
+												<li class="tab_item_menu tab_menu_active" id="offer_revised" data-id='Job Offers Revised'><a
+													class="step" href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+														<div class="tab_item ">
+
+															<i class="nf nf-manage-competencies"></i>
+															<div id="Offer_Revised"></div>
+														</div> <span class="spantext">Job Offers Revised</span>
+												</a></li>
+
+
+											</ul>
+
+										</div>
+									</div>
+									<!-- tab1 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab1">{% include "./offer_management_info.html" %}</div>
+									</div>
+									<!-- tab2 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab2">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject job_offer_title bold uppercase">Job
+																	Offer Details</h2>
+															</div>
+														</div>
+
+														<div class="portlet-body form">
+
+															<div class="row">
+																<div class="col-md-12" id="offer_search">
+																	<div class="col-sm-3"
+																		style="float: right; margin-bottom: 15px; margin-top: -50px;" id="2">
+																		<input class="form-control"
+																			placeholder="Search by Job Title" id="job_name"
+																			type="text">
+																	</div> 
+																</div>
+
+																<div class="col-md-12 " id="job-requisitions"></div>
+																<div class="col-md-4 tabitem_right"
+																	id="job_requisitions_form" style="display: none;">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject job_offer_title bold uppercase">
+																					Job Offer Details</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="job_requisitions_close"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content">
+																					<div class="portlet-body">
+																						<div class="row">
+																							<div
+																								class="col-md-12 col-sm-12  job_requisitions_content"
+																								id="job_offer_content"></div>
+
+																						</div>
+
+																					</div>
+																				</div>
+
+																			</div>
+																			<div id="read_moreid"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-2 pull-right">
+
+										<div class="portlet-body form" id="offer_pagination">
+											<!-- BEGIN FORM-->
+											<ul class="pagination pagination-sm" id="pagination_space">
+												<!-- <li><a href="javascript:;"> <i
+														class="fa fa-angle-left"></i>
+												</a></li>
+												<li><a href="javascript:;"> <i
+														class="fa fa-angle-right"></i>
+												</a></li> -->
+											</ul>
+
+											<!-- END FORM-->
+										</div>
+									</div>
+
+									<!-- tab3 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab3"></div>
+									</div>
+									<!-- tab4 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab4"></div>
+									</div>
+									<!-- tab5 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab5">Tab5</div>
+									</div>
+									<!-- tab6 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab6">Tab6</div>
+									</div>
+									<!-- tab6 -->
+									<div class="tab-content">
+										<div class="tab-pane" id="ex-tab7">Tab7</div>
+									</div>
+								</div>
+
+								{% include 'logger.html' %}
+								<div id="logswitcher">
+									<div class="logswitcher-toggle" style="display: none;">
+										<div data-toggle="tooltip" data-placement="bottom"
+											title="Log Search" class="tooltips">
+											<i class="logicon fa fa-user"></i>
+										</div>
+									</div>
+									<div class="profile_log">
+										<h1>
+											<span>Activity Feeds</span>
+										</h1>
+										<div class="heading_icon">
+											<label><input id="logSearch" name="logSearch"
+												class="form-control input-inline" placeholder="Search Log"
+												type="search"></label>
+										</div>
+										<div class='col-sm-12'>
+											<div class="profile_log_item">
+												<ul id='log_info_div'>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- modal start here -->
+<div id="offerModal" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Offer Management</h4>
+			</div>
+
+			<div class="modal-body md-max-height" style="text-align: center;">
+				<div class="col-sm-12" id='offer_generate_div'></div>
+				<span class="btn btn-success btn-eql-wid btn-animate"
+					id="generate_offer" onclick='generate_offer()' aria-hidden="true">Generate
+					Offer</span> <span class="" id="offer_download" aria-hidden="true">Download</span>
+				<span class="" id="offer_email" onclick='email_offer()'
+					aria-hidden="true"><a title="Send to Email"
+					class="btn btn-success btn-eql-wid btn-animate"><i
+						class="offer_report nf nf-email"></i></a></span>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->
+{% endblock %}
+<!-- body content end -->
+
+<!-- custom js link start -->
+{% block scripts %}
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- date timepicker js -->
+<script
+	src="{%  static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+	type="text/javascript"></script>
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+<!-- layout form wizard -->
+<!-- <script	src="{% static  '/dev/talent_acquisition/js/ta_layout_formwizard.js'  %}"></script> -->
+<script>
+	/* $("#date3,#date4").DateTimePicker({
+	 dateFormat: "dd-MM-yyyy"
+	 }); */
+</script>
+<!-- dev js -->
+
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<script src='/static/dev/talent_acquisition/js/ta_offer_management.js'></script>
+<script src='/static/dev/talent_acquisition/js/ta_offer_tabs.js'></script>
+{% endblock %}
+<!-- custom js link end -->

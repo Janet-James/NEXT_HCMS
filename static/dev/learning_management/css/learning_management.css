@@ -1,0 +1,252 @@
+.modal-open .select2-dropdown {    z-index: 99999 !important;}
+.margin-right-3{
+    margin-right: 3px !important;
+}
+    /* end */
+#dtBox_new { background: none;}
+#dtBox_new .dtpicker-bg {    height: 70%;}
+/*.modal-dialog-md{ width:1200px !important;}*/
+.ass_btn{margin: 0px -10px;}
+.text_center{text-align:center;}
+.col-2.5{width:19.66667% !important;}
+.col-lg-2.col-lg-2.5.col-md-3.col-sm-6.col-xs-12{width:19.66667% !important;}
+.box_height{height: 150px;/* overflow: auto; overflow-x: hidden;*/}
+.badge.badge-success.size{background-color: #37bd9c;width: 10px;height: 10px;}
+.badge.badge-primary.size{background-color: #5867dd;width: 10px;height: 10px;}
+.border_bottom_div.size{padding: 0px 0;clear: both;position: relative; top: 70px;}
+.ribbon-content.size{font-size:13px;}
+.income-height{    min-height: 135px;}
+.padding-0{padding:0;}
+/*******************************************************
+08 Jan 2018 CSS for loader: Prabu
+*******************************************************/
+#loading{
+height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    margin-top: 0px;
+    top: 0px;
+    background: rgba(0,0,0,0.7);
+}
+.resizer {
+  position: absolute;
+  top: 0;
+  right: -8px;
+  bottom: 0;
+  left: auto;
+  width: 16px;    
+  cursor: col-resize;       
+}
+#loading-center{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    }
+#loading-center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    height: 200px;
+    width: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+.object{
+width: 200px;
+    height: 200px;
+    background-color: rgba(255,255,255,0);
+    margin-right: auto;
+    margin-left: auto;
+    border: 4px solid #FFF;
+    left: 60px;
+    top: 64px;
+    position: absolute;
+}
+#first_object{
+    border: 0px solid #46be8a;
+    background-repeat: no-repeat;
+    background-image: url('../../../ui/images/meeting-bg.png');
+    background-size: 200px;
+}
+#second_object{
+    border: 0px solid #ffb517;
+    -webkit-animation: second_object 1s forwards, second_object_animate 2s infinite ease-in-out;
+    animation: second_object 1s forwards, second_object_animate 2s infinite ease-in-out;
+-webkit-animation: rotation 3s infinite linear;
+    width: 30px;
+    height: 30px;
+    left: 145px;
+    top: 100px;
+    }    
+@-webkit-keyframes rotation {
+        from {
+                -webkit-transform: rotate(0deg);
+        }
+        to {
+                -webkit-transform: rotate(359deg);
+        }
+}
+/*******************************************************/
+.icon_mar{margin: 11px 0px 0px 0px !important;}
+.income-height{    min-height: 135px;}
+.input-icon.select_height{    height: 60px !important;overflow-x: hidden;overflow-y: scroll;}
+.tab_text{     float: right;
+    margin-right: inherit;}
+.get-level-1 text{text-align:center !important;}
+  .panel-heading a, .panel-heading a:active, .panel-heading a:focus, .panel-heading a:hover {
+    text-decoration: none;
+    display: block;}
+.tooltip-hvr {
+    /* margin: 0px 15px 5px 3px !important; */
+        margin: 0px 5px 5px -3px !important;
+    position: relative !important;
+    padding: 5px 0px 0px 5px;
+}
+.form-group.bottom_rem{margin-bottom:0px;} 
+.div_top{margin-top:-30px;}
+span.select2.select2-container.select2-container--bootstrap.select2-container--focus {
+    width: auto !important;
+}
+span.select2.select2-container.select2-container--bootstrap {
+    width: auto !important;
+}
+.title_head_text{background: #e6f7ff;padding: 5px;border-radius: 2px !important;font-size: 14px;}
+/***************** 17-04-18 ****************************/
+.tabbable-reversed .panel-body p:hover{color:#f50057;}
+.md-max-height{max-height: 650px;overflow-y: scroll;overflow-x: hidden;}
+.editable-table-sec table tbody td{ position: relative; }
+.form-group.assessor_detail{ position:relative; }
+.assessor_detail .btn-icon-only{ position: absolute; top: 25px; right:0px; }
+img.pic_ina{ object-fit: cover;}
+#attendance_popup_table_wrapper .dt-buttons{float: left; }
+.input-icon #select_id{ top:0px; }
+h3.desk-hide-names {display: none;}
+.input-icon.select_height #role_select_id{position: absolute;right: 0px;top: 0px;}
+.btn_assesment {padding: 0px 0px;position: absolute;top: 0px;right: 0px;}
+.ribbon-content .badge-success{background:#5ac8fb !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important; }
+.ribbon-content .badge-primary{background: #4cda64 !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important;}
+#employeePage, #chartPage, #businessObjectivesPage{ padding-top: 30px; }
+.cell-wrapper{white-space: normal;}
+.label_right_table1 {right: 15px;position: absolute;top: -10px;}
+.selectorg {z-index: 10050 !important}
+.ass_form{margin-top: 21% !important;}
+@media(max-width:992px){
+h3.desk-hide-names {display: block;}
+h3.res-hide-name{ display: none; }
+}
+.row_margin{margin-right: 0;}
+/* text blink */    /*  Esakkiprem */
+.blink_me {
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    color:#e73d4a;
+}
+@keyframes blinker { 
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+.topuser i{text-align: center;font-size: 11em;background-size: cover;}
+.topuser_icon {float:left;width: 30%;}
+.topuser span{    text-align: center;
+    word-wrap: break-word;
+    width: 100%;
+    display: block;
+    font-size: 11px;
+    margin-left: 15px;
+    margin-bottom: 10px;}
+.activeuser i{
+    position: relative;
+    z-index: 100;
+    left: -31px;
+    top: -35px;
+    font-size: 20rem;
+    background: -webkit-gradient(linear, left top, left bottom, from(#57c3ff), to(#2ce7c7));
+    -webkit-background-clip: text;
+    cursor: pointer;
+    -webkit-text-fill-color: transparent;
+    }
+ .circle_item{position:absolute;width:100px;height:100px;border-radius:50% !important;background:#5ac8fb !important;left:0;right:0;top:37%;z-index:1;margin-left:auto;margin-right:auto;}
+.circle_item span {   font-size: 15px;    text-align: center;    color: #fff;    line-height: 22px;    position: absolute;    left: 0px;    right: 0px;    top: 15px;    font-weight: bold; }
+ .nodata_text{   color:#e73d4a;  text-align: center;    display: block;     position: absolute;    margin: 30px auto;    left: 0;    right: 0;}
+   /*  Esakkiprem */
+ .trainingname {  text-transform: capitalize; }
+ 
+   /*  text blink */
+   
+   * text blink */
+.blink_me {
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    color:#e73d4a;
+}
+@keyframes blinker { 
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+    /* end */
+  
+ #cost_budget,#training_recommendation1,#training_recommendation2  { width: 100%; height:270px;border: 1px solid #efefef;}
+ #training_calender { width: 100%; height: auto;margin-top: 20px;}
+ .scorecard_content  .caption ,  .chart_wrap  .caption { margin-bottom:10px;}
+ .chart_wrap {margin-top:20px;}
+ .chart_wrap .addplus { cursor: pointer;}
+ #training_div1,  #training_div2{ width: 100%; height: 280px;}
+ #training_div3{ width: 100%; height: 280px;}
+  #opening_training,#ongoing_completed_training,#closed_training{ width: 100%; height: 280px;}
+
+/*  slider start  */
+ul.vslider{padding:10px 0;}
+ul.vslider li{margin-bottom:20px;padding:0;margin-left:0;border-bottom: 1px solid #ccc;padding-bottom: 10px;}
+ul.vslider .text{ font-weight:bold;}
+ #vslider{height:260px;display:inline-block;*display:inline;background-color:#fff;border:1px solid #efefef;position:relative;-webkit-user-select:none;user-select:none;overflow: auto;}
+ #vslider div.inner{width:auto;padding:2px;height:100%;box-sizing:border-box;position:relative;overflow:hidden;margin:0 auto;}
+ #thumbnail-slider div.inner ul{/*the followings should not be changed */
+ white-space:nowrap;position:relative;left:0;top:0;list-style:none;font-size:0;padding:0;margin:0;float:left!important;width:auto!important;height:auto!important;}
+#thumbnail-slider ul li{margin-bottom:20px;}
+#thumbnail-slider ul li.active{border:none !important;}
+#thumbnail-slider .thumb{opacity:1;width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:center center;display:block;position:absolute;font-size:0;}
+/* --------- navigation controls ------- */
+/* The nav id should be:slider id + ("-prev", "-next", and "-pause-play") */
+#thumbnail-slider-pause-play{display:none;}
+ /*.pause*/
+#thumbnail-slider-prev, #thumbnail-slider-next{opacity:1;position:absolute;/*background-color:#0346a3;*/
+ *background-color:#ccc;/*IE7 hack*/
+ backface-visibility:hidden;width:32px;height:60px;line-height:60px;top:50%;margin:0;margin-top:-30px;color:white;z-index:10;cursor:pointer;}
+#thumbnail-slider-prev{left:-30px;right:auto;}
+#thumbnail-slider-next{left:auto;right:-30px;}
+#thumbnail-slider-next.disabled, #thumbnail-slider-prev.disabled{opacity:0.3;cursor:default;}
+/* arrows */
+#thumbnail-slider-prev::before, #thumbnail-slider-next::before{position:absolute;top:19px;display:none;content:"";display:block;width:12px;height:12px;}
+#thumbnail-slider-prev::before{left:7px;-ms-transform:rotate(-45deg);/*IE9*/
+ -webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+#thumbnail-slider-next::before{right:7px;-ms-transform:rotate(135deg);/*IE9*/
+ -webkit-transform:rotate(135deg);transform:rotate(135deg);}
+/*Responsive settings*/
+@media only screen and (max-width:736px){#thumbnail-slider{padding:10px 26px;}
+
+.vslider span {color: #d277fe;    font-size: 13px;    margin-bottom: 10px;    font-weight: bold;}
+
+ #thumbnail-slider-prev{left:0px;}
+ #thumbnail-slider-next{right:0px;}
+}
+   /*  slider end */
+   .filelist_view ul { margin:0; padding:0}
+   .filelist_view ul li{list-style:none; margin-bottom:10px;}
+   .filelist_view .fa{ float:right; margin-left:10px; font-size:12px;color: #333;}
+   #exit_request_lv_320 {
+    height: 570px !important;
+}
+.form-group small, .write_mail small{
+    position: relative;
+    top: unset;
+    left: unset;
+    color: #585858;
+    font-size: 11px
+}

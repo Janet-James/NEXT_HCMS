@@ -1,0 +1,825 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- date time picker css -->
+<link
+	href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- file input css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- vertical slider css -->
+<link href="{% static '/ui/plugins/vertical_slider/css/vslider.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+    rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Talent Acquisition css -->
+<link
+	href="{% static '/ui/css/talent_acquisition.css' %}"
+	rel="stylesheet" type="text/css" /> 
+<style>
+div.dataTables_wrapper div.dataTables_filter label {
+    right: 0px !important;
+    top: -41px;
+}
+</style>
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="TACandidate" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container emp_formwizard" id="maincontent ">
+		<div class="page-content-wrapper">
+			<div class="page-content padding-0">
+				<div class="row eqheight">
+					<div class="col-md-12 ">
+						<div class="portlet light bordered datatable_view">
+							<div class="">
+								<div class="portlet-title">
+									<div class="caption">
+										<h1 class="caption-subject  bold uppercase">
+											Candidate Tracking System  </h1>
+
+									</div>
+								</div>
+								<div action="#" id="formwizardShift" method="POST"
+									class="talent_acquisition_wrapper">
+									<div class="form-wizard  ">
+
+										<div class="form-body">
+											<ul id="navForwizard" class="nav nav-pills nav-justified steps">
+												<li class="active"><a class="step" href="#tab1"
+													id="tab1" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_createtask">
+															<i class="fa fa-plus"></i>
+														</div> <span class="spantext paddingtop">Create Candidate</span>
+
+												</a></li>
+												<li class="tab_item_menu  "><a class="step"
+													href="#tab2" id="tab2" data-toggle="tab"
+													aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-user-group-niaa"></i>
+															<span id="candidate_count" class="activecount"></span>
+
+														</div> <span class="spantext">Candidates</span>
+
+												</a></li>
+												<li class="tab_item_menu "><a class="step" href="#tab3"
+													id="tab3" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item activetab">
+
+															<i class="nf nf nf-candidates-screening"></i> <span
+																class="activecount" id="screening_count"></span>
+
+														</div> <span class="spantext">Screening</span>
+
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab4"
+													id="tab4" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-negotiate"></i>
+															<span class="activecount" id="interview_count"></span>															
+
+														</div> <span class="spantext">Interview</span>
+
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab5"
+													id="tab5" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-candidates-offers"></i>
+															<span class="activecount" id="offer_count"></span>
+
+														</div> <span class="spantext">Offers</span>
+
+												</a></li>
+												<li class="tab_item_menu tab_menu_active"><a
+													class="step" href="#tab6" id="tab6" data-toggle="tab"
+													aria-expanded="true">
+														<div class="tab_item ">
+															<i class="nf nf-candidates-hired"></i>
+															<span class="activecount" id="hired_count"></span>
+
+														</div> <span class="spantext">Hired</span>
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab7"
+													id="tab7" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+
+															<i class="nf nf-candidates-employee-ref"></i>
+															<span class="activecount" id="employee_referral_count"></span>
+
+														</div> <span class="spantext">Employee Referrals</span>
+
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab8"
+													id="tab8" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-talent-acquistion"></i>
+															<span class="activecount" id="external_referral_count"></span>
+
+														</div> <span class="spantext">External Referrals</span>
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab9"
+													id="tab9" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-deployment"></i>
+															<span class="activecount" id="website_count"></span>
+															
+														</div> <span class="spantext">Website</span>
+
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab10"
+													id="tab10" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+															<i class="nf nf-mom"></i>
+															<span class="activecount" id="walkin_count"></span>
+														
+														</div> <span class="spantext">Walkin</span>
+
+												</a></li>
+												<li class="tab_item_menu"><a class="step" href="#tab11"
+													id="tab11" data-toggle="tab" aria-expanded="true">
+
+														<div class="tab_item">
+
+															<i class="nf nf-class-diagram"></i>
+															<span class="activecount" id="job_board_count"></span>
+
+														</div> <span class="spantext">Job Boards</span>
+
+												</a></li>	
+											</ul>
+										</div>
+									</div>
+									<!-- tab1 -->
+									<div class="tab-content">
+										 <div class="lo-tab-pane" id="ex-tab1">
+											{% include "./candidate_info.html" %}
+										</div>
+									</div>
+									<!-- tab2 -->
+										<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab2">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Candidates</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_2">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb2"																
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">Candidate
+																					Details</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb2"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb2'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab3 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab3">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Candidate Screening</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_3">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb3"	
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">Candidate
+																					Screening Details</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb3"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb3'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab4 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab4">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Candidate Interview</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_4">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb4"	
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Candidate Interview Details</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb4"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb4'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab5 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab5">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Candidate Offers</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_5">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb5"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Candidate Offers</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb5"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb5'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab6 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab6">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Candidate Hired</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_6">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb6"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Candidate Hired Details</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb6"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb6'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab7 -->
+										<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab7">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Employee Referrals</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_7">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb7"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Employee Referrals</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb7"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb7'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab8 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab8">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">External Referrals</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_8">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb8"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					External Referrals</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb8"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb8'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- tab9 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab9">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Website</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_9">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb9"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Website</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb9"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb9'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<!-- tab10 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab10">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Walkin</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_10">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb10"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Candidate Walkin</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb10"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb10'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+																		
+									<!-- tab11 -->
+									<div class="tab-content">
+										<div class="lo-tab-pane" id="ex-tab11">
+										<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<div class="portlet bordered">
+														<div class="portlet-title">
+															<div class="caption">
+																<h2 class="caption-subject  bold uppercase">Job Boards</h2>
+															</div>
+														</div>
+														<div class="portlet-body form">
+															<div class="row">
+																<div class="col-md-12" id="candidate_list_11">
+																</div>
+																<div class="col-md-4 tabitem_right" id="candidate_tb11"
+																	style="display: none; border-left: 1px solid #c3e3f7; transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+																	<div class="portlet bordered">
+																		<div class="portlet-title">
+																			<div class="caption">
+																				<h2 class="caption-subject  bold uppercase">
+																					Candidate Job Boards</h2>
+																			</div>
+
+																			<i data-toggle="tooltip" data-placement="top"
+																				title="" class="fa fa-times float-right"
+																				style="float: right; cursor: pointer;"
+																				id="candidate_close_tb11"
+																				data-original-title="Close"></i>
+																		</div>
+																		<div class="portlet-body">
+																			<div class="row">
+																				<div
+																					class="col-md-12 col-sm-12  job_requisitions_content"
+																					id='candidate_content_tb11'></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								{% include 'logger.html' %}
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+</div>
+<!-- NEXT Passion Popup --> 
+<div id="resume_parser" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+		<h4 class="modal-title">Candidate Resume Parser</h4>
+	  </div>
+	  <div class="modal-body" style="height: 350px;">
+		  <div class="col-sm-12">
+			  <form id="document_basic_inform">
+			  			<p class="txt-info1">Maximum Passible Content Only Extract here. If any Mismatch Record Found.
+						 Kindly Update It.</p>
+						<div class="form-group">
+							<label>Resume Upload <span class="asterisk">*</span></label>
+							<div class="clearfix"></div>
+							<div class="fileinput fileinput-new" data-provides="fileinput">
+								<div class="input-group">
+									<div style="width: 233px !important;"
+										class="form-control uneditable-input input-medium input-fixed"
+										data-trigger="fileinput">
+										<i class="fa fa-file fileinput-exists"></i>&nbsp; <span
+											class="fileinput-filename"> </span>
+									</div>
+									<span
+										class="input-group-addon btn btn-success btn-file btn-animate ">
+										<span class="fileinput-new"> <i class="fa fa-upload"></i></span>
+										<span class="fileinput-exists"> Change </span> <input
+										type="file" id="ta_interview_doc"
+										onchange="encodeDoctoBase64(this)" name="ta_interview_doc" data-error=".errorTxt1003" required/>
+									</span> <a href="javascript:;"
+										class="input-group-addon btn btn-danger btn-animate fileinput-exists"
+										data-dismiss="fileinput"> Remove </a>
+								</div>
+								<span><p class="txt-info">( Note : Please upload pdf
+										and file size should be less than 2MB )</p></span>
+							</div>
+							<span id="document_error" class="errorTxt1003 errormessage"></span>
+						</div>	 </form>
+				<button class="btn btn-success btn-eql-wid btn-animate" onclick="resumeParserExtract()">Extract here</button>
+		 </div>
+				<div class="col-sm-8 extracted_content" id="extracted_content"
+					style="height: 100px; overflow: auto; "></div>
+				<div class="col-sm-4 extracted_content" id="saved_pdfsss"
+					style="height: 100px; overflow: auto; ">
+					<iframe id="resume_parser_pdfview" src=""
+						frameborder="0"></iframe>
+				</div>
+				<div class="col-sm-4" id="saved_pdf" 
+					style="height: 10px; overflow: auto;display:none"></div>
+			</div>
+	  <div class="modal-footer">
+		<button class="btn btn-success btn-eql-wid btn-animate" onclick="resumeParserExtractApply()">Apply To Candidate</button>
+	  </div>
+	</div>
+  </div>
+</div>
+<!-- org unit modal start -->
+{% include "organization_unit.html" %}
+<!-- org unit modal end -->
+<!-- employee modal start -->
+{% include "employee_search_select.html" %}
+{% endblock %}
+<!-- body content end -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/formwizard_candidate.js' %}"
+	type="text/javascript"></script>
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+
+<!-- datetime js -->
+<script
+	src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}"
+	type="text/javascript"></script>
+<script>
+
+</script>
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/lib/additional-methods.min.js' %}"
+	type="text/javascript"></script> 
+<!-- layout form wizard -->
+<script	src="{% static  '/dev/talent_acquisition/js/ta_candidate_layout.js'  %}"></script> 
+<!-- dev js -->
+
+<script 
+	src="{% static  '/dev/talent_acquisition/js/candidate/ta_candidate_details.js' %}"
+	type="text/javascript"></script>
+	
+
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/basic_info.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate_education.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate_experience.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate_certification.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate_skills.js' %}"
+	type="text/javascript"></script>
+	
+<script
+	src="{% static  '/dev/talent_acquisition/js/candidate/candidate_others.js' %}"
+	type="text/javascript"></script>
+	
+{% endblock %}
+<!-- custom script end -->

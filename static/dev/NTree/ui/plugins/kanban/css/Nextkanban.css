@@ -1,0 +1,62 @@
+/* NEXT UX3.x | NEXTKANBAN.CSS
+// Version    0.2 | Build 0.1
+// Released on | 25 Oct 2017
+// © 2017-2018 | www.nexttechnosolutions.com
+// ===================================================================================================================*/
+
+section.box #myKanban { overflow-x: auto; padding-bottom: 20px;    margin-top: 15px; }
+.kanban-container { position: relative; box-sizing: border-box; width: auto; margin:20px 0}
+.kanban-container * { box-sizing: border-box; outline: none; }
+.kanban-container:after { clear: both; display: block; content: ""; }
+.kanban-board { position: relative; float: left;/* background: #E2E4E6;*/ transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); }
+.kanban-board.is-moving.gu-mirror { transform: rotate(3deg); }
+.kanban-board.is-moving.gu-mirror .kanban-drag { overflow: hidden; padding-right: 50px; }
+/*.kanban-board header { font-size: 16px; padding: 15px; position:relative }
+.kanban-board header .kanban-title-board { font-weight: 700; margin: 0; padding: 0; }*/
+.kanban-board .kanban-drag { background: #fff none repeat scroll 0 0; height: 100%; min-height: 600px; padding: 0; width: 100%; }
+.kanban-board:after { clear: both; display: block; content: ""; }
+.kanban-item { background: transparent; padding: 15px; margin-bottom: 20px; transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1); background: #fff; -webkit-box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.03); -moz-box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.03); box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.03); border-left: 2px solid #019fff; }
+.kanban-item h4 { margin: 0; padding: 0; font-size: 15px; font-weight: 500; float: left }
+.kanban-item:last-child { margin: 0; }
+.kanban-item.is-moving.gu-mirror { transform: rotate(3deg); height: auto !important; }
+/* Dragula CSS  */
+.gu-mirror { position: fixed !important; margin: 0 !important; z-index: 9999 !important; }
+.gu-hide { display: none !important; }
+.gu-unselectable { -webkit-user-select: none !important; -moz-user-select: none !important; -ms-user-select: none !important; user-select: none !important; }
+.gu-transit { opacity: 0.2 !important; transform: rotate(0deg) !important; }
+.kanban-container footer { display: none }
+a.add-links { position: absolute; right: 0; padding: 10px 0 0 15px; font-size: 16px; font-weight: bold; cursor: pointer; }
+a.search-links { position: absolute; right: 25px; padding: 10px 0 0 0; font-size: 16px; font-weight: bold; cursor: pointer; }
+.kanban-board header { position: relative; display: inline-block; /*width: 100%;*/ vertical-align: top; background-color: transparent; border: 0 solid rgba(0,0,0,0.12); border-bottom: 0 solid #004b98; }
+.kanban-board-header .title { position: relative; width: auto; height: 36px; -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0; }
+.kanban-board-header .title h3 { font-weight: normal; margin: 10px 0; }
+.kanban-item p { cursor: auto; font-size: 12px; margin: 0;     margin-top: 10px !important; line-height: 20px;}
+.kanban-item [contenteditable="true"]:focus,
+.kanban-board-header .title h4:focus { outline: 0; }
+.taskLinks > a {margin: 0px 5px 0px 0px;padding: 3px;width: 10px;height: 10px;color: #ccc;}
+
+/* NEXT UX2.0 | NEXTKANBAN.CSS - I have used to NSMART project : Sasikumar 28Mar2018*/
+#myKanban { overflow-x: auto; padding-bottom: 20px; }
+[data-id="_project"] .kanban-item { border-left: 2px solid #019fff; }
+[data-id="_project"] a.add-links { color: #019fff }
+[data-id="_project"] a.search-links { color: #b8e2fc }
+[data-id="_assigned"] .kanban-item { border-left: 2px solid #d277fe; }
+[data-id="_assigned"] a.add-links { color: #d277fe }
+[data-id="_assigned"] a.search-links { color: #d994f9 }
+[data-id="_inprogress"] .kanban-item { border-left: 2px solid #fc9a77; }
+[data-id="_inprogress"] a.add-links { color: #fc8a62 }
+[data-id="_inprogress"] a.search-links { color: #fdc2ad }
+[data-id="_completed"] .kanban-item { border-left: 2px solid #26cfb7; }
+[data-id="_completed"] a.add-links { color: #27cfb7 }
+[data-id="_completed"] a.search-links { color: #b7efe7 }
+[data-id="_default"] .kanban-item { border-left: 2px solid #000; }
+[data-id="_default"] a.add-links { color: #222 }
+[data-id="_default"] a.search-links { color: #ccc }
+.taskLinks { text-align: right }
+.taskLinks svg { color: #ccc; margin: 0 2px; font-size: 13px; display: inline-block }
+.taskLinks .dropdown-menu { right: 0; left: auto; -webkit-box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.1); -moz-box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.1); box-shadow: 0px 0px 27px 0px rgba(30,30,30,0.1); border: none; }
+.taskLinks .dropdown { margin: 0 0 0 5px; border: none; }
+.taskLinks .dropdown:hover > ul.dropdown-menu { display: block; }
+.taskLinks .dropdown a.dropdown-toggle{ color: #ccc; padding: 0px 7px 0px 7px;}
+.taskLinks .dropdown ul li a{color: #333;}
+.taskLinks .dropdown ul li a i{ color: #ccc;}

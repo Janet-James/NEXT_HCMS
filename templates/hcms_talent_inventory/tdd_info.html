@@ -1,0 +1,194 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<!-- Single and multi select Dropdown-->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/hcms.css' %}" rel="stylesheet"
+	type="text/css" />
+<link
+	href="{% static '/dev/hcms_talent_inventory/css/talent_inventory.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TIDashboard" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<div class="row">
+					<div class="show-grid">
+						<div class="col-sm-6 col-lg-1-5">
+							<div class="dashboard-stat2 primary-border">
+								<div class="display">
+									<div class="number">
+										<span class="number_span" data-counter="counterup"
+											data-value="{{ org_unit_types_count.0.count }}"></span>
+									</div>
+									<div class="number">
+										<small>Organization Unit Types</small>
+										<div class="bar_icon">
+											<i class="nf nf-organizational-level"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-1-5">
+							<div class="dashboard-stat2 success-border">
+								<div class="display">
+									<div class="number">
+										<span class="number_span" data-counter="counterup"
+											data-value="{{ uniq_emp_roles_count.0.count }}"></span>
+									</div>
+									<div class="number">
+										<small>Unique Employee Roles</small>
+										<div class="bar_icon">
+											<i class="nf nf-employee-portal"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-1-5">
+							<div class="dashboard-stat2 info-border">
+								<div class="display">
+									<div class="number">
+										<span class="number_span" data-counter="counterup"
+											data-value="{{ tech_comp_count.0.count }}"></span>
+									</div>
+									<div class="number">
+										<small>Technical Competencies</small>
+										<div class="bar_icon">
+											<i class="nf nf-functionalities"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-1-5">
+							<div class="dashboard-stat2 warning-border">
+								<div class="display">
+									<div class="number">
+										<span class="number_span" data-counter="counterup"
+											data-value="{{ func_comp_count.0.count }}"></span>
+									</div>
+									<div class="number">
+										<small>Functional Competencies</small>
+										<div class="bar_icon">
+											<i class="nf nf-functional-requirment"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-lg-1-5">
+							<div class="dashboard-stat2 danger-border">
+								<div class="display">
+									<div class="number">
+										<span class="number_span" data-counter="counterup"
+											data-value="{{ behv_comp_count.0.count }}"></span>
+									</div>
+									<div class="number">
+										<small>Behavioral Competencies</small>
+										<div class="bar_icon">
+											<i class="nf nf-assess-behavioral-completencies"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-eq-height">
+					<div class="col-md-6 col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption width_select">
+									<div class="col-md-8 col-sm-12">
+										<span class="caption-subject bold uppercase">Role
+											Definition</span>
+									</div>
+									<div class="col-md-4 col-sm-12">
+										<span class=""> <select id="rd_chart_select"
+											class="form-control select2">
+												<option value="0">All</option> 
+												{% for data in org_unit_type_data %}
+												<option value="{{ data.id }}">{{ data.refitems_name }}</option> 
+												{% endfor %}
+										</select>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-12 col-sm-12">
+											<div class="portlet-body">
+												<div id="role_design" class="chart height-500">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption width_select">
+									 <span
+										class="caption-subject bold uppercase">Competency
+										Definition</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-12 col-sm-12">
+											<div class="portlet-body">
+												<div id="competency_def" class="chart height-500"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<!-- Single Select -->
+<script
+	src="{%  static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{%  static '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{%  static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- Charts scripts -->
+<script src="{%  static '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{%  static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<script src="{%  static '/ui/plugins/amchart/js/pie.js' %}"
+	type="text/javascript"></script>
+<script src="{%  static '/ui/plugins/amchart/js/radar.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/chart.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static 'dev/hcms_talent_inventory/js/ti_dashboard.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

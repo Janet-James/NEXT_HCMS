@@ -1,0 +1,724 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- datetime css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- tagsinput css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HRReports" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container formwizard_reports" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered" id="form_wizard_1">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase"> <span
+										class="step-title"> Reports </span></span>
+								</div>
+							</div>
+							<div class="form-horizontal" action="#" id="formwizard"
+								method="POST">
+								<div class="form-wizard">
+									<div class="form-body">
+										<ul class="nav nav-pills nav-justified steps">
+											<li><a class="step" href="#pills-tab1" id='tab1'
+												data-toggle="tab"><span class="number "> <i
+														class="nf nf-survay"></i>
+												</span><span class="desc"> <i class="fa fa-check"></i>
+														Job Opening
+												</span></a></li>
+											<li><a class="step" href="#pills-tab2" id='tab2'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-candidates-screening"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Candidate
+												</span></a></li>
+											<li><a class="step" href="#pills-tab3" id='tab3'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-job-selection"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Interview
+												</span> </a></li>
+											<li><a class="step" href="#pills-tab4" id='tab4'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-candidates-offers"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Offer Details
+												</span></a></li>
+											<li><a class="step" href="#pills-tab5" id='tab5'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-candidates-offers"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Hired Candidates
+												</span></a></li>											
+										</ul>
+										<div class="clearfix"></div>
+										<br>
+										
+										<div class="row">
+										<div class="col-md-12">
+										<div class="form-group tab1f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='job_opening_searchtags'>
+											</div>
+										</div>
+										</div>
+										
+										</div>
+										
+										
+										<div class="row">
+										<div class="col-md-12">
+										
+										<div class="form-group tab2f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='candidate_searchtags'>
+											</div>
+										</div>
+										</div>
+										</div>
+										
+										<div class="row">
+										<div class="col-md-12">
+										<div class="form-group tab3f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='interview_searchtags'>
+											</div>
+										</div>
+										</div>
+											</div>
+											
+										<div class="row">
+										<div class="col-md-12">
+										<div class="form-group tab4f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='offer_searchtags'>
+											</div>
+										</div>
+										</div>
+											</div>
+											
+											<div class="row">
+										<div class="col-md-12">
+										<div class="form-group tab5f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='candidate_hired_searchtags'>
+											</div>
+										</div>
+										</div>
+											</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-content">
+						<!-- tab1 content start -->
+						<div class="tab-pane" id="pills-tab1">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1"
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="job_opening_report_search(1)" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Job Name"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="job_opening_report_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="job_opening_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="job_organization_id" name="job_organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt0">
+															<option value="0">--Select Organization--</option> 
+															{% for i in org %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt0 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="job_organization_unit_id" name="job_organization_unit_id"
+														onchange="jobOpeningOrgUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select
+														id="organization_emp_division_id" name="organization_emp_division_id"
+														onchange="employeeOrgDivisionFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Division--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Name" id="job_name"
+															name="job_name"
+															onchange="jobOpeningNameFunction(this);" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Key's Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Key Skills" id="key_name"
+															name="key_name"
+															onchange="jobOpeningKeyNameFunction(this);" type="text">
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="job_opening_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- tab1 content end -->
+						<!-- tab2 content start -->
+						<div class="tab-pane" id="pills-tab2">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1" style='overflow:hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters</span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="candidate_report_search(1)" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="candidate_report_clear()"
+												href="#" class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="candidate_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="candidate_organization_id" name="candidate_organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt1">
+															<option value="0">--Select Organization--</option> 
+															{% for i in org %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt1 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="candidate_organization_unit_id" name="candidate_organization_unit_id"
+														onchange="candidateOrgUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select
+														id="organization_can_division_id" name="organization_can_division_id"
+														onchange="candidateOrgDivisionFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Division--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>First Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="First Name" id="candidate_fname"
+															name="candidate_fname"
+															onchange="candidateFristFunction(this);" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Last Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Last Name" id="candidate_lname"
+															name="candidate_lname" type="text"
+															onchange="candidateLastFunction(this);">
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="candidate_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- tab2 content end -->
+						<!-- tab3 content start -->
+						<div class="tab-pane" id="pills-tab3">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1"
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="interview_report_search(1)" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="interview_report_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="interview_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="interview_organization_id" name="interview_organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt2">
+															<option value="0">--Select Organization--</option> 
+															{% for i in org %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt2 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="interview_organization_unit_id" name="interview_organization_unit_id"
+														onchange="interviewOrglUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select
+														id="organization_interview_division_id" name="organization_interview_division_id"
+														onchange="interviewOrgDivisionFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Division--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Interview Status </label> <select id="interview_status"
+														onchange="interviewStatusFunction(this);"
+														name="interview_status" class="form-control select2">
+														<option value="0">--Select Interview Status--</option> 
+														{% for i in interview_status %}
+															<option value={{i.id}}>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Interview Date</label>
+													<div class="input-icon input-icon-att">
+													<i class="fa fa-calendar cicon"></i> <input id='interview_date'
+														name="interview_date" placeholder="Interview Date" class="form-control form-control-inline"
+														type="text" data-field="date" onchange="interviewDateFunction(this);" readonly > 
+													<div id="date3"
+														class="dtpicker-overlay dtpicker-mobile"
+														style="display: none;">
+														<div class="dtpicker-bg">
+															<div class="dtpicker-cont">
+																<div class="dtpicker-content">
+																	<div class="dtpicker-subcontent"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="interview_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- tab3 content end -->
+						<!-- tab4 content start -->
+						<div class="tab-pane" id="pills-tab4">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1"
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="offer_report_search(1)" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="offer_report_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="offer_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="offer_organization_id" name="offer_organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt3">
+															<option value="0">--Select Organization--</option> 
+															{% for i in org %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt3 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="offer_organization_unit_id" name="offer_organization_unit_id"
+														onchange="offerOrglUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select
+														id="organization_offer_division_id" name="organization_offer_division_id"
+														onchange="offerOrgDivisionFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Division--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Job Name </label> <select id="job_opening_name"
+														onchange="offerJobNameFunction(this);"
+														name="job_opening_name" class="form-control select2">
+														<option value="0">--Select Job Name--</option> 
+														{% for i in job_name %}
+															<option value={{i.id}}>{{i.job_title}}</option>
+														{%endfor %}
+													</select>
+												</div>
+												
+												<div class="form-group">
+													<label>Job Status </label>
+													<div class="input-icon">
+														<select id="job_status"
+															onchange="offerJobStatusFunction(this);"
+															name="job_status" class="form-control select2">
+															<option value="0">--Select Job Status--</option> 
+															{% for i in job_status %}
+																<option value={{i.id}}>{{i.refitems_name}}</option> 
+															{% endfor %}
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="offer_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="report_download"></div>
+						</div>
+						<!-- tab4 content end -->
+						
+						<!-- tab4 content start -->
+						<div class="tab-pane" id="pills-tab5">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1"
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters </span></span>
+										</div>
+																		
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="candidate_hired_report_search(1)" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="candidate_hired_report_clear()"
+												href="#" class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="candidate_hired_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="candidate_hired_organization_id" name="candidate_hired_organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt3">
+															<option value="0">--Select Organization--</option> 
+															{% for i in org %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt3 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="candidate_hired_organization_unit_id" name="candidate_hired_organization_unit_id"
+														onchange="candidateHiredOrgUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select
+														id="organization_hired_division_id" name="organization_hired_division_id"
+														onchange="hiredOrgDivisionFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Division--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>First Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="First Name" id="candidate_hired_fname"
+															name="candidate_hired_fname"
+															onchange="candidateHiredFirstFunction(this);" type="text">
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Last Name </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Last Name" id="candidate_hired_lname"
+															name="candidate_hired_lname" type="text"
+															onchange="candidateHiredLastFunction(this);">
+													</div>
+												</div>											
+												
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="candidate_hired_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="report_download"></div>
+						</div>
+						<!-- tab4 content end -->
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<!-- body content end -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/formWizards.js' %}"
+	type="text/javascript"></script>
+<!-- tags input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"
+	type="text/javascript"></script>
+<!-- datetime js -->
+<script
+	src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+	type="text/javascript"></script>
+<!-- dev js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/attendance_management/reporting_formWizards.js' %}"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/report/job_opening.js' %}"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/report/candidate.js' %}"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/report/interview.js' %}"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/report/offer.js' %}"></script>
+<script
+	src="{% static  '/dev/talent_acquisition/js/report/candidate_hired.js' %}"></script>
+{% endblock %}
+<!-- custom script end -->

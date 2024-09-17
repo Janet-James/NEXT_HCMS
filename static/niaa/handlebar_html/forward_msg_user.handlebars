@@ -1,0 +1,47 @@
+
+{{#if room}}
+  {{#if room.user}}
+    {{#if room.user.length}}
+      {{#each room.user}}
+    <li class="select-li-list {{fwdselection selected}}" id={{id}}>
+       <div class="img-name">
+          <a href="#">
+             <img class='{{color status}}' src={{ip username}}>
+             <p>{{username}}</p>
+          </a>
+       </div>
+    </li>
+      {{/each}}
+    {{/if}}
+  {{/if}}
+
+  {{#if  room.channel}}
+    {{#if  room.channel.length}}
+      {{#each  room.channel}}
+    <li class="select-li-list {{fwdselection selected}}" id={{id}}>
+       <div class="img-name">
+          <a href="#">
+             <img class='mem-cir-img' src={{ip name}}>
+             <p>{{name}}</p>
+          </a>
+       </div>
+    </li>
+      {{/each}}
+    {{/if}}
+  {{/if}}
+
+  {{#if  room.group}}
+    {{#if  room.group.length}}
+      {{#each  room.group}}
+    <li class="select-li-list {{fwdselection selected}}" id={{id}}>
+       <div class="img-name">
+          <a href="#">
+             <img class='mem-cir-img' src={{ip name}}>
+             <p>{{name}}</p>
+          </a>
+       </div>
+    </li>
+      {{/each}}
+    {{/if}}
+  {{/if}}
+{{/if}}

@@ -1,0 +1,107 @@
+
+@media (max-width: 1650px){
+  .mail-Message-Body-Content{max-height: 500px;}
+}
+
+@media (min-width: 1500px){
+    .owl-carousel{width: 430px;}
+    .circle-1{height: 40px;width: 40px;}
+    .circle-1 > a {margin: 5px 0px;}
+}
+
+@media (max-width: 1400px){
+    .messages > ul > li .mesg-bg {max-width: 450px !important;    min-width: 450px !important;}
+    #sidebar{min-width: 250px;max-width: 250px;    margin-left: -250px;}
+    .img-wit-des .mesg-bg{width: 100%;}
+    .circle-1{height: 35px;width: 35px;margin: 0px 5px 0px 0px;}
+    .circle-1 a{ margin: 3px 0px;font-size: 20px;}
+    .tabs [class^="tab"] label, .tabs [class*=" tab"] label{ font-size: 100%;}
+    .search{margin: 0px 10px 7px 0px;}
+    .icon-search{font-size: 18px;}
+    .owl-carousel {width: 60%;}
+    .owl-carousel .owl-item img{width: 35px;}
+    .large-circle-btn span.large{font-size: 11px;}
+    .large-circle-btn span.medium{font-size: 10px;}
+    .large-circle-btn span.small{font-size: 9px;}
+    .send-name{font-size: 14px;}
+    .icon-search .fa-search{    font-size: 18px;}
+    span.group-top-msg{top: -7px;}
+    .owl-carousel span.group-top-msg{right: 10px; top: 0px;}
+    .chat-img-nxt .modal-dialog { margin: 30px auto 0px;}
+    .line-1{ font-size: 160%;}
+    .welcome-note h1{ font-size: 30px;}
+    .mark-read a, .mark-read p{font-size: 12px; min-width: 140px;}
+    span.group-member-list{width: 15px;height: 15px; line-height: 15px;}
+    span.group-top-msg{    width: 15px;height: 15px; line-height: 15px;}
+
+}
+
+@media (max-width: 1366px){
+    /* .main-menu li a i{line-height: 40px !important;}
+    .ux3menu li i{font-size: 18px;} */
+    .cm-container, .ux3menu-pos-r{ top: 70px; }
+    .img-wit-des .mesg-bg p{max-width: 420px;}
+    .srh-circle .chat-close-btn{right: 0px;}
+    .main-menu li a i{line-height: 40px !important;}
+    .ux3menu li i {font-size: 18px;}
+    .srh-circle{padding: 18px 0px 0px 0px;}
+    .Exp-serach{margin: 5px 10px 0px 0px !important;}
+    .search-icon-ipt ul li .img-name span, .timeline_search_result li.message-data .date-time .send-name{font-size: 13px;}
+    #sidebar ul li .img-name p, .timeline_search_result li.message-data .date-time .mesg-bg{font-size: 11px;}
+    .search-icon-ipt ul li .img-name .search-time, .timeline_search_result li.message-data .date-time .rec-time{    font-size: 9px;}
+    .ux3menu li a{ width: 35px; height: 35px; }
+	.tabs .tab-2 [type="radio"] + div{width: 250px;}
+	.circle-1 > a i{font-size: 20px;}
+	.tabs .close-icon{top: -10px;}
+.new-messg-recent{    bottom: 12%;}
+.group_all_users ul li .chatUser span.username, .group_online_users ul li .chatUser span.username{font-size: 11px;}
+}
+
+@media (max-width: 1250px){
+    .ux3menu li a{ width: 35px; height: 35px; }
+    .search {margin: 0px 5px 7px 0px;}
+    .circle-1 {height: 30px;width: 30px;margin: 0px 5px 0px 0px;}
+    .circle-1 a{font-size: 15px;margin: 5px 0px;}
+}
+
+@media (max-width: 1200px){
+    .group-chat-name p, .group-chat-name p b{ font-size: 14px; }
+/*    .messages ul li .mesg-bg {max-width: 500px;}*/
+   .col-md-9.col-md-5{ max-width: 70%;}
+    /* .srh-circle{ text-align: left;} */
+}
+
+
+@media (max-width: 1100px){
+    .group-chat-name{ display: none;}
+    .owl-carousel {width: 50%;}
+    .messages > ul.force-overflow{padding: 0px 15px 0px 15px;}
+}
+
+@media (max-width: 1024px){
+.search {margin: 0px 0px 0px 0px;}
+}
+
+@media (max-width: 1000px){
+   .col-md-9.col-md-5 {max-width: 60%;}
+    .messages > ul > li.sent > img, .messages > ul > li.replies > img{    position: absolute;}
+    .messages > ul > li.sent .date-time{margin-left: 70px;}
+    .messages li.replies .date-time{margin-right: 70px;}
+    .messages > ul > li.replies > img{margin: 0px 0 0 0px;}
+    .img-wit-des .mesg-bg h4{ font-size: 18px; }
+    .circle-1{ width: 40px; height: 40px; }
+    .circle-1 a{  padding: 5px;font-size: 20px;}
+    span.group-top-msg, span.group-member-list{line-height: 14px;font-size: 8px;width: 13px;height: 13px;}
+    .srh-circle{padding: 16px 0px 0px 0px;}
+    .Exp-serach{margin: 5px 10px 0px 0px !important;}
+    .owl-carousel {width: 50%;}
+}
+
+@media (max-width: 980px){
+
+
+}
+
+@media (max-width: 767px){
+
+}

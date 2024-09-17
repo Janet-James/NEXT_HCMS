@@ -1,0 +1,1139 @@
+id,created_date,modified_date,is_active,refitems_name,refitems_code,is_systemdata,refitems_desc,created_by_id,modified_by_id,refitems_category_id
+1,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Deduction,DEDCN,t,Deduction,1,1,1
+2,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Employer Contribution,EMPCR,f,Employer Contribution,1,1,1
+3,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Earnings,ALLWC,t,Earnings,1,1,1
+4,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Percentage,PERCT,f,Percentage,1,1,2
+5,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Amount,VALUE,f,Amount,1,1,2
+6,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Cash,CASHH,f,Cash,1,1,3
+7,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Cheque,CHEQE,f,Cheque,1,1,3
+8,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Online,ONLIN,f,Online,1,1,3
+9,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Daily,DAILY,f,Daily,1,1,4
+10,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Weekly,WEKLY,f,Weekly,1,1,4
+11,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Monthly,MNTLY,f,Monthly,1,1,4
+12,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Subcontract,SUBCT,f,Subcontract,1,1,5
+13,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Temporary,TEMPY,f,Temporary,1,1,5
+14,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Permanent,WORKR,f,Permanent,1,1,5
+15,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Daily,DAILy,f,Daily,1,1,6
+16,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Weekly,WEKLy,f,Weekly,1,1,6
+17,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Monthly,WGMON,f,Monthly,1,1,6
+18,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Insurance,INSUR,f,Insurance,1,1,7
+19,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Leave,LEAVE,t,Leave,1,1,7
+20,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Retirement,RETRI,t,Retirement,1,1,7
+21,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Calculated Value,CALVA,t,Calculated Value,1,1,8
+22,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Percentage,PERCT,t,Percentage,1,1,8
+23,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Value,NUMBR,t,Value,1,1,8
+24,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Monthly CTC,MNCTC,f,Monthly CTC,1,1,9
+25,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Net Salary,NETTT,f,Net Salary,1,1,9
+26,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Fixed Gross,GROSS,f,Fixed Gross,1,1,9
+27,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Fixed Basic,BASIC,f,Fixed Basic,1,1,9
+28,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Earned CTC,ENCTC,f,Earned CTC,1,1,9
+29,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,LOP,LOSOP,f,LOP,1,1,9
+30,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Earned Basic,ENBSC,f,Earned Basic,1,1,9
+31,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Performance Score,PERSC,f,Performance Score,1,1,9
+32,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Rent Allowance,HRALW,f,Rent Allowance,1,1,10
+33,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Leave Travel Allowance,LTALW,f,Leave Travel Allowance,1,1,10
+34,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Medical Allowance,MDALW,f,Medical Allowance,1,1,10
+35,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Income Tax,TDSDE,f,Income Tax,1,1,10
+36,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Professional Tax,PTDED,f,Professional Tax,1,1,10
+37,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Single,SINGL,f,Single,1,1,11
+38,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Married,MARRD,f,Married,1,1,11
+39,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Widowed,WIDOW,f,Widowed,1,1,11
+40,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Divorced,DIVRC,f,Divorced,1,1,11
+41,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Separated,SEPRT,f,Separated,1,1,11
+42,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Registered partnership,PARTN,f,Registered partnership,1,1,11
+43,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Christianity,CHRST,f,Christianity,1,1,12
+44,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Gnosticism,GNOST,f,Gnosticism,1,1,12
+45,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Islam,ISLAM,f,Islam,1,1,12
+46,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Judaism,JUDAI,f,Judaism,1,1,12
+47,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Others,OTHRS,f,Others,1,1,12
+48,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Buddhism,BUDHI,f,Buddhism,1,1,12
+49,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Hinduism,HINDU,f,Hinduism,1,1,12
+50,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,A -,ANGTV,f,A -,1,1,13
+51,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,A +,APSTV,f,A +,1,1,13
+52,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,AB -,ABNGT,f,AB -,1,1,13
+53,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,AB +,ABPST,f,AB +,1,1,13
+54,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,B -,BNGTV,f,B -,1,1,13
+55,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,B +,BPSTV,f,B +,1,1,13
+56,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,O -,ONGTV,f,O -,1,1,13
+57,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,O +,OPSTV,f,O +,1,1,13
+58,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Morning,MORNG,f,Morning,1,1,14
+59,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Noon,NOOON,f,Noon,1,1,14
+60,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Evening,EVENG,f,Evening,1,1,14
+61,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Post-Dinner,DINNR,f,Post-Dinner,1,1,14
+62,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Present,PRSNT,f,Present,1,1,15
+63,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Absent,ABSNT,f,Absent,1,1,15
+64,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Reported UnWell,UNWEL,f,Reported UnWell,1,1,15
+65,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Mother,MOTHR,f,Mother,1,1,16
+66,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Father,FATHR,f,Father,1,1,16
+67,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Daughter,DAGTR,f,Daughter,1,1,16
+68,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Son,SONNN,f,Son,1,1,16
+69,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Friend,FREND,f,Friend,1,1,16
+70,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Business Relation,BIZRL,f,Business Relation,1,1,16
+71,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Mother-In-Law,MTRLA,f,Mother-In-Law,1,1,16
+72,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Father-In-Law,FTRLA,f,Father-In-Law,1,1,16
+73,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Sister-In-Law,STRLA,f,Sister-In-Law,1,1,16
+74,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Brother-In-Law,BRTLA,f,Brother-In-Law,1,1,16
+75,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Son-In-Law,SONLA,f,Son-In-Law,1,1,16
+76,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Daughter-In-Law,DTRLA,f,Daughter-In-Law,1,1,16
+77,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,GrandMother,GRDMA,f,GrandMother,1,1,16
+78,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,GrandFather,GRDFA,f,GrandFather,1,1,16
+79,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Uncle,MOTHR,f,Uncle,1,1,16
+80,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Aunt,AUNTY,f,Aunt,1,1,16
+81,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Nephew,NEPHW,f,Nephew,1,1,16
+82,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Niece,NIECE,f,Niece,1,1,16
+83,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Others,OTHER,f,Others,1,1,16
+84,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Associate of Applied Science,ASAPS,f,Associate of Applied Science,1,1,17
+85,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Bachelor of Arts,BAART,f,Bachelor of Arts,1,1,17
+86,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Bachelor of Science,BASCI,f,Bachelor of Science,1,1,17
+87,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Bachelor of Engineering,BENGG,f,Bachelor of Engineering,1,1,17
+88,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Bachelor of Liberal Arts,BALAR,f,Bachelor of Liberal Arts,1,1,17
+89,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Doctor of Philosophy,PHDDD,f,Doctor of Philosophy,1,1,17
+90,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Arts,MARTS,f,Master of Arts,1,1,17
+91,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Science,MSCIN,f,Master of Science,1,1,17
+92,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Engineering,MENGG,f,Master of Engineering,1,1,17
+93,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Arts in Liberal Studies,MALIS,f,Master of Arts in Liberal Studies,1,1,17
+94,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Library Science,MLSSS,f,Master of Library Science,1,1,17
+95,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Master of Science in Library Science,MSLSS,f,Master of Science in Library Science,1,1,17
+96,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Email,EMAIL,f,Email,1,1,18
+97,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Telephone,TPHON,f,Telephone,1,1,18
+98,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Mobile,MOBIL,f,Mobile,1,1,18
+99,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Job Portal,JOBPR,f,Job Portal,1,1,19
+100,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Resume Database,RSMDB,f,Resume Database,1,1,19
+101,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Referral,REFRL,f,Referral,1,1,19
+102,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Male,MALEE,f,Male,1,1,20
+103,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Female,FMALE,f,Female,1,1,20
+104,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Others,OTHER,f,Others,1,1,20
+105,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,On Hold,ONHLD,f,On Hold,1,1,21
+106,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Open,OPENN,f,Open,1,1,21
+107,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Closed,CLOSD,f,Closed,1,1,21
+108,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Cancelled,CNCLD,f,Cancelled,1,1,21
+109,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Meals,MEALS,f,Meals,1,1,22
+110,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Travel,TRAVL,f,Travel,1,1,22
+111,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Client Visit,CLVST,f,Client Visit,1,1,22
+112,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Indian Rupees,INDNR,f,Indian Rupees,1,1,23
+113,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,US Dollars,USDOL,f,US Dollars,1,1,23
+114,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Approved,APPRV,f,Approved,1,1,24
+115,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Rejected,REJCT,f,Rejected,1,1,24
+116,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Open,OPENN,f,Open,1,1,24
+117,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Insufficient Docs,NODOC,f,Insufficient Docs,1,1,25
+118,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Need More Info,NMINF,f,Need More Info,1,1,25
+119,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Approved,APPRV,f,Approved,1,1,26
+120,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Rejected,REJCT,f,Rejected,1,1,26
+121,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Open,OPENN,f,Open,1,1,26
+122,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Cancelled,CANCL,f,Cancelled,1,1,26
+123,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Sick Leave,SICKL,f,Sick Leave,1,1,27
+124,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Casual Leave,CASHL,f,Casual Leave,1,1,27
+125,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Maternity Leave,MTNTL,f,Maternity Leave,1,1,27
+126,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Paternity Leave,PTNTL,f,Paternity Leave,1,1,27
+127,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Compensatory Off,CMPOF,f,Compensatory Off,1,1,27
+128,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Permission,PEMSN,f,Permission,1,1,27
+129,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Leave of Absence,LEABS,f,Leave of Absence,1,1,27
+130,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Frequent Leave,FRQLV,f,Frequent Leave,1,1,28
+131,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Impacts Work Deliverables,IMPCT,f,Impacts Work Deliverables,1,1,28
+132,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Mr.,MISTR,f,Mr.,1,1,29
+133,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Master,MASTR,f,Master,1,1,29
+134,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Ms.,MISRS,f,Mrs.,1,1,29
+135,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Miss,MISSS,f,Miss,1,1,29
+136,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Father,FATHR,f,Father,1,1,29
+137,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Rev.,REVRD,f,Rev.,1,1,29
+138,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Sr.,SISTR,f,Sr.,1,1,29
+139,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,15 Days,15DYS,f,15 Days,1,1,30
+140,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,1 Month,1MNTH,f,1 Month,1,1,30
+141,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,3 Months,3MNTH,f,3 Months,1,1,30
+142,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Immediate,IMEDT,f,Immediate,1,1,30
+143,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,1 Week,1WEEK,f,1 Week,1,1,30
+144,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Shortlisted,STLST,f,Shortlisted,1,1,31
+145,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Selected,SLCTD,f,Selected,1,1,31
+146,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Offered,OFERD,f,Offered,1,1,31
+147,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Rejected,RJCTD,f,Rejected,1,1,31
+148,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Review in progress,REVIW,f,Review in progress,1,1,31
+149,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Open,OPENN,f,Open,1,1,31
+150,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Indian Overseas Bank,IOBBN,f,Indian Overseas Bank,1,1,32
+151,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,State Bank Of India,SBIBN,f,State Bank Of India,1,1,32
+152,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,AXIS,AXISB,f,AXIS,1,1,32
+153,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,OneTime,ONETI,f,OneTime,1,1,33
+154,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Quarterly,QRTLY,f,Quarterly,1,1,33
+155,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Monthly,MTHLY,f,Monthly,1,1,33
+156,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Strategy,STRAT,f,Strategy,1,1,34
+157,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Managerial,MNGRL,f,Managerial,1,1,34
+158,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Execution,EXECN,f,Execution,1,1,34
+159,2014-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Teamwork,TCP01,f,Teamwork,1,1,35
+160,2015-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Responsibility,TCP02,f,Responsibility,1,1,35
+161,2016-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Commitment to career,TCP03,f,Commitment to career,1,1,35
+162,2017-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Commercial awareness,TCP04,f,Commercial awareness,1,1,35
+163,2015-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Career motivation,TCP05,f,Career motivation,1,1,35
+164,2016-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Decision making,TCP06,f,Decision making,1,1,35
+165,2017-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Communication,TCP07,f,Communication,1,1,35
+166,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Leadership,TCP08,f,Leadership,1,1,35
+167,2014-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Adaptability/Decisiveness,BCP01,f,Adaptability/Decisiveness,1,1,36
+168,2015-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Initiative/Perseverance,BCP02,f,Initiative/Perseverance,1,1,36
+169,2016-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Interpersonal Skills,BCP03,f,Interpersonal Skills,1,1,36
+170,2014-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Organizational Skills,BCP04,f,Organizational Skills,1,1,36
+171,2015-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Stress Management,BCP05,f,Stress Management,1,1,36
+172,2016-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Valuing Service and Diversity,BCP06,f,Valuing Service and Diversity,1,1,36
+173,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Financial,FINAN,f,Financial,1,1,37
+174,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Customer,CSTMR,f,Customer,1,1,37
+175,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Internal Process,IPRCS,f,Internal Process,1,1,37
+176,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Learning & Growth,LRNGR,f,Learning & Growth,1,1,37
+177,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Organization,ORGNZ,t,Organization,1,1,38
+178,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Region,REGIN,f,Region,1,1,38
+179,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Province,PRVNC,f,Province,1,1,38
+180,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,District,DSTRT,f,District,1,1,38
+181,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Local Level Government Areas,LLGAR,f,Local Level Government Areas,1,1,38
+182,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Town,TOWNS,f,Town,1,1,38
+183,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Currency,CUREN,f,Currency,1,1,39
+184,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Units,UNITS,f,Units,1,1,39
+185,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Count,COUNT,f,Count,1,1,39
+186,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Mid-Year,MIDYR,f,Mid-Year,1,1,40
+187,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,End-Year,ENDYR,f,End-Year,1,1,40
+188,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Quarterly,QRTLY,f,Quarterly,1,1,40
+189,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Probation Confirmation,PRBCN,f,Probation Confirmation,1,1,40
+190,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Contract Conversion,CONCN,f,Contract Conversion,1,1,40
+191,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Self,1SELF,f,Self,1,1,41
+192,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Reporting Officer,4REPO,f,Reporting Officer,1,1,41
+193,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Senior Officer,5SRRP,f,Senior Officer,1,1,41
+194,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Deparment Head,6DHED,f,Deparment Head,1,1,41
+195,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Contract,CNTRT,f,Casuals,1,1,42
+196,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,National Contract,NCNTR,f,National Contract,1,1,42
+197,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,National Permanent,NPERM,f,National Permanent,1,1,42
+198,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Correspondence ,FCP01,f,Correspondence ,1,1,43
+199,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Documentation,FCP02,f,Documentation,1,1,43
+200,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Text Box,TEBFT,f,Text Box,1,1,44
+201,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Single Select,SISFT,f,Single Select,1,1,44
+202,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Date Picker,DAPFT,f,Date Picker,1,1,44
+203,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Select Search,SESFT,f,Select Search,1,1,44
+204,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Automatic,AUTOM,f,Automatic,1,1,45
+205,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Manual,MANUA,f,Manual,1,1,45
+206,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Weekly,MFWLY,f,Weekly,1,1,46
+207,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Monthly,MFMLY,f,Monthly,1,1,46
+208,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Quarterly,MFQLY,f,Quarterly,1,1,46
+209,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Basic,BASIC,f,Basic,1,1,47
+210,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Intermediate,INMDT,f,Indermediate,1,1,47
+211,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Advanced,ADVCD,f,Advanced,1,1,47
+212,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Subordinate,2SUBO,f,Subordinate,1,1,48
+213,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Peer,3PEER,f,Peer,1,1,48
+214,2018-02-14 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Call Letter,CALLL,f,Call Letter,1,1,49
+215,2018-02-15 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Offer Letter,OFFER,f,Offer Letter,1,1,49
+216,2018-02-16 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Appointment Order,APORD,f,Appointment Order,1,1,49
+217,2018-02-17 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Non Disclosure Agreement,NDAGR,f,Non Disclosure Agreement,1,1,49
+218,2018-02-18 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Resume ,RESUM,f,Resume ,1,1,49
+219,2018-02-19 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Work experience Documents,WKEXP,f,Work experience Documents,1,1,49
+220,2018-02-20 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Educational Certificates,EDCRT,f,Educational Certificates,1,1,49
+221,2018-02-21 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Other Certificates,OTCRT,f,Other Certificates,1,1,49
+222,2018-02-22 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Other Personnel Info,OPRSN,f,Other Personnel Info,1,1,49
+223,2018-02-23 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Employee Medical Info,EMEDI,f,Employee Medical Info,1,1,49
+224,2018-02-24 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Leave Request,LREQS,f,Leave Request,1,1,49
+225,2018-02-25 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Incorrect Document,INCRT,f,Incorrect Document,1,1,50
+226,2018-02-26 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Revised Document to be added,REVSD,f,Revised Document to be added,1,1,50
+227,2018-02-27 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Scheduled,SCHDL,f,Scheduled,1,1,51
+228,2018-02-28 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,In Progress,INPRG,f,In Progress,1,1,51
+229,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Complete,COMPL,f,Complete,1,1,51
+230,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Overseas Contract,OCNTR,f,Overseas Contract,1,1,42
+231,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Overseas Volunteer,OVOLN,f,Overseas Volunteer,1,1,42
+232,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Temporary Staff,TMPRY,f,Temporary Staff,1,1,42
+233,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Probation Officer,PROFF,f,Probation Officer,1,1,42
+234,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Point 1,GRD01,f,Grade 01,1,1,52
+235,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Point 2,GRD02,f,Grade 02,1,1,52
+236,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Point 3,GRD03,f,Grade 03,1,1,52
+237,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Point 4,GRD04,f,Grade 04,1,1,52
+238,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Point 5,GRD05,f,Grade 05,1,1,52
+239,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 06,GRD06,f,Grade 06,1,1,52
+240,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 07,GRD07,f,Grade 07,1,1,52
+241,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 08,GRD08,f,Grade 08,1,1,52
+242,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 09,GRD09,f,Grade 09,1,1,52
+243,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 10,GRD10,f,Grade 10,1,1,52
+244,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Grade 11,GRD11,f,Grade 11,1,1,52
+245,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,f,Check-in,LOGIN,t,Check-in,1,1,53
+246,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Login from Home via Internet,INHOM,t,Login from Home via Internet,1,1,53
+247,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Login using Security Card,SECRD,t,Login using Security Card,1,1,53
+248,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Nil Login,NILLG,t,Nil Login,1,1,53
+249,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Tracker,TRCKR,t,Tracker,1,1,53
+250,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Check-In or Work from Home,DSHOM,t,Check-In or Work from Home,1,1,53
+251,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Check-in or Attendance through Mobile or Work From Home,DSHMB,t,Check-in or Attendance through Mobile or Work From Home,1,1,53
+252,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Check-In or Attendance through Mobile,DSMOB,t,Check-In or Attendance through Mobile,1,1,53
+253,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Work from Home or Attendance via Mobile,HOMOB,t,Work from Home or Attendance via Mobile,1,1,53
+254,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Attendance via Mobile,MOBIL,t,Attendance via Mobile,1,1,53
+255,2018-02-13 21:57:00+05:30,2018-02-13 21:57:00+05:30,t,Physical Impairment,NEURO,f,Physical Impairment,1,1,54
+256,2018-02-13 21:57:00+05:30,2018-02-14 21:57:00+05:30,t,Physical Impairment - Musculoskeletal,MUSCO,f,Physical Impairment - Musculoskeletal,1,1,54
+257,2018-02-13 21:57:00+05:30,2018-02-15 21:57:00+05:30,t,Physical Impairment - Special sense organs,SENSE,f,Physical Impairment - Special sense organs,1,1,54
+258,2018-02-13 21:57:00+05:30,2018-02-16 21:57:00+05:30,t,Physical Impairment - Respiratory (including speech organs),RESPI,f,Physical Impairment - Respiratory (including speech organs),1,1,54
+259,2018-02-13 21:57:00+05:30,2018-02-17 21:57:00+05:30,t,Physical Impairment - Cardiovascular,CARDI,f,Physical Impairment - Cardiovascular,1,1,54
+260,2018-02-13 21:57:00+05:30,2018-02-18 21:57:00+05:30,t,Physical Impairment - Reproductive,REPRO,f,Physical Impairment - Reproductive,1,1,54
+261,2018-02-13 21:57:00+05:30,2018-02-19 21:57:00+05:30,t,Physical Impairment - Digestive,DIGES,f,Physical Impairment - Digestive,1,1,54
+262,2018-02-13 21:57:00+05:30,2018-02-20 21:57:00+05:30,t,Physical Impairment - Genitourinary,GENIT,f,Physical Impairment - Genitourinary,1,1,54
+263,2018-02-13 21:57:00+05:30,2018-02-21 21:57:00+05:30,t,Physical Impairment - Immune,IMUNE,f,Physical Impairment - Immune,1,1,54
+264,2018-02-13 21:57:00+05:30,2018-02-22 21:57:00+05:30,t,Physical Impairment - Circulatory,CIRCU,f,Physical Impairment - Circulatory,1,1,54
+265,2018-02-13 21:57:00+05:30,2018-02-23 21:57:00+05:30,t,Physical Impairment - Hemic,HEMIC,f,Physical Impairment - Hemic,1,1,54
+266,2018-02-13 21:57:00+05:30,2018-02-24 21:57:00+05:30,t,Physical Impairment - Lymphatic,LYMPH,f,Physical Impairment - Lymphatic,1,1,54
+267,2018-02-13 21:57:00+05:30,2018-02-25 21:57:00+05:30,t,Physical Impairment - Skin,SKINN,f,Physical Impairment - Skin,1,1,54
+268,2018-02-13 21:57:00+05:30,2018-02-26 21:57:00+05:30,t,Physical Impairment - Endocrine,ENDOC,f,Physical Impairment - Endocrine,1,1,54
+269,2018-02-13 21:57:00+05:30,2018-02-27 21:57:00+05:30,t,Psychological Disorders - intellectual disability,INTEL,f,Psychological Disorders - intellectual disability,1,1,54
+270,2018-02-13 21:57:00+05:30,2018-02-28 21:57:00+05:30,t,Psychological Disorders - Formerly mental retardation,FMNTL,f,Psychological Disorders - Formerly mental retardation,1,1,54
+271,2018-02-13 21:57:00+05:30,2018-03-01 21:57:00+05:30,t,Psychological Disorders - Organic brain syndrome,OBRAN,f,Psychological Disorders - Organic brain syndrome,1,1,54
+272,2018-02-13 21:57:00+05:30,2018-03-02 21:57:00+05:30,t,Psychological Disorders - Emotional or mental illness,EMOTN,f,Psychological Disorders - Emotional or mental illness,1,1,54
+273,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Psychological Disorders - Specific learning disabilities,LEAND,f,Psychological Disorders - Specific learning disabilities,1,1,54
+274,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Traditionalists/Silent Generation,<1945,t,Traditionalists/Silent Generation,1,1,55
+275,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Baby Boomers,<1964,t,Baby Boomers,1,1,55
+276,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Generation X,<1976,t,Generation X,1,1,55
+277,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Millennials/Gen Y,<1995,t,Millennials/Gen Y,1,1,55
+278,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Gen Z/ iGen/ Centennials,>1996,t,Gen Z/ iGen/ Centennials,1,1,55
+279,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Text,TEXTT,t,Text,1,1,56
+280,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Image,IMAGE,t,Image,1,1,56
+281,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Layout,LYOUT,t,Layout,1,1,56
+282,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,New,NEWWW,t,New,1,1,57
+283,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Edited,EDITD,t,Edited,1,1,57
+284,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Published,PUBSD,t,Published,1,1,57
+285,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Not in Use,NOUSE,t,Not in Use,1,1,57
+286,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Legal,LEGAL,t,Legal,1,1,58
+287,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,General,GENRL,t,General,1,1,58
+288,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Policy,POLCY,t,Policy,1,1,58
+289,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Functional,FUNCT,t,Functional,1,1,58
+290,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Basic,ORGBS,t,Organization Basic,1,1,59
+291,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Units,OUTSS,t,Organization Units,1,1,59
+292,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Unit Basic,OUTBS,t,Organization Unit Basic,1,1,59
+293,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Roles,ORLSS,t,Organization Roles,1,1,59
+294,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Role Basic,ORLBS,t,Organization Role Basic,1,1,59
+295,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Chart,ORGCT,t,Organization Chart,1,1,59
+296,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Unit Employees,OUTES,t,Organization Unit Employees,1,1,59
+297,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Basic,EMPBS,t,Employee Basic,1,1,59
+298,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Demographics,EMPDM,t,Employee Demographics,1,1,59
+299,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Personal Details,EMPPD,t,Employee Personal Details,1,1,59
+300,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Settings,EMPST,t,Employee Settings,1,1,59
+301,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Certification,EMPCT,t,Employee Certification,1,1,59
+302,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Education,EMPED,t,Employee Education,1,1,59
+303,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Work Experience,EMPWE,t,Employee Work Experience,1,1,59
+304,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Leave Request,EMPLR,t,Employee Leave Request,1,1,59
+305,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Leave Balance,EMPLB,t,Employee Leave Balance,1,1,59
+306,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Attendance,EMPAT,t,Employee Attendance,1,1,59
+307,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Assessment Form,EMPAF,t,Employee Assessment Form,1,1,59
+308,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Assessment Schedule,EMPAS,t,Employee Assessment Schedule,1,1,59
+309,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Objectives,EMPOB,t,Employee Objectives,1,1,59
+310,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Users,USRSS,t,System Users,1,1,59
+311,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Basic,USRBS,t,System User Basic,1,1,59
+312,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Permissions,PRMSS,t,System Permissions,1,1,59
+313,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Permission Basic,PRMBS,t,System Permission Basic,1,1,59
+314,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Roles,URLSS,t,System User Roles,1,1,59
+315,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Basic,URLBS,t,System User Role Basic,1,1,59
+316,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Permissions,URPSS,t,System User Role Permissions,1,1,59
+317,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Permission Basic,URPBS,t,System User Role Permission Basic,1,1,59
+318,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization,ORGAN,t,Organization,1,1,60
+319,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Details,EMPDT,t,Organization Units,1,1,60
+320,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Attendance,EMPAT,t,Organization Unit Basic,1,1,60
+321,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Leave,EMPLV,t,Organization Roles,1,1,60
+322,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Assessment,EMPAS,t,Organization Role Basic,1,1,60
+323,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Users,SYSUS,t,Organization Chart,1,1,60
+324,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Permissions,SYPER,t,Organization Unit Employees,1,1,60
+325,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Roles,SYROL,t,Employee Basic,1,1,60
+326,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Details,DETLS,t,Details,1,1,61
+327,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Metrics,METRS,t,Metrics,1,1,61
+328,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Summary Information,SUMRY,t,Summary Infomration,1,1,61
+329,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Graphical Information,GRAPH,t,Graphical Information,1,1,61
+330,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,List Information,LISTT,t,List Information,1,1,61
+331,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Database Field,DBVAL,t,Database Field,1,1,62
+332,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Entity,ENTTY,t,Entity,1,1,62
+333,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,New,NEWWW,t,New,1,1,63
+334,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Edited,EDITD,t,Edited,1,1,63
+335,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Published,PUBSD,t,Published,1,1,63
+336,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Not in Use,NOUSE,t,Not in Use,1,1,63
+337,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Basic,ORGBS,t,Organization Basic,1,1,63
+338,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Units,OUTSS,t,Organization Units,1,1,63
+339,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Unit Basic,OUTBS,t,Organization Unit Basic,1,1,63
+340,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Roles,ORLSS,t,Organization Roles,1,1,63
+341,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Role Basic,ORLBS,t,Organization Role Basic,1,1,63
+342,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Chart,ORGCT,t,Organization Chart,1,1,63
+343,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Organization Unit Employees,OUTES,t,Organization Unit Employees,1,1,63
+344,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Basic,EMPBS,t,Employee Basic,1,1,63
+345,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Demographics,EMPDM,t,Employee Demographics,1,1,63
+346,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Personal Details,EMPPD,t,Employee Personal Details,1,1,63
+347,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Settings,EMPST,t,Employee Settings,1,1,63
+348,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Certification,EMPCT,t,Employee Certification,1,1,63
+349,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Education,EMPED,t,Employee Education,1,1,63
+350,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Work Experience,EMPWE,t,Employee Work Experience,1,1,63
+351,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Leave Request,EMPLR,t,Employee Leave Request,1,1,63
+352,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Leave Balance,EMPLB,t,Employee Leave Balance,1,1,63
+353,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Attendance,EMPAT,t,Employee Attendance,1,1,63
+354,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Assessment Form,EMPAF,t,Employee Assessment Form,1,1,63
+355,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Assessment Schedule,EMPAS,t,Employee Assessment Schedule,1,1,63
+356,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Employee Objectives,EMPOB,t,Employee Objectives,1,1,63
+357,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Users,USRSS,t,System Users,1,1,63
+358,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Basic,USRBS,t,System User Basic,1,1,63
+359,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Permissions,PRMSS,t,System Permissions,1,1,63
+360,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System Permission Basic,PRMBS,t,System Permission Basic,1,1,63
+361,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Roles,URLSS,t,System User Roles,1,1,63
+362,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Basic,URLBS,t,System User Role Basic,1,1,63
+363,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Permissions,URPSS,t,System User Role Permissions,1,1,63
+364,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,System User Role Permission Basic,URPBS,t,System User Role Permission Basic,1,1,63
+365,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Critical,CRITI,t,Critical,1,1,65
+366,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,High,HIGHH,t,High,1,1,65
+367,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Medium,MEDUM,t,Medium,1,1,65
+368,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Low,LOWWW,t,Low,1,1,65
+369,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Physical,PHYSC,t,Physical,1,1,66
+370,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Verbal,VERBL,t,Verbal,1,1,66
+371,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Fire Accident,FIRAC,t,Fire Accident,1,1,67
+372,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Work Place Issue,WPLAC,t,Work Place Issue,1,1,67
+373,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Mail,MAILL,t,Mail,1,1,68
+374,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Verbal,VERBA,t,Verbal,1,1,68
+375,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Written,WRITN,t,Written,1,1,68
+376,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Car,ASCAR,t,Car,1,1,69
+377,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Bike,BIKES,t,Bike,1,1,69
+378,2018-02-13 21:57:00+05:30,2018-03-03 21:57:00+05:30,t,Laptop,LAPTP,t,Laptop,1,1,69
+379,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Gazetted Holiday,GAZET,t,Gazetted Holiday,1,1,70
+380,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Restricted Holiday,RESTR,t,Restricted Holiday ,1,1,70
+381,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Bridge Holiday,BRIDE,t,Bridge Holiday ,1,1,70
+382,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Federal Holiday,FEDER,t,Federal Holiday ,1,1,70
+383,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Statutory Holiday,STATU,t,Statutory Holiday ,1,1,70
+384,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,10-30,DIPE1,t,10-30,1,1,71
+385,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,30-50,DIPE2,t,30-50,1,1,71
+386,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,50-70,DIPE3,t,50-70,1,1,71
+387,2018-05-11 21:57:00+05:30,2018-05-11 21:57:00+05:30,t,Above 70,DIPE4,t,Above 70,1,1,71
+388,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Thought Processes,SKIL1,t,Thought Processes,1,1,72
+389,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,"Administrative, Business, and Finance",SKIL2,t,"Administrative, Business, and Finance",1,1,72
+390,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Industry Specific Skills,SKIL3,t,Industry Specific Skills,1,1,72
+391,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Communication and Interpersonal,SKIL4,t,Communication and Interpersonal,1,1,72
+392,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Leadership and Management,SKIL5,t,Leadership and Management,1,1,72
+393,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Personal Skills,SKIL6,t,Personal Skills,1,1,72
+394,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sales and Marketing,SKIL7,t,Sales and Marketing,1,1,72
+395,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Technology,SKIL8,t,Technology,1,1,72
+396,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,General Skills,SKIL9,t,General Skills,1,1,72
+397,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Day Shift,SHIF1,t,Day Shift,1,1,73
+398,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Night Shift,SHIF2,t,Night Shift,1,1,73
+399,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Rotational Shift,SHIF3,t,Rotational Shift,1,1,73
+400,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Better Employment Conditions,EMBEC,t,Better Employment Conditions,1,1,74
+401,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Career Prospect,EMCPR,t,Career Prospect,1,1,74
+402,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Death,EMDTH,t,Death,1,1,74
+403,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dessertion,EMDES,t,Dessertion,1,1,74
+404,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dismissed,EMDMS,t,Dismissed,1,1,74
+405,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dissatisfaction,EMDST,t,Dissatisfaction,1,1,74
+406,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Emigrating,EMEMG,t,Emigrating,1,1,74
+407,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Health,EMHLT,t,Health,1,1,74
+408,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Higher Pay,EMPAY,t,Higher Pay,1,1,74
+409,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Personality Conflicts,EMPCF,t,Personality Conflicts,1,1,74
+410,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Retirement,EMRTR,t,Retirement,1,1,74
+411,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Retrenchment,EMTRN,t,Retrenchment,1,1,74
+412,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Resignation letter submitted,ECRLS,t,Resignation letter submitted,1,1,75
+413,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Exit interview conducted,ECEIC,t,Exit interview conducted,1,1,75
+414,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,ID card returned,ECIDR,t,ID card returned,1,1,75
+415,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Asset details verified,ECADV,f,Asset details verified,1,1,75
+416,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Monitor,ASTP1,f,Monitor,1,1,76
+417,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,CPU,ASTP2,f,CPU,1,1,76
+418,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Keyboard,ASTP3,f,Keyboard,1,1,76
+419,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Mouse,ASTP4,f,Mouse,1,1,76
+420,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,AIO System,ASTP5,f,AIO System,1,1,76
+421,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Workstation,ASTP6,f,Workstation,1,1,76
+422,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Active,ASST1,f,Active,1,1,77
+423,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Inactive,ASST2,f,Inactive,1,1,77
+424,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Allocated,ASST3,f,Allocated,1,1,77
+425,2018-05-21 21:57:00+05:30,2018-05-21 21:57:00+05:30,t,Basic,BASIC,t,Basic,1,1,1
+426,2018-05-21 21:57:00+05:30,2018-05-21 21:57:00+05:30,t,Net,NETTT,t,Net,1,1,1
+427,2018-05-21 21:57:00+05:30,2018-05-21 21:57:00+05:30,t,Gross,GROSS,t,Gross,1,1,1
+428,2018-05-21 21:57:00+05:30,2018-05-21 21:57:00+05:30,t,Company Contribution,CMPCB,t,Company Contribution,1,1,1
+429,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Papua New Guinea,CNTR1,f,Papua New Guinea,1,1,78
+430,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,375,CCDE1,f,375,1,1,79
+431,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Highlands Region,PROV1,t,Highlands Region,1,1,80
+432,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell,ATMK1,f,Dell,1,1,81
+433,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo,ATMK2,f,Lenovo,1,1,81
+434,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Laptop,ASTP7,f,Laptop,1,1,76
+435,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple,ATMK3,f,Apple,1,1,81
+436,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Asus,ATMK4,f,Asus,1,1,81
+437,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung,ATMK5,f,Samsung,1,1,81
+438,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Microsoft,ATMK6,f,Microsoft,1,1,81
+439,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP,ATMK7,f,HP,1,1,81
+440,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Logitech,ATMK8,f,Logitech,1,1,81
+441,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Optiplex 3020,ATMD1,f,Optiplex 3020,1,1,82
+442,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,D06D,ATMD2,f,D06D,1,1,82
+443,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Optiplex 780 SFF,ATMD3,f,Optiplex 780 SFF,1,1,82
+444,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Optiplex 790 SFF,ATMD4,f,Optiplex 790 SFF,1,1,82
+445,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell Precision- T5500,ATMD5,f,Dell Precision- T5500,1,1,82
+446,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Thinkcentre CJQ,ATMD6,f,Thinkcentre CJQ,1,1,82
+447,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,MK142H,ATMD7,f,MK142H,1,1,82
+448,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,K555L,ATMD8,f,K555L,1,1,82
+449,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,X552L,ATMD9,f,X552L,1,1,82
+450,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,X550J RTL8821AE,ATM10,f,X550J RTL8821AE,1,1,82
+451,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,X553M,ATM11,f,X553M,1,1,82
+452,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,X550Z,ATM12,f,X550Z,1,1,82
+453,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,K501L,ATM13,f,K501L,1,1,82
+454,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,E2214Hb,ATM14,f,E2214Hb,1,1,82
+455,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,1N19206,ATM15,f,1N19206,1,1,82
+456,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,E2414Ht,ATM16,f,E2414Ht,1,1,82
+457,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,S2240L,ATM17,f,S2240L,1,1,82
+458,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KB212-B,ATM18,f,KB212-B,1,1,82
+459,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KB4021,ATM19,f,KB4021,1,1,82
+460,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KB4022,ATM20,f,KB4022,1,1,82
+461,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KB4023,ATM21,f,KB4023,1,1,82
+462,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KB4024,ATM22,f,KB4024,1,1,82
+463,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KBRF3971,ATM23,f,KBRF3971,1,1,82
+464,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,1455,ATM24,f,1455,1,1,82
+465,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,SK-2885,ATM25,f,SK-2885,1,1,82
+466,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,KU-0316,ATM26,f,KU-0316,1,1,82
+467,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Y-U0009,ATM27,f,Y-U0009,1,1,82
+468,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,MS111P,ATM28,f,MS111P,1,1,82
+469,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,MS111-L,ATM29,f,MS111-L,1,1,82
+470,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,MORFFHL,ATM30,f,MORFFHL,1,1,82
+471,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,1454,ATM31,f,1454,1,1,82
+472,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,2018,YEAR1,f,2018,1,1,83
+473,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,f,Not Working,ASST4,f,Not Working,1,1,77
+474,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Monthly,ALPMO,t,Monthly,1,1,84
+475,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Quarterly,ALPQU,t,Quarterly,1,1,84
+476,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Half-Yearly,ALPHY,t,Half-Yearly,1,1,84
+477,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Yearly,ALPYE,t,Yearly,1,1,84
+478,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Phone,ASTP8,f,Phone,1,1,76
+479,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Vehicle,ASTP9,f,Vehicle,1,1,76
+480,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Alienware,ATMK9,f,Alienware,1,1,81
+481,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Acer,AMK10,f,Acer,1,1,81
+482,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toshiba,AMK11,f,Toshiba,1,1,81
+483,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony,AMK12,f,Sony,1,1,81
+484,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Micromax,AMK13,f,Micromax,1,1,81
+485,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Redmi,AMK14,f,Redmi,1,1,81
+486,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,iPhone,AMK15,f,iPhone,1,1,81
+487,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honor,AMK16,f,Honor,1,1,81
+488,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Nokia,AMK17,f,Nokia,1,1,81
+489,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Oppo,AMK18,f,Oppo,1,1,81
+490,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Panasonic,AMK19,f,Panasonic,1,1,81
+491,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Audi,AMK20,f,Audi,1,1,81
+492,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,BMW,AMK21,f,BMW,1,1,81
+493,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honda,AMK22,f,Honda,1,1,81
+494,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Hyundai,AMK23,f,Hyundai,1,1,81
+495,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Ford,AMK24,f,Ford,1,1,81
+496,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toyota,AMK25,f,Toyota,1,1,81
+497,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Suzuki,AMK26,f,Suzuki,1,1,81
+498,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volvo,AMK27,f,Volvo,1,1,81
+499,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Jaguar,AMK28,f,Jaguar,1,1,81
+500,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volkswagen,AMK29,f,Volkswagen,1,1,81
+501,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Asus ROG GR8,ATM32,f,Asus ROG GR8,1,1,82
+502,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Asus (V221IDUK-BA166T),ATM33,f,Asus (V221IDUK-BA166T),1,1,82
+503,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Asus V221ICUK-BA039T,ATM34,f,Asus V221ICUK-BA039T,1,1,82
+504,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell Inspiron 3268,ATM35,f,Dell Inspiron 3268,1,1,82
+505,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell OptiPlex 7450,ATM36,f,Dell OptiPlex 7450,1,1,82
+506,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell Inspiron 3250,ATM37,f,Dell Inspiron 3250,1,1,82
+507,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple MNED2HN/A iMac,ATM38,f,Apple MNED2HN/A iMac,1,1,82
+508,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Imac Apple I Mac Mk452 Hn,ATM39,f,Imac Apple I Mac Mk452 Hn,1,1,82
+509,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple MMQA2HN/A iMac,ATM40,f,Apple MMQA2HN/A iMac,1,1,82
+510,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP Slimline 260-A062IL (W2T64AA),ATM41,f,HP Slimline 260-A062IL (W2T64AA),1,1,82
+511,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP Slimline 260-P020IL,ATM42,f,HP Slimline 260-P020IL,1,1,82
+512,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP 280 G3,ATM43,f,HP 280 G3,1,1,82
+513,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Alienware Alpha,ATM44,f,Alienware Alpha,1,1,82
+514,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Alienware Alpha R2,ATM45,f,Alienware Alpha R2,1,1,82
+515,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo V520 Tower(10NLA011IH),ATM46,f,Lenovo V520 Tower(10NLA011IH),1,1,82
+516,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo V520 Tower(10NLA01FIH),ATM47,f,Lenovo V520 Tower(10NLA01FIH),1,1,82
+517,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Acer Aspire C20-720,ATM48,f,Acer Aspire C20-720,1,1,82
+518,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Acer Veriton M200 (UX.VJSSI.W85),ATM49,f,Acer Veriton M200 (UX.VJSSI.W85),1,1,82
+519,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toshiba DX735-D3330,ATM50,f,Toshiba DX735-D3330,1,1,82
+520,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toshiba DX735-D3360,ATM51,f,Toshiba DX735-D3360,1,1,82
+521,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung Series 7 DP700A7D-S03US,ATM52,f,Samsung Series 7 DP700A7D-S03US,1,1,82
+522,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony VAIO SVZ13115GNXI,ATM53,f,Sony VAIO SVZ13115GNXI,1,1,82
+523,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,ASUS F555LA-AB31,ATM54,f,ASUS F555LA-AB31,1,1,82
+524,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,ASUS X551MA,ATM55,f,ASUS X551MA,1,1,82
+525,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,ASUS Zenbook UX305LA,ATM56,f,ASUS Zenbook UX305LA,1,1,82
+526,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Dell Inspiron 15,ATM57,f,Dell Inspiron 15,1,1,82
+527,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,DELL Inspiron 7570,ATM58,f,DELL Inspiron 7570,1,1,82
+528,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,DELL Inspiron 5379,ATM59,f,DELL Inspiron 5379,1,1,82
+529,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple MD101HN/A MacBook Pro,ATM60,f,Apple MD101HN/A MacBook Pro,1,1,82
+530,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple (MPXT2) MacBook Pro,ATM61,f,Apple (MPXT2) MacBook Pro,1,1,82
+531,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Apple MPXQ2 MacBook Pro,ATM62,f,Apple MPXQ2 MacBook Pro,1,1,82
+532,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP 15-bs145tu,ATM63,f,HP 15-bs145tu,1,1,82
+533,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP 14q-BU005TU 2017,ATM64,f,HP 14q-BU005TU 2017,1,1,82
+534,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,HP 15 15-bs615TU 2017,ATM65,f,HP 15 15-bs615TU 2017,1,1,82
+535,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Alienware AW17R4-7003SLV-PUS17,ATM66,f,Alienware AW17R4-7003SLV-PUS17,1,1,82
+536,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Alienware AW13R3-7000SLV-PUS13.3,ATM67,f,Alienware AW13R3-7000SLV-PUS13.3,1,1,82
+537,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo Ideapad 720s,ATM68,f,Lenovo Ideapad 720s,1,1,82
+538,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo B490 59-369345,ATM69,f,Lenovo B490 59-369345,1,1,82
+539,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo G50-70 59-413724,ATM70,f,Lenovo G50-70 59-413724,1,1,82
+540,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,SF713-51-M51W,ATM71,f,SF713-51-M51W,1,1,82
+541,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,SF714-51T-M9H0,ATM72,f,SF714-51T-M9H0,1,1,82
+542,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,SF514-52T-50AQ,ATM73,f,SF514-52T-50AQ,1,1,82
+543,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,A40-C-BTO,ATM74,f,A40-C-BTO,1,1,82
+544,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,A40-C1443,ATM75,f,A40-C1443,1,1,82
+545,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,A40-D-BTO,ATM76,f,A40-D-BTO,1,1,82
+546,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung NP-N100S-E01IN,ATM77,f,Samsung NP-N100S-E01IN,1,1,82
+547,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung ATIV NP450R4V-X01TH,ATM78,f,Samsung ATIV NP450R4V-X01TH,1,1,82
+548,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung NP300E5E-A041N,ATM79,f,Samsung NP300E5E-A041N,1,1,82
+549,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony VJS131X0211B,ATM80,f,Sony VJS131X0211B,1,1,82
+550,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony VAIO Z Canvas,ATM81,f,Sony VAIO Z Canvas,1,1,82
+551,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony VAIO Pro SVP11213SNBI,ATM82,f,Sony VAIO Pro SVP11213SNBI,1,1,82
+552,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Micromax E311,ATM83,f,Micromax E311,1,1,82
+553,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Micromax Canvas Juice 3 Q392,ATM84,f,Micromax Canvas Juice 3 Q392,1,1,82
+554,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Micromax Spark 4G,ATM85,f,Micromax Spark 4G,1,1,82
+555,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Redmi Note 4,ATM86,f,Redmi Note 4,1,1,82
+556,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Redmi Note 5 pro,ATM87,f,Redmi Note 5 pro,1,1,82
+557,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Redmi Note 5,ATM88,f,Redmi Note 5,1,1,82
+558,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,iPhone X,ATM89,f,iPhone X,1,1,82
+559,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,IPhone 6,ATM90,f,IPhone 6,1,1,82
+560,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,iPhone 7s,ATM91,f,iPhone 7s,1,1,82
+561,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony Xperia,ATM92,f,Sony Xperia,1,1,82
+562,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony Xperia R1 Plus,ATM93,f,Sony Xperia R1 Plus,1,1,82
+563,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Sony Xperia XA1,ATM94,f,Sony Xperia XA1,1,1,82
+564,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honor 9 Lite,ATM95,f,Honor 9 Lite,1,1,82
+565,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honor Holly 3,ATM96,f,Honor Holly 3,1,1,82
+566,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honor 7A,ATM97,f,Honor 7A,1,1,82
+567,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Nokia 2,ATM98,f,Nokia 2,1,1,82
+568,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Nokia 6,ATM99,f,Nokia 6,1,1,82
+569,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Nokia 7 plus,AM100,f,Nokia 7 plus,1,1,82
+570,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung Galaxy,AM101,f,Samsung Galaxy,1,1,82
+571,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung Galaxy J6,AM102,f,Samsung Galaxy J6,1,1,82
+572,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Samsung Galaxy J3 Pro,AM103,f,Samsung Galaxy J3 Pro,1,1,82
+573,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo K8,AM104,f,Lenovo K8,1,1,82
+574,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo K8 Note,AM105,f,Lenovo K8 Note,1,1,82
+575,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Lenovo K8 Plus,AM106,f,Lenovo K8 Plus,1,1,82
+576,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Oppo A71,AM107,f,Oppo A71,1,1,82
+577,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Oppo A37f,AM108,f,Oppo A37f,1,1,82
+578,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Oppo F1,AM109,f,Oppo F1,1,1,82
+579,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Panasonic P91,AM110,f,Panasonic P91,1,1,82
+580,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Panasonic P99,AM111,f,Panasonic P99,1,1,82
+581,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Panasonic P71,AM112,f,Panasonic P71,1,1,82
+582,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Audi A3,AM113,f,Audi A3,1,1,82
+583,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Audi A4,AM114,f,Audi A4,1,1,82
+584,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Audi A5,AM115,f,Audi A5,1,1,82
+585,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,BMW X5,AM116,f,BMW X5,1,1,82
+586,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,BMW X1,AM117,f,BMW X1,1,1,82
+587,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,BMW X6,AM118,f,BMW X6,1,1,82
+588,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honda CR-V,AM119,f,Honda CR-V,1,1,82
+589,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honda Amaze,AM120,f,Honda Amaze,1,1,82
+590,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Honda City,AM121,f,Honda City,1,1,82
+591,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Hyundai Eon,AM122,f,Hyundai Eon,1,1,82
+592,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Hyundai Verna,AM123,f,Hyundai Verna,1,1,82
+593,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Hyundai Elantra,AM124,f,Hyundai Elantra,1,1,82
+594,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Ford Figo,AM125,f,Ford Figo,1,1,82
+595,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Ford Aspire,AM126,f,Ford Aspire,1,1,82
+596,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Ford Mustang,AM127,f,Ford Mustang,1,1,82
+597,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toyota Etios,AM128,f,Toyota Etios,1,1,82
+598,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toyota Yaris,AM129,f,Toyota Yaris,1,1,82
+599,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Toyota Camry,AM130,f,Toyota Camry,1,1,82
+600,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Maruti Suzuki Alto 800,AM131,f,Maruti Suzuki Alto 800,1,1,82
+601,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Maruti Suzuki Swift,AM132,f,Maruti Suzuki Swift,1,1,82
+602,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Maruti Suzuki Alto K10,AM133,f,Maruti Suzuki Alto K10,1,1,82
+603,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volvo XC90,AM134,f,Volvo XC90,1,1,82
+604,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volvo XC60,AM135,f,Volvo XC60,1,1,82
+605,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volvo S60,AM136,f,Volvo S60,1,1,82
+606,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Jaguar XJ,AM137,f,Jaguar XJ,1,1,82
+607,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Jaguar XF,AM138,f,Jaguar XF,1,1,82
+608,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Jaguar XE,AM139,f,Jaguar XE,1,1,82
+609,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volkswagen Polo,AM140,f,Volkswagen Polo,1,1,82
+610,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volkswagen Ameo,AM141,f,Volkswagen Ameo,1,1,82
+611,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,Volkswagen Vento,AM142,f,Volkswagen Vento,1,1,82
+612,2018-05-16 21:57:00+05:30,2018-05-16 21:57:00+05:30,t,House,AST10,f,House,1,1,76
+613,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Others(Please specify),OTHPS,f,Others(Please specify),1,1,28
+614,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Analyzing Business Context & Environment,STGY1,f,Analyzing Business Context & Environment,1,1,85
+615,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Current Workforce Profile Analysis,STGY2,f,Current Workforce Profile Analysis,1,1,85
+616,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Gap Analysis,STGY3,f,Gap Analysis,1,1,85
+617,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Cost View,STGY4,f,Cost View,1,1,85
+618,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Summarized Reports,STGY5,f,Summarized Reports,1,1,85
+619,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Org. Structure View,STRC1,f,Org. Structure View,1,1,86
+620,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Structure Overlay,STRC2,f,Structure Overlay,1,1,86
+621,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Gap Analysis,STRC3,f,Gap Analysis,1,1,86
+622,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Cost View,STRC4,f,Cost View,1,1,86
+623,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Summarized Reports,STRC5,f,Summarized Reports,1,1,86
+624,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,View System Requirements,SYST1,f,View System Requirements,1,1,87
+625,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Analyze System Requirements,SYST2,f,Analyze System Requirements,1,1,87
+626,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Priority / Criteria View,SYST3,f,Priority / Criteria View,1,1,87
+627,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Cost View,SYST4,f,Cost View,1,1,87
+628,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Summarized Reports,SYST5,f,Summarized Reports,1,1,87
+629,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Career Website & Portals ,CWAP1,f,Career Website & Portals ,1,1,88
+630,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Social Media ,CWAP2,f,Social Media ,1,1,88
+631,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Full Time,JOBT1,f,Full Time,1,1,89
+632,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Part Time,JOBT2,f,Part Time,1,1,89
+633,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,On-Hold,JOBT3,f,On-Hold,1,1,89
+634,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Contractual,JOBT4,f,Contractual,1,1,89
+635,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Freelance,JOBT5,f,Freelance,1,1,89
+636,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Internship,JOBT6,f,Internship,1,1,89
+637,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Fresher,WRKE1,f,Fresher,1,1,90
+638,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,0-1 year,WRKE2,f,0-1 year,1,1,90
+639,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,1-3 years,WRKE3,f,1-3 years,1,1,90
+640,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,3-5 years,WRKE4,f,3-5 years,1,1,90
+641,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,4-6 years,WRKE5,f,4-6 years,1,1,90
+642,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,6+ years,WRKE5,f,6+ years,1,1,90
+643,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Publish in Website,JBAD1,f,Publish in Website,1,1,91
+644,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,TimesJob,JBAD2,f,TimesJob,1,1,91
+645,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Naukri,JBAD3,f,Naukri,1,1,91
+646,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Indeed,JBAD4,f,Indeed,1,1,91
+647,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Shine,JBAD5,f,Shine,1,1,91
+648,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Under Process,CWAP3,f,Under Process,1,1,92
+649,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Waiting for Approval,CWAP4,f,Waiting for Approval,1,1,92
+650,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,On Hold,CWAP5,f,On Hold,1,1,92
+651,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Filled,CWAP6,f,Filled,1,1,92
+652,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Cancelled,CWAP7,f,Cancelled,1,1,92
+653,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Declined,CWAP8,f,Declined,1,1,92
+654,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,f,Inactive,CWAP9,f,Inactive,1,1,92
+655,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Offer Made,OFRE1,f,Offer Made,1,1,93
+656,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Offer Accepted,OFRE2,f,Offer Accepted,1,1,93
+657,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Offer Declined,OFRE3,f,Offer Declined,1,1,93
+658,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Offer Withdrawn,OFRE4,f,Offer Withdrawn,1,1,93
+659,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Offer Revised,OFRE5,f,Offer Revised,1,1,93
+660,2018-07-04 15:27:00+05:30,2018-07-04 15:27:00+05:30,t,Monthly,MONT1,f,Monthly,1,1,94
+661,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 1 Interview,INTER,f,Level 1 Interview,1,1,95
+662,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 2 Interview,LEVE1,f,Level 2 Interview,1,1,95
+663,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 3 Interview,LEVE2,f,Level 3 Interview,1,1,95
+664,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Postponed/Rescheduled,LEVE3,f,Postponed/Rescheduled,1,1,96
+665,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Not Cleared,WRINT,f,Not Cleared,1,1,96
+666,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Selected,SELCT,f,Selected,1,1,96
+667,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Rejected,REJCT,f,Rejected,1,1,96
+668,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,On Hold,ONHLD,f,On Hold,1,1,96
+669,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Screening,SCRNG,f,Screening,1,1,97
+670,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Interview,INTVW,f,Interview,1,1,97
+671,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Offer,OFFER,f,Offer,1,1,97
+672,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Hired,HIRED,f,Hired,1,1,97
+673,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,New,SCNEW,f,Screening New,1,1,98
+674,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Evaluated,EVTED,f,Evaluated,1,1,98
+675,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Contacted,CNTED,f,Contacted,1,1,98
+676,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Not Contacted,NTCND,f,Not Contacted,1,1,98
+677,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Contact in Future,CNFUT,f,Contact in Future,1,1,98
+678,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Rejected,RJECT,f,Rejected,1,1,98
+679,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Waiting for Evaluation,WAEVN,f,Waiting for Evaluation,1,1,98
+680,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Attempted to Contact,ATCNT,f,Attempted to Contact,1,1,98
+681,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Qualified,QUFID,f,Qualified,1,1,98
+682,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Interview to be Scheduled,INTSD,f,Interview to be Scheduled,1,1,99
+683,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Interview Scheduled ,INSHD,f,Interview Scheduled ,1,1,99
+684,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Interview in Progress,INTPG,f,Interview in Progress,1,1,99
+685,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,On Hold,ONHLD,f,On Hold,1,1,99
+686,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Joined,JOIND,f,Joined,1,1,100
+687,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,No Show,NOSHW,f,No Show,1,1,100
+688,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Onboarded - Employee,ONBRD,f,Onboarded - Employee,1,1,100
+689,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Walk In,WLKIN,f,Walk In,1,1,101
+690,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Internal,INTAL,f,Internal,1,1,101
+691,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Employee Referral,EMREF,f,Employee Referral,1,1,101
+692,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,External Referral,EXREF,f,External Referral,1,1,101
+693,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Careers Inbox,CAINB,f,Careers Inbox,1,1,101
+694,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Naukri,NAURI,f,Naukri,1,1,101
+695,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Indeed,INDED,f,Indeed,1,1,101
+696,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Timesjob,TIMES,f,Timesjob,1,1,101
+697,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,National Contract Expatriate,EXEEX,f,PUBCE,1,1,102
+698,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Executive,PUBST,f,EXE,1,1,102
+699,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,National Public Servant,PUBCP,f,PUB,1,1,102
+700,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,National Contract,PUBCC,f,PUBC,1,1,102
+701,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Approved,APROW,f,Approved,1,1,103
+702,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Rejected,REJET,f,Rejected,1,1,103
+703,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Team Introduction ,TEMIN,f,Team Introduction ,1,1,104
+704,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Partcipation in team meetings,PAITM,f,Partcipation in team meetings,1,1,104
+705,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Project Orientation,PJTON,f,Project Orientation,1,1,104
+706,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Company Policies & Procedures Overview ,CPAPR,f,Company Policies & Procedures Overview,1,1,105
+707,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Organizational Norms,ORGNS,f,Organizational Norms,1,1,105
+708,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Roles &  Respnsibilities,ROLRS,f,Roles &  Respnsibilities,1,1,106
+709,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Training Meterials,TRNMT,f,Training Meterials,1,1,106
+710,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Knowledge Transfer,KNGTR,f,Knowledge Transfer,1,1,106
+711,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Document Verification,DOCVN,f,Document Verification,1,1,107
+712,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Background Verification,BCKVE,f,Background Verification,1,1,107
+713,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,"Asset Allotment-ID Card,Access Card,Workstation,Vehicle",ASTAL,f,"Asset Allotment-ID Card,Access Card,Workstation,Vehicle",1,1,107
+714,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,New,JRSN1,f,New,1,1,108
+715,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Employee Exit/Replacement,JRSN2,f,Employee Exit/Replacement,1,1,108
+716,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,Termination,JRSN3,f,Termination,1,1,108
+717,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,M1,GRD01,f,M1,1,1,109
+718,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,M2,GRD02,f,M2,1,1,109
+719,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,M3,GRD03,f,M3,1,1,109
+720,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,M4,GRD04,f,M4,1,1,109
+721,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,L1,GRD05,f,L1,1,1,109
+722,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,L2,GRD06,f,L2,1,1,109
+723,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,L3,GRD07,f,L3,1,1,109
+724,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,t,L4,GRD08,f,L4,1,1,109
+725,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS09,GRD09,f,PS09,1,1,109
+726,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS10,GRD10,f,PS10,1,1,109
+727,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS11,GRD11,f,PS11,1,1,109
+728,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS12,GRD12,f,PS12,1,1,109
+729,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS13,GRD13,f,PS13,1,1,109
+730,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS14,GRD14,f,PS14,1,1,109
+731,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS15,GRD15,f,PS15,1,1,109
+732,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS16,GRD16,f,PS16,1,1,109
+733,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS17,GRD17,f,PS17,1,1,75
+734,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS18,GRD18,f,PS18,1,1,109
+735,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,PS19,GRD19,f,PS19,1,1,109
+736,2018-07-13 15:27:00+05:30,2018-07-13 15:27:00+05:30,f,EX05,GRD20,f,EX05,1,1,109
+737,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Interview to be Scheduled,REJC1,f,Interview to be Scheduled,1,1,96
+738,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Interview Scheduled ,REJC2,f,Interview Scheduled ,1,1,96
+739,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Interview in Progress,REJC3,f,Interview in Progress,1,1,96
+740,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 1 Cleared,REJC4,f,Level 1 Cleared,1,1,96
+741,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 2 Cleared,REJC5,f,Level 2 Cleared,1,1,96
+742,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Level 3 Cleared,REJC6,f,Level 3 Cleared,1,1,96
+743,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Admin Policy,POLC1,f,Admin Policy,1,1,110
+744,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,HR Policy,POLC2,f,HR Policy,1,1,110
+745,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,IT Policy,POLC3,f,IT Policy,1,1,110
+746,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Logo,STAD1,f,Logo,1,1,111
+747,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Signature,STAD2,f,Signature,1,1,111
+748,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Word,STAD3,f,Word,1,1,111
+749,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,PDF,STAD4,f,PDF,1,1,111
+750,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Presentation,STAD5,f,Presentation,1,1,111
+751,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Externally Only,RINS1,f,Externally Only,1,1,112
+752,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Do Not Post,RINS2,f,Do Not Post,1,1,112
+753,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Internally and Externally,RINS3,f,Internally and Externally,1,1,112
+754,2018-07-10 15:27:00+05:30,2018-07-10 15:27:00+05:30,t,Internally Only,RINS4,f,Internally Only,1,1,112
+755,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:30,t,Not Recommended,NOREC,f,Not Recommended,1,1,113
+756,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:31,t,Require Additional Evaluation,REAEV,f,Require Additional Evaluation,1,1,113
+757,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:32,t,Recommended with Reservations,RERES,f,Recommended with Reservations,1,1,113
+758,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:33,t,Recommended,RECOM,f,Recommended,1,1,113
+759,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Highly Recommended,HIREC,f,Highly Recommended,1,1,113
+760,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Project Source ,DEPT1,f,Project Source ,1,1,114
+761,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Project KT,DEPT2,f,Project KT,1,1,114
+762,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Project Handled,DEPT3,f,Project Handled,1,1,114
+763,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Project Documentation,DEPT4,f,Project Documentation,1,1,114
+764,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Network KT,NTWC1,f,Network KT,1,1,115
+765,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Network Password,NTWC2,f,Network Password,1,1,115
+766,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,PF Account,ACCL1,f,PF Account,1,1,116
+767,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,ESI Account,ACCL2,f,ESI Account,1,1,116
+768,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Panch Access Removed,ADMN1,f,Panch Access Removed,1,1,117
+769,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Mail Access Removed,ADMN2,f,Mail Access Removed,1,1,117
+770,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Others,OTHP1,f,Others,1,1,74
+771,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Permanent,PERMT,f,Permanent,1,1,118
+772,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Temporary,TEMPY,f,Temporary,1,1,118
+773,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Production Transfer,PRTNR,f,Production Transfer,1,1,119
+774,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Replacement Transfer,RETNR,f,Replacement Transfer,1,1,119
+775,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Rotation Transfer,ROTNR,f,Rotation Transfer,1,1,119
+776,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Shift Transfer,SFTNR,f,Shift Transfer,1,1,119
+777,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Penal Transfer,PETNR,f,Penal Transfer,1,1,119
+778,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Remedial Transfer,RETNR,f,Remedial Transfer,1,1,119
+779,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Personal Issues,PRISE,f,Personal Issues,1,1,120
+780,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Interest and abilities,INTAB,f,Interest and abilities,1,1,120
+781,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,High priority,HIPRY,f,High priority,1,1,120
+782,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Others,REOTH,f,Others,1,1,120
+783,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Poor Performance,POPER,f,Poor Performance,1,1,121
+784,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Lack of skills,LCSKL,f,Lack of skills,1,1,121
+785,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Eliminating the role,ELROL,f,Eliminating the role,1,1,121
+786,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Misconduct,MSCOD,f,Misconduct,1,1,121
+787,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Indiscipline,INDSP,f,Indiscipline,1,1,121
+788,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,Insubordination,INSBN,f,Insubordination,1,1,121
+789,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,"If this position was left vacant, it would cause serious difficulties in achieving operational and strategic goals ?",KEYR1,f,"If this position was left vacant, it would cause serious difficulties in achieving operational and strategic goals ?",1,1,122
+790,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position directly impacts organization relationships and partnerships ?,KEYR2,f,This position directly impacts organization relationships and partnerships ?,1,1,122
+791,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,"If this position were left vacant, it would cause serious difficulties in delivering on our commitments and corporate priorities ?",KEYR3,f,"If this position were left vacant, it would cause serious difficulties in delivering on our commitments and corporate priorities ?",1,1,122
+792,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position requires a high degree of specialized/corporate knowledge transfer to ensure continuity in the performance of the function ?,KEYR4,f,This position requires a high degree of specialized/corporate knowledge transfer to ensure continuity in the performance of the function ?,1,1,122
+793,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,"If this position were left vacant, it would be difficult to delegate the duties assigned to this role ?",KEYR5,f,"If this position were left vacant, it would be difficult to delegate the duties assigned to this role ?",1,1,122
+794,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position would be difficult to fill because it requires specialized expertise and skills/knowledge that is not readily available ?,KEYR6,f,This position would be difficult to fill because it requires specialized expertise and skills/knowledge that is not readily available ?,1,1,122
+795,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position would be difficult to fill because the internal pool for this position is less or not available ?,KEYR7,f,This position would be difficult to fill because the internal pool for this position is less or not available ?,1,1,122
+796,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position would be difficult to fill because of its location ?,KEYR8,f,This position would be difficult to fill because of its location ?,1,1,122
+797,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position would be difficult to fill because of its Shift/Work Time ?,KEYR9,f,This position would be difficult to fill because of its Shift/Work Time ?,1,1,122
+798,2018-09-13 15:27:00+05:30,2018-09-13 15:27:00+05:30,t,This position would be difficult to fill because of specialized and rich experience ?,KEY10,f,This position would be difficult to fill because of specialized and rich experience ?,1,1,122
+799,2018-09-28 03:29:38.264866+05:30,2018-10-02 00:13:13.83088+05:30,t,A1 B +,,f,A1 B +,1,1,13
+800,2018-09-13 21:57:00+05:30,2018-09-13 21:57:00+05:30,t,Earned Leave,ERNLV,f,Earned Leave,1,1,27
+801,2018-10-05 23:46:29.293637+05:30,2018-10-05 23:46:29.293703+05:30,t,ICICI Bank,,f,Bank Of Baroda,1,1,32
+802,2018-10-05 23:47:01.031992+05:30,2018-10-05 23:47:01.032077+05:30,t,BOB,,f,Bank Of Baroda,1,1,32
+803,2018-10-05 23:47:45.823385+05:30,2018-10-05 23:47:45.823448+05:30,t,HDFC Bank,,f,HDFC Bank,1,1,32
+804,2018-10-05 23:48:16.749695+05:30,2018-10-05 23:48:16.749762+05:30,t,Indian Bank,,f,Indian Bank,1,1,32
+805,2018-10-05 23:48:38.977614+05:30,2018-10-05 23:48:38.97768+05:30,t,Syndicate Bank,,f,Syndicate Bank,1,1,32
+806,2018-10-05 23:49:18.659673+05:30,2018-10-05 23:49:18.659744+05:30,t,Canara Bank,,f,Canara Bank,1,1,32
+807,2018-10-05 23:50:06.4185+05:30,2018-10-05 23:50:06.418607+05:30,t,Kotak Mahindra Bank,,f,Kotak Mahindra Bank,1,1,32
+808,2018-10-05 23:51:04.483507+05:30,2018-10-05 23:51:04.483571+05:30,t,Tamil Nadu Mercantile Bank,,f,Tamil Nadu Mercantile Bank,1,1,32
+809,2018-10-06 00:00:12.24088+05:30,2018-10-06 00:00:12.240946+05:30,t,Vijaya Bank,,f,Vijaya Bank,1,1,32
+810,2018-10-06 00:01:59.593243+05:30,2018-10-06 00:01:59.593289+05:30,t,Lakshmi Vilas Bank,,f,Lakshmi Vilas Bank,1,1,32
+811,2018-10-06 00:02:36.547866+05:30,2018-10-06 00:02:36.547934+05:30,t,South Indian Bank,,f,South Indian Bank,1,1,32
+812,2018-10-06 03:17:42.917451+05:30,2018-10-06 03:17:42.917517+05:30,t,Karur Vysya Bank,,f,Karur Vysya Bank,1,1,32
+813,2018-10-06 03:22:54.500463+05:30,2018-10-06 03:22:54.500526+05:30,t,Central Bank of India,,f,Central Bank of India,1,1,32
+814,2018-10-06 03:47:28.951814+05:30,2018-10-06 03:47:28.951909+05:30,t,Bank of India,,f,BOI,1,1,32
+815,2018-10-18 01:43:15.261595+05:30,2018-10-18 01:43:15.26167+05:30,t,Core Java,TCP09,f,Core Java,1,1,35
+816,2018-10-18 01:43:28.00186+05:30,2018-10-18 01:43:28.001936+05:30,t,Android SDK,TCP10,f,Android SDK,1,1,35
+817,2018-10-18 01:43:48.386476+05:30,2018-10-18 01:43:48.386548+05:30,t,Objective C,TCP11,f,Objective C,1,1,35
+818,2018-10-18 01:44:01.415016+05:30,2018-10-18 01:44:01.415118+05:30,t,XML,TCP12,f,XML,1,1,35
+819,2018-10-18 01:44:13.289736+05:30,2018-10-18 01:44:13.289814+05:30,t,Backend Skills,TCP13,f,Backend Skills,1,1,35
+820,2018-10-18 01:45:04.11173+05:30,2018-10-23 02:11:26.167789+05:30,t,"Mobile Framework Expertise  (iOS, Android etc.,)",TCP14,f,"Expertise in iOS, Android and  other mobile frameworks",1,1,35
+821,2018-10-18 01:45:21.222628+05:30,2018-10-23 02:12:40.458693+05:30,t,Business processes optimization across various frameworks,TCP15,f,"Proven ability to design, optimize and integrate business processes across disparate systems and mobile technologies",1,1,35
+822,2018-10-18 01:45:50.564695+05:30,2018-10-23 02:14:21.939916+05:30,t,Enterprise mobile software deployment,TCP16,f,Demonstrated deployments of enterprise/ consumer-facing mobile software systems using industry standard environments for iOS & Android,1,1,35
+823,2018-10-18 01:46:01.527167+05:30,2018-10-23 02:16:14.303682+05:30,f,Excellent analysis skills and the ability to develop processes and methodologies,TCP17,f,Excellent analysis skills and the ability to develop processes and methodologies,1,1,35
+824,2018-10-18 01:46:13.616866+05:30,2018-10-18 01:46:13.616942+05:30,t,"Ability to rapidly learn and take advantage of new concepts, business models, and technologies",TCP18,f,"Ability to rapidly learn and take advantage of new concepts, business models, and technologies",1,1,35
+825,2018-10-18 01:46:27.956555+05:30,2018-10-18 01:46:27.956633+05:30,t,Experience with Enterprise Mobile Device Management (MDM) solutions,TCP19,f,Experience with Enterprise Mobile Device Management (MDM) solutions,1,1,35
+826,2018-10-18 01:50:57.222676+05:30,2018-10-18 01:50:57.222754+05:30,t,Attitude,BCP07,f,Attitude,1,1,36
+827,2018-10-18 01:51:11.837478+05:30,2018-10-18 01:51:11.837566+05:30,t,Team Work,BCP08,f,Team Work,1,1,36
+828,2018-10-18 01:52:01.487732+05:30,2018-10-18 01:52:01.487802+05:30,t,Coaching & Mentoring,BCP09,f,Coaching & Mentoring,1,1,36
+829,2018-10-18 01:53:05.717346+05:30,2018-10-18 01:53:05.717421+05:30,t,Analytical Skills,FCP03,f,Analytical Skills,1,1,43
+830,2018-10-18 01:53:28.834501+05:30,2018-10-18 02:08:23.632548+05:30,t,Strategic Skills,FCP04,f,Strategic Skills,1,1,43
+831,2018-10-18 01:54:10.390407+05:30,2018-10-18 01:54:10.390535+05:30,t,Communication Skills,FCP05,f,Communication Skills,1,1,43
+832,2018-10-18 01:54:24.983941+05:30,2018-10-18 01:54:24.984013+05:30,t,Logical Reasoning,FCP06,f,Logical Reasoning,1,1,43
+833,2018-10-18 01:55:45.579808+05:30,2018-10-18 01:55:45.579877+05:30,t,Ability to accommodate,BCP10,f,Accommodative Skills,1,1,36
+834,2018-10-18 01:56:59.47524+05:30,2018-10-18 01:56:59.475314+05:30,t,Ability to apply knowledge,FCP07,f,Ability to apply knowledge,1,1,43
+835,2018-10-18 01:57:33.942146+05:30,2018-10-18 01:57:33.942215+05:30,t,Decision Making,FCP08,f,Decision Making,1,1,43
+836,2018-10-18 02:00:33.053421+05:30,2018-10-18 02:00:33.053492+05:30,f,"Expertise in iOS, Android and  other mobile frameworks",TCP20,f,"Expertise in iOS, Android and  other mobile frameworks",1,1,35
+837,2018-10-18 02:00:43.836811+05:30,2018-10-18 02:00:43.836886+05:30,f,"Proven ability to design, optimize and integrate business processes across disparate systems and mobile technologies",TCP21,f,"Proven ability to design, optimize and integrate business processes across disparate systems and mobile technologies",1,1,35
+838,2018-10-18 02:01:00.562608+05:30,2018-10-18 02:01:00.562682+05:30,f,Demonstrated deployments of enterprise/ consumer-facing mobile software systems using industry standard environments for iOS & Android,TCP22,f,Demonstrated deployments of enterprise/ consumer-facing mobile software systems using industry standard environments for iOS & Android,1,1,35
+839,2018-10-18 02:01:12.838928+05:30,2018-10-18 02:01:12.839003+05:30,t,"A thorough understanding of OOP, design patterns, iOS, Android, and enterprise in mobile application integration",TCP23,f,"A thorough understanding of OOP, design patterns, iOS, Android, and enterprise in mobile application integration",1,1,35
+840,2018-10-18 02:01:27.109287+05:30,2018-10-18 02:01:27.109375+05:30,f,Excellent analysis skills and the ability to develop processes and methodologies,TCP24,f,Excellent analysis skills and the ability to develop processes and methodologies,1,1,35
+841,2018-10-18 02:01:38.305005+05:30,2018-10-18 02:01:38.305096+05:30,f,"Ability to rapidly learn and take advantage of new concepts, business models, and technologies",TCP25,f,"Ability to rapidly learn and take advantage of new concepts, business models, and technologies",1,1,35
+842,2018-10-18 02:01:49.151341+05:30,2018-10-18 02:01:49.151413+05:30,f,Experience with Enterprise Mobile Device Management (MDM) solutions,TCP26,f,Experience with Enterprise Mobile Device Management (MDM) solutions,1,1,35
+843,2018-10-18 02:02:39.052907+05:30,2018-10-18 02:02:39.052977+05:30,t,Conflict Resolution,BCP11,f,Conflict Resolution,1,1,36
+844,2018-10-18 02:02:52.582798+05:30,2018-10-18 02:02:52.582884+05:30,t,Emotional Intelligence,BCP12,f,Emotional Intelligence,1,1,36
+845,2018-10-18 02:04:01.282384+05:30,2018-10-18 02:04:01.282454+05:30,t,Team Building,BCP13,f,Team Building,1,1,36
+846,2018-10-18 02:04:14.776444+05:30,2018-10-18 02:04:14.77652+05:30,t,Delegation,BCP14,f,Delegation,1,1,36
+847,2018-10-18 02:04:24.549494+05:30,2018-10-23 02:05:41.425513+05:30,f,Coaching,BCP15,f,Coaching,1,1,36
+848,2018-10-18 02:04:35.206219+05:30,2018-10-18 02:04:35.20629+05:30,t,Problem Solving,FCP09,f,Problem Solving,1,1,43
+849,2018-10-18 02:04:51.690467+05:30,2018-10-18 02:04:51.69054+05:30,t,Motivating Skills,BCP16,f,Motivating Skills,1,1,36
+850,2018-10-18 02:05:17.456737+05:30,2018-10-18 02:05:17.456821+05:30,t,Project Management Skills,FCP10,f,Project Management Skills,1,1,43
+851,2018-10-18 02:05:26.070949+05:30,2018-10-18 02:05:26.071052+05:30,t,Work Coordination,FCP11,f,Work Coordination,1,1,43
+852,2018-10-18 02:05:35.542011+05:30,2018-10-18 02:05:35.542086+05:30,t,Performance Management,FCP12,f,Performance Management,1,1,43
+853,2018-10-18 02:06:03.885941+05:30,2018-10-18 02:06:03.886014+05:30,t,Planning Efficiency,FCP13,f,Planning,1,1,43
+854,2018-10-18 02:06:22.374397+05:30,2018-10-18 02:06:22.374515+05:30,t,Open communication,FCP14,f,Open communication,1,1,43
+855,2018-10-18 02:07:58.54969+05:30,2018-10-18 02:07:58.549773+05:30,t,Execution Skills,FCP15,f,Execution Skills,1,1,43
+856,2018-10-18 02:09:59.77326+05:30,2018-10-18 02:09:59.773332+05:30,t,Coding Standard,TCP27,f,Coding Standard,1,1,35
+857,2018-10-18 02:10:10.258003+05:30,2018-10-18 02:10:10.258098+05:30,t,Root Cause Analysis,TCP28,f,Root Cause Analysis,1,1,35
+858,2018-10-18 02:10:19.665535+05:30,2018-10-18 02:10:19.665611+05:30,t,Escalation Handling,TCP29,f,Escalation Handling,1,1,35
+859,2018-10-18 02:11:07.303289+05:30,2018-10-18 02:11:07.30337+05:30,t,Leadership,BCP17,f,Leadership,1,1,36
+860,2018-10-18 02:12:00.573133+05:30,2018-10-18 02:12:00.573208+05:30,t,Communication Skills,TCP30,f,Communication Skills,1,1,35
+861,2018-10-18 02:12:28.846317+05:30,2018-10-18 02:12:28.846387+05:30,t,Critical Thinking,TCP31,f,Critical Thinking,1,1,35
+862,2018-10-18 02:13:06.844749+05:30,2018-10-18 02:13:06.844834+05:30,t,Documentation Skills,TCP32,f,Documentation Skills,1,1,35
+863,2018-10-20 01:08:09.927814+05:30,2018-10-20 01:08:09.92789+05:30,t,Java,TCP33,f,Java,1,1,35
+864,2018-10-17 16:19:25.870333+05:30,2018-10-17 16:19:25.870383+05:30,t,Access Point,AST11,f,Access Point,1,1,76
+865,2018-10-17 16:19:34.89732+05:30,2018-10-17 16:19:34.897368+05:30,t,BladeCenter,AST12,f,BladeCenter,1,1,76
+866,2018-10-17 16:19:43.755219+05:30,2018-10-17 16:19:43.755265+05:30,t,Dongle Wireless,AST13,f,Dongle Wireless,1,1,76
+867,2018-10-17 16:19:53.396331+05:30,2018-10-17 16:19:53.396375+05:30,t,Hard Disk,AST14,f,Hard Disk,1,1,76
+868,2018-10-17 16:20:00.860208+05:30,2018-10-17 16:20:00.860252+05:30,t,Headset,AST15,f,Headset,1,1,76
+869,2018-10-17 16:20:10.364579+05:30,2018-10-17 16:20:10.364629+05:30,t,Laptop Bag,AST16,f,Laptop Bag,1,1,76
+870,2018-10-17 16:20:18.608555+05:30,2018-10-17 16:20:18.608605+05:30,t,Laptop Charger,AST17,f,Laptop Charger,1,1,76
+871,2018-10-17 16:20:30.992662+05:30,2018-10-17 16:20:30.992712+05:30,t,Mobile Charger,AST18,f,Mobile Charger,1,1,76
+872,2018-10-17 16:20:40.159431+05:30,2018-10-17 16:20:40.159473+05:30,t,Mobile Handheld,AST19,f,Mobile Handheld,1,1,76
+873,2018-10-17 16:20:48.92843+05:30,2018-10-17 16:20:48.928475+05:30,t,Network Switch,AST20,f,Network Switch,1,1,76
+874,2018-10-17 16:20:55.638658+05:30,2018-10-17 16:20:55.638703+05:30,t,Printer,AST21,f,Printer,1,1,76
+875,2018-10-17 16:21:02.238976+05:30,2018-10-17 16:21:02.239028+05:30,t,Projector,AST22,f,Projector,1,1,76
+876,2018-10-17 16:21:10.197228+05:30,2018-10-17 16:21:10.197287+05:30,t,Projector Ceiling,AST23,f,Projector Ceiling,1,1,76
+877,2018-10-17 16:21:19.051855+05:30,2018-10-17 16:21:19.051902+05:30,t,Projector Charger,AST24,f,Projector Charger,1,1,76
+878,2018-10-17 16:21:28.161265+05:30,2018-10-17 16:21:28.161311+05:30,t,Projector Screen Remote,AST25,f,Projector Screen Remote,1,1,76
+879,2018-10-17 16:21:37.124928+05:30,2018-10-17 16:21:37.124981+05:30,t,Project Sensor,AST26,f,Project Sensor,1,1,76
+880,2018-10-17 16:21:45.820108+05:30,2018-10-17 16:21:45.820159+05:30,t,Rack Server,AST27,f,Rack Server,1,1,76
+881,2018-10-17 16:21:52.060517+05:30,2018-10-17 16:21:52.06058+05:30,t,Remote,AST28,f,Remote,1,1,76
+882,2018-10-17 16:21:58.577818+05:30,2018-10-17 16:21:58.577869+05:30,t,Server,AST29,f,Server,1,1,76
+883,2018-10-17 16:22:06.060543+05:30,2018-10-17 16:22:06.060596+05:30,t,SIP Phone,AST30,f,SIP Phone,1,1,76
+884,2018-10-17 16:22:12.613868+05:30,2018-10-17 16:22:12.613922+05:30,t,Storage,AST31,f,Storage,1,1,76
+885,2018-10-17 16:22:19.438619+05:30,2018-10-17 16:22:19.438668+05:30,t,Tablet,AST32,f,Tablet,1,1,76
+886,2018-10-17 16:22:25.545575+05:30,2018-10-17 16:22:25.545624+05:30,t,UPS,AST33,f,UPS,1,1,76
+887,2018-10-17 16:22:31.681269+05:30,2018-10-17 16:22:31.681314+05:30,t,VOIP,AST34,f,VOIP,1,1,76
+888,2018-10-17 16:22:41.807612+05:30,2018-10-17 16:22:41.807664+05:30,t,Wireless Controller,AST35,f,Wireless Controller,1,1,76
+889,2018-10-17 16:22:50.335201+05:30,2018-10-17 16:22:50.335256+05:30,t,Wireless Router,AST36,f,Wireless Router,1,1,76
+890,2018-10-17 16:30:30.89004+05:30,2018-10-17 16:30:30.890083+05:30,t,AIRTEL,AMK30,f,AIRTEL,1,1,81
+891,2018-10-17 16:30:39.913035+05:30,2018-10-17 16:30:39.913082+05:30,t,APC,AMK31,f,APC,1,1,81
+892,2018-10-17 16:30:46.255505+05:30,2018-10-17 16:30:46.255555+05:30,t,BASS,AMK32,f,BASS,1,1,81
+893,2018-10-17 16:30:52.652271+05:30,2018-10-17 16:30:52.652326+05:30,t,BIGTAB,AMK33,f,BIGTAB,1,1,81
+894,2018-10-17 16:30:59.065328+05:30,2018-10-17 16:30:59.065378+05:30,t,BROTHER,AMK34,f,BROTHER,1,1,81
+895,2018-10-17 16:31:05.52836+05:30,2018-10-17 16:31:05.528415+05:30,t,BULZER,AMK35,f,BULZER,1,1,81
+896,2018-10-17 16:31:11.388003+05:30,2018-10-17 16:31:11.388051+05:30,t,CISCO,AMK36,f,CISCO,1,1,81
+897,2018-10-17 16:31:17.070404+05:30,2018-10-17 16:31:17.070452+05:30,t,COREWISE,AMK37,f,COREWISE,1,1,81
+898,2018-10-17 16:31:22.56735+05:30,2018-10-17 16:31:22.567389+05:30,t,DLINK,AMK38,f,DLINK,1,1,81
+899,2018-10-17 16:31:28.886234+05:30,2018-10-17 16:31:28.886287+05:30,t,EPSON,AMK39,f,EPSON,1,1,81
+900,2018-10-17 16:31:35.985328+05:30,2018-10-17 16:31:35.985372+05:30,t,IBM,AMK40,f,IBM,1,1,81
+901,2018-10-17 16:31:42.296396+05:30,2018-10-17 16:31:42.296447+05:30,t,JIO,AMK41,f,JIO,1,1,81
+902,2018-10-17 16:31:48.75356+05:30,2018-10-17 16:31:48.753602+05:30,t,LINKSYS,AMK42,f,LINKSYS,1,1,81
+903,2018-10-17 16:31:55.381214+05:30,2018-10-17 16:31:55.381271+05:30,t,MATRIX,AMK43,f,MATRIX,1,1,81
+904,2018-10-17 16:32:02.036049+05:30,2018-10-17 16:32:02.036101+05:30,t,Mercury,AMK44,f,Mercury,1,1,81
+905,2018-10-17 16:32:09.910147+05:30,2018-10-17 16:32:09.910191+05:30,t,MTS,AMK45,f,MTS,1,1,81
+906,2018-10-17 16:32:16.246656+05:30,2018-10-17 16:32:16.246699+05:30,t,NETGEAR,AMK46,f,NETGEAR,1,1,81
+907,2018-10-17 16:32:23.908636+05:30,2018-10-17 16:32:23.908682+05:30,t,TP-LINK,AMK47,f,TP-LINK,1,1,81
+908,2018-10-17 16:32:30.564159+05:30,2018-10-17 16:32:30.56422+05:30,t,TRENDNET,AMK48,f,TRENDNET,1,1,81
+909,2018-10-17 16:32:38.660063+05:30,2018-10-17 16:32:38.660111+05:30,t,UNBRANDED,AMK49,f,UNBRANDED,1,1,81
+910,2018-10-17 16:32:45.278823+05:30,2018-10-17 16:32:45.278865+05:30,t,WD,AMK50,f,WD,1,1,81
+911,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,19065G,AM143,f,19065G,1,1,82
+912,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,20405,AM144,f,20405,1,1,82
+913,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,2504,AM145,f,2504,1,1,82
+914,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,3545,AM146,f,3545,1,1,82
+915,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,3702i,AM147,f,3702i,1,1,82
+916,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,600va,AM148,f,600va,1,1,82
+917,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,6h750mv,AM149,f,6h750mv,1,1,82
+918,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,A1048,AM150,f,A1048,1,1,82
+919,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,A1152,AM151,f,A1152,1,1,82
+920,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,A1243,AM152,f,A1243,1,1,82
+921,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,ADLX65NLC3A,AM153,f,ADLX65NLC3A,1,1,82
+922,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,ADP 65GD B,AM154,f,ADP 65GD B,1,1,82
+923,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,ADP-65GDB,AM155,f,ADP-65GDB,1,1,82
+924,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,ADP-90YD,AM156,f,ADP-90YD,1,1,82
+925,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Cisco WS-C3560G,AM157,f,Cisco WS-C3560G,1,1,82
+926,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Compellent Xyrate,AM158,f,Compellent Xyrate,1,1,82
+927,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,DES1016D,AM159,f,DES1016D,1,1,82
+928,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,DS-2126,AM160,f,DS-2126,1,1,82
+929,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,DSL-N12E,AM161,f,DSL-N12E,1,1,82
+930,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,E1909Wc,AM162,f,E1909Wc,1,1,82
+931,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,EB-1776W - H476c,AM163,f,EB-1776W - H476c,1,1,82
+932,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,f,EB-1776W – H476c,AM164,f,EB-1776W – H476c,1,1,82
+933,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,EB-X18,AM165,f,EB-X18,1,1,82
+934,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Epson EB-X36 Projector,AM166,f,Epson EB-X36 Projector,1,1,82
+935,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,EqualLogic PS 3000,AM167,f,EqualLogic PS 3000,1,1,82
+936,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,EV-2502SL,AM168,f,EV-2502SL,1,1,82
+937,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,F101K,AM169,f,F101K,1,1,82
+938,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,HK-J209CLF,AM170,f,HK-J209CLF,1,1,82
+939,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,I Mac 20 inch 2009,AM171,f,I Mac 20 inch 2009,1,1,82
+940,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Inspron  3505,AM172,f,Inspron  3505,1,1,82
+941,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Inspron  620s,AM173,f,Inspron  620s,1,1,82
+942,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,JIO Dongle,AM174,f,JIO Dongle,1,1,82
+943,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KB216,AM175,f,KB216,1,1,82
+944,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KB813,AM176,f,KB813,1,1,82
+945,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KU-0317,AM177,f,KU-0317,1,1,82
+946,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KU-0318,AM178,f,KU-0318,1,1,82
+947,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KU-0319,AM179,f,KU-0319,1,1,82
+948,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KU-0320,AM180,f,KU-0320,1,1,82
+949,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,KZ248AA,AM181,f,KZ248AA,1,1,82
+950,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,L565 PSCF NW,AM182,f,L565 PSCF NW,1,1,82
+951,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M0C5U0,AM183,f,M0C5U0,1,1,82
+952,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M105,AM184,f,M105,1,1,82
+953,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-105,AM185,f,M-105,1,1,82
+954,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M110,AM186,f,M110,1,1,82
+955,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M165,AM187,f,M165,1,1,82
+956,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-BJ69,AM189,f,M-BJ69,1,1,82
+957,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MF70,AM190,f,MF70,1,1,82
+958,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MME41F134BB7A2,AM191,f,MME41F134BB7A2,1,1,82
+959,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MO28UOL,AM192,f,MO28UOL,1,1,82
+960,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MO56U0A,AM193,f,MO56U0A,1,1,82
+961,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MOEUUO,AM194,f,MOEUUO,1,1,82
+962,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MS111,AM195,f,MS111,1,1,82
+963,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-U0004,AM196,f,M-U0004,1,1,82
+964,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-U0031,AM197,f,M-U0031,1,1,82
+965,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-UAE96,AM198,f,M-UAE96,1,1,82
+966,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,MUARDEL7,AM199,f,MUARDEL7,1,1,82
+967,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-UAY-ACR2,AM200,f,M-UAY-ACR2,1,1,82
+968,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-UV69a,AM201,f,M-UV69a,1,1,82
+969,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,M-UV96,AM202,f,M-UV96,1,1,82
+970,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Optiplex 790,AM203,f,Optiplex 790,1,1,82
+971,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Optiplex 980,AM204,f,Optiplex 980,1,1,82
+972,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,PA-1121-28,AM205,f,PA-1121-28,1,1,82
+973,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,PA165078,AM206,f,PA165078,1,1,82
+974,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,RT-AC1200HP,AM207,f,RT-AC1200HP,1,1,82
+975,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SG100,AM208,f,SG100,1,1,82
+976,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SG300,AM209,f,SG300,1,1,82
+977,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1820,AM210,f,SK1820,1,1,82
+978,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1821,AM211,f,SK1821,1,1,82
+979,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1822,AM212,f,SK1822,1,1,82
+980,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1823,AM213,f,SK1823,1,1,82
+981,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1824,AM214,f,SK1824,1,1,82
+982,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK1825,AM215,f,SK1825,1,1,82
+983,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-2285,AM216,f,SK-2285,1,1,82
+984,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-2886,AM217,f,SK-2886,1,1,82
+985,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-4400416,AM218,f,SK-4400416,1,1,82
+986,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-8115,AM219,f,SK-8115,1,1,82
+987,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-8120,AM220,f,SK-8120,1,1,82
+988,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK8165,AM221,f,SK8165,1,1,82
+989,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SK-8185,AM222,f,SK-8185,1,1,82
+990,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SP2309WC,AM223,f,SP2309WC,1,1,82
+991,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SP230WC,AM224,f,SP230WC,1,1,82
+992,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,SPARSHVP248,AM225,f,SPARSHVP248,1,1,82
+993,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,Tablet,AM226,f,Tablet,1,1,82
+994,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,TL-PA8030P,AM227,f,TL-PA8030P,1,1,82
+995,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,TL-WA854RE,AM228,f,TL-WA854RE,1,1,82
+996,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,TL-WA855RE,AM229,f,TL-WA855RE,1,1,82
+997,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,TL-WR740N,AM230,f,TL-WR740N,1,1,82
+998,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,VCVRA-1211,AM231,f,VCVRA-1211,1,1,82
+999,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,VX279,AM232,f,VX279,1,1,82
+1000,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,W-KMB-52,AM233,f,W-KMB-52,1,1,82
+1001,2018-10-17 17:38:11.964055+05:30,2018-10-17 17:38:11.964055+05:30,t,X552C,AM234,f,X552C,1,1,82
+1002,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,21 - 30 yrs,WKRA1,f,21 - 30 yrs,1,1,123
+1003,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,31 - 40 yrs,WKRA2,f,31 - 40 yrs,1,1,123
+1004,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,41 - 50 yrs,WKRA3,f,41 - 50 yrs,1,1,123
+1005,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Above 51 yrs,WKRA4,f,Above 51 yrs,1,1,123
+1006,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,< 6 months,TICR1,f,< 6 months,1,1,124
+1007,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,> 6 months - 1 year,TICR2,f,> 6 months - 1 year,1,1,124
+1008,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,1 -2 years,TICR3,f,1 -2 years,1,1,124
+1009,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,2 - 4 years,TICR4,f,2 - 4 years,1,1,124
+1010,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,> 4 years,TICR5,f,> 4 years,1,1,124
+1011,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Less than Industry Standard,SALV1,f,Less than Industry Standard,1,1,125
+1012,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Industry Standard,SALV2,f,Industry Standard,1,1,125
+1013,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,More than Industry Standard,SALV3,f,More than Industry Standard,1,1,125
+1014,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Low,WRKL1,f,Low,1,1,126
+1015,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Medium,WRKL2,f,Medium,1,1,126
+1016,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,High,WRKL3,f,High priority,1,1,126
+1017,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Disagree,PAYR1,f,Disagree,1,1,127
+1018,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Neither agree nor disagree,PAYR2,f,Neither agree nor disagree,1,1,127
+1019,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Agree,PAYR3,f,Agree,1,1,127
+1020,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Soft Skills Training,LDSST,f,Soft Skills Training,1,1,128
+1021,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Technical Training,LDTET,f,Technical Training,1,1,128
+1022,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Safety Training,LDSAF,f,Safety Training,1,1,128
+1023,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Mangerial Training,LDMGT,f,Mangerial Training,1,1,128
+1024,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Self Learning,LDSLF,f,Self Learning,1,1,129
+1025,2018-09-26 15:27:00+05:30,2018-09-26 15:27:00+05:30,t,Instructor Led Training,LDINS,f,Instructor Led Training,1,1,129
+1026,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Master current role,MASCR,f,Master current role,1,1,130
+1027,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,Move to next level,MVNL,f,Move to next level,1,1,130
+1028,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t, < 6 months,LSSTS,f, < 6 months,1,1,131
+1029,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,> 6 months - 1 year,LSTON,f,> 6 months - 1 year,1,1,131
+1030,2018-09-22 15:27:00+05:30,2018-09-22 15:27:00+05:30,t,1 -2 years,ONTWO,f,1 -2 years,1,1,131
+1031,2018-10-03 15:27:00+05:30,2018-10-03 15:27:00+05:30,t,Internal,LDINT,f,Internal,1,1,132
+1032,2018-10-03 15:27:00+05:30,2018-10-03 15:27:00+05:30,t,External,LDEXT,f,External,1,1,132
+1033,2018-08-20 15:27:00+05:30,2018-08-20 15:27:00+05:34,t,Payroll,PAYRL,f,Payroll,1,1,116
+1034,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Python,TCP34,f,Python,1,1,35
+1035,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Javascript,TCP35,f,Javascript,1,1,35
+1036,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,HTML / HTML5,TCP36,f,HTML / HTML5,1,1,35
+1037,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,CSS3,TCP37,f,CSS3,1,1,35
+1038,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Django,TCP38,f,Django,1,1,35
+1039,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Jquery,TCP39,f,Jquery,1,1,35
+1040,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Odoo,TCP40,f,Odoo,1,1,35
+1041,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Bootstrap,TCP41,f,Bootstrap,1,1,35
+1042,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,PHP,TCP42,f,PHP,1,1,35
+1043,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Android,TCP43,f,Android,1,1,35
+1044,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Postgres,TCP44,f,Postgres,1,1,35
+1045,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,SHA Algorithm,TCP45,f,SHA Algorithm,1,1,35
+1046,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Jenkins,TCP46,f,Jenkins,1,1,35
+1047,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Operating Systems / Browsers,TCP47,f,Operating Systems / Browsers,1,1,35
+1048,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,MySQL,TCP48,f,MySQL,1,1,35
+1049,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Knime,TCP49,f,Knime,1,1,35
+1050,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Selenium,TCP50,f,Selenium,1,1,35
+1051,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Linux,TCP51,f,Linux,1,1,35
+1052,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Centos,TCP52,f,Centos,1,1,35
+1053,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Windows,TCP53,f,Windows,1,1,35
+1054,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Opennebula,TCP54,f,Opennebula,1,1,35
+1055,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Docher / Container,TCP55,f,Docher / Container,1,1,35
+1056,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Ceph,TCP56,f,Ceph,1,1,35
+1057,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,GitHub,TCP57,f,GitHub,1,1,35
+1058,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,C,TCP58,f,C,1,1,35
+1059,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,C++,TCP59,f,C++,1,1,35
+1060,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Django REST Framework,TCP60,f,Django REST Framework,1,1,35
+1061,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,HandlerbarJS,TCP61,f,HandlerbarJS,1,1,35
+1062,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,RequireJS,TCP62,f,RequireJS,1,1,35
+1063,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Redis,TCP63,f,Redis,1,1,35
+1064,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Websocket,TCP64,f,Websocket,1,1,35
+1065,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,DDP,TCP65,f,DDP,1,1,35
+1066,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Jmeter,TCP66,f,Jmeter,1,1,35
+1067,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Apache,TCP67,f,Apache,1,1,35
+1068,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Pfsense,TCP68,f,Pfsense,1,1,35
+1069,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Web GIS,TCP69,f,Web GIS,1,1,35
+1070,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Desktop GIS,TCP70,f,Desktop GIS,1,1,35
+1071,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Mobile GIS,TCP71,f,Mobile GIS,1,1,35
+1072,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Server GIS,TCP72,f,Server GIS,1,1,35
+1073,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Geo Referencing,TCP73,f,Geo Referencing,1,1,35
+1074,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Feature Extraction,TCP74,f,Feature Extraction,1,1,35
+1075,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Spacial Database,TCP75,f,Spacial Database,1,1,35
+1076,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,GIS File Formats,TCP76,f,GIS File Formats,1,1,35
+1077,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,UI,TCP77,f,UI,1,1,35
+1078,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Commitment to Career,BCP18,f,Commitment to Career,1,1,36
+1079,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Career Motivation,BCP19,f,Career Motivation,1,1,36
+1080,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,SQL,TCP78,f,SQL,1,1,35
+1081,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,RealM,TCP79,f,RealM,1,1,35
+1082,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,SQLite,TCP80,f,SQLite,1,1,35
+1083,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Web Services,TCP81,f,Web Services,1,1,35
+1084,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,SVN,TCP82,f,SVN,1,1,35
+1085,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Swift,TCP83,f,Swift,1,1,35
+1086,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Mobile Analytics,TCP84,f,Mobile Analytics,1,1,35
+1087,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,"OOPS, Design Patterns Understanding",TCP85,f,"OOPS, Design Patterns Understanding",1,1,35
+1088,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Latest Technology Updates / Learning,TCP86,f,Latest Technology Updates / Learning,1,1,35
+1089,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Analytical Thinking,FCP16,f,Analytical Thinking,1,1,43
+1090,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Development Framework Expertise,TCP87,f,Development Framework Expertise,1,1,35
+1091,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Web Analytics,TCP88,f,Web Analytics,1,1,35
+1092,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Enterprise Software Deployment,TCP89,f,Enterprise Software Deployment,1,1,35
+1093,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Adobe Photoshop,TCP90,f,Adobe Photoshop,1,1,35
+1094,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Adobe Illustrator,TCP91,f,Adobe Illustrator,1,1,35
+1095,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Corel Draw,TCP92,f,Corel Draw,1,1,35
+1096,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Creativity,TCP93,f,Creativity,1,1,35
+1097,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Design Expertise,TCP94,f,Design Expertise,1,1,35
+1098,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Automation Testing,TCP95,f,Automation Testing,1,1,35
+1099,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Functional Testing,TCP96,f,Functional Testing,1,1,35
+1100,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,System Testing,TCP97,f,System Testing,1,1,35
+1101,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Integration Testing,TCP98,f,Integration Testing,1,1,35
+1102,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Performance Testing,TCP99,f,Performance Testing,1,1,35
+1103,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Remote Sensing,TC100,f,Remote Sensing,1,1,35
+1104,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Photogrammetry,TC101,f,Photogrammetry,1,1,35
+1105,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Field Survey,TC102,f,Field Survey,1,1,35
+1106,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,WiFi / 802 / .11 Protocol,TC103,f,WiFi / 802 / .11 Protocol,1,1,35
+1107,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,AWS,TC104,f,AWS,1,1,35
+1108,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,MSOfficeSuit,TC105,f,MSOfficeSuit,1,1,35
+1109,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,LibreOfficeSuit,TC106,f,LibreOfficeSuit,1,1,35
+1110,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Problem Solving Skills,TC107,f,Problem Solving Skills,1,1,35
+1111,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Enterprise Software Management Solutions,TC108,f,Enterprise Software Management Solutions,1,1,35
+1112,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,GIS Framework Expertise,TC109,f,GIS Framework Expertise,1,1,35
+1113,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,GIS Analytics,TC110,f,GIS Analytics,1,1,35
+1114,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Enterprise GIS Software Management Solutions,TC111,f,Enterprise GIS Software Management Solutions,1,1,35
+1115,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Performance Leave,PRFLV,f,Performance Leave,1,1,27
+1116,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Whole Day,WHODY,f,Whole Day,1,1,133
+1117,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,Fore Noon,FORNN,f,Fore Noon,1,1,133
+1118,2018-08-24 13:09:00+05:30,2018-08-24 13:09:00+05:30,t,After Noon,AFTNN,f,After Noon,1,1,133
+1119,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Critical,CEPR1,f,Critical,1,1,134
+1120,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,High,CEPR2,f,High,1,1,134
+1121,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Normal,CEPR3,f,Normal,1,1,134
+1122,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Low,CEPR4,f,Low,1,1,134
+1123,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Very Low,CEPR5,f,Very Low,1,1,134
+1124,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Monthly,MONLY,f,Monthly,1,1,135
+1125,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Quaterly,QUTRY,f,Quaterly,1,1,135
+1126,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Half-Yearly,HFYRY,f,Half-Yearly,1,1,135
+1127,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Yearly,YERLY,f,Yearly,1,1,135
+1128,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Arrear,ARRER,f,Arrear,1,1,136
+1129,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Performance Bonus,PERBS,f,Performance Bonus,1,1,136
+1130,2018-12-11 13:09:00+05:30,2018-12-11 13:09:00+05:30,t,Variable Pay,VARPY,f,Variable Pay,1,1,136
+1131,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Business Processes,CPJC1,f,1,1,1,137
+1132,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Consulting,CPJC2,f,2,1,1,137
+1133,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Corporate,CPJC3,f,3,1,1,137
+1134,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Delivery Management,CPJC4,f,4,1,1,137
+1135,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Digital,CPJC5,f,5,1,1,137
+1136,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,IT Infrastructure,CPJC6,f,6,1,1,137
+1137,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Sales & Marketing,CPJC7,f,7,1,1,137
+1138,2018-12-24 13:09:00+05:30,2018-12-24 13:09:00+05:30,t,Technology & Engineering,CPJC8,f,8,1,1,137

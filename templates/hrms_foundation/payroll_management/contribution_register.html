@@ -1,0 +1,128 @@
+					<div class="col-md-6">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Contribution Register </span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<form role="form" id="contribution_register_form">
+									<div class="form-body">
+									<div class="row">
+										{%csrf_token%}
+										<div class="col-md-6">
+												<div class="form-group">
+													<label>Name<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Name"
+															id="hr_contribution_register_name"
+															name="contribution_register_name" type="text" required
+															data-error=".errorTxt9"> <span
+															class="errorTxt9 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>	
+											<div class="col-md-6">
+													<div class="form-group">
+														<label>Code <span class="asterisk">*</span>
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-organization"></i> <input
+																class="form-control" placeholder="Code"
+																id="hr_contribution_register_code" name="contribution_register_code"
+																rows="1" type="text" maxlength="5" required data-error=".errorTxt41"> <span
+																class="errorTxt41 errormessage errorTxts"></span>
+														</div>
+													</div>				
+												</div>
+												<div class="clearfix"></div>
+												<div class="col-md-6">
+										<div class="form-group">
+													<label>Description</label>
+													<div class="input-icon">
+														<i class="nf nf-eployee-directories-address"></i>
+														<textarea class="form-control" id="hr_contribution_register_description"
+															name="description" placeholder="Description" rows="1"
+															data-error=".errorTxt34"></textarea>
+														<span class="errorTxt34 errormessage"></span>
+													</div>
+												</div>
+												</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Contributor<span class="asterisk"> *</span>
+													</label> <select id="hr_con_reg_contributor"
+														name="contributor_id" class="form-control select2"
+														data-error=".errorTxt13">
+														<option value="0">--Select Contributor--</option> 
+														<option value="1">Employee</option>
+														<option value="2">Employer</option>
+														<!-- {% for code,name in country %}
+															<option value='{{name}}'>{{name}}</option> 
+														{% endfor %} -->
+													</select> <span id="contributor_clear" class="errorTxt13 errormessage errorTxts"></span>
+												</div>
+											</div>	
+											<div class="clearfix"></div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Contribution(%)<span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Contribution"
+															id="hr_con_reg_contribution"
+															name="contribution" type="text" required
+															data-error=".errorTxt19"> <span
+															class="errorTxt19 errormessage errorTxts"></span>
+													</div>
+												</div>
+											</div>				
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Salary Component<span class="asterisk"> *</span>
+													</label> <select id="contribution_salary_rule_component"
+														name="salary_compontent_id" class="form-control select2"
+														data-error=".errorTxt14">
+														<option value="0">--Select Salary Component--</option> 
+														{% for i in salary_component_data %}
+															<option value='{{i.id}}'>{{i.refitems_name}}</option> 
+														{% endfor %}
+													</select> <span id="salary_compontent_id_clear" class="errorTxt14 errormessage errorTxts"></span>
+												</div>
+											</div>					
+												<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding" id='hrms_contribution_btn'></div>
+										</div>
+									</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- END SAMPLE FORM PORTLET-->
+					</div>
+				
+					<div class="col-md-6">
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"
+										id='popupYesNoCallback'> Contribution Register Details</span>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<table class="table table-striped table-bordered table-hover"
+									id="contribution_register_details">
+								</table>
+							</div>
+						</div>
+						<!-- END EXAMPLE TABLE PORTLET-->
+					</div>
+				
+

@@ -1,0 +1,351 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css link -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css link -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- file upload css link -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css link -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HROrganization" %} 
+<!-- begin container -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<h1>New Organization</h1>
+				<div class="row" id="org_em_main_div">
+					<div class="col-md-12" style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090,1.000);">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+							<div class="row">
+								<div class="col-md-9 col-sm-12 ">
+								{% if "Organization" in request.session.Create %} 
+									<div class="form-group ">
+										<div id="org_em_add_btn" 
+											class="btn blue float-right  btn-animate" data-toggle="tooltip" data-placement="top" title="Add Organization" style="float: left;"><i class="nf nf-plus"></i></div>
+									</div>
+								{% endif %}
+								</div>
+									<div id="search_btn" class="col-md-3 col-sm-12 "
+										style="float: right;">
+										<div class="row">
+										<div class="col-sm-2" style="margin-top: 10px;">
+											<i data-toggle="tooltip" data-placement="top" title=""
+												class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"
+												data-original-title="Search here"></i>
+										</div>
+										<div class="col-sm-10">
+											<div class="form-group">
+												<div class="form-group">
+													<div class="input-icon">
+														<i class="nf nf-advanced-search"></i> <input
+															class="form-control"
+															placeholder="Search by Organization Name"
+															id='org_name_search' type="text">
+													</div>
+												</div>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div> 
+							<!-- Employee list content start -->
+							<div class="row" style="clear: both;">   
+								<div class="portlet-body col-md-12 col-sm-12" >
+								<div class="row" id='org_em_list_div'></div>
+								</div>
+							</div>
+							<!-- Employee list content end -->
+						</div> 
+					</div>
+					<div class="col-md-12" id="org_em_add_form_div" style="display:none;">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="form-group">
+									<h3 class="margin-top-0">
+										Organization Details<i data-toggle="tooltip" data-placement="top" title='Close' class="fa fa-times float-right" style="float: right;cursor:pointer;"
+											id="org_em_form_close"></i>
+									</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="portlet-body">
+							<form role="form" id="organization_details_form">
+							{%csrf_token%}
+							<div class="form-body">
+								<div class="col-md-6">
+										<div class="form-group">
+													<label>Organization Name <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-organization"></i> <input
+															class="form-control" placeholder="Enter Organization Name"
+															id="organization_name" name="organization_name"
+															rows="1" type="text" required data-error=".errorTxt0" maxlength="40"> <span
+															class="errorTxt0 errormessage errorTxts"></span>
+													</div>
+										</div>
+										<div class="form-group">
+														<label>Organization Legal Name
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-organization"></i> <input
+																class="form-control" placeholder="Enter Organization Legal Name"
+																id="organization_legal_name" name="organization_legal_name"
+																rows="1" type="text" data-error=".errorTxt1"> <span
+																class="errorTxt1 errormessage errorTxts"></span>
+														</div>
+										</div>	
+										<div class="form-group">
+														<label>Organization Short Name 
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-organization"></i> <input
+																class="form-control" placeholder=" Enter Organization Short Name"
+																id="organization_short_name" name="organization_short_name" maxlength=50
+																rows="1" type="text" data-error=".errorTxt2"> <span
+																class="errorTxt2 errormessage errorTxts"></span>
+														</div>
+										</div>	
+										<div class="form-group">
+														<label>Organization Website </label>
+														<div class="input-icon">
+															<i class="nf nf-address-card-o"></i> <input
+																class="form-control" placeholder="Enter Organization Website"
+																id="organization_website" name="organization_website" maxlength=100
+																type="text" data-error=".errorTxt11"> <span
+																class="errorTxt11 errormessage errorTxts"></span>
+														</div>
+											</div>
+											<div class="form-group">
+														<label>Organization Email <span class="asterisk">*</span>
+														</label>	
+														<div class="input-icon">
+															<i class="nf nf-email"></i> <input class="form-control"
+																placeholder="Enter Organization Email" id="organization_email" maxlength=100
+																name="organization_email" type="text" required 
+																data-error=".errorTxt14"> <span
+																class="errorTxt14 errormessage errorTxts"></span>
+														</div>
+											</div>
+										<div class="form-group">
+													<label>Organization Fax Number</label>
+													<div class="input-icon">
+														<i class="nf nf-fax"></i> <input class="form-control"
+															placeholder="Enter Organization Fax" id="organization_fax"
+															name="organization_fax" type="text"
+															data-error=".errorTxt12" maxlength="10"> <span
+															class="errorTxt12 errormessage errorTxts" ></span>
+													</div>
+											</div>
+											<div class="row">
+												
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Organization Company Registration Number (CRN)
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-telephone"></i> <input
+																class="form-control" placeholder="Enter Company Registration Number (eg:1-12345 or 1-abcde)"
+																id="corporate_identity_number"
+																name="corporate_identity_number" type="text" 
+																data-error=".errorTxt8" maxlength="21"> <span
+																class="errorTxt8 errormessage errorTxts" ></span>
+														</div>
+													</div>
+												</div>
+											</div>
+									
+										
+										
+										
+												<div class="form-group">
+													<label class="upload-label control-label ">Organization Logo
+														 </label>
+													<div class="clearfix"></div>
+
+													<div class="col-md-9 padding-0">
+														<div class="fileinput fileinput-new"
+															data-provides="fileinput">
+															<div class="fileinput-new thumbnail new_thumbnail"
+																style="width: 120px; height: 80px;">
+																<img id="user_image"
+																	src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+																	alt="" />
+															</div>
+															<div class="fileinput-preview fileinput-exists thumbnail upload_click_data_img"
+																style="max-width: 200px; max-height: 150px;"></div>
+															<div>
+																<span class="btn btn-success btn-file btn-animate"> <span
+																	class="fileinput-new upload_click_data_img" data-show-preview="false"> Upload Image</span> <span
+																	class="fileinput-exists row_click_data_img"> Change </span> <input
+																	type="file" id='profile_image' name="image"
+																	onchange="encodeImagetoBase64(this)">
+																</span> <a href="javascript:;" class="btn btn-danger btn-animate fileinput-exists row_click_data_img"
+																	data-dismiss="fileinput"> <span
+																	class="fileinput-exists row_click_data_img">Remove </span></a>
+															</div>
+														</div>
+														<span class="txt-info" style="display: inline-block;">( Note : Please upload jpg,jpeg or png and image size should be less than 1MB )</span>
+													</div>
+										</div>
+								</div>
+								
+								<div class="col-md-6">
+									 					<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Organization Country <span class="asterisk">*</span>
+															</label> <select id="organization_country" name="organization_country"
+																class="form-control select2" data-error=".errorTxt13">
+																<option value="0">--Select Country--</option> 
+																{% for i in country %}
+																	<option value={{i.id}}>{{i.country_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt13 errormessage errorTxts"></span>
+														</div>
+														
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Organization State <span class="asterisk">*</span>
+															</label> <select id="organization_state" name="organization_state"
+																class="form-control select2" data-error=".errorTxt4">
+																<option value="0">--Select State--</option> 
+															</select> <span class="errorTxt4 errormessage errorTxts"></span>
+														</div>
+														
+													<div class="form-group">
+														<label>Organization Registered Address <span class="asterisk">*</span>
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-address-card-o"></i>
+															<textarea class="form-control "
+																name="organization_address1" id="organization_address1"
+																placeholder="Enter Organization Registered Address" rows="2" required
+																data-error=".errorTxt3" maxlength="250"></textarea>
+															<span class="errorTxt3 errormessage errorTxts"></span>
+														</div>
+													</div>
+													<div class="form-group">
+														<label>Organization Physical Address</label>
+														<div class="input-icon">
+															<i class="nf nf-address-card-o"></i>
+															<textarea class="form-control " rows="2" name="organization_address2"
+																id="organization_address2" placeholder="Enter Organization Physical Address"
+																rows="2" data-error=".errorTxt15" maxlength="250"></textarea>
+																<span class="errorTxt15 errormessage errorTxts"></span>
+														</div>
+													</div>
+													
+												<div class="form-group">
+															<label>Organization Landmark
+															</label>
+															<div class="input-icon">
+																<i class="nf nf-telephone"></i> <input
+																	class="form-control" placeholder="Enter Organization Landmark"
+																	id="organization_location" maxlength=50
+																	name="organization_location" type="text"
+																	> 
+															</div>
+													 </div>
+													 <div class="form-group">
+														<label>Organization Postcode<span class="asterisk"> *</span>
+														</label>
+														<div class="input-icon">
+															<i class="nf nf-telephone"></i> <input
+																class="form-control" placeholder="Enter Organization Postcode"
+																id="organization_pin_code"
+																name="organization_pin_code" type="text" required
+																data-error=".errorTxt6" minlength="6" maxlength="6"> <span
+																class="errorTxt6 errormessage errorTxts"></span>
+														</div>
+													</div>
+													<div class="form-group">
+													<label>Organization Telephone Number<span class="asterisk">
+															*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-telephone"></i> <input
+															class="form-control" placeholder="Enter Organization Telephone Number (eg:1111234567)"
+															id="organization_telephone_number"
+															name="organization_telephone_number" type="text" required
+															data-error=".errorTxt9" maxlength="9"> <span
+															class="errorTxt9 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Mobile Number </label>
+													<div class="input-icon">
+														<i class="nf nf-mobile"></i> <input class="form-control"
+															placeholder="Enter Organization Mobile Number"
+															id="organization_mobile_number"
+															name="organization_mobile_number" type="text"
+															data-error=".errorTxt10" maxlength="10"> <span
+															class="errorTxt10 errormessage errorTxts"></span>
+													</div>
+												</div>
+									</div>								
+							</div>					
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="pull-right" id='hrms_organization_btn' style="padding-right:15px;"></div>
+										</div>
+								</div>	
+						</form>
+						</div>
+					</div>
+				</div></div></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end container -->
+{% endblock %} 
+<!-- custom script start -->
+{% block scripts %}
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+<!-- datatable custom js -->
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- dev js -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/organization.js' %}"
+	type="text/javascript"></script>
+{% endblock %}
+<!-- custom script end -->

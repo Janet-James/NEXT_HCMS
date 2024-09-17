@@ -1,0 +1,123 @@
+id,module_name,sys_param_name,sys_param_var_name,sys_param_val,sys_param_type,created_date,created_by_id,modified_date,modified_by_id,is_active
+1,General,Success Status Message,NTE_01,Details added successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+2,General,Failure Status message,NTE_02,Details not created/updated.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+3,General,Updates Status Message,NTE_03,Details updated successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+4,General,Remove Status Message,NTE_04,Details removed successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+5,General,Password Update Status Message,NTE_05,Your password has been changed successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+6,General,OTP Status Message,NTE_06,OTP Sent Successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+7,Talent Definition,Critical Success Factors,NTE_07,Maximum of 10 factors only can be defined.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+8,Talent Definition,Minimal Technical Competency Validation Message,NTE_08,Select atleast one Technical Competency for this role.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+9,Talent Definition,Minimal Functional Competency Validation Message,NTE_09,Select atleast one Functional Competency for this role.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+10,Talent Definition,Minimal Behavioural Competency Validation Message,NTE_10,Select atleast one Behavioural Competency for this role.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+11,Leave & Attendance,Success Check-In,NTE_11,Check-In done Successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+12,Leave & Attendance,Success Check-Out,NTE_12,Check-Out done Successfully.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+13,Leave & Attendance,Existing Check-In/Out,NTE_13,Check-In/Out already exists for today.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+14,Leave & Attendance,Existing Holiday Name,NTE_14,Holiday name already exists.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+15,Leave & Attendance,Leave Rejection Reasons Select,NTE_15,Select rejection reasons.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+16,Talent Asessment,Objective addition in past,NTE_16,Objectives cannot be added in the past date.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+17,General,Mandate KPI value,NTE_17,Fill the all KPI value.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+18,General,Existing Objective Message,NTE_18,Objective already exist.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+19,Talent Asessment,Objective updates in past,NTE_19,Objectives defined earlier in the past cannot be updated.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+20,Talent Asessment,Objective removal in past,NTE_20,Objectives created in the past cannot be removed,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+21,General,Start and End date Validation,NTE_21,Start Date should be greater than End Date.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+22,General,Select atleast one data to Remove,NTE_22,Select atleast one data to Remove.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+23,Talent Asessment,Select Strategic Objective,NTE_23,Select Strategic Objective.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+24,General,Bad request ,ERR0400,Bad request.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+25,General,Unauthorized,ERR0401,Unauthorized.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+26,General,Forbidden,ERR0403,Forbidden.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+27,General,Page not found,ERR0404,Page Not Found.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+28,General,Method not allowed,ERR0405,Method not allowed.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+29,General,Request Timeout,ERR0408,Request Timeout.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+30,General,Internal server error,ERR0500,Internal Server Error.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+31,General,Service unavailable,ERR0503,Service Unavailable.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+32,General,Error rendering template,ERR0600,Error rendering template(Template syntax error).,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+33,General,Invalid credentials,ERR0001,Login failed due to invalid credentials.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+34,General,Login attempt limit,ERR0002,Login attempt limit reached.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+35,General,Permission denied,ERR0003,Permission to view this page is denied.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+36,General,Authorization failed,ERR0004,Authorization failed.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+37,General,Incorrect data type,ERR0005,Incorrect data type.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+38,General,Invalid data format,ERR0006,Invalid data format.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+39,General,File size limit exceeded,ERR0007,File size limit exceeded.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+40,General,File format not supported,ERR0008,File format not supported.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+41,General,Missing mandatory fields,ERR0009,Missing mandatory fields.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+42,General,Too many arguments,ERR0010,Too many arguments.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+43,General,To date is less than from date,ERR0011,To date is less than from date.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+44,General,Data/Resource not found,ERR0012,Data/Resource not found.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+45,General,Unknown Exception,ERR0013,Unknown Exception.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+46,General,Error occured while sending email,ERR0014,Error occured while sending email.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+47,General,Incorrect data supplied,ERR0015,Incorrect data supplied.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+48,General,Name/Title already exists,ERR0016,Name/Title already exists.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+49,General,Duplicate code cannot be added,ERR0020,Duplicate code cannot be added.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+50,General,Map logged User And Employee.,ERR0021,Please Map logged User And Employee.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+51,General,Leave type not having balance,ERR0022,The selected leave type does not have an associated leave balance.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+52,General,100 Characters in Name field,ERR0023,Enter less than 100 characters in Name field.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+53,General,30 Characters in First Name,ERR0024,Enter less than 30 characters in First Name or Last Name.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+54,General,Duplicate User Name,ERR0025,Duplicate Username cannot be added.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+55,General,Module association with page,ERR0026,The selected modules does not have any pages associated. Select any other module.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+56,General,Category association with items,ERR0027,The selected category does not have any reference items. Select any other category.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+57,General,Data in use,ERR0028,The selected data is in use and cannot be removed.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+58,General,System data removal,ERR0029,System data cannot be removed.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+59,General,System data modification,ERR0030,System data code cannot be modified.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+60,General,Module association with Parameter type,ERR0031,The selected modules and parameter type does not have any record. Select any other option.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+61,General,System data updation,ERR0032,The selected data is in use and cannot be updated.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+62,Talent Definition,Minimum KPO Message,NTE_24,Enter atleast one Key Performance Objective.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+63,Talent Definition,KPO Details Message,NTE_25,Enter valid details for the newly added KPO,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+64,Talent Definition,KPI Details Message,NTE_26,Enter valid details for the newly added KPI,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+65,Talent Definition,Minimum KPI Message,NTE_27,Enter atleast one Key Performance Indicator,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+66,Talent Definition,SaveData,NTE_28,Save the unsaved data entered recently.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+67,General,Minimal Filter Criteria for Reports,NTE_29,Select atleast one filter criteria.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+68,General,Fill all necessary details,ERR0033,Fill all the necessary details.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+69,General,Details cannot be edited,ERR0034,The selected details cannot be edited,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+70,General,Details cannot be removed,ERR0035,The selected details cannot be removed,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+71,Talent Asessment,Select Org Unit and Role,NTE_30,Select the Organization Unit and Role,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+72,Talent Asessment,Objective Driver Info,NTE_31,Enter the driver information for this Objective,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+73,Talent Asessment,Template code length,NTE_32,Note the template code should have 5 characters,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+74,Talent Asessment,Category selection for Role ,NTE_33,Select Category to select the role,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+75,Talent Asessment,Template Association for Role,NTE_34,A template is already associated to this role,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+76,Talent Asessment,"Template association for Category, Role",NTE_35,A template is already associated to this selected category and role,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+77,Talent Asessment,KPI association to role,NTE_36,KPI is not defined for this role,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+78,Talent Asessment,Select role to view KPI,NTE_37,Select a role to view the KPI,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+79,Talent Asessment,Template Association for selected Employee Role,NTE_38,The selected employee role does not have an assessment template.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+80,Talent Asessment,Expected value and Weightage values are needed,NTE_39,Expected value and Weightage values are needed.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+81,Talent Asessment,Select Employee,NTE_40,Select Employee,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+82,Talent Asessment,Select assessment type,NTE_41,Select assessment type,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+83,Talent Asessment,Select assessor,NTE_42,Select assessor,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+84,Talent Asessment,Add schedule name,NTE_43,Add schedule name,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+85,Talent Asessment,Select assessment category,NTE_44,Select assessment category,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+86,Talent Asessment,Specify day count and start date,NTE_45,Specify day count and start date,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+87,Talent Asessment,Feedback is required,NTE_46,Feedback is required,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+88,Talent Asessment,No Employee with given name,NTE_47,No Employee found with given name,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+89,Talent Asessment,Scheme Name,NTE_48,Enter the Rating Scheme,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+90,Talent Asessment,Rating Detail,NTE_49,Enter Rating Details,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+91,Talent Asessment,Minimum two ratings,NTE_50,Enter atleast two rating information.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+92,Talent Asessment,Rating name and value,NTE_51,Enter Rating Name and Value,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+93,Talent Asessment,Unique rating name,NTE_52,Enter Unique Rating Name,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+94,Talent Asessment,Unique rating value,NTE_53,Enter Unique Rating Value,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+95,General,Select data for update,ERR0036,Select data for update,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+96,General,Valid date,ERR0037,Enter valid date,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+97,Leave & Attendance,Pemission Details,NTE_54,"Permission can be availed only for an hour, Kindly raise this as leave request.",Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+98,General,Valid time,ERR0038,Enter valid Time,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+99,Organization,Organization and Unit required,NTE_55,Organization & Unit is required.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+100,Organization,Select Organization,NTE_56,Select Organization,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+101,Leave & Attendance,Wait for Employee Attendance,NTE_57,Searching for employee attendance details. Kindly wait for few seconds.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+102,HR Foundation,Wait for Employee details,NTE_58,Searching for employee details. Kindly wait for few seconds.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+103,Leave & Attendance,Wait for Employee Leave ,NTE_59,Searching for employee leave details. Kindly wait for few seconds.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+104,HR Foundation,Select Employee for other steps,NTE_60,The access to other steps requires to select an employee from the employee list,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+105,HR Foundation,Select document,NTE_61,Select the document,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+106,HR Foundation,Invalid ID,NTE_62,Invalid ID,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+107,HR Foundation,Reason type selection,NTE_63,Select Reason Type,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+108,General,File exists,ERR0039,The file already exists. Select another file.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+109,Organization,Select Organization Unit,NTE_65,Select Organization Unit,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+110,HR Foundation,Employee data select,NTE_66,The employee data is not selected.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+111,HR Foundation,Certification Select,NTE_67,Certification not Selected,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+112,General,Error In details update,ERR0040,Error in Updating Details,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+113,HR Foundation,Education details not set,NTE_69,Education Details are not set. ,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+114,HR Foundation,Experience details,NTE_70,Experience details are not provided.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+115,HR Foundation,Related user already used,NTE_71,Related User is already mapped to another Employee.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+116,HR Foundation,Emp and Reporting officer,NTE_72,Employee and reporting officer cannot be same.,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+117,General,Image Upload Failed,ERR0041,"Image Upload Failed,Try Again.",Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+118,HR Foundation,Skill Not selected,NTE_74,Skill not Selected,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+119,General,No data for Org Unit,ERR0042,No data avalilable for selected Organization Unit,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+120,Talent Assessment,Total Weight KPI,NTE_75,Total Weightage of KPI should be 100,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:28,1,TRUE
+121,General,Duplicate User Email,ERR0043,Duplicate User email cannot be added.,Error Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE
+122,Talent Acquisition,Select Candidate for other steps,NTE_76,The access to other steps requires to select an candidate from the candidate list,Action Display Message,2/13/2018 16:27,1,2/13/2018 16:27,1,TRUE

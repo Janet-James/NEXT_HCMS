@@ -1,0 +1,126 @@
+<!-- 									<h3 class="block">Skills</h3>
+ -->									
+ 								<div class="clearfix"></div>
+ 								<form role="form" id="candidate_other_details_form">
+									<div class="form-body">
+										{%csrf_token%}									
+										
+										<div class="col-md-12">
+												<div class="col-md-6">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Candidate Status <span class="asterisk">*</span></label> 
+															<select id="candidate_status" name="candidate_status"
+															class="form-control select2" data-error=".errorTxt0" readonly>
+															<option value="0">--Candidate Status--</option> 	
+															{% for i in candidate_status_info %}
+																	{% if i.refitems_name != 'Screening' %} 
+																	<option value={{i.id}} disabled="disabled">{{i.refitems_name}}</option>																	
+																	{% else %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+																	{% endif %}
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt0 errormessage"></span>	 												
+														</div>
+														
+														<div class="form-group" id="interview">
+															<label for="single" class="control-label black_font">
+															Interview <span class="asterisk">*</span></label> 
+															<select id="candidate_interview" name="candidate_interview"
+															class="form-control select2" data-error=".errorTxt2">
+															<option value="0">--Candidate Interview--</option> 	
+															{% for i in candidate_interview_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt2 errormessage"></span>	 
+														</div>
+															
+														<div class="form-group" id="hired">
+															<label for="single" class="control-label black_font">
+															Hired <span class="asterisk">*</span></label> 
+															<select id="candidate_hired" name="candidate_hired"
+															class="form-control select2" data-error=".errorTxt4">
+															<option value="0">--Hired Type--</option> 	
+															{% for i in hired_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt4 errormessage"></span>	 												
+														</div>
+														<div class="form-group" id="referral">
+															<label for="single" class="control-label black_font">
+																Referral <span class="asterisk">*</span>
+															</label> <select id="referral_by" name="referral_by"
+																class="form-control select2" data-error=".errorTxt21">
+																<option value="0">--Referral By--</option> 
+																{% for i in referral_by_info %}
+																<option value={{i.id}}>{{i.name}}</option>
+																{% endfor %}
+															</select> <span class="errorTxt21 errormessage"></span>
+														</div>																											
+												</div>
+												<div class="col-md-6">
+														<div class="form-group" id="screening">
+															<label for="single" class="control-label black_font">
+															Screening <span class="asterisk">*</span></label>
+															<select id="candidate_screening" name="candidate_screening"
+															class="form-control select2" data-error=".errorTxt1">
+															<option value="0">--Candidate Screening--</option> 	
+															{% for i in screening_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt1 errormessage"></span>	 												
+														</div>
+														<div class="form-group" id="offer">
+															<label for="single" class="control-label black_font">
+															Offer Release <span class="asterisk">*</span></label> 
+															<select id="offer_release" name="offer_release"
+															class="form-control select2" data-error=".errorTxt3">
+															<option value="0">--Offer Release--</option> 	
+															{% for i in offer_release_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt3 errormessage"></span>	 												
+														</div>	
+														<div class="form-group" id="source_of_hire">
+															<label for="single" class="control-label black_font">
+															Source of Hire <span class="asterisk">*</span></label>
+															<select id="candidate_source_of_hire" name="candidate_source_of_hire"
+															class="form-control select2" data-error=".errorTxt5">
+															<option value="0">--Source of Hire--</option> 	
+															{% for i in source_of_hire_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt5 errormessage"></span>	 												
+														</div>
+														
+														
+											 </div>												
+										</div>
+																														
+										<div class="col-md-12"  style="padding:0 30px;display:none">
+												<div class="form-group">
+												<h3>Candidate Other Details</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="candidate_other_details">
+													</table>
+												</div>
+										</div>
+											
+										<div class="clearfix"></div>
+											<div class="form-group" align="right">
+												<div class="btn-padding" id='hrms_candidate_other_btn'>
+												       	<button type="button" id="candidate_other_update_button" onclick="candidate_other_create_button()" class=" btn-primary btn-animate btn-eql-wid  btn">Update</button>
+<!-- 													<button type="button" id="candidate_other_remove_button" onclick="candidate_other_delete_button()" class="btn-animate btn-eql-wid  btn btn-danger">Remove</button>
+ -->													<button type="button" id="candidate_other_cancel_button" onclick="clear_candidate_other_info()" class="btn-warning btn-animate btn-eql-wid  btn">Cancel / Clear</button>
+												</div>
+											</div>
+										<div class="clearfix"></div>
+									</div>
+								</form>

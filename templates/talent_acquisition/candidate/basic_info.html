@@ -1,0 +1,284 @@
+<!-- 									<h3 class="block">Employee Information</h3>
+ -->									<div class="clearfix"></div>
+								<form role="form" id="candidate_basic_details_form">
+									<div class="form-body">
+										{%csrf_token%}
+										<div class="col-md-12 ">
+											<div class="col-md-3 col-sm-12">
+												<div class="form-group">
+													<label>First Name <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="First Name" id="first_name"
+															name="first_name" type="text" required
+															data-error=".errorTxt0" autofocus maxlength="50"> <span
+															class="errorTxt0 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>Last Name <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Last Name" id="last_name"
+															name="last_name" type="text"
+															data-error=".errorTxt1" autofocus maxlength="50"> <span
+															class="errorTxt1 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Gender <span class="asterisk">*</span>
+															</label> <select id="gender" name="gender"
+																class="form-control select2" required
+																data-error=".errorTxt2">
+																<option value="0">-- Select Gender --</option> 
+																{% for i in gender_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt2 errormessage"></span>
+												</div>
+												
+												
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Title <span class="asterisk">*</span>
+															</label> <select id="title" name="title"
+																class="form-control select2" required
+																data-error=".errorTxt3">
+																<option value="0">-- Select Title --</option> 
+																{% for i in title_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt3 errormessage"></span>
+												</div>
+																							
+												<div class="form-group">
+														<label for="single" class="control-label black_font">
+																Skype ID
+														</label> 
+														<div class="input-icon">
+																<i class="nf nf-customer"></i> <input class="form-control"
+																placeholder="Skype ID" id="skype_id"
+																name="skype_id" type="text"
+																data-error=".errorTxt20" autofocus maxlength="100"> <span
+																class="errorTxt20 errormessage"></span>
+														</div>
+												</div>
+																															
+											</div>
+											
+											<div class="col-md-3 col-sm-12">
+											
+												<div class="form-group">
+													<label>Primary Email <span class="asterisk">*</span></label>
+													<div class="input-icon">
+														<i class="nf nf-email"></i> <input class="form-control"
+															placeholder="Primary Email" id="primary_email" name="primary_email" type="text"
+															data-error=".errorTxt4" maxlength="100"> <span
+															class="errorTxt4 errormessage"></span>
+													</div>
+												</div>	
+											
+												<div class="form-group">
+													<label>Secondary Email</label>
+													<div class="input-icon">
+														<i class="nf nf-email"></i> <input class="form-control"
+															placeholder="Secondary Email" id="secondary_email" name="secondary_email" type="text"
+															data-error=".errorTxt5" maxlength="100"> <span
+															class="errorTxt5 errormessage"></span>
+													</div>
+												</div>	
+												
+												<div class="form-group">
+															<label>Phone Number</label>
+															<div class="input-icon">
+																<i class="nf nf-phone"></i> <input class="form-control"
+																	placeholder="Phone Number (eg:1111234567)" id="phone_no"
+																	name="phone_no" type="text" data-error=".errorTxt6" maxlength="11">
+																<span class="errorTxt6 errormessage" ></span>
+															</div>
+												</div>
+												
+												<div class="form-group">
+															<label>Mobile Number <span class="asterisk">*</span>
+															</label>
+															<div class="input-icon">
+																<i class="nf nf-mobile"></i> <input class="form-control"
+																	placeholder="Mobile Number (eg:1234567896)" id="mobile_no"
+																	name="mobile_no" type="text" required
+																	data-error=".errorTxt7" maxlength="10"> <span
+																	class="errorTxt7 errormessage"></span>
+															</div>
+												</div>
+												
+																							
+												
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Job Opening <span class="asterisk">*</span>
+															</label> <select id="job_opening" name="job_opening"
+																class="form-control select2"
+																data-error=".errorTxt15">
+																<option value="0">-- Select Job Opening --</option> 
+																{% for i in job_title_info %}
+																	<option value={{i.id}}>{{i.job_title}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt15 errormessage"></span>
+												</div>													
+											</div>
+											
+											
+											<div class="col-md-3 col-sm-12">
+												<div class="form-group">
+													<label>Street 
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Street Name" id="street"
+															name="street" type="text"
+															data-error=".errorTxt9" maxlength="50"> <span
+															class="errorTxt9 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>ZIP/Postal Code
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="ZIP/Postal Code" id="postal_code"
+															name="postal_code" type="text"
+															data-error=".errorTxt10" autofocus maxlength="20"> <span
+															class="errorTxt10 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label>City
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="City Name" id="city"
+															name="city" type="text"
+															data-error=".errorTxt11" autofocus maxlength="50"> <span
+															class="errorTxt11 errormessage"></span>
+													</div>
+												</div>
+												
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Country <span class="asterisk">*</span>
+															</label> <select id="candidate_country" name="candidate_country"
+																class="form-control select2" data-error=".errorTxt12">
+																<option value="0">--Select Country--</option> 
+																{% for i in country %}
+																	<option value={{i.id}}>{{i.country_name}}</option> 
+																{% endfor %}
+															</select> <span class="errorTxt12 errormessage"></span>
+												</div>
+														
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																State <span class="asterisk">*</span>
+															</label> <select id="candidate_province" name="candidate_province"
+																class="form-control select2" data-error=".errorTxt13">
+																<option value="0">--Select State--</option> 
+															</select> <span class="errorTxt13 errormessage errorTxts"></span>
+												</div>
+												
+																							
+											</div>
+											
+											<div class="col-md-3 col-sm-12">	
+												<div class="form-group">
+															<label>Date of Birth  </label>
+															<div class="input-icon">
+																<!-- <i class="nf nf-calendar"></i> <input id="candidate_dob"
+																	name="candidate_dob"  placeholder="Date of Birth"
+																	class="form-control form-control-inline" data-field="date"
+																	size="16" value="" type="text" data-error=".errorTxt14"> <span id="dob_error"
+																	class="errorTxt14 errormessage"></span>
+																	<div id="dtBox"></div>
+															</div> -->
+															<i class="fa fa-calendar cicon"></i> <span
+															style="cursor: text" placeholder="Date of Birth"
+															id="candidate_dob_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Date of Birth"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="candidate_dob"
+															placeholder="Date of Birth"
+															onchange="DatePickerInputUpdate(this)"
+															id="candidate_dob" type="hidden" readonly
+															data-error=".errorTxt14">
+														<div id="dtBox"></div>
+														<span id="dob_error"
+																	class="errorTxt14 errormessage"></span>
+												</div>	</div>
+												
+													
+												<div class="form-group">
+													<label> Candidate Address </label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i>
+														<textarea class="form-control" id="candidate_address" name="candidate_address" placeholder="Candidate Address" rows="1" data-error=".errorTxt16" maxlength="150"></textarea>
+														<span class="errorTxt16 errormessage"></span>
+													</div>													
+												</div>
+												
+												<div class="form-group">
+															<label>Languages Known 
+															</label>
+															<div class="input-icon">
+																<i class="nf nf-mobile"></i> <input class="form-control"
+																	placeholder="Languages Known" id="languages_known"
+																	name="languages_known" type="text"
+																	data-error=".errorTxt8" maxlength="100"> <span
+																	class="errorTxt8 errormessage"></span>
+															</div>
+												</div>	
+																							
+												
+												<div class="form-group">
+													<label>Expected Salary (per annum)
+													</label>
+													<div class="input-icon">
+														<i class="nf nf-customer"></i> <input class="form-control"
+															placeholder="Expected Salary" id="expected_salary"
+															name="expected_salary" type="text"
+															data-error=".errorTxt18" autofocus maxlength="15"> <span
+															class="errorTxt18 errormessage"></span>
+													</div>
+												</div>
+												
+											
+												<div class="form-group">
+															<label for="single" class="control-label black_font">
+																Additional Info 
+															</label> 
+															<div class="input-icon">
+																<i class="nf nf-customer"></i> <input class="form-control"
+																placeholder="Additional Info" id="additional_info"
+																name="additional_info" type="text"
+																data-error=".errorTxt19" autofocus maxlength="100"> <span
+																class="errorTxt19 errormessage"></span>
+															</div>
+												</div>	
+											
+											</div>
+											
+										</div>
+										<div class="clearfix"></div>
+											<div class="form-group" align="right">
+												<div class="btn-padding" id='hrms_candidate_btn'></div>
+											</div>
+										<div class="clearfix"></div>
+									</div>
+								</form>

@@ -1,0 +1,240 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{%block links %}
+<!-- CUSTOM CSS LINK START -->
+<!-- NTREE CSS -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/NTree/ui/css/default/NTree.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<link href="/static/dev/NTree/ui/css/default/animate.css"
+	rel="stylesheet" type="text/css" />
+
+<link href="/static/dev/NTree/ui/plugins/amchart/css/chart.min.css"
+	rel="stylesheet" type="text/css" />
+
+{% endblock %}{% block content %} {% nav_tags breadcrum_title="" %}
+<!-- CUSTOM CSS LINK END-->
+
+<!-- BODY CONTENT START -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content" style="padding-left: 0;">
+				<div class="container-fluid no-padding level-one ">
+					<!-- 	<button id="basicPrimary" type="button"
+						class="btn btn-success btn-eql-wid btn-animate no-display">Success</button> -->
+					<div class="row">
+						<div class="vision-mission" id="vision_mission">
+							<span class="vision-span" href="#NEXT-Vision" role="button"
+								data-toggle="modal"><img
+								src="/static/dev/NTree/ui/images/vision-img.png"></span> <span
+								class="mission-span" href="#NEXT-Mission" role="button"
+								data-toggle="modal"><img
+								src="/static/dev/NTree/ui/images/mission-img.png"></span>
+						</div>
+						<div class="col-sm-12 ">
+							<div class="portlet light bordered datatable_view" style="padding-bottom: 0 !important; margin-bottom: 0 !important;">
+								<div class="portlet-title no-border">
+									<div class="caption" style="padding-left: 30px;">
+										<span class="caption-subject bold uppercase">Objectives
+											and Key Results</span>
+									</div>
+								</div>
+								<div class="page-content">
+									<!-- BEGIN CONTENT BODY -->
+									<div class="row ">
+										<!-- BEGIN PAGE BASE CONTENT -->
+
+										<div class="col-md-6 col-sm-12 ">
+											<div class="col-md-6 col-sm-12 no-padding">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">Organization
+														<span class="required">*</span>
+													</label> <select id="ntree_organization" name="ntree_organization"
+														class="form-control select2" data-error=".errorTxt0">
+														<option value="0">--Select--</option> {% for i in organization %}
+
+														<option value={{i.id}}>{{i.name}}</option> {% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">Organization
+														Unit Name <span class="required">*</span>
+													</label> <select id="ntree_organization_unit"
+														name="ntree_organization_unit"
+														class="form-control select2" data-error=".errorTxt0">
+														<option value="0">--Select--</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="portlet-body ">
+										<div id="ntree_div">
+											<div class="sun" id="spin">
+												<img src="/static/dev/NTree/ui/images/NTree-Sun.png"
+													class="img-responsive" />
+											</div>
+											<div class="rainbow animated infinite fadeIn">
+												<img src="/static/dev/NTree/ui/images/NTree-Rainbow.png"
+													class="img-responsive" />
+											</div>
+											<div class="full-tree">
+												<ul class="falling">
+													<li><img src="/static/dev/NTree/ui/images/f1.png" class="mymove" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f2.png" class="mymove mymove1" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f3.png" class="mymove mymove2" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f4.png" class="mymove mymove3" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f5.png" class="mymove mymove4" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f6.png" class="mymove mymove5" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f7.png" class="mymove mymove6" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f8.png" class="mymove mymove7" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f3.png" class="mymove mymove8" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f2.png" class="mymove mymove9" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f1.png" class="mymove mymove10" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f4.png" class="mymove mymove3" /></li>
+													<li><img src="/static/dev/NTree/ui/images/f5.png" class="mymove mymove3" /></li>
+												</ul>
+												<div class="flying">
+													<canvas
+														style="width: 50px; height: 50px; margin: 30px auto; display: block"></canvas>
+													<button class="btn btn-primary no-display" id="play">Play</button>
+													<button class="btn btn-primary no-display" id="stop">Stop</button>
+													<button class="btn btn-primary no-display" id="goto">Goto
+														Frame 3</button>
+													<button class="btn btn-primary no-display" id="restart">Restart</button>
+												</div>
+												<img src="/static/dev/NTree/ui/images/NTree-Level-one.png"
+													class="img-responsive " />
+											</div>
+											<div class="sand">
+												<img src="/static/dev/NTree/ui/images/NTree-sand.jpg"
+													class="img-responsive" />
+											</div>
+										</div>
+										</div>
+	<div id="org_chart_view" style="display: none;">									
+ <div class="row eqheight" >
+										<div class="col-md-6 col-sm-12">
+											<div class="portlet light bordered datatable_view" style="overflow: hidden;">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject bold uppercase">
+															Expected VS Completed</span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+													<div id="total_objective_div"></div>
+													<div id="chart_div" ></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="portlet light bordered datatable_view" style="overflow: hidden;">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject bold uppercase"> KR
+															Status</span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+													<div id="chart_div1"></div>
+												</div>
+											</div>
+										</div>
+										</div>
+										 <div class="row eqheight" >
+										
+<div class="col-md-6 col-sm-12">
+											<div class="portlet light bordered datatable_view" style="overflow: hidden;">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject bold uppercase">Completion Status</span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+										<div id="completed_objectives" >
+
+										</div>
+										</div>
+										</div>
+										</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="portlet light bordered datatable_view" style="overflow: hidden;">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject bold uppercase"> Overall Organization Objective</span>
+													</div>
+												</div>
+												<div class="portlet-body form">
+										<div id="total_org_objectives">
+										</div>
+										</div>
+										</div>
+										</div>
+										</div>
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- MODEL START -->
+<!-- BODY CONTENT END -->
+<!-- CUSTOM JS LINK START-->
+{% endblock %} {% block scripts %}
+<script src="/static/dev/NTree/ui/js/default/sprite-animate.js" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/components-select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/NTree/dev/charts/amcharts.js' %}"></script>
+<script src="{% static 'dev/NTree/dev/charts/serial.js' %}"></script>
+<script src="{% static 'dev/NTree/dev/charts/pie.js' %}"></script>
+<script src="/static/dev/NTree/dev/charts/light.js"></script>
+<script>
+$(function(){
+  var $canvas = $('canvas');
+    $canvas.spriteAnimate({
+        frameWidth: 150,
+        frameHeight: 150,
+        numberOfFrames: 4,
+        imgSrc: "/static/dev/NTree/ui/images/demo.png",
+        fps: 15,
+        loop: true,
+        debug: false,
+        onFinish: function(){}
+  });
+$( "#play" ).click(function() {
+  $canvas.spriteAnimate('play');
+});
+$( "#stop" ).click(function() {
+  $canvas.spriteAnimate('pause');
+});
+$( "#goto" ).click(function() {
+  $canvas.spriteAnimate('goTo', 3);
+});
+$( "#restart" ).click(function() {
+  $canvas.spriteAnimate('restart');
+});
+$('#play').trigger('click');
+
+// trigger the notification
+setInterval(function(){ 
+$('#basicPrimary').trigger('click'); }, 8000);	
+	
+});
+</script>
+<script>
+$(".nav_trigger").hide()
+</script>
+<script src="/static/dev/NTree/dev/ntree_view.js" type="text/javascript">
+</script>
+{% endblock %}
+<!-- CUSTOM JS LINK END--->

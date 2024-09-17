@@ -1,0 +1,296 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css link -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css link -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- datetime css -->
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- file upload css link -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css link -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="TaxDeclaration" %}
+<!-- body container start -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<!-- form div start -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Tax
+										Declaration </span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<form role="form" id="tax_declaration_form">
+									<div class="form-body">
+										<div class="row">
+											{%csrf_token%}
+											<style type="text/css">
+											textarea.form-control {
+
+    padding-bottom: 0 !important;
+
+}
+.declaration_from {
+	padding-bottom: 30px;
+}
+
+.declaration_from .control-label {
+	padding-top: 10px;
+}
+
+.declaration_from .form-group {
+	overflow: hidden
+}
+
+.declaration_table tr th {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.declaration_table tr td {
+	vertical-align: middle;
+	padding: 10px;
+}
+
+.declaration_table>tbody>tr>td, .declaration_table>tbody>tr>th,
+	.declaration_table>tfoot>tr>td, .declaration_table>tfoot>tr>th,
+	.declaration_table>thead>tr>td, .declaration_table>thead>tr>th {
+	padding: 10px;
+}
+
+.addrow textarea.form-control {
+        min-height: 70px !important;
+}
+
+.form-control { font-size:14px !important}
+
+</style>
+											</head>
+											<!-- END HEAD -->
+											<!-- BEGIN CONTAINER -->
+
+											<div
+												class="col-md-10 col-sm-12 col-md-offset-1 declaration_from">
+												<table width="100%" border="1"
+													class="table declaration_table" id="tab_logic">
+
+													<thead>
+
+														<tr>
+															<th width="15%">Item Name</th>
+															<th width="30%">Particulars</th>
+															<th width="10%">Eligibility</th>
+															<th width="8%">Max Limit</th>
+															<th width="15%">Amount</th>
+															
+														</tr>
+
+													</thead>
+
+
+													<tbody>
+
+														<tr>
+															<td colspan="5">Exemption u/s 10</td>
+														</tr>
+
+
+														<tr>
+															<td><strong>House Rent Allowance</strong></td>
+															<td width="40%">
+																 <textarea class="form-control"></textarea>
+
+															</td>
+															<td width="17%"><select class="form-control">
+														<option value="1">Metro</option>
+														<option value="2">Non-Metro</option> 
+													</select>
+															<td width="15%"> <textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td>
+															<td width="20%"><input type="text" 
+																class="form-control amount" onchange="onChangeamount(this)"></td>
+														</tr>
+														<tr>
+															<td rowspan="2"><strong>LTA</strong></td>
+															<td>Proposed travel for LTA <br>Exemption for
+																the<br> Block 2018-2021
+
+
+															</td>
+															<td colspan="3"><strong>Planning to claim
+																	LTA this year</strong></td>
+
+														</tr>
+
+														<tr>
+															<td colspan="4">
+																<table width="100%" border="0" cellpadding="5"
+																	cellspacing="5">
+																	<tbody>
+																		<tr>
+																			<td width="47%">Claims during the year 2018</td>
+																			<td width="20%"><select class="form-control">
+																			<option value="1">Yes</option>
+																			<option value="2">No</option></select></td>
+																			<td width="18%"><textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td>
+																			<td width="22%"><input type="text"
+																				class="form-control amount" onchange="onChangeamount(this)"></td>
+
+																		</tr>
+																		<tr>
+																			<td>Claims during the year 2019</td>
+																			<td width="10%"><select class="form-control">
+																			<option value="1">Yes</option>
+																			<option value="2">No</option></select></td>
+																			<td width="15%"><textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td>
+																			<td width="20%"><input type="text" class="form-control amount" onchange="onChangeamount(this)"></td>
+
+																		</tr>
+																		<tr>
+																			<td>Claims during the year 2020</td>
+																			<td width="15%"><select class="form-control">
+																			<option value="1">Yes</option>
+																			<option value="2">No</option></select></td>
+																			<td width="15%"><textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td> 
+																			<td width="20%"><input type="text" class="form-control amount" onchange="onChangeamount(this)"></td>
+
+																		</tr>
+																		<tr>
+																			<td>Claims during the year 2021</td>
+																			<td width="15%"><select class="form-control">
+																			<option value="1">Yes</option>
+																			<option value="2">No</option></select></td>
+																			<td width="15%"><textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td>
+																			<td width="20%"><input type="text" class="form-control amount" onchange="onChangeamount(this)"/></td>
+
+																		</tr>
+																		<tr>
+																			<td>If I do not produce the bills <br>to
+																				the satisfaction of the company, <br> then the
+																				Company can consider the amount<br> paid
+																				towards LTA for tax purpose
+																			</td>
+																			<td width="15%"><select class="form-control">
+																			<option value="1">Yes</option>
+																			<option value="2">No</option></select></td>
+																			<td width="15%"><textarea name='textarea_field' value='textarea_value' class='form-control amount_limit'></textarea></td>
+																			<td width="20%"><input type="text" class="form-control amount" onchange="onChangeamount(this)"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+
+												<div class="group-btn-sec">
+													<button id="add_head"
+														class="btn btn-success btn-eql-wid  pull-left">Add
+														Heading</button>
+												    <button id="add_row"
+														class="btn btn-success btn-eql-wid pull-left">Add
+														Row</button>		
+													<button id='delete_row'
+														class="pull-right btn btn-danger btn-eql-wid ">Delete
+														Row</button>
+													<button id='delete_head'
+														class="pull-right btn btn-danger btn-eql-wid ">Delete
+														Heading</button>
+												</div>
+											</div>
+										</div>
+										<br>
+
+
+									</div>
+								</form>
+
+							</div>
+						</div>
+						<div class="form-group" align="right">
+							<div class="btn-padding" id='tax_declaration_form_btn'></div>
+						</div>
+						<!-- END SAMPLE FORM PORTLET-->
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- END CONTENT -->
+
+	<!-- body container end -->
+	{% endblock %}
+	<!-- body content end -->
+	<!-- custom script start -->
+	{% block scripts %}
+
+	<!-- datatable js -->
+	<script
+		src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+		type="text/javascript"></script>
+	<!-- select2 js -->
+	<script
+		src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+		type="text/javascript"></script>
+	<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+		type="text/javascript"></script>
+	<script
+		src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+		type="text/javascript"></script>
+	<!-- file input js -->
+	<script
+		src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+		type="text/javascript"></script>
+	<!-- datatable custom js -->
+	<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+		type="text/javascript"></script>
+	<!-- date picker.js -->
+	<script
+		src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+		type="text/javascript"></script>
+	<script>
+	$("#tax_dob_dt").DateTimePicker({
+		dateFormat : "dd-mm-YYYY"
+	});
+	
+</script>
+
+	<!-- dev js -->
+	<script
+		src="{% static  '/dev/hrms_foundation/js/payroll/tax_entry_form_declaration.js' %}"
+		type="text/javascript"></script>
+	{% endblock %}
+	<!-- custom script end -->

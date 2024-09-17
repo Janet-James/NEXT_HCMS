@@ -1,0 +1,143 @@
+.select2-container--open {
+	z-index: 20052 !important;
+}
+.input_hide {
+	pointer-events: none;
+}
+.get-oc-tb {
+	margin-top: -5px;
+}
+.get-oc-c {
+	overflow: auto !important;
+}
+.get-org-chart .get-text {
+	font-size: 18px ;
+	stroke: none;
+}
+.get-level-1 {
+	fill: white;
+	stroke: #5c5c64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+.get-level-2 {
+	fill: #fff;
+	stroke: #d277fe;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-3 {
+	fill: #fff;
+	stroke: #5856d6;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-4 {
+	fill: #fff;
+	stroke: #ff9501;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-5 {
+	fill: #fff;
+	stroke: #4cda64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-6 {
+	fill: #fff;
+	stroke: #5ac8fb;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-7 {
+	fill: #fff;
+	stroke: #50c9f6;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-8 {
+	fill: #fff;
+	stroke: #f6d167;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-9 {
+	fill: #fff;
+	stroke: #92aafe;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-10 {
+	fill: #fff;
+	stroke: #ff9501;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-11 {
+	fill: #fff;
+	stroke: #5c5c64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-12 {
+	fill: #fff;
+	stroke: #4cda64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-1:hover, .get-level-2:hover, .get-level-3:hover, .get-level-4:hover,
+	.get-level-5:hover, .get-level-6:hover, .get-level-7:hover,
+	.get-level-8:hover, .get-level-9:hover, .get-level-10:hover, .get-level-11:hover, .get-level-12:hover {
+	fill: #ffeffa !important;
+	stroke: white;
+	stroke-width: 0.5px;cursor:pointer;
+}
+
+/* org employee chart text color change */
+.get-text-3 {
+    font-size: 14px !important;
+    fill: #000 !important;
+}
+.get-text-2 {
+    font-size: 14px !important;
+    fill: #000 !important;
+}
+.get-text-1 {
+    font-size: 18px !important;
+    fill: #27c2ff !important;
+}
+.get-text-0 {
+        font-size: 20px !important;
+        stroke: none !important;
+        fill: #000 !important;
+        text-transform: uppercase;
+}
+
+
+
+
+

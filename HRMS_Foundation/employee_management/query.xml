@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="EmployeeManagement">
+		<query id="user_role_id" name="user_role_id"
+			description="To select all records in a user role details">
+        	<![CDATA[select role.id,role.code,hrdept.description as dept_name,hrcmi.name as company_name,hrcmi.id as company_id from role inner join auth_user on role.id = auth_user.role_id 
+					inner join hr_employee hre on hre.related_user_id = auth_user.id
+					inner join hr_company_info hrcmi on hrcmi.id = hre.company_id_id
+					inner join hr_department hrdept on hre.department_id_id = hrdept.id
+					where auth_user.id = %s ]]>
+		</query>
+		<query id="company_result" name="company_result"
+			description="To select all records in a Company">
+      	<![CDATA[select id,name,country from hr_company_info where is_active=True order by name]]>
+		</query>
+		<!-- Employee details data fetching start -->
+		<query id="hrms_employee_list" query_name="hrms_employee_list"
+			description="hrms employee list">
+          <![CDATA[select ei.id,UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name ,coalesce(ei.work_email,'') as email,
+		coalesce(ei.work_phone,'') as phone,coalesce(ai.name,'no_data.png') as profile ,coalesce(hrd.role_title,'') as role 
+		from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+		left join hcms_ti_role_details hrd on hrd.id = ei.role_id_id
+		where 
+		]]>
+		</query>
+		<!-- Employee details data fetching end -->
+		<!-- Attachment details data fetching start -->
+		<query id="hrms_attachment_max_id" name="hrms_attachment_max_id"
+			description="Attachment max id get">
+      	<![CDATA[select coalesce (max(id+1),1) as id from attachment_info]]>
+		</query>
+		<query id="hrms_attachment_insert" name="hrms_attachment_insert"
+			description="Attachment insert">
+      	<![CDATA[insert into attachment_info (name,path,format,is_active) values (%s,%s,%s,True) RETURNING id]]>
+		</query>
+		<query id="hrms_attachment_update" name="hrms_attachment_update"
+			description="Attachment update">
+      	<![CDATA[update attachment_info set name=%s,path=%s,format=%s where id=%s RETURNING id]]>
+		</query>
+		<!-- Attachment details data fetching end -->
+		
+		<!-- Employee drop down start -->
+		<query id="hrms_fetch_reporting_officer_info" name="hrms_fetch_reporting_officer_info"
+			description="hrms fetch reporting officer info">
+		<![CDATA[select id,UPPER(COALESCE(name, '') || ' ' || COALESCE(last_name, '')) as name from employee_info where is_active and org_id_id=%s and id <> %s]]>
+		</query>
+		
+		<!-- Org unit Info drop down -->
+		<query id="hrms_fetch_org_unit_info" name="hrms_fetch_org_unit_info"
+			description="hrms_fetch_org_unit_info">
+		<![CDATA[select id,orgunit_name from organization_unit_info where is_active and organization_id=%s and parent_orgunit_id != 0 order by orgunit_name]]>
+		</query>
+		<query id="hrms_fetch_parent_org_unit_info" name="hrms_fetch_parent_org_unit_info"
+			description="hrms_fetch_parent_org_unit_info">
+		<![CDATA[select oui.id,oui.orgunit_name from organization_unit_info oui left join reference_items ri on oui.orgunit_type_id = ri.id
+		where oui.is_active and oui.organization_id = %s and ri.refitems_code != 'TOWNN'  order by orgunit_name]]>
+		</query>
+		<query id="hrms_fetch_organization_info" name="hrms_fetch_organization_info"
+			description="hrms fetch organization info">
+		<![CDATA[select id,name from organization_info where is_active]]>
+		</query>
+		
+		<query id="hrms_fetch_related_user_info" name="hrms_fetch_related_user_info"
+			description="hrms fetch role info">
+		<![CDATA[select usr.id,COALESCE(usr.username, '')  as name,usr.is_active from auth_user usr inner join hcms_role rol on usr.role_id = rol.id  ]]>
+		</query>
+		<!-- Employee drop down end -->
+		
+		<!-- Employee team names drop down -->
+		<query id="hrms_fetch_team_name_info" name="hrms_fetch_team_name_info"
+				description="hrms_fetch_team_name_info">
+			<![CDATA[select id,COALESCE(name, '')  as name from team_details_info where org_unit_id=%s and is_active]]>
+		</query>
+		<!-- Employee team names drop down end --> 
+		
+		
+		<!-- Employee data table start -->
+		<query id="hrms_fetch_employee_info" name="hrms_fetch_employee_info"
+			description="hrms fetch employee_info">
+		<![CDATA[
+		select emp.id,ROW_NUMBER() OVER(ORDER BY emp.id asc) as row_no,UPPER(coalesce(emp.name,'')||' '||coalesce(emp.last_name,'')) as name,
+emp.work_email,emp.working_address,coalesce(ai.name,'no_data.png') as img_name,coalesce(emp.image_id_id,0) as img_id from employee_info emp
+left join attachment_info ai on ai.id = emp.image_id_id  where emp.is_active and emp.id=%s order by emp.name
+		]]>
+		</query>
+		
+		<query id="hrms_fetch_employee_id" name="hrms_fetch_employee_id"
+			description="hrms fetch employee id">
+		<![CDATA[select coalesce(max(id+1),1)::text as emp_id from employee_info]]>
+		</query>
+		<!-- Employee data table end -->
+		
+		<!-- Employee data table row click start -->
+		<query id="hrms_employee_row_click" name="hrms_employee_row_click"
+			description="hrms employee row click">
+		<![CDATA[select ei.id::text as id,UPPER(COALESCE((select COALESCE(name, '') || ' ' || COALESCE(last_name, '') from employee_info where id=ei.reporting_officer_id),'')) as reporting_officer_name,
+			     coalesce(ai.name,'no_data.png') as img_name,coalesce(ei.image_id_id,0) as img_id,to_char(ei.created_date, 'DD-MM-YYYY') as created_date,to_char(ei.modified_date, 'DD-MM-YYYY') as modified_date,UPPER(COALESCE(ei.name, '') || ' ' || COALESCE(ei.last_name, '')) as emp_name,UPPER(ei.name) as name ,ei.working_address,ei.work_mobile,
+				 ei.work_location, ei.work_email, ei.work_phone,  to_char(ei.date_of_joining, 'DD-MM-YYYY') as date_of_joining, to_char(ei.date_of_confirmation, 'DD-MM-YYYY') as date_of_confirmation,to_char(date_of_resignation, 'DD-MM-YYYY') as date_of_resignation ,to_char(date_of_releaving, 'DD-MM-YYYY') as date_of_releaving,
+				 file_no as employee_id, spouse_name, spouse_employer, ei.spouse_telephone, to_char(ei.spouse_date_of_birth, 'DD-MM-YYYY') as spouse_date_of_birth , ei.father_name,to_char(father_date_of_birth, 'DD-MM-YYYY') as father_date_of_birth  , mother_name,to_char(mother_date_of_birth, 'DD-MM-YYYY') as mother_date_of_birth, citizenship_no, license_number, pan_no,
+				 ei.provident_fund_no, home_address, ei.permanent_address,coalesce(ei.employee_gender_id::int,0) as employee_gender, coalesce(ei.marital_status::int,0) as marital_status, ei.no_of_children,to_char(ei.date_of_birth, 'DD-MM-YYYY') as date_of_birth, place_of_birth, total_work_experience,
+				 ei.parent_id,coalesce(ei.org_id_id,0) as org_id_id, coalesce(ei.org_unit_id_id,0) as org_unit_id_id, coalesce(ei.type_id_id,0) as type_id_id, coalesce(ei.role_id_id,0) as role_id_id, coalesce(ei.team_name_id,0) as team_name_id, org_info.orgunit_name as org_unit_name,
+				 coalesce(ei.related_user_id_id,0) as related_user_id_id,coalesce(ei.reporting_officer_id,0) as reporting_officer_id, rol_det.role_title as role_title, ei.short_name as short_name, coalesce(ei.title_id,0) as title, coalesce(ei.country_id,'0') as country_of_birth, coalesce(ei.country_code_id,'0') as country_code,
+				 ei.emergency_contact_no, coalesce(ei.attendance_option_id,0) as attendance_option, ei.no_of_dependents as no_of_dependents, coalesce(ei.blood_group_id,'0') as blood_group, coalesce(ei.disability_category_id::int,0) as disability_category,
+				 ei.physically_challenged as physically_challenged, ei.middle_name, UPPER(ei.last_name) as last_name, ei.is_spouse_same_org, ei.license_number, coalesce(ei.disability_percentage_id::int,0) as disability_percentage, coalesce(ei.shift_type_id::int,0) as shift_type_id,coalesce(ei.uan,'') as system_no, coalesce(ei.employee_id,'') as file_no,coalesce(ei.personal_email_id,'') as personal_email_id,
+				 ei.is_employee_active, ei.is_id_card_provided, is_payroll_active from employee_info ei left join organization_unit_info org_info on org_info.id=ei.org_unit_id_id left join hcms_ti_role_details rol_det on rol_det.id=ei.role_id_id left join attachment_info ai on ai.id = ei.image_id_id
+                 where ei.id=%s ]]>
+		</query>
+		<!-- Employee data table row click end -->
+		
+		<!-- Employee fetch skill details start -->
+		<query id="hrms_fetch_employee_skill_details" name="hrms_fetch_employee_skill_details"
+			description="hrms fetch employee skill details">
+		<![CDATA[select skills.id,ROW_NUMBER() OVER(ORDER BY skills.id asc),skills.skill_name,skills.experience,skills.rating,ref.refitems_name as skill_type,file_name,
+                 COALESCE(upload_id, null) as upload_id, skills.skill_type_id from hrms_skills skills left join reference_items ref on ref.id=skills.skill_type_id where skills.is_active and skills.emp_id_id=%s]]>
+		</query>
+		<!-- Employee fetch skill details end -->
+		
+		<!-- Employee fetch educational details start -->
+		<query id="hrms_fetch_employee_education_details" name="hrms_fetch_employee_education_details"
+			description="hrms fetch employee skill details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),university,coalesce(specialization,'') specialization,year_of_passed_out,institution_name,duration,cgpa,percentage,course_name,certificate_status,file_name,COALESCE(upload_id, null) as upload_id from hrms_education_details where is_active and emp_id_id=%s]]>
+		</query>
+		<!-- Employee fetch skill details end -->
+		
+		<!-- Employee fetch experience details start -->
+		<query id="hrms_fetch_employee_experience_details" name="hrms_fetch_employee_experience_details"
+			description="hrms fetch employee experience details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),employer,position,to_char(start_date, 'DD-MM-YYYY') as start_date ,to_char(end_date, 'DD-MM-YYYY') as end_date, certificate_status,previous_employee_id, hr_reason,emp_references,file_name,COALESCE(upload_id, null) as upload_id from hrms_professional_experience where is_active and emp_id_id=%s]]>
+		</query>
+		<!-- Employee fetch experience details end -->
+		
+		<!-- Employee fetch certification details start -->
+		<query id="hrms_fetch_employee_certification_details" name="hrms_fetch_employee_certification_details"
+			description="hrms fetch employee certification details">
+		<![CDATA[select id,ROW_NUMBER() OVER(ORDER BY id asc),description,certification_no,issued_by,to_char(start_date, 'DD-MM-YYYY') as start_date ,to_char(end_date, 'DD-MM-YYYY') as end_date, certificate_status,file_name,COALESCE(upload_id, null) as upload_id from hrms_certifications where is_active and emp_id_id=%s]]>
+		</query>
+		<!-- Employee fetch certification details end -->	
+				
+		<!-- Organization query start -->			
+		<!-- Organization datatable query start -->
+		<query id="hrms_fetch_organization_details" name="hrms_fetch_organization_details"
+			description="hrms fetch organization details">
+		<![CDATA[select org.id,row_number() over(ORDER BY org.id asc),org.name,org.telephone_number,org.email,org.fax,org.address1,cntry.country_name as country,to_char(org.created_date, 'YYYY-MM-DD') as created_date,to_char(org.modified_date, 'YYYY-MM-DD') as modified_date,
+                 coalesce(ai.name,'no_org_img.png') as img_name, coalesce(org.logo_id,0) as img_id from organization_info org left join attachment_info ai on ai.id = org.logo_id left join country_info cntry on cntry.id=org.country_id where org.is_active]]>
+		</query>
+		<!-- Organization datatable query end -->
+		
+		<!-- Organization datatable row click query start -->
+		<query id="hrms_organization_row_click" name="hrms_organization_row_click"
+			description="hrms organization row click">
+		<![CDATA[select oi.id,oi.name,oi.telephone_number,oi.email,oi.fax,coalesce(oi.country_id,'0') as country,oi.mobile_number,oi.address1,oi.address2,
+to_char(oi.created_date, 'YYYY-MM-DD') as created_date,to_char(oi.modified_date, 'YYYY-MM-DD') as modified_date,COALESCE(oi.website, '') as website,
+COALESCE(oi.logo_id, 0) as logo_id,COALESCE(ai.name, 'no_org_img.png') as logo_name, oi.legal_name, oi.short_name,coalesce(oi.state_id,'0') as state, oi.location, oi.pincode, oi.corporate_identity_number from organization_info oi left join attachment_info ai
+on ai.id=oi.logo_id where oi.id=%s and oi.is_active]]>
+		</query>
+		<!-- Organization datatable row click query end -->				
+		<!-- Organization query end -->
+		
+		
+		<!-- Employee Search List Start -->
+		<query id="hrms_reporting_officer_search_list" query_name="hrms_reporting_officer_search_list"
+			description="hrms reporting officer search list">
+          <![CDATA[select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id asc),
+		coalesce('<img class="img-circle img-inline pic_ina" src="http://tst-hcms.nexttechnosolutions.int/media/user_profile/'||ai.name||'" alt="Image Loction Not found" width="35px" height="30px"/>','<img src="http://tst-hcms.nexttechnosolutions.int/media/profile/no_data.png"  alt="Not found" width="35px" height="30px"/>') as profile
+		,ei.name,ei.last_name,ei.employee_gender_id,ci.name from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id and ei.is_active]]>
+		</query>
+		<!-- Employee Search List End -->
+		
+		<!-- Employee role drop down -->
+		<query id="hrms_fetch_role_drop_down" name="hrms_fetch_role_drop_down"
+			description="hrms fetch role drop down">
+		<![CDATA[select id,role_title from hcms_ti_role_details where is_active]]>
+		</query>
+		<!-- Employee role drop down -->
+		<!-- Employee HR info -->
+		<query id="hrms_check_related_user_id_exists" query_name="hrms_check_related_user_id_exists"
+			description="hrms_check_related_user_id_exists">
+          <![CDATA[select * from employee_info where related_user_id_id=%s and id=%s and is_active]]>
+		</query>			
+		<!-- Employee HR info -->
+		<!-- Team details -->
+		 <query id="hrms_fetch_team_details" name="hrms_fetch_team_details"
+			description="hrms_fetch_team_details">
+		<![CDATA[select td.id,row_number() over (order by td.id asc),oi.name as organization,aui.orgunit_name,td.name,td.code from team_details_info  td
+        inner join organization_unit_info aui on td.org_unit_id=aui.id inner join organization_info  oi on  oi.id=td.org_id
+        where td.is_active=True {}]]>
+		</query>
+		<query id="hrms_fetch_team_details_rowclick" name="hrms_fetch_team_details_rowclick"
+			description="hrms_fetch_team_details_rowclick">
+		<![CDATA[select td.id,td.org_id,td.org_unit_id,aui.orgunit_name,td.name,td.code,td.description from team_details_info td inner join organization_unit_info aui on aui.id=td.org_unit_id
+ where td.is_active=True  and td.id=%s]]>
+		</query>
+		<query id="hrms_employee_get_gen_type" name="hrms_employee_get_gen_type"
+			description="hrms_employee_get_gen_type">
+		<![CDATA[select COALESCE(id,0) as id from reference_items where refitems_code=%s]]>
+		</query>
+		<!-- Employee Document Event info -->
+		<query id="hrms_doc_employee_event_list" query_name="hrms_doc_employee_event_list"
+			description="hrms_doc_employee_event_list">
+          <![CDATA[select ei.id,COALESCE(ai.name, 'no_data.png') image,ei.employee_id,oi.name org_name,oui.orgunit_name org_unit_name,UPPER(COALESCE(ei.name, '') || ' ' || COALESCE(ei.last_name, '')) as name,hrd.role_title,COALESCE(tdi.name,'') tname
+			from employee_info ei left join organization_info oi on ei.org_id_id = oi.id  
+			left join organization_unit_info oui on ei.org_unit_id_id = oui.id 
+			left join hcms_ti_role_details hrd on ei.role_id_id = hrd.id 
+			left join team_details_info tdi on ei.team_name_id = tdi.id 
+			left join attachment_info ai on ei.image_id_id = ai.id
+			where oi.is_active and oui.is_active and ei.is_active 
+			and ei.id=%s]]>
+		</query>	
+		<query id="hrms_attachment_doc_insert" query_name="hrms_attachment_doc_insert"
+			description="hrms_attachment_doc_insert">
+          <![CDATA[INSERT INTO document_info(
+             is_active, name, path, extension, 
+            created_by_id, doc_type_id, employee_id, modified_by_id, org_id, 
+            org_unit_id, notes)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, 
+            %s, %s, %s, %s) returning id;]]>
+		</query>	
+		<query id="hrms_attachment_doc_details" query_name="hrms_attachment_doc_details"
+			description="hrms_attachment_doc_details">
+          <![CDATA[
+			select a.id,ROW_NUMBER () OVER (ORDER BY a.name desc),a.org_name,a.org_unit_name,a.name,a.profile,a.role_title,a.tname,a.refi,a.docname,
+			'<span id="http://tst-hcms.nexttechnosolutions.int/media/documents/'||a.docname||'" onclick="downloadFile(this)"><a><i class="nf nf-download" title="'||a.docname||'" style="color: #4dae59;font-size: 20px;"></i></a></span>',
+			'<span id="'||a.id||'" onclick="deleteFile(this)"><a><i class="nf nf-close" title="'||a.docname||'" style="color: red;font-size: 20px;"></i></a></span>' from (
+			select di.id,oi.name org_name,oui.orgunit_name org_unit_name,
+			UPPER(COALESCE(ei.name, '') || ' ' || COALESCE(ei.last_name, '')) as name,hrd.role_title,COALESCE(tdi.name,'') tname,
+			COALESCE(ri.refitems_name,'') as refi,
+			COALESCE(di.name,'') as docname,
+			coalesce('<img class="img-circle img-inline pic_ina" src="http://tst-hcms.nexttechnosolutions.int/media/user_profile/'||ai.name||'" alt="Image Loction Not found" width="35px" height="30px"/>','<img src="http://tst-hcms.nexttechnosolutions.int/media/profile/no_data.png"  alt="Not found" width="35px" height="30px"/>') as profile
+			from employee_info ei left join organization_info oi on ei.org_id_id = oi.id  
+			left join organization_unit_info oui on ei.org_unit_id_id = oui.id 
+			left join hcms_ti_role_details hrd on ei.role_id_id = hrd.id 
+			left join team_details_info tdi on ei.team_name_id = tdi.id 
+			left join attachment_info ai on ei.image_id_id = ai.id
+			left join document_info di on di.employee_id = ei.id
+			left join reference_items ri on di.doc_type_id = ri.id
+			where oi.is_active and oui.is_active and ei.is_active and hrd.is_active and di.is_active and ri.is_active)a order by a.name			
+			 ]]>
+		</query>	
+		<query id="hrms_past_doc_details" query_name="hrms_past_doc_details"
+			description="hrms_past_doc_details">
+          <![CDATA[
+			select di.id,ROW_NUMBER () OVER (ORDER BY di.id asc),oi.name org_name,oui.orgunit_name org_unit_name,
+UPPER(COALESCE(ei.name, '') || ' ' || COALESCE(ei.last_name, '')) as name,
+COALESCE('<img class="img-circle img-inline pic_ina" src="http://tst-hcms.nexttechnosolutions.int/media/user_profile/'||ai.name||'" alt="Image Loction Not found" width="35px" height="30px"/>','<img src="http://tst-hcms.nexttechnosolutions.int/media/profile/no_data.png"  alt="Not found" width="35px" height="30px"/>') as profile,
+hrd.role_title,COALESCE(tdi.name,'') tname,
+COALESCE(ri.refitems_name,'') as refi,
+COALESCE(di.name,'') as docname,
+'<span id="http://tst-hcms.nexttechnosolutions.int/media/documents/'||di.name||'" onclick="downloadFile(this)"><a><i class="nf nf-download" title="'||di.name||'" style="color: #4dae59;font-size: 20px;"></i></a></span>' 
+from employee_info ei left join organization_info oi on ei.org_id_id = oi.id  
+left join organization_unit_info oui on ei.org_unit_id_id = oui.id 
+left join hcms_ti_role_details hrd on ei.role_id_id = hrd.id 
+left join team_details_info tdi on ei.team_name_id = tdi.id 
+left join attachment_info ai on ei.image_id_id = ai.id
+left join document_info di on di.employee_id = ei.id
+left join reference_items ri on di.doc_type_id = ri.id
+where oi.is_active and oui.is_active and ei.is_active and hrd.is_active and di.is_active and ri.is_active 		
+			 ]]>
+		</query>	
+		
+		<!-- Assets -->
+		<query id="hrms_assets_check" name="hrms_assets_check"
+			description="check assets for the employee">
+		<![CDATA[select * from hrms_assets_info where emp_id_id = %s]]>
+		</query>
+		
+		<query id="hrms_assets_list_for_employee" name="hrms_assets_list_for_employee"
+			description="listing assets for the employee">
+		<![CDATA[select ROW_NUMBER () OVER (ORDER BY a.asset_id asc) ,*from
+((select ri.id as asset_id,ri.refitems_name as asset_name, '<label class="label-cbx"><input class="invisible" type="checkbox" checked id="'||ri.id||'" /><div class="checkbox checkbox-append"><svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.89543051.8954305,1 3,1 Z"></path><polyline points="4 11 8 15 16 6"></polyline></svg></div></label>' as status, 
+'<input class="form-control textboxCustom serial_no" type="text" placeholder="Enter Serial Number"  id="'||ri.id||'" value="'||hai.serial_no||'" style="width:350px"></input>' as serial_no,
+'<input class="form-control form-control-inline given_date" data-field="date"   id="'||ri.id||'" value="'||coalesce(to_char(hai.given_date, 'DD-MM-YYYY'),'')||'" style="width:250px" type="text"><div id="dtBox5"></div>' as given_date from reference_item_category ric 
+inner join reference_items ri on ric.id = ri.refitems_category_id
+left join hrms_assets_info hai on hai.asset_id = ri.id
+where ric.refitem_category_code in ('ASSET') and hai.asset_status in ('True') and ri.is_active and hai.emp_id_id = {0}
+order by asset_name asc)
+union all 
+(select ri.id as asset_id,ri.refitems_name as asset_name, '<label class="label-cbx"><input class="invisible" type="checkbox" id="'||ri.id||'" /><div class="checkbox checkbox-append"><svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.89543051.8954305,1 3,1 Z"></path><polyline points="4 11 8 15 16 6"></polyline></svg></div></label>' as status, 
+'<input class="form-control textboxCustom serial_no" type="text" placeholder="Enter Serial Number" id="'||ri.id||'" value="" style="width:350px"></input>' as serial_no,
+'<input class="form-control form-control-inline given_date" data-field="date" id="'||ri.id||'" value="" type="text" style="width:250px"><div id="dtBox5"></div>' as given_date
+from reference_item_category ric inner join reference_items ri on ric.id=ri.refitems_category_id
+where ri.id not in 
+(select ri.id as asset_id from reference_item_category ric 
+inner join reference_items ri on ric.id = ri.refitems_category_id
+left join hrms_assets_info hai on hai.asset_id = ri.id
+where ric.refitem_category_code in ('ASSET') and hai.asset_status in ('True') and ri.is_active and hai.emp_id_id = {0}) 
+and ric.refitem_category_code in ('ASSET') and ri.is_active and ric.is_active))a
+]]>
+		</query>
+		
+		<query id="hrms_assets_list" name="hrms_assets_list"
+			description="Listing asset details">
+		<![CDATA[select ROW_NUMBER () OVER (ORDER BY ri.id asc),ri.id as asset_id,ri.refitems_name as asset_name, '<label class="label-cbx"><input class="invisible" type="checkbox" id="'||ri.id||'" /><div class="checkbox checkbox-append"><svg width="20px" height="20px" viewBox="0 0 20 20">
+<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.89543051.8954305,1 3,1 Z"></path><polyline points="4 11 8 15 16 6"></polyline></svg></div></label>' as status,
+'<input class="form-control textboxCustom serial_no" type="text" placeholder="Enter Serial Number" id="'||ri.id||'" value="" style="width:350px"></input>' as serial_no,
+'<input class="form-control form-control-inline given_date" data-field="date" id="'||ri.id||'" value="" type="text" style="width:250px"><div id="dtBox5"></div>' as given_date
+from reference_item_category ric inner join reference_items ri on ric.id = ri.refitems_category_id
+where ric.refitem_category_code in ('ASSET') and ric.is_active and ri.is_active order by asset_name asc]]>
+		</query>
+		
+		<query id="hrms_insert_asset_details" name="hrms_insert_asset_details"
+			description="Inserting asset details">
+		<![CDATA[insert into hrms_assets_info(asset_id,serial_no,asset_status,emp_id_id,created_by_id,is_active)
+		 VALUES(%s,%s,%s,%s,%s,%s) returning id]]>
+		</query>
+		
+		<query id="hrms_update_asset_details" name="hrms_update_asset_details"
+			description="hrms update asset details">
+		<![CDATA[update hrms_assets_info SET asset_status='False' where emp_id_id=%s returning id]]>
+		</query>
+		
+		<!-- Employee Document Event info -->
+		
+		<query id="hrms_fetch_team_details_max_id" name="hrms_fetch_team_details_max_id"
+			description="hrms fetch team details max_id">
+		<![CDATA[select coalesce(max(id+1),1)::text as team_id from team_details_info]]>
+		</query>
+		
+		<!-- Employee list country code based on country -->
+		<query id="hrms_employee_list_country_code" name="hrms_employee_list_country_code"
+			description="hrms employee list country code">
+		<![CDATA[select id,country_code as refitems_name from country_info where id=%s]]>
+		</query>
+		
+		<!-- Check organization name already exists -->
+		<query id="hrms_check_organization_name" name="hrms_check_organization_name"
+			description="hrms check organization name">
+		<![CDATA[select * from organization_info where LOWER(name)=LOWER(%s) ]]>
+		</query>
+		
+		<!-- Check organization name already exists -->
+		<query id="hrms_country_drop_down" name="hrms_country_drop_down"
+			description="hrms country drop down">
+		<![CDATA[select id,country_name from country_info where is_active]]>
+		</query>
+		
+			<!-- Organization list province based on country -->
+		<query id="hrms_organization_list_province" name="hrms_organization_list_province"
+			description="hrms organization list province">
+		<![CDATA[select id,state_name from state_info where country_id=%s and is_active order by state_name]]>
+		</query>
+		
+<!-- 			Asset ID drop down
+ -->	<!-- <query id="hrms_asset_id_drop_down" name="hrms_asset_id_drop_down"
+			description="hrms_asset_id_drop_down">
+		<![CDATA[select id,asset_model_code as asset_id from hcms_am_asset_list where asset_model_type_refitem_id=%s and id 
+	NOT IN(select asset_id from hrms_assets_info where emp_id_id=%s and is_active)]]>
+		</query> -->
+		
+		<query id="hrms_asset_id_drop_down" name="hrms_asset_id_drop_down"
+			description="hrms_asset_id_drop_down">
+		<![CDATA[select id, asset_model_code as asset_id from hcms_am_asset_list where asset_model_type_refitem_id=%s and asset_status_refitem_id NOT IN(select id from reference_items where refitems_code ='ASST2' or  refitems_code ='ASST3')
+and id NOT IN(select asset_id from hrms_assets_info where is_active) and is_active]]>
+		</query>
+				
+			<!-- Asset Listing -->
+		<query id="hrms_fetch_employee_assets" name="hrms_fetch_employee_assets"
+			description="hrms listing allocated assets in datatable">
+			<![CDATA[select ass_alloc.id as id,ROW_NUMBER () OVER (ORDER BY asset.id asc),ref.refitems_name as asset_type, asset.asset_model_code, 
+	to_char(ass_alloc.given_date, 'DD-MM-YYYY') as given_date,asset.asset_model_type_refitem_id as asset_type_id, ass_alloc.asset_id from hcms_am_asset_list asset
+	inner join reference_items ref on ref.id=asset.asset_model_type_refitem_id
+	inner join hrms_assets_info ass_alloc on ass_alloc.asset_id = asset.id and ass_alloc.is_active and ass_alloc.emp_id_id=%s]]>
+		</query>
+		
+		<query id="hrms_mobile_number_already" name="hrms_mobile_number_already"
+			description="hrms mobile number already">
+			<![CDATA[select id,work_mobile from employee_info where is_active]]>
+		</query>
+		<query id="hrms_pf_number_already" name="hrms_pf_number_already"
+			description="hrms pf number already">
+			<![CDATA[select id,provident_fund_no from employee_info where is_active]]>
+		</query>
+		<!-- Employee Id Card Query Start -->
+		<query id="hrms_select_employee_info" name="hrms_select_employee_info" description="hrms select employee info">
+			<![CDATA[select id,name as employee_name from employee_info where is_active]]>
+		</query>
+		<!-- Employee Id Card Query end -->
+	</queries>
+</data>
+		

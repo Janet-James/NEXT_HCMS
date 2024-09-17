@@ -1,0 +1,14 @@
+{{#if usermention}}
+{{#if usermention.length}}
+{{#each usermention}}
+    <li>
+       <div class="img-name">
+          <a href="#">
+             <img class="{{color status}} mem-cir-img" src={{ip username}}>
+             <p>{{username}}</p>
+          </a>
+       </div>
+    </li>
+{{/each}}
+{{/if}}
+{{/if}}

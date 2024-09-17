@@ -1,0 +1,39 @@
+<ul>
+  {{#if records}}
+    {{#if admin}}
+      {{#if records.length}}
+        {{#each records}}
+          <li>
+            <div class="chatUser img-name" id={{_id}}>
+              <a href="#">
+                <img class="{{color status}}" src={{ip username}}>
+                <span class="username" id={{_id}}>{{username}}</span>
+              </a>
+              <div class="sent-editor-sec">
+                <a href="#"><i class="fa fa-ellipsis-v"></i></a>
+                <ul>
+                  <li>
+                    <a href="#" id="remove_user_from_group">Remove from group</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        {{/each}}
+      {{/if}}
+    {{else}}
+      {{#if records.length}}
+        {{#each records}}
+          <li>
+            <div class="chatUser img-name" id={{_id}}>
+              <a href="#">
+                <img class="{{color status}}" src={{ip username}}>
+                <span class="username" id={{_id}}>{{username}}</span>              
+              </a>
+            </div>
+          </li>
+        {{/each}}
+      {{/if}}
+    {{/if}}
+  {{/if}}
+</ul>

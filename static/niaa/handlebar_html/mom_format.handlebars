@@ -1,0 +1,338 @@
+<style>
+ul, li{ list-style: none;}
+.mom-format-style tr:nth-child(even) .pert-replay span{margin-right: 0px;margin-left: 45px;text-align: left;}
+.mom-format-style tr:nth-child(even) .pert-replay span.send-date-rlp{top: 5px;}
+.mom-format-style tr:nth-child(odd) .pert-replay p {margin-left: 40px;}
+.mom-format-style tr:nth-child(even) .pert-replay p{margin-left: 40px;text-align: left;}
+.attachment-flex{ text-align: left;}
+</style>
+
+{{#if res}}
+<div><div class="mail-Message-Body-Content">
+                    <table width="100%" cellspacing="0" cellpadding="7">
+                    <tbody>
+                    <tr valign="top">
+                    <td>
+                    <h1><span style="font-family:Calibri,serif;"><span style="font-size:large;"><em><strong>MEETING MINUTES - Project  Meeting</strong></em></span></span></h1>
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+                    <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"><em>Meeting Minutes guidelines: </em></span></span></p>
+                    <ul>
+                    <li>
+                    <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"><em>Publish Minutes within 18 minutes of any meeting</em></span></span></p>
+                    </li>
+                    <li>
+                    <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"><em>Post Minutes in a place available to all stakeholders (e.g. shared drive or website)</em></span></span></p>
+                    </li>
+                    <li>
+                    <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"><em>Send Minutes via email to all stakeholders. Include Action Items in body of the email.</em></span></span></p>
+                    </li>
+                    <li>
+                    <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"><em>Review Action Items for completion during the next meeting.</em></span></span></p>
+                    </li>
+                    </ul>
+                    <table width="100%" cellspacing="0" cellpadding="7" border="1" bordercolor="#e1f3ff">
+                    <tbody>
+                    <tr valign="top">
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="138"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Project /Category Name:</strong></span></span></h4>
+                    </td>
+                    <td colspan="3" bgcolor="#ffffff" width="490" style="padding: 0px 0px 0px 5px;"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Project</strong></span></span><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong></strong></span></span></h4>
+                    </td>
+                    </tr>
+                    <tr valign="top">
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="138">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Date of Meeting:</strong></span></span> <span style="font-family:Calibri,serif;"><span style="font-size:xx-small;">(DD/MMM/YYYY, HH:MM:SS AM/PM)</span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="197"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"> {{res.header.date_string}}</span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="92">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Venue:</strong></span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="172"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;">Conference Room</span></span></h4>
+                    </td>
+                    </tr>
+                    <tr valign="top">
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="138">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Minutes Prepared By:</strong></span></span></h4>
+                    </td>
+                    <td bgcolor="#ffffff" width="197"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;">{{res.header.chaired_by}}</span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="92">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Charge time to:</strong></span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="172"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"> {{res.header.charge_time}}</span></span></h4>
+                    </td>
+                    </tr>
+                    <tr valign="top">
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="138" height="12">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Chaired By:</strong></span></span></h4>
+                    </td>
+                    <td bgcolor="#ffffff" width="197"><h4><span style="font-family:Calibri,serif;"><span style="font-size:small;">{{res.header.chaired_by}}</span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="92">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;"><strong>Version </strong></span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="172">
+                    <h4><span style="font-family:Calibri,serif;"><span style="font-size:small;">1.0</span></span></h4>
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <p>&nbsp;</p>
+                    <table width="100%" cellspacing="0" cellpadding="7">
+                    <tbody>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ccecff" width="642">
+                    <h3><span style="color:#00000a;"><span style="font-family:Calibri,serif;"><span style="font-size:medium;"><strong>1. Purpose of Meeting</strong></span></span></span></h3>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ffffff" width="642" height="1"><p><span style="color:#00000a;"><span style="font-family:Calibri,serif;"><span style="font-size:small;">Project  Meeting </span></span></span></p>
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <p>&nbsp;</p>
+                    <table width="100%" cellspacing="0" cellpadding="1">
+                    <tbody>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" colspan="4" valign="top" bgcolor="#ccecff" width="676">
+                    <h3><span style="color:#00000a;"><span style="font-family:Calibri,serif;"><span style="font-size:medium;"><strong>2. Attendance at Meeting </strong></span></span></span></h3>
+                    </td>
+                    </tr>
+                    <tr valign="top">
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="45">
+                    <h4><span style="font-family:&quot;Helvetica Neue&quot;,serif;"><span style="font-size:small;"><strong>S.No</strong></span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="210">
+                    <h4><span style="font-family:&quot;Helvetica Neue&quot;,serif;"><span style="font-size:small;"><strong>Name</strong></span></span></h4>
+                    </td>
+                    <td style="padding: 0px 0px 0px 5px;" bgcolor="#edf8ff" width="218">
+                    <h4><span style="font-family:&quot;Helvetica Neue&quot;,serif;"><span style="font-size:small;"><strong>E-Mail</strong></span></span></h4>
+                    </td>
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    {{#if res.users_list}}
+                    {{#if res.users_list.length}}
+                    {{#each res.users_list}}
+                    <tr valign="top">
+                        <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="45">
+                        <p><span style="font-family:Calibri,serif;"><span style="font-size:small;" >{{incCount @index}}</span></span></p>
+                        </td>
+                        <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="210">
+                        <p><span style="font-family:Calibri,serif;"><span style="font-size:small;"> {{user_name}}</span></span></p>
+                        </td>
+                        <td style="padding: 0px 0px 0px 5px;" bgcolor="#ffffff" width="218">
+                        <p><span style="font-size:small;"><span style="font-family:Calibri,serif;"><span style="font-size:small;">
+
+                        <a href="mailto:{{email_id}}" class="ns-action" data-click-action="common.go" data-params="new_window&amp;url=%23compose%3Fmailto%3D{{email_id}}" target"_blank">{{email_id}}</a>
+
+
+                        </span></span></span></p>
+                        </td></tr>
+                    {{/each}}
+                    {{/if}}
+                     {{/if}}
+                   </tbody>
+                    </table>
+
+
+                    <p>&nbsp;</p>
+                    <table width="100%" cellspacing="0" cellpadding="7">
+                    <tbody>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ccecff" width="642">
+                    <h3><span style="color:#00000a;"><span style="font-family:Calibri,serif;"><span style="font-size:medium;"><strong>3. Meeting </strong></span></span></span><span style="color:#00000a;"><span style="font-family:Calibri,serif;"><span style="font-size:medium;"><strong>Agenda</strong></span></span></span></h3>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ffffff" width="642">
+                    <p><span style="color:#000000;"><span style="font-family:Calibri,serif;"><span style="font-size:small;"></span></span></span></p><p>Project Meeting&nbsp;</p>
+
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="7" class="table-left-right-dsn">
+                    <tbody>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ccecff" width="642">
+                    <h3><span style="font-family:Calibri,serif;"><span style="color:#00000a;"><span style="font-size:medium;"><strong>4. Meeting </strong></span></span><span style="color:#00000a;"><span style="font-size:medium;"><strong>Discussions, Status</strong></span></span></span></h3>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td style="padding: 0px 0px 0px 5px;" valign="top" bgcolor="#ffffff" width="642">
+
+
+<!-- {{#mailalign uid}}
+<li style="text-align: right;background: #f3f9fe;padding: 10px 10px 10px 0px;margin: 10px 0px 10px 0px; list-style:none;">
+<img style="text-align: right;margin: 0px; width: 50px;float: right;border-radius: 50% !important;border: 1px solid #ccc;" src={{ip username}} alt="">
+<strong style="margin-right: 10px;font-size: 16px;color: #39b8fd;font-weight: 500;text-transform: capitalize;">{{username}}</strong>
+<section style="margin-right: 60px;font-size: 13px;color: #000;">{{{msg}}}</section>
+<span style="margin-right: 10px;font-size: 10px;color: #949494;">{{time_str}}</span>
+</li>
+{{else}}
+<li style="text-align: left;background: #f3f9fe; background: #f3f9fe;padding: 10px 0px 10px 10px;margin: 10px 0px 10px 0px;">
+<img style="text-align: left;margin: 0px; width: 50px;float: left;border-radius: 50% !important;border: 1px solid #ccc;" src={{ip username}} alt="">
+<strong style="font-size: 16px;color: #39b8fd;font-weight: 500;margin-left: 10px;text-transform: capitalize;">{{username}}</strong>
+<section style="margin-left: 60px;font-size: 13px;color: #000;">{{{msg}}}</section>
+<span style="margin-left: 12px;font-size: 10px;color: #949494;">{{time_str}}</span>
+</li>
+{{/mailalign}} -->
+<table class="mom-format-style" style="width:100%;">
+    <tbody>
+      <!-- <ul style="list-style: none;padding:0px;"> -->
+      {{#if res.messages}}
+        {{#if res.messages.length}}
+          {{#each res.messages}}
+      <tr>
+        <td>
+
+
+{{#mailalign uid}}
+
+<div style="list-style: none;display: inline-block;clear: both;margin: 15px 0px 0px 0px;width: calc(100% - 0px);font-size: 0.9em;position: relative;">
+   <img style="position: relative;top: 25px;right: 0px;float: right;margin: 0px 0 0 20px;width: 50px;border-radius: 50% !important;margin-right: 25px;border: 1px solid #e2e1e1;" src={{ip username}} alt="">
+   <div style="float: right;position: relative;display: inline-block;" class="date-time {{type msg_type}}">
+      <div style="color: #39b8fd;font-size: 16px;font-weight: 500;text-align: right;" class="send-name">{{username}}</div>
+      {{#if isReply}}
+      <div style="float: right;color: #000;font-size: 13px;background: #f3f9fe;display: inline-block;padding: 10px 15px 10px 15px;border-radius: 5px !important;max-width: 550px;line-height: 20px;min-width: 550px;min-height: 40px;word-break: break-all;" class="mesg-bg">
+
+        <!-- <div class=pert-replay><img class=pert-img src={{ip base_author}} alt="">
+      <span>{{base_author}}</span><span class=send-date-rlp>{{base_time}}</span><p>{{{base_msg}}}</p></div> -->
+
+      <table width="100%" border="0" style="background: #bee5fb;border: 1px solid #afe2ff;border-radius: 2px !important;margin: 0px 5px 5px 0px;text-align: left;">
+       <tbody>
+         <tr>
+           <td>
+           <table width="100%" border="0">
+       <tbody>
+         <tr>
+           <td style="width:50px">  <img style="border: 1px solid #e2e1e1;height: 30px;max-width: 30px;border-radius: 50% !important;display: inline-block;vertical-align: middle;position: static;left: 5px;" class="pert-img" src={{ip base_author}} alt=""></td>
+           <td> <span style="display: block;color: #39b8fd;line-height: normal;">{{base_author}}</span></td>
+         </tr>
+         <tr>
+          <td > </td>
+           <td colspan="2">   <p style="display: block;vertical-align: top;font-size: 12px;color: #000;margin: 0px 0px 0px 0px;">{{{base_msg}}}</p></td>
+         </tr>
+       </tbody>
+     </table>
+       </td>
+           <td valign="top" style="width:70px;"><span style="line-height: normal;font-size: 10px;margin: 0px 10px 0px 0px; text-align: right; float: right;">{{base_time}}</span></td>
+         </tr>
+       </tbody>
+     </table>
+      <div class=attachment-flex>{{{reply_msg}}}</div></div>
+      {{else}}
+      <div style="float: right;color: #000;font-size: 13px;background: #f3f9fe;display: inline-block;padding: 10px 15px 10px 15px;border-radius: 5px !important;max-width: 550px;line-height: 20px;min-width: 550px;min-height: 40px;word-break: break-all;" class="mesg-bg">{{{msg}}}</div>
+      {{/if}}
+      <!-- {{#if isEdited}}
+      <div class=edit-time><i class='fa fa-edit'></i><p class=user-message>{{isEdited}}</p></div>
+      {{/if}} -->
+      <div style="right: 0px;color: #949494;bottom: -20px;line-height: normal;font-size: 10px;font-weight: 500;position: absolute;left: inherit;text-align: right;" class="rec-time">{{time_str}}</div>
+   </div>
+</div>
+{{else}}
+<div style="list-style: none;display: inline-block;clear: both;margin: 15px 0px 0px 0px;width: calc(100% - 0px);font-size: 0.9em;position: relative;">
+   <img style="position: relative;top: 25px;right: 0px;float: left;margin: 0px 0 0 20px;width: 50px;border-radius: 50% !important;margin-right: 25px;border: 1px solid #e2e1e1;" src={{ip username}} alt="">
+   <div style="float: left;position: relative;display: inline-block;" class="date-time {{type msg_type}}">
+      <div style="color: #39b8fd;font-size: 16px;font-weight: 500;text-align: left;" class="send-name">{{username}}</div>
+      {{#if isReply}}
+      <div style="float: left;color: #000;font-size: 13px;background: #f3f9fe;display: inline-block;padding: 10px 15px 10px 15px;border-radius: 5px !important;max-width: 550px;line-height: 20px;min-width: 550px;min-height: 40px;word-break: break-all;" class="mesg-bg">
+        <!-- <div class=pert-replay><img class=pert-img src={{ip base_author}} alt="">
+      <span>{{base_author}}</span><span class=send-date-rlp>{{base_time}}</span><p>{{{base_msg}}}</p></div> -->
+
+      <table width="100%" border="0" style="background: #bee5fb;border: 1px solid #afe2ff;border-radius: 2px !important;margin: 0px 5px 5px 0px;text-align: left;">
+       <tbody>
+         <tr>
+           <td>
+           <table width="100%" border="0">
+       <tbody>
+         <tr>
+           <td style="width:50px">  <img style="border: 1px solid #e2e1e1;height: 30px;max-width: 30px;border-radius: 50% !important;display: inline-block;vertical-align: middle;position: static;left: 5px;" class="pert-img" src={{ip base_author}} alt=""></td>
+           <td> <span style="display: block;color: #39b8fd;line-height: normal;">{{base_author}}</span></td>
+         </tr>
+         <tr>
+          <td > </td>
+           <td colspan="2">   <p style="display: block;vertical-align: top;font-size: 12px;color: #000;margin: 0px 0px 0px 0px;">{{{base_msg}}}</p></td>
+         </tr>
+       </tbody>
+     </table>
+       </td>
+           <td valign="top" style="width:70px;"><span style="line-height: normal;font-size: 10px;margin: 0px 10px 0px 0px; text-align: right; float: right;" >{{base_time}}</span></td>
+         </tr>
+       </tbody>
+     </table>
+
+      <div class=attachment-flex>{{{reply_msg}}}</div></div>
+      {{else}}
+      <div style="float: left;color: #000;font-size: 13px;background: #f3f9fe;display: inline-block;padding: 10px 15px 10px 15px;border-radius: 5px !important;max-width: 550px;line-height: 20px;min-width: 550px;min-height: 40px;word-break: break-all;" class="mesg-bg">{{{msg}}}</div>
+      {{/if}}
+      <!-- {{#if isEdited}}
+      <div class=edit-time><i class='fa fa-edit'></i><p class=user-message>{{isEdited}}</p></div>
+      {{/if}} -->
+      <div style="right: 0px;color: #949494;bottom: -20px;line-height: normal; font-size: 10px;font-weight: 500;position: absolute;left: 0px;" class="rec-time">{{time_str}}</div>
+   </div>
+</div>
+{{/mailalign}}
+</td>
+</tr>
+{{/each}}
+  {{/if}}
+{{/if}}
+
+
+<!-- </ul> -->
+</tbody>
+</table>
+
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+                    <table bgcolor="#E1E1E1" border="0" cellpadding="0" cellspacing="0" width="100%" id="emailFooter" style="margin:18px 0px 0px 0px;">
+
+                      <!-- FOOTER ROW // -->
+
+                      <tr>
+                        <td align="center" valign="top">
+                          <!-- CENTERING TABLE // -->
+                          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td align="center" valign="top">
+                                <!-- FLEXIBLE CONTAINER // -->
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="flexibleContainer">
+                                  <tr>
+                                    <td align="center" valign="top" width="100%" class="flexibleContainerCell">
+                                      <table border="0" cellpadding="30" cellspacing="0" width="100%">
+                                        <tr>
+                                          <td style="padding:12px 0px;" valign="top" bgcolor="#ccecff">
+
+                                            <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#000;text-align:center;line-height:120%;">
+                                              <div>Copyright &#169; 2018 <span style="color:#000; font-weight:bold;">Next Inc</span>. All&nbsp;rights&nbsp;reserved.</div>
+                                              <div>If you do not want to receive emails from us, you can <a href="#" target="_blank" style="text-decoration:none;color:#000;"><span style="color:#000;">unsubscribe</span></a>.</div>
+                                            </div>
+
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <!-- // FLEXIBLE CONTAINER -->
+                              </td>
+                            </tr>
+                          </table>
+                          <!-- // CENTERING TABLE -->
+                        </td>
+                      </tr>
+
+                    </table>
+                    <!-- // END -->
+
+{{/if}}

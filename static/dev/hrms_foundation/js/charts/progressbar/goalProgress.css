@@ -1,0 +1,45 @@
+div.progressBar {
+	color: #fff;
+	font-size: 1.0em;
+	letter-spacing: -1px;
+	font-weight: 500;
+	padding: 10px;
+	display: block;
+	overflow: hidden;
+	width: 25px;
+}
+span.goalAmount {
+	display: none;
+	text-indent: -9999px;
+}
+#revenue_per_id div.progressBar {
+	background: #4cda64;
+}
+#avg_salary_id div.progressBar {
+	background: #ff8982;
+}
+#training_cost_id div.progressBar {
+	background: #e28696;
+}
+#profit_cost_id div.progressBar {
+	background: #5856d6;
+}
+
+#tot_salary_id div.progressBar {
+	background: #5fc786;
+}
+#avg_salary_id div.progressBar {
+	background: #ff7171;
+}
+#bonus_cost_id div.progressBar {
+	background: #3465a4;
+}
+#avg_bonus_id div.progressBar {
+	background: #729fcf;
+}
+#tot_overtime_id div.progressBar {
+	background: #1aaeff;
+}
+#avg_overtime_id div.progressBar {
+	background: #83d7e9;
+}

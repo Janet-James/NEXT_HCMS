@@ -1,0 +1,641 @@
+<!-- BEGIN MENU TOGGLER -->
+<div class="outer-menu">
+	<div id="menu-wrapper">
+		<div class="gt-dev"></div>
+		<div class="gt-dev"></div>
+		<div class="gt-dev"></div>
+		<div class="gt-dev"></div>
+		<p class="open-dev-badge show-menu">
+			<i class="nf nf-square-box"></i>
+		</p>
+		<div class="cd-folding-panel">
+			<div class="fold-left"></div>
+			<!-- This is the left fold --> 
+			<div class="fold-right"></div>
+			<!-- This is the right fold -->
+			<div class="cd-fold-content">
+				<ul id="menu-ul" style="display: none;">
+					{% if "HR Foundation" in menu_lists %}
+					<li class="menu-li i1"><a
+						href="#"> <i
+							class="nf nf nf-hr-foundation"></i>
+							<div class="menu-tittle">
+								<span>HR Foundation</span>
+							</div>
+					</a>
+						<ul class="sub-menu">
+							{% if "Manage Organization" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Organization</a>
+								<ul class="second-sub-menu">
+									{% if "Organization" in menu_lists %}
+									<li><a href="{% url 'hrms_employee:hrms_organizations' %}"><i
+											class="nf nf-organization"></i>Organization</a></li>
+									{% endif %}
+									{% if "Organization Unit" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:hrms_organization_unit' %}"><i
+											class="nf nf-organizational-level"></i>Organization Unit</a></li>
+									{% endif %}
+									{% if "Division" in menu_lists %}
+									<li><a href="{% url 'hrms_employee:hrms_team_details' %}"><i
+											class="nf nf nf-team"></i>Division</a></li>
+									{% endif %}
+									{% if "Organization Hierarchical" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_attendance:hrms_unit_structure' %}"><i
+											class="nf nf-organization-chart"></i>Organization
+											Hierarchy</a></li> 
+									{% endif %}
+								</ul></li>
+							{% endif %}
+							{% if "Manage Employee" in menu_lists %}
+							<li><a href="#"><i class="nf nf-manage-group"></i>
+									Employee</a>
+								<ul class="second-sub-menu">
+									{% if "Employee Details" in menu_lists %}
+									<li><a href="{% url 'hrms_employee:hrms_employee' %}"><i
+											class="nf nf-employee-portal"></i>Employee Details</a> </li>
+									{% endif %}
+									{% if "Employee List" in menu_lists %}
+									<li><a href="{% url 'hrms_employee:hrms_employee_list' %}"><i
+											class="nf nf-employee-portal"></i>Employee List</a> </li>
+									{% endif %}
+									{% if "Employee Hierarchy" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_attendance:hrms_org_structure' %}"><i
+											class="nf nf-organization-chart"></i>Employee Hierarchy</a></li>
+									{% endif %}
+									{% if "ID Card Generation" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:employee_id_card' %}"><i
+											class="nf nf-organization-chart"></i>ID Card Generation</a></li>
+									{% endif %}
+									{% if "Correspondance Management Document Creation" in menu_lists %}
+									<li><a href="{% url 'correspondance_management_static:parameter_configuration_view' %}" >
+									<i
+							class="nf nf-application"></i>Correspondance Management Document Generation</a></li>
+									{% endif %}
+									{% if "Employee Offer Generation" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:employee_offer' %}"><i
+											class="nf nf-organization-chart"></i>Employee Offer Generation</a></li>
+									{% endif %}
+									{% if "Meet Our Expertise" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:meet_our_expertise' %}"><i
+											class="nf nf-organization-chart"></i>Meet Our Expertise (Website Join Us)</a></li>
+									{% endif %}
+									{% if "Exit Employee" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:meet_our_expertise' %}"><i
+											class="nf nf-organization-chart"></i>Ex-Employee (Website)</a></li>
+									{% endif %}
+									{% if "Exit Request Employee" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_employee:exit_employee_reqeust' %}"><i
+											class="nf nf-organization-chart"></i>Request Ex-Employee (Website E-Verification)</a></li>
+									{% endif %}
+								</ul></li>
+							{% endif %}
+							{% if "HR Foundation Reports" in menu_lists %}
+							<li><a href="#"><i
+									class="nf nf-report-document-1"></i>Report</a><ul class="second-sub-menu">
+									{% if "Employee Report" in menu_lists %}
+									<li><a href="{% url 'hrms_attendance:hrms_reports' %}"><i
+											class="nf nf-report-document-1"></i>Employee Report</a></li>
+									{% endif %}
+								</ul></li>
+							{% endif %}
+						</ul></li>
+					{% endif %}
+                    {% if "Leave Management" in menu_lists %}
+                     <li class="menu-li i2"><a
+						href="#"> <i
+							class="nf nf-leave-mgnt"></i>
+							<div class="menu-tittle">
+								<span>Leave Management</span>
+							</div>
+					</a>
+						<ul class="sub-menu">
+						   	    	{% if "Holiday Administration" in menu_lists %}
+									<li><a href="{% url 'hrms_attendance:holiday_list' %}"><i
+											class="nf nf-public-holiday"></i>Holiday Administration</a></li>
+									{% endif %}
+									<!-- {% if "Holiday Details" in menu_lists %}
+									<li><a href="{% url 'hrms_attendance:holiday_details' %}"><i
+											class="nf nf-public-holiday"></i>Holiday Details</a></li>
+									{% endif %} -->
+									{% if "Leave Administration" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_attendance:hrms_leave_balance' %}"><i
+											class="nf nf-leave-balance"></i>Leave Administration</a></li>
+									{% endif %}
+									{% if "Raise Leave Request" in menu_lists %}
+									<li><a href="{% url 'hrms_attendance:hrms_leave' %}"><i
+											class="nf nf-request-leave"></i>Raise Leave Request</a></li>
+									{% endif %}
+									{% if "Holiday/Leave Calendar" in menu_lists %}
+									<li><a href="{% url 'hrms_attendance:hrms_leave_calendar' %}"><i
+											class="nf nf-request-leave"></i>Holiday/Leave Calendar</a></li>
+									{% endif %}
+									{% if "Process Leave Request" in menu_lists %}
+									<li><a
+										href="{% url 'hrms_attendance:hrms_leave_process' %}"><i
+											class="nf nf-leave-request"></i>Process Leave Request</a></li>
+									{% endif %}
+						</ul></li>
+					{% endif %}
+					{% if "Compensation Management" in menu_lists %}	
+                     <li class="menu-li i3"><a
+						href="#"> <i
+							class="nf nf-salary-payslip"></i>
+							<div class="menu-tittle">
+								<span>Compensation Enablement</span>
+							</div>
+					</a>
+						<ul class="sub-menu">
+							 		{% if "Payroll Setup" in menu_lists %}
+								    	<li><a href="{% url 'payroll_management:payroll_menus' %}"><i
+											class="nf nf-salary-payslip"></i>Payroll Setup</a></li>
+									{% endif %}
+								    {% if "Payroll Report" in menu_lists %}
+										  	<li><a href="{% url 'payroll_management:payslip_report_generation' %}"><i
+													class="nf nf-report-document-1"></i>Payslip Report</a></li>
+									{% endif %}
+									{% if "Payroll Setup" in menu_lists %}
+										  	<li><a href="{% url 'payroll_management:rating_point' %}"><i
+													class="nf nf-report-document-1"></i>Basic Contribution Return</a></li>
+									{% endif %}
+									{% if "Payroll Setup" in menu_lists %}
+								  	<li><a href="{% url 'payroll_management:leadership_value_return' %}"><i
+											class="nf nf-report-document-1"></i>Leadership Value Return</a></li>
+									{% endif %}
+									{% if "Payroll Setup" in menu_lists %}
+								  	<li><a href="{% url 'payroll_management:esi_value_form' %}"><i
+											class="nf nf-report-document-1"></i>ESI Value Form</a></li>
+									{% endif %}
+									{% if "Payroll Setup" in menu_lists %}
+								  	<li><a href="{% url 'payroll_management:arrear_amount_form' %}"><i
+											class="nf nf-report-document-1"></i>Arrear Amount Form</a></li>
+									{% endif %}
+									{% if "Tax Declaration Configuration" in menu_lists %}
+										  	<li><a href="{% url 'payroll_management:tax_entry_form_declaration' %}"><i
+													class="nf nf-report-document-1"></i>Tax Declaration Configuration</a></li>
+									{% endif %}
+									{% if "Tax Declaration Form" in menu_lists %}
+										  	<li><a href="{% url 'payroll_management:tax_declaration' %}"><i
+													class="nf nf-report-document-1"></i>Tax Declaration Form</a></li>
+									{% endif %}
+									{% if "Payroll Setup" in menu_lists %}
+										  	<li><a href="{% url 'payroll_management:my_payslip' %}"><i
+													class="nf nf-report-document-1"></i>My Payslip</a></li>
+									{% endif %}
+						</ul></li>
+					{% endif %}
+					{% if "Talent Management" in menu_lists %}
+					<li class="menu-li i4"><a href="#"><i
+						class="nf nf-talent-management"></i>
+						<div class="menu-tittle">
+							<span>Talent Management</span>
+						</div></a>
+						<ul class="sub-menu">
+							{% if "Talent Inventory" in menu_lists %}
+							<li><a href="{% url 'talent_inventory:td_dashboard' %}"><i class="nf nf-talent-definition"></i>Talent Inventory</a>
+								<ul class="second-sub-menu">
+									{% if "Role Definition" in menu_lists %}
+									<li><a
+										href="{% url 'talent_inventory:ti_role_def' %}"><i
+											class="nf nf-manage-role"></i>Role Definition</a></li>
+									{% endif %}
+									{% if "View Reporting Structure" in menu_lists %}
+									<li><a
+										href="{% url 'talent_inventory:reporting_structure_page' %}"><i
+											class="nf nf-view-organization-structure"></i> View Reporting Structure </a></li>
+									{% endif %}
+									{% if "Talent Inventory Reports" in menu_lists %}
+									<li><a
+										href="{% url 'talent_inventory:ti_reports' %}"><i
+											class="nf nf-report"></i> Reports </a></li>
+									{% endif %}
+								</ul>
+							</li>
+							{% endif %}
+							{% if "Talent Profiling" in menu_lists %}
+							<li><a href="{% url 'talent_management:talent_profiling' %}">
+									<i class="nf nf-talent-definition"></i>Talent Profiling </a></li>
+							{% endif %}
+							{% if "Competency Assessment" in menu_lists %}
+							<li><a
+								href="{% url 'talent_management:competency_assessment' %}">
+									<i class="nf nf-talent-definition"></i>Competency Assessment </a></li>
+							{% endif %}
+							{% if "Talent Matrix" in menu_lists %}
+							<li><a
+								href="{% url 'talent_management:talent_matrix' %}">
+									<i class="nf nf-talent-definition"></i>Talent Matrix </a></li>
+							{% endif %}
+							{% if "Accolades Management" in menu_lists %}
+							<li><a
+								href="{% url 'talent_management:manage_accolades' %}">
+									<i class="nf nf-talent-definition"></i>Accolades Management </a></li>
+							{% endif %}
+							{% if "My Talent Profile" in menu_lists %}
+							<li><a
+								href="{% url 'talent_management:my_talent_profile' %}">
+									<i class="nf nf-talent-definition"></i>My Talent Profile </a></li>
+							{% endif %}
+						</ul>
+					</li>
+					{% endif %}
+					{% if "Workforce Planning" in menu_lists %}	
+					<li class="menu-li i5"><a href="#"> <i
+							class="nf nf-workforce-planning"></i>
+							<div class="menu-tittle">
+								<span>Workforce Planning</span>
+							</div>
+					</a>
+						<ul class="sub-menu">
+							{% if "Strategy Analysis" in menu_lists %}
+							<li><a
+								href="{% url 'workforce_planning:wfp_strategy_analysis' %}"><i
+									class="nf nf-organization"></i>Strategy Analysis</a></li>
+							{% endif %}		
+							{% if "Structure Analysis" in menu_lists %}
+							<li><a
+								href="{% url 'workforce_planning:wfp_structure_analysis' %}"><i
+									class="nf nf-organization"></i>Structure Analysis</a></li>
+							{% endif %}
+							{% if "job Requisition Analysis" in menu_lists %}
+							<li><a
+								href="{% url 'workforce_planning:wfp_system_analysis' %}"><i
+									class="nf nf-organization"></i>Job Requisition Analysis</a></li>
+							{% endif %}
+							{% if "Workforce Request" in menu_lists %}
+							<li><a
+								href="{% url 'workforce_planning:wfp_resource_request' %}"><i
+									class="nf nf-organization"></i>Workforce Request</a></li>
+							{% endif %}
+						</ul></li>
+					{% endif %}
+					{% if "Talent Acquisition" in menu_lists %}
+					<li class="menu-li i6"><a href="#"> <i
+							class="nf nf-talent-acquistion"></i>
+							<div class="menu-tittle">
+								<span>Talent Acquisition</span>
+							</div>
+					  </a>
+						<ul class="sub-menu">
+							{% if "Job Openings" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_job_openings' %}"><i
+							class="nf nf-job-training"></i>
+									Job Openings </a></li>
+							{% endif %}
+							{% if "Candidate Tracking System" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_candidate' %}"><i
+							class="nf nf-manager"></i>
+									Candidate Tracking System </a></li>
+							{% endif %}
+							{% if "Interview Management" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_recruitment' %}"> <i
+							class="nf nf-interview"></i>Interview Management </a></li>
+							{% endif %}
+							{% if "Offer Management" in menu_lists %}	
+							<li><a
+								href="{% url 'talent_acquisition:ta_offer_management' %}"><i
+							class="nf nf-offer-letter"></i>
+									Offer Management</a></li>
+							{% endif %}
+							{% if "On boarding" in menu_lists %}<li><a href="{% url 'talent_acquisition:ta_on_boarding' %}"><i
+							class="nf nf-workforce-planning"></i> On boarding</a></li> {% endif %}
+							{% if "Job Posting Request" in menu_lists %}<li><a href="{% url 'talent_acquisition:ta_job_posting_request' %}"><i
+							class="nf nf-workforce-planning"></i>Job Posting Request</a></li> {% endif %}
+							{% if "Job Posting Approval" in menu_lists %}<li><a href="{% url 'talent_acquisition:ta_job_posting_approval' %}"><i
+							class="nf nf-workforce-planning"></i> Job Posting Approval</a></li> {% endif %}
+							{% if "Talent Acquisition Report" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_report' %}" >
+									<i
+							class="nf nf-report-document-1"></i>Report </a></li>
+							{% endif %}
+						</ul></li> 
+					{% endif %}
+					
+					{% if "Workforce Administration" in menu_lists %}
+					<li class="menu-li i7"><a href="#"> <i
+							class="nf nf-workforce-planning"></i>
+							<div class="menu-tittle">
+								<span>Workforce Administration</span>
+							</div>
+					  </a>
+						<ul class="sub-menu">
+							{% if "Work Time Management" in menu_lists %}
+							<li><a href="{% url 'shift_management:shift_detail' %}"><i
+									class="nf nf-working-schedule"></i>WorkTime Management </a></li> 
+							{% endif %} 
+							{% if "Attendance Configuration" in menu_lists %}
+							<li><a
+								href="{% url 'attendance_management:employee_attendance' %}"><i
+									class="nf nf-attendance-info"></i> Attendance Configuration </a></li> 
+							{% endif %} 
+							{% if "Asset Management" in menu_lists %}
+							<li><a href="{% url 'asset_management:asset_list' %}"><i
+									class="fa fa-calendar"></i>Asset Management </a></li> 
+							{% endif %} 
+							{% if "Manual Attendance" in menu_lists %}
+							<li><a href="{% url 'hrms_attendance:attendance_page' %}"><i
+									class="nf nf-billing-plan"></i>Manual Attendance</a></li> 
+							{% endif %} 
+							{% if "Attendance Records" in menu_lists %}
+							<li><a
+								href="{% url 'hrms_attendance:hrms_past_attendance' %}"><i
+									class="nf nf-billing-plan"></i>Attendance Records</a></li> 
+							{% endif %}
+
+						</ul></li> {% endif %}
+
+					{% if "Performance Management" in menu_lists %}
+					<li class="menu-li i8"><a href="#"> <i
+							class="nf nf-performance-mgnt"></i>
+							<div class="menu-tittle">
+								<span>Performance Management</span>
+							</div>
+					</a>
+					<ul class="sub-menu">
+							{% if "Balanced Scorecard" in menu_lists %}
+							<li><a
+								href="{% url 'performance_assessment:balanced_scorecard' %}"><i
+									class="nf nf-balanced-scorecard"></i> Balanced Scorecard </a></li>
+							{% endif %}
+							{% if "Objectives & Key Results" in menu_lists %}
+							<li><a href="{% url 'objective_setting:pm_okr_tree_view' %}"><i
+									class="nf nf-activities"></i>Objectives & Key Results</a></li>
+							{% endif %}
+							{% if "Cascade Objectives" in menu_lists %}
+							<li><a
+								href="{% url 'performance_assessment:cascading_objectives' %}"><i
+									class="nf nf-cascade-objectives"></i> Cascade Objectives </a></li>
+							{% endif %}
+							{% if "Assessment Configuration" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Assessment
+									Configuration</a>
+								<ul class="second-sub-menu">
+									{% if "Assessment Form Setup" in menu_lists %}
+									<li><a
+										href="{% url 'performance_assessment:performance_assessment' %}"><i
+											class="nf nf-apparisal-form"></i> Assessment Form Setup </a></li>
+									{% endif %}
+									{% if "Assessment Schedule Setup" in menu_lists %}
+									<li><a href="{% url 'performance_assessment:schedule' %}"><i
+											class="nf nf-schedule-assessment"></i> Assessment Schedule
+											Setup </a></li>
+									{% endif %}
+								</ul></li>
+							{% endif %}
+							{% if "Performance Assessment" in menu_lists %}
+							<li><a
+								href="{% url 'performance_assessment:performance_assessment_view' %}"><i
+									class="nf nf-performance-mgnt"></i> Performance Assessment </a></li>
+							{% endif %}
+							{% if "Performance Dashboard" in menu_lists %}
+							<li><a
+								href="{% url 'performance_assessment:performance_dashboard' %}"><i
+									class="nf nf-rating-schema"></i> Performance Dashboard </a></li>
+							{% endif %}
+						</ul></li>
+					{% endif %}
+					
+					{% if "Learning & Development" in menu_lists %}
+					<li class="menu-li i9"><a href="#"> <i
+							class="nf nf-development"></i>
+							<div class="menu-tittle">
+								<span>Learning & Development</span>
+							</div>
+					</a>
+					<ul class="sub-menu">
+							{% if "Training Management" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Training Management</a>
+								<ul class="second-sub-menu">	
+							{% if "Training Creation" in menu_lists %}
+							<li><a href="#"><i
+									class="nf nf-apparisal-form"></i> Training Creation </a></li> 
+							{% endif %}
+							{% if "Internship Training" in menu_lists %}
+							<li><a href="#"><i
+									class="nf nf-schedule-assessment"></i> Internship Training </a></li>	
+							{% endif %}	
+									</ul>
+									</li>
+							{% endif %}
+							{% if "Training Request" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Training
+									Request</a>
+								<ul class="second-sub-menu">
+									{% if "Raise Training Request" in menu_lists %}
+									<li><a href="#"><i class="nf nf-apparisal-form"></i>
+											Raise Training Request </a></li>
+									{% endif %}
+									{% if "Process Training Request" in menu_lists %}
+									<li><a href="#"><i class="nf nf-schedule-assessment"></i>
+											Process Training Request </a></li>
+									{% endif %}
+								</ul></li> {% endif %}
+							{% if "Training Recommendation" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Training
+									Recommendation</a>
+								<ul class="second-sub-menu">
+									{% if "General Recommendation" in menu_lists %}
+									<li><a href="#"><i class="nf nf-apparisal-form"></i>
+											General Recommendation </a></li>
+									{% endif %}
+									{% if "Management & TL Recommendation" in menu_lists %}
+									<li><a href="#"><i class="nf nf-schedule-assessment"></i>
+											Management & TL Recommendation </a></li>
+									{% endif %}
+								</ul></li> {% endif %}
+							{% if "Training Results" in menu_lists %}
+							<li><a href="#"><i
+									class="nf nf-cascade-objectives"></i> Training Results </a></li> 
+							{% endif %}
+							{% if "Training Cost & Budget" in menu_lists %}
+							<li><a href="#"><i class="nf nf-organization"></i>Training
+									Cost & Budget</a>
+								<ul class="second-sub-menu">
+									{% if "Raise Budget Request" in menu_lists %}
+									<li><a href="#"><i class="nf nf-apparisal-form"></i>
+											Raise Budget Request </a></li>
+									{% endif %}	
+									{% if "Process Budget Request" in menu_lists %}
+									<li><a href="#"><i class="nf nf-schedule-assessment"></i>
+											Process Budget Request</a></li>
+									{% endif %}
+								</ul></li> {% endif %}
+					</ul>
+					</li>
+					{% endif %}
+					
+					{% if "Succession Planning" in menu_lists %}
+					<li class="menu-li i10"><a href="#"> <i
+							class="nf nf-manage-succession-planning"></i>
+							<div class="menu-tittle">
+							<span> Succession Planning</span>
+						</div></a>
+							<ul class="sub-menu">
+									{% if "Identify Key Roles" in menu_lists %}
+									<li><a href="{% url 'succession_planning:sp_identify_key_roles' %}" >
+									<i class="nf nf-report-document-1"></i>Identify Key Roles</a></li>
+									{% endif %}
+									{% if "Successor Hierarchy" in menu_lists %}
+									<li><a href="{% url 'succession_planning:sp_successor_hierarchy' %}" >
+									<i class="nf nf-report-document-1"></i>Successor Hierarchy</a></li>
+									{% endif %}
+									{% if "Potential Successors" in menu_lists %}
+									<li><a href="{% url 'succession_planning:sp_potential_successor' %}" >
+									<i class="nf nf-report-document-1"></i>Potential Successors </a></li>
+									{% endif %}
+
+									{% if "Reassignment Request" in menu_lists %}
+									<li><a href="#"><i class="nf nf-podcast"></i>Reassignment Request</a>
+										<ul class="second-sub-menu">
+											{% if "Transfer Request" in menu_lists %}
+											<li><a
+											href="{% url 'succession_planning:sp_transfer_request' %}"><i
+												class="nf nf-leave-request"></i>Transfer Request</a></li>
+											{% endif %}
+											{% if "Promotion Request" in menu_lists %}
+											<li><a
+												href="{% url 'succession_planning:sp_promotion_request' %}"><i
+													class="nf nf-leave-request"></i>Promotion Nomination</a></li>
+											{% endif %}
+											{% if "Demotion Request" in menu_lists %}
+											<li><a
+												href="{% url 'succession_planning:sp_demotion_request' %}"><i
+													class="nf nf-leave-request"></i>Demotion Recommendation</a></li>
+											{% endif %}
+									</ul></li>
+									{% endif %}
+									
+									{% if "Reassignment Process" in menu_lists %}
+									<li><a href="#"><i class="nf nf-podcast"></i>Reassignment Process</a>
+										<ul class="second-sub-menu">
+											{% if "Transfer Process" in menu_lists %}
+											<li><a
+												href="{% url 'succession_planning:sp_transfer_process' %}"><i
+													class="nf nf-process-request"></i>Transfer Requests</a></li>
+											{% endif %}
+											{% if "Promotion Process" in menu_lists %}
+											<li><a
+												href="{% url 'succession_planning:sp_promotion_process' %}"><i
+													class="nf nf-process-request"></i>Promotion Nominations</a></li>
+											{% endif %}
+											{% if "Demotion Process" in menu_lists %}
+											<li><a
+												href="{% url 'succession_planning:sp_demotion_process' %}"><i
+													class="nf nf-process-request"></i>Demotion Recommendations</a></li>
+											{% endif %}
+									</ul></li>
+									{% endif %}
+									
+									{% if "Succession Planning Report" in menu_lists %}
+									<li><a href="{% url 'succession_planning:sp_report' %}" >
+									<i class="nf nf-report-document-1"></i>Report </a></li>
+									{% endif %}
+								</ul>
+					</li> 
+					{% endif %}
+					
+					{% if "Exit Management" in menu_lists %}
+					<li class="menu-li i11"><a href="#"> <i
+							class="nf nf-logout"></i>
+							<div class="menu-tittle">
+								<span>Exit Management</span>
+							</div>
+					</a>
+						<ul class="sub-menu">
+							{% if "Raise Exit Request" in menu_lists %}
+							<li><a href="{% url 'exit_management:em_request' %}"><i
+									class="nf nf-leave-request"></i>Raise Exit Request</a></li> {% endif %}
+							{% if "Process Exit Request" in menu_lists %}
+							<li><a href="{% url 'exit_management:em_process' %}"><i
+									class="nf nf-process-request"></i>Process Exit Request</a></li> {% endif %}
+							{% if "Generate Exit Certificate" in menu_lists %}
+							<li><a href="{% url 'exit_management:em_certifcate' %}"><i
+									class="nf nf-certificate"></i>Generate Exit Certificate</a></li> {% endif %}
+							{% if "Exit Employee Report Details" in menu_lists %}
+							<li><a href="{% url 'exit_management:em_report' %}"><i
+									class="nf nf-report"></i>Exit Report</a></li> {% endif %}
+						</ul></li> {% endif %} 
+						
+					{% if "AppAdmin" in menu_lists %}
+					<li class="menu-li i12"><a
+						href="{% url 'hcms_sysadmin:sysadmin_page' %}"> <i
+							class="nf nf-app-admin"></i>
+							<div class="menu-tittle">
+								<span>App Admin</span>
+							</div></a>
+						<ul class="sub-menu">
+							{% if "User" in menu_lists %}
+							<li><a href="#"><i class="nf nf-user"></i>User</a>
+								<ul class="second-sub-menu">
+									{% if "User Roles" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:role_details' %}"><i
+											class="nf nf-work-culture"></i>User Roles</a></li> {% endif %} 
+											{% if "Manage Users" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:usr_details' %}"><i
+											class="nf nf-manpower"></i>Manage Users</a></li> {% endif %}
+								</ul></li> {% endif %} {% if "Access Control" in menu_lists %}
+							<li><a href="#"><i class="nf nf-data-access"></i>Access
+									Control</a>
+								<ul class="second-sub-menu">
+									{% if "Menu & Page Master" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:usr_access_details' %}"><i
+											class="nf nf-associate"></i>Menu & Page Master</a></li> {% endif %}
+								</ul></li> {% endif %} {% if "Configuration" in menu_lists %}
+							<li><a href="#"><i class="nf nf-configuration"></i>Configuration</a>
+								<ul class="second-sub-menu">
+									{% if "Alert & Notification" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:sysparam_details' %}"><i
+											class="nf nf-information-alert"></i>Alert & Notification</a></li> {% endif %}
+									{% if "Manage Reference Item" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:refitem_details' %}"><i
+											class="nf nf-moscow-table"></i>Manage Reference Item</a></li> {% endif %}
+									{% if "Manage Reference Item Link" in menu_lists %}
+									<li><a
+										href="{% url 'hcms_sysadmin:refitemlink_details' %}"><i
+											class="nf nf-moscow-table"></i>Manage Reference Item Link</a></li> {% endif %} 
+									{% if "Country & Province Master" in menu_lists %}
+									<li><a href="{% url 'hcms_sysadmin:country_state' %}"><i
+											class="nf nf-moscow-table"></i>Country & Province Master</a></li> {% endif %}
+								</ul></li> {% endif %}
+								
+							{% if "Upload Data" in menu_lists %}
+							<li><a href="{% url 'hcms_sysadmin:data_mgt_details' %}"><i
+									class="nf nf-cogs"></i>Upload Data</a></li> {% endif %}
+									{% if "Tools & Technology" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_tools_tech' %}"><i
+							class="nf nf-presentation"></i> Tools & Technology</a></li>
+							{% endif %}
+								{% if "Organization Branding" in menu_lists %}	
+							<li><a href="{% url 'talent_acquisition:ta_branding' %}" >
+									<i
+							class="nf nf-application"></i>Organization Branding </a></li>
+							{% endif %}
+							{% if "Correspondance Management Template Configuration" in menu_lists %}
+							<li><a href="{% url 'correspondance_management_static:correspondance_view' %}" >
+									<i
+							class="nf nf-application"></i>Correspondance Management Template Configuration</a></li>
+							{% endif %}
+							{% if "Linked In" in menu_lists %}
+									<li><a href="{% url 'talent_acquisition:linked_in' %}"><i
+											class="nf nf-moscow-table"></i>LinkedIn</a></li> {% endif %}
+							{% if "Payment File Generation" in menu_lists %}
+											<li><a href="{% url 'payment:payment_view' %}" >
+											<i class="nf nf-application"></i>Payment File Generation</a></li>
+							{% endif %}
+						</ul>
+						</li> {% endif %}
+				</ul>
+			</div>
+		</div>
+		<!-- .cd-folding-panel -->
+	</div>
+</div>
+<!-- End MENU TOGGLER -->

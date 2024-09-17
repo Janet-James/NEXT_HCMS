@@ -1,0 +1,275 @@
+ {% load static %} {% load base_tags %}
+<!DOCTYPE html>
+<html lang="en" >
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8" />
+<title>NEXT::HCMS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="NEXT HCMS Framework" name="description" />
+<meta content="" name="author" />
+<link rel="shortcut icon" href="{% static '/ui/images/favicon.png' %}" />
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link
+	href="{% static '/ui/plugins/font-awesome/css/font-awesome.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/default/nfonts.css' %}" rel="stylesheet"
+	type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap/css/bootstrap.min.css' %}" 
+	rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES --> 
+
+<!-- Nestable Tree CSS-->
+<link
+	href="{% static '/ui/plugins/jquery-nestable/css/jquery.nestable.min.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap-tagsinput-->  
+<link
+	href="{% static '/ui/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<!-- Notification Lobibox -->
+<link
+	href="{% static '/ui/plugins/jquery-notification/css/lobibox.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<!-- Sweetalert -->
+<link
+	href="{% static '/ui/plugins/bootstrap-sweetalert/css/sweetalert.css' %}"
+	rel="stylesheet" type="text/css" />
+	
+<!-- JSTree  PLUGINS start -->
+<link
+	href="{% static '/ui/plugins/jstree/dist/themes/default/style.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- JSTree  PLUGINS end -->
+{% block links %}{% endblock %}
+<!-- BEGIN THEME LAYOUT STYLES -->
+<link href="{% static '/ui/css/default/components.min.css' %}"
+	rel="stylesheet" id="style_components" type="text/css" />
+<link href="{% static '/ui/css/default/layout.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/themes/css/default.min.css' %}"
+	rel="stylesheet" type="text/css" id="style_color" />
+<link href="{% static '/ui/css/default/CircleMenu.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- END THEME LAYOUT STYLES -->
+	
+<!-- BEGIN Common HCMS overight styles only -->	
+<link href="{% static '/ui/css/common-hcms.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- End Common HCMS overight styles only -->
+<!-- HCMS Menu CSS -->
+<link href="{% static '/ui/css/HCMS-Menu.css' %}" rel="stylesheet" type="text/css" /> 
+<!-- HCMS Menu CSS -->
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body class="dow-logo">
+	 <!-- Preloader -->
+    <div class="loader-wrapper" id="loader_payslip"> 
+        <div class="loader"></div>
+    </div>
+	{% block content %} {% endblock %}
+</body>
+<!-- END BODY -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- BEGIN CORE PLUGINS -->
+<script src="{% static '/ui/plugins/jquery.min.js' %}"></script>
+<script src="{% static '/ui/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/ui/js/default/custom_script.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/moment.min.js' %}"
+	type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+
+<!-- Bootstrap-tagsinput-->
+<script 
+	src="{% static '/ui/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"
+	type="text/javascript"></script>
+
+<!-- Notification Lobibox-->
+<script
+	src="{% static '/ui/plugins/jquery-notification/js/lobibox.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/bootstrap-confirmation/js/bootstrap-confirmation.min.js' %}"
+	type="text/javascript"></script>
+
+<!--Menu flip-->
+<script src="{% static '/ui/plugins/menuflip/js/modernizr.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/menuflip/js/menu-flip.min.js' %}"
+	type="text/javascript"></script>
+<!--End-->
+
+<!-- Counter scripts -->
+<script
+	src="{%  static '/ui/plugins/counterup/js/jquery.waypoints.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{%  static '/ui/plugins/counterup/js/jquery.counterup.min.js'  %}"
+	type="text/javascript"></script>
+	
+<!-- Sweetalert-->
+<script
+	src="{% static '/ui/plugins/bootstrap-sweetalert/js/sweetalert.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/bootstrap-sweetalert/js/ui-sweetalert.min.js' %}"
+	type="text/javascript"></script>
+
+<!-- VERSION TOOLTIP PLUGINS -->
+<script src="{% static '/ui/plugins/tooltip/js/anime.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/tooltip/js/tooltip.min.js' %}"
+	type="text/javascript"></script>
+<!--  VERSION TOOLTIP  PLUGINS -->
+
+<!-- Search SCRIPTS -->
+<script src="{% static '/ui/js/default/search.min.js' %}"
+	type="text/javascript"></script>
+<!-- Search SCRIPTS -->
+
+<!-- Form validation -->
+<script
+	src="{%  static '/ui/plugins/jquery-validation/js/jquery.validate.min.js' %}"
+	type="text/javascript"></script>
+	
+<!--   LIBRARY JS FOR UX3.0 SCRIPT SUPPORT -->
+<script src="{% static '/ui/plugins/lib/js/lib.js' %}"
+	type="text/javascript"></script>
+
+<!-- JSTree  PLUGINS start -->
+<script src="{% static '/ui/plugins/jstree/dist/jstree.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/jstree/dist/ui-tree.min.js'%}"
+	type="text/javascript"></script>
+<!-- JSTree  PLUGINS end  -->
+
+<!-- BEGIN Dev base library JS  -->
+<script src="{% static '/dev/lib/js/config.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/lib.js' %}" type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/jquery.idle.js' %}"
+	type="text/javascript"></script>
+<!-- END Dev base library JS  -->
+{% block scripts %} {% endblock %}
+<!-- BEGIN Theme change scripts -->
+<script src="{% static '/ui/themes/js/layout.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/themes/js/theme_switches.min.js' %}"
+	type="text/javascript"></script>
+<!-- END Theme change scripts -->
+	
+<!-- Search SCRIPTS -->
+<script src="{% static '/ui/js/default/search.min.js' %}"
+	type="text/javascript"></script>
+<!-- Search SCRIPTS -->
+
+<!-- Select to tab navigation SCRIPTS -->
+<script src="{% static '/ui/plugins/select2/js/select2-tab-fix.js' %}"
+	type="text/javascript"></script>	
+<!-- Select to tab navigation SCRIPTS -->
+<!-- Inspect Hide -->
+<!-- <script src="{% static '/ui/js/default/inspect_hide.js' %}"></script>
+ -->
+ <script>
+$(document).idle({
+	onIdle : function() {
+		window.location.href = "/logout/"
+	},
+	idle : 15 * 60 * 1000
+});
+var global_url_path = 'http://mynext.nexttechnosolutions.com/media/';
+var static_path = '/static/ui/images/';
+var image_path = global_url_path+'user_profile/' ;
+var doc_path = global_url_path+'user_document/' ;
+var ta_doc_path = global_url_path+'policy_document/' ;
+var ta_jo_doc_path = global_url_path+'job_opening_document/' ;
+var ta_interview_doc_path = global_url_path+'Interview/' ;
+var asset_path = global_url_path+'asset_images/' ;
+var logo_path = global_url_path+'logo/' ;
+var ta_offer_letter_path = global_url_path+"offer_document/"
+var hrms_payslip_path = global_url_path+"payslip/"
+var exit_certificate_path = global_url_path+"exit_offer/"
+var offer_certificate_path = global_url_path+"employee_offer/"
+var payslip_path = global_url_path+"payslip/"
+var resume_parser_path = global_url_path+"resume_parser/"
+var template_path = global_url_path+"job_posting/"
+</script>
+<script>
+$(".second-level-details").click(function() {
+	$(".show-second-level-details").toggle();
+});
+
+function dynamic_delete(this_name) {
+	$(this_name).parent().parent(".third-menu").remove();
+}
+$(".delete-third-menu").on("click", function() {
+	$(this).parent("li").remove();
+});
+$(".delete-second-menu").on("click", function() {
+	$(this).parent().parent().parent().parent(".panel-default").remove();
+});
+$(".delete-main-menu").on("click", function() {
+	$(this).parents(".menu-icons").remove();
+});
+$(document).on("click", ".delete-second-level", function() {
+	$(this).parents(".second-level-wrapper").remove();
+});
+$(".add-second-level").click(function() {
+	$(".second-level-wrapper-panel").append("<div class='second-level-wrapper ui-state-default'><div class='row'><div class='col-sm-12'><div class='form-group'><div class='row enter-second-level'><div class='col-sm-4'><input type='text' class='form-control' placeholder='Second Level Menu'></div><div class='col-sm-6'><input type='text' class='form-control' placeholder='Enter the Link'></div><div class='col-sm-2'><i class='nf nf-cancel delete-second-level'></i></div></div></div></div></div><div class='row'><div class='col-sm-12'><div class='form-group'><a class='third-level-details' onclick='display_third_level(this);'><i class='nf nf-circle-down'></i>Third Level Menu</a></div></div></div><div class='row show-third-level-details'><div class='col-sm-12'><div class='form-group third-level-menus sortable'><div class='row third-menu ui-state-default'><div class='col-sm-4'><input type='text' class='form-control' placeholder='Third Level Menu'></div><div class='col-sm-6'><input type='text' class='form-control' placeholder='Enter the Link'></div><div class='col-sm-2'><i class='nf nf-cancel remove-third-level' onclick='dynamic_delete(this);'></i></div></div></div><button class='btn btn-success add-third-level'><i class='nf nf-plus'></i></button></div></div></div>")
+
+	$(document).find(".sortable").sortable();
+	$(document).find(".sortable").disableSelection();
+	$(document).find(".sortable-main").sortable();
+	$(document).find(".sortable-main").disableSelection();
+
+
+});
+
+function display_third_level(this_name) {
+	$(this_name).parents(".row").next().toggle();
+	$(this_name).children().toggleClass("nf nf-circle-top");
+}
+
+$(document).on('click', ".add-third-level", function() {
+	$(this).prev(".third-level-menus").append("<div class='row third-menu ui-state-default'><div class='col-sm-4'><input type='text' class='form-control' placeholder='Third Level Menu'></div><div class='col-sm-6'><input type='text' class='form-control' placeholder='Enter the Link'></div><div class='col-sm-2'><i class='nf nf-cancel remove-third-level' onclick='dynamic_delete(this);'></i></div></div>");
+
+	$(document).find(".sortable").sortable();
+	$(document).find(".sortable").disableSelection();
+	$(document).find(".sortable-main").sortable();
+	$(document).find(".sortable-main").disableSelection();
+});
+
+</script>
+<!-- Menu Toggle SCRIPTS -->
+		<script>
+			$(document).ready(function() {
+				$(".menu-toggle-btn").click(function() {
+					$(".menu-toggle").toggleClass("menu-toggle-open");
+					$(".fadeInLeft").toggleClass("fadeIn");
+					$(".RS-data").toggleClass("RS-data-expand");
+				});
+			});
+			// Menu toggle button text
+			$("#team-toggle-btn").on("click", function() {
+				var el = $(this);
+				el.text() == el.data("text-swap") ?
+					el.text(el.data("text-original")) :
+					el.text(el.data("text-swap"));
+			});
+			$("#charts-toggle-btn").on("click", function() {
+				var el = $(this);
+				el.text() == el.data("text-swap") ?
+					el.text(el.data("text-original")) :
+					el.text(el.data("text-swap"));
+			});
+		</script>
+</html>

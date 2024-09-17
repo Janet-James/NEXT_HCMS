@@ -1,0 +1,10 @@
+--------if------- Leave Management
+--------if------- Leave Management
+Updated ID :  3194
+Updated ID :  3195
+n <module>
+    import psycopg2
+ImportError: No module named psycopg2
+INFO:root:3434343434343343434 : 3194
+INFO:root:3434343434343343434 : 3195
+INFO:root:Finished : 2022-12-01 05:41:01

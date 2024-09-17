@@ -1,0 +1,170 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{%block links %}
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/multiselect-list/css/listbox-multiselected.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_assessment/css/talent_assessment.css'  %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- BEGIN CONTENT -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="tabbable-line boxless tabbable-reversed">
+							<div class="tab-pane">
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase">Comprehensive
+												View</span>
+										</div>
+									</div>
+
+									<div class="portlet-body ">
+										<!--  <h2 class="margin-bottom-20"> View User Info - Bob Nilson </h2> -->
+										<div class="row">
+											<div class="col-md-2 col-sm-12">
+												<!-- <div class="col-md-3 col-sm-3 col-xs-3"> -->
+												<ul class="nav nav-tabs tabs-left">
+													<li><a href="#demography" data-toggle="tab"
+														id="demography"> <i class="nf nf-user-circle"></i>
+															Demography
+													</a></li>
+													<li><a href="#emp_personal_details" data-toggle="tab"
+														id="emp_personal_details"> <i
+															class="nf nf-visitor-details"></i> Personal Detail
+													</a></li>
+													<li><a href="#skills_details" data-toggle="tab"
+														id="skills_details"> <i class="nf nf-skills"></i>
+															Skills
+													</a></li>
+													<li><a href="#profession_experience_details"
+														data-toggle="tab" id="profession_experience_details">
+															<i class="nf nf-experience"></i> Professional Experience
+													</a></li>
+													<li><a href="#certifications_details"
+														data-toggle="tab" id="certifications_details"> <i
+															class="nf nf-certificate"></i> Certifications
+													</a></li>
+													<li><a href="#emp_education_details" data-toggle="tab"
+														id="emp_education_details"> <i
+															class="nf nf-account-details"></i> Education Detail
+													</a></li>
+													<li><a href="#emp_assessment_info" data-toggle="tab"
+														id="emp_assessment_info"> <i
+															class="nf nf-assess-functional-completencies"></i>
+															Assessment Info
+													</a></li>
+													<li><a href="#emp_objectives" data-toggle="tab"
+														id="emp_objectives"> <i
+															class="nf nf-strategy-objective"></i> Employee Objective
+													</a></li>
+												</ul>
+											</div>
+											<div class="col-md-10 col-sm-12">
+												<div id="base_employee_id"></div>
+												<div class="col-md-12 " id="skill_details"
+													style="display: none">
+													<h3 class="form-section">Skills</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="skillDatatable">
+													</table>
+												</div>
+												<div class="col-md-12 " id="experience_details"
+													style="display: none">
+													<h3 class="form-section">Professional Experience</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="experienceDatatable">
+													</table>
+												</div>
+												<div class="col-md-12 " id="certification_details"
+													style="display: none">
+													<h3 class="form-section">Certification</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="certificationDatatable">
+													</table>
+												</div>
+												<div class="col-md-12 " id="assessment_details"
+													style="display: none">
+													<div class="portlet-title">
+														<div class="caption">
+															<span class="caption-subject  bold uppercase">Assessment
+																Info </span>
+														</div>
+													</div>
+
+													<div class="portlet-body">
+														<div class="panel-group accordion" id="assess_accord">
+
+															<!-- 															<div class="portlet-body">
+																<div class="panel-group accordion scrollable"
+																	id="assess_accord"> -->
+															<div id="assessment_info_view">
+																<span>No Data Available</span>
+															</div>
+
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12 " id="employee_objective_view"
+													style="display: none">
+													<h3 class="form-section">Cascaded Objective</h3>
+													<span class="nodata_objective" id=nodata_cascade_obj">No Data Available</span>
+													<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="cascaded_objective_table">
+													</table></div>
+													<h3 class="form-section">Role Objective</h3>
+													<span class="nodata_objective" id=nodata_role_obj">No Data Available</span>
+													<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="role_objective_table">
+													</table></div>
+													<h3 class="form-section">Individual Objective</h3>
+													<span class="nodata_objective" id=nodata_individual_obj">No Data Available</span>
+													<div class="portlet-body">
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="individual_objective_table">
+													</table></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- END PAGE BASE CONTENT -->
+						</div>
+					</div>
+				</div>
+
+				<!-- END CONTENT BODY -->
+				{% endblock %} {% block scripts %}
+
+				<script
+					src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+					type="text/javascript"></script>
+				<script
+					src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+					type="text/javascript"></script>
+				<script src="{% static '/dev/lib/js/datatable_lib.min.js' %}"></script>
+				<script
+					src="{% static '/dev/Comprehensive_Management/js/base_employee.js' %}"
+					type="text/javascript"></script>
+				{% endblock %}

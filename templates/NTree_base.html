@@ -1,0 +1,247 @@
+ {% load static %} {% load base_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>NEXT::NTREE</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="NEXT UX 3.X Framework" name="description" />
+<meta content="" name="author" />
+<link rel="shortcut icon" href="/static/dev/NTree/ui/images/favicon.png" />
+<!-- FONT CSS--> 
+<link href="/static/dev/NTree/ui/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- NFONT CSS--> 
+<link href="/static/dev/NTree/ui/css/default/nfonts.css" rel="stylesheet" type="text/css" />
+<!-- UI CSS--> 
+<link href="/static/dev/NTree/ui/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<!-- SINGLE AND MULTI SELECT DROPDOWN -->
+<link href="/static/dev/NTree/ui/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/NTree/ui/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+<!--ALERT NOTIFICSTION CSS-->
+<link href="/static/dev/NTree/ui/plugins/jquery-notification/css/lobibox.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/NTree/ui/plugins/bootstrap-sweetalert/css/sweetalert.css" rel="stylesheet" id="style_components" type="text/css" />
+
+<!-- CUSTOME CSS LINK START--> 
+{% block link %}{% endblock %}
+<!-- CUSTOME CSS LINK END--> 
+
+<!-- NTREE CSS -->
+<link href="/static/dev/NTree/ui/css/default/NTree.css" rel="stylesheet" type="text/css" />
+
+<!-- Jquery UI STYLES -->
+<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<!-- SEARCH  -->
+<link href="/static/dev/NTree/ui/css/default/plugins.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/static/dev/NTree/ui/css/default/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+<link href="/static/dev/NTree/ui/css/default/layout.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/NTree/ui/themes/css/default.min.css" rel="stylesheet" type="text/css" id="style_color" />
+<link href="/static/dev/NTree/ui/css/default/CircleMenu.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="loader-wrapper"  id="loading" > 
+		<div class="loader"></div>
+	</div>	
+
+<div class="page-header navbar navbar-fixed-bottom" id="nav_div">
+  <div class="dreadcrumb-theam">
+    <div id="switcher">
+      <div class="colors theme-panel">
+        <ul class="theme-colors">
+          <li id="btn1" data-toggle="tooltip" data-placement="bottom" title="Gradient Theme" class="tooltips theme-color theme-color-default active scolor gradient" data-theme="default" style="display: none;" onClick="changefunc(this.id)"></li>
+          <li id="btn2" data-toggle="tooltip" data-placement="bottom" title="Flat Theme" class="tooltips theme-color theme-color-light scolor flat" data-theme="flat" onClick="changefunc(this.id)"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ <div class="page-header-inner"> 
+    <div class="page-logo"> <a href="/NTree" class="logo-default"><img alt="Next Logo" src="/static/dev/NTree/ui/images/nlogo.png"/></a></div>
+    <div class="logo"> <img alt="Next Logo" src="/static/dev/NTree/ui/images/logo-desktop.png"/> 
+      <!--Tool tip Version type-->
+      <div class="grid__item">
+        <div class="tooltip tooltip--smaug" data-type="smaug">
+          <div class="tooltip__trigger" role="tooltip" aria-describedby="info-smaug"> <span class="tooltip__trigger-text">V.0.1</span> </div>
+          <div class="tooltip__base">
+            <div class="tooltip__content" id="info-smaug">
+              <div id="footerNotesdis">
+                <table class="table table-border">
+                  <thead>
+                    <tr>
+                      <th colspan="5">TRANSFORM NTree</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#</td>
+                      <td>Version</td>
+                      <td>Release</td>
+                      <td>Build</td>
+                      <td>Date</td>
+                    </tr>
+                    <tr>
+                      <td>Latest Code</td>
+                      <td>1</td>
+                      <td>v.0.1</td>
+                      <td>#{{request.session.build_number}}</td>
+                      <td>{{request.session.build_date}}</td>
+                    </tr>
+                    <tr>
+                      <td>Used Code</td>
+                      <td>1</td>
+                      <td>v.0.1</td>
+                      <td>#{{request.session.build_number}}</td>
+                      <td>{{request.session.build_date}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-border">
+                  <thead>
+                    <tr>
+                      <th colspan="5">UX 3.X</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#</td>
+                      <td>Version</td>
+                      <td>Release</td>
+                      <td>Build</td>
+                      <td>Date</td>
+                    </tr>
+                    <tr>
+                      <td>Latest Code</td>
+                      <td>1</td>
+                      <td>v0.1.0</td>
+                      <td>#7</td>
+                      <td>Apr 11,2018</td>
+                    </tr>
+                    <tr>
+                      <td>Used Code</td>
+                      <td>1</td>
+                      <td>v0.1.0</td>
+                      <td>#7</td>
+                      <td>Apr 11,2018</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End tooltip version--> 
+    </div>
+    <div class="page-top"> 
+      <!-- BEGIN HEADER SEARCH BOX -->
+      <div class="mobilesearch">
+        <form class="search-form" action="#" method="GET">
+          <div class="input-group">
+            <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+            <span class="input-group-btn"> <a href="javascript:;" class="btn submit"> <i class="icon-magnifier"></i> </a> </span> </div>
+        </form>
+      </div>
+      <div class="searchwrap">
+        <div class="cd-search animate-search">
+         </div>
+      </div>
+      <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown dropdown-user dropdown-dark"> <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <span class="username username-hide-on-mobile"> {{request.session.name}} </span> <img alt="" class="img-circle" src="{{request.session.image}}" /> </a>
+            <ul class="dropdown-menu dropdown-menu-default" role="menu">
+              <li class="user_name"> <a href="#" title="{{request.session.email}}"> <i class="fa fa-user"></i> {{request.session.email}} </a> </li>
+              <li class="divider"> </li>
+              <li> <a href="/login"> <i class="fa fa-sign-out"></i> Log Out </a> </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="nav_trigger"> <span class="line1"></span> <span class="line2"></span> <span class="line3"></span> </div>
+        <ul id="mobilemenu" class="nav_responsiv">
+ 
+        </ul>
+        <div class="flip-logo"> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"> </div>
+
+<!-- BODY CONTENT START--> 
+{% block content %}{% endblock %}
+<!-- BODY CONTENT END--> 
+
+<!-- BASIC JS--> 
+
+<script src="/static/dev/NTree/ui/plugins/jquery.min.js"></script> 
+<script src="/static/dev/NTree/ui/plugins/bootstrap/js/bootstrap.min.js" ></script> 
+<script src="/static/dev/NTree/ui/js/default/custom_script.min.js" type="text/javascript"></script> 
+ <!-- BIRAD ANIMATION JS--> 
+<!--   <script src="/static/dev/NTree/ui/js/default/jquery-3.1.0.slim.min.js"></script> -->
+
+<!-- SINGLE AND MULTI SELECT DROPDOWN--> 
+<script src="/static/dev/NTree/ui/plugins/select2/js/select2.min.js" type="text/javascript"></script> 
+<script src="/static/dev/NTree/ui/plugins/select2/js/select2.full.min.js" type="text/javascript"></script> 
+<script src="/static/dev/NTree/ui/plugins/select2/js/components-select2.min.js" type="text/javascript"></script> 
+
+<!-- THEME JS--> 
+<script src="/static/dev/NTree/ui/themes/js/layout.min.js" type="text/javascript"></script> 
+<script src="/static/dev/NTree/ui/themes/js/theme_switches.min.js" type="text/javascript"></script> 
+
+<!--JQUERY ALERT NOTIFICATION-->
+<script src="/static/dev/NTree/ui/plugins/jquery-notification/js/lobibox.js" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/bootstrap-confirmation/js/bootstrap-confirmation.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/dev/NTree/ui/plugins/bootstrap-sweetalert/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/static/dev/NTree/ui/plugins/bootstrap-sweetalert/js/ui-sweetalert.min.js"></script>
+
+<script src="/static/dev/NTree/dev/jquery-ui.js" type="text/javascript"></script> 
+
+<!--  <script>
+  $( function() {
+    $( ".draggable-cloud" ).draggable();
+	  $( ".draggable-cloud img" ).resizable();
+  } );
+  </script> -->
+ <!-- Sweetalert close function -->
+<script>
+function dev_swal_close(){
+	$( ".cancel" ).click();
+}
+</script>
+<script>
+$(document).ready(function () {
+	$(".loader-wrapper").hide();
+});
+$(document).ajaxStart(function(){
+   $('.loader-wrapper').show()
+ });
+ 
+$(document).ajaxComplete(function(){
+	$('.loader-wrapper').hide()
+});
+</script>
+<script>
+$('#mobilemenu ').click(function(){
+	$('#mobilemenu').hide();
+})
+</script>
+  
+<!-- FLIP JS--> 
+<script src="/static/dev/NTree/ui/plugins/menuflip/js/modernizr.js" type="text/javascript"></script> 
+<script src="/static/dev/NTree/ui/plugins/menuflip/js/menu-flip.min.js" type="text/javascript"></script> 
+<!-- TOOLTIP JS--> 
+<script src="/static/dev/NTree/ui/plugins/tooltip/js/anime.min.js" type="text/javascript"></script> 
+<script src="/static/dev/NTree/ui/plugins/tooltip/js/tooltip.min.js" type="text/javascript"></script> 
+<!-- SEARCH JS --> 
+<script src="/static/dev/NTree/ui/js/default/search.min.js" type="text/javascript"></script> 
+<!-- SEARCH SCRIPTS -->
+<script src="/static/dev/NTree/dev/ntree_common.js" type="text/javascript"></script>
+
+<!-- CUSTOM JS LINK START --> 
+{% block script %}{% endblock %}
+<!-- CUSTOM JS LINK END--> 
+</body>
+</html>

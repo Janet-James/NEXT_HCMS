@@ -1,0 +1,51 @@
+.animate_arrows {
+	color: #d277fe;
+	display: inline-block;
+	margin-left: 30px;
+}
+.no-data {
+	text-align: center;
+	color: #e73d4a
+}
+.asterisk, .error, .data-error {
+	color: #e73d4a;
+}
+.val_message {
+	position: absolute;
+	width: 100%;
+	bottom: -20px;
+}
+.select2-dropdown {
+	z-index: 99999;
+}
+
+/* talent_profile.css :: 81 */
+.profile_grid_content h1{
+	padding: 0px !important;
+}
+
+/* talent_profile.css :: 87 */
+.profile_item{
+	padding: 0px !important;
+}
+
+/* talent_profile.css :: 94 */
+.profile_grid_wrap h2{
+	padding: 0px !important;
+}
+
+.profile_grid_content{
+	padding: 15px 30px 0px 15px;
+}
+
+.li_focused{
+	color: #23527c !important;
+}
+
+#tm_my_perf_overall_chart, #tm_my_perf_comp_chart, #tm_my_perf_selected_chart, #tm_my_perf_selected_scores {
+	height: 500px !important;
+}
+
+.float-right{
+	float: right !important;
+}

@@ -1,0 +1,88 @@
+
+  /*  end */
+  .panel-heading a, .panel-heading a:active, .panel-heading a:focus, .panel-heading a:hover {
+    text-decoration: none;
+    display: block;}
+.bsc_text:hover {
+/*      background: #729fcf;
+     color: #000000; */
+     cursor: pointer;
+}
+
+.tooltip-hvr {
+    /* margin: 0px 15px 5px 3px !important; */
+        margin: 0px 5px 5px -3px !important;
+    position: relative !important;
+    padding: 5px 0px 0px 5px;
+}
+
+.talent-matrix .box-mid-sec ul li img{width: 40px !important; height: 40px !important; object-fit: cover;}
+
+.form-group.bottom_rem{margin-bottom:0px;} 
+
+.div_top{margin-top:-30px;}
+
+span.select2.select2-container.select2-container--bootstrap.select2-container--focus {
+    width: auto !important;
+}
+
+span.select2.select2-container.select2-container--bootstrap {
+    width: auto !important;
+}
+
+.title_head_text{background: #e6f7ff;padding: 5px;border-radius: 2px !important;font-size: 14px;}
+
+
+
+/***************** 17-04-18 ****************************/
+.tabbable-reversed .panel-body p:hover{color:#f50057;}
+.md-max-height{max-height: 650px;overflow-y: scroll;overflow-x: hidden;}
+#select_id, #role_submit_id{    position: absolute;top: 25px;right: 0px;}
+#role_table_id_tbody .nf-trash-o{ color:red; }
+#cascade_objective_model .dataTables_wrapper .dataTables_length{ text-align: left; }
+#cascade_objective_model div.dataTables_wrapper div.dataTables_filter label{ right:0px; top:0px; }
+#cascade_objective_model .table-scrollable td .nf-trash-o{ color:red; }
+#kpi_target-error{ position: absolute;top: 47px;left: 20px;font-size: 10px; }
+.editable-table-sec table tbody td{ position: relative; }
+#assessment_template_table_wrapper .table-scrollable table tr td .nf-violations, #assessment_template_table_wrapper .table-scrollable table tr td .nf-trash-o{ color: red; }
+#employee_select_id{ position: absolute; top:25px; right:0px;}
+#form_kpi_view .caption{ font-size: 16px;}
+.form-group.assessor_detail{ position:relative; }
+.assessor_detail .btn-icon-only{ position: absolute; top: 25px; right:0px; }
+img.pic_ina{ object-fit: cover;}
+#attendance_popup_table_wrapper .dt-buttons{float: left; }
+.input-icon #select_id{ top:0px; }
+
+#manage_role_kpi #manage_role_kpi_table_wrapper .dataTables_filter label{ top:0px; }
+#manage_role_kpi #manage_role_kpi_table_wrapper .dataTables_length{    text-align: left;}
+h3.desk-hide-names {display: none;}
+.input-icon.select_height #role_select_id{position: absolute;right: 0px;top: 0px;}
+#rating_data .mt-radio-inline{padding: 0px;}
+.btn_assesment {padding: 0px 0px;position: absolute;top: 0px;right: 0px;}
+.form-wizard .steps>li>a.step{ text-align:center; }
+#rating_detail_table_wrapper table tr td .nf-trash-o{ color: red; }
+.ribbon-content .badge-success{background:#5ac8fb !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important; }
+.ribbon-content .badge-primary{background: #4cda64 !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important;}
+#employeePage, #chartPage, #businessObjectivesPage{ padding-top: 30px; }
+.cell-wrapper{white-space: normal;}
+.label_right_table1 {right: 15px;position: absolute;top: -10px;}
+
+
+.selectorg {z-index: 10050 !important}
+.ass_form{margin-top: 21% !important;}
+@media(max-width:992px){
+	
+h3.desk-hide-names {display: block;}
+h3.res-hide-name{ display: none; }
+}
+
+
+
+
+
+.row_margin{margin-right: 0;}
+
+
+
+
+

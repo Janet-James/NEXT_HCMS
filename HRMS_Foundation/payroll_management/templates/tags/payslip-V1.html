@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Payslip </title>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" width="100%" style="border:1px solid #f0f0f0;font-family: Helvetica,Arial,sans-serif;padding:10px 10px 0px 10px;background-image:url(/home/nextaps/NEXT_HCMS/watermark.jpg);background-repeat:repeat;">
+        <tbody>
+            <tr>
+                <td style="background-image:url(/home/nextaps/NEXT_HCMS/footer.jpg);background-repeat: no-repeat;background-position: bottom;background-size: contain;">
+                    <table cellpadding="0" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td><img src="/home/nextaps/NEXT_HCMS/next_logo.png" ></td>
+                                                <td align="right">
+                                                    <label style="float: right;">
+                                                    <span style="font-size:10px;font-weight:normal;color:#0e71f6;display:inline-block;float:left;text-transform:uppercase;padding-right:10px;">(PAYSLIP)</span>
+                                                    <span style="font-size:15px;font-weight:bold;color:#0e71f6;display:inline-block;float:left;text-transform:uppercase;padding-right:10px;">Financial Progress Report</span>
+                                                    <span style="font-size:15px;font-weight:bold;color:#000;display:inline-block;float:left;text-transform:uppercase;">{{payslip_data.payslip_month}} {{payslip_data.payslip_year}}</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="vertical-align:top;">
+                                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td colspan="2" style="margin:0px;padding:0px;">
+                                                                                <!-- <h1>{{a}}</h1> -->
+                                                                                    <h6 style="font-size:15px;font-weight:bold;color:#0e71f6;margin:0px 0px;">Employee Information</h6>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;line-height: 9px;margin:0px;">Employee No </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;line-height: 9px;">{{payslip_data.employee_data_val.0.matrix_id}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;line-height: 9px;">Employee Name </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;line-height: 9px;">{{payslip_data.employee_data_val.0.employee_name}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;line-height: 9px;">Designation </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;line-height: 9px;">{{payslip_data.employee_data_val.0.designation}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;line-height: 9px;">Date of Joining  </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;line-height: 9px;">{{payslip_data.employee_data_val.0.date_of_joining}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Total Work Days</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.employee_data_val.0.worked_days}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">LOP </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.employee_data_val.0.lop_days}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Account No </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.payment_details.0.account_no}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Bank Name </span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.payment_details.0.bank_name}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">UAN Number</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.employee_data_val.0.uan_number}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">PAN</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{payslip_data.employee_data_val.0.pan_number}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Employer PF Contribution</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                {% for b in payslip_data.employer_contribution_details %}
+                                                                                {% if b.contribution_code == 'EMRPF' %}
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{b.assignment_value}}</span>
+                                                                                    {% endif %}
+                                                                                    {% endfor %}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Employer ESI Contribution</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                 {% for b in payslip_data.employer_contribution_details %}
+                                                                                {% if b.contribution_code == 'EMRSI' %}
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:5px;text-transform:capitalize;">{{b.assignment_value}}</span>
+                                                                                 {% endif %}
+                                                                                    {% endfor %}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:5px;text-transform:capitalize;">Amount Transferred</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:5px;text-transform:capitalize;">{{net_salary}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="vertical-align:top;border: 1px solid #e7f4fd;border-right:0px;
+    padding: 10px;">
+                                                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td colspan="2" style="margin:0px;padding:0px;">
+                                                                                                    <h6 style="font-size:15px;font-weight:bold;color:#0bb295;margin:5px 0px;">Earnings</h6>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% for c in payslip_data.emp_actual_earning_list %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">{{c.salary_rule_name}}</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{c.assignment_value}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endfor %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Special Allowance</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.special_allowance}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% if payslip_data.arrear_amount > 0 %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Arrears</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.arrear_amount}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endif %}
+                                                                                            {% if payslip_data.variable_amount > 0 %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Performance Incentive</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.variable_amount}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endif %}
+                                                                                            {% if payslip_data.lvr_value > 0 %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Leadership Value Return</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.lvr_value}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endif %}
+                                                                                            {% if payslip_data.pvr_value > 0 %}
+                                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Product Value Return</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.pvr_value}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endif %}
+                                                                                            <tr>
+                                                                                                <td colspan="2" style="vertical-align:bottom;border:1px solid #e7f4fd;margin:0px;padding:0px;">
+                                                                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td>
+                                                                                                                <span style="font-size:15px;color:#000000;padding-right:10px;font-weight:bold;text-transform:capitalize;">Total Earnings</span>
+                                                                                                                </td>
+                                                                                                                <td>
+                                                                                                                    <span style="font-size:15px;color:#000000;font-weight:bold;padding-right:5px;font-weight:bold;text-transform:capitalize;float:right;">{{total_earnings}}</span>
+                                                                                                                </td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>   
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                <td bgcolor="#fff9f9" style="vertical-align:top;border: 1px solid #e7f4fd;border-left:0px;
+    padding: 10px;">
+                                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td colspan="2" style="margin:0px;padding:0px;">
+                                                                                    <h6 style="font-size:15px;font-weight:bold;color:#fe5253;margin:5px 0px;">Deductions</h6>
+                                                                                </td>
+                                                                            </tr>
+                                                                            {% for d in payslip_data.emp_actual_deduction_list %}
+                                                                            <tr>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">{{d.salary_rule_name}}</span>
+                                                                                </td>
+                                                                                <td style="margin:0px;padding:0px;">
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{d.assignment_value}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            {% endfor %}
+                                                                            {% if payslip_data.tds_amount > 0 %}
+                                                                            <tr>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">Income Tax</span>
+                                                                                                </td>
+                                                                                                <td style="margin:0px;padding:0px;">
+                                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">{{payslip_data.tds_amount}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {% endif %}
+                                                                            <!-- <tr>
+                                                                                <td>
+                                                                                    <span style="font-size:13px;color:#000000;padding-right:10px;text-transform:capitalize;">ESI Employee Cont..</span>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span style="font-size:13px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;float:right;">-</span>
+                                                                                </td>
+                                                                            </tr> -->
+                                                                            <tr>
+                                                                                <td colspan="2" style="height:159px;"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td colspan="2" style="vertical-align:bottom;border:1px solid #e7f4fd;margin:0px;padding:0px;">
+                                                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                <span style="font-size:15px;color:#000000;padding-right:10px;font-weight:bold;text-transform:capitalize;">Total Deductions</span>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <span style="font-size:15px;color:#000000;font-weight:bold;padding-right:10px;font-weight:bold;text-transform:capitalize;float:right;">{{total_deduction}}</span>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>   
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                        </td>
+                                                            </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#f1f9ff"  style="margin:0px 0px;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <h6 style="font-size:17px;font-weight:bold;color:#0e71f6;margin:5px 0px;text-transform:uppercase;">NET SALARY</h6>
+                                                </td>
+                                                <td>
+                                                    <span style="font-size:16px;color:#000000;font-weight:bold;padding-right:10px;text-transform:capitalize;">{{net_salary}}  </span>
+                                                </td>
+                                                <td>
+                                                    <h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px 0px;text-transform:uppercase;">Rupees {{netsalary_letter}}</h6>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td width="70%">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px 0px;">Your Ratings</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            {% if payslip_data.month_image_name %}
+                                                                <td style="height:100px;">
+                                                                   <img height="100"  src={{payslip_data.month_image_name}} >
+                                                                </td>
+                                                                {% else %}   
+                                                                    <td style="height:100px;vertical-align:middle;">
+                                                                    <p style="margin:0px;color:#fa8e8f;font-size:17px;">To Be Published</p>
+                                                                </td>
+                                                                {% endif %}
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                                                    
+                                                </td>
+                                                <td  width="30%">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px 0px;">Leadership Value Returns</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            {% if payslip_data.lvr_image_name %}
+                                                                <td style="height:100px;">
+                                                                <img height="100" src={{payslip_data.lvr_image_name}} >
+                                                                </td>
+                                                                {% else %}   
+                                                                    <td style="height:100px;vertical-align:middle;">
+                                                                    <p style="margin:0px;color:#fa8e8f;font-size:17px;">To Be Published</p>
+                                                                </td>
+                                                                {% endif %}
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                                                    
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td width="75%">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px 0px;">Basic Value Return (BVR)</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            {% if payslip_data.bvr_image_name %}
+                                                                <td style="height:100px;">
+                                                                    <img height="100"  src={{payslip_data.bvr_image_name}} >
+                                                                    </td>
+                                                                 {% else %}   
+                                                                    <td style="height:100px;vertical-align:middle;">
+                                                                    <p style="margin:0px;color:#fa8e8f;font-size:17px;">To Be Published</p>
+                                                                </td>
+                                                                {% endif %}
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                                                    
+                                                </td>
+                                                <td  width="25%">
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px 0px;">Year To Date</h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                            {% if payslip_data.year_date_image_name %}
+                                                                <td style="height:100px;">
+                                                                    <img height="100" width="100%" src={{payslip_data.year_date_image_name}} >
+                                                                </td>
+                                                                {% else %}   
+                                                                    <td style="height:100px;vertical-align:middle;">
+                                                                    <p style="margin:0px;color:#fa8e8f;font-size:17px;">To Be Published</p>
+                                                                </td>
+                                                                {% endif %}
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>                                                    
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table cellpadding="0" cellspacing="0" width="100%">
+                                                        <thead style="background-color:#fffbef;padding:5px 10px;">
+                                                            <tr>
+                                                                <th style="vertical-align:middle;"><h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px;float:left;">Your Product</h6></th>
+                                                                <th style="vertical-align:middle;text-align:center;" colspan="2"><h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px;">Commercial Delivery</h6></th>
+                                                                <th style="vertical-align:middle;text-align:center;" colspan="2"><h6 style="font-size:15px;font-weight:bold;color:#000000;margin:5px;">Commercial Return</h6></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th style="vertical-align:middle;"></th>
+                                                                <th style="vertical-align:middle;"><span style="font-size:12px;font-weight:bold;color:#000000;margin:5px;margin:5px;">Total Progress</span></th>
+                                                                <th style="vertical-align:middle;"><span style="font-size:12px;font-weight:bold;color:#000000;margin:0px 5px 5px 5px;">Individual Contribution</span></th>
+                                                                <th style="vertical-align:middle;"><span style="font-size:12px;font-weight:bold;color:#00d5b1;float:right;margin:0px 5px 5px 5px;">Total</span></th>
+                                                                <th style="vertical-align:middle;"><span style="font-size:12px;font-weight:bold;color:#c95bff;float:right;margin:5px;">Individual</span></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for e in payslip_data.project_contribution_details %}
+                                                            <tr>
+                                                                <td style="width:200px;">
+                                                                    <span style="font-size:14px;color:#000000;text-transform:uppercase;float:left;">{{e.project_name}}</span>
+                                                                </td>
+                                                                <td style="text-align:center;">
+                                                                    <div style="width:60%;float:left;margin-top: 4px;">
+                                                                    <div style="width:100%;background:#faf4fe;height:12px;float:left;margin:0px 10px;"><span style="display:block;width:{{e.project_contribution_percent}}%;background:#2ce7c8;height:12px;"></span></div>
+                                                                    </div>
+                                                                    <label style="width:40%;color: #0eccac;font-weight: bold;font-size: 12px;padding: 0px 0px 0px 5px;margin: 0px;text-align:right;">{{e.project_contribution_percent}}%</label>
+                                                                </td>
+                                                                <td style="text-align:center;" align="right">
+                                                                    <div style="width:65%;float:left;margin-top: 4px;">
+                                                                    <div style="width:100%;background:#faf4fe;height:12px;float:left;margin:0px 10px;"><span style="display:block;width:{{e.employee_contribution_percent}}%;background:#e3a9fe;height:12px;"></span></div>
+                                                                    </div>
+                                                                    <label style="width:35%;color: #cd63ff;font-weight: bold;font-size: 12px;padding: 0px 0px 0px 5px;margin: 0px;text-align:right;">{{e.employee_contribution_percent}}%</label>
+                                                                </td>
+                                                                <td>
+                                                                    <span style="font-size:14px;font-weight:bold;color:#000000;text-transform:uppercase;float:right;">-</span>
+                                                                </td>
+                                                                <td>
+                                                                    <span style="font-size:14px;font-weight:bold;color:#000000;text-transform:uppercase;float:right;">-</span>
+                                                                </td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#f1f9ff" style="margin:0px 0px 0px 0px;">
+                                        <tbody>
+                                            <tr>
+                                                <td align="left">
+                                                    <h6 style="font-size:17px;font-weight:bold;color:#0e71f6;margin:5px 0px;text-transform:uppercase;float:left;">Total Return Per Month<span style="font-size:16px;color:#000000;font-weight:bold;padding-left:30px;text-transform:capitalize;margin:5px 0px;display:inline-block;">{{net_salary}}  </span></h6>
+                                                    
+                                                </td>
+                                                <td align="right">
+                                                    <h6 style="font-size:17px;font-weight:bold;color:#0e71f6;margin:5px 0px;text-transform:uppercase;float:right;">Total Return Per Year<span style="font-size:16px;color:#000000;font-weight:bold;padding-left:30px;text-transform:capitalize;margin:5px 0px;display:inline-block;">{{total_year_net_salary}}  </span></h6>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="margin:10px 0px 0px 0px;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <span style="font-size:6px;color:#000000;text-transform:capitalize;display:block;margin-top:5px;">*This is a computer generated Payslip, hence signature is not required</span>
+                                                    <span style="font-size:11px;color:#000000;font-weight:bold;text-transform:capitalize;display:block;">NEXT Techno Enterprises Private Limited</span>
+                                                    <span style="font-size:10px;color:#000000;text-transform:capitalize;display:block;">Module No: 308/1, Third Floor,Tidel Park, Coimbatore, Tamil Nadu, India.</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

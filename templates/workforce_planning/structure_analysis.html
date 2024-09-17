@@ -1,0 +1,308 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- Org Chart css -->
+<link
+	href="{% static '/dev/hcms_talent_inventory/css/ti_getorgchart.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- DataTable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css' %}"
+	type="text/javascript" />
+<!-- Charts CSS -->
+<link href="{% static '/ui/plugins/amchart/css/chart.min.css' %}" rel="stylesheet" type="text/css" />
+<!-- Dev css -->
+<link
+	href="{% static '/dev/workforce_planning/css/workforce_planning.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- 07-AUG-2018 || SMI || Added Styles & Scripts for Map -->
+<link href="{% static '/dev/hcms_talent_inventory/css/ol.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/hcms_talent_inventory/css/popup.css' %}"
+	rel="stylesheet" type="text/css" />
+<script src="{% static '/dev/hcms_talent_inventory/js/ol.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/hcms_talent_inventory/js/popup.js' %}"
+	type="text/javascript"></script>
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="WFP_StructureAnalysis" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<h1>WORKFORCE PLANNING - STRUCTURE ANALYSIS</h1>
+				<div class="row" id="wf_structure_main_div">
+					<div class="col-md-12 col-sm-12"
+						style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+						<div class="portlet light bordered">
+							<div class="portlet-body">
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="row">
+											<div class="col-md-4 col-sm-2" style="margin-top: 10px; text-align:right;">
+												<i data-toggle="tooltip" data-placement="top" title=""
+													class="wfp_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group">
+													<select id="wfp_sel_org" name="wfp_sel_org"
+														class="form-control select2 hide_error"
+														onchange="get_org_list($(this).val());">
+														<option></option>
+														{% for data in structure_org %}
+														<option value="{{ data.id }}">{{ data.name }}</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="col-md-4 col-sm-3">
+												<div class="form-group">
+													<select id="wfp_sel_org_unit" name="wfp_sel_org_unit"
+														class="form-control select2 hide_error" disabled="disabled"
+														onchange="get_struct_sel($(this).val());">
+														<option></option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="structure_analysis_wiz">
+									<div class="form-wizard">
+										<div id="tab_formwizard" class="form-body">
+											<ul class="nav nav-pills nav-justified steps">
+												<li class="active"><a class="step"
+													href="#structure_step1_tab_content" id="STRC1"
+													data-toggle="tab"><span class="number"> <i
+															class="nf nf-employee-portal"></i>
+													</span><span class="desc"> <i class="fa fa-check"></i>
+															Planned Org. Structure
+													</span></a></li>
+												<li><a class="step" href="#structure_step2_tab_content"
+													id="STRC2" data-toggle="tab"><span class="number">
+															<i class="nf nf-university"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Structure Overlay
+													</span> </a></li>
+												<li><a class="step" href="#structure_step3_tab_content"
+													id="STRC3" data-toggle="tab"><span class="number">
+															<i class="nf nf-experience"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i> Gap
+															Analysis
+													</span> </a></li>
+												<li><a class="step" href="#structure_step4_tab_content"
+													id="STRC4" data-toggle="tab"><span class="number">
+															<i class="nf nf-certificate"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Cost View
+													</span> </a></li>
+												<li><a class="step" href="#structure_step5_tab_content"
+													id="STRC5" data-toggle="tab"><span class="number">
+															<i class="nf nf-skills"></i>
+													</span> <span class="desc"> <i class="fa fa-skills"></i>
+															Summarized Reports
+													</span> </a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="row">
+										<div class="tab-content">
+											<!-- Structure Analysis - Step 1 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane active" id="structure_step1_tab_content">
+											</div>
+											<!-- Structure Analysis - Step 1 Content End -->
+											<!-- Structure Analysis - Step 2 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane" id="structure_step2_tab_content">
+											</div>
+											<!-- Structure Analysis - Step 2 Content End -->
+											<!-- Structure Analysis - Step 3 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane" id="structure_step3_tab_content">
+												<table class="table table-striped table-bordered table-hover"
+													id="wfp_struct_s3_tbl">
+													<thead>
+														<tr>
+															<th>No.</th>
+															<th>Org. Unit Type</th>
+															<th>Role</th>
+															<th>Planned Resource Count</th>
+															<th>Existing Resource Count</th>
+															<th>Required Resource Count</th>
+															<th>Excess Resource Count</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+													<tfoot>
+														<tr>
+															<th colspan="3" style="text-align: right">Total:</th>
+															<th></th>
+															<th></th>
+															<th></th>
+															<th></th>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+											<!-- Structure Analysis - Step 3 Content End -->
+											<!-- Structure Analysis - Step 4 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane" id="structure_step4_tab_content">
+												<table class="table table-striped table-bordered table-hover"
+													id="wfp_struct_s4_tbl">
+													<thead>
+														<tr>
+															<th>No.</th>
+															<th>Org. Unit Type</th>
+															<th>Role</th>
+															<th>Required Resource Count</th>
+															<th>Required Resource Cost</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+													<tfoot>
+														<tr>
+															<th colspan="3" style="text-align: right">Total:</th>
+															<th></th>
+															<th></th>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+											<!-- Structure Analysis - Step 4 Content End -->
+											<!-- Structure Analysis - Step 5 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane" id="structure_step5_tab_content">
+												<div class="row">
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Cost-wise Chart</h3>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="struct_donut_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Summarized Chart</h3>
+															<div class="form-group">
+																<select id="wfp_bar_sel_role" name="wfp_bar_sel_role"
+																	class="form-control select2 hide_error" disabled="disabled"
+																	onchange="get_role_val_bar($(this).val());">
+																	<option></option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="struct_bar_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Multi-Value Chart</h3>
+															<div class="form-group">
+																<select id="wfp_bar_msel_roles"
+																	name="wfp_bar_msel_roles" onchange="wfp_bar_msel_roles_chng();"
+																	class="form-control select2-multiple hide_error"
+																	multiple="multiple" disabled="disabled">
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="struct_multi_bar_chart"></div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Grade Based Chart</h3>
+															<div class="form-group">
+																<select id="wfp_bar_msel_grades"
+																	name="wfp_bar_msel_grades" onchange="wfp_bar_msel_grades_chng();"
+																	class="form-control select2-multiple hide_error"
+																	multiple="multiple" disabled="disabled">
+																	{% for data in role_grades %}
+																	<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="struct_multi_grade_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-8 col-sm-12">
+														<h3>Structure Analysis - Map</h3>
+														<div class="map" id="struct_step5_tab_map"></div>
+													</div>
+												</div>
+											</div>
+											<!-- Structure Analysis - Step 5 Content End -->
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}{% block scripts %}
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!--Charts-->
+<script src="{% static '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/pie.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/export.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/light.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<script 
+	src="{% static '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/workforce_planning/js/wfp_datatables.js' %}"
+	type="text/javascript"></script>
+<!-- Map Plugins -->
+<script src="{% static '/dev/workforce_planning/js/png_admin_boundary.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/dev/workforce_planning/js/structure_map_page.js' %}"
+    type="text/javascript"></script>
+<!-- Org structure --> 
+<script src="{%  static '/ui/plugins/org-structure/js/getorgchart_dev.js'  %}" type="text/javascript"></script> 
+<!-- Export table geo org chart -->
+<script src="{% static  '/ui/plugins/org-structure/js/jspdf.min.js'  %} "></script>
+<script
+	src="{% static '/dev/workforce_planning/js/structure_analysis.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

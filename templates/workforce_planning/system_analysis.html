@@ -1,0 +1,472 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<!-- Dev css -->
+<link
+    href="{% static '/dev/workforce_planning/css/workforce_planning.css' %}"
+    rel="stylesheet" type="text/css" />
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+    rel="stylesheet" type="text/css" />
+<link
+    href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+    rel="stylesheet" type="text/css" />
+<!-- DataTable css -->
+<link
+    href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+    rel="stylesheet" type="text/css" />
+<link
+    href="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css' %}"
+    type="text/javascript" />
+<!-- Charts CSS -->
+<link href="{% static '/ui/plugins/amchart/css/chart.min.css' %}" rel="stylesheet" type="text/css" />
+<!-- 07-AUG-2018 || SMI || Added Styles & Scripts for Map -->
+<link href="{% static '/dev/hcms_talent_inventory/css/ol.css' %}"
+    rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/hcms_talent_inventory/css/popup.css' %}"
+    rel="stylesheet" type="text/css" />
+<script src="{% static '/dev/hcms_talent_inventory/js/ol.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/dev/hcms_talent_inventory/js/popup.js' %}"
+    type="text/javascript"></script>
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="WFP_SystemAnalysis" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+    <div class="page-container " id="maincontent">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <h1>WORKFORCE PLANNING - JOB REQUISITION ANALYSIS</h1>
+                <div class="row" id="wf_system_main_div">
+                    <div class="col-md-12 col-sm-12"
+                        style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+                        <div class="portlet light bordered">
+                            <div class="portlet-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-4 col-sm-2"
+                                                style="margin-top: 10px; text-align: right;">
+                                                <i data-toggle="tooltip" data-placement="top" title=""
+                                                    class="wfp_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4">
+                                                <div class="form-group">
+                                                    <select id="wfp_sys_org" name="wfp_sys_org"
+                                                        class="form-control select2 hide_error"
+                                                        onchange="wfp_sys_org_change_view($(this).val());">
+                                                        <option></option>
+                                                        {% for data in system_org %}
+                                                        <option value="{{ data.id }}">{{ data.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-3">
+                                                <div class="form-group">
+                                                    <select id="wfp_sys_org_unit" name="wfp_sys_org_unit"
+                                                        class="form-control select2 hide_error"
+                                                        disabled="disabled">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="system_analysis_wiz">
+                                    <div class="form-wizard">
+                                        <div id="tab_formwizard" class="form-body">
+                                            <ul class="nav nav-pills nav-justified steps">
+                                                <li class="active"><a class="step"
+                                                    href="#system_step1_tab_content" id="SYST1"
+                                                    data-toggle="tab"><span class="number"> <i
+                                                            class="nf nf-employee-portal"></i>
+                                                    </span><span class="desc"> <i class="fa fa-check"></i>
+                                                            Requisition Requirements
+                                                    </span></a></li>
+                                                <li><a class="step" href="#system_step2_tab_content"
+                                                    id="SYST2" data-toggle="tab"><span class="number">
+                                                            <i class="nf nf-university"></i>
+                                                    </span> <span class="desc"> <i class="fa fa-check"></i>
+                                                            Analyze Requisition
+                                                    </span> </a></li>
+                                                <li><a class="step" href="#system_step3_tab_content"
+                                                    id="SYST3" data-toggle="tab"><span class="number">
+                                                            <i class="nf nf-experience"></i>
+                                                    </span> <span class="desc"> <i class="fa fa-check"></i> Gap
+                                                            Priority / Criteria View
+                                                    </span> </a></li>
+                                                <li><a class="step" href="#system_step4_tab_content"
+                                                    id="SYST4" data-toggle="tab"><span class="number">
+                                                            <i class="nf nf-certificate"></i>
+                                                    </span> <span class="desc"> <i class="fa fa-check"></i>
+                                                            Cost View
+                                                    </span> </a></li>
+                                                  <li><a class="step" href="#sytem_step5_tab_content"
+                                                    id="SYST5" data-toggle="tab"><span class="number">
+                                                            <i class="nf nf-skills"></i>
+                                                    </span> <span class="desc"> <i class="fa fa-skills"></i>
+                                                            Summarized Reports
+                                                    </span> </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="tab-content">
+                                            <!-- System Analysis - Step 1 Content Start -->
+                                            <div class="clearfix" style="padding: 10px;"></div>
+                                            <div class="tab-pane active" id="system_step1_tab_content">
+                                                <!-- BEGIN ACCORDION PORTLET-->
+                                                <div class="col-md-12">
+                                                    <div class="panel-group accordion" id="sys_step1_acc">
+                                                        <div class="panel-group accordion" id="acc_main"></div>
+                                                    </div>
+                                                    <!-- END ACCORDION PORTLET-->
+                                                </div>
+                                                <!-- END ACCORDION PORTLET-->
+                                            </div>
+                                            <!-- System Analysis - Step 1 Content End -->
+                                            <!-- System Analysis - Step 2 Content Start -->
+                                            <div class="clearfix" style="padding: 10px;"></div>
+                                            <div class="tab-pane" id="system_step2_tab_content">
+                                                <form id="sys_step2_details">
+                                                    <div class="form-body">
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Department/Team<span class="required">
+                                                                        * </span>
+                                                                </label> <select id="sys_asr_team" name="sys_asr_team"
+                                                                    class="form-control select2 hide_error"
+                                                                    required="required" data-error=".errorTxt0">
+                                                                    <option></option>
+                                                                    {% for data in sysana_team_details %}
+                                                                    <option value="{{ data.id }}">{{data.team_name }}</option>
+                                                                    {% endfor %}
+                                                                </select><span class="errorTxt0 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Position<span class="required"> * </span>
+                                                                </label> <select id="sys_asr_role" name="sys_asr_role"
+                                                                    class="form-control select2 hide_error"
+                                                                    required="required" data-error=".errorTxt1">
+                                                                    <option></option>
+                                                                </select><span class="errorTxt1 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Grade<span class="required"> * </span>
+                                                                </label> <select id="sys_asr_grade" name="sys_asr_grade"
+                                                                    class="form-control select2 hide_error"
+                                                                    required="required" data-error=".errorTxt8">
+                                                                    <option></option>
+                                                                </select><span class="errorTxt8 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Resource Count<span class="required">
+                                                                        * </span></label>
+                                                                <div class="input-icon">
+                                                                    <i class="nf nf-id-card"></i> <input type="text"
+                                                                        readonly="readonly" maxlength="200"
+                                                                        id="sys_asr_res_count" name="sys_asr_res_count"
+                                                                        placeholder="Resource Count" class="form-control"
+                                                                        data-error=".errorTxt2" required="required" /> <span
+                                                                        class="errorTxt2 error val_message"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Requested By<span class="required">
+                                                                        * </span></label>
+                                                                <div class="input-icon">
+                                                                    <i class="nf nf-id-card"></i> <input type="text"
+                                                                        readonly="readonly" maxlength="200"
+                                                                        id="sys_asr_req_by" name="sys_asr_req_by"
+                                                                        placeholder="Requested By" class="form-control"
+                                                                        data-error=".errorTxt3" required="required" /> <span
+                                                                        class="errorTxt3 error val_message"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Requirement Type<span class="required">
+                                                                        * </span>
+                                                                </label> <select id="sys_asr_req_type" name="sys_asr_req_type"
+                                                                    class="form-control select2 hide_error"
+                                                                    required="required" data-error=".errorTxt4">
+                                                                    <option></option>
+                                                                     {% for data in recruit_inst %}
+                                                                     <option value="{{ data.id }}">{{ data.refitems_name }}</option>
+                                                                     {% endfor %}
+                                                                </select><span class="errorTxt4 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group input-icon">
+                                                                <label>Requested On<span class="required">
+                                                                        * </span></label> <i class="fa fa-calendar"></i><input
+                                                                    id="sys_asr_req_on" name="sys_asr_req_on"
+                                                                    placeholder="Requested On" readonly="readonly"
+                                                                    class="form-control form-control-inline" type="text"
+                                                                    data-error=".errorTxt5" data-field="date" /><span
+                                                                    class="errorTxt5 error val_message"></span>
+                                                                <div id="requested_on_div"
+                                                                    class="dtpicker-overlay dtpicker-mobile"
+                                                                    style="display: none;">
+                                                                    <div class="dtpicker-bg">
+                                                                        <div class="dtpicker-cont">
+                                                                            <div class="dtpicker-content">
+                                                                                <div class="dtpicker-subcontent"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Reason for Requisition<span
+                                                                    class="required"> * </span>
+                                                                </label> <select id="sys_asr_req_reason"
+                                                                    name="sys_asr_req_reason"
+                                                                    class="form-control select2 hide_error"
+                                                                    required="required" data-error=".errorTxt4">
+                                                                    <option></option>
+                                                                    {% for data in reason_requisition %}
+                                                                    <option value="{{ data.id }}">{{ data.refitems_name }}</option>
+                                                                    {% endfor %}
+                                                                </select><span class="errorTxt4 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Analysis Details <span class="required">
+                                                                        * </span></label>
+                                                                <textarea rows="2" maxlength="200"
+                                                                    id="sys_asr_analysis_details" required="required"
+                                                                    name="sys_asr_analysis_details" class="form-control"
+                                                                    data-error=".errorTxt7"></textarea>
+                                                                <span class="errorTxt7 error val_message"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label>Status</label>
+                                                                <div class="mt-radio-inline">
+                                                                    <div class="radio">
+                                                                        <label> <input type="radio"
+                                                                            id="status_approved" name="sys_analy_status"
+                                                                            value="Approved" checked> <span class="cr"><i
+                                                                                class="cr-icon fa fa-circle"></i></span> Approved
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio">
+                                                                        <label> <input type="radio"
+                                                                            id="status_rejected" name="sys_analy_status"
+                                                                            value="Rejected"> <span class="cr"><i
+                                                                                class="cr-icon fa fa-circle"></i></span> Rejected
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12" id="form_btns">
+                                                            <div
+                                                                class="form-group float-right portlet-body group-btn-sec">
+                                                                <button type="button"
+                                                                    class="btn btn-warning btn-eql-wid btn-animate pull-right"
+                                                                    onclick="sys_cancel_clear_confirm('sys_cancel_clear')">Cancel/
+                                                                    Clear</button>
+                                                                <button type="button" onclick="sys_step2_save(this);"
+                                                                    class="btn-animate btn btn-success btn-eql-wid pull-right">Add</button>
+ 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- Structure Analysis - Step 2 Content End -->
+                                            <!-- Structure Analysis - Step 3 Content Start -->
+                                            <div class="clearfix"></div>
+                                            <div class="tab-pane" id="system_step3_tab_content">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="sytem_step3_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No.</th>
+                                                                <th>Department/Team</th>
+                                                                <th>Position</th>
+                                                                <th>Grade</th>
+                                                                <th>Resource Need</th>
+                                                                <th>Priority</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 float-right">
+                                                    <button type="button" onclick="sys_step3_save();"
+                                                        class="btn-animate btn btn-success btn-eql-wid pull-right">Update</button>
+                                                </div>
+                                            </div>
+                                            <!-- Structure Analysis - Step 3 Content End -->
+                                            <!-- Structure Analysis - Step 4 Content Start -->
+                                            <div class="clearfix"></div>
+                                            <div class="tab-pane" id="system_step4_tab_content">
+                                                <div class="col-md-12">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="sytem_step4_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No.</th>
+                                                                <th>Department/Team</th>
+                                                                <th>Position</th>
+                                                                <th>Grade</th>
+                                                                <th>Resource Need</th>
+                                                                <th>Priority</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Structure Analysis - Step 4 Content End -->
+                                            <!-- Structure Analysis - Step 5 Content Start -->
+                                            <div class="clearfix" style="padding: 10px;"></div>
+                                            <div class="tab-pane" id="sytem_step5_tab_content">
+ 
+ 
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <h3>Cost-wise Chart</h3>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div id="system_donut_chart"></div>
+                                                        </div>
+                                                    </div>
+ 
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <h3>Summarized Chart</h3>
+                                                            <div class="form-group">
+                                                                <select id="wfp_bar_sel_role" name="wfp_bar_sel_role"
+                                                                    class="form-control select2 hide_error"
+                                                                    onchange="get_role_val_bar($(this).val());">
+                                                                    <option></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div id="wpf_system_bar_chart"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <h3>MultiValue Chart</h3>
+                                                            <div class="form-group">
+                                                                <select id="wfp_bar_multisel_role"
+                                                                    name="wfp_bar_multisel_role"
+                                                                    class="form-control select2-multiple hide_error"
+                                                                    multiple="multiple">
+                                                                    <option></option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div id="wpf_system_bar_chart_multi"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <h3>MultiValue Chart</h3>
+                                                            <div class="form-group">
+                                                                <select id="wfp_bar_grade"
+                                                                    name="wfp_bar_grade"
+                                                                    class="form-control select2-multiple hide_error"
+                                                                    multiple="multiple">
+                                                                    <option></option>
+                                                                    {% for data in grade %}
+                                                                    <option value="{{ data.id }}">{{ data.refitems_name }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div id="wpf_system_bar_chart_grade"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8 col-sm-12">
+                                                    <!-- Map div For Geospatial View  -->
+                                                    	<h3>System Analysis - Map</h3>
+                                                        <div id="system_analysis_map" class="map" style="height:700px"></div>
+                                                    <!-- Map div For Geospatial View  -->
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}{% block scripts %}
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+    type="text/javascript"></script>
+<script
+    src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+    type="text/javascript"></script>
+<!--Charts-->
+<script src="{% static '/ui/plugins/amchart/js/amcharts.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/pie.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/export.min.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/light.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/datatable_lib.min.js' %}"
+    type="text/javascript"></script>
+<script
+    src="{% static '/ui/plugins/datatables/js/table-datatables-colreorder.min.js' %}"
+    type="text/javascript"></script>
+<script
+    src="{% static '/dev/workforce_planning/js/wfp_datatables.js' %}"
+    type="text/javascript"></script>
+<script
+    src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+    type="text/javascript"></script>
+<script
+    src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+    type="text/javascript"></script>
+    <!-- Map Plugins -->
+<script src="{% static '/dev/workforce_planning/js/png_admin_boundary.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/dev/workforce_planning/js/system_map_page.js' %}"
+    type="text/javascript"></script>
+    <!-- Map Plugins -->
+<script
+    src="{% static '/dev/workforce_planning/js/system_analysis.js' %}"
+    type="text/javascript"></script>
+ 
+{% endblock %}

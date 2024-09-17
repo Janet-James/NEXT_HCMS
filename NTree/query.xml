@@ -1,0 +1,461 @@
+<?xml version="1.0"?>
+<data>
+    <queries name="NTree">
+    <query id="fetch_organization_details_view" query_name="fetch_organization_details_view"
+			description="fetch_organization_details_view">
+          <![CDATA[select id,name from organization_info where is_active=TRUE order by name]]>
+		</query>
+		<query id="org_unit_details" query_name="org_unit_details"
+			description="org_unit_details">
+          <![CDATA[select id,orgunit_name from organization_unit_info where is_active='TRUE' and organization_id={0} and parent_orgunit_id!=0 order by orgunit_name]]>
+		</query>
+		<query id="team_detail_check" query_name="team_detail_check"
+			description="team_detail_check">
+          <![CDATA[select id,name from team_details_info  where org_unit_id =%s and is_active]]>
+		</query>
+		<query id="org_unit_id_fetch" query_name="org_unit_id_fetch" description="All Employee Name Details">
+        	<![CDATA[select org_unit_id from team_details_info  where id=%s and is_active ]]>
+        </query>
+    	<query id="all_teamname_query" query_name="all_teamname_query" description="All Team Name Details">
+        	<![CDATA[SELECT id,name from team_details_info where is_active order by name]]>
+        </query>
+        <query id="all_tree_teamname_query" query_name="all_tree_teamname_query" description="All Team Name Details based on the Ntree">
+        	<![CDATA[
+SELECT nt.team_id as id,td.name from ntree_team nt left join team_details_info td
+on nt.team_id=td.id where nt.is_active and nt.order_id !='' and td.org_unit_id=%s and td.is_active order by nt.name asc]]>
+        </query>
+        <query id="groupcode_details_query" query_name="groupcode_details_query" description="Group Code Details query">
+        	<![CDATA[SELECT code from group_info inner join group_user_rel on group_user_rel.group_id=group_info.id 
+                where group_user_rel.user_id=%s limit 1]]>
+        </query>
+        <query id="individualemp_details_query" query_name="useremp_details_query" description="Particular Employee Details query">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name,
+		tdi.name as team_name,ci.name as title,rd.name as designation from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_role rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id
+		left join team_details_info tdi on tdi.id=ei.team_name_id
+		 where ei.id=%s]]>
+        </query>
+        
+         <query id="allemp_details_query" query_name="allemp_details_query" description="All Employee Details query">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name,
+		tdi.name as team_name,ci.name as title,rd.name as designation from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_role rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id
+		left join team_details_info tdi on tdi.id=ei.team_name_id
+		 where ei.team_name_id=%s]]>
+        </query>
+        <!--  <query id="okr_teamview_query" query_name="okr_teamview_query" description="Team View Details">
+        	<![CDATA[SELECT obj.team_id as team_id,obj.id as objective_id, obj.objective, array_agg(COALESCE(key.id, 0) order by key.id) as keyresult_id,   
+array_agg(COALESCE(key.key_result, '')::varchar order by key.id) as key_result,
+array_agg(COALESCE(key.progress, '') order by key.id) as progress,
+array_agg(COALESCE(key.assigned_id, 0) order by key.id) as assigned_id,array_agg(COALESCE(concat(ein.name,' ',ein.last_name), '') order by key.id) as assigned_name,
+array_agg(COALESCE(to_char(key.start_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as start_date,
+array_agg(COALESCE(to_char(key.due_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as due_date,COUNT(DISTINCT key.id) as keyresult_count,
+COALESCE(ROUND(SUM(key.progress ::decimal) / COUNT(key.id) ::decimal,0),0)::text as completion,
+COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+/((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(key.id),0) ,0)::text as expectation,
+array_agg(COALESCE(to_char(key.due_date,'YYYY-MM-DD')::text,to_char(current_timestamp,'YYYY-MM-DD')::text)::varchar order by key.id) as due_date_format
+from ntree_objective as obj left join ntree_keyresults as key on key.objective_id = obj.id left join employee_info as ein on key.assigned_id=ein.id  where obj.is_active and key.is_active and 
+obj.team_id=%s group by obj.id order by obj.id desc]]>
+        </query> -->
+        
+        <query id="teamemp_details_query" query_name="teamemp_details_query" description="Team based Employee Details query">
+        	<![CDATA[SELECT id,employee_image,title,employee_name,team_name,designation from auth_user 
+        	where team_name = (select team_name from auth_user where is_active='true' and id=%s) and is_active='true' order by employee_name]]>
+        </query>
+        
+        <query id="individualteam_details_query" query_name="individualteam_details_query" description="individual Team Details From Ntree team">
+        	<![CDATA[SELECT id,name from ntree_team where name=(select team_name from auth_user where id=%s)]]>
+        </query>
+        
+		<query id="individualemp_name_query" query_name="individualemp_name_query" description="Individual Employee Name Details">
+        	<![CDATA[SELECT id,concat(name, ' ', last_name) as employee_name from employee_info where is_active='true' and id=%s order by name]]>
+        </query>
+        
+        <query id="allemp_name_query" query_name="allemp_name_query" description="All Employee Name Details">
+        	<![CDATA[SELECT id,concat(name, ' ', last_name) as employee_name from employee_info where is_active='true' order by name]]>
+        </query>
+        
+        
+        <query id="teamemp_name_query" query_name="teamemp_name_query" description="Team Based Employee Name Details">
+        	<![CDATA[SELECT id,employee_name from auth_user where team_name = (select team_name from auth_user where is_active='true' and id=%s) and is_active='true' order by employee_name
+        	]]>
+        </query>
+        
+        <query id="teamview_empinfo_query" query_name="teamview_empinfo_query" description="Team view employee information">
+        	<![CDATA[select id as team_id,name as team_name,to_char((modified_date),'MM/DD/YYYY') as last_update from team_details_info  where is_active and id=%s
+]]>
+        </query>
+        
+        <query id="create_objective_query" query_name="create_objective_query" description="Create Objective Query">
+        	<![CDATA[INSERT into ntree_objective(objective,team_id,assigned_id,is_active,created_by_id,created_date,modified_by_id,modified_date) values(%s,%s,%s,True,%s,%s,%s,%s) returning id]]>
+        </query>
+        
+         <query id="update_objective_query" query_name="update_objective_query" description="Update Objective Query">
+        	<![CDATA[UPDATE ntree_objective set objective=%s,team_id=%s,assigned_id=%s,is_active=%s,modified_by_id=%s,modified_date=%s  where id=%s returning id]]>
+        </query>
+        
+        <query id="select_kr_query" query_name="select_kr_query" description="To select the key results details based on objective">
+        	<![CDATA[SELECT id from ntree_keyresults where objective_id=%s and is_active]]>
+        </query>
+        
+        <query id="delete_objective_query" query_name="delete_objective_query" description="To Delete Objective Details">
+        	<![CDATA[UPDATE ntree_objective set is_active=false where id=%s]]>
+        </query>
+        
+        <query id="create_keyresult_query" query_name="create_keyresult_query" description="Create Key Result Query">
+        	<![CDATA[INSERT into ntree_keyresults(assigned_id,objective_id,key_result,progress,start_date,due_date,is_active,created_by_id,created_date,modified_by_id,modified_date) values(%s,%s,%s,%s,%s,%s,True,%s,%s,%s,%s) returning id]]>
+        </query>
+        
+         <query id="update_keyresult_query" query_name="update_keyresult_query" description="Update Key Result Query">
+        	<![CDATA[UPDATE ntree_keyresults SET """+column_name+"""=%s, modified_by=%s, modified_date=%s where id=%s RETURNING id]]>
+        </query>
+        
+        <query id="delete_keyresults_query" query_name="delete_keyresults_query" description="To Delete Key Results">
+        	<![CDATA[UPDATE ntree_keyresults SET is_active=false where id=%s]]>
+        </query>
+        
+        <query id="teamview_query" query_name="teamview_query" description="Team View Details">
+        	<![CDATA[SELECT obj.team_id as team_id,obj.id as objective_id, obj.objective, array_agg(COALESCE(key.id, 0) order by key.id) as keyresult_id,   
+                array_agg(COALESCE(key.key_result, '')::varchar order by key.id) as key_result,
+                array_agg(COALESCE(key.progress, '') order by key.id) as progress,
+                array_agg(COALESCE(key.assigned_id, 0) order by key.id) as assigned_id,array_agg(COALESCE(to_char(key.start_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as start_date,
+                array_agg(COALESCE(to_char(key.due_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as due_date,COUNT(DISTINCT key.id) as keyresult_count,
+                COALESCE(ROUND(SUM(key.progress ::decimal) / COUNT(key.id) ::decimal,0),0)::text as completion,
+                COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+                /((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(key.id),0) ,0)::text as expectation,
+                array_agg(COALESCE(to_char(key.due_date,'YYYY-MM-DD')::text,to_char(current_timestamp,'YYYY-MM-DD')::text)::varchar order by key.id) as due_date_format
+                
+                from ntree_objective as obj
+                left join ntree_keyresults as key on key.objective_id = obj.id and key.is_active where obj.is_active and obj.assigned_id=%s group by obj.id order by obj.id desc]]>
+        </query>
+        
+        <query id="okr_teamview_query" query_name="okr_teamview_query" description="Team View Details">
+        	<![CDATA[SELECT obj.team_id as team_id,obj.id as objective_id, obj.objective, array_agg(COALESCE(key.id, 0) order by key.id) as keyresult_id,   
+array_agg(COALESCE(key.key_result, '')::varchar order by key.id) as key_result,
+array_agg(COALESCE(key.progress, '') order by key.id) as progress,
+array_agg(COALESCE(key.assigned_id, 0) order by key.id) as assigned_id,array_agg(COALESCE(concat(ein.name,' ',ein.last_name), '') order by key.id) as assigned_name,
+array_agg(COALESCE(to_char(key.start_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as start_date,
+array_agg(COALESCE(to_char(key.due_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as due_date,COUNT(DISTINCT key.id) as keyresult_count,
+COALESCE(ROUND(SUM(key.progress ::decimal) / COUNT(key.id) ::decimal,0),0)::text as completion,
+COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+/((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(key.id),0) ,0)::text as expectation,
+array_agg(COALESCE(to_char(key.due_date,'YYYY-MM-DD')::text,to_char(current_timestamp,'YYYY-MM-DD')::text)::varchar order by key.id) as due_date_format
+from ntree_objective as obj left join ntree_keyresults as key on key.objective_id = obj.id left join employee_info as ein on key.assigned_id=ein.id  where (obj.is_active or key.is_active) and 
+obj.team_id=%s group by obj.id order by obj.id desc]]>
+        </query>
+        <query id="update_empty_team_query" query_name="update_empty_team_query" description="To Update team Details with null values">
+        	<![CDATA[UPDATE ntree_team SET position_left='',position_top='',height='',width='',order_id='',visual_type='' where team_id=%s]]>
+        </query>
+        <query id="remove_team_query" query_name="remove_team_query" description="To Update team Details with null values">
+        	<![CDATA[UPDATE ntree_team SET is_active=false where team_id=%s]]>
+        </query>
+        <query id="update_ntree_team_query" query_name="update_ntree_team_query" description="To insert team Details">
+        	<![CDATA[UPDATE ntree_team SET position_left=%s,position_top=%s,height=%s,width=%s,order_id=%s,visual_type=%s where team_id=%s]]>
+        </query>
+        
+         <query id="insert_ntree_team_query" query_name="insert_ntree_team_query" description="To insert team Details">
+        	<![CDATA[insert into ntree_team (position_left,position_top,height,width,order_id,visual_type,team_id,is_active) values(%s,%s,%s,%s,%s,%s,%s,true) returning id]]>
+        </query>
+        
+        <query id="ntree_team_existcheck_query" query_name="ntree_team_existcheck_query" description="To check team Details">
+        	<![CDATA[select id from ntree_team where team_id=%s and is_active=true]]>
+        </query>
+        
+        <query id="max_orderid_query" query_name="max_orderid_query" description="To fetch maximum order id from the ntree team ">
+        	<![CDATA[SELECT max(order_id) as order_id  FROM ntree_team]]>
+        </query>
+        
+        <query id="max_orderid_query" query_name="max_orderid_query" description="To fetch maximum order id from the ntree team ">
+        	<![CDATA[SELECT max(order_id) as order_id  FROM ntree_team]]>
+        </query>
+        
+        <query id="already_existteam_query" query_name="already_existteam_query" description="To Check the team already Exist or not">
+        	<![CDATA[SELECT exists(select 1 from ntree_team where name ilike %s)]]>
+        </query>
+        
+        <query id="insert_team_query" query_name="insert_team_query" description="To insert team name into team">
+        	<![CDATA[INSERT into ntree_team(name) values(%s) returning id]]>
+        </query>
+        
+        <query id="team_name_query" query_name="team_name_query" description="To fetch name from the Ntree team">
+        	<![CDATA[SELECT team_id from ntree_team where id=%s]]>
+        </query>
+        
+        
+        <query id="team_emp_image_query" query_name="team_emp_image_query" description="To view Employee image based on the team">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name from  employee_info  ei
+		left join attachment_info ai on ai.id = ei.image_id_id
+		 where ei.team_name_id=%s]]>
+        </query>
+        
+         <query id="individual_emp_image_query" query_name="individual_emp_image_query" description="To view Individual Employee image based on the user">
+        	<![CDATA[SELECT id,employee_image,employee_name from auth_user where team_name=%s and is_active='true']]>
+        </query>
+        
+         <query id="emp_details_query" query_name="emp_details_query" description="To view all details of the Employee">
+        	<![CDATA[SELECT ei.id,ai.name as employee_image
+,concat(ei.name, ' ', ei.last_name) as employee_name,tdi.name as team_name,ci.name as title,rd.name as designation,
+COALESCE(to_char(max(ntree_keyresults.modified_date),'MM/DD/YYYY'),to_char(now(),'MM/DD/YYYY')) as last_update from
+ organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_role rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id
+		left join team_details_info tdi on tdi.id=ei.team_name_id
+		left join ntree_keyresults on ntree_keyresults.assigned_id=ei.id
+WHERE ei.is_active='true' and ei.id=%s group by ei.id,ai.name,tdi.name,ci.name,rd.name]]>
+        </query>
+        
+        <query id="view_teamname_query" query_name="view_teamname_query" description="To fetch the name from ntree team">
+        	<![CDATA[SELECT team_name from auth_user where id=%s]]>
+        </query>
+        
+        <query id="team_details_query" query_name="team_details_query" description="To fetch team details">
+        	<![CDATA[SELECT nt.team_id as id,td.name,nt.position_top,nt.position_left, nt.height,nt.width,nt.visual_type,nt.order_id from ntree_team nt left join team_details_info td
+on nt.team_id=td.id where nt.order_id !='' and td.org_unit_id=%s and nt.is_active and td.is_active order by nt.order_id asc]]>
+        </query>
+        
+         <query id="view_teamname_query" query_name="view_teamname_query" description="To fetch the name from ntree team">
+        	<![CDATA[SELECT team_name from auth_user where id=%s]]>
+        </query>
+        
+        <!-- Chart Query Start -->
+        
+        <query id="individual_com_exp_query" query_name="individual_com_exp_query" description="To view the Individual Completion Expectation">
+        	<![CDATA[SELECT COALESCE(ROUND(SUM(progress  ::decimal) / COUNT(id) ::decimal,0),0)::text as completion,
+                 COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+                /((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(id),0) ,0)::text as expectation
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+        <query id="individual_combined_chart_query" query_name="individual_combined_chart_query" description="To view the Individual Completion,Expectation,Risk,Exceeded,OnTrack,OffTrack ">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+         <query id="individual_risk_query" query_name="individual_risk_query" description="To view the individual risk objectives">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COUNT(id) as total_risk
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+        <query id="individual_exceeded_query" query_name="individual_exceeded_query" description="To view the individual Exceeded">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COUNT(id) as exceeded_total
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+        <query id="individual_completed_query" query_name="individual_completed_query" description="To view the individual Completed">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COUNT(id) as completed_total
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+        <query id="individual_ontrack_query" query_name="individual_ontrack_query" description="To view the individual On Track">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track,
+                COUNT(id) as ontrack_total
+                FROM ntree_keyresults WHERE assigned_id=%s and is_active]]>
+        </query>
+        
+        
+         <query id="all_com_exp_query" query_name="all_com_exp_query" description="To view the All Completion Expectation">
+        	<![CDATA[SELECT COALESCE(ROUND(SUM(progress  ::decimal) / COUNT(id) ::decimal,0),0)::text as completion,
+                 COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+                /((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(id),0) ,0)::text as expectation
+                FROM ntree_keyresults where is_active]]>
+        </query>
+        
+        <query id="all_combined_chart_query" query_name="all_combined_chart_query" description="To view the all Completion,Expectation,Risk,Exceeded,OnTrack,OffTrack ">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track
+                FROM ntree_keyresults WHERE due_date is NOT NULL and is_active]]>
+        </query>
+        
+         <query id="all_risk_query" query_name="all_risk_query" description="To view the all risk objectives">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COUNT(id) as total_risk FROM ntree_keyresults where is_active]]>
+        </query>
+        
+        <query id="all_exceeded_query" query_name="all_exceeded_query" description="To view the all Exceeded">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COUNT(id) as exceeded_total
+                FROM ntree_keyresults where is_active ]]>
+        </query>
+        
+        <query id="all_ontrack_query" query_name="all_ontrack_query" description="To view the all On Track">
+        
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track,
+                COUNT(id) as ontrack_total
+                FROM ntree_keyresults where is_active]]>
+        </query>
+        
+     	<query id="all_completed_query" query_name="all_completed_query" description="To view the all Completed">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COUNT(id) as completed_total
+                FROM ntree_keyresults where is_active]]>
+        </query>
+        
+        
+        <query id="team_com_exp_query" query_name="team_com_exp_query" description="To view the team level Completion Expectation">
+        	<![CDATA[SELECT COALESCE(ROUND(SUM(progress  ::decimal) / COUNT(id) ::decimal,0),0)::text as completion,
+                  COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+                /((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(id),0) ,0)::text as expectation
+                FROM ntree_keyresults WHERE assigned_id in %s]]>
+        </query>
+        
+        <query id="team_combined_chart_query" query_name="team_combined_chart_query" description="To view the team level Completion,Expectation,Risk,Exceeded,OnTrack,OffTrack ">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track
+                FROM ntree_keyresults WHERE assigned_id in %s AND due_date is NOT NULL]]>
+        </query>
+        
+         <query id="team_risk_query" query_name="team_risk_query" description="To view the team level risk objectives">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COUNT(id) as total_risk
+                FROM ntree_keyresults WHERE assigned_id in %s]]>
+        </query>
+        
+        <query id="team_exceeded_query" query_name="team_exceeded_query" description="To view the team level Exceeded">
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COUNT(id) as exceeded_total
+                FROM ntree_keyresults WHERE assigned_id in %s]]>
+        </query>
+        
+        <query id="team_completed_query" query_name="team_completed_query" description="To view the team level Completed">
+        
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COUNT(id) as completed_total
+                FROM ntree_keyresults WHERE assigned_id in %s]]>
+        </query>
+        <query id="team_ontrack_query" query_name="team_ontrack_query" description="To view the team level On Track">
+        
+        	<![CDATA[SELECT COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track,
+                COUNT(id) as ontrack_total
+                FROM ntree_keyresults WHERE assigned_id in %s]]>
+        </query>
+        <!-- Chart Query End -->
+        
+        
+        <!--Team Wise User Query Start  -->
+        
+         <query id="teambased_user_query" query_name="teambased_user_query" description="Team Based Employee Name Details">
+        	<![CDATA[select id,concat(name, ' ',last_name) as employee_name from  employee_info  where team_name_id=%s and is_active order by name
+        	]]>
+        </query>
+        
+        <!--Team Wise User Query End  -->
+        
+		<query id="already_existobjective_query" query_name="already_existobjective_query" description="To Check the Objective already Exist or not">
+        	<![CDATA[SELECT exists(select 1 from ntree_objective where objective ilike %s and assigned_id=%s)]]>
+        </query> 
+        
+		<query id="already_existobjective_update_query" query_name="already_existobjective_update_query" description="To Check the Objective already Exist or not for update">
+        	<![CDATA[SELECT exists(select 1 from ntree_objective where objective ilike %s and assigned_id=%s and id != %s)]]>
+        </query>     
+        
+        <query id="already_existkeyresult_update_query" query_name="already_existkeyresult_update_query" description="To Check the key result already Exist or not for update">
+        	<![CDATA[SELECT exists(select 1 from ntree_keyresults where key_result ilike  %s and objective_id = %s and id != %s)]]>
+        </query>
+        
+        <query id="ntree_access_rights_role_dropdown" query_name="ntree_access_rights_role_dropdown" description="NTree Access Rights Role DropDown">
+        	<![CDATA[SELECT id,name as role_title from hcms_role where is_active = True]]>
+        </query>    
+        
+        <query id="ntree_access_rights_data_fetch" query_name="ntree_access_rights_data_fetch" description="NTree Access Rights Data Fetch">
+        	<![CDATA[select levels,role_id from okr_accessrights where is_active=TRUE]]>
+        </query> 
+        
+        <query id="ntree_access_rights_roleId_fetch_based_roles" query_name="ntree_access_rights_roleId_fetch_based_roles" description="NTree Access Rights Role Id Fetch based on roles">
+        	<![CDATA[select role_id from okr_accessrights where role_id in {0} and levels not like '%{1}%' and is_active=TRUE]]>
+        </query> 
+        
+        <query id="ntree_access_rights_roleId_fetch_based_role" query_name="ntree_access_rights_roleId_fetch_based_role" description="NTree Access Rights Role Id Fetch based on role">
+        	<![CDATA[select role_id from okr_accessrights where role_id = {0} and levels not like '%{1}%' and is_active=TRUE]]>
+        </query>
+        
+        <query id="role_data_fetch_based_ids" query_name="role_data_fetch_based_ids" description="NTree Access Rights Role Fetch Based Its Ids">
+        	<![CDATA[select id,role_title from hcms_ti_role_details where is_active = True and id in {0}]]>
+        </query>
+        
+        <query id="role_data_fetch_based_id" query_name="role_data_fetch_based_ids" description="NTree Access Rights Role Fetch Based Its Id">
+        	<![CDATA[select id,role_title from hcms_ti_role_details where is_active = True and id = {0}]]>
+        </query>
+        
+        <query id="delete_ntree_access_rights_based_roles_level" query_name="delete_ntree_access_rights_based_roles_level" description="Delete NTree Access Rights Based Roles and Level">
+        	<![CDATA[delete from okr_accessrights where role_id in {0} and levels not like '%{1}%' returning id]]>
+        </query>
+        
+        <query id="delete_ntree_access_rights_based_role_level" query_name="delete_ntree_access_rights_based_role_level" description="Delete NTree Access Rights Based Role and Level">
+        	<![CDATA[delete from okr_accessrights where role_id = {0} and levels not like '%{1}%' returning id]]>
+        </query>
+        
+        <query id="delete_ntree_access_rights_based_level" query_name="delete_ntree_access_rights_based_level" description="Delete NTree Access Rights Based Level">
+        	<![CDATA[delete from okr_accessrights where levels like '%{0}%' returning id]]>
+        </query>
+        
+        <query id="insert_ntree_access_rights" query_name="insert_ntree_access_rights" description="Insert NTree Access Rights">
+        	<![CDATA[INSERT into okr_accessrights(levels,role_id,is_active,created_by_id,created_date) values('{0}',{1},True,{2},now()) returning id]]>
+        </query>
+        
+                                  <!-- ntree dashboard -->
+         <query id="org_total_objective" query_name="org_total_objective" description="org_total_objective">
+        	<![CDATA[select count(ntree_objective) as id from team_details_info inner join ntree_objective on ntree_objective.team_id=team_details_info.id
+              where ntree_objective.is_active='True' and team_details_info.is_active='True' and org_id={0}]]>
+        </query>
+        
+        <query id="expected_completed" query_name="expected_completed" description="expected_completed">
+        	<![CDATA[SELECT COALESCE(ROUND(SUM(progress  ::decimal) / COUNT(id) ::decimal,0),0)::text as completion,
+                 COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=due_date::date) THEN 100 ELSE (((((due_date::date-start_date::date)+1)-(due_date::date-current_date::date)) ::decimal 
+                /((due_date::date-start_date::date)+1) ::decimal)*100.00) END) / COUNT(id),0) ,0)::text as expectation
+                FROM ntree_keyresults where objective_id in ( select ntree_objective.id from team_details_info
+inner join ntree_objective on ntree_objective.team_id=team_details_info.id
+where ntree_objective.is_active='True' and team_details_info.is_active='True' and  ntree_keyresults.is_active='True' and org_id={0} )]]>
+        </query>
+        
+        <query id="all_stage_objective" query_name="expected_completed" description="expected_completed">
+        	<![CDATA[
+  SELECT COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as risk,
+                COALESCE(SUM(CASE WHEN (current_date::date>=due_date::date) AND (current_date::date-due_date::date >= 1 AND current_date::date-due_date::date < 3) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as exceeded,
+                COALESCE(SUM(CASE WHEN (progress::int = 100) THEN 1 ELSE 0 END),0) as completed,
+                COALESCE(SUM(CASE WHEN (current_date::date<=due_date::date) AND (progress::int < 100) THEN 1 ELSE 0 END),0) as on_track
+                FROM ntree_keyresults WHERE due_date is NOT NULL and objective_id in (select ntree_objective.id from team_details_info
+inner join ntree_objective on ntree_objective.team_id=team_details_info.id
+where ntree_objective.is_active='True' and team_details_info.is_active='True' and  ntree_keyresults.is_active='True' and org_id={0}) and ntree_keyresults.is_active='True']]>
+        </query>
+        
+        <query id="completed_stages" query_name="completed_stages" description="completed_stages">
+        	<![CDATA[
+  SELECT COALESCE(SUM(CASE WHEN (completed_date::date>due_date::date)  AND (progress::int = 100) THEN 1 ELSE 0 END),0) as exceeded,
+       COALESCE(SUM(CASE WHEN (completed_date::date<=due_date::date) AND (progress::int = 100) THEN 1 ELSE 0 END),0) as on_track     
+       FROM ntree_keyresults WHERE due_date is NOT NULL and objective_id in (select ntree_objective.id from team_details_info
+inner join ntree_objective on ntree_objective.team_id=team_details_info.id
+where ntree_objective.is_active='True' and team_details_info.is_active='True' and  ntree_keyresults.is_active='True' and org_id={0} ) 
+and ntree_keyresults.is_active='True' ]]>
+        </query>
+ 
+       <query id="organization_objective" query_name="organization_objective" description="organization_objective">
+        	<![CDATA[
+select count( obj.id) as visits,orgunit_name as country,'#fcaa7d' AS color  from organization_unit_info 
+inner join team_details_info as team on team.org_unit_id=organization_unit_info.id
+inner join ntree_objective as obj on obj.team_id=team.id
+where organization_unit_info.organization_id={0} group by organization_unit_info.id,orgunit_name ]]>
+        </query>
+        
+    </queries>
+</data>

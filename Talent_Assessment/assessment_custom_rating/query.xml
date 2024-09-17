@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Rating">
+		<query id="custom_rating_name_existence_check" query_name="custom_rating_name_existence_check"
+			description="Custom Rating Name Existence Check">
+          <![CDATA[select id,custom_rating_scheme_name from hcms_ti_custom_rating_scheme where custom_rating_scheme_name ilike %s and is_active=TRUE]]>
+		</query>
+		<query id="custom_rating_update_name_existence_check" query_name="custom_rating_update_name_existence_check"
+			description="Custom Rating Name Existence Check while updating">
+          <![CDATA[select id,custom_rating_scheme_name from hcms_ti_custom_rating_scheme where custom_rating_scheme_name ilike %s and id!=%s and is_active=TRUE]]>
+		</query>
+		<query id="custom_rating_detail_fetch" query_name="custom_rating_detail_fetch"
+			description="Custom Rating detail fetch">
+          <![CDATA[select crs.id as custom_rating_id,custom_rating_scheme_name as scheme_name,au.username as created_by,date(created_date) as created_on from hcms_ti_custom_rating_scheme crs left join auth_user au on crs.created_by_id=au.id where crs.is_active=True]]>
+		</query>
+		<query id="custom_rating_detail_fetch_by_id" query_name="custom_rating_detail_fetch_by_id"
+			description="Custom Rating detail fetch by id">
+          <![CDATA[select id as custom_rating_rel_id,custom_rating_name,custom_rating_value from hcms_ti_custom_rating_scheme_relation where custom_rating_scheme_id=%s and is_active=True]]>
+		</query>
+		</queries>
+		</data>

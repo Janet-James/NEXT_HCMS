@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/org-structure/css/getorgchart_dev.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/dev/hcms_talent_inventory/css/talent_inventory.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TIRepStruct" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1>PLANNED ROLE REPORTING STRUCTURE VIEW</h1>
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-md-4 col-sm-2" style="margin-top: 10px; text-align:right;">
+								<i data-toggle="tooltip" data-placement="top" title=""
+									class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+							</div>
+							<div class="col-md-4 col-sm-4">
+								<div class="form-group">
+									<select id="ti_rs_sel_org" name="ti_rs_sel_org"
+										class="form-control select2 hide_error"
+										onchange="get_org_list($(this).val());">
+										<option></option>
+										{% for data in role_org %}
+										<option value="{{ data.id }}">{{ data.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-3">
+								<div class="form-group">
+									<select id="ti_rs_sel_org_unit" name="ti_rs_sel_org_unit"
+										class="form-control select2 hide_error" disabled="disabled"
+										onchange="get_struct_sel($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12">
+						<div id="ti_reporting_struct">
+							<h3 class="no-data">No data available</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %}
+<!-- Select2 --> 
+<script src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}" type="text/javascript"></script>
+<!-- Org structure --> 
+<script src="{%  static '/ui/plugins/org-structure/js/getorgchart_dev.js'  %}" type="text/javascript"></script> 
+<!-- Export table geo org chart -->
+<script src="{% static  '/ui/plugins/org-structure/js/jspdf.min.js'  %} "></script>
+<!-- Developer functions --> 
+<script src="{% static '/dev/hcms_talent_inventory/js/ti_org_chart_ready.js' %}" type="text/javascript"></script>
+{% endblock %}

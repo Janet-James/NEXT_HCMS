@@ -1,0 +1,346 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start-->
+{% block links %}
+<!-- Single and multi select Dropdown-->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/hcms.css' %}" rel="stylesheet"
+	type="text/css" />
+<!-- goalProgress -->
+<link
+	href="{% static '/dev/hrms_foundation/js/charts/progressbar/goalProgress.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- goalbarProgress -->
+<link
+	href="{% static '/dev/hrms_foundation/js/charts/performanceChart/habilidades.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- circle css -->
+<link
+	href="{% static '/dev/hrms_foundation/js/charts/css/jquery.circliful.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css link -->
+<link href="{% static '/dev/hrms_foundation/css/dashboard.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end-->
+<!-- body content start-->
+{% block content %} {% nav_tags breadcrum_title="HRDashboard" %}
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<div class="row">
+					<div class="col-md-2 col-sm-6 col-xs-7" style=''>
+						<div class="form-group">
+							<select id="organization_id" name="organization_id"
+								class="form-control select2" required data-error=".errorTxt0">
+								<option value="0">--Select Organization--</option> 
+								{% for i in organization_info %}
+									<option value={{i.id}}>{{i.name}}</option> 
+								{% endfor %}
+							</select> <span class="errorTxt0 errormessage"></span>
+						</div>
+					</div>
+					<!--Management Switcher-->
+					<ul class="managment-switcher">
+						<li><a href="#" onclick="dashboard_changes('Customer')"><i
+								class="nf nf-customer"></i></a></li>
+						<li><a class="active" href="#"
+							onclick="dashboard_changes('HR')"><i class="nf nf-lead"></i></a></li>
+						<li><a href="#" onclick="dashboard_changes('Customer')"><i
+								class="nf nf-manager"></i></a></li>
+					</ul>
+					<!--End Managment Switcher-->
+				</div>
+				<div class="bottomSpace">{% include "./powerbar.html" %}</div>
+				<div class="row row-eq-height">
+					<div class="col-md-3 ">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Employee
+										Turnaround</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="text-center">Present</div>
+											<div class="donut-charts" id='hrd_chart_present'></div>
+										</div>
+										<div class="col-md-6">
+											<div class="text-center">Leave</div>
+											<div class="donut-charts" id='hrd_chart_absent'></div>
+										</div>
+										<div class="col-md-6">
+											<div class="text-center">Ontime Arrival</div>
+											<div class="donut-charts" id='hrd_chart_ontime'></div>
+										</div>
+										<div class="col-md-6">
+											<div class="text-center">Late Comers</div>
+											<div class="donut-charts" id='hrd_chart_late'></div>
+										</div>
+										<div class="col-md-12">
+											<div class="text-left">
+												Employee Count : <b><span id='employee_counts'></span></b>
+											</div>
+											<div class="donut-charts" style='height: 20px;'
+												id='employeeCountChart'></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Employee
+										Performance <span class="reddot"><i
+											class="nf nf-circle" title='In progress'
+											style="color: #e28696;"></i></span>
+									</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="text-left">Reviews Status</div>
+											<div id='performance12' style="height: 130px; width: 100%;"></div>
+										</div>
+										<div class="col-md-12 habilidades">
+											<div class="text-left">Average Per of Existing Employee</div>
+											<div class="codeconSkillbar" id='performance3'></div>
+											<div class="text-left">Average Per of New Employee</div>
+											<div class="codeconSkillbar" id='performance4'></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Trainings
+										<span class="reddot"><i class="nf nf-circle"
+											title='In progress' style="color: #e28696;"></i></span>
+									</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="text-left">Training Status</div>
+											<div id='training12' style="height: 130px; width: 100%;"></div>
+										</div>
+										<div class="col-md-6">
+											<div class="text-center">Avg Trainer Rating</div>
+											<div class="text-center alignment-charts" id="training3"></div>
+										</div>
+										<div class="col-md-6">
+											<div class="text-center">Avg Trainee Rating</div>
+											<div class="text-center alignment-charts" id="training4"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">
+										Competencies <span class="reddot"><i
+											class="nf nf-circle" title='In progress'
+											style="color: #e28696;"></i></span>
+									</span>
+								</div>
+							</div>
+							<br>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-12">
+											<canvas id="chart-area" style="width: 100%; height: 100%"></canvas>
+										</div>
+										<div class="row"
+											style="padding-left: 15px; font-size: 12px; margin-top: 200px;">
+											<div class="col-sm-12 col-md-6">
+												<p>
+													<span><i class="nf nf-buttons"
+														style='color: #4cda64; background: #4cda64;'></i></span><span>
+														Required Roles</span>
+												</p>
+												<p>
+													<span><i class="nf nf-buttons"
+														style='color: #ff8982; background: #ff8982;'></i></span><span>
+														Available Roles</span>
+												</p>
+											</div>
+											<div class="col-sm-12 col-md-6">
+												<p>
+													<span><i class="nf nf-buttons"
+														style='color: #5856d6; background: #5856d6;'></i></span><span>
+														Competency Required</span>
+												</p>
+												<p>
+													<span><i class="nf nf-buttons"
+														style='color: #5ac8fb; background: #5ac8fb;'></i></span><span>
+														Competency Available</span>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row row-eq-height">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Strategic</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-3">
+											<div class="text-center">Avg Performance Rate</div>
+											<div class="text-center no_data alignment-charts"
+												id="performance_rate_id"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Satisfication Rate</div>
+											<div class="text-center no_data alignment-charts"
+												id="statisfication_rate_id"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Average Work Tenure</div>
+											<div class="text-center no_data alignment-charts"
+												id="work_tenure_id"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Attrition Rate</div>
+											<p class="text-center pie_attrition_clss alignment-charts"
+												style='margin-top: -18px !important; width: 140px; margin-left: 10px;'>
+												<span class="no_data pie_attrition_cls"
+													id='attrition_rate_id'>0</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase"> Business</span>
+								</div>
+							</div>
+							<div class="portlet-body form">
+								<div class="">
+									<div class="row">
+										<div class="col-md-3">
+											<div class="text-center">Revenue Per Employee</div>
+											<div class="text-center no_data sample_goal"
+												id="revenue_per_id"
+												style="margin:; margin-top: 48px; margin-left: 10px;"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Average Salary</div>
+											<div class="text-center no_data sample_goal"
+												id="avg_salary_id"
+												style="margin:; margin-top: 48px; margin-left: 10px;"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Training cost per employee</div>
+											<div class="text-center no_data sample_goal"
+												id="training_cost_id"
+												style="margin:; margin-top: 30px; margin-left: 10px;"></div>
+										</div>
+										<div class="col-md-3">
+											<div class="text-center">Profit per employee</div>
+											<div class="text-center no_data sample_goal"
+												id="profit_cost_id"
+												style="margin:; margin-top: 48px; margin-left: 10px;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+<!-- body content end-->
+
+<!-- custom script start-->
+{% block scripts %}
+<!--Charts-->
+<script src="{% static '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/pie.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<!-- progress -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/progressbar1/progressbar.js'  %}"></script>
+<!-- circleful -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/js/jquery.circliful.js'  %}"
+	type="text/javascript"></script>
+<!-- goalProgress -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/progressbar/goalProgress.js'  %}"
+	type="text/javascript"></script>
+<!-- progresspiesvg -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/progress/jquery-progresspiesvg-min.js'  %}"
+	type="text/javascript"></script>
+<!-- goalbarProgress -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/performanceChart/jquery.skills.js'  %}"
+	type="text/javascript"></script>
+<!-- Chart Js -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/chartjs/Chart.bundle.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/charts/chartjs/utils.js'  %}"
+	type="text/javascript"></script>
+<!-- Select2 Js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- Custom dashboard Js -->
+<script src="{% static '/dev/hrms_foundation/js/hrms_dashboard.js' %}"></script>
+<script
+	src="{% static '/dev/hrms_foundation/js/hrms_hr_dashboard.js' %}"></script>
+{% endblock %}
+<!-- custom script end-->

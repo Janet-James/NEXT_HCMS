@@ -1,0 +1,1016 @@
+ {% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{% block links %}
+<!-- CSS -->
+<link
+	href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}"  rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/default/demo.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}" rel="stylesheet" type="text/css" />
+<!-- <link  href="{% static '/dev/incident_management/css/incident_management.css' %}" rel="stylesheet" type="text/css" />
+ --><!-- Data  tables -->
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}" rel="stylesheet" type="text/css" />
+<!--  kamban view  -->
+<link href="{% static '/dev/incident_management/css/Nextkanban.css' %}"  rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/talent_assessment/css/talent_assessment.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<!-- END HEADER & CONTENT DIVIDER -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="row">
+				<div class="col-md-12 ">
+					<!-- BEGIN SAMPLE FORM PORTLET-->
+					<div class="portlet light bordered">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="icon-settings"></i> <span
+									class="caption-subject bold uppercase">Details Recording</span>
+							</div>
+						</div>
+						<div class="portlet-title" id="incident_mgmt_btn_div"></div>
+						<div class="portlet-body form">
+            <div id="myKanban"></div>
+          </div>
+						<div class="portlet-body form" id="details_recording_div">
+							<form role="form" id="incident_details_recording">
+								{% csrf_token %}
+								<div class="form-body">
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label class="control-label">Subject<span
+												class="required">*</span></label> <input type="text"
+												id="details_subject" name="details_subject"
+												class="form-control" placeholder="Subject"
+												data-error=".errorTxt0"> <span
+												class="errorTxt0 errormessage" id="error_message"></span>
+										</div>
+										<div class="form-group col-md-6">
+											<label class="control-label">Incident Date<span
+												class="required">*</span></label> <input
+												class="form-control form-control-inline" id="incident_date"
+												placeholder="DD-MM-YYYY" name="incident_date" type="text"
+												data-field="date" data-error=".errorTxt1" readonly><span
+												class="errorTxt1 errormessage" id="error_message"></span>
+											<div id="dtBox_new"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label class="control-label black_font"> Description
+												<span class="required">*</span>
+											</label>
+											<div class="clearfix"></div>
+											<textarea class="form-control" rows="4"
+												data-placeholder="Description" id="details_description"
+												name="details_description" data-error=".errorTxt2"></textarea>
+											<span class="errorTxt2 errormessage" id="error_message"></span>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="single" class="control-label black_font">Incident
+												Type <span class="required">*</span>
+											</label>
+											<div class="clearfix"></div>
+											<select id="incident_type" class="form-control select2"
+												name="incident_type" data-error=".errorTxt3"
+												data-placeholder="Select">
+												<option value="0">--Select--</option>{% for i in incident_type %}
+												<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+											</select> <span class="errorTxt3 errormessage" id="error_message"></span>
+
+											<label for="single" class="control-label black_font">Incident
+												Severity Type <span class="required">*</span>
+											</label>
+											<div class="clearfix"></div>
+											<select id="incident_severity_type"
+												class="form-control select2" name="incident_severity_type"
+												data-error=".errorTxt4" data-placeholder="Select">
+												<option value="0">--Select--</option>{% for i in incident_sev %}
+												<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+											</select> <span class="errorTxt4 errormessage" id="error_message"></span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label class="control-label">Location<span
+												class="required">*</span></label> <input type="text"
+												id="details_location" name="details_location"
+												class="form-control" placeholder="Location"
+												data-error=".errorTxt5"> <span
+												class="errorTxt5 errormessage" id="error_message"></span>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="single" class="control-label black_font">Category
+												<span class="required">*</span>
+											</label>
+											<div class="clearfix"></div>
+											<select id="category" class="form-control select2"
+												name="category" data-error=".errorTxt6"
+												data-placeholder="Select">
+												<option value="0">--Select--</option>{% for i in incident_cat %}
+												<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+											</select> <span class="errorTxt6 errormessage" id="error_message"></span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label class="control-label">Trigger Info </label> <input
+												type="text" id="trigger_info" name="trigger_info"
+												class="form-control" placeholder="Trigger Info">
+										</div>
+										<div class="form-group col-md-4">
+											<label for="single" class="control-label black_font">Reported By <span class="required">*</span>
+											</label>
+											<div class="input-icon select_height"> 
+											<select id="reported_by" class="form-control select2"
+												name="reported_by" data-error=".errorTxt7"
+												data-placeholder="Select">
+											</select> <span class="errorTxt7 errormessage" id="error_message"></span>							
+											<a role="button" id="employee_select_id" class="btn btn-icon-only blue btn-animate"
+												data-toggle="modal"
+												onclick='incident_employee_search("NTE-TS","NTE-SIN","reported_by")'><i
+												class="nf nf-search"></i></a></div>
+										</div>
+										<div class="form-group col-md-2">
+											<label for="single" class="control-label black_font">Mode
+											</label> <select id="mode" class="form-control select2" name="mode"
+												data-placeholder="Select">
+												<option value="0">--Select--</option>{% for i in mode %}
+												<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-settings"></i> <span
+												class="caption-subject bold uppercase">Involved
+												Parties</span>
+										</div>
+									</div>
+									<div class="row">
+									<div class="form-group col-md-6">
+									<div class="row">
+										<div class="form-group col-md-12">
+										
+											<label class="control-label">Victim<span class="required">*</span></label>
+											<div class="input-icon select_height"> <i
+												class="fa"></i><select id="victrim_id" name="victrim_id"
+												class="form-control select2-multiple" multiple
+												data-error=".errorTxt8" data-placeholder="Select">
+												
+											</select> <span class="errorTxt8 errormessage" id="error"> </span>
+										
+											<a href="#orgModal" role="button" id="selected_victrim_id"
+												class="btn btn-icon-only blue btn-animate" data-toggle="modal"
+												onclick='incident_employee_search("NTE-TM","NTE-MUL","victim")'><i
+												class="nf nf-search"></i></a>
+												</div>
+										</div>
+										</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label class="control-label">Witness</label> <div class="input-icon select_height"><i class="fa"></i><select
+												id="witness_id" name="witness_id"
+												class="form-control select2-multiple" multiple
+												data-placeholder="Select">
+												<option value="0">--Select--</option>
+											</select>
+											<a href="#orgModal" role="button" id="selected_victrim_id"
+												class="btn btn-icon-only blue btn-animate" data-toggle="modal"
+												onclick='incident_employee_search("NTE-TM","NTE-MUL","witness")'><i
+												class="nf nf-search"></i></a>
+												</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label class="control-label">Prepetrator<span class="required">*</span></label> <div class="input-icon select_height"><i
+												class="fa"></i><select id="prepetrator_id"
+												name="prepetrator_id" class="form-control select2-multiple employee"
+												multiple data-placeholder="Select" data-error=".errorTxt9">
+												<option value="0">--Select--</option>
+											</select> <span class="errorTxt9 errormessage" id="error"> </span>
+
+											<a href="#orgModal" role="button" id="selected_victrim_id"
+												class="btn btn-icon-only blue btn-animate" data-toggle="modal"
+												onclick='incident_employee_search("NTE-TM","NTE-MUL","prepetrator")'><i
+												class="nf nf-search"></i></a></div>
+										</div>
+									</div>
+									</div>
+									<div class="form-group col-md-6">
+											<input class="" name="files" id="files"
+												onchange="uploadFileContent(this);" type="file"
+												aria-label="files" />
+											<ul id='file_upload_content'
+												style="padding: 10px; height: 55px; overflow: auto;"></ul>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label class="control-label black_font">Risk Details
+											</label>
+											<div class="clearfix"></div>
+											<textarea class="form-control" rows="4" id="risk_details"
+												data-placeholder="Risk"></textarea>
+										</div>
+										<div class="form-group col-md-6">
+											<label for="single" class="control-label black_font">Status
+											</label>
+											<div class="clearfix"></div>
+											<select id="status" class="form-control select2"
+												name="status" data-placeholder="Select">
+												<option value="Open">Open</option>
+												<option value="Close">Close</option>
+											</select>
+										</div>
+										<div class="col-md-12">
+										<div class="text-right"
+											id="details_recording_button_div"></div>
+									</div>
+									</div>
+									
+								</div>
+							</form>
+						</div>
+						 <!--   -->
+						<div class="portlet-body" id="accordion_view">
+							<div class="row">
+								<div class="col-md-3 col-sm-3 col-xs-3">
+									<ul class="nav nav-tabs tabs-left" id='option'>
+										<li class="active"><a href="#details_rec"
+											data-toggle="tab">Details Recording </a></li>
+										<li id="Investigation"><a href="#investigation" data-toggle="tab">Investigation</a></li>
+										<li><a href="#injuries" onclick="injuriesClick()"
+											data-toggle="tab">Injuries</a></li>
+										<li><a href="#impact_analysis" onclick="impactAnalysisClick()" data-toggle="tab">
+												Impact Analysis</a></li>
+										<li id="Solution Proposal"><a href="#solution_proposal" data-toggle="tab">Solution Proposal</a></li>
+										<li id="Corrective Action"><a href="#corrective_action" data-toggle="tab">Corrective Action</a></li>
+									</ul>
+								</div>
+								<div class="col-md-9 col-sm-9 col-xs-9">
+									<div class="tab-content">
+										<div class="tab-pane active" id="details_rec">
+											<div class="portlet-body form" id="details_recording_div">
+												<form role="form" id="update_incident_details_recording">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label">Subject<span
+																	class="required">*</span></label> <input type="text"
+																	id="update_details_subject"
+																	name="update_details_subject" class="form-control"
+																	placeholder="Subject" data-error=".errorTxt0">
+																<span class="errorTxt0 errormessage" id="error_message"></span>
+															</div>
+															<div class="form-group col-md-6">
+																<label class="control-label">Incident Date<span
+																	class="required">*</span></label> <input
+																	class="form-control form-control-inline"
+																	id="update_incident_date" placeholder="DD-MM-YYYY"
+																	name="update_incident_date" type="text"
+																	data-field="date" data-error=".errorTxt1" readonly><span
+																	class="errorTxt1 errormessage" id="error_message"></span>
+																<div id="dtBox_new1"></div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label black_font">
+																	Description <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="update_details_description"
+																	name="update_details_description"
+																	data-error=".errorTxt2"></textarea>
+																<span class="errorTxt2 errormessage" id="error_message"></span>
+															</div>
+															<div class="form-group col-md-6">
+																<label for="single" class="control-label black_font">Incident
+																	Type <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<select id="update_incident_type"
+																	class="form-control select2"
+																	name="update_incident_type" data-error=".errorTxt3"
+																	data-placeholder="Select">
+																	<option value="0">--Select--</option>{% for i in incident_type %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+																</select> <span class="errorTxt3 errormessage" id="error_message"></span>
+																<label for="single" class="control-label black_font">Incident
+																	Severity Type <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<select id="update_incident_severity_type"
+																	class="form-control select2"
+																	name="update_incident_severity_type"
+																	data-error=".errorTxt4" data-placeholder="Select">
+																	<option value="0">--Select--</option>{% for i in incident_sev %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+																</select> <span class="errorTxt4 errormessage" id="error_message"></span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label">Location<span
+																	class="required">*</span></label> <input type="text"
+																	id="update_details_location"
+																	name="update_details_location" class="form-control"
+																	placeholder="Location" data-error=".errorTxt5">
+																<span class="errorTxt5 errormessage" id="error_message"></span>
+															</div>
+															<div class="form-group col-md-6">
+																<label for="single" class="control-label black_font">Category
+																	<span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<select id="update_category"
+																	class="form-control select2" name="update_category"
+																	data-error=".errorTxt6" data-placeholder="Select">
+																	<option value="0">--Select--</option>{% for i in incident_cat %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+																</select> <span class="errorTxt6 errormessage" id="error_message"></span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label">Trigger Info </label> <input
+																	type="text" id="update_trigger_info"
+																	name="update_trigger_info" class="form-control"
+																	placeholder="Trigger Info">
+															</div>
+															<div class="form-group col-md-3">
+																<label for="single" class="control-label black_font">Reported
+																	By <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<select id="update_reported_by"
+																	class="form-control select2" name="update_reported_by"
+																	data-error=".errorTxt7" data-placeholder="Select">
+																</select> <span class="errorTxt7 errormessage" id="error_message"></span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a role="button" id="update_employee_select_id"
+																	class="btn blue" data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TS","NTE-SIN","update_reported_by")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+															<div class="form-group col-md-2">
+																<label for="single" class="control-label black_font">Mode
+																</label> <select id="update_mode" class="form-control select2"
+																	name="update_mode" data-placeholder="Select">
+																	<option value="0">--Select--</option>{% for i in mode %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+																</select>
+															</div>
+														</div>
+														<div class="portlet-title">
+															<div class="caption">
+																<i class="icon-settings"></i> <span
+																	class="caption-subject bold uppercase">Involved
+																	Parties</span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-5">
+																<label>Victim</label><span class="required">*</span> <i
+																	class="fa"></i><select id="update_victrim_id"
+																	name="update_victrim_id"
+																	class="form-control select2-multiple" multiple
+																	data-error=".errorTxt8" data-placeholder="Select">
+																	<option value="0">--Select--</option>
+																</select> <span class="errorTxt8 errormessage" id="error">
+																</span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a href="#orgModal" role="button"
+																	id="update_selected_victrim_id" class="btn blue"
+																	data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TM","NTE-MUL","update_victim")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+															<div class="form-group col-md-6">
+																<label>Attachments</label> <input class="" name="files"
+																	id="update_files"
+																	onchange="update_uploadFileContent(this);" type="file"
+																	aria-label="files" />
+																<ul id='update_file_upload_content'
+																	style="padding: 10px; height: 55px; overflow: auto;"></ul>
+																<div>
+																	<ul id="file_list"></ul>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-5">
+																<label>Witness</label> <i class="fa"></i><select
+																	id="update_witness_id" name="update_witness_id"
+																	class="form-control select2-multiple" multiple
+																	data-placeholder="Select">
+																	<option value="0">--Select--</option>
+																</select>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a href="#orgModal" role="button"
+																	id="update_selected_victrim_id" class="btn blue"
+																	data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TM","NTE-MUL","update_witness")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-5">
+																<label>Perpetrator</label><span class="required">*</span>
+																<i class="fa"></i><select id="update_prepetrator_id"
+																	name="update_prepetrator_id"
+																	class="form-control select2-multiple" multiple
+																	data-placeholder="Select" data-error=".errorTxt9">
+																	<option value="0">--Select--</option>
+																</select> <span class="errorTxt9 errormessage" id="error">
+																</span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a href="#orgModal" role="button"
+																	id="update_selected_victrim_id" class="btn blue"
+																	data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TM","NTE-MUL","update_prepetrator")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label black_font">Risk
+																	Details </label>
+																<div class="clearfix"></div>
+																<textarea class="form-control" rows="4"
+																	id="update_risk_details" data-placeholder="Risk"></textarea>
+															</div>
+															<div class="form-group col-md-6">
+																<label for="single" class="control-label black_font">Status
+																</label>
+																<div class="clearfix"></div>
+																<select id="update_status" class="form-control select2"
+																	name="update_status" data-placeholder="Select">
+																	<option value="Open">Open</option>
+																	<option value="Close">Close</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-actions right"
+																id="update_details_recording_button_div"></div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="investigation">
+											<div class="portlet-body form" id="investigation_div">
+												<form role="form" id="investigation_details_form">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-5">
+																<label>Team</label><span class="required">*</span> <i
+																	class="fa"></i><select id="team_id"
+																	name="team"
+																	class="form-control select2-multiple" multiple
+																	data-error=".errorTxt0" data-placeholder="Select">
+																	<option value="0">--Select--</option>
+																</select> <span class="errorTxt0 errormessage" id="error">
+																</span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a href="#orgModal" role="button"
+																	id="update_selected_victrim_id" class="btn blue"
+																	data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TM","NTE-MUL","team")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-12">
+																<label class="control-label black_font">Investigation
+																	Details <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<div class="portlet light bordered">
+																	<div class="editable-table-sec">
+																		<div class="table-toolbar">
+																			<div class="row">
+																				<div class="col-md-6">
+																					<div class="btn-group">
+																						<button id="investigation_plus" class="btn btn-success btn-eql-wid btn-animate">Add</button>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<table
+																			class="table table-striped table-hover table-bordered"
+																			id="investigation_details_table">
+																			<thead>
+																				<tr>
+																					<th class="center">Question</th>
+																					<th class="center">Answer</th>
+																					<th class="center"></th>
+																				</tr>
+																			</thead>
+																			<tbody id="investigation_details_table_tbody">
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Attachments</label> <input class="" name="files"
+																	id="invsetigation_files"
+																	onchange="investigation_uploadFileContent(this);"
+																	type="file" aria-label="files" />
+																<ul id='investigation_file_upload_content'
+																	style="padding: 10px; height: 55px; overflow: auto;"></ul>
+																<div>
+																	<ul id="investigation_file_list"></ul>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-actions right"
+																id="investigation_button_div"></div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="solution_proposal">
+											<div class="portlet-body form" id="solution_proposal_div">
+												<form role="form" id="solution_proposal_form">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label">Corrective Measure <span
+												class="required">*</span></label> 
+												<textarea class="form-control" rows="3" id="corrective_measure" name="corrective_measure" data-error=".errorTxt0"></textarea>
+																	<span class="errorTxt0 errormessage" id="error"></span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label class="control-label">Preventive Measure <span
+												class="required">*</span></label> 
+												<textarea class="form-control" rows="3" id="preventive_masure" name="preventive_masure" data-error=".errorTxt1"></textarea>
+																	<span class="errorTxt1 errormessage" id="error"></span>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-actions right"
+																id="solution_proposal_btn_div"></div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="impact_analysis">
+											<div class="portlet-body form" id="impact_analysis_div">
+												<form role="form" id="impact_analysis_form">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-3">
+																<span></span>
+															</div>
+															<div class="form-group col-md-3">
+																<span>Financial Value</span>
+															</div>
+															<div class="form-group col-md-3">
+																<span>Currency</span>
+															</div>
+															<div class="form-group col-md-3">
+																<span>Impact Details</span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-3">
+																<span>Environmental</span>
+															</div>
+															<div class="form-group col-md-3">
+																<input type="text"
+																	id="environmental_finance" name="environmental_finance"
+																	class="form-control filterme" placeholder="Finance" data-error=".errorTxt1">
+																	<span class="errorTxt1 errormessage"></span>
+															</div>
+															<div class="form-group col-md-3">
+																<select id="environmental_currency"
+																	class="form-control select2" name="environmental_currency"
+																	data-placeholder="Currency">
+																	<option value="0">--Select--</option> {% for i in currency %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select> 
+															</div>
+															<div class="form-group col-md-3">
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="environmental_impact_details"
+																	name="environmental_impact_details"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-3">
+																<span>HR</span>
+															</div>
+															<div class="form-group col-md-3">
+																<input type="text"
+																	id="hr_finance" name="hr_finance"
+																	class="form-control filterme" placeholder="Finance" data-error=".errorTxt2">
+																	<span class="errorTxt2 errormessage"></span>
+															</div>
+															<div class="form-group col-md-3">
+																<select id="hr_currency"
+																	class="form-control select2" name="hr_currency"
+																	data-placeholder="Currency">
+																	<option value="0">--Select--</option> {% for i in currency %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select> 
+															</div>
+															<div class="form-group col-md-3">
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="hr_impact_details"
+																	name="hr_impact_details"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-3">
+																<span>Materials</span>
+															</div>
+															<div class="form-group col-md-3">
+																<input type="text"
+																	id="materials_finance" name="materials_finance"
+																	class="form-control filterme" placeholder="Finance" data-error=".errorTxt3">
+																	<span class="errorTxt3 errormessage"></span>
+															</div>
+															<div class="form-group col-md-3">
+																<select id="materials_currency"
+																	class="form-control select2" name="materials_currency"
+																	data-placeholder="Currency">
+																	<option value="0">--Select--</option> {% for i in currency %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select> 
+															</div>
+															<div class="form-group col-md-3">
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="materials_impact_details"
+																	name="materials_impact_details"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-3">
+																<span>Machinery</span>
+															</div>
+															<div class="form-group col-md-3">
+																<input type="text"
+																	id="machinery_finance" name="machinery_finance"
+																	class="form-control filterme" placeholder="Finance" data-error=".errorTxt4">
+																	<span class="errorTxt4 errormessage"></span>
+															</div>
+															<div class="form-group col-md-3">
+																<select id="machinery_currency"
+																	class="form-control select2" name="machinery_currency"
+																	data-placeholder="Currency">
+																	<option value="0">--Select--</option> {% for i in currency %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select> 
+															</div>
+															<div class="form-group col-md-3">
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="machinery_impact_details"
+																	name="machinery_impact_details"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Analysis Date</label>
+																<input class="form-control form-control-inline" id="analysis_date"
+																placeholder="DD-MM-YYYY" name="analysis_date" type="text"
+																data-field="date">
+																<div id="dtBox_impact"></div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Other Risks</label>
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="other_risks"
+																	name="other_risks"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Business Impact</label>
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="business_impact"
+																	name="business_impact"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Business Activities Affected</label>
+																<textarea class="form-control" rows="4"
+																	data-placeholder="Description"
+																	id="business_activities_affected"
+																	name="business_activities_affected"></textarea>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Minimum Recovery Time</label>
+																<input type="text"
+																	id="minimum_recoverty_time" name="minimum_recoverty_time"
+																	class="form-control filterinteger" placeholder="Recovery Time" data-error=".errorTxt5">
+																	<span class="errorTxt5 errormessage"></span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-12">
+																<div class="form-actions right">
+																	<button type="button"
+																		class="btn btn-success animate_btn margin-right-3"
+																		id="impact_analysis_add">Add</button>
+																	<button type="button"
+																		class="btn btn-primary btn-eql-wid btn-animate margin-right-3"
+																		id="impact_analysis_update">Update</button>
+																	<button type="button"
+																		class="btn btn-danger animate_btn margin-right-3"
+																		id="impact_analysis_delete">Remove</button>
+																	<button type="button"
+																		class="btn btn-warning animate_btn margin-right-3"
+																		id="impact_analysis_clear">Cancel / Clear</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="injuries">
+											<div class="portlet-body form" id="details_injuries_div">
+												<form role="form" id="injuries_details_recording">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label for="injury_type"
+																	class="control-label black_font">Injury Type 
+																</label>
+																<div class="clearfix"></div>
+																<select id="injury_type" class="form-control select2"
+																	name="injury_type" data-placeholder="Select">
+																	<option value="0">--Select--</option> {% for i in injury_type %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label for="illness_id" class="control-label black_font">Illness
+																</label>
+																<div class="clearfix"></div>
+																<select id="illness_id" class="form-control select2"
+																	name="illness_id"
+																	data-placeholder="Select"><option value="0">--Select--</option>
+																	{% for i in illness_type %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label for="body_type" class="control-label black_font">Part
+																	of the Body
+																</label>
+																<div class="clearfix"></div>
+																<select id="body_type" class="form-control select2"
+																	name="body_type"
+																	data-placeholder="Select">
+																	<option value="0">--Select--</option> {% for i in part_of_body_type %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select>
+															</div>
+															<div class="form-group col-md-6">
+																<label for="single" class="control-label black_font">
+																	Laterality
+																</label>
+																<div class="clearfix"></div>
+																<select id="laterality_type"
+																	class="form-control select2" name="laterality_type"
+																	data-placeholder="Select">
+																	<option value="0">--Select--</option> {% for i in laterality_type %}
+																	<option value="{{i.id}}">{{i.refitems_name}}</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Treatment Given</label>
+																<div class="mt-checkbox-list">
+																	<label class="mt-checkbox mt-checkbox-outline">
+																		First Aid <input type="checkbox" value="firstAid"
+																		name="treatment"> <span></span>
+																	</label> <label class="mt-checkbox mt-checkbox-outline">
+																		Hospital Treatment <input type="checkbox"
+																		value="hospitalTreatment" name="treatment"> <span></span>
+																	</label> <label class="mt-checkbox mt-checkbox-outline">
+																		None Required <input type="checkbox"
+																		value="noneRequired" name="treatment"> <span></span>
+																	</label> <label class="mt-checkbox mt-checkbox-outline">
+																		Minor Injuries <input type="checkbox"
+																		value="minorInjuries" name="treatment"> <span></span>
+																	</label>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-6">
+																<label>Notes</label>
+																<textarea id="notes_id" class="form-control" rows="3"></textarea>
+															</div>
+														</div>
+														<div class="col-md-12">
+															<div class="form-actions right">
+																<button type="button"
+																	class="btn btn-success animate_btn margin-right-3"
+																	id="injury_details_add">Add</button>
+																<button type="button"
+																	class="btn btn-primary btn-eql-wid btn-animate margin-right-3"
+																	id="injury_details_update">Update</button>
+																<button type="button"
+																	class="btn btn-danger animate_btn margin-right-3"
+																	id="injury_details_delete">Remove</button>
+																<button type="button"
+																	class="btn btn-warning animate_btn margin-right-3"
+																	id="injury_details_clear">Cancel / Clear</button>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="corrective_action">
+											<div class="portlet-body form" id="corrective_action_div">
+												<form role="form" id="corrective_action_form">
+													{% csrf_token %}
+													<div class="form-body">
+														<div class="row">
+															<div class="form-group col-md-5">
+																<label>Action Item Summary</label><span class="required">*</span>
+																<textarea class="form-control" rows="3" id="action_item" name="action_item_summary"
+																	data-placeholder="" data-error=".errorTxt0"></textarea>
+																<span class="errorTxt0 errormessage" id="error_message">
+																</span>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-4">
+																<label for="single" class="control-label black_font">Owner
+																	<span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<select id="owner_id" class="form-control select2"
+																	name="owner" data-error=".errorTxt1"
+																	data-placeholder="Select">
+																</select> <span class="errorTxt1 errormessage" id="error_message"></span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a role="button" id="owner_select_id" class="btn blue"
+																	data-toggle="modal"
+																	onclick='incident_employee_search("NTE-TS","NTE-SIN","owner")'><i
+																	class="nf nf-search"></i></a>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-4">
+																<label for="single" class="control-label black_font">Status
+																</label>
+																<div class="clearfix"></div>
+																<select id="action_item_status"
+																	class="form-control select2" name="action_status"
+																	data-placeholder="Select" data-error=".errorTxt2">
+																	<option value="Open">Open</option>
+																	<option value="Complete">Complete</option>
+																</select> <span class="errorTxt2 errormessage" id="error_message">
+																</span>
+															</div>
+															<div class="col-md-1 margin-top-20">
+																<a role="button" id="add_action"
+																	class="btn btn-success animate_btn" data-toggle="modal"
+																	onclick='add_data()'>ADD</a>
+															</div>
+														</div>
+														<div class="row">
+															<div class="form-group col-md-12">
+																<label class="control-label black_font">Action
+																	Details <span class="required">*</span>
+																</label>
+																<div class="clearfix"></div>
+																<div class="portlet light bordered">
+																	<div class="editable-table-sec">
+																		<div class="table-toolbar"></div>
+																		<table
+																			class="table table-striped table-hover table-bordered"
+																			id="corrective_action_table">
+																			<thead>
+																				<tr>
+																					<th class="center">Action Item</th>
+																					<th class="center">Owner</th>
+																					<th class="center">Action Item Status</th>
+																					<th class="center"></th>
+																				</tr>
+																			</thead>
+																			<tbody id="corrective_action_table_tbody">
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-12">
+															<div class="text-right"
+																id="corrective_action_button_div"></div>
+														</div>
+														</div>
+														
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %} {% include "employee_search_select.html" %}
+<script src="{% static 'ui/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/components-select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}" type="text/javascript"></script>
+<script src="{% static '/dev/incident_management/js/Nextkanban.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/dev/incident_management/js/Nextkanban-function.js' %}" type="text/javascript"></script>
+<script>
+	$("#dtBox_new").DateTimePicker({
+		dateFormat : "DD-MM-yyyy"
+	});
+	
+	$("#dtBox_new1").DateTimePicker({
+		dateFormat : "DD-MM-yyyy"
+	});
+	
+</script>
+<!-- Common DEV JS -->
+<script src="{% static 'dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+ <script src="{% static '/dev/hrms_foundation/js/employee_management/organization_unit.js' %}" type="text/javascript"></script> 
+<script src="{% static '/dev/hrms_foundation/js/attendance_management/multiselect.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/incident_mgmt_validation.js' %}"  type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/incident_mgmt_select.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/common.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/details_recodring.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/injury_details.js' %}" type="text/javascript"></script>
+<script  src="{% static 'dev/incident_management/js/impact_analysis_validation.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/incident_management/js/impact_analysis.js' %}" type="text/javascript"></script>
+{% endblock %}

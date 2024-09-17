@@ -1,0 +1,107 @@
+<!-- 									<h3 class="block">Skills</h3>
+ -->									
+ 								<div class="clearfix"></div>
+ 								<form role="form" id="employee_skills_details_form">
+									<div class="form-body">
+										{%csrf_token%}										
+										
+										<div class="col-md-12 ">										
+												<div class="col-md-6">
+														<div class="form-group">
+															<label>Skill Name <span class="asterisk">*</span>
+															</label>
+															<div class="input-icon">
+																<i class="nf nf-skills"></i> <input class="form-control"
+																	placeholder="Skill Name" id="employee_skill_name"
+																	name="employee_skill_name" type="text" required
+																	data-error=".errorTxt9" maxlength="100"> <span
+																	class="errorTxt9 errormessage"></span>
+															</div>
+														</div>
+												</div>
+												<div class="col-md-6">
+														<div class="form-group">
+															<label for="single" class="control-label black_font">
+															Skill Type </label> <select id="employee_skill_type" name="employee_skill_type"
+															class="form-control select2" data-error=".errorTxt48">
+															<option value="0">--Select Skill Type--</option> 	
+															{% for i in skill_type_info %}
+																	<option value={{i.id}}>{{i.refitems_name}}</option>
+															{% endfor %}																																												
+															</select>
+															<span class="errorTxt48 errormessage"></span>	 												
+														</div>
+												</div>
+											</div>
+																				
+										
+										<div class="col-md-12 ">										
+											<div class="col-md-6 ">											
+												<div class="form-group">
+													<label>Experience (Months)</label>
+													<div class="input-icon">
+													 <i class="nf nf-experience"></i>
+													  <input class="form-control"
+															placeholder="Experience (Months)" id="employee_experience" name="employee_experience"
+															type="text" data-error=".errorTxt10" maxlength="3"> <span
+															class="errorTxt10 errormessage"></span>	  
+													</div>		
+												</div>
+											</div>	
+											
+											<div class="col-md-6 ">											
+												<div class="form-group">
+													<label>Rating <span class="asterisk">*</span> </label>
+													<div class="input-icon">
+													  <i class="nf nf-ratings"></i>
+													  <input class="form-control"
+															placeholder="Rating (out of 10)" id="employee_skill_rating" name="employee_skill_rating"
+															type="text" required data-error=".errorTxt11" maxlength="1"> <span
+															class="errorTxt11 errormessage"></span>
+													</div>	
+												</div>
+											</div>											
+										</div>
+										
+										
+										<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding">
+												<a href="javascript:;" title='Add' id="skills_create_button" class="btn btn-success btn-animate skill_add"> 
+												Add </a>	
+												<a href="javascript:;" title='Update' id="skills_edit_button" class="btn-primary btn-animate btn skill_update"> 
+												Update </a>	
+												<a href="javascript:;" title='Remove' id="skills_delete_button" class="btn-animate  btn btn-danger skill_update"> 
+												Remove </a>	
+												<a href="javascript:;" title='Cancel / Clear' id="skills_cancel_button" class="btn-warning btn-animate btn skill_clear"> 
+												Cancel / Clear </a>																																								
+											</div>
+										</div>
+											<div class="col-md-12" id="skills_table" style="display: none;padding:0 30px;">
+												<div class="form-group">
+												<h3>Employee Skills Details</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="candidate_skill_details">
+													</table>
+												</div>
+											</div>
+											
+										<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding">
+											<!-- 	<button type="button" id="employee_skills_create_button"
+													class="btn btn-success  ">Add</button> -->
+												<!-- Indicates caution should be taken with this action -->
+												<button type="button" id="employee_skills_edit_button" style="display:none"
+													class="btn-primary btn-animate btn-eql-wid  btn">Update</button>
+												<!-- Indicates a dangerous or potentially negative action -->
+												<!-- <button type="button" id="employee_skills_delete_button"
+													class="btn btn-danger ">Remove</button> -->
+												<button type="button" id="employee_skills_cancel_button" style="display:none"
+													class="btn-warning btn-animate btn-eql-wid  btn">Cancel / Clear</button>																													
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</form>

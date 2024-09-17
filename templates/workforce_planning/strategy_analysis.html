@@ -1,0 +1,764 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- Datetime css -->
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Range slider -->
+<link
+	href="{%  static '/ui/plugins/ion.rangeslider/css/ion.rangeSlider.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- Charts CSS -->
+<link href="{% static '/ui/plugins/amchart/css/chart.min.css' %}" rel="stylesheet" type="text/css" />
+<!-- Datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css' %}"
+	type="text/javascript" />
+<!-- Dev css -->
+<link
+	href="{% static '/dev/workforce_planning/css/workforce_planning.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- 07-AUG-2018 || SMI || Added Styles & Scripts for Map -->
+<link href="{% static '/dev/hcms_talent_inventory/css/ol.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/hcms_talent_inventory/css/popup.css' %}"
+	rel="stylesheet" type="text/css" />
+<script src="{% static '/dev/hcms_talent_inventory/js/ol.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/hcms_talent_inventory/js/popup.js' %}"
+	type="text/javascript"></script>
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="WFP_StrategyAnalysis" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<h1>WORKFORCE PLANNING - STRATEGY ANALYSIS</h1>
+				<div class="row" id="wf_strategy_main_div">
+					<div class="col-md-12 col-sm-12"
+						style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+						<div class="portlet light bordered">
+							<div class="portlet-body">
+								<div class="row">
+									<div class="col-md-2 col-sm-12">
+										<div class="row">
+											<div class="col-md-2">
+												{% if "WFP Strategy Analysis" in request.session.Create %}
+												<button type="button" onclick="add_strategy();"
+													data-toggle="tooltip" data-placement="top"
+													data-original-title="Add New Strategy"
+													class="btn blue btn-animate">
+													<i class="nf nf-plus"></i>
+												</button>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+									<div class="col-md-10 col-sm-12">
+										<div class="row">
+											<div class="col-md-2 col-sm-2" style="margin-top: 10px; text-align:right;">
+												<i data-toggle="tooltip" data-placement="top" title="Select Organization"
+													class="wfp_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div>
+											<div class="col-md-4 col-sm-4">
+												<div class="form-group">
+													<select id="sel_stg_org" name="sel_stg_org"
+														class="form-control select2 hide_error"
+														onchange="get_strategy_org($(this).val());">
+														<option value="">-Select Organization-</option>
+														{% for data in strategy_org %}
+														<option value="{{ data.id }}">{{ data.name }}</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<div class="form-group">
+													<select id="sel_stg_org_unit" name="sel_stg_org_unit"
+														class="form-control select2 hide_error" disabled="disabled"
+														onchange="get_strategy_sel($(this).val());">
+														<option disabled="disabled" value="">-Select Org. Unit-</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<div class="form-group">
+													<select id="wfp_strategy_sel" name="wfp_strategy_sel"
+														class="form-control select2 hide_error" disabled="disabled">
+														<option value="">-Select a Strategy-</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="strategy_analysis_wiz">
+									<div class="form-wizard ">
+										<div id="tab_formwizard" class="form-body">
+											<ul class="nav nav-pills nav-justified steps">
+												<li class="active"><a class="step"
+													href="#strategy_step1_tab_content" id="STGY1"
+													data-toggle="tab"><span class="number"> <i
+															class="nf nf-employee-portal"></i>
+													</span><span class="desc"> <i class="fa fa-check"></i>
+															Business Context & Environment
+													</span></a></li>
+												<li><a class="step" href="#strategy_step2_tab_content"
+													id="STGY2" data-toggle="tab"><span class="number">
+															<i class="nf nf-university"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Current Workforce Profile Analysis
+													</span> </a></li>
+												<li><a class="step" href="#strategy_step3_tab_content"
+													id="STGY3" data-toggle="tab"><span class="number">
+															<i class="nf nf-experience"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i> Gap
+															Analysis
+													</span> </a></li>
+												<li><a class="step" href="#strategy_step4_tab_content"
+													id="STGY4" data-toggle="tab"><span class="number">
+															<i class="nf nf-certificate"></i>
+													</span> <span class="desc"> <i class="fa fa-check"></i>
+															Cost View
+													</span> </a></li>
+												<li><a class="step" href="#strategy_step5_tab_content"
+													id="STGY5" data-toggle="tab"><span class="number">
+															<i class="nf nf-skills"></i>
+													</span> <span class="desc"> <i class="fa fa-skills"></i>
+															Summarized Reports
+													</span> </a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="row">
+										<div class="tab-content">
+											<!-- Strategy Analysis - Step 1 Content Start -->
+											<div class="" style="padding: 12px;"></div>
+											<div class="tab-pane active" id="strategy_step1_tab_content">
+												<div class="row">
+													<form id="strategy_analysis_step1">
+														<div class="col-md-6 col-sm-12">
+															<div class="form-body">
+																<div class="col-md-12">
+																	<h3>Strategy Basic Info.</h3>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="form-group">
+																		<label>Organization<span class="required"> *
+																		</span>
+																		</label> <select id="stg_org" name="stg_org"
+																			class="form-control select2 hide_error"
+																			onchange="strategy_org_change($(this).val());" required="required"
+																			data-error=".errorTxt16">
+																			<option value="">-Select Organization-</option>
+																			{% for data in strategy_org %}
+																			<option value="{{ data.id }}">{{ data.name }}</option>
+																			{% endfor %}
+																		</select><span class="errorTxt16 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="form-group">
+																		<label>Organization Unit<span class="required">
+																				* </span>
+																		</label> <select id="stg_org_unit" name="stg_org_unit"
+																			class="form-control select2 hide_error" required="required"
+																			disabled="disabled" data-error=".errorTxt17">
+																			<option disabled="disabled" value="">-Select Org. Unit-</option>
+																		</select><span class="errorTxt17 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-12 col-sm-12">
+																	<div class="form-group">
+																		<label>Strategy Summary <span class="required">
+																				* </span></label>
+																		<div class="input-icon">
+																			<i class="nf nf-user-1"></i> <input
+																				required="required" type="text" id="stg_summary"
+																				name="stg_summary" class="form-control"
+																				placeholder="Summary" data-error=".errorTxt0">
+																			<span class="errorTxt0 error val_message"></span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="form-group">
+																		<label>Execution Details <span
+																			class="required"> * </span></label>
+																		<div class="input-icon">
+																			<i class="fa fa-user"></i> <input
+																				class="form-control" placeholder="Execution Details"
+																				id='steeple_exec' name="steeple_exec" type="text"
+																				data-error=".errorTxt7"> <span
+																				class="errorTxt7 error val_message"></span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="form-group">
+																		<label>Workforce Details <span
+																			class="required"> * </span></label>
+																		<div class="input-icon">
+																			<i class="fa fa-user"></i> <input
+																				class="form-control" placeholder="Workforce Details"
+																				id='steeple_workforce' name="steeple_workforce"
+																				type="text" data-error=".errorTxt8"> <span
+																				class="errorTxt8 error val_message"></span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-md-12 col-sm-12">
+																	<div class="form-group">
+																		<label>Strategy Details <span class="required">
+																				* </span></label>
+																		<textarea required="required" class="form-control"
+																			id="stg_details" name="stg_details" rows="3"
+																			placeholder="List the strategy details"
+																			data-error=".errorTxt1"></textarea>
+																		<span class="errorTxt1 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	 <div class="form-group input-icon">
+																		<!-- <label>Period From <span class="required">
+																				*</span></label> <i class="fa fa-calendar"></i><input
+																			id="stg_period_from_date" name="stg_period_from_date"
+																			placeholder="Period From" required="required"
+																			data-error=".errorTxt2"
+																			class="form-control form-control-inline" type="text"
+																			data-field="date" /><span
+																			class="errorTxt2 error val_message"></span>
+																		<div id="period_from_date"
+																			class="dtpicker-overlay dtpicker-mobile"
+																			style="display: none;">
+																			<div class="dtpicker-bg">
+																				<div class="dtpicker-cont">
+																					<div class="dtpicker-content">
+																						<div class="dtpicker-subcontent"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div> -->
+																		<label>Period From <span class="required">
+																				*</span></label> <i class="fa fa-calendar"></i>
+																		 <span
+															style="cursor: text" placeholder="Period From"
+															id="stg_period_from_date_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Period From"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="stg_period_from_date"
+															placeholder="Period From"
+															onchange="DatePickerInputUpdate(this)"
+															id="stg_period_from_date" type="hidden" readonly
+															data-error=".errorTxt2">
+														<div id="period_from_date"></div>
+														<span
+																			class="errorTxt2 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-12">
+																	<div class="form-group input-icon">
+																		<label>Period To <span class="required">
+																				*</span></label> <i class="fa fa-calendar"></i>
+																		<!-- <input
+																			id="stg_period_to_date" name="stg_period_to_date"
+																			placeholder="Period To" required="required"
+																			data-error=".errorTxt3"
+																			class="form-control form-control-inline" type="text"
+																			data-field="date" /><span
+																			class="errorTxt3 error val_message"></span>
+																		<div id="period_to_date"
+																			class="dtpicker-overlay dtpicker-mobile"
+																			style="display: none;">
+																			<div class="dtpicker-bg">
+																				<div class="dtpicker-cont">
+																					<div class="dtpicker-content">
+																						<div class="dtpicker-subcontent"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div> -->
+																		<span
+															style="cursor: text" placeholder="Period To"
+															id="stg_period_to_date_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Period To"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="stg_period_to_date"
+															placeholder="Period To"
+															onchange="DatePickerInputUpdate(this)"
+															id="stg_period_to_date" type="hidden" readonly
+															data-error=".errorTxt3">
+														<div id="period_to_date"></div>
+														<span
+																			class="errorTxt3 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-12 col-sm-12">
+																	<div class="form-group input-icon">
+																		<label>Defined On <span class="required">
+																				*</span></label> <i class="fa fa-calendar"></i>
+																		<!-- <input
+																			id="stg_defined_on" name="stg_defined_on"
+																			placeholder="Defined On Date" required="required"
+																			data-error=".errorTxt4"
+																			class="form-control form-control-inline" type="text"
+																			data-field="date" /><span
+																			class="errorTxt4 error val_message"></span>
+																		<div id="Defined_date"
+																			class="dtpicker-overlay dtpicker-mobile"
+																			style="display: none;">
+																			<div class="dtpicker-bg">
+																				<div class="dtpicker-cont">
+																					<div class="dtpicker-content">
+																						<div class="dtpicker-subcontent"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div> -->
+																		<span
+															style="cursor: text" placeholder="Defined On Date"
+															id="stg_defined_on_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Defined On Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="stg_defined_on"
+															placeholder="Defined On Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="stg_defined_on" type="hidden" readonly
+															data-error=".errorTxt4">
+														<div id="Defined_date"></div>
+														<span
+																			class="errorTxt4 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-12 col-sm-12">
+																	<div class="form-group">
+																		<label>Approval Board <span class="required">
+																				* </span></label> <select id="stg_approval_board"
+																			name="stg_approval_board"
+																			class="form-control select2-multiple hide_error"
+																			required="required" multiple="multiple"
+																			data-error=".errorTxt5"> 
+																			{% for data in approval_board %}
+																			<option value="{{ data.id }}">{{ data.name }}</option> 
+																			{% endfor %}
+																		</select><span class="errorTxt5 error val_message"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-6 col-sm-12">
+															<div class="form-body">
+																<div class="row ">
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<h3>STEEPLE Description</h3>
+																		</div>
+																		<div class="col-md-1">
+																			<h3>
+																				<i class="fa fa-minus-circle"></i>
+																			</h3>
+																		</div>
+																		<div class="col-md-4" style="text-align: center;">
+																			<h3>STEEPLE Impact</h3>
+																		</div>
+																		<div class="col-md-1" style="text-align: right;">
+																			<h3>
+																				<i class="fa fa-plus-circle"></i>
+																			</h3>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Social <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																						<input class="form-control" id="stp_social"
+																					name="stp_social" type="text"
+																					data-error=".errorTxt9" placeholder='Enter Social' /> <span
+																					class="errorTxt9 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_1" name="range_1" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Technological <span class="required">
+																						* </span></label> 
+																					<div class="input-icon"><i class="nf nf-user-1"></i>
+																						<input class="form-control" id="stp_tech"
+																					name="stp_tech" type="text"
+																					data-error=".errorTxt10" placeholder='Enter Technological' /> <span
+																					class="errorTxt10 error val_message"></span>
+																					</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_2" name="range_2" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Economical <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																					<input class="form-control" id="stp_economy"
+																					name="stp_economy" type="text"
+																					data-error=".errorTxt11" placeholder='Enter Economical' /> <span
+																					class="errorTxt11 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_3" name="range_3" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Environmental <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																					<input class="form-control" id="stp_env"
+																					name="stp_env" type="text" data-error=".errorTxt12" placeholder='Enter Environmental' />
+																				<span class="errorTxt12 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_4" name="range_4" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Political <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																					<input class="form-control" id="stp_political"
+																					name="stp_political" type="text"
+																					data-error=".errorTxt13" placeholder='Enter Political' /> <span
+																					class="errorTxt13 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_5" name="range_5" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Legal <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																				<input class="form-control" id="stp_legal"
+																					name="stp_legal" type="text"
+																					data-error=".errorTxt14" placeholder='Enter Legal' /> <span
+																					class="errorTxt14 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_6" name="range_6" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-12">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label>Ethical <span class="required">
+																						* </span></label> 
+																				<div class="input-icon"><i class="nf nf-user-1"></i>
+																				<input class="form-control" id="stp_ethic"
+																					name="stp_ethic" type="text"
+																					data-error=".errorTxt15" placeholder='Enter Ethical' /> <span
+																					class="errorTxt15 error val_message"></span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input id="range_7" name="range_7" type="text"
+																					value="" />
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="clearfix"></div>
+															</div>
+														</div>
+													</form>
+												</div>
+												<div class="col-md-12 col-sm-12">
+													<div
+														class="form-group float-right portlet-body group-btn-sec"
+														id="step1_stg_btns">
+													</div>
+												</div>
+											</div>
+											<!-- Strategy Analysis - Step 1 Content End -->
+											<!-- Strategy Analysis - Step 2 Content Start -->
+											<!-- <div class=""></div> -->
+											<div class="tab-pane" id="strategy_step2_tab_content">
+												<div class="col-md-12 col-sm-12">
+													<button type="button" id="stg_add_new_task"
+														class="btn green margin-bottom-15 float-left" disabled="disabled">
+														Add New Task</button>
+												</div>
+												<div class="col-md-12 col-sm-12">
+													<table
+														class="table tablefixed table-striped table-hover table-bordered"
+														id="stg_step2_table">
+														<thead>
+															<tr>
+																<th>Task Summary</th>
+																<th>WorkForce Required</th>
+																<th>Position</th>
+																<th>Grade</th>
+																<th>Actions</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>
+												</div>
+												<div class="col-md-12 col-sm-12" align="right">
+													<div
+														class="form-group float-right portlet-body group-btn-sec"
+														id="step2_stg_btns"></div>
+												</div>
+											</div>
+											<!-- Strategy Analysis - Step 2 Content End -->
+											<!-- Strategy Analysis - Step 3 Content Start -->
+											<!-- <div class="" style="padding: 10px;"></div> -->
+											<div class="tab-pane" id="strategy_step3_tab_content">
+												<div class="col-md-12 col-sm-12">
+													<table class="table table-striped table-bordered table-hover"
+														id="wfp_strategy_s3_tbl">
+														<thead>
+															<tr>
+																<th>No.</th>
+																<th>Position</th>
+																<th>Grade</th>
+																<th>Existing Resource Count</th>
+																<th>Required Resource Count</th>
+																<th>Resource Gap</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+														<tfoot id="stg_s3_tbl_foot">
+															<tr>
+																<th colspan="3" style="text-align: right">Total:</th>
+																<th></th>
+																<th></th>
+																<th></th>
+															</tr>
+														</tfoot>
+													</table>
+												</div>
+											</div>
+											<!-- Strategy Analysis - Step 3 Content End -->
+											<!-- Strategy Analysis - Step 4 Content Start -->
+											<!-- <div class="" style="padding: 10px;"></div> -->
+											<div class="tab-pane" id="strategy_step4_tab_content">
+												<div class="col-md-12 col-sm-12">
+													<table class="table table-striped table-bordered table-hover"
+														id="wfp_strategy_s4_tbl">
+														<thead>
+															<tr>
+																<th>No.</th>
+																<th>Position</th>
+																<th>Resource Need</th>
+																<th>Cost</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+														<tfoot id="stg_s4_tbl_foot">
+															<tr>
+																<th colspan="2" style="text-align: right">Total:</th>
+																<th></th>
+																<th></th>
+															</tr>
+														</tfoot>
+													</table>
+												</div>
+											</div>
+											<!-- Strategy Analysis - Step 4 Content End -->
+											<!-- Strategy Analysis - Step 5 Content Start -->
+											<div class="clearfix"></div>
+											<div class="tab-pane" id="strategy_step5_tab_content">
+												<div class="row">
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Cost-wise Chart</h3>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="strategy_donut_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Summarized Chart</h3>
+															<div class="form-group">
+																<select id="wfp_stg_bar_sel_role" name="wfp_stg_bar_sel_role"
+																	class="form-control select2 hide_error" disabled="disabled"
+																	onchange="stg_get_role_val_bar($(this).val());">
+																	<option></option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="strategy_bar_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Multi-Value Chart</h3>
+															<div class="form-group">
+																<select id="wfp_stg_bar_msel_roles"
+																	name="wfp_stg_bar_msel_roles" onchange="wfp_stg_bar_msel_roles_chng();"
+																	class="form-control select2-multiple hide_error"
+																	multiple="multiple" disabled="disabled">
+																	<option></option>
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="strategy_multi_bar_chart"></div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-4 col-sm-12">
+														<div class="col-md-12 col-sm-12">
+															<h3>Grade Based Chart</h3>
+															<div class="form-group">
+																<select id="stg_bar_msel_grades"
+																	name="stg_bar_msel_grades" onchange="stg_bar_msel_grades_chng();"
+																	class="form-control select2-multiple hide_error"
+																	multiple="multiple" disabled="disabled">
+																	{% for data in role_grades %}
+																	<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+														<div class="col-md-12 col-sm-12">
+															<div id="strategy_multi_grade_chart"></div>
+														</div>
+													</div>
+													<div class="col-md-8 col-sm-12">
+														<h3>Strategy Analysis - Map</h3>
+														<div class="map" id="strategy_step5_tab_map"></div>
+													</div>
+												</div>
+											</div>
+											<!-- System Analysis - Step 5 Content End -->
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}{% block scripts %}
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/workforce_planning/js/wfp_datatables.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}"
+	type="text/javascript"></script>
+    <!-- Map Plugins -->
+<script src="{% static '/dev/workforce_planning/js/png_admin_boundary.js' %}"
+    type="text/javascript"></script>
+<script src="{% static '/dev/workforce_planning/js/strategy_map_page.js' %}"
+    type="text/javascript"></script>
+    <!-- Map Plugins -->
+<!--Charts-->
+<script src="{% static '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/pie.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/export.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/light.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<!-- Range slider js-->
+<script
+	src="{% static '/ui/plugins/ion.rangeslider/js/ion.rangeSlider.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{%  static '/dev/workforce_planning/js/strategy_analysis.js'  %}"
+	type="text/javascript"></script>
+{% endblock %}

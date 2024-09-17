@@ -1,0 +1,292 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %} 
+<!-- Single and multi select Dropdown-->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}" 
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/system_admin/css/sysadmin.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="CMEntities" %}
+<!-- Pre-loader start -->
+<!--<div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object animated full-rotate" id="first_object"></div>
+			<div class="object" id="second_object">
+				<img src="{% static '/ui/images/settings.png' %}">
+			</div>
+		</div>
+	</div>
+</div>-->
+<!--<div class="spinner"></div>
+    <img class="blink" style="position: absolute;left: 50%;margin: 0px auto;top: 50%;transform: translate(-50%, -50%);" src="{% static '/ui/images/loader-logo.png' %}"/>-->
+<!-- Pre-loader End -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN ENTITY FORM -->
+				<h1>Manage Entities</h1>
+				<div class="row eqheight">
+					<div class="col-md-12">
+						<div class="col-md-1">
+							<button type="button" class="btn btn-success" id="btn_add_new">Add
+								New</button>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12 margin-top-30">
+						<div class="portlet light bordered">
+							<div class="portlet-body form">
+								<form id="entity_form" method="post" onsubmit="return cm_entity_search();">
+									<div class="form-body">
+										<div class="form-group">
+											<label class="label-cbx"> <input type="checkbox" id="check_searchall"
+												name="check_searchall" class="invisible" />
+												<div class="checkbox">
+													<svg width="20px" height="20px" viewBox="0 0 20 20">
+							                        	<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+							                       		<polyline points="4 11 8 15 16 6"></polyline>
+							                      	</svg>
+												</div> <span>Select All</span>
+											</label>
+											<div class="mt-checkbox-list">
+											{% for data in entity_type %} 
+											<label class="label-cbx" style="margin-left:10px;"> <input type="checkbox"
+												value="{{data.id}}" class="invisible cd_entity_types" />
+												<div class="checkbox">
+													<svg width="20px" height="20px" viewBox="0 0 20 20">
+							                        	<path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+							                       		<polyline points="4 11 8 15 16 6"></polyline>
+							                      	</svg>
+												</div> <span>{{ data.refitems_name }}</span>
+											</label>
+											{% endfor %}
+											</div>
+										</div>
+										<div class="form-group">
+											<label>Name </label>
+											<div class="input-icon">
+												<i class="nf nf-address-card-o"></i> <input type="text"
+													id="entity_name" name="entity_name" maxlength="200"
+													class="form-control" placeholder="Title"/>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="entity_category_refitem_id"
+												class="control-label black_font">Category </label> <select
+												id="entity_category_refitem_id"
+												name="entity_category_refitem_id"
+												class="form-control select2 hide_error">
+												<option disabled="disabled" value="0" hidden="hidden"
+													selected="selected">-Select-</option>
+												{% for data in category %}
+												<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="entity_subcategory_refitem_id"
+												class="control-label black_font">Sub Category </label> <select
+												id="entity_subcategory_refitem_id"
+												name="entity_subcategory_refitem_id"
+												class="form-control select2 hide_error">
+												<option disabled="disabled" value="0" hidden="hidden"
+													selected="selected">-Select-</option>
+												{% for data in sub_category %}
+												<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="entity_status_refitem_id"
+												class="control-label black_font">Status </label> <select
+												id="entity_status_refitem_id" name="entity_status_refitem_id"
+												class="form-control select2 hide_error">
+												<option disabled="disabled" value="0" hidden="hidden"
+													selected="selected">-Select-</option>
+												{% for data in status %}
+												<option value="{{data.id}}">{{ data.refitems_name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="padding-bottom-15">
+											<div class="float-right">
+												<button type="submit" class="btn btn-info animate_btn"
+													id="btn_search">Search</button>
+												<button type="button" class="btn btn-warning animate_btn"
+													id="cme_search_clear" onclick="cm_entity_search_clear();">Clear</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div
+						class="portlet light bordered col-md-8 col-sm-12 margin-top-30">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="nf nf-criteria-list"></i> <span
+									class="caption-subject bold uppercase">Entities</span>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<table class="table table-striped table-bordered table-hover"
+								id="entities_table">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Name</th>
+										<th>Type</th>
+										<th>Category</th>
+										<th>Sub Category</th>
+										<th>Status</th>
+										<th>Code</th>
+										<th>Id</th>
+									</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- END ENTITY FORM -->
+				<!-- Entity - Modal Start -->
+					<div id="entity_add_new_modal" class="modal fade" tabindex="-1"
+						role="dialog" aria-labelledby="entity_add_new_modal" aria-hidden="true">
+						<div class="modal-dialog modal-md" id="entity_add_new_modal_div">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true"></button>
+									<h4 class="modal-title">Manage Entities</h4>
+								</div>
+								<div class="modal-body">
+									<div class="portlet-body form">
+										<form class="formValidate" id="form_entity_add" novalidate>
+											<div class="form-body">
+												<div class="form-group col-md-6">
+													<label>Name</label><span class="required"> * </span>
+													<div class="input-icon">
+														<i class="fa fa-user"></i> <input class="form-control"
+															required="required" placeholder="Entity Name"
+															id='entity_name_modal' name='entity_name_modal'
+															type="text" data-error=".errorTxt0" /><span
+															class="errorTxt0 error"></span>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label>Code</label><span class="required"> * </span>
+													<div class="input-icon">
+														<i class="fa fa-user"></i> <input class="form-control"
+															placeholder="Code" id='entity_code_modal'
+															name='entity_code_modal' type="text"
+															data-error=".errorTxt1"> <span
+															class="errorTxt1 error"></span>
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label for="entity_category_val"
+														class="control-label black_font">Category </label> <span
+														class="required"> * </span> <select
+														id="entity_category_val" name="entity_category_val"
+														class="form-control select2 hide_error"
+														data-error=".errorTxt2">
+														<option value="0" selected="selected">-Select-</option> 
+														{% for data in category %}
+														<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+														{% endfor %}
+													</select><span class="errorTxt2 error"></span>
+												</div>
+												<div class="form-group col-md-6">
+													<label for="entity_subcategory_modal"
+														class="control-label black_font">Sub Category </label> <span
+														class="required"> * </span> <select 
+														id="entity_subcategory_modal"
+														name="entity_subcategory_modal"
+														class="form-control select2"
+														data-error=".errorTxt3">
+														<option value="0">-Select-</option>
+														{% for data in sub_category %}
+														<option value="{{ data.id }}">{{ data.refitems_name }}</option>
+														{% endfor %}
+													</select><span class="errorTxt3 error"></span>
+												</div>
+												<div class="form-group col-md-6">
+													<label for="entity_status_modal"
+														class="control-label black_font">Status </label> <span
+														class="required"> * </span> <select 
+														id="entity_status_modal" name="entity_status_modal"
+														class="form-control select2 hide_error"
+														data-error=".errorTxt5">
+														<option value="0" selected="selected">-Select-</option>
+														{% for data in status %}
+														<option value="{{data.id}}">{{ data.refitems_name }}</option>
+														{% endfor %}
+													</select><span class="errorTxt5 error"></span>
+												</div>
+												<div class="form-group col-md-6">
+													<label for="entity_type_modal"
+														class="control-label black_font">Type </label> <span
+														class="required"> * </span> <select 
+														id="entity_type_modal" name="entity_type_modal"
+														class="form-control select2 hide_error"
+														data-error=".errorTxt4">
+														<option value="0" selected="selected">-Select-</option>
+														{% for data in entity_type %}
+														<option value="{{data.id}}">{{ data.refitems_name }}</option>
+														{% endfor %}
+													</select><span class="errorTxt4 error"></span>
+												</div>
+												<div class="form-group col-md-12">
+													<div id="dynamic_form"></div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="modal-footer" id="btn_modal">
+									<button type="button" value="" class="btn btn-success"
+										onclick="cm_entity_save();" id="btn_entity_add">Save</button>
+									<button type="button" class="btn btn-warning animate_btn"
+										onclick="modal_data_clear()">Cancel/Clear</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- Entity - Modal End -->
+			</div>
+		</div>
+		<!-- END CONTENT BODY -->
+	</div>
+	<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+
+{% endblock %} {% block scripts %}
+<script src="{% static '/ui/plugins/select2/js/select2.full.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js' %}"
+	type="text/javascript"></script>
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script 
+	src="{% static '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/multiselect-list/js/listbox-multiselected.js' %}"></script>
+<script src="{% static '/dev/system_admin/js/entities.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

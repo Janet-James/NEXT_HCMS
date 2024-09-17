@@ -1,0 +1,78 @@
+html, body {
+    background-color:#e9eaed;
+    height: auto !important;
+}
+/* .content {
+    width:960px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.panel-group {
+    width:430px;
+    z-index: 100;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateX(-100%) rotate(-90deg);
+    -webkit-transform-origin: right top;
+    -moz-transform: translateX(-100%) rotate(-90deg);
+    -moz-transform-origin: right top;
+    -o-transform: translateX(-100%) rotate(-90deg);
+    -o-transform-origin: right top;
+    transform: translateX(-100%) rotate(-90deg);
+    transform-origin: right top;
+}
+.panel-heading {
+    width: 430px;
+}
+.panel-title {
+    height:18px
+}
+.panel-title a {
+    float:right;
+    text-decoration:none;
+    padding: 10px 430px;
+    margin: -10px -430px;
+}
+.panel-body {
+    height:450px;
+}
+.panel-group img {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateX(-100%) rotate(90deg);
+    -webkit-transform-origin: right top;
+    -moz-transform: translateX(-100%) rotate(90deg);
+    -moz-transform-origin: right top;
+    -o-transform: translateX(-100%) rotate(90deg);
+    -o-transform-origin: right top;
+    transform: translateX(-100%) rotate(90deg);
+    transform-origin: right top;
+}
+.panel-group .panel img {
+    margin-left:400px;
+    margin-top:800px;
+    position: absolute;
+}
+
+
+ */
+ 
+ 
+ 
+ /* Author: ManikandanMeganathan 
+ 	Date: 	20-Dec-2018
+ 	Dec:	CSS Start
+ */
+ .col-sm-3.rating-div-parent { padding: 0; border: 5px solid #fff; }
+ .col-sm-3.rating-div-parent .panel{margin-bottom: 0;}
+ .user_ratings_div.odd .col-sm-3.rating-div-parent .panel.panel-default,.user_ratings_div.odd .panel-heading{background-color: #fff !important;}
+ .user_ratings_div.even .col-sm-3.rating-div-parent .panel.panel-default,.user_ratings_div.even .panel-heading{background-color: #f0faff !important;}
+ .rating-div-parent .panel.panel-default,.rating-div-parent .panel-heading{ border: 0px !important; }
+ h4.panel-title {text-align: center;}
+ .rating-div-parent .panel-body li {list-style: none; margin-bottom: 15px; }
+ .rating-div-parent .panel-body li b {color: #00afff;}
+ .rating-div-parent .panel-body li span{text-transform: capitalize;}
+ .select-ratings h4 { color: #fe938d; font-weight: 600;}
+ .ratings-content {overflow: auto;height: 645px;margin-top: 15px !important;}
+ .RS-data{min-height: 900px !important;}
+ .menu-toggle{padding-top: 30px !important;height: 900px !important;}
+ 
+/* CSS End */

@@ -1,0 +1,250 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{% block links %}
+<link href="{% static '/dev/help_topics/css/help_topic.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container margin-0" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered"
+							id="blockui_sample_1_portlet_body">
+							<div class="portlet-title">
+								<div class="caption">
+									 <span class="caption-subject bold">NEXT
+										Human Capital Management System</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Human Capital Management System</h3>
+										</div>
+										<div class="panel-body">Human Capital Management
+											software is basically designed in a way to maximize the
+											efficiency in the organization work by accuracy in workflow &
+											resolving timing issues. It has specifically assigned the
+											authorities & rights for every single user. Provide
+											automation & streamlined flow to all day-to-day tasks. Single
+											database system provides centralized managements.</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<a href="{% url 'help_content:help_content_details' 'SysAdmin' %}">
+												<h3 class="panel-title">AppAdmin</h3>
+											</a>
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">The AppAdmin facilitates
+												the data management, user, access management and also to
+												manage the application data. Data management is a
+												configuration module to set up the master data.</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item">Data Management<span>
+											</span>
+											</li>
+											<li class="list-group-item">Manage Application Data<span>
+											</span>
+											</li>
+											<li class="list-group-item">User & Access Management<span>
+											</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+										<a href="{% url 'help_content:help_content_details' 'TalentAssessment' %}">
+												<h3 class="panel-title">Talent Assessment</h3>
+											</a>
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">The fundamental goal of
+												talent assessment and feedback is to promote and improve
+												employee effectiveness. Help towards achievement of superior
+												standards of work performance.</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item">Goal Management<span>
+											</span>
+											</li>
+											<li class="list-group-item">Goal Alignment<span>
+											</span>
+											</li>
+											<li class="list-group-item">Goal Cascading<span>
+											</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<h3 class="panel-title">Talent Development</h3>
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">Talent Development enables
+												all the employees to develop their skills in which they are
+												expertized. It enables them to the next level to elevation.</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item"><a href="">Holiday List</a></li>
+											<li class="list-group-item"><a href="">Manage Leave
+													Balance</a></li>
+											<li class="list-group-item"><a href="">Leave Request</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<h3 class="panel-title">Talent Management</h3>
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">Talent management is the
+												proactive identification and development of high potential
+												individuals, at all levels of an organisation, to support
+												them to reach their full potential.</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item"><a href="">Talent
+													Inventory</a></li>
+											<li class="list-group-item"><a href="">Succession
+													Planning</a></li>
+											<li class="list-group-item"><a href="">Track Process</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="row">	
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<a href="{% url 'help_content:help_content_details' 'HRMS' %}">
+												<h3 class="panel-title">HRMS</h3>
+											</a>
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">A Human Resources
+												Management System combines many human resources functions,
+												including benefits administration, payroll, recruiting and
+												training, and performance analysis and review</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item"><a href="">Employee
+													Management</a></li>
+											<li class="list-group-item"><a href="">Leave
+													Management</a></li>
+											<li class="list-group-item"><a href="">Organization
+													Unit</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<h3 class="panel-title">Talent Acquistion</h3>																						
+										</div>
+										<div class="panel-body">
+											<p style="text-align: justify">Talent Acquisition is the
+												process of attracting and hiring skilled employees to
+												fulfill a company’s business needs. Proactively build
+												applicant pipelines to meet current and future business
+												needs. </p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item"><a href="">Reference
+													Item Category</a></li>
+											<li class="list-group-item"><a href="">Reference
+													items</a></li>
+											<li class="list-group-item"><a href="">Data Access</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+										<a href="{% url 'help_content:help_content_details' 'WorkforcePlanning' %}">
+												<h3 class="panel-title">Workforce Planning</h3>
+											</a>
+											</div>
+										<div class="panel-body">
+											<p>Workforce planning is a continual process used to
+												align the needs and priorities of the organization with
+												those of its workforce to ensure</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item"><a href="">SSM Details</a></li>
+											<li class="list-group-item"><a href="">Module
+													details</a></li>
+											<li class="list-group-item"><a href="">Help content</a></li>
+										</ul>
+									</div>
+
+								</div>
+								<div class="col-md-3">
+									<div class="panel panel-default">
+										<!-- Default panel contents -->
+										<div class="panel-heading">
+											<a href="{% url 'help_content:help_content_details' 'TalentDefinition' %}">
+												<h3 class="panel-title">Talent Definition</h3>
+											</a>										
+										</div>
+										<div class="panel-body">
+											<p>In the employee’s page, the user can view their
+												details and the HR can add, update or remove the employee
+												details.</p>
+										</div>
+										<!-- List group -->
+										<ul class="list-group">
+											<li class="list-group-item">Primary Information<span>
+											</span>
+											</li>
+											<li class="list-group-item">Personal Management<span>
+											</span>
+											</li>
+											<li class="list-group-item">HR Setting<span> </span>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}

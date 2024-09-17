@@ -1,0 +1,163 @@
+ {% load static %} {% load base_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8" />
+<title>NEXT::HCMS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta content="NEXT HCMS Framework" name="description" />
+<meta content="" name="author" />
+<link rel="shortcut icon" href="{% static '/ui/images/favicon.png' %}" />
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link
+	href="{% static '/ui/plugins/font-awesome/css/font-awesome.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/default/nfonts.css' %}" rel="stylesheet"
+	type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap/css/bootstrap.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- Nestable Tree CSS-->
+<link
+	href="{% static '/ui/plugins/jquery-nestable/css/jquery.nestable.min.css' %}"
+	rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap-tagsinput-->
+<link
+	href="{% static '/ui/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}"
+	rel="stylesheet" type="text/css" />
+
+{% block links %}{% endblock %}
+<!-- BEGIN THEME LAYOUT STYLES -->
+<link href="{% static '/ui/css/default/components.min.css' %}"
+	rel="stylesheet" id="style_components" type="text/css" />
+<link href="{% static '/ui/css/default/layout.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/themes/css/default.min.css' %}"
+	rel="stylesheet" type="text/css" id="style_color" />
+<link href="{% static '/ui/css/default/CircleMenu.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- END THEME LAYOUT STYLES -->
+
+<!-- BEGIN Common HCMS overight styles only -->
+<link href="{% static '/ui/css/common-hcms.css' %}" rel="stylesheet"
+	type="text/css" />
+<!-- End Common HCMS overight styles only -->
+<!-- HCMS Menu CSS -->
+<link href="{% static '/ui/css/HCMS-Menu.css' %}" rel="stylesheet"
+	type="text/css" />
+<!-- HCMS Menu CSS -->
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="dow-logo">
+	{% nav_tags breadcrum_title="AccessDenied" %}
+	<div id="menuOverlay"
+		class="backgroundfix">
+		<div class="page-container" id="maincontent">
+			<!-- BEGIN CONTENT -->
+			<div class="page-content-wrapper">
+				<!-- BEGIN CONTENT BODY -->
+				<div class="page-content">
+					<!-- BEGIN PAGE BASE CONTENT -->
+					<div class="row">
+						<div class="col-sm-12 no-padding">
+							<div class="col-sm-offset-3  col-sm-6">
+								<div class="caption text-center">
+									<img src="{% static '/ui/images/login-logo.png' %}">
+								</div>
+								<div class="portlet light bordered text-center">
+									<div class="txt-center col-sm-12 no-padding">
+										<h1>
+											<i class="nf nf-manage-permissions warning-icon"></i>
+										</h1>
+									</div>
+									<div class="col-sm-12">
+										<div class="caption">
+											<h1
+												class="text-center animated flash infinite caption-subject bold uppercase blue_txt">Access
+												Denied</h1>
+										</div>
+									</div>
+									<div class="portlet-body">
+										<div class="quote-wizard txt-center margin-bottom-50">
+											<p>This Message is being displayed because you attempted
+												to access an page that requires authorization that is not
+												part of your team.</p>
+											<a class="btn btn-warning back-btn margin-top-30 margin-bottom-50 tooltips"
+												href="{% url 'dashboard:dashboard_page' %}" data-toggle="tooltip"
+												data-placement="top" title="Go back to previous screen"><i
+												class="nf nf-angle-left"></i> Back</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END CONTENT BODY -->
+			</div>
+			<!-- END CONTENT -->
+		</div>
+	</div>
+	<!-- END CONTAINER -->
+</body>
+<!-- END BODY -->
+
+<!-- BEGIN CORE PLUGINS -->
+<script src="{% static '/ui/plugins/jquery.min.js' %}"></script>
+<script src="{% static '/ui/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/ui/js/default/custom_script.min.js' %}"
+	type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+
+<!-- Bootstrap-tagsinput-->
+<script
+	src="{% static '/ui/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"
+	type="text/javascript"></script>
+
+<!-- VERSION TOOLTIP PLUGINS -->
+<script src="{% static '/ui/plugins/tooltip/js/anime.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/tooltip/js/tooltip.min.js' %}"
+	type="text/javascript"></script>
+<!--  VERSION TOOLTIP  PLUGINS -->
+
+<!-- Search SCRIPTS -->
+<script src="{% static '/ui/js/default/search.min.js' %}"
+	type="text/javascript"></script>
+<!-- Search SCRIPTS -->
+
+<!--   LIBRARY JS FOR UX3.0 SCRIPT SUPPORT -->
+<script src="{% static '/ui/plugins/lib/js/lib.js' %}"
+	type="text/javascript"></script>
+
+<!-- BEGIN Dev base library JS  -->
+<script src="{% static '/dev/lib/js/jquery.idle.js' %}"
+	type="text/javascript"></script>
+<!-- END Dev base library JS  -->
+{% block scripts %} {% endblock %}
+<!-- BEGIN Theme change scripts -->
+<script src="{% static '/ui/themes/js/layout.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/themes/js/theme_switches.min.js' %}"
+	type="text/javascript"></script>
+<!-- END Theme change scripts -->
+
+<!-- Search SCRIPTS -->
+<script src="{% static '/ui/js/default/search.min.js' %}"
+	type="text/javascript"></script>
+<!-- Search SCRIPTS -->
+<script>
+	$(document).idle({
+		onIdle : function() {
+			window.location.href = "/logout/"
+		},
+		idle : 15 * 60 * 1000
+	});
+</script>
+</html>

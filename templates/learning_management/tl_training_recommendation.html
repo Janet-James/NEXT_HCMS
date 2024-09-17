@@ -1,0 +1,379 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- css link start -->
+{% block links %}
+<!-- select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"	rel="stylesheet" type="text/css" />
+<!-- datatable css -->
+<link	href="{%  static '/ui/plugins/datatables/css/datatables.min.css'  %}"	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"	rel="stylesheet" type="text/css" />
+<!-- date timepicker css -->
+<link	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"	rel="stylesheet" type="text/css" />
+<link	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}"	rel="stylesheet" type="text/css" />
+<!-- Talent Acquisition css -->
+<link href="{% static '/ui/css/talent_acquisition.css' %}"	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/learning_management/css/learning_management.css' %}"	rel="stylesheet" type="text/css" />
+<style>
+.sweet-alert h2 {
+	font-size: 15px !important;
+}
+
+.select2-container--open {
+	z-index: 20052 !important;
+}
+</style>
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="LDManagementRecommendation" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<div class="row eqheight">
+
+					<div class="col-md-8" id='ta_open_main_div1'
+						style="transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+						<!-- BEGIN SAMPLE FORM PORTLET-->
+						<div class="portlet light bordered datatable_view">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">Training Recommendation - Team Lead
+										</h3>
+								</div>
+								<div class="col-md-1 caption blink_class">
+									<span
+										class="ta_nav caption-subject animated flash infinite bold uppercase"
+										id='left' data-toggle="tooltip" data-placement="bottom"
+										title="Request Details View"><i
+										class="nf nf-angle-left"></i></span> <span
+										class="ta_nav caption-subject animated flash infinite bold uppercase"
+										id='right' data-toggle="tooltip" data-placement="bottom"
+										title="Request Form View"><i class="nf nf-angle-right"></i></span>
+								</div>
+							</div>
+<!-- 							{% include 'logger.html' %}
+ -->							<div class="portlet-body form">
+								<form role="form" id='teamlead_training_recommendation_form'>
+									{% csrf_token %}
+									<div class="row">
+									<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">
+												Training Name <span class="asterisk"> *</span>
+											</label> <select id="tl_training_name" data-placeholder="Select Training" name="tl_training_name" required
+												data-error=".errorTxt0"
+												class="form-control select2 "
+												tabindex="-1" aria-hidden="true">
+												<option value="0">--Select--</option>
+											</select> <span class="errorTxt0 errormessage"></span>
+										</div>
+											</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">Organization
+												<span class="asterisk">*</span>
+											</label> <select id="tl_organization" name="tl_organization" data-placeholder="Select Organization"
+												class="form-control select2" data-error=".errorTxt1">
+												<option value="0">--Select--</option>
+												{% for i in organization %}
+												<option value="{{ i.id }}">{{i.name}}</option> {% endfor %}
+											</select> <span class="errorTxt1 errormessage"></span>
+										</div>
+											</div>
+											
+											</div>
+											<div class="row">
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group">
+											<label for="single" class="control-label black_font">Organization
+												Unit <span class="asterisk">*</span>
+											</label> <select id="tl_organization_unit" name="tl_organization_unit" data-placeholder="Select Organization Unit"
+												class="form-control select2" data-error=".errorTxt2">
+												<option value="0">--Select--</option>
+											</select> <span class=" errorTxt2 errormessage "></span>
+										</div>
+											</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">
+												Division <span class="asterisk">*</span>
+											</label> <select id="ld_organization_division" multiple
+												name="ld_organization_division" class="form-control select2-multiple" data-placeholder="Select Division"
+												data-error=".errorTxt3">
+												<option value="0">--Select--</option>
+											</select> <span class="errorTxt3 errormessage"></span>
+										</div>
+											</div>
+											
+											</div>
+											<div class="row">
+										<div class="col-md-6 col-sm-12">
+												<div class="form-group">
+											<label for="single" class="control-label black_font">
+												Employee <span class="asterisk">*</span>
+											</label> <select id="mr_employee" multiple 
+												name="mr_employee" class="form-control select2-multiple" data-placeholder="Select Employee"
+												data-error=".errorTxt4">
+											</select> <span class="errorTxt4 errormessage"></span>
+										</div>
+											</div>
+											<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">Training Category
+												<span class="asterisk">*</span>
+											</label> <select id="tl_training_category" name="tl_training_category" data-placeholder="Select Training Category"
+												class="form-control select2" data-error=".errorTxt5">
+												<option value="0">--Select--</option> {% for i in training_category_data %}
+													<option value="{{ i.id }}">{{i.refitems_name}}</option> {% endfor %}
+											</select> <span class="errorTxt5 errormessage"></span>
+										</div>
+											
+											</div>
+											</div>
+											<div class="row">
+											<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">Training Type
+												<span class="asterisk">*</span>
+											</label> <select id="tl_training_type" name="tl_training_type" data-placeholder="Select Training Type"
+												class="form-control select2" data-error=".errorTxt7">
+													<option value="0">--Select--</option> {% for i in training_type_data %}
+													<option value="{{ i.id }}">{{i.refitems_name}}</option> {%endfor %}
+											</select> <span class="errorTxt7 errormessage"></span>
+										</div>
+											</div>
+										<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">Training Methodology
+												<span class="asterisk">*</span>
+											</label> <select id="tl_training_methodology" name="tl_training_methodology" data-placeholder="Select Training Methodology"
+												class="form-control select2" data-error=".errorTxt8">
+												<option value="0">--Select--</option> {% for i in training_method_data %}
+													<option value="{{ i.id }}">{{i.refitems_name}}</option> {% endfor %}
+											</select> <span class="errorTxt8 errormessage"></span>
+										</div>
+											</div>
+											
+											</div>
+											<div class="row">
+											<div class="col-md-6 col-sm-12">
+											<div class="form-group">
+											<label for="single" class="control-label black_font">
+												Recommended By <span class="asterisk"> *</span>
+											</label> <select id="mr_recommended_by" name="mr_recommended_by" required
+												data-error=".errorTxt9" data-placeholder="Select Recommended Person"
+												class="form-control select2"
+												tabindex="-1" aria-hidden="true">
+												<option value="0">--Select--</option>
+												
+											</select> <span class="errorTxt9 errormessage"></span>
+										</div>
+											</div>
+										<!-- <div class="col-md-6 col-sm-12">
+											<div class="col-md-6">
+											<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Start Date <span class="asterisk"> *</span>
+													</label><input id="tl_start_date" name="tl_start_date"
+														placeholder="Start Date"
+														class="form-control form-control-inline" required
+														data-field="date" size="16" value="" type="text"
+														data-error=".errorTxt10"> <span
+														id="transfer_date_error" class="errorTxt10 errormessage"></span>
+													<div id="start_date"></div>
+
+												</div>
+												</div>
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														End Date <span class="asterisk"> *</span>
+													</label><input id="tl_end_date" name="tl_end_date"
+														placeholder="End Date"
+														class="form-control form-control-inline" required
+														data-field="date" size="16" value="" type="text"
+														data-error=".errorTxt11"> <span
+														id="transfer_date_error" class="errorTxt11 errormessage"></span>
+													<div id="end_date"></div>
+												</div>
+												</div>
+											</div> -->
+											<div class="col-md-6 col-sm-12">
+										<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Start Date <span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="fa fa-calendar cicon"></i> <span
+															style="cursor: text" placeholder="Start Date"
+															id="tl_start_date_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Start Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="tl_start_date"
+															placeholder="Start Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="tl_start_date" type="hidden" readonly
+															data-error=".errorTxt4">
+														<span
+														id="transfer_date_error" class="errorTxt10 errormessage"></span>
+													<div id="start_date"></div>
+													</div>
+
+
+												</div>
+											</div>
+												<div class="col-md-6">
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														End Date <span class="asterisk"> *</span>
+													</label>
+													<div class="input-icon">
+														<i class="fa fa-calendar cicon"></i> <span
+															style="cursor: text" placeholder="End Date"
+															id="tl_end_date_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="End Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="tl_end_date"
+															placeholder="Set the End Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="tl_end_date" type="hidden" readonly
+															data-error=".errorTxt5">
+														
+														<span
+														id="transfer_date_error" class="errorTxt11 errormessage"></span>
+													<div id="end_date"></div>
+													</div>
+												</div>
+												</div>
+											</div>
+											</div>
+								</form>
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-sm-12">
+								<div class="form-group" align="right">
+									<div class="" id="tl_view_btn_div"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- list dev start -->
+					<div class="col-md-4" id='ta_open_main_div2'
+						style="display: none; transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+						<div class="portlet light bordered datatable_view">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold uppercase">Management Training Recommendation</span>
+								</div>
+								<div class="col-sm-12" >
+									
+										<div class="form-group">
+												<label class="control-label"></label> <select
+																		id="search_recommendation_training_data" name="search_recommendation_training_data" 
+																		class="form-control select2" data-error=".errorTxt4">
+																		<option value="0">Search by Training Name</option></select>
+											</div>
+								</div>
+							</div>
+							<div class="portlet-body">
+								<div class="row" id='exit_request_lv'>
+									<div class="col-md-12 col-sm-12  job_requisitions_content"
+										id='training_recommendation_detail_view'></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+<!-- modal start here -->
+<div id="documentView" class="modal1 modal fade" role="dialog"
+	aria-labelledby="DocumentView" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Document View</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<div class="col-sm-12" id='targetDiv'></div>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->
+{% endblock %}
+<!-- body content end  -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- datatable js -->
+<script	src="{%  static '/ui/plugins/datatables/js/datatables.min.js'  %}"	type="text/javascript"></script>
+<script	src="{%  static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js'  %}"	type="text/javascript"></script>
+<!-- select2 js -->
+<script	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"	type="text/javascript"></script>
+<script	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"	type="text/javascript"></script>
+<!-- file input js -->
+<script	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"	type="text/javascript"></script>
+<!-- date timepicker js -->
+<script	src="{% static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"	type="text/javascript"></script>
+<!-- dev js -->
+<script src="{% static '/dev/lib/js/datatable_lib.min.js'  %}"	type="text/javascript"></script>
+<script src="{% static '/dev/learning_management/js/tl_training_recommendation.js' %}"	type="text/javascript"></script>
+<script src="{% static '/dev/lib/js/onChangeLib.js' %}"	type="text/javascript"></script>
+<script>
+$("#start_date,#end_date").DateTimePicker({
+	dateTimeFormat : "dd-MMM-YYYY",
+	 minDate: new Date(),		 
+	});
+	
+	//20-July-2018 || TRU || right Details Button Function 
+	$("#right").click(function() { 
+		$('.blink_class').css({
+			'float' : 'right',
+			'margin-right' : '36px'
+		});
+		$('#left').css('display', 'block');
+		$('#right').css('display', 'none');
+		$('#ta_open_main_div1').addClass('col-md-12').removeClass('col-md-8');
+		$('#ta_open_main_div2').removeClass('divActive');
+	});
+
+	//20-July-2018 || TRU || left Details Button Function
+	$("#left").click(function() {
+		$('.blink_class').css({
+			'float' : 'right',
+			'margin-right' : '-8px'
+		});
+		$('#left').css('display', 'none');
+		$('#right').css('display', 'block');
+		$('#ta_open_main_div1').addClass('col-md-8').removeClass('col-md-12');
+		$('#ta_open_main_div2').addClass('divActive');
+	});
+	$('#right').trigger('click');
+</script>
+
+{% endblock %}
+<!-- custom script end -->

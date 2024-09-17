@@ -1,0 +1,639 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+<!-- custom css start -->
+{% block links %}
+<!-- select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/amchart/css/chart.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" /> 
+<link href="{%  static '/ui/css/leave-management.css'  %}" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+{% block content %} {% nav_tags breadcrum_title="HREmployeeLeaveDetails" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+  <div class="page-container" id="maincontent"> 
+    <!-- BEGIN CONTENT -->
+    <div class="page-content" id='page_id'> 
+      <!-- BEGIN CONTENT BODY --> 
+      <h1> Leave & HOLIDAY Calendar  </h1> 
+      <div class="leave-mangmt-sys"> 
+        <div class="row"> 
+            <div class="col-md-12">  
+            <div class="portlet light bordered">         	
+						<div class="leave-mangmt-inner"> 
+							{% if 'Leave & HOLIDAY Calendar ' in get_add_records %}	
+							<div class="row"> 
+								<div class="col-md-8"><!-- <span class="caption-subject bold uppercase"> Leave Calendar</span> --></div>
+								<div class="col-md-4">  
+									<div class="row">
+										<div class="col-md-4"> 
+										 	<ul class="list-inline pull-right"> 
+												<li><div class="caption margin-top-10">
+														<i data-toggle="tooltip" data-placement="top" title=""
+															class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"
+															data-original-title="Employee"></i>
+													</div></li> 
+												 
+											</ul>
+										</div>
+										<div class="col-md-8">
+											<div class="form-group"> 
+												<select id="employee_list" name="employee_list"													
+													class="form-control select2" required
+													tabindex="-1" aria-hidden="true">
+													<option value="0">--Select Employee--</option>
+												</select> 
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endif %}		
+							<div class="leave-leave-box">
+							<div class="leave-quarterly-box">
+                            <ul> 
+                                <li> <span> <img src="{%  static '/ui/images/quater-one.png' %}"> </span>Q1</li>
+                                <li> <span> <img src="{%  static '/ui/images/quater-two.png' %}"> </span>Q2</li>
+                                <li> <span> <img src="{%  static '/ui/images/quater-three.png' %}"> </span>Q3</li>
+                                <li> <span> <img src="{%  static '/ui/images/quater-four.png' %}"> </span>Q4</li>
+                            </ul>
+                        </div>
+								<!-- <div class="leave-quarterly-box">  
+	 									<ul>
+										<li><span> <i class="nf nf-chart-schemes custom-quater"></i>
+										</span>Q1</li> 
+										<li><span><i class="nf nf-pie-chart custom-quater"></i>
+										</span>Q2</li>
+										<li><span><i class="nf nf-circle-thin custom-quater"></i>
+										</span>Q3</li>
+										<li><span><i class="nf nf-circle-1 custom-quater"></i>
+										</span>Q4</li>
+									</ul>
+								</div> -->
+								<div class="leave-month-box"> 
+									<ul>
+										<li>Jan</li>
+										<li>Feb</li>
+										<li>Mar</li>
+										<li>Apr</li>
+										<li>May</li>
+										<li>Jun</li>
+										<li>Jul</li>
+										<li>Aug</li>
+										<li>Sep</li>
+										<li>Oct</li>
+										<li>Nov</li>
+										<li>Dec</li>
+									</ul>
+
+								</div>
+								<div class="past-current-quater">
+									<ul id='quater_head'>
+										<li id='q1'>Past Quater</li>
+										<li id='q2'>Past Quater</li>
+										<li id='q3'>Past Quater</li>
+										<li id='q4'>Current Quater</li> 
+									</ul>
+								</div>  
+								<div id="calender_box_main">
+								<div class="leave-calender-box" id="calendar_box_div">
+									<table width="100%" border="1" id="calendar_table">
+										<tbody>
+											<tr id='day_01'>
+												<td>1</td>  
+												<td>1</td>  
+												<td>1</td> 
+												<td>1<!--  <div class="list-leave-icon"> 
+       			<img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="{% static  '/ui/images/aproved-leave-icon.png"> 
+       		</div> -->
+												</td> 
+												<td>1</td> 
+												<td>1</td>
+												<td>1</td>
+												<td>1</td>
+												<td>1</td>
+												<td>1</td>   
+												<td>1</td>
+												<td>1</td>
+											</tr> 
+											<tr id='day_02'>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2
+												</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+												<td>2</td>
+											</tr>
+											<tr id='day_03'>
+												<td>
+													</div>3 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> 
+      		</div> -->
+												</td>
+												<td>3</td>
+												<td>3</td>
+												<td>3</td>
+												<td>3
+													
+												</td>
+												<td>3</td>
+												<td>3</td>
+												<td>3</td>
+												<td>3</td>
+												<td>3 <!--  <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> -->
+												</td>
+												<td>3</td>
+												<td>3</td>
+											</tr>
+											<tr id='day_04'>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4</td>
+												<td>4<!--  <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>4</td>
+												<td>4</td>
+											</tr>
+											<tr id='day_05'>
+												<td>5 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5</td>
+												<td>5 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>5</td>
+											</tr>
+											<tr id='day_06'>
+												<td>6</td>
+												<td>6
+													
+												</td>
+												<td>6</td>
+												<td>6</td>
+												<td>6</td>
+												<td>6</td>
+												<td>6 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>6</td>
+												<td>6</td>
+												<td>6</td>
+												<td>6</td>
+												<td>6</td>
+											</tr>
+											<tr id='day_07'>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+												<td>7</td>
+											</tr>   
+											<tr id='day_08'>
+												<td>8</td>
+												<td>8</td>
+												<td>8 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>8</td>
+												<td>8</td>
+												<td>8</td>
+												<td>8</td>
+												<td>8</td>
+												<td>8</td>
+												<td>8 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>8</td>
+												<td>8</td>
+											</tr>
+											<tr id='day_09'>
+													<td>9</td>
+													<td>9</td>
+												<td>9</td>
+												<td>9</td> 
+												<td>9</td>
+												<td>9 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>9</td>
+												<td>9</td>
+												<td>9</td>
+												<td>9</td>
+												<td>9</td>
+												<td>9</td>
+											</tr>
+											<tr id='day_10'>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10</td>
+												<td>10
+													
+												</td>
+											</tr>
+											<tr id='day_11'>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+												<td>11</td>
+											</tr>
+											<tr id='day_12'>
+												<td>12<!--  <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>12</td>
+												<td>12</td>
+												<td>12</td>
+												<td>12</td>
+												<td>12
+													
+												</td>
+												<td>12</td>
+												<td>12</td>
+												<td>12</td>
+												<td>12</td>
+												<td>12 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>12</td>
+											</tr>
+											<tr id='day_13'>
+												<td>13 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13</td>
+												<td>13 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+											</tr>
+											<tr id='day_14'>
+												<td>14</td>
+												<td>14 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Casual Leave" src="assets/images/casual-leave.png"> </div> --></td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+												<td>14</td>
+											</tr>
+											<tr id='day_15'>
+												<td>15</td>
+												<td>15</td>
+												<td>15<!--  <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+												<td>15</td>
+												<td>15
+													
+												</td>
+												<td>15</td>
+												<td>15</td>
+												<td>15</td>
+												<td>15</td>
+												<td>15</td>
+												<td>15</td>
+												<td>15</td>
+											</tr>
+											<tr id='day_16'>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+												<td>16</td>
+											</tr>
+											<tr id='day_17'>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17</td>
+												<td>17 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>17</td>
+											</tr>
+											<tr id='day_18'>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+												<td>18</td>
+											</tr>
+											<tr id='day_19'>
+												<td>19
+													
+												</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+												<td>19</td>
+											</tr>
+											<tr id='day_20'>
+												<td>20 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Permission Leave" src="assets/images/permission-icon'.png"> </div> --></td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20</td>
+												<td>20
+													
+												</td>
+											</tr>
+											<tr id='day_21'>
+												<td>21</td>
+												<td>21</td>
+												<td>21 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+												<td>21</td>
+												<td>21</td>
+												<td>21
+													<!-- <div class="unaproved-leave"></div>   for late arrival--> 
+												</td> 
+												<td>21</td> 
+												<td>21</td>
+												<td>21</td>
+												<td>21</td>
+												<td>21</td>
+												<td>21</td>
+											</tr>
+											<tr id='day_22'>
+												<td>22</td>
+												<td>22</td>
+												<td>22 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+												<td>22</td>
+												<td>22</td>
+												<td>22</td>
+												<td>22</td>
+												<td>22
+													
+												</td>
+												<td>22</td>
+												<td>22</td>
+												<td>22</td>
+												<td>22</td>
+											</tr>
+											<tr id='day_23'>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+												<td>23</td>
+											</tr>
+											<tr id='day_24'>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td>24</td>
+												<td >24</td>
+												<td >24 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Performance Leave" src="assets/images/performance-leave.png"> </div> --></td>
+											</tr>
+											<tr id='day_25'>
+												<td>25</td>
+												<td>25</td>
+												<td>25<!--  <div class="list-leave-icon"> <im data-toggle="tooltip" data-placement="top" title="Sick Leave"g src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>25</td>
+												<td>25</td>
+												<td>25</td>
+												<td>25</td>
+												<td>25</td>
+												<td>25</td>
+												<td>25</td>
+												<td>25
+													
+												</td>
+												<td>25</td>
+											</tr>
+											<tr id='day_26'>
+												<td>26</td>
+												<td>26 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+												<td>26</td>
+											</tr>
+											<tr id='day_27'>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+												<td>27</td>
+											</tr>
+											<tr id='day_28'>
+												<td>28</td>
+												<td>28</td>
+												<td>28 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28</td>
+												<td>28 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+											</tr>
+											<tr id='day_29'>
+												<td>29
+													
+												</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+												<td>29</td>
+											</tr>
+											<tr id='day_30'>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30</td>
+												<td>30 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+											</tr>
+											<tr id='day_31'>
+												<td>31</td> 
+												<td>31 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Approved Leave" src="assets/images/aproved-leave-icon.png"> </div> --></td>
+												<td>31</td>
+												<td>31</td>
+												<td>31</td> 
+												<td>31
+													
+												</td>
+												<td>31</td>
+												<td>31</td>
+												<td>31</td>
+												<td>31</td>
+												<td>31 <!-- <div class="list-leave-icon"> <img data-toggle="tooltip" data-placement="top" title="Sick Leave" src="assets/images/sick-leave-icon.png"> </div> --></td>
+												<td>31</td>
+											</tr>
+										</tbody> 
+									</table>
+								</div>
+								</div>
+								<div id='clone_div'></div>
+								<div class="label-leave-list">
+									<ul id='leave_ledgent'> 
+									<!--   <li><img src="assets/images/sick-leave-icon.png">&nbsp; Sick Leave</li>
+                                    <li><img src="assets/images/casual-leave.png">&nbsp; Casual Leave</li>
+                                    <li><img src="assets/images/permission-icon'.png">&nbsp; Permissions</li>
+                                    <li><img src="assets/images/permission-icon'.png">&nbsp; Unapproved Leave</li>
+                                    <li><img src="assets/images/performance-leave.png">&nbsp; Performance Holiday</li>
+                                    <li><img src="assets/images/aproved-leave-icon.png">&nbsp; Approved Public Holidays</li> -->
+									</ul>
+								</div>
+								<div class="chart-box-sec row">
+									<div class="col-lg-3 col-md-6">
+										<div id="quater-one"></div>
+									</div>
+									<div class="col-lg-3 col-md-6">
+										<div id="quater-two"></div>
+									</div>
+
+									<div class="col-lg-3 col-md-6">
+										<div id="quater-three"></div>
+									</div>
+
+									<div class="col-lg-3 col-md-6">
+										<div id="quater-four"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>  
+        </div>  
+      </div>
+      <!-- END PAGE BASE CONTENT -->
+    </div>
+    <!-- END CONTENT BODY -->
+    
+    {% endblock %}
+  </div>
+</div>
+
+{% block scripts %}
+    <!--Charts-->
+<script src="{% static  '/ui/plugins/amchart/js/amcharts.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/amchart/js/pie.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/amchart/js/export.min.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/amchart/js/light.js' %}" type="text/javascript"></script> 
+<script src="{% static  '/ui/plugins/amchart/js/serial.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/amchart/js/gauge.js' %}" type="text/javascript"></script> 
+<script src="{% static  '/ui/plugins/amchart/js/gantt.js' %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/amchart/js/chart-script-all.js' %}" type="text/javascript"></script>
+<!-- select2 js -->
+<script src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}" type="text/javascript"></script>
+<!-- developement js -->
+<script src="{% static  'dev/hrms_foundation/js/attendance_management/leave_calendar.js' %}" 
+	type="text/javascript"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip() 
+        })
+    </script>
+    {% endblock %}
+<!-- 
+vow=['a','e','i','o','u']
+leter=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_',' '] 
+print ''.join([i if i not  in vow else i.upper() for i in [leter[leter.index(x)+1] for x in raw_input().replace(' ','_')]]) -->

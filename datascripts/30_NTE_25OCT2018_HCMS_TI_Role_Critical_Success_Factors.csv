@@ -1,0 +1,107 @@
+id,created_date,modified_date,is_active,factors_crit_succ_fact,created_by_id,factors_role_id,modified_by_id
+1,2018-10-25 11:54:40.567494+05:30,2018-10-25 11:54:40.567545+05:30,t,"Writing reusable, testable, and efficient code",1,2,1
+2,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Design and implementation of low-latency, high-availability, and performant applications",1,2,1
+3,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Integration of user-facing elements with server side logic,1,2,1
+4,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Implementation of security and data protection,1,2,1
+5,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Writing reusable, testable, and efficient code",1,3,1
+6,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Design and implementation of low-latency, high-availability, and performant applications",1,3,1
+7,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Integration of user-facing elements with server side logic,1,3,1
+8,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Implementation of security and data protection,1,3,1
+9,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Use-case identification,1,4,1
+10,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement gathering - Analyzing customer requirement,1,4,1
+11,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement based solution approach,1,4,1
+12,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Process adherence and Deliverable ownership,1,4,1
+13,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Lead and perform in-depth and thorough testing of the owned features,1,4,1
+14,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Ensure the best possible performance, quality, and responsiveness of the application",1,5,1
+15,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Maintain code quality and automatization,1,5,1
+16,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Work with outside data sources and APIs,1,5,1
+17,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Writing reusable, testable, and efficient code",1,5,1
+18,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Work with outside data sources and APIs,1,6,1
+19,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Ensure the best possible performance, quality, and responsiveness of the application",1,6,1
+20,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Maintain code quality and automatization,1,6,1
+21,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Writing reusable, testable, and efficient code",1,6,1
+22,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Translate designs and wireframes into high quality code,1,7,1
+23,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Collaborate with cross-functional teams to define, design, and ship new features",1,7,1
+24,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Ensure the best possible performance, quality, and responsiveness of the application",1,7,1
+25,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Maintain code quality and automatization,1,7,1
+26,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Work with outside data sources and APIs,1,7,1
+27,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Implementation of security and data protection,1,7,1
+28,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Writing reusable, testable, and efficient code",1,7,1
+29,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Process adherence and Deliverable ownership,1,8,1
+30,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project Scope,1,8,1
+31,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project communication,1,8,1
+32,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Problem & Solution definition,1,8,1
+33,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement gathering - Analyzing customer requirement,1,8,1
+34,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement based solution approach,1,8,1
+35,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Engage and partner with internal and client personnel to understand specific system and functional requirements,1,9,1
+36,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Develop and test applications,1,9,1
+37,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Review and modify code to meet new requirements,1,9,1
+38,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Optimize user interface for ease of use,1,9,1
+39,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Track developer & team productivity metrics & help the team improve performance, and enable developers to grow",1,9,1
+40,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Partner with IT leads to develop technology roadmaps that align to business roadmaps and target state.,1,10,1
+41,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Outstanding prioritization and project management skills,1,10,1
+42,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Develop and test applications,1,10,1
+43,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Review and modify code to meet new requirements,1,10,1
+44,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Optimize user interface for ease of use,1,10,1
+45,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Track developer & team productivity metrics & help the team improve performance, and enable developers to grow",1,10,1
+46,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Create high fidelity mockups of elegant, usable and consistent user interfaces based on business requirements",1,11,1
+47,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Build functional/interactive prototypes ,1,11,1
+48,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Provide usability recommendations based on user testing, analytics, and user behavior",1,11,1
+49,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Contribute to the broader team defining core usability and visual design concepts ,1,11,1
+50,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Translate user behavior and research into actionable data.,1,12,1
+51,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Conceive, develop, test and present ideas that deliver the highest quality user experience in terms of innovation,simplicity and consistency",1,12,1
+52,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Drives design process in a collaborative manner with cross-functional teams,1,12,1
+53,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Establish and maintain reusable design standards and guideline,1,12,1
+54,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Design, build, and implement front-end solutions.",1,12,1
+55,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Create high fidelity mockups of elegant, usable and consistent user interfaces based on business requirements",1,13,1
+56,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Build functional/interactive prototypes ,1,13,1
+57,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Provide usability recommendations based on user testing, analytics, and user behavior",1,13,1
+58,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Contribute to the broader team defining core usability and visual design concepts ,1,13,1
+59,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Translate user behavior and research into actionable data.,1,14,1
+60,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Conceive, develop, test and present ideas that deliver the highest quality user experience in terms of innovation,simplicity and consistency",1,14,1
+61,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Drives design process in a collaborative manner with cross-functional teams,1,14,1
+62,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Establish and maintain reusable design standards and guideline,1,14,1
+63,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Design, build, and implement front-end solutions.",1,14,1
+64,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Translate user behavior and research into actionable data.,1,15,1
+65,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Conceive, develop, test and present ideas that deliver the highest quality user experience in terms of innovation,simplicity and consistency",1,15,1
+66,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Drives design process in a collaborative manner with cross-functional teams,1,15,1
+67,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Establish and maintain reusable design standards and guideline,1,15,1
+68,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Design, build, and implement front-end solutions.",1,15,1
+69,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Team handling & escalation handling,1,15,1
+70,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Preparation/review of test plans & test cases,1,16,1
+71,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Develop test strategy and planning cycles for projects,1,16,1
+72,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Execution of tests and reporting of defects,1,16,1
+73,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Preparation of test reports,1,16,1
+74,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Identify risks, perform risk analysis, work with stakeholders to understand those risks and help reach the best decision for our customers",1,16,1
+75,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Test solutions in terms of functionality, performance, reliability, stability, security and compatibility ",1,16,1
+76,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Development and integration of GIS Modules ,1,17,1
+77,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,To ensure that Web GIS applications adheres the requirement of customer ,1,17,1
+78,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Create test plans and develop test suites for integration &unit testing.,1,17,1
+79,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Participate in application requirements gathering and design meetings,1,17,1
+80,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Defining cloud architectures for new systems,1,18,1
+81,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Re-architecting systems with an emphasis on cloud,1,18,1
+82,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Building, driving, and creating roadmaps of systems that need to be migrated to the cloud",1,18,1
+83,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Helping define automation and management of cloud infrastructure,1,18,1
+84,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Creativity and a good sense of aesthetics,1,19,1
+85,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Aptitude for visualizing content ,1,19,1
+86,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Capacity for attention to detail,1,19,1
+87,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Animation Techniques,1,19,1
+88,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Requirement elicitation, analysis and documentation",1,20,1
+89,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Define and Track Project Plans,1,20,1
+90,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Manage scope effectively,1,20,1
+91,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Change Management,1,20,1
+92,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,"Requirement elicitation, analysis and documentation",1,21,1
+93,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Manage scope effectively,1,21,1
+94,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Change Management,1,21,1
+95,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Process adherence and Deliverable ownership,1,22,1
+96,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project Scope,1,22,1
+97,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project communication,1,22,1
+98,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Problem & Solution definition,1,22,1
+99,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement gathering - Analyzing customer requirement,1,22,1
+100,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement based solution approach,1,22,1
+101,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Process adherence and Deliverable ownership,1,23,1
+102,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project Scope,1,23,1
+103,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Project communication,1,23,1
+104,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Problem & Solution definition,1,23,1
+105,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement gathering - Analyzing customer requirement,1,23,1
+106,2018-10-25 11:54:40.609093+05:30,2018-10-25 11:54:40.609158+05:30,t,Requirement based solution approach,1,23,1

@@ -1,0 +1,132 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- Single Select -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" />
+<!-- multiple select css -->
+<link
+	href="{%  static '/ui/plugins/multiselect-list/css/listbox-multiselected.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- Multiple Select with Grouped  -->
+<link
+	href="{%  static '/ui/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Sweetalert -->
+<link href="{%  static '/ui/plugins/bootstrap-sweetalert/css/sweetalert.css'  %}" rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css -->
+<link href="{% static '/ui/css/employee_offer.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- begin container -->
+{% endblock %}
+{% block content %} {% nav_tags breadcrum_title="HREmployeeExitExpertise" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1>
+					Exit Employee (Website)
+				</h1>
+				<div class="row">
+					<div class="col-md-12 ">
+						<!-- BEGIN SAMPLE FORM PORTLET-->
+						<div class="portlet light bordered" >
+							<div class="portlet-title">
+								<div class="row">
+								<form role="form" id='employee_exit_btn_form'>
+									{% csrf_token %}
+									<div class="col-sm-6">
+												<div class="form-group">
+													<label> Exit Employee<span
+													class="asterisk">*</span>   
+													</label>
+													<select id="employee_list" class="form-control mt-multiselect btn btn-default" multiple="multiple" data-label="left" data-select-all="true" data-width="100%" data-filter="true" data-action-onchange="true"
+													name="employee_list" data-placeholder="--Exit Employee Filter--"
+													data-error="errorTxt0">
+													{% for i in employee_list %}
+													<option value="{{ i.id }}">{{ i.name }}</option> 
+													{% endfor %}
+													</select>
+													<span class="errorTxt0 errormessage"></span>
+												</div>
+												<div class="form-group">
+													<label> Exit Employee Status <span
+													class="asterisk">*</span>   
+													</label><select id="status" name="status"
+													class="form-control select2 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true" required
+													data-error=".errorTxt1">
+													<option value="0">--Select Exit Employee Status--</option>
+													<option value="1">Active</option> 
+													<option value="2">In Active</option> 
+												</select> <span class="errorTxt1 errormessage"></span>
+											</div>
+										</div>
+									<div class="col-md-12" id='employee_exit_btn'>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h1>
+					Exit Employee Details (Website)
+				</h1>
+				<div class="portlet light bordered" style='overflow: hidden'>
+					<div class="portlet-title">
+						<div class="row">
+							<div class="col-md-12" id='emp_name_filter'>
+								<div class="col-md-3" style='float:right'>
+									<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-advanced-search"></i> <input
+												class="form-control" placeholder="Search by Exit Employee Name"
+												id='emp_name' type="text">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12" id='employee_exit_details' style="height: 460px;overflow: auto;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end container -->
+
+{% endblock %}
+{% block scripts %}
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+
+<!-- Sweet Alert --> 
+<script src="{%  static '/ui/plugins/bootstrap-sweetalert/js/sweetalert.min.js'  %}" type="text/javascript"></script> 
+<script src="{%  static '/ui/plugins/bootstrap-sweetalert/js/ui-sweetalert.min.js'  %}" type="text/javascript"></script> 
+<!-- Multiple Select List with Search -->
+		<script
+			src="{%  static '/ui/plugins/multiselect-list/js/listbox-multiselected.js'  %}"
+			type="text/javascript"></script>
+		<script>
+		
+</script>
+<!-- multiselect group js --> 
+<script src="{%  static '/ui/plugins/bootstrap-multiselect/js/components-bootstrap-multiselect.min.js'  %}" type="text/javascript"></script> 
+<script src="{%  static '/ui/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js'  %}" type="text/javascript"></script> 
+<!-- Developer functions --> 
+<script src="{%  static '/dev/lib/js/lib.js'  %}" type="text/javascript"></script>
+<script src="{%  static '/dev/hrms_foundation/js/employee_management/exit_our_expertise.js'  %}" type="text/javascript"></script>
+{% endblock %}

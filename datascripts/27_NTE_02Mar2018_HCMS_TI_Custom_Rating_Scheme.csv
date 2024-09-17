@@ -1,0 +1,10 @@
+id,created_date,modified_date,is_active,custom_rating_scheme_name,created_by_id,modified_by_id
+1,2/13/2018 16:27,2/13/2018 16:27,TRUE,YesNoNA,1,1
+2,2/13/2018 16:27,2/13/2018 16:27,TRUE,3 Point Scale,1,1
+3,2/13/2018 16:27,2/13/2018 16:27,TRUE,5 Point Scale,1,1
+4,2/13/2018 16:27,2/13/2018 16:27,TRUE,10 Point Scale,1,1
+5,2/13/2018 16:27,2/13/2018 16:27,TRUE,MetNotMet,1,1
+6,2/13/2018 16:27,2/13/2018 16:27,TRUE,3- Expertise Level,1,1
+7,2/13/2018 16:27,2/13/2018 16:27,TRUE,4- Expertise Level,1,1
+8,2/13/2018 16:27,2/13/2018 16:27,TRUE,3- Performance Level,1,1
+9,2/13/2018 16:27,2/13/2018 16:27,TRUE,5- Performance Level,1,1

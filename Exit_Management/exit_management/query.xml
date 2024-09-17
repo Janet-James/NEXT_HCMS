@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Exit_Management/exit_management">
+		<!-- 24-Aug-2018 || SMI || Fetch data for employee list selection field start -->
+		<query id="employee_list_fetch_sel" query_name="employee_list_fetch_sel" description="Fetch data for employee list selection field">
+        	<![CDATA[ select id, employee_id,(name||' '||last_name) as emp_name, is_active from employee_info order by name; ]]>
+        </query>
+        <query id="all_exit_employee" query_name="all_exit_employee" description="Fetch all exit employee details ">
+             <![CDATA[ select ee.id,ROW_NUMBER()OVER (ORDER BY ee.id asc) ,coalesce(ei.name,'')||' '||coalesce (ei.last_name,'') as name ,
+					to_char(ee.emp_resignation_date,'DD-MM-YYYY') as resignation_date,to_char(ee.emp_exp_relieving_date,'DD-MM-YYYY')as relieving_date,
+					(select case when emp_status  and department_approve_status and  not hr_emp_status  and  not hr_approve_status then '<span class="exit_approved" >Department Approved</span>' 
+					when hr_emp_status and hr_approve_status then '<span class="exit_approved" >HR Approved</span>' 
+					when emp_status and not department_approve_status then '<span class="exit_rejected" >Department Rejected</span>' 
+					when emp_status and department_approve_status and  hr_emp_status and  not hr_approve_status then '<span class="exit_rejected" >HR Rejected </span>'  
+					when  not emp_status and not department_approve_status and not hr_emp_status and  not hr_approve_status then '<span class="exit_requeseted" >Requested </span>' 
+					end  as status from em_exit_details   where id=ee.id )as status
+					from em_exit_details  ee  inner join employee_info ei on ei.id=ee.emp_id  where ei.is_active and ei.id=%s and  ee.is_active order by status
+				 ]]>
+        </query>
+        <query id="row_exit_employee" query_name="row_exit_employee" description="Fetch one  exit employee details ">
+             <![CDATA[ select ee.emp_id,to_char(ee.emp_resignation_date,'DD-MM-YYYY') as resignation_date,to_char(ee.emp_exp_relieving_date,'DD-MM-YYYY')as relieving_date,
+					   ee.emp_leaving_reason_refitem,ee.emp_leaving_reason_others,ee.emp_remarks
+					   from em_exit_details  ee    where ee.id=%s  and ee.is_active  ]]>
+        </query>
+        <!-- Check Exit employee name already exists -->
+		<query id="exit_employee_check" name="exit_employee_check"
+			description="Check exit employee naame already exist ">
+		<![CDATA[select id from em_exit_details where emp_id=%s ]]>
+		</query>
+        <!-- 24-Aug-2018 || SMI || Fetch data for employee list selection field end -->
+        
+        <!-- Listing Organization -->
+        <query id="hrms_org_list" query_name="hrms_org_list"
+			description="hrms Org list">
+          <![CDATA[select id,name from organization_info where is_active order by name]]>
+		</query>      
+		
+		<!-- Requests Search -->
+		<query id="exit_requests_report_search" query_name="exit_requests_report_search"
+			description="exit_requests_report_search">
+          <![CDATA[select ext.id, ROW_NUMBER() OVER(ORDER BY ext.id asc),emp.name,emp.last_name,to_char(ext.emp_resignation_date,'DD-MM-YYYY'),to_char(ext.emp_exp_relieving_date,'DD-MM-YYYY') from em_exit_details ext
+            inner join employee_info emp on emp.id=ext.emp_id where]]>
+		</query>      
+			
+		<!-- Approved Search -->  
+		<query id="exit_approved_report_search" query_name="exit_approved_report_search"
+			description="exit_approved_report_search">
+          <![CDATA[select ext.id, ROW_NUMBER() OVER(ORDER BY ext.id asc),ext.name,ext.last_name,to_char(ext.emp_resignation,'DD-MM-YYYY') as emp_resignation_date,
+			to_char(ext.emp_exp_rel_date,'DD-MM-YYYY') as emp_rel_date,ext.relieving_status from
+			(select ext.id, ROW_NUMBER() OVER(ORDER BY ext.id asc),emp.name,emp.last_name,
+			ext.emp_resignation_date AS emp_resignation,ext.emp_exp_relieving_date as emp_exp_rel_date,
+			(case when (ext.relieving_status is true ) then 'Relieved' else 'Not Relieved' end) as relieving_status,
+			emp_resignation_date,department_approve_status,hr_approve_status,ext.is_active,ext.emp_status,ext.hr_emp_status,
+			emp.org_unit_id_id,emp.team_name_id,emp.org_id_id
+			from em_exit_details ext inner join employee_info emp on emp.id=ext.emp_id where]]>
+		</query>	
+				
+</queries>
+</data>

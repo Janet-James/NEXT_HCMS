@@ -1,0 +1,19 @@
+canvas {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.alignment-charts {
+	height: 90px;
+	width: 90px;
+	margin: 32px;
+	margin-top: 18px;
+}
+.alignment-charts1 {
+	margin-left: 13px;
+}
+.donut-charts {
+    width: 100%;
+    height: 100px;
+}

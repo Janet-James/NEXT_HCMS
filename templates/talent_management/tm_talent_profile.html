@@ -1,0 +1,350 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/tooltip/css/tooltip.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/talent_management.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/dev/talent_management/css/talent_profile.css'  %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TMTalentProfiling" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data  fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1>Resource Talent Profile</h1>
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-md-1 col-sm-1" style="margin-top: 10px; text-align:right;">
+								<i data-toggle="tooltip" data-placement="top" title=""
+									class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+							</div>
+							<div class="col-md-2 col-sm-2">
+								<div class="form-group">
+									<select id="tm_tp_sel_org" name="tm_tp_sel_org"
+										class="form-control select2 hide_error"
+										onchange="get_org_list($(this).val());">
+										<option></option>
+										{% for data in tm_org %}
+										<option value="{{ data.id }}">{{ data.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3">
+								<div class="form-group">
+									<select id="tm_tp_sel_org_unit" name="tm_tp_sel_org_unit"
+										class="form-control select2 hide_error" disabled="disabled"
+										onchange="get_division_list($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3">
+								<div class="form-group">
+									<select id="tm_tp_division" name="tm_tp_division"
+										class="form-control select2 hide_error" disabled="disabled"
+										onchange="get_emp_list($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3">
+								<div class="form-group">
+									<select id="tm_tp_sel_emp" name="tm_tp_sel_emp"
+										class="form-control select2 hide_error" disabled="disabled"
+										onchange="tm_disp_profile($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					
+						<div id="tm_perform_potential" style="display: none;">
+							<div id="tm_year_slider"></div>
+							<div class="row">
+								<div class="col-md-8 col-sm-8">
+									<h1>PERFORMANCE & POTENTIAL</h1>
+								</div>
+								<div style="display:none;">
+									<button type="button" onclick="tp_add_edit_matrix();"
+										data-toggle="tooltip" data-placement="top"
+										data-original-title="Add / Edit Matrix Scale"
+										class="btn blue btn-animate" style="float: right;">
+										<i class="nf nf-plus"></i>
+									</button>
+								</div>
+								<div class="col-md-2 col-sm-2" style="margin-top: 10px; text-align:right;">
+									<i data-toggle="tooltip" data-placement="top" title=""
+										class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+								</div>
+								<div class="col-md-2 col-sm-2 float-right">
+									<div class="form-group">
+										<div class="form-group">
+											<select id="tm_sel_quarter" name="tm_sel_quarter"
+											 	class="form-control select2" data-placeholder="-Select Year-"
+											 	onchange="get_per_pot_values($(this).val());">
+												<option></option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive">
+								<table width="100%" border="0" class=" performance_table">
+									<tbody>
+										<tr>
+											<td colspan="6" class="tablehead">PERFORMANCE</td>
+										</tr>
+										<tr>
+											<td width="2%" rowspan="4" class="vertical">
+												<div class="vertical tablehead">POTENTIAL</div>
+											</td>
+											<td width="26%" colspan="2" class="tdtitle style1">Below</td>
+											<td width="15%" class="tdtitle style2">Meets</td>
+											<td width="15%" class="tdtitle style3">Exceeds</td>
+										</tr>
+										<tr>
+											<td width="2%" class="vertical style3">
+												<div class="vertical">High</div>
+											</td>
+											<td width="15%" id="pt_td_1_1">Needs development</td>
+											<td id="pt_td_1_2">Rising and developing contributor and performer</td>
+											<td id="pt_td_1_3">Star with Potential</td>
+										</tr>
+										<tr>
+											<td width="2%" class="vertical style2">
+												<div class="vertical">Medium</div>
+											</td>
+											<td id="pt_td_2_1">Not yet performing at required level</td>
+											<td id="pt_td_2_2">Contributor</td>
+											<td id="pt_td_2_3">Consistent Exceptional Delivery</td>
+										</tr>
+										<tr>
+											<td width="2%" class="vertical style1">
+												<div class="vertical">Low</div>
+											</td>
+											<td id="pt_td_3_1">Questionable Fit/Poor Performance</td>
+											<td id="pt_td_3_2">Sound Performance</td>
+											<td id="pt_td_3_3">Expert</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-md-12 col-small-12 col-lg-12"
+	                        id="tm_profile_nodata_div" style="display: block;">
+	                        <h3 class="no-data">No data available</h3>
+	                    </div>
+
+					</div>
+				</div>
+
+				<div id="profile_grid" class="" style="display: none;">
+					<div class="profile_grid">
+						<div data-toggle="tooltip" data-placement="bottom" title=""
+							class="profile_grid_icon " id="usersearch_icon"
+							data-original-title="Profile" style="right: 90px;"></div>
+					</div>
+					<div class="profile_grid_content1 profile_grid_wrap">
+						<div class="profile_grid_content">
+							<h1>
+								Talent Profile <i
+									class="nf nf-job-close-one pull-right switcher-close"></i>
+							</h1>
+							<div class="profile_item">
+								<img id="profile_img"
+									src="/static/dev/talent_management/img/avatar2.jpg"> <span
+									class="name">-</span> <span class="position">-</span>
+							</div>
+							<hr class="divide_line">
+							<ul class="profile-ul">
+								<li><span class="profile-li"><i
+										class="fa fa-envelope-o"></i></span><span id="profile_email">-</span></li>
+								<li><span class="profile-li"><i class="fa fa-phone"></i></span>
+									<span id="profile_mobile">-</span></li>
+								<li><span class="profile-li"><i
+										class="fa fa-map-marker"></i></span><span id="profile_location">-</span></li>
+							</ul>
+							<hr class="divide_line">
+							<h2>Job History :</h2>
+							<ul class="profile-ul">
+								<li><span class="profile-li"><i
+										class="fa nf nf-manager"></i></span> <span class="headstyle">
+										- </span> - </li>
+								<li><span class="profile-li"><i
+										class="fa fa-graduation-cap"></i></span> <span class="headstyle">-</span>
+									-</li>
+								<li><span class="profile-li"><i
+										class="fa fa-map-marker"></i></span> <span class="headstyle">
+										- </span> -</li>
+								<li><span class="profile-li"><i class="nf nf-globe"></i></span>
+									<span class="headstyle">-</span></li>
+								<li><span class="profile-li"><i
+										class="nf nf-briefcase"></i></span> <span class="headstyle">-</span></li>
+								<li><span class="profile-li"><i
+										class="fa fa-map-marker"></i></span> <span class="headstyle">-</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!--  modal start here -->
+				<div id="myModal1" class="modal fade" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel1" aria-hidden="true"	>
+					<div class="modal-dialog modal-md">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true"></button>
+								<h4 class="modal-title">Add / Edit Matrix Scale</h4>
+							</div>
+							<div class="modal-body">
+								<div class="portlet-body form">
+									<form role="form" id='add_edit_matrix'>
+										<div class="form-body">
+											<div class="row ">
+												<div class="col-md-12 col-sm-12">
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Category<span class="required"> * </span></label>
+															<select id="sel_category" name="sel_category"
+																class="form-control select2 hide_error"
+																required="required" data-error=".errorTxt0">
+																<option></option>
+																<option value="1">Performance</option>
+																<option value="2">Potential</option>
+															</select><span class="errorTxt0 error val_message"></span>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12 col-sm-12">
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-1 from</label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 1 from" id='range_1_from' name="range_1_from"
+																	type="number" disabled="disabled">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-1 to <span class="required"> * </span></label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 1 to" id='range_1_to' name="range_1_to"
+																	type="number" step="1" min="1" max="96" maxlength="2"
+																	required="required" data-error=".errorTxt1" /><span
+																	class="errorTxt1 error val_message"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12 col-sm-12">
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-2 from</label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 2 from" id='range_2_from' name="range_2_from"
+																	type="number" disabled="disabled">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-2 to <span class="required"> * </span></label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 2 to" id='range_2_to' name="range_2_to" 
+																	type="number" step="1" min="1" max="98" maxlength="2"
+																	required="required" data-error=".errorTxt2" /><span
+																	class="errorTxt2 error val_message"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12 col-sm-12">
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-3 from</label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 3 from" id='range_3_from' name="range_3_from"
+																	type="number" disabled="disabled">
+															</div>
+														</div>
+													</div>
+													<div class="col-md-6 col-sm-6">
+														<div class="form-group">
+															<label>Range-3 to</label>
+															<div class="input-icon">
+																<i class="fa fa-user"></i> <input class="form-control"
+																	placeholder="Range 3 to" id='range_3_to' name="range_3_to" 
+																	type="number" disabled="disabled">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-success btn-eql-wid btn-animate" id="submit_modal">Save</button>
+								<button class="btn btn-warning btn-eql-wid btn-animate" id="cancel_clear">Cancel / Clear</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--  modal end here -->
+
+
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script
+	src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/tooltip/js/tooltip.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/jquery-validation/js/jquery.validate.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/jquery-validation/js/additional-methods.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/talent_management/js/talent_profiling.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/talent_management/js/talent_profile.min.js'  %}"
+	type="text/javascript"></script>
+{% endblock %}

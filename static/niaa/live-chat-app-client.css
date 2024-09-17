@@ -1,0 +1,176 @@
+
+.live-chat-box * {
+    box-sizing: border-box;
+    font-family: arial;
+}
+.live-chat-box {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+    z-index: 99999;
+    background-color: #edeff1;
+    width: 300px;
+    -webkit-box-shadow: 3px 7px 20px -4px rgba(0, 0, 0, 0.35);
+    box-shadow: 3px 7px 20px -4px rgba(0, 0, 0, 0.35);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.live-chat-box-header {
+    width: 100%;
+    height: 55px;
+    line-height: 55px;
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;    font-size: 14px;
+    position: relative;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.live-chat-box-header .live-chat-header-title {
+    padding-left: 12px;
+}
+.live-chat-messages {
+    background-color: #edeff1;
+    font-size: 13px;
+    padding: 10px;
+    height: 300px;
+    border: 1px solid #cdcdcd;
+    border-bottom: 0;
+    overflow-y: auto;
+}
+.live-chat-messages:after,
+.live-chat-messages:before {
+    display: table;
+    content: " ";
+}
+.live-chat-messages:after {
+    clear: both;
+}
+.live-chat-message-item {
+    background-color: transparent;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    word-wrap: break-word;
+}
+.live-chat-message-item:after,
+.live-chat-message-item:before {
+    display: table;
+    content: " ";
+}
+.live-chat-message-item:after {
+    clear: both;
+}
+
+.live-chat-message-item .message {
+    border-radius: 15px;
+    padding: 5px 8px 4px;
+    max-width: 80%;
+    width: auto;
+    background-color: #fff;
+    color: #424242;
+}
+.live-chat-message-item .message {
+    float: left;
+}
+.live-chat-message-item-client .message {
+    float: right;
+}
+
+.live-chat-submit-input {
+    width: 100%;
+    border: 1px solid #cdcdcd;
+    border-top: 0;
+    padding: 10px;
+    outline: none;
+    resize: none;
+    font-size: 13px;
+    margin: 0;
+    display: block;
+}
+/* Overlay to show Jumb to recent message button */
+.live-chat-jump-to-recent {
+    position: absolute;
+    left: 10%;
+    top: 90%;
+}
+.room-msg-loading {
+    cursor: pointer;
+    color: #555;
+    display: block;
+    padding: 10px;
+    margin: 3px;
+}
+
+li {
+  list-style-type: none;
+}
+
+
+.user_photo{
+width:50px;height:50px;background-repeat: no-repeat;background-position: center;background-size: cover;
+}
+
+
+/*confirm window for file upload*/
+/*Start*/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 25%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.prev_window {
+    
+    width:100%;
+}
+/* Progress Bar */
+
+#progressBar {
+  width: 0%;
+  height: 5px;
+  background-color: #4fcaf1;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+/*14-06-2018 by bhu for side bar show hide */
+.hidden {
+    display: none;
+}
+.visible {
+    display: block;
+}

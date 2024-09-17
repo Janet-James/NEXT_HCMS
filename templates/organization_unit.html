@@ -1,0 +1,55 @@
+<!-- modal start here -->
+<div id="orgModal" class="modal1 modal fade" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Select Organization Unit</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<p>
+				<!-- <div class="form-group">
+					<div class="mt-radio-inline">
+						<div class="radio">
+							<label> <input name="org_tree_type" id="org_tree_single"
+								value="single" checked="" type="radio"> <span class="cr"><i
+									class="cr-icon fa fa-circle"></i></span>Single Select
+							</label>
+						</div>
+						<div class="radio">
+							<label> <input name="org_tree_type" id="org_tree_multi"
+								value="multi" type="radio"> <span class="cr"><i
+									class="cr-icon fa fa-circle"></i></span>Multi Select
+							</label>
+						</div>
+					</div>
+				</div> -->
+				<div class="form-group">
+					<label for="single" class="control-label black_font">
+						Select Organization <span class="asterisk">*</span>
+					</label> <select id="organization_id_popup" name="organization_id_popup"
+						class="form-control select2" required data-error=".errorTxt3">
+						<option value="0">--Select Organization--</option>
+					</select> <span class="errorTxt3 errormessage"></span>
+				</div>
+				<div class="form-group">
+					<label for="single" class="control-label black_font">Organization Unit Type <span class="asterisk">*</span>
+					</label> <select id="organization_unit_type"
+						class="select2"
+						tabindex="-1" aria-hidden="true">
+						<option value="0">--select--</option>
+						<optgroup label="Company">
+						</optgroup>
+					</select>
+				</div>
+				<div id="tree_2"></div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success btn-eql-wid btn-animate"
+					id="org_unit_save" data-dismiss="modal" aria-hidden="true">Select</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->

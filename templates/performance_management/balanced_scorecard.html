@@ -1,0 +1,431 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{%block links %}
+<link href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/multiselect-list/css/listbox-multiselected.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="/static/dev/NTree/ui/plugins/ion.rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/dev/NTree/ui/plugins/ion.rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/performance_management/dev/css/performance_management.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="PMBalancedScorecard" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row eqheight" id="balance_scorecard_view">
+					<div class="col-md-12"
+						style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase">Balanced
+										Scorecard</span>
+								</div>
+							<button onclick="bsc_obj_model();" class="pull-right btn btn-sm btn-success tip" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add"> <i class="fa fa-plus"></i> </button>
+								</div>
+								<div class="row">
+									<div class="col-md-3 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Year</label> <select id="year_data"
+												name="year_list" class="form-control select2">
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3 col-sm-6">
+										<div class="form-group">
+											<label class="control-label">Quarter</label> 
+											<select id="quarter"
+												name="quarter" class="form-control select2-icon">
+												</select>
+										</div>
+									</div>
+								</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="clearfix"></div>
+									<div class="col-md-12">
+										<form class="horizontal-form">
+											{%csrf_token%}
+											<div class="row">
+												<div class="col-md-12">
+													<div class="tab-content">
+														<div id="tab_1" class="tab-pane active">
+															<div id="accordion1" class="panel-group accordion balanced_scorecard_acc">
+																<div class="panel panel-default">
+																	<div class="panel-heading">
+																		<h4 class="panel-title">
+																			<a class="accordion-toggle accordion-toggle-styled"
+																				data-toggle="collapse" data-parent="#accordion1"
+																				href="#accordion1_1"> Financial Perspective</a>
+																		
+																		
+																		<div class="pull-right pro-count-list">
+																		
+																		<span class="total-obj">Objectives<span id='fin_obj_count'></span></span>
+																		
+																		<span class="total-completed">Completed <span  id=fin_obj_completed></span></span>
+																		
+																		
+																		<div id="fin_chart"></div>
+																		
+																		<span class="pro-count" id='fin_avg'></span>
+																		
+																		
+																		</div>
+																		
+																		</h4>
+																		
+																		
+																		
+																		
+																	</div>
+																	<div id="accordion1_1"
+																		class="panel-collapse collapse in">
+																		<div class="panel-body">
+																			<div id="financial_dev"></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="panel panel-default">
+																	<div class="panel-heading">
+																		<h4 class="panel-title">
+																			<a
+																				class="accordion-toggle accordion-toggle-styled collapsed"
+																				data-toggle="collapse" data-parent="#accordion1"
+																				href="#accordion1_2"> Customer Perspective </a>
+																				<div class="pull-right pro-count-list">
+																		
+																		<span class="total-obj">Objectives<span id='cst_obj_count'></span></span>
+																		
+																		<span class="total-completed">Completed <span  id=cst_obj_completed></span></span>
+																		
+																		
+																		<div id="cst_chart"></div>
+																		
+																		<span class="pro-count" id='cst_avg'></span>
+																		
+																		
+																		</div>
+																		</h4>
+																	</div>
+																	<div id="accordion1_2" class="panel-collapse collapse">
+																		<div class="panel-body">
+																			<div id="custom_dev"></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="panel panel-default">
+																	<div class="panel-heading">
+																		<h4 class="panel-title">
+																			<a
+																				class="accordion-toggle  accordion-toggle-styled collapsed"
+																				data-toggle="collapse" data-parent="#accordion1"
+																				href="#accordion1_3"> Learning and Growth </a>
+																				<div class="pull-right pro-count-list">
+																		
+																		<span class="total-obj">Objectives<span id='learn_obj_count'></span></span>
+																		
+																		<span class="total-completed">Completed <span  id=learn_obj_completed></span></span>
+																		
+																		
+																		<div id="learn_chart"></div>
+																		
+																		<span class="pro-count" id='learn_avg'></span>
+																		
+																		
+																		</div>
+																		</h4>
+																	</div>
+																	<div id="accordion1_3" class="panel-collapse collapse">
+																		<div class="panel-body">
+																			<div id="knowledge_dev"></div>
+																		</div>
+																	</div>
+																</div>
+																<div class="panel panel-default">
+																	<div class="panel-heading">
+																		<h4 class="panel-title">
+																			<a
+																				class="accordion-toggle  accordion-toggle-styled collapsed"
+																				data-toggle="collapse" data-parent="#accordion1"
+																				href="#accordion1_4"> Process Perspective</a>
+																				 <div class="pull-right pro-count-list">
+																		
+																		<span class="total-obj">Objectives<span id='process_obj_count'></span></span>
+																		
+																		<span class="total-completed">Completed <span  id=process_obj_completed></span></span>
+																		
+																		
+																		<div id="process_chart"></div>
+																		
+																		<span class="pro-count" id='process_avg'></span>
+																		
+																		
+																		</div>
+																		</h4>
+																	</div>
+																	<div id="accordion1_4" class="panel-collapse collapse">
+																		<div class="panel-body">
+																			<div id="process_dev"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12" id="Add_bsc_objective_Modal"
+						style="display: none;">
+						
+							<div class="portlet light bordered" >
+								<div class="portlet-title">
+									<div class="form-group">
+										<h1 class="margin-top-0">
+											 Objective Setting <i data-toggle="tooltip"
+												data-placement="top" title=""
+												class="fa fa-times float-right"
+												style="float: right; cursor: pointer;"
+												id="balance_scorecard_form_close"
+												data-original-title="Close"></i>
+										</h1>
+									</div>
+								</div>
+								<div class="portlet-body ">
+									<!-- BEGIN FORM -->
+									<div class="row eqheight">
+										<div class="col-md-12">
+											<div class="tabbable-line">
+												<div class="tab-content " style="border:none !important">
+													<div class="tab-pane active" id="scorecard_tab_1">
+														<div class="portlet-body form">
+															<!-- BEGIN FORM -->
+															<form action="#" class="horizontal-form div_top"
+																id="bsc_objective_form">
+																{%csrf_token%}
+																<div class="form-body" style="padding: 0;">
+																	<div class="row row_margin">
+																		<div class="col-md-4">
+																			<label for="obj_plan_type"
+																				class="control-label black_font">Plan Type <span
+																					class="required" aria-required="true"> * </span></label>
+																			<div class="form-group">
+																				<select id="obj_plan_type"
+																					class="form-control select2 " name="obj_plan_type" data-error=".errorTxt1">
+																					<option value="0">--Select--</option>
+																					<option value="monthly">Monthly</option>
+																					<option value="quarterly">Quarterly</option>
+																				</select><span class="errorTxt1 errormessage" id="error_message"></span>
+																			</div>
+																		</div>
+																		<div class="col-md-4" style="display: none">
+																			<label for="obj_set_yearlist"
+																				class="control-label black_font">Year <span
+																					class="required" aria-required="true"> * </span></label>
+																			<div class="form-group">
+																				<select id="obj_set_yearlist"
+																					class="form-control select2 "
+																					name="obj_set_yearlist" data-error=".errorTxt2">
+																					<option value="0">--Select--</option>
+																					<option value="2016">2016</option>
+																					<option value="2017">2017</option>
+																					<option value="2018">2018</option>
+																					<option value="2019">2019</option>
+																					<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+																				</select><span class="errorTxt2 errormessage" id="yearly_error_message"></span>
+																			</div>
+																		</div>
+																		<div class="col-md-4" style="display: none">
+																			<label for="obj_set_quarterlist"
+																				class="control-label black_font">Quarters <span
+																					class="required" aria-required="true"> * </span></label>
+																			<div class="form-group">
+																				<select id="obj_set_quarterlist"
+																					class="form-control select2-icon"
+																					name="obj_set_quarterlist">
+																					<option value="0">--Select--</option>
+																					<option value="1">Quarter 1</option>
+																					<option value="2">Quarter 2</option>
+																					<option value="3">Quarter 3</option>
+																					<option value="4">Quarter 4</option>
+																				</select><span class="errorTxt1 errormessage" id="quarter_error_message"></span>
+																			</div>
+																		</div>
+																		<div class="col-md-4" style="display: none">
+																			<label for="obj_set_monthlist"
+																				class="control-label black_font">Monthly <span
+																					class="required" aria-required="true"> * </span></label>
+																			<div class="form-group">
+																				<select id="obj_set_monthlist" 
+																					class="form-control select2 "
+																					name="obj_set_monthlist">
+																					<option value="0">--Select--</option>
+																					<option value="1">January</option>
+																					<option value="2">February</option>
+																					<option value="3">March</option>
+																					<option value="4">April</option>
+																					<option value="5">May</option>
+																					<option value="6">June</option>
+																					<option value="7">July</option>
+																					<option value="8">August</option>
+																					<option value="9">September</option>
+																					<option value="10">October</option>
+																					<option value="11">November</option>
+																					<option value="12">December</option>
+																				</select><span class="errorTxt1 errormessage" id="monthly_error_message"></span>
+																			</div>
+																		</div>
+																	</div>
+																		<div class="row row_margin">
+																			<div class="col-md-6">
+																				<div class="form-group">
+																				<label for="obj_set_assign_type">Organization</label>
+																				<select id="obj_org_id"
+																					class="form-control select2 "
+																					name="obj_org_id" data-error=".errorTxt6">
+                                                                                    <option value="0">--Select--</option> {% for i in organization %}
+											                                        <option value={{i.id}}>{{i.name}}</option> {% endfor %}
+																				</select><span class="errorTxt6 errormessage" id="error_message"></span>
+																			</div>
+																			</div>
+																			<div class="col-md-6">
+																				<div class="form-group">
+																					<label for="bsc_perspective"
+																						class="control-label black_font">BSC
+																						Perspective<span
+																					class="required" aria-required="true"> * </span></label>
+																					<div class="form-group">
+																						<select id="bsc_perspective"
+																							class="form-control select2 "
+																							name="bsc_perspective" data-error=".errorTxt7">
+																							 <option value="0">--Select--</option> {% for i in bsc_info %}
+											                                        <option value={{i.id}}>{{i.refitems_name}}</option> {% endfor %}
+																						</select><span class="errorTxt7 errormessage" id="error_message"></span>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	<div class="row row_margin">
+																		<div class="col-md-12">
+																			<div class="form-group">
+																				<label for="objective_name">Objective name<span
+																					class="required" aria-required="true"> * </span></label>
+																				<div class="input-icon">
+																					<input type="text" class="form-control"
+																						placeholder="Objective Name"
+																						id="org_set_objective_name" data-orgobjectiveid=''
+																						name="org_set_objective_name" required=""
+																						aria-required="true" data-error=".errorTxt3">
+																				</div><span class="errorTxt3 errormessage" id="error_message"></span>
+																			</div></div></div>
+																			<div class="row row_margin">
+																			<div class="col-md-6">
+																				<div class="form-group">
+																					<label class="control-label ">Start Date<span
+																						class="required"> * </span></label>
+																					<div class="input-icon">
+																						 <input
+																							id="obj_set_start_date" name="obj_set_start_date"
+																							required="required" 
+																							placeholder="Start Date"
+																							class="form-control form-control-inline"
+																							type="text" data-field="date" data-error=".errorTxt4"/><span
+																							class="errorTxt4 errormessage" id="error_message"></span>
+																						<div id="am_start_date"></div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-md-6">
+																				<div class="form-group">
+																		<label class="control-label ">End Date<span
+																			class="required"> * </span></label>
+																		<div class="input-icon">
+																			 <input
+																				id="obj_set_end_date" name="obj_set_end_date"
+																				required="required" 
+																				placeholder="End Date"
+																				class="form-control form-control-inline" type="text"
+																				data-field="date" data-error=".errorTxt5"/><span
+																				class="errorTxt5 errormessage" id="error_message"></span>
+																			<div id="am_end_date"></div>
+																		</div>
+																	</div>
+																			</div>
+																		</div>
+																		<div class="row row_margin">
+																			<div class="col-md-6">
+																		<div id='progress_div'>
+																			<input type="text" value=""  class="objective_progress" ></input>
+																			</div></div></div>
+																</div>
+																<div class="text-right" id="balance_obj_btn">
+																</div>
+															</form>
+															<!-- END FORM -->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %}
+<!-- Objective JS Setup -->
+<script src="{% static '/ui/plugins/multiselect-list/js/listbox-multiselected.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/components-select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/moment.min.js" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/ion.rangeslider/js/ion.rangeSlider.min.js" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/ion.rangeslider/js/components-ion-sliders.min.js" type="text/javascript"></script>
+    <!--  link for chart -->
+<script src="{% static 'ui/plugins/amchart/js/amcharts.js' %}"></script>
+<script src="{% static 'ui/plugins/amchart/js/pie.js' %}"></script>
+<script src="{% static 'ui/plugins/amchart/js/serial.js' %}"></script>
+<script src="{% static 'ui/plugins/amchart/js/light.js' %}"></script>
+<script src="{% static 'dev/performance_management/dev/balance_scorecard.js' %}" type="text/javascript"></script>
+<script>
+        $(document).ready(function() {
+        function formatState(state) {
+                if (!state.id) {
+                    return state.text;
+                }
+                var baseUrl = "css";
+                var a=state.element.text.toLowerCase()
+                if(a!='--select--'){
+                var $state = $(
+                    '<span><img src="/static/dev/performance_management/dev/css/'+a+'.png"  class="quarter-icon" /> ' + state.text + '</span>'
+                );
+                }
+                return $state;
+            };
+            $(".select2-icon").select2({
+                templateResult: formatState
+            });
+        }); 
+    </script>
+{% endblock %}

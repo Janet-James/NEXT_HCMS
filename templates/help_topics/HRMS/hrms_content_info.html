@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<link href="{% static '/dev/help_topics/css/help_topic.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container margin-0" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+										<div class="caption">
+											 <span
+												class="caption-subject  bold uppercase">MENU LIST </span>
+										</div>
+									</div>
+									<div class="portlet-body ">
+										<div id="help_topic_tree" class="tree-demo"
+											style="margin-left: 15%;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-9 col-sm-12 content_replace">
+								{% include "help_topics/HRMS/Introduction.html" %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %}
+<script src="{% static '/dev/help_topics/js/help_topic.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

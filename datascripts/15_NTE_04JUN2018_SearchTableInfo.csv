@@ -1,0 +1,191 @@
+id,search_keyword,search_type,search_data,search_link,is_active,created_by_id,modified_by_id,created_date,modified_date
+1,attendance,FORM,Employee Attendance,/hrms_attendance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+2,employee attendance,FORM,Employee Attendance,/hrms_attendance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+3,view attendance,FORM,Employee Attendance,/hrms_past_attendance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+4,past attendance,FORM,Employee Attendance,/hrms_past_attendance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+5,load data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+6,bulk load data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+7,import data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+8,import test data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+9,import master data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+10,data master,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+11,data import,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+12,bulk data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+13,load bulk data,FORM,Data Upload - App Admin,/data_mgt_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+14,employee report,FORM,Employee Reports,/hrms_reports/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+15,attendance report,FORM,Employee Attendance Report,/hrms_reports/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+16,leave report,FORM,Employee Leave Report,/hrms_reports/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+17,employee,FORM,Employee Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+18,staff,FORM,Employee Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+19,employee skills,FORM,Employee Skill Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+20,skills,FORM,Employee Skill Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+21,education qualification,FORM,Employee Education Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+22,education details,FORM,Employee Education Details,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+23,work experience,FORM,Employee Work Experience,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+24,professional experience,FORM,Employee Work Experience,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+25,certification,FORM,Employee Certification,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+26,employee details,FORM,Employee Details,/hrms_employee_list/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+27,personal details,FORM,Employee Details,/hrms_employee_list/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+28,identification ,FORM,Employee Details,/hrms_employee_list/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+29,permission,FORM,App Admin - System Permission,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+30,role permission,FORM,App Admin - Role Permission,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+31,user permission,FORM,App Admin - User Permission,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+32,access,FORM,App Admin - User Access,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+33,user access,FORM,App Admin - User Access,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+34,application access,FORM,App Admin - User Access,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+35,access management,FORM,App Admin - User Access,/permission_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+36,reference category,FORM,Reference Item category,/refitemcat_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+37,reference item category,FORM,Reference Item category,/refitemcat_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+38,application data managemen,FORM,Reference Item category,/refitemcat_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+39,manage application data,FORM,Reference Item category,/refitemcat_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+40,reference item,FORM,Reference Items,/refitem_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+41,employee role,FORM,Employee Role,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+42,role,FORM,Employee Role,/hrms_employee/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+43,role,FORM,System User Role,/role_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+44,user role,FORM,System User Role Manage,/usr_access_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+45,user,FORM,System Users,/usr_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+46,system user,FORM,System Users,/usr_details/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+47,previous leave requests,FORM,Past Leave requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+48,past leave requests,FORM,Past Leave requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+49,process leave,FORM,Process Leave Requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+50,approve leave,FORM,Process Leave Requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+51,leave approvals,FORM,Process Leave Requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+52,leave approvals,FORM,Process Leave Requests,/hrms_leave_process/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+53,leave,FORM,Raise Leave Request ,/hrms_leave/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+54,request leave,FORM,Raise Leave Request ,/hrms_leave/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+55,leave request,FORM,Raise Leave Request ,/hrms_leave/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+56,skill set,FORM,Employee Role Skill Set,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+57,success factors,FORM,Employee Role Success Factors,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+58,critical success factors,FORM,Employee Role Success Factors,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+59,kpo,FORM,Employee Role KPO,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+60,objectives,FORM,Employee Role Objectives,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+61,kpi,FORM,Employee Role Key Performance Indicators,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+62,key performance indicators,FORM,Employee Role Key Performance Indicators,Manage roles of Talent Definition/Inventory,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+63,role structure,FORM,Employee Reporting Structure,View Reporting Structure of TI,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+64,role reporting structure,FORM,Employee Reporting Structure,View Reporting Structure of TI,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+65,reporting officer,FORM,Employee Reporting Structure,View Reporting Structure of TI,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+66,employee roles,FORM,Employee Role,Talent definition reports,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+67,role list,FORM,Employee Role Reports,Talent definition reports,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+68,competencies,FORM,Employee Role Reports,Talent definition reports,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+69,competency list,FORM,Employee Role Reports,Talent definition reports,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+70,organization chart,FORM,Organization Chart,/hrms_org_structure/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+71,org chart,FORM,Organization Chart,/hrms_org_structure/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+72,org. chart,FORM,Organization Chart,/hrms_org_structure/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+73,employee list,FORM,Organization Chart,/hrms_employee_list/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+74,employee list,FORM,Organization Chart,/hrms_employee_list/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+75,leave balance,FORM,Leave Balance,/hrms_leave_balance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+76,assessment forms,FORM,Employee Assessment Forms,/ta_assessment_form/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+77,assessment templates,FORM,Employee Assessment Templates,/ta_assessment_template/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+78,assessment ,FORM,Employee Assessments,/ta_performance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+79,balanced scorecard,FORM,Balanced Scorecard,/ta_balanced_scorecard/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+80,cascade objectives,FORM,Cascade Objectives,/ta_cascading_objectives/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+81,objectives,FORM,Cascade Objectives,/ta_cascading_objectives/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+82,objectives,FORM,Cascade Objectives,/ta_cascading_objectives/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+83,objectives,FORM,Cascade Objectives,/ta_cascading_objectives/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+84,scorecard,FORM,Balanced Scorecard,/ta_balanced_scorecard/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+85,assessment schedule,FORM,Employee Assessment Schedule,/ta_schedule/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+86,schedule assessment,FORM,Employee Assessment Schedule,/ta_schedule/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+87,talent assessment,FORM,Employee Assessments,/ta_performance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+88,performance management,FORM,Employee Assessments,/ta_performance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+89,performance appraisal,FORM,Employee Assessments,/ta_performance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+90,appraisal,FORM,Employee Assessments,/ta_performance/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+91,schedule reports,FORM,Assessment schedule Reports,/ta_reports/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+92,performance meeting reports,FORM,Assessment schedule Reports,/ta_reports/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+93,custom rating scheme,FORM,Custom Rating,/ta_custom_rating/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+94,custom rating ,FORM,Custom Rating,/ta_custom_rating/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+95,rating scheme,FORM,Custom Rating,/ta_custom_rating/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+96,attendance,HELP,Employee Attendance,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+97,employee attendance,HELP,Employee Attendance,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+98,view attendance,HELP,Employee Attendance,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+99,past attendance,HELP,Employee Attendance,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+100,load data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+101,bulk load data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+102,import data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+103,import test data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+104,import master data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+105,data master,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+106,data import,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+107,bulk data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+108,load bulk data,HELP,Data Upload - App Admin,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+109,employee report,HELP,Employee Reports,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+110,attendance report,HELP,Employee Attendance Report,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+111,leave report,HELP,Employee Leave Report,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+112,employee,HELP,Employee Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+113,staff,HELP,Employee Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+114,employee skills,HELP,Employee Skill Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+115,skills,HELP,Employee Skill Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+116,education qualification,HELP,Employee Education Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+117,education details,HELP,Employee Education Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+118,work experience,HELP,Employee Work Experience,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+119,professional experience,HELP,Employee Work Experience,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+120,certification,HELP,Employee Certification,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+121,employee details,HELP,Employee Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+122,personal details,HELP,Employee Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+123,identification ,HELP,Employee Details,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+124,permission,HELP,App Admin - System Permission,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+125,role permission,HELP,App Admin - Role Permission,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+126,user permission,HELP,App Admin - User Permission,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+127,access,HELP,App Admin - User Access,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+128,user access,HELP,App Admin - User Access,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+129,application access,HELP,App Admin - User Access,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+130,access management,HELP,App Admin - User Access,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+131,reference category,HELP,Reference Item category,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+132,reference item category,HELP,Reference Item category,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+133,application data managemen,HELP,Reference Item category,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+134,manage application data,HELP,Reference Item category,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+135,reference item,HELP,Reference Items,/help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+136,employee role,HELP,Employee Role,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+137,role,HELP,Employee Role,help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+138,role,HELP,System User Role,help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+139,user role,HELP,System User Role,help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+140,user,HELP,System Users,help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+141,system user,HELP,System Users,help_content_details/SysAdmin/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+142,previous leave requests,HELP,Past Leave requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+143,past leave requests,HELP,Past Leave requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+144,process leave,HELP,Process Leave Requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+145,approve leave,HELP,Process Leave Requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+146,leave approvals,HELP,Process Leave Requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+147,leave approvals,HELP,Process Leave Requests,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+148,leave,HELP,Raise Leave Request ,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+149,request leave,HELP,Raise Leave Request ,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+150,leave request,HELP,Raise Leave Request ,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+151,skill set,HELP,Employee Role Skill Set,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+152,success factors,HELP,Employee Role Success Factors,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+153,critical success factors,HELP,Employee Role Success Factors,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+154,kpo,HELP,Employee Role KPO,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+155,objectives,HELP,Employee Role Objectives,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+156,kpi,HELP,Employee Role Key Performance Indicators,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+157,key performance indicators,HELP,Employee Role Key Performance Indicators,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+158,role structure,HELP,Employee Reporting Structure,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+159,role reporting structure,HELP,Employee Reporting Structure,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+160,reporting officer,HELP,Employee Reporting Structure,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+161,employee roles,HELP,Employee Role,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+162,role list,HELP,Employee Role Reports,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+163,competencies,HELP,Employee Role Reports,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+164,competency list,HELP,Employee Role Reports,/help_content_details/TalentDefinition/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+165,organization chart,HELP,Organization Chart,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+166,org chart,HELP,Organization Chart,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+167,org. chart,HELP,Organization Chart,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+168,employee list,HELP,Organization Chart,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+169,employee list,HELP,Organization Chart,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+170,leave balance,HELP,Leave Balance,/help_content_details/HRMS/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+171,assessment forms,HELP,Employee Assessment Forms,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+172,assessment templates,HELP,Employee Assessment Templates,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+173,assessment ,HELP,Employee Assessments,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+174,balanced scorecard,HELP,Balanced Scorecard,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+175,cascade objectives,HELP,Cascade Objectives,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+176,objectives,HELP,Cascade Objectives,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+177,objectives,HELP,Cascade Objectives,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+178,objectives,HELP,Cascade Objectives,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+179,scorecard,HELP,Balanced Scorecard,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+180,assessment schedule,HELP,Employee Assessment Schedule,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+181,schedule assessment,HELP,Employee Assessment Schedule,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+182,talent assessment,HELP,Employee Assessments,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+183,performance management,HELP,Employee Assessments,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+184,performance appraisal,HELP,Employee Assessments,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+185,appraisal,HELP,Employee Assessments,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+186,schedule reports,HELP,Assessment schedule Reports,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+187,performance meeting reports,HELP,Assessment schedule Reports,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+188,custom rating scheme,HELP,Custom Rating,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+189,custom rating ,HELP,Custom Rating,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27
+190,rating scheme,HELP,Custom Rating,/help_content_details/TalentAssessment/,TRUE,1,1,2/13/2018 16:27,2/13/2018 16:27

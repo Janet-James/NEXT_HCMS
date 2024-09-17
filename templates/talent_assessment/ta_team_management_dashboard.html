@@ -1,0 +1,991 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<link
+	href="{% static '/dev/talent_assessment/css/tooltip-classic.css' %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/css/hcms.css' %}" rel="stylesheet"
+	type="text/css" />
+<link
+	href="{% static '/dev/talent_assessment/css/talent_assessment.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %}{%nav_tags breadcrum_title="TADashboard" %}
+<!-- <div id="loading">
+	<div id="loading-center">
+		<div id="loading-center-absolute">
+			<div class="object animated full-rotate" id="first_object"></div>
+			<div class="object" id="second_object">
+				<img src="/static/ui/images/settings.png">
+			</div>
+		</div>
+	</div>
+</div> -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!--Management Switcher-->
+				<ul class="managment-switcher">
+					<li><a href="#" onclick="dashboard_changes('HR')"><i
+							class="nf nf-manager" data-toggle="tooltip"
+							data-placement="bottom" title="Management"></i></a></li>
+					<li><a class="active" href="#"
+						onclick="dashboard_changes('Manager')"><i class="nf nf-lead"
+							data-toggle="tooltip" data-placement="bottom" title="Team"></i></a></li>
+				</ul>
+				<!--End Managment Switcher-->
+				<div class="row bottomSpace">
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv1"></div>
+							<p class="text_center">
+								<b>Employee Engagement</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv2"></div>
+							<p class="text_center">
+								<b>Customer Satisfaction</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv3"></div>
+							<p class="text_center">
+								<b>PIP/CMMI</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv4"></div>
+							<p class="text_center">
+								<b>Ontime Delivery</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv5"></div>
+							<p class="text_center">
+								<b>Technical Leadership</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv6"></div>
+							<p class="text_center">
+								<b>Functional Leadership</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv7"></div>
+							<p class="text_center">
+								<b>Innovation</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv8"></div>
+							<p class="text_center">
+								<b>Performance</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv9"></div>
+							<p class="text_center">
+								<b>Security</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="nt-large-12 nt-medium-12 nt-small-12 nt-xsmall-12">
+							<div id="chartdiv10"></div>
+							<p class="text_center">
+								<b>Team Collaboration</b>
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-1 col-md-4 col-sm-4 col-xs-6">
+						<div class="border_bottom_div size">
+							<p class="ribbon-content size">
+								<span class="badge badge-success size">&nbsp;&nbsp;</span>
+								Technical Leadership
+							</p>
+							<p class="ribbon-content size">
+								<span class="badge badge-primary size">&nbsp;&nbsp;</span>
+								Functional Leadership
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row row-eq-height team-dashboard">
+					<div class="col-md-12">
+						<div class="portlet light bordered" style="padding-top: 30px;">
+							<div class="col-lg-6 col-md-12 col-sm-12">
+								<div class="portlet">
+									<div class="form-group label_right_table1">
+										<label> Select Team </label> <select class="form-control"
+											id="teamChange">
+											<option value="select">--Select--</option> {% for i in team_list %}
+											<option value="{{i.id}}">{{i.name}}</option> {% endfor %}
+										</select>
+									</div>
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-settings"></i> <span
+												class="caption-subject bold uppercase">Talent Matrix</span>
+										</div>
+									</div>
+									<div class="portlet-body form talent-matrix">
+										<div class="col-md-offset-1 col-md-12 col-small-12 col-lg-12">
+                  <div class="row txt-alg-ctn">
+                    <div class="col-md-12">
+                      <h4><b>Potential</b></h4>
+                    </div>
+                  </div>
+                  <div class="row txt-alg-ctn">
+                    <div class="col-md-4">
+                      <h3><b>Low</b></h3>
+                    </div>
+                    <div class="col-md-4">
+                      <h3><b>Medium</b></h3>
+                    </div>
+                    <div class="col-md-4">
+                      <h3><b>High</b></h3>
+                    </div>
+                  </div>
+                  <h4 class="rotate-txt"><b>Performance</b></h4>
+                  <div class="row ">
+                    <div class="box-one-outer row-eq-height">
+                      <h3 class="rotate-txt">Exceeds</h3>
+                      <div class="col-sm-12 col-md-4 box-border border1">
+                        <div class="box-top-sec"> <span>Workers</span> <span class="badge badge-primary" id="hlLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Low</b></h3>
+                          </div>
+                        </div>
+                    
+                        <div class="box-mid-sec" id="hlDiv">
+                          <ul>
+                              
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 box-border border2">
+                        <div class="box-top-sec"> <span>Contributors</span> <span class="badge badge-primary" id="hmLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Medium</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec" id="hmDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 box-border border3">
+                        <div class="box-top-sec"> <span>Stars</span> <span class="badge badge-primary" id="hhLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>High</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec"  id="hhDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-one-outer row-eq-height">
+                      <h3 class="rotate-txt">Meets</h3>
+                      <div class="col-sm-12 col-md-4 box-border border1">
+                        <div class="box-top-sec"> <span>Blockers</span> <span class="badge badge-primary" id="mlLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Low</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec"  id="mlDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 box-border border2">
+                        <div class="box-top-sec"> <span>Transitionals</span> <span class="badge badge-primary" id="mmLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Medium</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec" id="mmDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 box-border border3">
+                        <div class="box-top-sec"> <span>Emergers</span> <span class="badge badge-primary" id="mhLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>High</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec" id="mhDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="box-one-outer row-eq-height">
+                      <h3 class="rotate-txt">Bellow</h3>
+                      <div class="col-sm-12 col-md-4 box-border border1">
+                        <div class="box-top-sec"> <span>Detractors</span> <span class="badge badge-primary" id="llLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Low</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec" id="llDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-4 box-border border2">
+                        <div class="box-top-sec"> <span>Placholders</span> <span class="badge badge-primary" id="lmLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Medium</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec" id="lmDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-4 box-border border3">
+                        <div class="box-top-sec"> <span>Latents</span> <span class="badge badge-primary" id="lhLen">0</span>
+                          <div class="hide-txt">
+                            <h3><b>Heigh</b></h3>
+                          </div>
+                        </div>
+                        <div class="box-mid-sec"  id="lhDiv">
+                          <ul>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-12 col-sm-12">
+								<div class="portlet">
+									<div class="portlet-title">
+										<div class="caption">
+											<i class="icon-settings"></i> <span
+												class="caption-subject bold uppercase">Performance
+												Rating</span>
+										</div>
+									</div>
+									<table class="table table-hover team-dash-table text_center"
+										id="performance_table">
+										<thead>
+											<tr>
+												<th class="text_center">Employee</th>
+												<th class="text_center">Rating</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="icon-settings"></i> <span
+										class="caption-subject bold uppercase">KPI'S</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="portlet-body flip-scroll">
+										<table
+											class="table table-hover table-bordered table-striped table-condensed flip-content">
+											<thead class="flip-content">
+												<tr>
+													<th width="20%">Team KPI</th>
+													<th>Target</th>
+													<th class="numeric">Actual</th>
+													<th class="numeric">Status</th>
+													<th class="numeric">Chart of Actual</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Team KPI 1</td>
+													<td></td>
+													<td class="numeric">&nbsp;</td>
+													<td class="numeric"></td>
+													<td class="numeric">
+														<div class="progress progress-striped active">
+															<div class="progress-bar progress-bar-success"
+																role="progressbar" aria-valuenow="40" aria-valuemin="0"
+																aria-valuemax="100" style="width: 40%">
+																<span class="sr-only"> 40% Complete (success) </span>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>Team KPI 2</td>
+													<td></td>
+													<td class="numeric"></td>
+													<td class="numeric"></td>
+													<td class="numeric">
+														<div class="progress progress-striped active">
+															<div class="progress-bar progress-bar-info"
+																role="progressbar" aria-valuenow="20" aria-valuemin="0"
+																aria-valuemax="100" style="width: 20%">
+																<span class="sr-only"> 20% Complete </span>
+															</div>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td>Team KPI 3</td>
+													<td></td>
+													<td class="numeric"></td>
+													<td class="numeric"></td>
+													<td class="numeric">
+														<div class="progress progress-striped active">
+															<div class="progress-bar progress-bar-warning"
+																role="progressbar" aria-valuenow="60" aria-valuemin="0"
+																aria-valuemax="100" style="width: 60%">
+																<span class="sr-only"> 60% Complete (warning) </span>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-md-4 padding-0">
+											<div class="kpi-box-outer kpi-box-1">
+												<h2>71%</h2>
+												<p>You have 5 pending membership that requires a quick
+													review.</p>
+											</div>
+										</div>
+										<div class="col-md-4 padding-0">
+											<div class="kpi-box-outer kpi-box-2">
+												<h2>67%</h2>
+												<p>You have 5 pending membership that requires a quick
+													review.</p>
+											</div>
+										</div>
+										<div class="col-md-4 padding-0">
+											<div class="kpi-box-outer kpi-box-3">
+												<h2>83%</h2>
+												<p>You have 5 pending membership that requires a quick
+													review.</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %} {% block scripts %}
+<script src="{% static  '/ui/plugins/amchart/js/amcharts.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/serial.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/pie.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/radar.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/light.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/ui/plugins/amchart/js/gauge.js' %}"
+	type="text/javascript"></script>
+<script>
+
+	var gaugeChart = AmCharts.makeChart("chartdiv1", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "50%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#5ac8fb",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#4cda64",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv2", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "50%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "89%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv3", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "55%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "66%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv4", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "22%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "77%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv5", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "60%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "40%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv6", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "90%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+
+	var gaugeChart = AmCharts.makeChart("chartdiv7", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "90%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+	
+	var gaugeChart = AmCharts.makeChart("chartdiv8", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "90%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+	
+	var gaugeChart = AmCharts.makeChart("chartdiv9", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "90%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+	
+	var gaugeChart = AmCharts.makeChart("chartdiv10", {
+		"type" : "gauge",
+		startDuration : 1,
+		"theme" : "light",
+		"axes" : [ {
+			"axisAlpha" : 0,
+			"tickAlpha" : 0,
+			"labelsEnabled" : false,
+			"startValue" : 0,
+			"endValue" : 100,
+			"startAngle": 90,
+		    "endAngle": 360,
+			"bands" : [ {
+				"color" : "#eee",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "100%",
+				"innerRadius" : "85%"
+			}, {
+				"color" : "#4cda64",
+				"startValue" : 0,
+				"endValue" : 80,
+				"radius" : "100%",
+				"innerRadius" : "85%",
+				"balloonText" : "90%"
+			}, {
+				"color" : "#5ac8fb",
+				"startValue" : 0,
+				"endValue" : 100,
+				"radius" : "80%",
+				"innerRadius" : "65%"
+			}, ]
+		} ],
+		"allLabels" : [ {
+			"text" : "90%",
+			"x" : "52%",
+			"y" : "5%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, {
+			"text" : "30%",
+			"x" : "52%",
+			"y" : "15%",
+			"size" : 12,
+			"bold" : true,
+			"color" : "#3f4047",
+			"align" : "left"
+		}, ],
+		"export" : {
+			"enabled" : true
+		}
+	});
+</script>
+<script
+	src="{% static '/dev/talent_assessment/js/ta_hr_dashboard.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

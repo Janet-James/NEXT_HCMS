@@ -1,0 +1,3 @@
+id,shift_name,shift_description,shift_start_time,shift_end_time,shift_half_day_time,shift_full_day_time,shift_weekend_definition,shift_active,shift_org_id,shift_orgunit_ids,is_active
+1,6-Work Days Cycle,Alternate Working Saturdays,08:00:00,17:00:00,04:00:00,08:00:00,"Sunady-1,Sunady-2,Sunady-3,Sunady-4,Sunady-5,Saturday-1,Saturday-3,Saturday-5",t,2,"(8,6,7)",t
+2,5-Work Days Cycle,,08:00:00,17:00:00,04:00:00,08:00:00,"Sunady-1,Sunady-2,Sunady-3,Sunady-4,Sunady-5,Saturday-1,Saturday-2,Saturday-3,Saturday-4,Saturday-5",t,2,"(8,6)",t

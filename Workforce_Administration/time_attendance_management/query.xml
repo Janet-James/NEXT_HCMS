@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Late Policy">
+		<!-- <query id="shift_details" query_name="shift_details"
+			description="shift_details">
+          <![CDATA[select id,shift_name from hcms_shift_master where is_active=TRUE and shift_active=TRUE and shift_orgunit_id={0} order by shift_name]]>
+		</query> -->
+		<query id="shift_details" query_name="shift_details"
+            description="shift_details">
+          <![CDATA[select shift.id,shift.shift_name from hcms_shift_master as shift
+inner join hcms_shift_division_rel as div_rel on div_rel.shift_id= shift.id
+where shift.is_active=TRUE and div_rel.is_active=TRUE and shift.shift_active=TRUE and div_rel.division_id in %s group by shift.id
+ order by shift.shift_name]]>
+        </query>
+        
+        <query id="shift_details_based_org_unit" query_name="shift_details_based_org_unit"
+            description="shift_details_based_org_unit">
+          <![CDATA[select shift.id as shift_id,shift.shift_name from hcms_shift_master as shift
+inner join hcms_shift_division_rel as div_rel on div_rel.shift_id= shift.id
+inner join team_details_info tdi on tdi.id = div_rel.division_id 
+inner join organization_unit_info oui on oui.id = tdi.org_unit_id
+where shift.is_active=TRUE and div_rel.is_active=TRUE and shift.shift_active=TRUE and oui.id {0} group by shift.id
+order by shift.shift_name]]>
+        </query>
+        
+        <query id="division_details_based_org_unit" query_name="division_details_based_org_unit"
+            description="division_details_based_org_unit">
+          <![CDATA[select tdi.id,tdi.name from team_details_info tdi
+inner join organization_unit_info oui on oui.id = tdi.org_unit_id
+where tdi.is_active = true and oui.is_active = true and oui.id {0} group by tdi.id
+order by tdi.name]]>
+        </query>
+        
+        <query id="late_policy_data_check" query_name="late_policy_data_check"
+			description="late_policy_data_check">
+          <![CDATA[select tdi.id as division_id,hsm.id as shift_id,tdi.name as team_name,hsm.shift_name,halp.id from hcms_attendance_late_early_policy halp 
+          	inner join hcms_attendance_late_early_policy_div_rel halr on halr.late_early_policy_id = halp.id 
+			inner join team_details_info tdi on tdi.id = halr.division_id inner join hcms_shift_master hsm on hsm.id = halp.emp_shift_id
+			where halr.division_id {0} and halp.emp_shift_id = {1} and halr.is_active = true and halp.is_active=true and tdi.is_active = true
+			and hsm.is_active = true {2} ]]>
+		</query>
+        
+		<query id="late_policy_save" query_name="late_policy_save"
+			description="late_policy_save">
+          <![CDATA[insert into hcms_attendance_late_early_policy (created_by_id,late_grace_time,
+          early_grace_time, effective_from,emp_shift_id,policy_period_id,created_date,is_active)
+          values (%s,%s,%s,%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		<!-- <query id="late_policy_details" query_name="late_policy_details"
+			description="late_policy_details">
+          <![CDATA[
+select organization_unit_info.orgunit_name as orgunit_name,organization_info.name as org_name,policy.id,shift.shift_name,
+to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time
+from hcms_attendance_late_early_policy as policy
+inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id 
+inner join organization_unit_info on organization_unit_info.id=shift_orgunit_id 
+          inner join organization_info on organization_info.id=organization_unit_info.organization_id
+where policy.is_active=TRUE and shift.is_active=TRUE]]>
+		</query> -->
+		<!-- <query id="late_policy_details" query_name="late_policy_details"
+            description="late_policy_details">
+          <![CDATA[
+select organization_info.name as org_name,policy.id,shift.shift_name,
+to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time
+from hcms_attendance_late_early_policy as policy
+inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id 
+inner join organization_info on organization_info.id=shift.shift_org_id
+where policy.is_active=TRUE and shift.is_active=TRUE
+]]>
+        </query> -->
+        
+        <query id="late_policy_details" query_name="late_policy_details"
+	description="late_policy_details">
+          <![CDATA[
+			select distinct on (policy.id) organization_info.name as org_name,policy.id,shift.shift_name,(select array_to_string(array_agg(name),',') team_names from team_details_info tdis
+			inner join hcms_attendance_late_early_policy_div_rel hldvs on hldvs.division_id = tdis.id where hldvs.late_early_policy_id = policy.id and hldvs.is_active=TRUE and tdis.is_active=TRUE) as team_names,
+			to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time
+			from hcms_attendance_late_early_policy as policy
+			inner join hcms_attendance_late_early_policy_div_rel hldv on hldv.late_early_policy_id = policy.id
+			inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+			inner join team_details_info tdi on tdi.id = hldv.division_id
+			inner join organization_info on organization_info.id=tdi.org_id
+			where policy.is_active=TRUE and shift.is_active=TRUE and hldv.is_active=TRUE and tdi.is_active=TRUE group by organization_info.name,policy.id,shift.shift_name,tdi.name
+		]]>
+		</query>
+        
+        
+        
+<!-- 		<query id="policy_details_show" query_name="policy_details_show"
+			description="policy_details_show">
+          <![CDATA[select policy.id,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time,to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,policy.early_departs_deduct_count,policy.early_departs_day_deduct,
+policy.process_start_month,to_char(policy.effective_from,'DD-MON-YYYY') as effective_from,policy.policy_period_id,
+shift.shift_name,policy.late_arrival_deduct_count,policy.late_arrival_day_deduct,shift.id as shift_id,
+organization_info.id as organization_id,organization_info.name,organization_unit_info.id as org_unit_id from hcms_attendance_late_early_policy as policy
+inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+inner join organization_unit_info on organization_unit_info.id=shift_orgunit_id 
+inner join organization_info on organization_info.id=organization_unit_info.organization_id
+where policy.is_active=TRUE and shift.is_active=TRUE and policy.id={0}]]>
+		</query> -->
+		
+		<!-- <query id="policy_details_show" query_name="policy_details_show"
+			description="policy_details_show">
+          <![CDATA[select distinct on (hsdr.division_id)
+			organization_info.id as organization_id,organization_info.name,tdi.org_unit_id,hsdr.division_id as division_id,shift.id as shift_id from hcms_attendance_late_early_policy as policy
+			inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+			inner join hcms_shift_division_rel hsdr on hsdr.shift_id = shift.id
+			inner join team_details_info tdi on tdi.id = hsdr.division_id
+			inner join organization_info on organization_info.id=shift.shift_org_id
+			inner join organization_unit_info on organization_unit_info.organization_id=organization_info.id
+			where policy.is_active=TRUE and shift.is_active=TRUE and policy.id={0} and organization_unit_info.is_active = TRUE and organization_info.is_active = TRUE and tdi.is_active = TRUE and hsdr.is_active = TRUE]]>
+		</query> --> 
+		
+		<query id="policy_details_show" query_name="policy_details_show"
+			description="policy_details_show">
+          <![CDATA[select distinct on (haldr.division_id)
+			oi.id as organization_id,oi.name,oui.id as org_unit_id,tdi.id as division_id,shift.id as shift_id,policy.id,
+			to_char(policy.late_grace_time,'HH24:MI') as late_grace_time,to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,
+			policy.early_departs_deduct_count,policy.early_departs_day_deduct,
+			policy.process_start_month,to_char(policy.effective_from,'DD-MON-YYYY') as effective_from,policy.policy_period_id,
+			shift.shift_name,policy.late_arrival_deduct_count,policy.late_arrival_day_deduct 
+			from hcms_attendance_late_early_policy as policy
+			inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+			inner join hcms_attendance_late_early_policy_div_rel haldr on haldr.late_early_policy_id =policy.id
+			inner join team_details_info tdi on tdi.id = haldr.division_id
+			inner join organization_unit_info oui on oui.id=tdi.org_unit_id
+			inner join organization_info oi on oi.id=oui.organization_id
+			where policy.is_active=TRUE and shift.is_active=TRUE and policy.id={0}  and oui.is_active = TRUE and oi.is_active = TRUE and 
+			tdi.is_active = TRUE and haldr.is_active = TRUE]]>
+		</query> 
+		
+		<query id="division_details_shift_change" query_name="division_details_shift_change"
+            description="division_details_shift_change">
+          <![CDATA[select tdi.id as division_id,tdi.name from hcms_shift_division_rel hsdr 
+			inner join team_details_info tdi on tdi.id = hsdr.division_id 		
+			where hsdr.shift_id = {0} and hsdr.is_active=TRUE and tdi.is_active=TRUE]]>
+        </query>
+        
+		<query id="policy_details_show_shift_change" query_name="policy_details_show_shift_change"
+            description="policy_details_show_shift_change">
+          <![CDATA[
+			select distinct on (hsdr.division_id) policy.id,hsdr.division_id as division_id,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time,to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,
+			policy.early_departs_deduct_count,policy.early_departs_day_deduct,
+			policy.process_start_month,to_char(policy.effective_from,'DD-MON-YYYY') as effective_from,policy.policy_period_id,
+			shift.shift_name,policy.late_arrival_deduct_count,policy.late_arrival_day_deduct,shift.id as shift_id
+			from hcms_attendance_late_early_policy as policy
+			inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+			inner join hcms_shift_division_rel hsdr on hsdr.shift_id = shift.id
+			where policy.is_active=TRUE and shift.is_active=TRUE and hsdr.is_active = TRUE and shift.id = {0}]]>
+        </query>
+		
+		<query id="policy_period" query_name="policy_period"
+			description="policy_period">
+          <![CDATA[select rfitm.refitems_name,rfitm.refitems_code,rfitm.id from reference_items  rfitm inner join
+		   reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  where rfctg.refitem_category_code='ALPER' 
+		   and rfitm.is_active=TRUE and rfctg.is_active=TRUE order by refitems_name]]>
+		</query>
+
+		<query id="lfa_add" query_name="lfa_add" description="lfa_add">
+          <![CDATA[insert into hcms_leave_of_absent(emp_shift_id,start_day,end_day,effective_from,created_by_id,created_date,is_active) values (%s,%s,%s,%s,%s,now(),TRUE) returning id]]>
+		</query>
+		<query id="lfa_leave_deduct_add" query_name="lfa_leave_deduct_add"
+			description="lfa_leave_deduct_add">
+          <![CDATA[insert into hcms_leave_type_absent_rel(leave_type_id,leave_of_absent_id,created_by_id,created_date,is_active) values (%s,%s,%s,now(),TRUE) returning id]]>
+		</query>
+		<query id="lfa_update" query_name="lfa_update" description="lfa_update">
+          <![CDATA[update hcms_leave_of_absent set emp_shift_id=%s,start_day=%s,end_day=%s,effective_from=%s,modified_by_id=%s,modified_date=now() where id=%s]]>
+		</query>
+		<query id="lfa_leave_deduct_remove" query_name="lfa_leave_deduct_remove"
+			description="lfa_update">
+          <![CDATA[update hcms_leave_type_absent_rel set is_active=FALSE where leave_of_absent_id=%s]]>
+		</query>
+		<query id="leave_for_absent_detail_fetch" query_name="leave_for_absent_detail_fetch"
+			description="leave_for_absent_detail_fetch">
+          <![CDATA[select organization_unit_info.orgunit_name as orgunit_name,organization_info.name as org_name,lfa.id,hsm.shift_name,to_char(lfa.effective_from,'DD-Mon-YYYY') as effective_from, lfa.start_day,lfa.end_day from
+ 			hcms_leave_of_absent  lfa inner join hcms_shift_master hsm on lfa.emp_shift_id=hsm.id 
+			inner join organization_unit_info on organization_unit_info.id=shift_orgunit_id 
+          	inner join organization_info on organization_info.id=organization_unit_info.organization_id
+ 			where lfa.is_active and hsm.is_active=TRUE]]>
+		</query>
+		<query id="leave_for_absent_detail_fetch_by_id" query_name="leave_for_absent_detail_fetch_by_id"
+			description="leave_for_absent_detail_fetch_by_id">
+          <![CDATA[
+			select lfa.id,hsm.shift_orgunit_id as orgunit_id,to_char(lfa.effective_from,'DD-Mon-YYYY') as effective_from,oui.organization_id, lfa.start_day,lfa.end_day,array(select
+			leave_type_id from hcms_leave_type_absent_rel where leave_of_absent_id=%s) as leave_type ,lfa.emp_shift_id from
+ 			hcms_leave_of_absent  lfa left join hcms_shift_master hsm on lfa.emp_shift_id=hsm.id left join organization_unit_info oui on 
+ 			hsm.shift_orgunit_id=oui.id where lfa.id=%s]]>
+		</query>
+		<query id="leave_for_absent_detail_fetch_by_shift" query_name="leave_for_absent_detail_fetch_by_shift"
+			description="leave_for_absent_detail_fetch_by_shift">
+          <![CDATA[
+			select lfa.id,hsm.shift_orgunit_id as orgunit_id,to_char(lfa.effective_from,'DD-Mon-YYYY') as effective_from,oui.organization_id, lfa.start_day,lfa.end_day,
+			array(select leave_type_id from hcms_leave_type_absent_rel lra left join hcms_leave_of_absent laf on lra.leave_of_absent_id=laf.id where laf.emp_shift_id=%s and laf.is_active ) as leave_type ,lfa.emp_shift_id from
+ 			hcms_leave_of_absent  lfa left join hcms_shift_master hsm on lfa.emp_shift_id=hsm.id left join organization_unit_info oui on 
+ 			hsm.shift_orgunit_id=oui.id where lfa.emp_shift_id=%s and lfa.is_active]]>
+		</query>
+		<query id="lfa_detail_remove" query_name="lfa_detail_remove"
+			description="lfa_detail_remove">
+          <![CDATA[update hcms_leave_of_absent set is_active=false ,modified_by_id=%s,modified_date=now() where id=%s ]]>
+		</query>
+
+		<query id="late_policy_update" query_name="late_policy_update"
+			description="late_policy_update">
+          <![CDATA[update hcms_attendance_late_early_policy set modified_by_id=%s,late_grace_time=%s,
+         early_grace_time=%s,effective_from=%s,emp_shift_id=%s,policy_period_id=%s,modified_date=now() where id=%s]]>
+		</query>
+		<query id="late_policy_remove" query_name="late_policy_remove"
+			description="late_policy_remove">
+          <![CDATA[update hcms_attendance_late_early_policy set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s and is_active=True]]>
+		</query>
+		<query id="late_policy_division_rel_delete" query_name="late_policy_division_rel_delete"
+			description="late_policy_division_rel_delete">
+          <![CDATA[update hcms_attendance_late_early_policy_div_rel set is_active='False',modified_date=now(),modified_by_id=%s where late_early_policy_id=%s and is_active=True]]>
+		</query>
+		<query id="late_policy_division_rel_save" query_name="late_policy_division_rel_save"
+			description="late_policy_division_rel_save">
+          <![CDATA[insert into hcms_attendance_late_early_policy_div_rel (division_id,late_early_policy_id,is_active,created_by_id,created_date) 
+          values ({0},{1},True,{2},now())]]>
+		</query>
+		<query id="permission_request_save" query_name="permission_request_save"
+			description="permission_request_save">
+          <![CDATA[insert into hcms_permission_request_conf (emp_shift_id,perm_request_count,perm_period_id,perm_request_per_day,
+         	perm_start_month,perm_max_hour,is_active,created_by_id,created_date) values ({0},{1},{2},{3},{4},'{5}',{6},{7},now()) returning id]]>
+		</query>
+		<query id="permission_request_update" query_name="permission_request_update"
+			description="permission_request_update">
+          <![CDATA[update hcms_permission_request_conf set emp_shift_id = {0},perm_request_count = {1},perm_period_id = {2},
+			perm_request_per_day = {3},perm_start_month = {4},perm_max_hour = '{5}',is_active = {6},modified_by_id = {7},modified_date = now()
+			where id = {8} returning id]]>
+		</query>
+		<query id="permission_request_delete" query_name="permission_request_delete"
+			description="permission_request_delete">
+          <![CDATA[update hcms_permission_request_conf set is_active=false,modified_by_id={1},modified_date=now() where id = {0} returning id]]>
+		</query>
+		<query id="shift_change_details" query_name="shift_change_details"
+			description="shift_change_details">
+          <![CDATA[select distinct on (tdi.id) hprc.perm_period_id,hprc.perm_start_month,tdi.id as division_id,
+			hprc.perm_request_count,hprc.perm_request_per_day,to_char(hprc.perm_max_hour,'HH24:MM') as perm_max_hour from hcms_permission_request_conf hprc 
+			inner join hcms_shift_master hsm on hsm.id = hprc.emp_shift_id 
+			inner join hcms_shift_division_rel hsdr on hsdr.shift_id = hsm.id
+			inner join team_details_info tdi on tdi.id = hsdr.division_id
+			where hprc.emp_shift_id = {0} and hprc.is_active=True and hsm.is_active=True and tdi.is_active = True and hsdr.is_active = True]]>
+		</query>
+		<!-- <query id="permission_details_table_view" query_name="permission_details_table_view"
+			description="permission_details_table_view">
+          <![CDATA[select hprc.id,ROW_NUMBER () OVER (ORDER BY hprc.id),hsm.shift_name,oi.name,ri.refitems_name,hprc.perm_request_count,
+      		hprc.perm_request_per_day from hcms_permission_request_conf hprc inner join hcms_shift_master hsm on hprc.emp_shift_id = hsm.id 
+      		inner join reference_items ri on ri.id = hprc.perm_period_id inner join
+      		organization_info oi on oi.id = hsm.shift_org_id where hsm.is_active=TRUE and oi.is_active=TRUE and hprc.is_active=True and
+      		hsm.is_active=True and ri.is_active= True ]]>
+		</query> -->
+		
+		<query id="permission_details_table_view" query_name="permission_details_table_view"
+			description="permission_details_table_view">
+          <![CDATA[select ROW_NUMBER() OVER(),* from (select  distinct on (hprc.id) hprc.id,hsm.shift_name,oi.name,(select array_to_string(array_agg(name),',') team_names from 
+		team_details_info tdis inner join hcms_permission_request_conf_div_rel hprds on hprds.division_id = tdis.id
+		 where hprds.permission_request_id = hprc.id and hprds.is_active= True and tdis.is_active= True) as team_names,
+		ri.refitems_name,hprc.perm_request_count,
+      		hprc.perm_request_per_day from hcms_permission_request_conf hprc 
+      		inner join hcms_shift_master hsm on hprc.emp_shift_id = hsm.id 
+      		inner join hcms_permission_request_conf_div_rel hpdr on hpdr.permission_request_id = hprc.id
+      		inner join team_details_info tdi on tdi.id = hpdr.division_id
+      		inner join reference_items ri on ri.id = hprc.perm_period_id 
+      		inner join organization_info oi on oi.id = tdi.org_id where hsm.is_active=TRUE and oi.is_active=TRUE and hprc.is_active=True and
+      		ri.is_active= True and tdi.is_active= True ) a ]]>
+		</query>
+		
+		
+		<query id="permission_details_view" query_name="permission_details_view"
+			description="permission_details_view">
+          <![CDATA[select distinct on (tdi.id) oi.id as org_id,tdi.org_unit_id,tdi.id as team_id,hprc.emp_shift_id,hprc.perm_period_id,
+          	hprc.perm_start_month,tdi.id as division_id,hprc.perm_request_count,hprc.perm_request_per_day,
+          	to_char(hprc.perm_max_hour,'HH24:MM') as perm_max_hour from hcms_permission_request_conf hprc 
+          	inner join hcms_permission_request_conf_div_rel hpdr on hpdr.permission_request_id = hprc.id
+			inner join team_details_info tdi on tdi.id = hpdr.division_id inner join organization_unit_info oui on oui.id= tdi.org_unit_id
+			inner join organization_info oi on oi.id = oui.organization_id 
+			where hprc.id={0} and hprc.is_active=True and hpdr.is_active=True and oi.is_active=True and oui.is_active=True 
+			and tdi.is_active=True]]>
+		</query>
+		<query id="permission_request_division_rel_delete" query_name="permission_request_division_rel_delete"
+			description="permission_request_division_rel_delete">
+          <![CDATA[update hcms_permission_request_conf_div_rel set is_active=false,modified_by_id=%s,modified_date=now() where permission_request_id=%s]]>
+		</query>
+		<query id="permission_request_division_rel_save" query_name="permission_request_division_rel_save"
+			description="permission_request_division_rel_save">
+          <![CDATA[insert into hcms_permission_request_conf_div_rel (division_id,permission_request_id,is_active,created_by_id,created_date) 
+          values ({0},{1},True,{2},now())]]>
+		</query>
+		<query id="permission_request_division_rel_delete" query_name="permission_request_division_rel_delete"
+			description="permission_request_division_rel_delete">
+          <![CDATA[delete from hcms_permission_request_conf_div_rel where division_id=%s]]>
+		</query>
+		<query id="permission_request_division_rel_save" query_name="permission_request_division_rel_save"
+			description="permission_request_division_rel_save">
+          <![CDATA[insert into hcms_permission_request_conf_div_rel (division_id,permission_request_id,is_active,created_by_id,created_date) 
+          values ({0},{1},True,{2},now())]]>
+          </query>
+		<query id="permission_request_data_check" query_name="permission_request_data_check"
+			description="permission_request_data_check">
+          <![CDATA[select tdi.id as division_id,hsm.id as shift_id,tdi.name as team_name,hsm.shift_name,hprc.id from 
+          	hcms_permission_request_conf hprc inner join hcms_permission_request_conf_div_rel hpdr on hpdr.permission_request_id = hprc.id 
+			inner join team_details_info tdi on tdi.id = hpdr.division_id inner join hcms_shift_master hsm on hsm.id = hprc.emp_shift_id 
+			where hpdr.division_id {0} and hprc.emp_shift_id = {1} and hpdr.is_active = true and hprc.is_active=true and tdi.is_active = true
+			and hsm.is_active = true {2} ]]>
+		</query>
+		<query id="policy_shift_details_show" query_name="policy_shift_details_show"
+			description="policy_shift_details_show">
+          <![CDATA[
+			select policy.id,to_char(policy.late_grace_time,'HH24:MI') as late_grace_time,to_char(policy.early_grace_time,'HH24:MI') as early_grace_time,policy.early_departs_deduct_count,policy.early_departs_day_deduct,
+			policy.process_start_month,to_char(policy.effective_from,'DD-MON-YYYY') as effective_from,policy.policy_period_id,
+			shift.shift_name,policy.late_arrival_deduct_count,policy.late_arrival_day_deduct,shift.id as shift_id,
+			organization_info.id as organization_id,organization_info.name,organization_unit_info.id as org_unit_id from hcms_attendance_late_early_policy as policy
+			inner join hcms_shift_master as shift on shift.id=policy.emp_shift_id
+			inner join organization_unit_info on organization_unit_info.id=shift_orgunit_id 
+			inner join organization_info on organization_info.id=organization_unit_info.organization_id
+			where policy.is_active=TRUE and shift.is_active=TRUE and policy.emp_shift_id={0}]]>
+		</query>
+
+		<query id="attendance_detail_fetch" query_name="attendance_detail_fetch"
+			description="attendance_detail_fetch">
+          <![CDATA[
+			select to_char(check_in, 'HH24:MI') as check_in_time,to_char(check_out, 'HH24:MI') as check_out_time,
+			to_char(check_in,'DD-Mon-YYYY HH24:MI') as check_in_date,to_char(check_in,'DD-Mon-YYYY HH24:MI') as check_out_date,
+			CONCAT_WS('-',TRIM (to_char(check_in, 'Day')),to_char(check_in, 'W') )as check_in_day,
+			CONCAT_WS('-',TRIM (to_char(check_out, 'Day')),to_char(check_out, 'W') )as check_out_day,to_char(Date %s,'DD-Mon-YYYY') as record_date,'Present' as attendance_status
+			from attendance_info where check_in::date =%s and employee_id_id=%s and is_active]]>
+		</query>
+		<query id="shift_detail_fetch" query_name="shift_detail_fetch"
+			description="shift_detail_fetch">
+          <![CDATA[
+			select shift_name,shift_weekend_definition,to_char(shift_start_time,'HH24:MI'),to_char(shift_end_time,'HH24:MI') from hcms_shift_master sm left join 
+			hcms_shift_employee_rel se on sm.id=se.shift_master_id where se.shift_employee_id=%s and sm.is_active and se.is_active]]>
+		</query>
+		<query id="attendance_date_series" query_name="attendance_date_series"
+			description="attendance_date_series">
+          <![CDATA[
+		select generate_series(%s::date,%s::date, interval  '1 day') as attendance_date]]>
+		</query>
+		<query id="attendance_status_fetch" query_name="attendance_status_fetch"
+			description="attendance_status_fetch">
+          <![CDATA[
+			select  CASE when CONCAT_WS('-',TRIM (to_char(DATE %s, 'Day')),to_char(DATE %s, 'W') ) in %s Then  'Weekend'
+			Else  'Absent' END as attendance_status,to_char(Date %s,'DD-Mon-YYYY') as record_date,'' as check_in_date,'' as check_out_date	]]>
+		</query>
+	</queries>
+</data>
+
+	
+	

@@ -1,0 +1,56 @@
+.succession_wrapper { height: auto; width: 98%; margin-left: 15px;}
+.succession_wrapper h2 { font-size: 16px;}
+.question_wrapper  {    margin: 30px 0;}
+.question_item .question { font-size: 16px; border-bottom: 1px solid #e3f5ff; padding-bottom: 25px; margin-bottom: 20px;}
+.question_left span{ float: left; margin-right:10px;}
+.activeno { font-size: 18px; color: #55bbff;    line-height: 20px;}
+.question_slider { margin-top: 50px !important;}
+.question_slider .que_no{ border: 1px solid #d1f2fe;
+  width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    position: relative;
+    text-align: center;
+    line-height: 36px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+
+}
+
+.question_slider .slick-slide {min-height: auto;}
+
+
+.question_slider .slick-next:before {
+
+
+    content: "\f107";
+    font-family: FontAwesome;
+     color: #000;
+
+}
+
+.question_slider  .slick-prev:before {
+    content: "\f106";
+    font-family: FontAwesome;
+      color: #000;
+
+}
+
+.question_slider .slick-next {    right: 0px;    bottom: -30px;    margin: 0 auto;    text-align: center;    left: 0;    right: 0;    top: auto;}
+.question_slider .slick-prev {    left: 10px;    top: -30px;    margin: 0 auto;    text-align: center;    left: 0;    right: 0;}
+.question_slider  .slick-prev:before, .question_slider  .slick-next:before { font-size: 30px !important; }
+.arrowicon{   color: #000;    position: absolute;    width: 20px;    height: 20px;    font-size: 30px; }
+.slick-prev {     left: 10px;    top: -25px;    margin: 0 auto;    text-align: center;     left: 0;    right: 0; }
+
+.question_slider  .slick-current .que_no {
+opacity: 1;
+color: #fff;
+background: #00bbff; /* Old browsers */
+background: -moz-linear-gradient(left, #00bbff 0%, #d2c3fc 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #00bbff 0%,#d2c3fc 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #00bbff 0%,#d2c3fc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00bbff', endColorstr='#d2c3fc',GradientType=1 ); /* IE6-9 */
+
+
+}

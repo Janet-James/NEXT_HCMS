@@ -1,0 +1,72 @@
+.listbox-multi {
+	/*border: 1px solid #ccc;*/
+	border-radius: 3px;
+	overflow: hidden;
+	width: 100%;
+	margin: 0 0 30px;
+	position: relative;
+	/*-webkit-box-shadow:  0px 0px 4.5px 0.5px rgba(30, 30, 30, 0.09); 
+	-moz-box-shadow:  0px 0px 4.5px 0.5px rgba(30, 30, 30, 0.09); 
+	box-shadow:  0px 0px 4.5px 0.5px rgba(30, 30, 30, 0.09); */
+}
+.listbox-multi .list-mulit-selected, .listbox-multi .selected-wrapper {
+	box-sizing: border-box;
+	display: inline-block;
+	height: 200px;
+	overflow-y: scroll;
+	padding: 10px;
+	vertical-align: top;
+	width: 50%;
+    border: 1px solid #efefef;
+}
+.listbox-multi .list-mulit-selected {
+	background: #ffffff;
+	border-right: 1px solid #ccc
+}
+.listbox-multi .selected-wrapper {
+	background: #fff
+}
+
+.selected-wrapper .item {color: #f50057!important;}
+
+.listbox-multi .item {
+	cursor: pointer;
+	display: block;
+	padding: 5px 10px;
+	color: #1b1c1c;
+	font-size: 14px;
+}
+.listbox-multi .item:hover {
+	color: #f50057;
+}
+.listbox-multi .search-input {
+	border: 0;
+	border: 1px solid #efefef;
+	border-radius: 0;
+	display: block;
+	font-size: 1em;
+	margin: 0;
+	outline: 0;
+	padding: 10px 35px;
+	width: 100%;
+	position: relative;
+        border-bottom: none;
+}
+.listbox-multi i {
+	position: absolute;
+	left: 7px;
+	top: 12px;
+	color: #004b98;
+}
+.listbox-multi .list-mulit-selected .item.selected {
+	opacity: .5;
+	color: #f50057;
+	border: none;
+}
+.listbox-multi .list-mulit-selected .item.selected:focus {
+	outline: none;
+}
+.listbox-multi .list-mulit-selected .ntrow.selected:hover {
+	background: inherit;
+	cursor: inherit
+}

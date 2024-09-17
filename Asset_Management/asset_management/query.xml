@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Asset_Management/asset_management">
+		<!-- 25-May-2018 || KAV || Employee Detail Fetch -->
+		<query id="as_mgnt_employee_info_fetch" query_name="as_mgnt_employee_info_fetch"
+			description="Asset Management Employee Details Fetch">
+          <![CDATA[ select id, name from employee_info; ]]>
+		</query>
+		<!-- 25-May-2018 || KAV || Asset Management List Fetch -->
+		<query id="asset_list_if_fetch" query_name="asset_list_fetch"
+			description="Asset Management Detail List Fetch all">
+          <![CDATA[ select * from (select am.id, am.asset_org_id, am.asset_org_unit_id, am.asset_model_code,r3.refitems_name as type_name, r1.refitems_name as asset_model,
+                        r4.refitems_name as asset_status from hcms_am_asset_list am   
+                        inner join reference_items r1 on r1.id = am.asset_model_refitem_id
+                        inner join reference_items r3 on r3.id = am.asset_model_type_refitem_id
+                        inner join reference_items r4 on r4.id = am.asset_status_refitem_id
+                        where am.is_active = True  UNION
+                        select am.id, am.asset_org_id, am.asset_org_unit_id, am.asset_model_code,
+                        r1.refitems_name as type_name,to_char(am.asset_make_refitem_id,''),
+                        r2.refitems_name as asset_status
+                        from hcms_am_asset_list am
+                        inner join reference_items r1 on r1.id = am.asset_model_type_refitem_id
+                        inner join reference_items r2 on r2.id = am.asset_status_refitem_id
+                        where asset_model_type_refitem_id =
+                        ( select id from reference_items where refitems_code ='AST10') and am.is_Active=True )a where a.asset_org_id=%s and a.asset_org_unit_id=%s order by a.id; ]]>
+		</query>
+		<query id="asset_list_else_fetch" query_name="asset_list_else_fetch"
+			description="Asset Management Detail List Fetch based of category selected">
+          <![CDATA[ select am.id, am.asset_model_code, r3.refitems_name as type_name, r1.refitems_name as asset_model,
+                        r4.refitems_name as asset_status from hcms_am_asset_list am   
+                        inner join reference_items r1 on r1.id = am.asset_model_refitem_id 
+                        inner join reference_items r3 on r3.id = am.asset_model_type_refitem_id
+                        inner join reference_items r4 on r4.id = am.asset_status_refitem_id
+                        where am.is_active = True and 
+                        am.asset_model_type_refitem_id = %s and am.asset_org_id = %s and am.asset_org_unit_id = %s 
+                        order by am.id; ]]>
+		</query>
+		<query id="asset_list_house_fetch" query_name="asset_list_house_fetch"
+			description="Asset Management Detail List Fetch based of house selected">
+          <![CDATA[ select am.id, am.asset_model_code, r3.refitems_name as type_name, to_char(am.asset_model_refitem_id, '')as asset_model,
+                        r4.refitems_name as asset_status from hcms_am_asset_list am   
+                        inner join reference_items r3 on r3.id = am.asset_model_type_refitem_id
+                        inner join reference_items r4 on r4.id = am.asset_status_refitem_id
+                        where am.is_active = True and
+                        am.asset_model_type_refitem_id = %s and am.asset_org_id = %s and am.asset_org_unit_id = %s 
+                        order by am.id; ]]>
+		</query>
+		<query id="asset_list_else_fetch_houseval" query_name="asset_list_else_fetch_houseval"
+			description="Asset Management Detail List Fetch  if category house selected ">
+          <![CDATA[ select am.id, am.asset_model_code, r3.refitems_name as type_name, to_char(am.asset_model_refitem_id, '')as asset_model,
+                        r4.refitems_name as asset_status from hcms_am_asset_list am   
+						inner join reference_items r3 on r3.id = am.asset_model_type_refitem_id
+                        inner join reference_items r4 on r4.id = am.asset_status_refitem_id
+                        where am.is_active = True and 
+                        am.asset_model_type_refitem_id = %s
+                        order by am.id;]]>
+		</query>
+		
+		
+		<query id="refitem_fetch" query_name="refitem_fetch"
+			description="Asset Management  Fetch  reference items">
+          <![CDATA[ SELECT refitems_name from reference_items where id=%s; ]]>
+		</query>
+		<query id="remove_query" query_name="remove_query"
+			description="Asset Is Active False Query">
+          <![CDATA[ Update hcms_am_asset_list set is_active='False', modified_date=now(), modified_by_id=%s where id = %s; ]]>
+		</query>
+		<query id="asset_details_update" query_name="asset_details_update"
+			description="Asset Details Update Query">
+          <![CDATA[ update hcms_am_asset_list set asset_org_id=%s, asset_org_unit_id=%s, asset_division_id=%s,
+          						 asset_make_refitem_id=%s, asset_model_refitem_id=%s, asset_configuration=%s, 
+                                 asset_serial=%s, asset_purchase_date=%s, 
+                                 asset_warranty=%s, asset_expiration_date=%s, asset_remarks=%s,
+                                 is_active = 'True', asset_status_refitem_id = %s, modified_date = now(), modified_by_id=%s,
+                                 asset_address = %s, asset_brown_goods = %s, asset_white_goods = %s where id=%s; ]]>
+		</query>
+		<query id="hrms_asset_info_update" query_name="hrms_asset_info_update"
+			description="HRMS Asset Details Update Query">
+          <![CDATA[ update hrms_assets_info set is_active='False', modified_by_id=%s where id=%s; ]]>
+		</query>
+		<query id="hrms_asset_info_update" query_name="hrms_asset_info_update"
+            description="HRMS Asset Details Update Query">
+          <![CDATA[ update hrms_assets_info set is_active='False' ,modified_by_id=%s where id=%s; ]]>
+        </query>
+    <query id="asset_type_code_fetch" query_name="asset_type_code_fetch"
+			description="Asset Management Fetch Code">
+          <![CDATA[ SELECT asset_model_code from hcms_am_asset_list where asset_model_type_refitem_id = %s ORDER BY ID DESC limit 1; ]]>
+		</query>
+		<query id="insert_asset_data" query_name="insert_asset_data"
+			description="Asset Management Insert Asset Data">
+          <![CDATA[ INSERT INTO hcms_am_asset_list(
+                                 asset_org_id, asset_org_unit_id, asset_division_id,
+                                 asset_make_refitem_id, asset_model_refitem_id, asset_model_code, asset_configuration, 
+                                 asset_serial, asset_purchase_date,
+                                 asset_warranty, asset_expiration_date, asset_remarks, asset_model_type_refitem_id,
+                                 created_date, modified_date, created_by_id, modified_by_id, is_active, 
+                                 asset_status_refitem_id, asset_address, asset_brown_goods, asset_white_goods)
+                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, now(), now(), 
+                                 %s, %s, 'True', %s, %s, %s, %s); ]]>
+		</query>
+		<query id="fetch_asset_list_data_allocated" query_name="fetch_asset_list_data_allocated"
+			description="Asset Management Fetch Asset List Data For allocated">
+          <![CDATA[ select am.asset_org_id, am.asset_org_unit_id, coalesce(am.asset_division_id,'0')as asset_division_id, am.asset_model_code, am.asset_configuration, am.asset_serial, 
+                      to_char(am.asset_purchase_date,'DD-MON-YYYY')as purchase_date, am.asset_warranty, 
+                      to_char(am.asset_expiration_date,'DD-MON-YYYY')as expiry_date, 
+                      am.asset_remarks, am.asset_model_type_refitem_id, am.asset_address, am.asset_brown_goods, am.asset_white_goods,
+                      am.asset_make_refitem_id, am.asset_model_refitem_id,r1.refitems_name as asset_status  from hcms_am_asset_list am  inner join reference_items r1 
+                      on r1.id = am.asset_status_refitem_id where am.id = %s; ]]>
+		</query>
+		<query id="fetch_emp_id" query_name="fetch_emp_id"
+			description=" Fetch Employee Id from HRMS Asset Info Code">
+          <![CDATA[ select emp_id_id from hrms_assets_info where is_active = 'True' and asset_id = %s; ]]>
+		</query>
+		<query id="fetch_emp_name" query_name="fetch_emp_name"
+			description=" Fetch Employee Name ">
+          <![CDATA[ select  name from employee_info where id = %s; ]]>
+		</query>
+		<query id="fetch_refitemscode" query_name="fetch_refitemscode"
+			description=" Fetch Refitemcode ">
+          <![CDATA[ select refitems_code from reference_items where refitems_name = %s; ]]>
+		</query>
+		<query id="fetch_refitem_id" query_name="fetch_refitem_id"
+			description=" Fetch Refitem Id ">
+          <![CDATA[ select id from reference_items where refitems_code = %s; ]]>
+		</query>
+		<query id="fetch_house_id" query_name="fetch_house_id"
+			description="To fetch house id">
+          <![CDATA[ select id from reference_items where refitems_code = 'AST10'; ]]>
+		</query>
+		<query id="am_org_fetch" query_name="am_org_fetch"
+			description="To fetch orgnization list">
+          <![CDATA[ select id, name from organization_info where is_active = 'True'; ]]>
+		</query>
+		<query id="am_orgunit_fetch" query_name="am_orgunit_fetch"
+			description="To fetch orgnization unit list">
+          <![CDATA[ select id, orgunit_name from organization_unit_info where organization_id = %s and parent_orgunit_id != 0 and is_active = 'True' order by orgunit_name; ]]>
+		</query>
+
+    <!-- 15-OCT-2018 || MST || Fetch Department List start -->
+    <query id="am_fetch_dept_list" query_name="am_fetch_dept_list"
+      description="Fetch Department List">
+          <![CDATA[ select id, name from team_details_info where org_unit_id = %s and is_active = TRUE; ]]>
+    </query>
+    <!-- 15-OCT-2018 || MST || Fetch Department List end -->
+	</queries>
+</data>

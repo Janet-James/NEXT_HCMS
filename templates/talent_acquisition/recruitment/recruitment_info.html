@@ -1,0 +1,241 @@
+<div class="row">
+	<span id="table_view"
+		class="animated fadeIn infinite  datatable_viewbtn viewIcons"
+		data-toggle="tooltip" data-placement="bottom" title="Table View"><i
+		class="nf nf-moscow-table"></i></span> <span id="form_view"
+		class="animated fadeIn infinite  datatable_viewbtn viewIcons"
+		data-toggle="tooltip" data-placement="bottom" title="Form View"
+		style="display: none"><i class="nf nf-apparisal-form"></i></span>
+
+	<div class="col-md-8" id='ta_open_main_div1'>
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject bold uppercase">Interview
+						Form</span>
+				</div>
+				<div class="col-md-1 caption" style='float: right'>
+					<span
+						class="ta_nav caption-subject animated flash infinite  bold uppercase"
+						id='left' data-toggle="tooltip" data-placement="bottom"
+						title="Job Interview Details View"><i
+						class="nf nf-angle-left"></i></span> <span
+						class="ta_nav caption-subject animated flash infinite  bold uppercase"
+						id='right' data-toggle="tooltip" data-placement="bottom"
+						title="Job Interview Form View"><i
+						class="nf nf-angle-right"></i></span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form role="form" id='recruitment_details_form'>
+					<div class="form-body row">
+						<div class="col-md-12 ">
+							<div class="col-md-6">
+
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Candidate Name <span class="asterisk">*</span>
+									</label> <select id="candidate_name" name="candidate_name"
+										class="form-control select2" data-error=".errorTxt1">
+										<option value="0">--Select Candidate--</option> 
+										{% for i in candidate_info %}
+										<option value="{{ i.id }}">{{ i.candidate_name }}</option> 
+										{% endfor %}
+									</select> <span class="errorTxt1 errormessage"></span>
+								</div>
+
+
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Job Title <span class="asterisk">*</span>
+									</label> <select id="job_title" name="job_title"
+										class="form-control select2" data-error=".errorTxt2">
+										<option value="0">--Select Job Title--</option> {% for i in job_title_info %}
+										<option value="{{ i.id }}">{{ i.job_title }}</option> {% endfor %}
+									</select> <span class="errorTxt2 errormessage"></span>
+								</div>
+
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Interview Type <span class="asterisk">*</span>
+									</label> <select id="interview_type" name="interview_type"
+										class="form-control select2" data-error=".errorTxt0">
+										<option value="0">--Select Interview Type--</option> {% for i in interview_type_info %}
+										<option value="{{ i.id }}">{{i.refitems_name}}</option> {% endfor %}
+									</select> <span class="errorTxt0 errormessage"></span>
+								</div>
+
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Interviewer <span class="asterisk">*</span>
+									</label> 
+									<select id="interviewer" class="form-control mt-multiselect btn btn-default" multiple="multiple" data-label="left" data-select-all="true" data-width="100%" data-filter="true" data-action-onchange="true"
+													name="interviewer" data-placeholder="--Interviewer Filter--"
+													data-error=".errorTxt3">
+										{% for i in interviewer_info %}
+										<option value="{{ i.id }}">{{ i.interviewer_name }}</option>
+										{% endfor %}
+												</select>
+									 <span class="errorTxt3 errormessage"></span>
+								</div>
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Interview Status <span class="asterisk">*</span>
+									</label> <select id="interview_status" name="interview_status"
+										class="form-control select2" data-error=".errorTxt4">
+										<option value="0">--Select Interview Status--</option> {% for i in interview_status_info %}
+										<option value="{{ i.id }}">{{ i.refitems_name }}</option> {% endfor %}
+									</select> <span class="errorTxt4 errormessage"></span>
+								</div>
+								<div class="form-group">
+									<label>Document Upload</label>
+									<div class="clearfix"></div>
+									<div class="fileinput fileinput-new" data-provides="fileinput">
+										<div class="input-group">
+											<div style="width: 233px !important;"
+												class="form-control uneditable-input input-medium input-fixed"
+												data-trigger="fileinput">
+												<i class="fa fa-file fileinput-exists"></i>&nbsp; <span
+													class="fileinput-filename"> </span>
+											</div>
+											<span
+												class="input-group-addon btn btn-success btn-file btn-animate ">
+												<span class="fileinput-new"> <i class="fa fa-upload"></i></span>
+												<span class="fileinput-exists"> Change </span> <input
+												type="file" id="ta_interview_doc"
+												onchange="encodeDoctoBase64(this)" name="...">
+											</span> <a href="javascript:;"
+												class="input-group-addon btn btn-danger btn-animate fileinput-exists"
+												data-dismiss="fileinput"> Remove </a>
+										</div>
+										<span><p class="txt-info">( Note : Please upload
+												doc,docx or pdf and file size should be less than 2MB )</p></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-6 ">
+								<div class="form-group">
+									<label>Interview Date <span class="asterisk">*</span></label>
+									<div class="input-icon">
+										<i class="nf nf-calendar"></i> <input id="interview_date"
+											name="interview_date" placeholder="Interview Date"
+											class="form-control form-control-inline" required
+											data-field="date" size="16" value="" type="text"
+											data-error=".errorTxt17"> <span id="dob_error"
+											class="errorTxt17 errormessage"></span>
+										<div id="int_date_time"></div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label> From (Time) <span class="asterisk">*</span></label>
+									<div class=" input-icon">
+										<i class="nf nf-calendar"></i> <input id="from_time"
+											name="from_time" placeholder="From Time"
+											class="form-control form-control-inline"  
+											data-date-end-date="0d" required data-error=".errorTxt5"
+											value="" type="text" data-field="time" data-format="hh:mm AA">
+										<div class="int_date_time"></div>
+										<span id="frm_time_err" class="errorTxt5 errormessage"></span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label> To (Time) <span class="asterisk">*</span></label>
+									<div class=" input-icon">
+										<i class="nf nf-calendar"></i> <input id="to_time"
+											name="to_time" placeholder="To Time"
+											class="form-control form-control-inline"
+											data-date-end-date="0d" required data-error=".errorTxt6"
+											value="" type="text" data-field="time" data-format="hh:mm AA">
+										<div class="int_date_time"></div>
+										<span id="to_time_err" class="errorTxt6 errormessage"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label> Comments/Observations </label>
+									<div class="input-icon">
+										<i class="nf nf-calendar"></i>
+										<textarea class="form-control" id="comments" name="comments"
+											placeholder="Comments" rows="1" data-error=".errorTxt7"
+											maxlength="200"></textarea>
+										<span class="errorTxt7 errormessage"></span>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Rating 
+									</label> <select id="rating" name="rating"
+										class="form-control select2" data-error=".errorTxt8">
+										<option value="0">--Select Rating--</option> {% for i in interview_rating_info %}
+										<option value="{{ i.id }}">{{ i.refitems_name }}</option> {% endfor %}
+									</select> <span class="errorTxt8 errormessage"></span>
+								</div>														
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-sm-12">
+							<div class="form-group" align="right">
+								<div class="" id="ta_recruitment_btn"></div>
+							</div>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- form dev end -->
+
+	<!-- table dev start -->
+	<div class="col-md-4 interview_details tabdetails_height" id='ta_open_main_div2'
+		style="display: none; transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);border-left: 1px solid rgb(195, 227, 247);"">
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption ">
+					<span class="caption-subject bold uppercase">Interview
+						Details</span>
+					<div class="col-sm-6" style="float: right; margin-top: -10px;">
+						<div class="form-group">
+							<div class="form-group">
+								<div class="input-icon">
+									<i class="nf nf-advanced-search"></i> <input
+										class="form-control" placeholder="Search by Name"
+										id='job_interview_search' type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" id="ta_job_interview_details_vertical_view"></div>
+			</div>
+		</div>
+	</div>
+	<!-- table dev start -->
+	<div class="col-md-12" id='ta_main_div2'
+		style="display: none; transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject bold uppercase">Job Interview
+						Details</span>
+				</div>
+				<div class="tools"></div>
+				<div class="portlet-body">
+					<table class="table table-striped table-bordered table-hover"
+						id="ta_interview_table">
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- table dev end -->
+</div>
+<!-- table dev end -->

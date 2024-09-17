@@ -1,0 +1,37 @@
+id,created_date,modified_date,is_active,role_title,role_req_work_exp,role_pref_edu,role_need,role_resp,role_travel,role_req_no_of_resource,role_org_unit,role_grade,role_depts,created_by_id,modified_by_id,role_org_id,role_reports_to_id,role_type_refitem_id
+1,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Chief Executive Officer,,,Needed,Chief Executive Officer,f,1,{7},{717},{1},1,1,2,1,157
+2,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Junior Solution Developer,,,Needed,Junior Solution Developer,f,1,"{6,7}",{724},"{2,5,6,7,8,9,10}",1,1,2,1,158
+3,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Application Developer,,,Needed,Application Developer,f,1,"{6,7}",{723},"{2,5,6,7,8,9,10}",1,1,2,1,158
+4,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Application Developer,,,Needed,Senior Application Developer,f,1,"{6,7}",{722},"{2,5,6,7,8,9,10}",1,1,2,1,158
+5,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Android Developer,,,Needed,Android Developer,f,1,{7},{723},{7},1,1,2,1,158
+6,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,iOS Developer,,,Needed,iOS Developer,f,1,{7},{723},{7},1,1,2,1,158
+7,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Android Developer,,,Needed,Senior Android Developer,f,1,{7},{722},{7},1,1,2,1,158
+8,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Technical Lead - MOVEO,,,Needed,Technical Lead - MOVEO,f,1,{7},{721},{7},1,1,2,1,158
+9,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Team Lead,,,Needed,Team Lead,f,1,"{6,7}",{722},"{2,5,6,7,8,9,10}",1,1,2,1,158
+10,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Team Lead,,,Needed,Senior Team Lead,f,1,"{6,7}",{722},"{2,5,6,7,8,9,10}",1,1,2,1,156
+11,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,UI/UX designer ,,,Needed,UI/UX designer ,f,1,{7},{723},{10},1,1,2,1,158
+12,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,UI/UX developer,,,Needed,UI/UX developer,f,1,{7},{723},{10},1,1,2,1,158
+13,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior UI/UX Designer ,,,Needed,Senior UI/UX Designer ,f,1,{7},{722},{10},1,1,2,1,158
+14,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior UI/UX Developer,,,Needed,Senior UI/UX Developer,f,1,{7},{722},{10},1,1,2,1,158
+15,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Lead UI/UX,,,Needed,Lead UI/UX,f,1,{7},{721},{10},1,1,2,1,158
+16,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Software Quality Analyst,,,Needed,Senior Software Quality Analyst,f,1,{7},{722},{14},1,1,2,1,156
+17,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior GIS Application Developer,,,Needed,Senior GIS Application Developer,f,1,{7},{722},{6},1,1,2,1,158
+18,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Cloud Engineer,,,Needed,Senior Cloud Engineer,f,1,{7},{722},{5},1,1,2,1,158
+19,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Junior Content Developer,,,Needed,Junior Content Developer,f,1,{7},{724},{4},1,1,2,1,158
+20,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Senior Business Analyst,,,Needed,Senior Business Analyst,f,1,{7},{722},{4},1,1,2,1,158
+21,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Business Analyst,,,Needed,Business Analyst,f,1,{7},{723},{4},1,1,2,1,158
+22,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,TL - Application Development,,,Needed,TL - Application Development,f,1,"{6,7}",{721},"{2,5,6,7,8,9,10}",1,1,2,1,156
+23,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Manager-Spatial & Technical Services,,,Needed,Manager-Spatial & Technical Services,f,1,{7},{718},{6},1,1,2,1,157
+24,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,GM - Solution Architecture & Value Addition,,,Needed,GM - Solution Architecture & Value Addition,f,1,"{6,7}",{718},"{2,5,6,7,8,9,10}",1,1,2,1,157
+25,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Trainee - EXOS,,,Needed,Trainee - EXOS,f,1,{7},{721},{5},1,1,2,1,158
+26,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Tech Lead,,,Needed,Tech Lead,f,1,"{6,7}",{722},"{2,5,6,7,8,9,10}",1,1,2,1,158
+27,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Development and Technical Service Engineer - IOT,,,Needed,Development and Technical Service Engineer - IOT,f,1,{6},{722},{2},1,1,2,1,158
+28,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Manager-Projects & Delivery,,,Needed,Manager-Projects & Delivery,f,1,"{6,7}",{718},"{2,5,6,7,8,9,10}",1,1,2,1,157
+29,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Associate Manager - Human Capital Management,,,Needed,Associate Manager - Human Capital Management,f,1,{6},{718},{11},1,1,2,1,157
+30,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Creative Lead,,,Needed,Creative Lead,f,1,{7},{722},{10},1,1,2,1,156
+31,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Business Manager,,,Needed,Business Manager,f,1,{6},{718},{4},1,1,2,1,157
+32,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Officer-Human Capital Enablement,,,Needed,Officer-Human Capital Enablement,f,1,{6},{723},{11},1,1,2,1,156
+33,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,TL-Operations & Maintenance,,,Needed,TL-Operations & Maintenance,f,1,{13},{722},{13},1,1,4,1,158
+34,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Operations and Maintenance Engineer,,,Needed,Operations and Maintenance Engineer,f,1,{13},{723},{13},1,1,4,1,158
+35,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Lead - Design & Development,,,Needed,Lead - Design & Development,f,1,{7},{722},{10},1,1,2,1,158
+36,2018-10-25 11:54:40.559189+05:30,2018-10-25 11:54:40.559189+05:30,t,Assistant Manager - F&A,,,Needed,Assistant Manager - F&A,f,1,{7},{718},{3},1,1,2,1,157

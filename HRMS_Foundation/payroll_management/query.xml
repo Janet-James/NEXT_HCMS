@@ -1,0 +1,645 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="PayrollManagement">
+
+		<!-- Salary Rule Info Start -->
+
+		<query id="salary_category_select" name="salary_category_select"
+			description="salary category select">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'SRUCT']]>
+		</query>
+
+		<query id="salary_calculation_type" name="salary_calculation_type"
+			description="salary calculation type">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'BENTY']]>
+		</query>
+
+		<query id="salary_component_type" name="salary_component_type"
+			description="salary component type">
+		<![CDATA[select rftm.id,rftm.refitems_name,refitems_code from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'BENVA']]>
+		</query>
+
+		<query id="salary_rule_table_data" name="salary_rule_table_data"
+			description="salary Rule Table Data">
+		<![CDATA[select hrsr.id,hrsr.salary_rule_name,hrsr.salary_rule_code,rftm.refitems_name
+				from hr_salary_rule hrsr 
+				inner join reference_items rftm on hrsr.salary_rule_category_id_id = rftm.id where hrsr.is_active = 'True' order by id desc]]>
+		</query>
+
+		<query id="salary_rule_table_row_click" name="salary_rule_table_row_click"
+			description="Salary Rule Table Row Click">
+        	<![CDATA[ SELECT  a.id as id,a.salary_rule_name,a.salary_rule_code,a.is_active,
+		a.refitems_name as refitems_name,
+		a.salary_rule_category_id_id,a.refitems_code,a.salary_rule_validation,a.salary_rule_validation_code,
+		a.salary_rule_value_assignment,a.salary_rule_value_assignment_code,a.contribution_id_id,a.contributor from 
+		(select hrss.id as id,hrss.salary_rule_name,hrss.salary_rule_code,hrss.is_active,
+		hrss.salary_rule_category_id_id,rfitm.refitems_code,rfitm.refitems_name as refitems_name,
+		rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,
+		rulcon.contribution_id_id,reg.contributor from hr_salary_rule hrss 
+		left join reference_items rfitm on rfitm.id = hrss.salary_rule_category_id_id 
+		left join hr_salary_rule_conditions rulcon on rulcon.salary_rule_id_id=hrss.id
+		left join hr_contribution_register reg on reg.id=rulcon.contribution_id_id )a     where a.id =%s]]>
+		</query>
+		<!-- Salary Rule Info End -->
+
+		<!-- Contribution Register Info Start -->
+		<query id="contributor_register_table_display" name="contributor_register_table_display"
+			description="contributor register table display">
+		<![CDATA[select conreg.id,conreg.name as contribution_register_name,conreg.code as contribution_register_code,
+				conreg.contributor,conreg.contribution,reftems.refitems_name from hr_contribution_register conreg
+				inner join reference_items reftems on reftems.id = conreg.salary_compontent_id
+ 				  where conreg.is_active = 'True'  order by id desc]]>
+		</query>
+		<query id="contributions_register_table_row_click" name="contributions_register_table_row_click"
+			description="contributor register table row click">
+		<![CDATA[select id,name as contribution_register_name,code as contribution_register_code,description,contributor,contribution,salary_compontent_id
+ 			from hr_contribution_register where id = %s and is_active = 'True']]>
+		</query>
+		
+		<query id="salary_rule_contribution_details_record" name="salary_rule_contribution_details_record"
+		description="To View the Salary Rule contribution Deatils ">
+        	<![CDATA[ SELECT cont.id,row_number() over(),cont.name,cont.code,cont.contributor,cont.contribution,cont.description,cont.salary_compontent_id,ref_item.refitems_name 
+				from hr_contribution_register cont
+				inner join reference_items ref_item  on ref_item.id =cont.salary_compontent_id     
+				where cont.is_active=True and cont.id=%s order by cont.id  ]]>
+	</query>
+	<query id="contribute_register_select" name="contribute_register_select" description="To select all records in a contribute register name">
+        	<![CDATA[select id,code,name from hr_contribution_register where is_active=True order by id]]>
+        </query>
+
+		<!-- Contribution Register Info End -->
+
+		<!-- Salary Structure Info Start -->
+
+		<query id="hrms_select_organization_info" name="hrms_select_organization_info"
+			description="hrms select organization info">
+		<![CDATA[select id,name from organization_info where is_active]]>
+		</query>
+		<query id="hrms_select_organization_unit_info" name="hrms_select_organization_unit_info" description="hrms select organization unit info">
+		<![CDATA[select id,orgunit_name from organization_unit_info where is_active]]>
+		</query>
+		
+		<query id="salary_structure_table_display" name="salary_structure_table_display"
+			description="salary structure table display">
+		<![CDATA[select hrss.id,orginfo.name as company_name,hrss.structure_code,hrss.structure_name from hr_salary_structure hrss
+				inner join organization_info orginfo on hrss.company_id_id = orginfo.id where hrss.is_active = 'True' order by id desc]]>
+		</query>
+		<!-- <query id="salary_structure_table_row_click" name="salary_structure_table_row_click"
+			description="salary structure table row click">
+		<![CDATA[select hrss.id,hrss.company_id_id,hrss.structure_code,hrss.structure_name,hrss.description from hr_salary_structure hrss
+ 					where is_active = 'True' and id = %s]]>
+		</query> -->
+		
+		<!-- <query id="salary_structure_table_row_click" name="salary_structure_table_row_click" description="Salary Structure Row Click value in table">
+        	<![CDATA[SELECT str.id,str.structure_name,str.structure_code,str.company_id_id,str.description,
+				rulcon.salary_rule_validation,rulcon.salary_rule_value_assignment,rulcon.id as condition_id,
+				rul.salary_rule_name,rul.salary_rule_code,rul.salary_rule_category_id_id,rfitm.refitems_name,strrul.salary_rule_id_id,strrul.salary_rule_conditions_id_id
+				 from hr_salary_structure str
+				left join  hr_salary_structure_rule strrul on str.id=strrul.structure_id_id and strrul.is_active=True
+				left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+				left join hr_salary_rule rul on rul.id=strrul.salary_rule_id_id 
+				left join reference_items rfitm on rfitm.id = rul.salary_rule_category_id_id where str.id = %s  order by str.id ]]>
+        </query> -->
+        <query id="salary_structure_table_row_click" name="salary_structure_table_row_click" description="Salary Structure Row Click value in table">
+        	<![CDATA[SELECT str.id,str.structure_name,str.structure_code,str.company_id_id,str.description,
+				rulcon.salary_rule_validation,rulcon.salary_rule_value_assignment,rulcon.id as condition_id,
+				rul.salary_rule_name,rul.salary_rule_code,rul.salary_rule_category_id_id,rfitm.refitems_name,strrul.salary_rule_id_id,strrul.salary_rule_conditions_id_id
+				 from hr_salary_structure str
+				left join hr_salary_structure_rule strrul on str.id=strrul.structure_id_id and strrul.is_active=True
+				left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+				left join hr_salary_rule rul on rul.id=strrul.salary_rule_id_id 
+				left join reference_items rfitm on rfitm.id = rul.salary_rule_category_id_id where str.id = %s   order by str.id ]]>
+        </query>
+		
+		<query id="salary_rule_popup_table" name="salary_rule_popup_table" description="To select all records in a employee name">
+        	<![CDATA[SELECT hrss.id,hrss.salary_rule_name,hrss.salary_rule_code,cond.salary_rule_validation,cond.salary_rule_validation_code,
+					cond.salary_rule_value_assignment,cond.salary_rule_value_assignment_code,rfitm.refitems_name as refitems_name,hrss.salary_rule_category_id_id,rfitm.refitems_code,cond.id as salary_rule_condition_id
+					from hr_salary_rule hrss 
+					inner join hr_salary_rule_conditions cond on cond.salary_rule_id_id=hrss.id 
+					inner join reference_items rfitm on rfitm.id = hrss.salary_rule_category_id_id
+					where hrss.is_active = 't' order by hrss.id]]>
+        </query>
+        
+        <query id="salary_rule_main_table" name="salary_rule_main_table" description="To select all records in a salary rule">
+        	<![CDATA[SELECT hrss.id,hrss.salary_rule_name,hrss.salary_rule_code,cond.salary_rule_validation,cond.salary_rule_validation_code,
+					cond.salary_rule_value_assignment,cond.salary_rule_value_assignment_code,rfitm.refitems_name as refitems_name,hrss.salary_rule_category_id_id,rfitm.refitems_code,cond.id as salary_rule_condition_id
+					from hr_salary_rule hrss 
+					inner join hr_salary_rule_conditions cond on cond.salary_rule_id_id=hrss.id 
+					inner join reference_items rfitm on rfitm.id = hrss.salary_rule_category_id_id
+					where hrss.id in (%s) and cond.id in (%s) and hrss.is_active=True order by hrss.id]]>
+        </query>
+        
+        <query id="salary_structure_id" name="salary_structure_id" description="salary structure">
+        	<![CDATA[select salary_rule_conditions_id_id,salary_rule_id_id from hr_salary_structure_rule where structure_id_id = %s and is_active=True ]]>
+        </query>
+        
+        <query id="salary_structure_id_delete" name="salary_structure_id_delete" description="salary structure id delete check">
+        	<![CDATA[update hr_salary_structure_rule set is_active=False where salary_rule_conditions_id_id = %s and structure_id_id = %s]]>
+        </query>
+        
+         <query id="select_salary_rule_id" name="select_salary_rule_id" description="Select salary Rule id from salary rule condition">
+        	<![CDATA[SELECT salary_rule_id_id from hr_salary_rule_conditions where id=%s and is_active=True ]]>
+        </query>
+
+		<!-- Salary Structure Info End -->
+		
+		<!-- Salary Contract Info Start -->
+		<query id="salary_periodicity_select" name="salary_periodicity_select" description="salary periodicity select">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'PERCT']]>
+		</query>
+		<query id="hrms_select_team_info" name="hrms_select_team_info" description="hrms select team info">
+			<![CDATA[select id,name as team_name from team_details_info where is_active]]>
+		</query>
+		
+		<query id="hrms_select_employee_info" name="hrms_select_employee_info" description="hrms select employee info">
+			<![CDATA[select id, COALESCE(concat(upper(name), ' ',upper(last_name)),'') as employee_name from employee_info where is_active order by name]]>
+		</query>
+		
+		<query id="salary_contract_type_select" name="salary_contract_type_select" description="salary contract type select">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'CONTY']]>
+		</query>
+		
+		<query id="salary_structure_name_selection_data_record" name="salary_structure_name_selection_data_record"
+			description="To Select the all Name of the Salary Structure ">
+        	<![CDATA[ SELECT structure_name,structure_code,id from hr_salary_structure where is_active=True ]]>
+		</query>
+		
+		<query id="salary_currency_type_select" name="salary_currency_type_select" description="salary currency type select">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'CUREN']]>
+		</query>
+		
+		<query id="salary_contract_table_view" name="salary_contract_table_view" description="To Select the all details of the Salary Contract">
+        	<![CDATA[SELECT contract.id,contract.job_title,company.name as company_id_id,orgunit.orgunit_name,department.name as department_id_id, 
+                        COALESCE(concat(upper(emp.name), ' ',upper(emp.last_name)),'') as employee_id_id,ref_item.refitems_name as contract_type_id_id,salstuct.structure_name,
+						contract.base_amount,ref_item2.refitems_name as currency_type,
+						to_char(contract.contract_effective_from_date,'DD-MM-YYYY') as contract_effective_from_date,
+						to_char(contract.contract_effective_to_date,'DD-MM-YYYY') as contract_effective_to_date
+                        from hr_salary_contract contract
+                        inner join organization_info company  on company.id =contract.company_id_id 
+						inner join organization_unit_info orgunit on orgunit.id = contract.org_unit_id_id
+                        inner join team_details_info department on department.id=contract.department_id_id
+                        inner join employee_info emp on emp.id=contract.employee_id_id 
+						inner join hr_salary_structure salstuct on salstuct.id=contract.salary_structure_id_id
+                        inner join reference_items ref_item  on ref_item.id =contract.contract_type_id_id
+                        inner join reference_items ref_item2  on ref_item2.id =contract.base_currency_id
+                        where contract.is_active=True order by contract.id desc ]]>
+		</query>
+		
+		<query id="salary_contract_table_row_click" name="salary_contract_table_row_click" description="Salary Contract Row Click value in table">
+        	<![CDATA[SELECT contract.id,company.id as company_id_id ,emp.id as employee_id_id,contract.job_title,
+                    structure.id as  salary_structure_id_id,department.id as department_id_id,contract.org_unit_id_id,
+                    ref_item.id as contract_type_id_id,ref_item.refitems_code as contract_type_id_code, contract.base_amount,
+                    ref_item2.id as base_currency_id,ref_item2.refitems_code as base_currency_code,hrieb.id as individual_benefit_id,hrieb.benefit_name,hrieb.validation,hrieb.validation_code,
+                    hrieb.value_assignment,hrieb.value_assignment_code,hrieb.calculation_type_id_id,hrieb.periodicity_id,hrieb.activate,to_char(hrieb.benefit_effective_from_date, 'DD-MM-YYYY') as benefit_effective_from_date ,to_char(hrieb.benefit_effective_to_date, 'DD-MM-YYYY') as benefit_effective_to_date,hrieb.salary_rule_category_id,
+		            ref_item3.id as calculate_id ,ref_item3.refitems_code as calculate_value,ref_item4.refitems_name as allowance_type,
+		            to_char(contract.contract_effective_from_date, 'DD-MM-YYYY') as contract_effective_from_date ,to_char(contract.contract_effective_to_date, 'DD-MM-YYYY') as contract_effective_to_date
+                    from hr_salary_contract contract
+                    inner join organization_info company  on company.id =contract.company_id_id 
+                    inner join team_details_info department on department.id=contract.department_id_id
+                    inner join employee_info emp on emp.id=contract.employee_id_id 
+                    inner join reference_items ref_item  on ref_item.id =contract.contract_type_id_id
+                    inner join reference_items ref_item2  on ref_item2.id =contract.base_currency_id
+		    		left join hr_individual_employee_benefit hrieb on hrieb.salary_contract_id_id =contract.id and hrieb.is_active = 'true'
+		    		left join reference_items ref_item3 on ref_item3.id = hrieb.calculation_type_id_id
+                    left join reference_items ref_item4 on hrieb.salary_rule_category_id =ref_item4.id
+                    inner join hr_salary_structure structure on structure.id=contract.salary_structure_id_id
+                    where contract.id=%s  and contract.is_active='true' ]]>
+        </query>
+
+		<!-- Salary Contract Info End -->
+		
+		<!-- Payslip Info Start -->
+		<!-- <query id="hrms_select_employee_info_payslip" name="hrms_select_employee_info_payslip" description="hrms select employee info">
+			<![CDATA[select emp.id,emp.name as employee_name from employee_info emp
+						inner join hr_salary_contract hrscon on hrscon.employee_id_id = emp.id
+						where emp.is_active]]>
+		</query> -->
+		<query id="hrms_select_employee_info_payslip" name="hrms_select_employee_info_payslip" description="hrms select employee info">
+			<![CDATA[select emp.id,COALESCE(concat(upper(emp.name), ' ',upper(emp.last_name)),'') as employee_name from employee_info emp
+			inner join hr_salary_contract hrscon on hrscon.employee_id_id = emp.id
+			where (hrscon.contract_effective_from_date,hrscon.contract_effective_to_date) overlaps (current_date,current_date) and 
+			 emp.is_active and hrscon.is_active]]>
+		</query>
+		<query id="payslip_salary_structure_name_selection_data" name="payslip_salary_structure_name_selection_data"
+			description="To Select the all Name of the Salary Structure ">
+        	<![CDATA[ SELECT hrsalstr.structure_name,hrsalstr.structure_code,hrsalstr.id from hr_salary_structure hrsalstr
+					inner join hr_salary_contract hrscon on hrscon.salary_structure_id_id = hrsalstr.id
+				    where hrsalstr.is_active=True and hrscon.employee_id_id = %s and 
+				    (hrscon.contract_effective_from_date,hrscon.contract_effective_to_date) overlaps (%s,%s) ]]>
+		</query>
+		
+		<query id="payslip_leaveof_lop_record" name="payslip_leaveof_lop_record"
+			description="To Select the Leave Calculating Based on the LOP Type Of the Leave,Approved,Start Date and End Date">
+        	<![CDATA[select COALESCE(sum(leave.number_of_days),0) as leave_lop from leave_info leave
+			inner join reference_items ref_items on ref_items.id=leave.type_id_id       
+			where from_date::date >= %s and to_date::date <= %s and leave.state_id=%s and 
+			leave_employee_id_id = %s  and ref_items.refitems_name=%s and leave.is_active]]>
+		</query>
+				<!-- <query id="payslip_leaveof_lop_record" name="payslip_leaveof_lop_record"
+			description="To Select the Leave Calculating Based on the LOP Type Of the Leave,Approved,Start Date and End Date">
+        	<![CDATA[SELECT sum(COALESCE(array_length(ARRAY  (
+        SELECT UNNEST(hr_condition_date) 
+        INTERSECT
+        SELECT UNNEST(hr_record_date)
+    	),1),0)) as leave_lop
+		FROM  (          
+        (select z.hr_condition_date,y.hr_record_date,y.leave_id from
+        (select array_agg(date1) as hr_condition_date,id from (select generate_series(%s,
+          %s, '1 day'::interval)::Date date1,id from leave_info)a where extract(DOW from date1) not in (6,0) group by id)z
+        inner join
+        (select  array_agg(a.date_field) as hr_record_date ,a.to_date::DATE ,a.from_date::DATE ,leave_id from  (select  (generate_series((from_date at time zone 'UTC')::Date,
+          (to_date at time zone 'UTC')::date, '1 day'::interval))::Date as date_field,(from_date at time zone 'UTC')::date  as from_date  ,(to_date at time zone 'UTC')::date as to_date,leave.id as leave_id from leave_info leave
+        inner join reference_items ref_items on ref_items.id=leave.type_id_id where leave.state_id=%s and leave_employee_id_id=%s and ref_items.refitems_name=%s
+       )a group by a.to_date,a.from_date,leave_id)y on z.id=y.leave_id)
+      ) q 
+ ]]>
+		</query> -->
+		
+		<query id="payslip_emp_fixed_monthly_ctc_amount_query" name="payslip_emp_fixed_monthly_ctc_amount_query"
+			description="To Select the Fixed Monthly CTC Amount From the contract Based on the Employee ">
+        	<![CDATA[SELECT base_amount from hr_salary_contract where  employee_id_id=%s and ( %s BETWEEN contract_effective_from_date and contract_effective_to_date) and is_active=True]]>
+		</query>
+		
+		<query id="payslip_salary_rule_basic_name" name="payslip_salary_rule_basic_name"
+			description="To Select the Basic Salary Validation Based on the Employee and Structure ">
+        	<![CDATA[
+			SELECT rule.salary_rule_name,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code from hr_salary_structure_rule  strrul
+			left join hr_salary_rule rule on rule.id= strrul.salary_rule_id_id
+			left join hr_salary_rule_conditions rulcon on rulcon.salary_rule_id_id=rule.id
+			left join hr_salary_contract contract on contract.salary_structure_id_id=strrul.structure_id_id
+			where rule.salary_rule_name ilike %s and contract.salary_structure_id_id=%s and contract.employee_id_id=%s order by salary_rule_name ]]>
+		</query>
+		
+		<query id="employer_payslip_structure_salary_rule" name="employer_payslip_structure_salary_rule"
+			description="To Select the Employer contribution Salary Rule Details Based on the Salary Structure ">
+	        	<![CDATA[SELECT rule.salary_rule_code,strrul.id as structure_rule_id,rulcon.id as rule_condition_id,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,rulcon.contribution_id_id,contract.base_amount
+			,rule.salary_rule_name,rule.salary_rule_category_id_id,a.refitems_name,a.refitems_code as rule_code,b.refitems_code as cal_type_code   from hr_salary_structure_rule strrul
+			left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+			left join hr_salary_contract  contract on contract.salary_structure_id_id=strrul.structure_id_id
+			left join hr_salary_rule rule on rule.id=rulcon.salary_rule_id_id
+			left join (select id,refitems_name,refitems_code from reference_items) a on a.id = rule.salary_rule_category_id_id --and a.refitems_code ='EMPCR'
+		    left join (select id,refitems_name,refitems_code from reference_items) b on b.id = rulcon.salary_rule_calculation_type_id_id
+			--left join hr_salary_rule_sequence seq on seq.salary_rule_id_id=rule.id
+			where strrul.structure_id_id=%s and contract.employee_id_id=%s  and strrul.is_active=True]]>
+		</query>
+		
+		<query id="payslip_select_pf_salary_rule_query" name="payslip_select_pf_salary_rule_query"
+			description="To Select the PF Salary Rule Query From the Salary Rule">
+        	<![CDATA[SELECT rulcon.id from hr_salary_rule rule 
+				inner join hr_salary_rule_conditions rulcon on rulcon.salary_rule_id_id=rule.id
+				inner join hr_contribution_register reg on reg.id=rulcon.contribution_id_id
+				where salary_rule_code=%s and reg.contributor='1' and rule.is_active=True]]>
+		</query>
+		
+		<query id="leave_status" name="leave_status" description="To Select the leave status id">
+        	<![CDATA[select id from reference_items where refitems_name in ('Approved') and is_active=True]]>
+		</query>
+		
+		<query id="earnings_payslip_structure_salary_rule" name="earnings_payslip_structure_salary_rule"
+			description="To Select the Salary Rule Details Based on the Salary Structure For the Category Earnings">
+	        	<![CDATA[SELECT rule.salary_rule_code,strrul.id as structure_rule_id,rulcon.id as rule_condition_id,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,rulcon.contribution_id_id,contract.base_amount
+			,rule.salary_rule_name,rule.salary_rule_category_id_id,a.refitems_name,a.refitems_code as rule_code,b.refitems_code as cal_type_code from hr_salary_structure_rule strrul
+			left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+			left join hr_salary_contract  contract on contract.salary_structure_id_id=strrul.structure_id_id
+			left join hr_salary_rule rule on rule.id=rulcon.salary_rule_id_id
+			left join (select id,refitems_name,refitems_code from reference_items) a on a.id = rule.salary_rule_category_id_id
+		    left join (select id,refitems_name,refitems_code from reference_items) b on b.id = rulcon.salary_rule_calculation_type_id_id
+			--left join hr_salary_rule_sequence seq on seq.salary_rule_id_id=rule.id
+			where strrul.structure_id_id=%s and contract.employee_id_id=%s and a.refitems_code ='ALLWC' and strrul.is_active=True]]>
+		</query>
+		
+		<query id="payslip_emp_benefit_rule_query" name="payslip_emp_benefit_rule_query"
+			description="To Select the Indiviual Employee benefits Based on the structure and Employee ">
+        	<![CDATA[SELECT	contract.id,benefit.benefit_name as salary_rule_name,a.refitems_name as refitems_name,benefit.validation as salary_rule_validation,
+		benefit.validation_code as salary_rule_validation_code,benefit.value_assignment as salary_rule_value_assignment,benefit.value_assignment_code as salary_rule_value_assignment_code	
+		,a.refitems_code as cal_type_code	
+		from hr_salary_contract  contract
+		left join hr_individual_employee_benefit benefit on benefit.salary_contract_id_id=contract.id
+		left join (select id,refitems_name,refitems_code from reference_items) b on b.id = benefit.salary_rule_category_id
+		left join (select id,refitems_name,refitems_code from reference_items) a on a.id = benefit.calculation_type_id_id 
+		left join hr_salary_structure stru on stru.id=contract.salary_structure_id_id where stru.id=%s and contract.employee_id_id=%s and benefit.is_active=True order by contract.id]]>
+		</query>
+		
+		<query id="deduction_payslip_structure_salary_rule" name="deduction_payslip_structure_salary_rule"
+			description="To Select the Salary Rule Details Based on the Salary Structure For the Category Deduction">
+	        	<![CDATA[SELECT rule.salary_rule_code,strrul.id as structure_rule_id,rulcon.id as rule_condition_id,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,rulcon.contribution_id_id,contract.base_amount
+			,rule.salary_rule_name,rule.salary_rule_category_id_id,a.refitems_name,a.refitems_code as rule_code,b.refitems_code as cal_type_code from hr_salary_structure_rule strrul
+			left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+			left join hr_salary_contract  contract on contract.salary_structure_id_id=strrul.structure_id_id
+			left join hr_salary_rule rule on rule.id=rulcon.salary_rule_id_id
+			left join (select id,refitems_name,refitems_code from reference_items) a on a.id = rule.salary_rule_category_id_id
+		    left join (select id,refitems_name,refitems_code from reference_items) b on b.id = rulcon.salary_rule_calculation_type_id_id
+			--left join hr_salary_rule_sequence seq on seq.salary_rule_id_id=rule.id
+			where strrul.structure_id_id=%s and contract.employee_id_id=%s and a.refitems_code ='DEDCN' and strrul.is_active=True]]>
+		</query>
+		
+		<query id="payslipline_insert_query_record" name="payslipline_insert_query_record"
+			description="To Insert the Payslip Line  Record Based on the Payslip">
+        	<![CDATA[ INSERT into hr_payslip_line(employee_id_id,payslip_id_id,type,details,amount,is_active)values(%s,%s,%s,%s,%s,%s) returning id ]]>
+		</query>
+		
+		<query id="payslip_select_all_query_record" name="payslip_select_all_query_record"
+			description="To Select the all details of the payslip">
+        	<![CDATA[SELECT payslip.id,row_number() over(),payslip.name,to_char(payslip.accountingperiod_from, 'DD/MM/YYYY') as accountingperiod_from,to_char(payslip.accountingperiod_to, 'DD/MM/YYYY') as accountingperiod_to,
+                    structure.structure_name as salary_structure_id_id,COALESCE(concat(upper(emp.name), ' ',upper(emp.last_name)),'') as employee_id_id,payslip.worked_days,payslip.lop_days  from hr_payslip payslip
+                    inner join employee_info emp  on emp.id =payslip.employee_id_id 
+                    inner join hr_salary_structure structure on structure.id =payslip.salary_structure_id_id  
+                    where payslip.is_active=True  order by payslip.id desc       
+                    ]]>
+		</query>
+		
+		<query id="payslip_line_details_query_record" name="payslip_line_details_query_record"
+	description="All the Payslip Line Details Query Record Based on the Payslip" >
+        	<![CDATA[SELECT  pl.type, pl.details, pl.amount from hr_payslip payslip
+	inner join hr_payslip_line pl on payslip.id=pl.payslip_id_id where payslip.id=%s and payslip.is_active = 'true' and pl.is_active = 'true'
+        	]]>
+	</query>
+	
+	<query id="payslip_view_button_query_record" name="payslip_view_button_query_record"
+			description="To View the Details Of the Payslip">
+        	<![CDATA[select COALESCE (hremp.name,'') as employee_name,COALESCE(hrdept.name,'') as department_name,COALESCE(hremp.file_no,'') as matrix_id,
+        COALESCE(to_char(hremp.date_of_joining,'DD/MM/YYYY'),'') as date_of_joining,COALESCE(hremp.provident_fund_no,'') as provident_fund_no,COALESCE(hrle.role_title,'') as designation,
+        COALESCE(to_char(hrplp.accountingperiod_from,'Month YYYY'),'') as payslip_date,COALESCE(hrplp.worked_days,'') as worked_days,
+        COALESCE(hrplp.lop_days,'') as lop_days,COALESCE(to_char(hrplp.accountingperiod_from,'MM/DD/YYYY'),'') as payslip_from_date,
+		COALESCE(hremp.pan_no,'') as pan_number,COALESCE(hremp.provident_fund_no,'') as pf_number,COALESCE(payment.uan_number,'') as uan_number
+    	from employee_info hremp
+        left join team_details_info hrdept on hremp.team_name_id = hrdept.id 
+        left join hr_payslip hrplp on hrplp.employee_id_id = hremp.id and hrplp.is_active = 'true'
+        left join hcms_ti_role_details hrle on hrle.id = hremp.role_id_id 
+        left join hr_payment_advices payment on payment.employee_id_id = hremp.id
+				 where hremp.is_active = 'true' and hrplp.id  = %s ]]>
+		</query>
+		
+		<query id="company_details_payslipview_query_record" name="company_details_payslipview_query_record"
+		description="Company Details For the Payslip View Query">
+        	<![CDATA[ SELECT org_id_id as company_id_id,company.name,company.address1 as address  from employee_info emp
+	inner join hr_payslip payslip on payslip.employee_id_id=emp.id
+	inner join organization_info company on company.id=emp.org_id_id
+ 	where payslip.id=%s and payslip.is_active = 'true' and emp.is_active = 'true'  ]]>
+	</query>
+	
+	<query id="payslip_structure_salary_rule" name="payslip_structure_salary_rule"
+			description="To Select the Salary Rule Details Based on the Salary Structure ">
+	        	<![CDATA[SELECT strrul.id as structure_rule_id,rulcon.id as rule_condition_id,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,rulcon.contribution_id_id,contract.base_amount
+			,rule.salary_rule_name,rule.salary_rule_category_id_id,rfitm.refitems_name,rfitm1.refitems_code as cal_type_code,rule.salary_rule_code   from hr_salary_structure_rule strrul
+			left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+			left join hr_salary_contract  contract on contract.salary_structure_id_id=strrul.structure_id_id
+			left join hr_salary_rule rule on rule.id=rulcon.salary_rule_id_id
+			left join reference_items rfitm on rfitm.id = rule.salary_rule_category_id_id
+			left join reference_items rfitm1 on rfitm1.id = rulcon.salary_rule_calculation_type_id_id
+			--left join hr_salary_rule_sequence seq on seq.salary_rule_id_id=rule.id
+			where strrul.structure_id_id=%s and contract.employee_id_id=%s and  strrul.is_active=True order by salary_rule_name]]>
+		</query>
+		
+		<query id="payslip_structure_salary" name="payslip_structure_salary"
+			description="To Select the Salary Rule Details Based on the Salary Structure ">
+	        	<![CDATA[SELECT strrul.id as structure_rule_id,rulcon.id as rule_condition_id,rulcon.salary_rule_validation,rulcon.salary_rule_validation_code,rulcon.salary_rule_value_assignment,rulcon.salary_rule_value_assignment_code,rulcon.contribution_id_id,contract.base_amount
+			,rule.salary_rule_name,rule.salary_rule_category_id_id,rfitm.refitems_name,rfitm1.refitems_code as cal_type_code,rule.salary_rule_code   from hr_salary_structure_rule strrul
+			left join hr_salary_rule_conditions rulcon on rulcon.id=strrul.salary_rule_conditions_id_id
+			left join hr_salary_contract  contract on contract.salary_structure_id_id=strrul.structure_id_id
+			left join hr_salary_rule rule on rule.id=rulcon.salary_rule_id_id
+			left join reference_items rfitm on rfitm.id = rule.salary_rule_category_id_id
+			left join reference_items rfitm1 on rfitm1.id = rulcon.salary_rule_calculation_type_id_id
+			--left join hr_salary_rule_sequence seq on seq.salary_rule_id_id=rule.id
+			where strrul.structure_id_id=%s and contract.employee_id_id=%s and  strrul.is_active=True and rulcon.contribution_id_id in (1,3)]]>
+		</query>
+		
+		
+		
+		<query id="select_payslip_data" name="select_payslip_data" description="select_payslip_data" >
+        	<![CDATA[select id,employee_id_id,salary_structure_id_id,worked_days,lop_days,to_char(accountingperiod_from,'MM/DD/YYYY') as accountingperiod_from,to_char(accountingperiod_to,'MM/DD/YYYY') as accountingperiod_to 
+        	from hr_payslip  where id in %s ]]>
+	</query>
+	
+	<query id="select_payslip_details" name="select_payslip_details" description="select payslip details ">
+	        	<![CDATA[select employee_name,department_name,matrix_id,date_of_joining,provident_fund_no,
+designation,payslip_date,worked_days,lop_days,payslip_from_date,pan_number,pf_number,id,
+case when uan_number=0 then '' else uan_number::varchar end as uan_number from (
+
+select COALESCE (hremp.name,'') as employee_name,COALESCE(hrdept.name,'') as department_name,COALESCE(hremp.employee_id,'') as matrix_id,
+        COALESCE(to_char(hremp.date_of_joining,'DD/MM/YYYY'),'') as date_of_joining,COALESCE(hremp.provident_fund_no,'') as provident_fund_no,COALESCE(hrle.role_title,'') as designation,
+        COALESCE(to_char(hrplp.accountingperiod_from,'Month YYYY'),'') as payslip_date,COALESCE(hrplp.worked_days,'') as worked_days,
+        COALESCE(hrplp.lop_days,'') as lop_days,COALESCE(to_char(hrplp.accountingperiod_from,'MM/DD/YYYY'),'') as payslip_from_date,
+		COALESCE(hremp.pan_no,'') as pan_number,COALESCE(hremp.provident_fund_no,'') as pf_number
+--,case when payment.uan_number='' then '0.0' else payment.uan_number end 
+,COALESCE(round(COALESCE(case when payment.uan_number='' then '0.0' else payment.uan_number::varchar end ,'0.0')::Decimal),0,0) as uan_number
+,hremp.id
+    	from employee_info hremp
+        left join team_details_info hrdept on hremp.team_name_id = hrdept.id 
+        left join hr_payslip hrplp on hrplp.employee_id_id = hremp.id and hrplp.is_active = 'true'
+        left join hcms_ti_role_details hrle on hrle.id = hremp.role_id_id 
+        left join hr_payment_advices payment on payment.employee_id_id = hremp.id and payment.is_active = 'true'
+		where hremp.is_active = 'true' and
+		 hremp.id = %s
+		and hrplp.id = %s
+)test]]>
+	</query>
+		
+	<query id="select_payslip_company_details" name="select_payslip_company_details" description="select payslip company details" >
+        	<![CDATA[select orginfo.name as company_name,orginfo.address1 as company_address from organization_info orginfo
+					inner join employee_info empinfo on empinfo.org_id_id = orginfo.id and orginfo.is_active = 'True'
+					where empinfo.id = %s and empinfo.is_active = 'True' ]]>
+	</query>
+	
+	<query id="payslip_pf_applicable_query" name="payslip_pf_applicable_query" description="To Select the PF Applicable From the Payslip">
+        	<![CDATA[SELECT pf_applicable from hr_payment_advices where employee_id_id=%s and is_active=True]]>
+	</query>
+		
+	<query id="payslip_contribution_details_query" name="payslip_contribution_details_query"
+			description="To Select the Details of the Contribution based on the salary rule contribution">
+        	<![CDATA[SELECT contributor from hr_contribution_register where id=%s and is_active=True]]>
+	</query>
+		
+	<query id="payslip_salaryrule_query_record" name="payslip_salaryrule_query_record"
+			description="To Select the Salary Rule Records Based on the Salary Structure for the payslip">
+        	<![CDATA[  SELECT  rule.id,rule.salary_rule_name as name,rule.salary_rule_code as code,rule_con.salary_rule_validation,rule_con.salary_rule_validation_code,
+			rule_con.salary_rule_value_assignment,rule_con.salary_rule_value_assignment_code,ref_item.refitems_name as refitems_name,rule.salary_rule_category_id_id,
+			ref_item.refitems_code as refitems_code,rule_con.id,contract.base_amount as salary_rule_condition_id from hr_salary_structure_rule st_rule 
+			inner join hr_salary_rule_conditions rule_con on rule_con.id=st_rule.salary_rule_conditions_id_id
+			inner join hr_salary_rule rule on rule.id=rule_con.salary_rule_id_id
+			inner join hr_salary_contract contract on contract.salary_structure_id_id=st_rule.structure_id_id
+			inner join reference_items ref_item on ref_item.id= rule.salary_rule_category_id_id 
+			where st_rule.structure_id_id=%s and contract.employee_id_id=%s and st_rule.is_active=True ]]>
+	</query>
+	
+	<query id="paymentadvice_query_record" name="paymentadvice_query_record" description="To Payment Advice Details Query Record">
+        	<![CDATA[ SELECT ref_item.refitems_name as bank_name,payment.bank_name_id ,payment.ifsc_code,payment.branch_code,payment.pf_number,
+				payment.account_no,to_char(payslip.accountingperiod_from,'MM/DD/YYYY') as period_from ,to_char(payslip.accountingperiod_to,'MM/DD/YYYY') as period_to  from hr_payment_advices payment
+				inner join hr_payslip payslip on payslip.employee_id_id=payment.employee_id_id 
+				left join reference_items ref_item  on ref_item.id =payment.bank_name_id :: int
+				where payslip.id= %s and payment.is_active = 'true' and  payslip.is_active = 'true'  ]]>
+	</query>
+		
+		<!-- Payslip Info End -->
+		
+		<!-- Payment Advice Info Start -->
+		<query id="hrms_select_payment_mode_info" name="hrms_select_payment_mode_info" description="hrms select payment mode info">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'PYMOD']]>
+		</query>
+		
+		<query id="hrms_select_bank_info" name="hrms_select_bank_info" description="hrms select bank info">
+		<![CDATA[select rftm.id,rftm.refitems_name,rftm.refitems_code  from reference_items rftm
+				inner join reference_item_category rftmc
+				on rftm.refitems_category_id = rftmc.id where rftmc.refitem_category_code = 'BANKN']]>
+		</query>
+		
+		 <query id="employee_id_check" name="employee_id_check" description="To select all records in a employee name">
+        	<![CDATA[select employee_id_id from hr_payment_advices where employee_id_id = %s and is_active=True]]>
+        </query>
+        
+        <query id="payment_advice_table_display" name="payment_advice_table_display" description="To select all records in a table display">
+        	<![CDATA[select hpa.id as id ,rfitm.refitems_name as payment_mode ,hre.name as employee_name,hrc.name as company_name from hr_payment_advices hpa
+					inner join  employee_info hre on hre.id = hpa.employee_id_id 
+					inner join organization_info hrc on hrc.id = hpa.company_id_id 
+					left join reference_items rfitm on rfitm.id = hpa.payment_mode_id
+					where hpa.is_active=True order by id desc]]>
+        </query>
+        
+        <query id="row_click_payment_advice" name="row_click_payment_advice" description="To select all records in a Row click">
+        	<![CDATA[SELECT payment.id,payment.company_id_id,payment.employee_id_id,payment.payment_mode_id as payment_mode,
+                    payment.organization_unit_id,payment.department_id,
+					payment.bank_name_id,ref_item.refitems_code as payment_code,payment.account_no,payment.ifsc_code,payment.branch_code,payment.branch_name,
+					payment.account_holder_name,payment.pan_number,payment.pf_number,uan_number,pf_applicable from hr_payment_advices payment 
+					left join reference_items ref_item  on ref_item.id = payment.payment_mode_id
+					where payment.id = %s]]>
+		</query>
+   <!-- Payment Advice Info End -->
+   
+   <!-- Payslip Report Generation Strat -->
+   <query id="hrms_org_unit_employee_list" query_name="hrms_org_unit_employee_list" description="hrms org unit employee list">
+          <![CDATA[select id,orgunit_name as name from organization_unit_info where is_active and organization_id = %s and parent_orgunit_id != 0 order by name]]>
+	</query>
+	<query id="hrms_department_list" query_name="hrms_department_list" description="hrms department employee list">
+          <![CDATA[select id as depart_id, name as depart_name from team_details_info where is_active and org_unit_id = %s order by name]]>
+	</query>
+	<query id="hrms_employee_list" query_name="hrms_employee_list" description="hrms employee list">
+          <![CDATA[select employee_info.id as employee_id, COALESCE(concat(upper(employee_info.name), ' ',upper(employee_info.last_name)),'') as employee_name from employee_info 
+			--inner join hr_payslip on hr_payslip.employee_id_id = employee_info.id
+			where employee_info.is_active and employee_info.team_name_id = %s order by employee_info.name]]>
+	</query>
+	<query id="hrms_org_employee_list" query_name="hrms_org_employee_list" description="hrms organization employee list">
+          <![CDATA[select empinfo.id as employee_id,ROW_NUMBER () OVER (ORDER BY empinfo.id desc), empinfo.name as employee_name,orginfo.name as org_name,hrplp.id as payslip_id,teaminfo.name as team_name,
+					org_unit_info.orgunit_name from employee_info empinfo 
+					left join organization_info orginfo on empinfo.org_id_id = orginfo.id
+					left join team_details_info teaminfo on teaminfo.id = empinfo.team_name_id
+					left join organization_unit_info org_unit_info on org_unit_info.id = empinfo.org_unit_id_id
+					left join hr_payslip hrplp on hrplp.employee_id_id = empinfo.id
+					where ]]>
+	</query>
+	<query id="hrms_employee_modal_list" query_name="hrms_employee_modal_list" description="hrms employee modal list">
+          <![CDATA[select id as emp_id,org_id_id,team_name_id,org_unit_id_id from employee_info
+             where id = %s and is_active = 'true']]>
+	</query>
+	<query id="select_payslip_id" query_name="select_payslip_id" description="select payslip id">
+          <![CDATA[select id as payslip_id from hr_payslip  where employee_id_id = %s and is_active = 'true'and id = %s]]>
+	</query>
+   <!-- Payslip Report Generation End -->
+   <!-- Tax declaration start -->
+   <query id="hrms_employee_code_data" query_name="hrms_employee_code_data" description="hrms employee code data ">
+          <![CDATA[select employee_id from employee_info  where id = %s and is_active = 'true']]>
+	</query>
+   <!-- Tax declaration end -->
+   
+   <!-- TDS Start -->
+   <query id="tds_table_display" name="tds_table_display" description="To select all records in a table display">
+        	<![CDATA[select tds.id,name as employee_name,to_char(tds_from_date,'MM/DD/YYYY') as tds_from_date,to_char(tds_to_date,'MM/DD/YYYY') as tds_to_date from hr_tds tds
+			inner join employee_info emp on tds.tds_employee_id = emp.id where tds.is_active]]>
+        </query>
+        <query id="row_click_tds" name="row_click_tds"
+			description="TDS table row click">
+		<![CDATA[select id,tds_employee_id,tds_amount,to_char(tds_from_date,'DD-MM-YYYY') as tds_from_date,to_char(tds_to_date,'DD-MM-YYYY') as tds_to_date
+ 			from hr_tds where id = %s and is_active = 'True']]>
+		</query>
+        <!-- TDS End -->
+        <!-- Rating Point Start -->
+        <query id="rating_point_table_display" name="rating_point_table_display" description="To select all records in a table display">
+        	<![CDATA[select id,minimum_range,maximum_range,slab_title,fixed_return,
+			variable_return,to_char(rating_date_from,'DD-MM-YYYY') as rating_date_from,to_char(rating_date_to,'DD-MM-YYYY') as rating_date_to
+			from rating_point  where is_active order by id desc]]>
+        </query>
+        <query id="rating_point_table_row_click" name="rating_point_table_row_click" description="To select all records in a table display">
+        	<![CDATA[select id,minimum_range,maximum_range,slab_title,fixed_return,
+			variable_return,to_char(rating_date_from,'DD-MM-YYYY') as rating_date_from,to_char(rating_date_to,'DD-MM-YYYY') as rating_date_to
+			from rating_point  where is_active and id = %s]]>
+        </query>
+        <!-- Rating Point End -->
+        <!--Leadership Value Return Start  -->
+         <query id="leadership_table_display" name="leadership_table_display" description="To select all records in a table display">
+        	<![CDATA[select leadership_value_return.id,lvr_name,value_return,rating_point.slab_title
+			,to_char(leadership_date_from,'DD-MM-YYYY') as leadership_date_from,to_char(leadership_date_to,'DD-MM-YYYY') as leadership_date_to
+			from leadership_value_return  
+			inner join rating_point on rating_point.id = leadership_value_return.leadership_slab_id
+			where leadership_value_return.is_active order by id desc]]>
+        </query>
+        
+        <query id="leadership_table_row_click" name="leadership_table_row_click" description="To select all records in a table display">
+        	<![CDATA[select id,lvr_name,value_return,leadership_slab_id,
+			to_char(leadership_date_from,'DD-MM-YYYY') as leadership_date_from,to_char(leadership_date_to,'DD-MM-YYYY') as leadership_date_to
+			from leadership_value_return  where is_active and id = %s]]>
+        </query>
+        <!-- Leadership Value Return End -->
+         <!-- Esi form Start -->
+         <query id="esi_table_display" name="esi_table_display" description="To select all records in a table display">
+        	<![CDATA[select esi_value.id,employee_info.name as employee_name,esi_value.esi_active,
+		to_char(esi_value.esi_date_from,'DD-MM-YYYY') as esi_from_date,to_char(esi_value.esi_date_to,'DD-MM-YYYY') as esi_date_to
+		from esi_value  
+		inner join employee_info on employee_info.id = esi_value.esi_employee_id
+		where esi_value.is_active order by id desc]]>
+        </query>
+        
+         <query id="esi_table_row_click" name="esi_table_row_click" description="To select all records in a table display">
+        	<![CDATA[select id,esi_employee_id,to_char(esi_date_from,'DD-MM-YYYY') as esi_date_from,
+		to_char(esi_date_to,'DD-MM-YYYY') as esi_date_to,esi_active
+			from esi_value  where is_active and id = %s]]>
+        </query>
+         <!-- Esi form End -->
+         
+         <!-- Arrear Amount form Start -->
+         <query id="arrear_table_display" name="arrear_table_display" description="To select all records in a table display">
+        	<![CDATA[select hr_arrear_amount.id,name as employee_name,refitems_name as arrear_type,
+			to_char(arrear_from_date,'MM/DD/YYYY') as arrear_from_date,to_char(arrear_to_date,'MM/DD/YYYY') as arrear_to_date 
+			from hr_arrear_amount 
+			inner join employee_info emp on hr_arrear_amount.arrear_employee_id = emp.id 
+			inner join reference_items on reference_items.id = hr_arrear_amount.arrear_type_id
+			where hr_arrear_amount.is_active order by hr_arrear_amount.id desc]]>
+        </query>
+        
+         <query id="row_click_arrear" name="row_click_arrear" description="To select all records in a table display">
+        	<![CDATA[select id,arrear_employee_id,arrear_type_id,arrear_amount,
+				to_char(arrear_from_date,'DD-MM-YYYY') as arrear_from_date,to_char(arrear_to_date,'DD-MM-YYYY') as arrear_to_date 
+				from hr_arrear_amount  where is_active and id = %s]]>
+        </query>
+         <!-- Arrear Amount form End -->
+         
+         <!-- my payslip start-->
+         <query id="my_payslip_emp_data" name="my_payslip_emp_data" description="To select all records in a table display">
+        	<![CDATA[select COALESCE (hremp.name,'') as employee_name,COALESCE(hrdept.name,'') as department_name,COALESCE(hremp.employee_id,'') as matrix_id,
+        COALESCE(to_char(hremp.date_of_joining,'DD/MM/YYYY'),'') as date_of_joining,COALESCE(hremp.provident_fund_no,'') as provident_fund_no,COALESCE(hrle.role_title,'') as designation,
+		COALESCE(hremp.pan_no,'') as pan_number,COALESCE(hremp.provident_fund_no,'') as pf_number,COALESCE(round(payment.uan_number::Decimal),0,0) as uan_number,hremp.id
+    	from employee_info hremp
+        left join team_details_info hrdept on hremp.team_name_id = hrdept.id 
+        --left join hr_payslip hrplp on hrplp.employee_id_id = hremp.id and hrplp.is_active = 'true'
+        left join hcms_ti_role_details hrle on hrle.id = hremp.role_id_id 
+        left join hr_payment_advices payment on payment.employee_id_id = hremp.id and payment.is_active = 'true'
+		where hremp.is_active = 'true' and hremp.id = %s ]]>
+        </query>
+         <!-- my payslip end-->
+         
+         
+	</queries>
+</data>
+		

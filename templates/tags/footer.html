@@ -1,0 +1,86 @@
+{% load static %} {% load base_tags %}
+<div class="logo">
+	<img alt="Next Logo" src="{% static '/ui/images/logo-desktop.png' %}" />
+	<!--Tool tip Version type-->
+	<div class="grid__item">
+		<div class="tooltip tooltip--smaug" data-type="smaug">
+			<div class="tooltip__trigger" role="tooltip"
+				aria-describedby="info-smaug">
+				<span class="tooltip__trigger-text">V.0.1</span>				
+			</div>
+			<!--<div class="logo1">
+				<img alt="Next Logo" src="{% static '/ui/images/dow.png' %}" />
+				</div>-->
+			<div class="tooltip__base">
+				<div class="tooltip__content" id="info-smaug">
+					<div id="footerNotesdis">
+						<table class="table table-border">
+							<thead>
+								<tr>
+									<th colspan="5">Project Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#</td>
+									<td>Version</td>
+									<td>Release</td>
+									<td>Build</td>
+									<td>Date</td>
+								</tr>
+								<tr>
+									<td>Latest Code</td>
+									<td>1</td>
+									<td>v0.1</td>
+									<td>#{{ build_no}}</td>
+									<td>{{ build_date }}</td>
+								</tr>
+								<tr>
+									<td>Used Code</td>
+									<td>1</td>
+									<td>v0.1</td>
+									<td>#{{ build_no}}</td>
+									<td>{{ build_date }}</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-border">
+							<thead>
+								<tr>
+									<th colspan="5">UX 3.X</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>#</td>
+									<td>Version</td>
+									<td>Release</td>
+									<td>Build</td>
+									<td>Date</td>
+								</tr>
+								<tr>
+									<td>Latest Code</td>
+									<td>1</td>
+									<td>v0.1</td>
+									<td>#7</td>
+									<td>11 Apr 2018</td>
+								</tr>
+								<tr>
+									<td>Used Code</td>
+									<td>1</td>
+									<td>v0.1</td>
+									<td>#7</td>
+									<td>11 Apr 2018</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="breadcrumb footer_breadcrumb">
+			{% include "tags/breadcrumb_details.html" %}
+		</ul>
+	</div>
+	<!--End tooltip version-->
+</div>

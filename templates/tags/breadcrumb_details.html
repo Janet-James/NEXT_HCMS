@@ -1,0 +1,697 @@
+{% if breadcrum_title == "Dashboard" %}
+<li class="breadcrumb-item active">HCMS</li>
+{% elif breadcrum_title == "AccessDenied" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Access Denied</li>
+<!-- App Admin Start -->
+{% elif breadcrum_title == "AppAdmin" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">App Admin</li>
+{% elif breadcrum_title == "DataManagement" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Upload Data</li>
+{% elif breadcrum_title == "RefItemCat" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reference Item Category</li>
+{% elif breadcrum_title == "RefItem" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reference Item</li>
+{% elif breadcrum_title == "RefItemLink" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reference Item Link</li>
+{% elif breadcrum_title == "Users" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Users</li>
+{% elif breadcrum_title == "UserGroups" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">User Groups</li>
+{% elif breadcrum_title == "CMEntities" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Entities</li>
+{% elif breadcrum_title == "CMDataDictionary" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Data Dictionary</li>
+{% elif breadcrum_title == "CMTemplates" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Templates</li>
+{% elif breadcrum_title == "CMSchedules" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Schedules</li>
+{% elif breadcrum_title == "UserRoles" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">User Role Groups</li>
+{% elif breadcrum_title == "AccessControl" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Access Control</li>
+{% elif breadcrum_title == "SysParam" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hcms_sysadmin:sysadmin_page' %}">App Admin</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Alert & Notification</li>
+<!-- App Admin End -->
+<!-- Talent Management Start -->
+{% elif breadcrum_title == "TIDashboard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Talent Inventory</li>
+{% elif breadcrum_title == "TIRoleDef" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'talent_inventory:td_dashboard' %}">Talent Inventory</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Role Definition</li>
+{% elif breadcrum_title == "TIRepStruct" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'talent_inventory:td_dashboard' %}">Talent Inventory</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">View Reporting Structure</li>
+{% elif breadcrum_title == "TIReports" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'talent_inventory:td_dashboard' %}">Talent Inventory</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reports</li>
+{% elif breadcrum_title == "TMTalentProfiling" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Talent Profiling</li>
+{% elif breadcrum_title == "TMCompetencyAssessment" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Competency Assessment</li>
+{% elif breadcrum_title == "TMTalentMatrix" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Talent Matrix</li>
+{% elif breadcrum_title == "TMManageAccolades" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Manage Accolades</li>
+{% elif breadcrum_title == "TMMyTalentProfile" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Talent Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">My Talent Profile</li>
+<!-- Talent Management End -->
+<!-- Talent Assessment Start -->
+{% elif breadcrum_title == "TADashboard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Performance Management</li>
+{% elif breadcrum_title == "TABalancedScorecard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Balanced Scorecard</li>
+{% elif breadcrum_title == "TACascadeObj" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Cascade Objectives</li>
+{% elif breadcrum_title == "TAAssessTemplates" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Assessment Templates</li>
+{% elif breadcrum_title == "TAAssessForm" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Assessment Form</li>
+{% elif breadcrum_title == "TAScheduleAssess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Schedule Assessment</li>
+{% elif breadcrum_title == "TAPerformAssess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Perform Talent Assessment</li>
+{% elif breadcrum_title == "TAReports" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reports</li>
+{% elif breadcrum_title == "TARatingScheme" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'ta_dashboard:ta_userd' %}">Talent Assessment</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Rating Scheme</li>
+<!-- Talent Assessment End -->
+<!-- Performance Management start-->
+{% elif breadcrum_title == "PMAssessForm" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Assessment Form</li>
+{% elif breadcrum_title == "PMBalancedScorecard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Balanced Scorecard</li>
+{% elif breadcrum_title == "PMCascadeObj" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Cascade Objectives</li>
+{% elif breadcrum_title == "PMScheduleAssess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Schedule Assessment</li>
+{% elif breadcrum_title == "PMOKR_tree" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">OKR</li>
+{% elif breadcrum_title == "PMDivision" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Division</li>
+{% elif breadcrum_title == "PMObjective" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Objective</li>
+
+{% elif breadcrum_title == "PMPerformAssess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Performance Assessment</li>
+
+{% elif breadcrum_title == "PMDashboard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'performance_assessment:performance_dashboard' %}">Performance Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Dashboard</li>
+                        <!--  Performance Management End-->
+<!-- HRMS Start -->
+{% elif breadcrum_title == "HROrganizationChart" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Employee Hierarchical</li>
+{% elif breadcrum_title == "HROrganization" %} 
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Organization</li>
+{% elif breadcrum_title == "HROrganizationUnit" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Organization</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Organization Unit</li>
+{% elif breadcrum_title == "HROrganizationUnitChart" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Organization</a></li> 
+<li>/</li>
+<li class="breadcrumb-item active">Organization Hierarchical</li>
+{% elif breadcrum_title == "HROrganizationTeam" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Organization</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Division Details</li>  
+{% elif breadcrum_title == "HREmployee" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li>
+{% elif breadcrum_title == "HREmployeeDetails" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Employee List</li>  
+{% elif breadcrum_title == "HREmployeeMeetExpertise" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Meet Our Expertise</li> 
+{% elif breadcrum_title == "HREmployeeExitExpertise" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Ex-Employee Details</li> 
+{% elif breadcrum_title == "HREmployeeExitRequestExpertise" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Request Ex-Employee Details</li> 
+{% elif breadcrum_title == "HREmployeeOfferDetails" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Employee Offer List</li>  
+{% elif breadcrum_title == "HREmployeeDocument" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+<li class="breadcrumb-item active">Employee Document</li>
+{% elif breadcrum_title == "HREmployeePastDocument" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="{% url 'hrms_employee:hrms_employee_document' %}">Employee Document</a></li>
+<li class="breadcrumb-item active">Past Document</li>
+{% elif breadcrum_title == "HREmployeeLeaveRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Leave Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Raise Leave Request</li> 
+{% elif breadcrum_title == "HREmployeeLeaveProcess" %} 
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Process Leave Request</li>
+{% elif breadcrum_title == "HREmployeeLeaveDetails" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Leave Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Employee Leave Details</li>
+{% elif breadcrum_title == "HRHolidayDetails" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Leave Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Holiday Details</li>
+{% elif breadcrum_title == "HREmployeeMangageLeave" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Leave Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Leave Administration</li>
+{% elif breadcrum_title == "HREmployeeHoliday" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Leave Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Holiday Administration</li>
+{% elif breadcrum_title == "HRAttendance" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Attendance</li>
+{% elif breadcrum_title == "HRAttendancePastView" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li> 
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Past Attendance</li>
+{% elif breadcrum_title == "HRAttendanceView" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Workforce Administration</li>
+{% elif breadcrum_title == "HRDashboard" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li> 
+<li class="breadcrumb-item active">HR Dashboard</li>
+<li>/</li>
+{% elif breadcrum_title == "HRReports" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">HR Foundation</a></li><li>/</li>
+<li class="breadcrumb-item"><a href="#">Employee</a></li> <li>/</li>
+ <li class="breadcrumb-item active">Employee Reports</li>  
+{% elif breadcrum_title == "HREmployeePayroll" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Payroll Setup</li>
+{% elif breadcrum_title == "RatingPoint" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Basic Contribution Return</li>
+{% elif breadcrum_title == "PayrollAppAdmin" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Payroll App Admin</li>   
+{% elif breadcrum_title == "PayslipReport" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Reports</li>    
+{% elif breadcrum_title == "LeadershipValueReturn" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Leadership Value Return</li>    
+{% elif breadcrum_title == "EsiValueForm" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">ESI Value Form</li>   
+{% elif breadcrum_title == "Arrearamount" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Arrear Amount</li>   
+{% elif breadcrum_title == "TaxDeclaration" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Compensation Enablement</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Tax Declaration</li>
+
+<!-- HRMS End -->
+<!-- Workforce Administration Start -->
+{% elif breadcrum_title == "ExitManagement" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Exit Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Exit Employee Details</li>
+<li>/</li>
+{% elif breadcrum_title == "AssetManagement" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Asset Management</li>
+<li>/</li>
+{% elif breadcrum_title == "Shift & Scheduling" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Work Time Management</li>
+
+{% elif breadcrum_title == "Attendance Configuration" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Administration</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Attendance Configuration</li>
+<!-- Workforce Administration End -->
+<!-- Workforce Planning Start -->
+{% elif breadcrum_title == "WorkforcePlanning" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item active"><a href="#">Workforce Planning</a></li>
+{% elif breadcrum_title == "WFP_StrategyAnalysis" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Strategy Analysis</li>
+{% elif breadcrum_title == "WFP_StructureAnalysis" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Structure Analysis</li>
+{% elif breadcrum_title == "WFP_SystemAnalysis" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Job Requisition Analysis</li>
+{% elif breadcrum_title == "WFP_WorkforceRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Workforce Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Workforce Request</li>
+<!-- Workforce Planning End -->
+<!-- Talent Acquisition Start -->
+{% elif breadcrum_title == "TABranding" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Branding</li>
+{% elif breadcrum_title == "TACandidate" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Candidate</li>
+{% elif breadcrum_title == "TAJobOpenings" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Job Openings</li>
+{% elif breadcrum_title == "HRJobPost" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Job Posting to LinkedIn</li>
+{% elif breadcrum_title == "TAOfferManagement" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Offer Management</li>
+{% elif breadcrum_title == "TAToolsTech" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Tools & Technology</li>
+{% elif breadcrum_title == "HRInterview" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Talent Acquisition</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Job Interview</li>
+<!-- Talent Acquisition End -->
+
+<!-- Exit Management Start -->
+{% elif breadcrum_title == "EMRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Exit Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Request</li>
+{% elif breadcrum_title == "EMProcess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Exit Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Process</li>
+{% elif breadcrum_title == "EMCertificate" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Exit Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Certification</li>
+{% elif breadcrum_title == "EMReport" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Exit Management</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Report</li>
+<!-- Exit Management End -->
+
+<!-- Succession Planning Management Start -->
+{% elif breadcrum_title == "SPIdentifyKeyRoles" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Indentify Key & Roles</a></li>
+{% elif breadcrum_title == "SPSuccessorsHierarchy" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Successors Hierarchy</a></li>
+{% elif breadcrum_title == "SPPotentialSuccessors" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Potential Successors</a></li>
+{% elif breadcrum_title == "SPTransferRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Reassignment Request </a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Transfer Request</a></li>
+{% elif breadcrum_title == "SPTransferProcess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+
+<li class="breadcrumb-item"><a href="#">Reassignment Process </a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Transfer Requests</a></li>
+{% elif breadcrum_title == "SPPromotionRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li> 
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+
+<li class="breadcrumb-item"><a href="#">Reassignment Request </a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Promotion Nomination</a></li>
+{% elif breadcrum_title == "SPPromotionProcess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+
+<li class="breadcrumb-item"><a href="#">Reassignment Process </a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Promotion Nominations</a></li>
+{% elif breadcrum_title == "SPDemotionRequest" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>  
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li> 
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Reassignment Request </a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Demotion Recommendation </a></li>
+{% elif breadcrum_title == "SPDemotionProcess" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Demotion Recommendations</a></li>
+{% elif breadcrum_title == "SP_Report" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Succession Planning</a></li>
+<li>/</li>  
+<li class="breadcrumb-item active">Reports</li>
+<!-- Succession Planning Management End --> 
+    <!--  Learning & Development  -->
+{% elif breadcrum_title == "LDTraining_creation"%}   
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item"><a href="#">Learning & Development</a></li>
+<li>/</li>
+<li class="breadcrumb-item active">Training Creation</li>
+<!-- CS Breadcrumb details -->
+{% elif breadcrum_title == "CS_Template" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Correspondance Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Template Configuration</li>
+<!-- CS Breadcrumb document details ends  -->
+{% elif breadcrum_title == "CS_Document" %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard:dashboard_page' %}">HCMS</a></li>
+<li>/</li>
+<li class="breadcrumb-item">Correspondance Management</li>
+<li>/</li>
+<li class="breadcrumb-item active">Document Creation</li>
+<!-- CS Breadcrumb docuemnt details ends  -->
+{% endif %}

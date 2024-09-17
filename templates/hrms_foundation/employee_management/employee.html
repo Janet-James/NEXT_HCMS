@@ -1,0 +1,403 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- date time picker css -->
+<link
+	href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- file input css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- vertical slider css -->
+<link href="{% static '/ui/plugins/vertical_slider/css/vslider.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- File Upload -->
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}"
+    rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+<style>
+div.dataTables_wrapper div.dataTables_filter label {
+    right: 0px !important;
+    top: -41px;
+}
+.next-join-us{
+    font-size: 10px;
+    float: right;
+    margin-right: 30px;
+    color: #3a7acc;
+    margin-top: 10px;
+}
+.emp_Active{
+	color:#44bd9f;
+}
+.emp_In-Active{
+	color:rgb(247, 168, 168);
+}
+.error{
+	color:red;
+}
+.emp_list_icons1{
+	 font-size: 25px;
+	 color: #44bd9f;
+	 cursor:pointer;
+}
+.emp_list_icons2{
+	 font-size: 25px;
+	 color: rgb(247, 168, 168);
+	 cursor:pointer;
+}
+</style>
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HREmployee" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container emp_formwizard" id="maincontent "> 
+		<div class="page-content-wrapper"> 
+			<div class="page-content"> 
+			<h1>
+			{% if 'Employee Details' in get_add_records %}	
+						 <span><a id="emp_current_status" title="Employee Status" data-toggle="tooltip" data-placement="bottom" class="animated fadeIn infinite" ></a></span>
+			{% endif %}	
+			Employee Details 
+		    {% if 'Employee Details' in get_add_records %}				
+			 <span onclick="usr_data_syn_to_others();"><a title="Sync New or Updated Users & Employee to (Transform & N-Power). Click Here." data-toggle="tooltip" data-placement="bottom" class="animated fadeIn infinite next-join-us" >Sync User (Transform)</a></span>
+			{% endif %}	
+			 </h1>
+				<div class="row">  
+					<div class="col-md-12">
+						<div class="portlet light bordered" id="form_wizard_1">
+							<div class="portlet-title">
+							<div class="row">
+							<!-- <div class="col-md-3"> 
+							<span id="profile_name" style="display:none;"></span>
+							</div> -->
+							<div class="col-md-8">
+							{% if 'Employee Details' in get_add_records %}	
+							<span title="Active Employee" data-toggle="tooltip" data-placement="bottom" class="emp_list_icons1" onclick="hrEmployeeActive()"><i class="nf nf-user"></i> </span>
+						<span title="In-Active Employee" data-toggle="tooltip" data-placement="bottom" class="emp_list_icons2" onclick="hrEmployeeInActive()"><i class="nf nf-user"></i> </span>
+							<div class="form-group">
+							<a
+								href='/hrms_employee_list/' class="navi-icon"
+								 data-toggle="tooltip" data-placement="bottom" title='Employee List'><i class="nf nf-employee-portal"></i>
+								 </a>
+									<div class='quick_access pull-left' id='employee_quick_access'></div>
+								</div>
+							{% endif %}	
+							</div>
+							<div class="col-md-4">
+							<div class="row">
+							<div class="col-md-4">
+							<ul class="list-inline pull-right">
+								<li><div class="caption margin-top-10">
+							<i data-toggle="tooltip" data-placement="top" title="" class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite" ></i>
+							</div></li>
+								<li><span id="profile_image"></span></li>
+							</ul>
+
+								</div> 
+							<div class="col-md-8">
+								<div class="form-group">
+									<select id="hrms_employee_list" name="hrms_employee_list"
+										class="form-control select2" required>
+									</select>
+
+								</div></div>
+								
+							</div>
+								 
+						</div>
+							</div>
+							
+							<div action="#" id="formwizard"
+								method="POST">
+								<div class="form-wizard ">
+									<div id="tab_formwizard" class="form-body">
+										<ul class="nav nav-pills nav-justified steps">
+								<li class="dtBox" ><a class="step" href="#pills-tab1" id="tab_primary" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-employee-portal"></i></span><span class="desc"> <i
+											class="fa fa-check"></i> Employee Information
+									</span></a></li>
+								<li class="dtBox1"><a class="step" href="#pills-tab2" id="tab_personal" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-personal-information"></i> </span> <span class="desc"> <i
+											class="nf nf-personal-information"></i> Personal Information
+									</span></a></li>
+								
+								
+								<li class=''><a class="step" href="#pills-tab3" id="tab_education" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-university"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Educational Details
+									</span> </a></li>
+								<li class='dtBox3'><a class="step" href="#pills-tab4" id="tab_experience" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-experience"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Professional Experience
+									</span> </a></li>
+								<li class='dtBox4'><a class="step" href="#pills-tab5" id="tab_certification" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-certificate"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Certification
+									</span> </a></li>
+									<li id=''><a class="step" href="#pills-tab6" id="tab_skills" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-skills"></i> </span> <span class="desc"> <i
+											class="fa fa-skills"></i> Skills
+									</span> </a></li>
+									
+								<li class=''><a class="step" href="#pills-tab7" id="tab_asset" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-assess-behavioral-completencies"></i> </span> <span class="desc"> <i
+											class="fa fa-check"></i> Asset & Allocation
+									</span> </a></li>
+									
+									<li class='dtBox2'><a class="step" href="#pills-tab8" id="tab_hr" data-toggle="tab"><span
+										class="number"> <i
+														class="nf nf-hr-administration"></i> </span> <span class="desc"> <i
+											class="nf nf-settings"></i> Employee Settings
+									</span> </a></li>
+									
+							</ul>
+									</div>
+								</div>
+							
+					
+					<div class="row">
+					<div class="tab-content">
+						<!-- tab1 content start -->
+						<div class="clearfix" style="padding: 10px;"></div>
+						<div class="tab-pane" id="pills-tab1">
+							<div class="row">
+								{% include "./primary.html" %}
+							</div>
+						</div>
+						<!-- tab1 content end -->
+						<!-- tab2 content start -->
+						<div class="tab-pane" id="pills-tab2">
+							<div class="row">
+								{% include "./personal.html" %}
+							</div>
+						</div>
+						<!-- tab2 content end -->
+						<!-- tab3 content start -->
+						<div class="tab-pane" id="pills-tab3">
+							<div class="row">
+								{% include "./education.html" %}
+							</div>
+						</div>
+						<!-- tab3 content end -->
+						<!-- tab4 content start -->
+						<div class="tab-pane" id="pills-tab4">
+							<div class="row">
+								{% include "./experience.html" %}
+							</div>
+						</div>
+						<!-- tab4 content end -->
+						<!-- tab5 content start -->
+						<div class="tab-pane" id="pills-tab5">
+							<div class="row">
+								{% include "./certification.html" %}
+							</div>
+						</div>
+						<!-- tab5 content end -->
+						<!-- tab6 content start -->
+						<div class="tab-pane" id="pills-tab6">
+							<div class="row">
+								{% include "./skill.html" %}
+							</div>
+						</div>
+						<!-- tab6 content end -->
+						<!-- tab7 content start -->
+						<div class="tab-pane" id="pills-tab7">
+							<div class="row">
+								{% include "./asset.html" %}
+							</div>
+						</div>
+						<!-- tab7 content end -->
+						<!-- tab8 content start -->
+						<div class="tab-pane" id="pills-tab8">
+							<div class="row">
+							    {% include "./setting.html" %}
+							</div>
+						</div>
+						<!-- tab8 content end -->
+					<div class="clearfix"></div>
+					
+						<div class="col-md-12">
+							<ul class="pager wizard top_for_pre_button">
+									<li class="previous first" style="display: none;"><a href="#">First</a></li>
+									<li class="previous"><a class="btn blue button-previous pre_button" id="employee_pre" title='Previous' href="#" style="display: block;"><i class="nf nf-double-arrow-right"></i></a></li>
+									<li class="next last" style="display: none;"><a href="#">Last</a></li>
+									<li class="next"><a class="btn green button-next" href="#" id="employee_last" title='Next'><i class="nf nf-double-arrow-left"></i></a></li>
+								</ul>
+   						 </div>
+   						 
+					</div>
+					</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- employee list toggle start -->
+					<div id="switcher1">
+						<div class="switcher-toggle1 popup_zindex">
+							<div data-toggle="tooltip" data-placement="bottom"
+								title="Profile Search" class="tooltips usersearch_icon "
+								id="usersearch_icon"></div>
+						</div>
+						<div class="switcher-content1 userprofile_wrap">
+							<!-- <span class="ExpIcon usersearch"><i class="fa fa-search"></i></span> -->
+							<div class="userprofile_inner">
+								<!-- <div data-placement="bottom" title="Grid View" href="#myModal1"
+									class="tooltips userprofile_grid" data-toggle="modal"></div> -->
+								<ul id="vcarousel" class="elastislide-list">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- employee list toggle end -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- org unit modal start -->
+{% include "organization_unit.html" %}
+<!-- org unit modal end -->
+<!-- employee modal start -->
+{% include "employee_search_select.html" %}
+<!-- employee mobile modal -->
+{% include "./employee_mobile_popup.html" %}
+<!-- employee email modal -->
+{% include "./employee_email_popup.html" %}
+{% endblock %}
+<!-- body content end -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/formWizards.js' %}"
+	type="text/javascript"></script>
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+
+<!-- datetime js -->
+<script
+	src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}"
+	type="text/javascript"></script>
+<script>
+
+</script>
+<!-- file input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+	
+<!-- vslider js  -->
+<script
+	src="{% static  '/ui/plugins/vertical_slider/js/jquery.vslider.js' %}"
+	type="text/javascript"></script>
+<!-- dev js -->
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_primary_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_personal_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_hr_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_skills_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_educational_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_experience_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_certification_info.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/organization_unit.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/hrms_foundation/js/attendance_management/multiselect.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/hrms_foundation/js/employee_management/employee_assets.js'  %}"
+	type="text/javascript"></script>	
+<script
+	src="{% static '/dev/hrms_foundation/js/employee_management/document_upload_lib.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/employee_registration.js' %}"
+	type="text/javascript"></script>	
+	
+	
+    <!--NIAA Important LINKS ------------->
+<script src="/static/niaa/util.js"></script>
+<script src="/static/niaa/require.js"></script>
+ <script>
+    requirejs.config({
+    	 baseUrl: '/static/niaa/',
+    });
+ </script>
+ <script>
+    require (['niaa_client']);
+ </script>
+ <!--- END NIAA Important LINKS ------------->	
+	
+	
+	
+{% endblock %}
+<!-- custom script end -->

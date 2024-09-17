@@ -1,0 +1,212 @@
+<!-- <h3 class="block">Educational Details</h3>
+ --> 							<div class="clearfix"></div>
+ 							<form role="form" id="employee_education_details_form">
+													<div class="form-body">
+														{%csrf_token%}
+
+														<div class="col-md-12 ">
+															<div class="col-md-4 ">
+																<div class="form-group">
+																	<label>Board/University <span class="asterisk">*</span>
+																	</label>
+																	<div class="input-icon">
+																		<i class="nf nf-university"></i> <input
+																			class="form-control" placeholder="Board/University"
+																			id="university" name="university" type="text"
+																			required data-error=".errorTxt25" maxlength="100"> <span
+																			class="errorTxt25 errormessage"></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4 ">
+																<div class="form-group">
+																	<label>Specialization/Major <span class="asterisk">*</span>
+																	</label>
+																	<div class="input-icon">
+																		<i class="nf nf-university"></i> <input
+																			class="form-control" placeholder="Specialization/Major"
+																			id="specialization" name="specialization" type="text"
+																			 data-error=".errorTxt72" maxlength="120"> <span
+																			class="errorTxt72 errormessage"></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-4 ">
+																<div class="form-group">
+																	<label>Institute/School </label>
+																	<div class="input-icon">
+																		<i class="nf nf-university"></i> <input
+																			class="form-control" placeholder="Institute/School"
+																			id="institution_name" name="institution_name"
+																			type="text" maxlength="100">
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-12 ">
+															<div class="col-md-6 ">
+																<div class="form-group">
+																	<label>Degree</label>
+																	<div class="input-icon">
+																		<i class="nf nf-university"></i> <input
+																			class="form-control" placeholder="Degree"
+																			id="course_name" name="course_name" type="text" maxlength="100">
+																	</div>
+																</div>
+															</div>
+
+															<div class="col-md-3 ">
+																<div class="form-group">
+																	<label>Graduated Year <span class="asterisk">*</span>
+																	</label>
+																	<div class="input-icon">
+																		<i class="nf nf-customer"></i> <input
+																			class="form-control" placeholder="Graduated Year"
+																			id="year_of_passed_out" name="year_of_passed_out"
+																			type="text" required data-error=".errorTxt27" maxlength="4">
+																		<span class="errorTxt27 errormessage"></span>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-3">
+																	<div class="form-group">
+																		<label>Duration (Months) 
+																		</label>
+																		<div class="input-icon">
+																			<i class="nf nf-university"></i> <input class="form-control"
+																				placeholder="Duration (Months)" id="duration" name="duration"
+																				type="text" data-error=".errorTxt26" maxlength="2"> <span
+																				class="errorTxt26 errormessage"></span>
+																		</div>
+																	</div>
+			 										 		</div>
+														</div>
+														<div class="col-md-12">
+															<div class="col-md-2">
+																			<div class="form-group">
+																				<label>Grade </label>
+																				<div class="input-icon">
+																					<i class="nf nf-grade"></i> <input class="form-control"
+																						placeholder="Grade" id="cgpa" name="cgpa" type="text"
+																						data-error=".errorTxt15" maxlength="3"> <span
+																						class="errorTxt15 errormessage"></span>
+																				</div>
+																			</div>
+																	</div>
+																	<div class="col-md-2">
+																			<div class="form-group">
+																				<label>Percentage/CGPA</label>
+																				<div class="input-icon">
+																					<i class="nf nf-percentage"></i> <input class="form-control"
+																						placeholder="Percentage/CGPA" id="percentage" name="percentage"
+																						data-error=".errorTxt16" maxlength="5"> <span
+																						class="errorTxt16 errormessage"></span>
+																				</div>																				
+																			</div>
+																	 </div>
+																	 
+																	 
+															<div class="col-md-5">
+																	<div class="form-group">
+																		<label>Document Upload</label><div class="clearfix"></div>
+																		<div class="fileinput fileinput-new col-md-12 padding-0" data-provides="fileinput">
+																				<div class="input-group">
+																					<div
+																						class="form-control uneditable-input input-fixed"
+																						data-trigger="fileinput">
+																						<i class="fa fa-file fileinput-exists"></i>&nbsp; <span
+																							class="fileinput-filename"> </span>
+																					</div>
+																					<span class="input-group-addon btn btn-success btn-file ">
+																						<span class="fileinput-new"> <i class="fa fa-upload"></i></span>
+																						<span class="fileinput-exists"> Change </span> <input name="..."
+																						type="file" id="edu_doc" onchange="encodeDoctoBase64(this)">
+																					</span> <a href="javascript:;"
+																						class="document_remove_btn input-group-addon btn btn-danger  fileinput-exists"
+																						data-dismiss="fileinput"> Remove </a>
+																				</div>
+																		</div>
+																		<span><p class="txt-info">( Note : Please upload doc,docx or pdf and file size should be less than 2MB )</p></span>
+																	</div>
+															</div>
+																		
+																	<div class="col-md-3 ">
+														
+																<div class="form-group">
+																			<label>Certificate Verification</label>
+																			<div class="mt-radio-inline">
+																				<div class="radio">
+																					<label> <input name="verification_education"
+																						id="verified_edu" value="Verified" type="radio"> <span
+																						class="cr"><i class="cr-icon fa fa-circle"></i>
+																							<div></div></span>Verified
+																					</label>
+																				</div>
+																				<div class="radio">
+																					<label> <input name="verification_education"
+																						id="not_verified_edu" value="Not Verified" type="radio">
+																						<span class="cr"><i class="cr-icon fa fa-circle"></i>
+																							<div></div></span>Not Verified
+																					</label>
+																				</div>
+																			</div>
+																</div>
+														</div>
+														
+																													
+														</div>	
+														<div class="col-md-12 padding-0 margin-bottom-30">		
+																{% if 'Employee Details' in get_add_records %}														
+																<div class="form-group pull-right" align="right">
+																	<div class="btn-padding">
+																			
+																		<a href="javascript:;" title='Add'
+																			id="education_details_create_button"
+																			class="btn btn-success btn-animate edu_add"> 
+																			Add</a> 
+																		<a href="javascript:;" title='Update'
+																			id="education_details_edit_button"
+																			class="btn-primary btn-animate btn edu_update">
+																			Update</a>
+																		<a href="javascript:;" title='Remove'
+																			id="education_details_delete_button"
+																			class="btn-animate  btn btn-danger edu_update"> 
+																			Remove</a>
+																		<a href="javascript:;" title='Cancel / Clear'
+																			id="education_details_cancel_button"
+																			class="btn-warning btn-animate btn edu_clear"> 
+																			Cancel/Clear</a>
+																	
+																	</div>
+																</div>
+																{% endif %}
+														</div>														
+													</div>
+											
+											
+											<div class="clearfix"></div>
+											
+																						
+										<div class="col-md-12" id="education_table" style="display: none;padding:0 30px;">
+												<div class="form-group">
+												<h3>Employee Education Details</h3>
+													<table
+														class="table table-striped table-bordered table-hover"
+														id="employee_education_details">
+													</table>																										
+												</div>
+										</div>
+										
+										<div class="clearfix"></div>
+										<div class="form-group" align="right">
+											<div class="btn-padding">			
+												<button type="button" id="employee_education_details_edit_button" style="display:none"
+													class="btn-primary btn-animate btn-eql-wid  btn">Update</button>
+												<!-- Indicates a dangerous or potentially negative action -->
+												<!-- <button type="button" id="employee_education_details_delete_button"
+													class="btn btn-danger ">Remove</button> -->
+												<button type="button" id="employee_education_details_cancel_button" style="display:none"
+													class="btn-warning btn-animate btn-eql-wid  btn">Cancel / Clear</button>	
+											</div>
+										</div>
+								</form>

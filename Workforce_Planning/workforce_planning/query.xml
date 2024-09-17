@@ -1,0 +1,854 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Workforce_Planning/workforce_planning">
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Employee Info form data start -->
+		<query id="wfp_stg_emp_data" query_name="wfp_stg_emp_data"
+			description="Strategy Analysis Employee Info form data">
+        	<![CDATA[ SELECT id, CONCAT (name ,' ', last_name) as name from employee_info order by id; ]]>
+		</query>
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Employee Info form data end -->
+
+		<!-- 26-JUL-2018 || SMI || Fetch Organization List start -->
+		<query id="wfp_fetch_org_list" query_name="wfp_fetch_org_list"
+			description="Fetch Organization List">
+        	<![CDATA[ SELECT id, name from organization_info where is_active = 'True'; ]]>
+		</query>
+		<!-- 26-JUL-2018 || SMI || Fetch Organization List end -->
+
+		<!-- 26-JUL-2018 || SMI || Fetch Organization Unit List start -->
+		<query id="wfp_fetch_org_unit_list" query_name="wfp_fetch_org_unit_list"
+			description="Fetch Organization Unit List">
+        	<![CDATA[ SELECT id, orgunit_name from organization_unit_info where organization_id = %s and parent_orgunit_id != 0 and is_active = 'True' order by orgunit_name; ]]>
+		</query>
+		<!-- 26-JUL-2018 || SMI || Fetch Organization Unit List end -->
+
+		<!-- 30-JUL-2018 || SMI || Fetch data for reporting structure start -->
+		<query id="ti_reports_struct_data" query_name="ti_reports_struct_data"
+			description="Fetch data for reporting structure">
+        	<![CDATA[ select rd.id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as res_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True
+						order by case when rd.role_title = 'Chief Executive Officer' then 0 else 1 end,
+						rd.id ]]>
+		</query>
+		<!-- 30-JUL-2018 || SMI || Fetch data for reporting structure end -->
+
+		<!-- 26-JUL-2018 || SMI || Fetch Strategy List start -->
+		<query id="wfp_fetch_stg_sel_query" query_name="wfp_fetch_stg_sel_query"
+			description="Fetch Strategy Select Values">
+        	<![CDATA[ SELECT id, strategy_analysis_summary from hcms_wp_strategy_analysis where is_active = TRUE and strategy_analysis_org_id=%s and strategy_analysis_org_unit_id=%s order by id; ]]>
+		</query>
+		<!-- 26-JUL-2018 || SMI || Fetch Strategy List end -->
+
+		<!-- 05-JUL-2018 || MST || To Insert Strategy Analysis Step 1 form data 
+			start -->
+		<query id="wfp_stg_step1_insert" query_name="wfp_stg_step1_insert"
+			description="To Insert Strategy Analysis Step 1 form data">
+        	<![CDATA[INSERT INTO hcms_wp_strategy_analysis(
+                               created_date, modified_date, is_active, strategy_analysis_summary, 
+                               strategy_analysis_details, strategy_analysis_period_from, strategy_analysis_period_to, 
+                               strategy_analysis_defined_on, strategy_analysis_approval_board_ids, 
+                               created_by_id, modified_by_id, strategy_analysis_org_id, strategy_analysis_org_unit_id)
+                       VALUES (now(), now(), TRUE, %s, 
+                               %s, %s, %s, 
+                               %s, %s, 
+                               %s, %s, %s, %s) returning id; ]]>
+		</query>
+		<!-- 05-JUL-2018 || MST || To Insert Strategy Analysis Step 1 form data 
+			end -->
+
+		<!-- 05-JUL-2018 || MST || To UPDATE Strategy Analysis Step 1 form data 
+			start -->
+		<query id="wfp_stg_step1_update" query_name="wfp_stg_step1_update"
+			description="To UPDATE Strategy Analysis Step 1 form data">
+        	<![CDATA[ UPDATE hcms_wp_strategy_analysis
+                      SET modified_date=now(), strategy_analysis_summary=%s, 
+                             strategy_analysis_details=%s, strategy_analysis_period_from=%s, 
+                             strategy_analysis_period_to=%s, strategy_analysis_defined_on=%s, 
+                             strategy_analysis_approval_board_ids=%s, modified_by_id=%s,
+                             strategy_analysis_org_id=%s, strategy_analysis_org_unit_id=%s
+                      WHERE id=%s; ]]>
+		</query>
+		<!-- 05-JUL-2018 || MST || To UPDATE Strategy Analysis Step 1 form data 
+			end -->
+
+		<!-- 05-JUL-2018 || MST || To Insert Strategy Analysis Step 1 STEEPLE form 
+			data start -->
+		<query id="wfp_stg_step1_steeple_insert" query_name="wfp_stg_step1_steeple_insert"
+			description="To Insert Strategy Analysis STEEPLE Step 1 form data">
+        	<![CDATA[ INSERT INTO hcms_wp_strategy_steeple(
+                              created_date, modified_date, is_active, steeple_execution_details, 
+                              steeple_workforce_details, steeple_social_desc, steeple_technological_desc, 
+                              steeple_economical_desc, steeple_environmental_desc, steeple_political_desc, 
+                              steeple_legal_desc, steeple_ethical_desc, steeple_social_neg_impact, 
+                              steeple_social_pos_impact, steeple_technological_neg_impact, 
+                              steeple_technological_pos_impact, steeple_economical_neg_impact, 
+                              steeple_economical_pos_impact, steeple_environmental_neg_impact, 
+                              steeple_environmental_pos_impact, steeple_political_neg_impact, 
+                              steeple_political_pos_impact, steeple_legal_neg_impact, steeple_legal_pos_impact, 
+                              steeple_ethical_neg_impact, steeple_ethical_pos_impact, created_by_id, 
+                              modified_by_id, steeple_strategy_id)
+                      VALUES (now(), now(), TRUE, %s, 
+                              %s, %s, %s, 
+                              %s, %s, %s, 
+                              %s, %s, %s, 
+                              %s, %s, %s, %s, 
+                              %s, %s, %s, %s, 
+                              %s, %s, %s, 
+                              %s, %s, %s, 
+                              %s, %s); ]]>
+		</query>
+		<!-- 05-JUL-2018 || MST || To Insert Strategy Analysis Step 1 STEEPLE form 
+			data end -->
+
+		<!-- 05-JUL-2018 || MST || To Insert Strategy Analysis Step 1 STEEPLE form 
+			data start -->
+		<query id="wfp_stg_step1_steeple_update" query_name="wfp_stg_step1_steeple_update"
+			description="To Update Strategy Analysis STEEPLE Step 1 form data">
+        	<![CDATA[ UPDATE hcms_wp_strategy_steeple
+                      SET modified_date=now(), steeple_execution_details=%s, 
+                          steeple_workforce_details=%s, steeple_social_desc=%s, steeple_technological_desc=%s, 
+                          steeple_economical_desc=%s, steeple_environmental_desc=%s, steeple_political_desc=%s, 
+                          steeple_legal_desc=%s, steeple_ethical_desc=%s, steeple_social_neg_impact=%s, 
+                          steeple_social_pos_impact=%s, steeple_technological_neg_impact=%s, 
+                          steeple_technological_pos_impact=%s, steeple_economical_neg_impact=%s, 
+                          steeple_economical_pos_impact=%s, steeple_environmental_neg_impact=%s, 
+                          steeple_environmental_pos_impact=%s, steeple_political_neg_impact=%s, 
+                          steeple_political_pos_impact=%s, steeple_legal_neg_impact=%s, steeple_legal_pos_impact=%s, 
+                          steeple_ethical_neg_impact=%s, steeple_ethical_pos_impact=%s,
+                          modified_by_id=%s
+                      WHERE steeple_strategy_id=%s; ]]>
+		</query>
+		<!-- 05-JUL-2018 || MST || To Update Strategy Analysis Step 1 STEEPLE form 
+			data end -->
+
+		<!-- 05-JUL-2018 || MST || To Remove Strategy Analysis Step 1 STEEPLE form 
+			data start -->
+		<query id="wfp_stg_step1_remove" query_name="wfp_stg_step1_remove"
+			description="To Remove Strategy Analysis STEEPLE Step 1 form data">
+        	<![CDATA[ UPDATE hcms_wp_strategy_analysis set is_active='False', modified_date=now(), 
+                          modified_by_id=%s where id = %s; ]]>
+            <![CDATA[ UPDATE hcms_wp_strategy_steeple set is_active='False', modified_date=now(), 
+                          modified_by_id=%s where steeple_strategy_id = %s; ]]>
+		</query>
+		<!-- 05-JUL-2018 || MST || To Update Strategy Analysis Step 1 STEEPLE form 
+			data end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 1 Retrieve form data 
+			start -->
+		<query id="wfp_stg_step1_fetch" query_name="wfp_stg_step1_fetch"
+			description="To Strategy Analysis Step 1 Retrieve form data">
+        	<![CDATA[ SELECT strategy_analysis_summary, strategy_analysis_details, to_char(strategy_analysis_period_from, 'DD-MON-YYYY') as period_from, 
+                          to_char(strategy_analysis_period_to, 'DD-MON-YYYY') as period_to, to_char(strategy_analysis_defined_on, 'DD-MON-YYYY') as defined_on, 
+                          strategy_analysis_approval_board_ids, strategy_analysis_org_id, strategy_analysis_org_unit_id from hcms_wp_strategy_analysis where id=%s; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 1 Retrieve form data 
+			end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 1 Steeple Fetch data 
+			start -->
+		<query id="wfp_stg_step1_steeple_fetch" query_name="wfp_stg_step1_steeple_fetch"
+			description="To Strategy Analysis Step 1 Steeple Fetch data">
+        	<![CDATA[ SELECT steeple_execution_details, steeple_workforce_details, steeple_social_desc, steeple_technological_desc, 
+                           steeple_economical_desc, steeple_environmental_desc, steeple_political_desc, 
+                           steeple_legal_desc, steeple_ethical_desc, steeple_social_neg_impact, 
+                           steeple_social_pos_impact, steeple_technological_neg_impact, 
+                           steeple_technological_pos_impact, steeple_economical_neg_impact, 
+                           steeple_economical_pos_impact, steeple_environmental_neg_impact, 
+                           steeple_environmental_pos_impact, steeple_political_neg_impact, 
+                           steeple_political_pos_impact, steeple_legal_neg_impact, steeple_legal_pos_impact, 
+                           steeple_ethical_neg_impact, steeple_ethical_pos_impact
+                      FROM hcms_wp_strategy_steeple where steeple_strategy_id=%s; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 1 Steeple Fetch data 
+			end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Current Workforce 
+			Profile Analysis Fetch data start -->
+		<query id="wfp_stg_step2_fetch" query_name="wfp_stg_step2_fetch"
+			description="To Strategy Analysis Step 2 Current Workforce Profile Analysis Fetch data">
+        	<![CDATA[ SELECT ri.refitems_name, wf.wf_profile_task_summary, wf.wf_profile_required, rd.role_title
+                         from hcms_wp_strategy_workforce_profile wf 
+                         inner join hcms_ti_role_details rd on rd.id = wf.wf_profile_role_id 
+                         inner join reference_items ri on ri.id = wf.wf_profile_grade_id
+                         where wf.wf_profile_strategy_id=%s; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Current Workforce 
+			Profile Analysis Fetch data end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Role ID Fetch data 
+			start -->
+		<query id="wfp_stg_step2_role_id" query_name="wfp_stg_step2_role_id"
+			description="To Strategy Analysis Step 2 Role ID Fetch data">
+        	<![CDATA[ SELECT id from hcms_ti_role_details where role_title = %s; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Role ID Fetch data 
+			end -->
+
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Grade ID Fetch data 
+			start -->
+		<query id="wfp_stg_step2_grade_id" query_name="wfp_stg_step2_grade_id"
+			description="To Strategy Analysis Step 2 Grade ID Fetch data">
+        	<![CDATA[ SELECT id from reference_items where refitems_name= %s; ]]>
+		</query>
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Grade ID Fetch data 
+			end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Insert form data 
+			start -->
+		<query id="wfp_stg_step2_insert" query_name="wfp_stg_step2_insert"
+			description="To Strategy Analysis Step 2 Insert form data">
+        	<![CDATA[ INSERT INTO hcms_wp_strategy_workforce_profile(
+					            created_date, modified_date, is_active, wf_profile_task_summary, 
+					            wf_profile_required, created_by_id, modified_by_id, wf_profile_role_id, 
+					            wf_profile_strategy_id, wf_profile_grade_id)
+					    VALUES (now(), now(), TRUE, %s, 
+					            %s, %s, %s, %s, 
+					            %s, %s); ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Insert form data 
+			end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Delete form data 
+			start -->
+		<query id="wfp_stg_step2_delete" query_name="wfp_stg_step2_delete"
+			description="To Strategy Analysis Step 2 Delete form data">
+        	<![CDATA[ DELETE from hcms_wp_strategy_workforce_profile where wf_profile_strategy_id = %s; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 Delete form data 
+			end -->
+
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Fetch Grade data 
+			start -->
+		<query id="fetch_grade_details" query_name="fetch_grade_details"
+			description="To Strategy Analysis Step 2 Fetch Grade data">
+        	<![CDATA[ SELECT ri.id, ri.refitems_name from (select unnest(role_grade) as grade 
+                                    from hcms_ti_role_details where id = %s)a 
+                                    inner join reference_items ri on ri.id = a.grade; ]]>
+		</query>
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Fetch Grade data 
+			end -->
+
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Fetch Selected Grade 
+			data start -->
+		<query id="fetch_selected_grade_details" query_name="fetch_selected_grade_details"
+			description="To Strategy Analysis Step 2 Fetch Selected Grade data">
+        	<![CDATA[ SELECT ri.id, ri.refitems_name from (select unnest(role_grade) as grade 
+                                    from hcms_ti_role_details where role_title = %s)a 
+                                    inner join reference_items ri on ri.id = a.grade ; ]]>
+		</query>
+		<!-- 07-AUG-2018 || MST || To Strategy Analysis Step 2 Fetch Selected Grade 
+			data end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 fetch form role 
+			data start -->
+		<query id="wfp_stg_step2_role_fetch" query_name="wfp_stg_step2_role_fetch"
+			description="To Strategy Analysis Step 2 fetch form role data">
+        	<![CDATA[ SELECT id, role_title from hcms_ti_role_details where is_active = TRUE and role_org_id = %s and %s = any(role_org_unit) order by id; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Step 2 fetch form role 
+			data end -->
+
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Step 3 gap calculation start -->
+		<query id="wfp_stg_step3_gap" query_name="wfp_stg_step3_gap"
+			description="Strategy Analysis Step 3 gap calculation">
+        	<![CDATA[ SELECT c.role_id_id, rd.role_title, c.existing_res, c.wf_profile_required, c.gap, c.refitems_name as grade from
+                             (select ri.refitems_name, a.role_id_id, a.existing_res, b.wf_profile_required, b.wf_profile_required - a.existing_res as gap from
+                             (select role_id_id, count(*) as existing_res from employee_info where role_id_id in 
+                             (select stg.wf_profile_role_id from hcms_wp_strategy_workforce_profile stg) 
+                             group by role_id_id order by role_id_id) a, hcms_wp_strategy_workforce_profile b, reference_items ri
+                             where a.role_id_id = b.wf_profile_role_id and b.wf_profile_strategy_id=%s and ri.id=b.wf_profile_grade_id)
+			     			 c, hcms_ti_role_details rd where c.role_id_id = rd.id; ]]>
+		</query>
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Step 3 gap calculation end -->
+
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Step 4 Cost View start -->
+		<query id="wfp_stg_step4_cost" query_name="wfp_stg_step4_cost"
+			description="Strategy Analysis Step 4 Cost View">
+        	<![CDATA[ SELECT hc.role_title, wp.wf_profile_required, wp.wf_profile_required from hcms_wp_strategy_workforce_profile wp
+                             inner join hcms_ti_role_details hc on wp.wf_profile_role_id = hc.id
+                             where wp.wf_profile_strategy_id = %s; ]]>
+		</query>
+		<!-- 25-JUL-2018 || MST || Strategy Analysis Step 4 Cost View end -->
+
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Strategy Select form data 
+			start -->
+		<query id="wfp_stg_select" query_name="wfp_stg_select"
+			description="To Strategy Analysis Strategy Select form data">
+        	<![CDATA[ SELECT a.id, a.strategy_analysis_summary from (select stg.id, stg.strategy_analysis_summary, (stp.steeple_social_neg_impact + stp.steeple_technological_neg_impact 
+                         + stp.steeple_economical_neg_impact +  stp.steeple_environmental_neg_impact + stp.steeple_political_neg_impact 
+                         + stp.steeple_legal_neg_impact + stp.steeple_ethical_neg_impact) +
+                         (stp.steeple_social_pos_impact + stp.steeple_technological_pos_impact 
+                         + stp.steeple_economical_pos_impact +  stp.steeple_environmental_pos_impact + stp.steeple_political_pos_impact 
+                         + stp.steeple_legal_pos_impact + stp.steeple_ethical_pos_impact) as steeple_val 
+                         from hcms_wp_strategy_steeple stp
+                         inner join hcms_wp_strategy_analysis stg on stg.id = stp.steeple_strategy_id WHERE stg.is_active=TRUE order by stg.id) a
+                         where a.steeple_val >= 0; ]]>
+		</query>
+		<!-- 13-JUL-2018 || MST || To Strategy Analysis Strategy Select form data 
+			end -->
+		
+		<!-- 21-JUL-2018 || MST || To Strategy Analysis Step 5 fetch form role 
+			data start -->
+		<query id="wfp_stg_step5_role_fetch" query_name="wfp_stg_step5_role_fetch"
+			description="To Strategy Analysis Step 5 fetch form role data">
+        	<![CDATA[ select rd.id, rd.role_title from hcms_ti_role_details rd, hcms_wp_strategy_workforce_profile wfp 
+        				where wfp.wf_profile_role_id = rd.id and rd.role_org_id = %s and %s = any(rd.role_org_unit) and wfp.wf_profile_strategy_id = %s
+        				group by rd.id, rd.role_title order by rd.id; ]]>
+		</query>
+		<!-- 21-JUL-2018 || MST || To Strategy Analysis Step 5 fetch form role 
+			data end -->
+		
+		<!-- 05-JUL-2018 || SMI || To fetch the planned, existing and excess count 
+			of resource per role start -->
+		<query id="wfp_struct_step2_details_fetch" query_name="wfp_struct_step2_details_fetch"
+			description="To fetch the planned, existing and excess count of resource per role">
+        	<![CDATA[ select rd1.id, rd1.role_title, rd1.role_type, rd1.role_reports_to_id, 
+						rd1.planned_count, COALESCE(a.existing, '0') as existing_count, 
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') < 0 then
+						COALESCE(a.existing, '0') - planned_count
+						end, '0') as excess_count
+						from (select rd.id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True 
+						order by case when rd.role_title = 'Secretary' then 0 else 1 end, rd.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id 
+						order by case when role_id_id = 196 then 0 else 1 end, role_id_id) a on a.role_id_id = rd1.id; ]]>
+		</query>
+		<!-- 05-JUL-2018 || SMI || To fetch the planned, existing and excess count 
+			of resource per role end -->
+		<!-- 09-JUL-2018 || SMI || To fetch the planned, existing and excess count 
+			of resource per role and org. unit type start -->
+		<query id="wfp_struct_step3_details_fetch" query_name="wfp_struct_step3_details_fetch"
+			description="To fetch the planned, existing and excess count of resource per role and org. unit type">
+        	<![CDATA[ select rd1.id, rd1.role_org_unit_type, rd1.role_title, rd1.role_type, rd1.role_reports_to_id, 
+						rd1.planned_count, COALESCE(a.existing, '0') as existing_count, 
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') < 0 then
+						COALESCE(a.existing, '0') - planned_count
+						end, '0') as excess_count
+						from (select a.id, b.refitems_name as role_org_unit_type, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id; ]]>
+		</query>
+		<!-- 10-JUL-2018 || SMI || To fetch the planned, existing and excess costs 
+			of resource per role and org. unit type end -->
+		<query id="wfp_struct_step4_details_fetch" query_name="wfp_struct_step4_details_fetch"
+			description="To fetch the planned, existing and excess costs of resource per role and org. unit type">
+        	<![CDATA[ select rd1.id, rd1.role_org_unit_type, rd1.role_title, COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_cost
+						from (select a.id, b.refitems_name as role_org_unit_type, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id; ]]>
+		</query>
+		<!-- 10-JUL-2018 || SMI || To fetch the planned, existing and excess costs 
+			of resource per role and org. unit type end -->
+		<!-- 10-JUL-2018 || SMI || To fetch data for Structure Analysis - Summarized 
+			Report Start -->
+		<query id="wfp_struct_step5_details_fetch" query_name="wfp_struct_step5_details_fetch"
+			description="To fetch data for Structure Analysis - Summarized Report">
+        	<![CDATA[ select sum(case when required_cost between 1 and 5000 then 1 else 0 end) as minrange,
+						sum(case when required_cost between 5001 and 10000 then 1 else 0 end) as midrange,
+						sum(case when required_cost > 10001 then 1 else 0 end) as maxrange
+						from (select rd1.id, rd1.role_org_unit_type, rd1.role_title, COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') * 1500 as required_cost
+						from (select a.id, b.refitems_name as role_org_unit_type, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type_id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id)tbl; ]]>
+		</query>
+		<!-- 10-JUL-2018 || SMI || To fetch data for Structure Analysis - Summarized 
+			Report end -->
+		<!-- 31-JUL-2018 || SMI || To fetch data for Structure Analysis - Data 
+			fetch on Donut Slice Click start -->
+		<query id="wfp_struct_slice_click_fetch" query_name="wfp_struct_slice_click_fetch"
+			description="To fetch data for Structure Analysis - Data fetch on Donut Slice Click">
+        	<![CDATA[ select * from
+						(select rd1.id, rd1.role_org_unit_type, rd1.role_title, planned_count, COALESCE(a.existing, '0') as existing_count, 
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') < 0 then
+						COALESCE(a.existing, '0') - planned_count
+						end, '0') as excess_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') * 1500 as required_cost
+						from (select a.id, b.refitems_name as role_org_unit_type, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type_id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id)tbl
+						where tbl.required_cost between %s and %s; ]]>
+		</query>
+		<!-- 31-JUL-2018 || SMI || To fetch data for Structure Analysis - Data 
+			fetch on Donut Slice Click end -->
+		<!-- 31-JUL-2018 || SMI || To fetch data for Structure Analysis - Data 
+			fetch for Bar Chart when selecting role start -->
+		<query id="wfp_struct_role_sel_fetch" query_name="wfp_struct_role_sel_fetch"
+			description="To fetch data for Structure Analysis - Data fetch for Bar Chart when selecting role">
+        	<![CDATA[ select * from
+						(select rd1.id, rd1.role_org_unit_type, rd1.role_title, planned_count, COALESCE(a.existing, '0') as existing_count, 
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') < 0 then
+						COALESCE(a.existing, '0') - planned_count
+						end, '0') as excess_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') * 1500 as required_cost
+						from (select a.id, b.refitems_name as role_org_unit_type, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type_id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id)tbl
+						where id = %s; ]]>
+		</query>
+		<!-- 31-JUL-2018 || SMI || To fetch data for Structure Analysis - Data 
+			fetch for Bar Chart when selecting role end -->
+		<!-- 16-AUG-2018 || SMI || To fetch data for Structure Analysis - Stacked bar chart by selected roles start -->
+		<query id="wfp_multi_bar_data_qry" query_name="wfp_multi_bar_data_qry"
+			description="To fetch data for Structure Analysis - Stacked bar chart by selected roles">
+              <![CDATA[select * from
+						(select rd1.id, rd1.role_title, planned_count, COALESCE(a.existing, '0') as existing_count, 
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') > 0 then
+						planned_count - COALESCE(a.existing, '0')
+						end, '0') as required_count,
+						COALESCE(case when planned_count - COALESCE(a.existing, '0') < 0 then
+						COALESCE(a.existing, '0') - planned_count
+						end, '0') as excess_count
+						from (select a.id, a.role_title, a.role_type, a.role_reports_to_id, a.planned_count
+						from (select rd.id, rd.role_org_unit_type_id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as planned_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True 
+						order by rd.id) a, reference_items b
+						where a.role_org_unit_type_id = b.id) rd1
+						left join (select role_id_id, count(role_id_id) as existing 
+						from employee_info where is_active=True group by role_id_id order by role_id_id) a on a.role_id_id = rd1.id)tbl
+						where id in %s; ]]>
+		</query>
+		<!-- 16-AUG-2018 || SMI || To fetch data for Structure Analysis - Stacked bar chart by selected roles end  -->
+		<!-- 17-AUG-2018 || SMI || To fetch data for Structure Analysis - Stacked bar chart by selected grades start -->
+		<query id="wfp_multi_grade_data_qry" query_name="wfp_multi_grade_data_qry"
+			description="To fetch data for Structure Analysis - Stacked bar chart by selected grades">
+              <![CDATA[ select ri.refitems_name as grade, gd.count from reference_items ri,
+						(select grade, count(role_title) from
+						(select id, role_title, unnest(role_grade) as grade from hcms_ti_role_details) a
+						where grade in %s
+						group by grade)gd
+						where gd.grade = ri.id
+						order by grade ]]>
+		</query>
+		<!-- 17-AUG-2018 || SMI || To fetch data for Structure Analysis - Stacked bar chart by selected grades end  -->
+		
+		<query id="stg_select_query" query_name="stg_select_query"
+			description="Select Strategy">
+              <![CDATA[ SELECT id, strategy_analysis_summary from hcms_wp_strategy_analysis where is_active = TRUE order by id; ]]>
+		</query>
+
+
+		<!-- 06-JUL-2018 || KAV || To Fetch the Resource Request details For System 
+			Analysis Start -->
+		<query id="wfp_syst_step1_details_fetch" query_name="wfp_syst_step1_details_fetch"
+			description="To Fetch the Resource Request details For System Analysis Step 1">
+            <![CDATA[select tm.name as team_name,array_agg(rd.role_title) as role_name,
+                            array_agg(to_char(resreq.resource_request_requested_on,'DD-MON-YYYY')) as requested_on,
+                            array_agg(rf.refitems_name) as request_reason,
+                            array_agg(rf1.refitems_name) as requirement_type_ids,
+                            array_agg(concat(au.first_name,au.last_name)) as requested_by_ids,
+                            array_agg(resreq.resource_request_count) as requirement_count,
+                            array_agg(rf2.refitems_name) as grade
+                            from hcms_wp_system_resource_request resreq  inner
+                            join hcms_ti_role_details rd on rd.id = resreq.resource_request_role_id
+                            inner join reference_items rf on rf.id = resreq.resource_request_request_reason_id
+                            inner join reference_items rf1 on rf1.id = resreq.resource_request_requirement_type_id
+                            inner join reference_items rf2 on rf2.id = resreq.resource_request_grade_id
+                            inner join auth_user au on au.id = resreq.created_by_id
+                            inner join team_details_info tm on tm.id = resreq.resource_request_team_id
+                            where resreq.is_active = TRUE 
+                            and resreq.resource_request_org_id = %s and  resreq.resource_request_org_unit_id = %s
+                            group by tm.name]]>
+		</query>
+		<query id="wfp_syst_step2_details_fetch" query_name="wfp_syst_step2_details_fetch"
+			description="To Fetch the Resource Request details For System Analysis Step 2">
+            <![CDATA[select resreq.resource_request_count ,concat(au.first_name,' ',au.last_name) as created_by_id ,resreq.resource_request_grade_id,
+                            resreq.resource_request_requirement_type_id,resreq.resource_request_request_reason_id,
+                            to_char(resreq.resource_request_requested_on,'DD-MON-YYYY') as requested_on,
+                            resreq.resource_request_analysis_details from hcms_wp_system_resource_request resreq
+                            inner join auth_user au on au.id = resreq.created_by_id where resreq.resource_request_team_id = %s
+                            and resreq.resource_request_role_id = %s  and resreq.is_active = 'TRUE']]>
+		</query>
+		<!-- 06-JUL-2018 || KAV || To Fetch the Resource Request details For System 
+			Analysis End -->
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request Role Details For 
+			System Analysis Start -->
+		<query id="sys_fetch_role_name" query_name="sys_fetch_role_name"
+			description="To Fetch the Resource Request Role details">
+            <![CDATA[select resreq.resource_request_role_id as role_id ,rl.role_title as role_title from hcms_wp_system_resource_request resreq
+                            inner join hcms_ti_role_details rl on rl.id = resreq.resource_request_role_id  where resreq.is_active ='True' and
+                            resreq.resource_request_team_id = %s group by rl.role_title,resreq.resource_request_role_id]]>
+		</query>
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request Role details For 
+			System Analysis End -->
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request Team Details For 
+			System Analysis Start -->
+		<query id="sys_fetch_team_name" query_name="sys_fetch_team_name"
+			description="To Fetch the Resource Request Team details">
+            <![CDATA[select resreq.resource_request_team_id as id , tm.name as team_name
+                         from hcms_wp_system_resource_request resreq inner join team_details_info tm on
+                         tm.id = resreq.resource_request_team_id
+                         where resreq.is_active = TRUE and resreq.resource_request_org_id = 1 and  resreq.resource_request_org_unit_id = 2 
+                         group by tm.name, resreq.resource_request_team_id]]>
+		</query>
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request Team details For 
+			System Analysis End -->
+		<!-- 12-JUL-2018 || KAV || To Update System Analysis Status Reject Start -->
+		<query id="sys_update_reject_status" query_name="sys_update_reject_status"
+			description="To System Analysis Status Reject">
+            <![CDATA[update hcms_wp_system_resource_request set resource_request_analyzed_by_id = %s,
+                            resource_request_analysis_details= %s,resource_request_grade_id= %s,resource_request_requirement_type_id =%s ,
+                            is_active = 'False'  where resource_request_team_id = %s and resource_request_role_id = %s]]>
+		</query>
+		<!-- 12-JUL-2018 || KAV || To Update System Analysis Status Reject End -->
+		<!-- 12-JUL-2018 || KAV || To Update System Analysis Status Approved Start -->
+		<query id="sys_update_approved_status" query_name="sys_update_approved_status"
+			description="To System Analysis Status Approved">
+            <![CDATA[update hcms_wp_system_resource_request set resource_request_analyzed_by_id = %s,
+                            resource_request_analysis_details= %s ,resource_request_grade_id= %s,resource_request_requirement_type_id =%s
+                            where resource_request_team_id = %s and resource_request_role_id = %s]]>
+		</query>
+		<!-- 12-JUL-2018 || KAV || To Update System Analysis Status Approved End -->
+
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request details For System 
+			Analysis Step 3 Start -->
+
+		<query id="wfp_syst_step3_details_fetch" query_name="wfp_syst_step3_details_fetch"
+			description="To Fetch the Resource Request details For System Analysis Step 3">
+            <![CDATA[select resreq.id,tm.name, rl.role_title,resreq.resource_request_prioriy_number,
+                            resreq.resource_request_count,resreq.resource_request_priority_id ,rf.refitems_name as grade from
+                            hcms_wp_system_resource_request resreq
+                            inner join team_details_info tm on tm.id = resreq.resource_request_team_id
+                            inner join hcms_ti_role_details rl on rl.id = resreq.resource_request_role_id
+                            inner join reference_items rf on rf.id = resreq.resource_request_grade_id where
+                            resreq.resource_request_org_id = %s and  resreq.resource_request_org_unit_id = %s and resreq.is_active = 'True'
+                            group by tm.name,rl.role_title,resreq.resource_request_prioriy_number,rf.refitems_name,
+                            resreq.resource_request_count,resreq.resource_request_priority_id,resreq.id]]>
+		</query>
+		<!-- Update Priority Id -->
+		<query id="wfp_syst_step3_update_priority" query_name="wfp_syst_step3_update_priority"
+			description="To Update Resource Request Priority Id details For System Analysis Step 3">
+            <![CDATA[update hcms_wp_system_resource_request set resource_request_priority_id = %s  where id =%s]]>
+		</query>
+		<!-- 12-JUL-2018 || KAV || To Fetch the Resource Request details For System 
+			Analysis Step 3 End -->
+
+		<!-- 24-JUL-2018 || KAV || To Fetch the Resource Request details to check 
+			Already Exists Start -->
+		<query id="resreq_already_exists" query_name="resreq_already_exists"
+			description="To Fetch the Resource Request details to check Already Exists">
+            <![CDATA[select resource_request_team_id ,resource_request_role_id  from hcms_wp_system_resource_request where
+                                 resource_request_team_id  = %s  and resource_request_role_id =%s ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Fetch the Resource Request details to check 
+			Already Exists End -->
+
+		<!-- 24-JUL-2018 || KAV || To Insert the Resource Request details Start -->
+		<query id="insert_resreq_data" query_name="insert_resreq_data"
+			description="Resource Request Insert Details ">
+              <![CDATA[ INSERT INTO hcms_wp_system_resource_request(created_date,modified_date,is_active,resource_request_count,resource_request_deployment_date,
+                        resource_request_requested_on,resource_request_request_reason_id,resource_request_analysis_details,
+                        resource_request_prioriy_number,created_by_id,modified_by_id,resource_request_analyzed_by_id,
+                        resource_request_priority_id,resource_request_requirement_type_id,resource_request_role_id,
+                        resource_request_team_id,resource_request_org_id,resource_request_org_unit_id,resource_request_certification,
+                        resource_request_edu_qual,resource_request_job_desc,resource_request_job_type_id,resource_request_language,
+                        resource_request_shift_id,resource_request_skills,resource_request_grade_id)
+                        VALUES(now(),now(),'True',%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s); ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Insert the Resource Request details End -->
+		<!-- 24-JUL-2018 || KAV || To Fetch the Role details Start -->
+		<query id="fetch_role_details" query_name="fetch_role_details"
+			description="Fetch Role Details ">
+              <![CDATA[ select id,role_title from hcms_ti_role_details where is_active = 'True' ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Fetch the Role details End -->
+		<!-- 24-JUL-2018 || KAV || To Fetch the Team details Start -->
+		<query id="fetch_team_info" query_name="fetch_team_info"
+			description="Fetch Team Info Details ">
+              <![CDATA[ select id,name from team_details_info where is_active ='True' ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Fetch the Team details End -->
+		<!-- 24-JUL-2018 || KAV || To Update the Resource Request details Start -->
+		<query id="update_resreq_data" query_name="update_resreq_data"
+			description="Resource Request Update Details ">
+              <![CDATA[UPDATE  hcms_wp_system_resource_request SET modified_date=now(),resource_request_count=%s,resource_request_deployment_date=%s,resource_request_requested_on=%s,
+                        resource_request_request_reason_id=%s,resource_request_analysis_details=%s,resource_request_prioriy_number=%s,
+                        modified_by_id=%s,resource_request_analyzed_by_id=%s,resource_request_priority_id=%s,resource_request_requirement_type_id=%s,
+                        resource_request_team_id=%s,resource_request_role_id=%s,resource_request_org_id=%s,resource_request_org_unit_id=%s,
+                        resource_request_certification=%s,resource_request_edu_qual=%s,resource_request_job_desc=%s,resource_request_job_type_id=%s,
+                        resource_request_language=%s,resource_request_shift_id=%s,resource_request_skills=%s,resource_request_grade_id=%s where id = %s ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Update the Resource Request details End -->
+		<!-- 24-JUL-2018 || KAV || To Fetch Resource Request details Start -->
+		<query id="resreq_details_fetch" query_name="resreq_details_fetch"
+			description="Resource Request Fetch Details ">
+              <![CDATA[select resreq.id,r1.role_title as role_title,r2.name as team_name,resreq.resource_request_count
+                             from hcms_wp_system_resource_request resreq
+                             inner join hcms_ti_role_details r1 on r1.id = resreq.resource_request_role_id
+                             inner join team_details_info r2 on r2.id = resreq.resource_request_team_id where resreq.is_active='True'
+                             and resreq.created_by_id = %s order by resreq.id ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Fetch Resource Request details End -->
+		<!-- 24-JUL-2018 || KAV || To Fetch Resource Request details By Id Start -->
+		<query id="resreq_details_fetch_id" query_name="resreq_details_fetch_id"
+			description="Resource Request Fetch Details ">
+              <![CDATA[select id,resource_request_count,to_char(resource_request_deployment_date,'DD-MON-YYYY')as deployment_date,
+                        to_char(resource_request_requested_on,'DD-MON-YYYY') as requested_on,
+                        resource_request_request_reason_id,resource_request_requirement_type_id,resource_request_role_id,resource_request_team_id,
+                        resource_request_org_id,resource_request_org_unit_id,resource_request_certification,
+                        resource_request_edu_qual,resource_request_job_desc,resource_request_job_type_id,
+                        resource_request_language,resource_request_shift_id,resource_request_skills,resource_request_grade_id
+                        from hcms_wp_system_resource_request where id  = %s ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Fetch Resource Request details By Id End -->
+		<!-- 24-JUL-2018 || KAV || To Delete Resource Request details Start -->
+		<query id="resreq_details_remove" query_name="resreq_details_remove"
+			description="Resource Request Details Remove">
+              <![CDATA[update hcms_wp_system_resource_request set is_active = 'False'  where id = %s ; ]]>
+		</query>
+		<!-- 24-JUL-2018 || KAV || To Delete Resource Request details End -->
+		<query id="stg_select_query" query_name="stg_select_query"
+			description="Select Strategy">
+              <![CDATA[ SELECT id, strategy_analysis_summary from hcms_wp_strategy_analysis where is_active = TRUE order by id; ]]>
+		</query>
+		<query id="orgunit_fetch" query_name="orgunit_fetch"
+			description="To fetch orgnization unit list">
+          <![CDATA[ select id, orgunit_name from organization_unit_info where organization_id = %s and parent_orgunit_id != 0 and is_active = 'True' order by orgunit_name; ]]>
+		</query>
+		<query id="org_location" query_name="org_location"
+			description="To fetch orgnization location">
+          <![CDATA[ select id, location from organization_info where id = %s  and is_active = 'True'; ]]>
+		</query>
+		<query id="resreq_shifts_qry" query_name="resreq_shifts_qry"
+			description="To fetch shift details">
+          <![CDATA[ select id,shift_name from hcms_shift_master where is_active = 'True'; ]]>
+		</query>
+		<query id="wfp_stgy_step5_details_fetch" query_name="wfp_stgy_step5_details_fetch"
+			description="To fetch Strategy Analysis Summarized Reports details">
+          <![CDATA[ select sum(case when cost between 1 and 5000 then 1 else 0 end) as minrange,
+						sum(case when cost between 5001 and 10000 then 1 else 0 end) as midrange,
+						sum(case when cost > 10001 then 1 else 0 end) as maxrange from
+						(select rd.role_title, wfp.required_res, wfp.required_res * 1000 as cost from hcms_ti_role_details rd,
+						(select wf_profile_role_id, sum(wf_profile_required) as required_res from hcms_wp_strategy_workforce_profile
+						where wf_profile_strategy_id = %s and is_active='TRUE'
+						group by wf_profile_role_id) wfp
+						where rd.id = wfp.wf_profile_role_id)a; ]]>
+		</query>
+		<query id="wfp_strgy_slice_click_fetch" query_name="wfp_strgy_slice_click_fetch"
+			description="To fetch data for Strategy Analysis - Data fetch on Donut Slice Click">
+          <![CDATA[ select rd.id, rd.role_title, wfp.required_res, wfp.required_res * 1000 as cost from hcms_ti_role_details rd,
+						(select wf_profile_role_id, sum(wf_profile_required) as required_res from hcms_wp_strategy_workforce_profile
+						where wf_profile_strategy_id = %s and is_active='TRUE'
+						group by wf_profile_role_id) wfp
+						where rd.id = wfp.wf_profile_role_id
+						and wfp.required_res * 1000 between %s and %s; ]]>
+		</query>
+		<query id="wfp_strgy_role_sel_fetch" query_name="wfp_strgy_role_sel_fetch"
+			description="To fetch data for Strategy Analysis - Bar Chart when selecting role">
+          <![CDATA[ select * from
+					(select count(*) as existing_count from employee_info where role_id_id = %s)a,
+					(select sum(wf_profile_required) as required_count from hcms_wp_strategy_workforce_profile 
+					where wf_profile_strategy_id = %s and wf_profile_role_id = %s and is_active='TRUE')b; ]]>
+		</query>
+		<query id="wfp_stgy_multi_bar_data_qry" query_name="wfp_stgy_multi_bar_data_qry"
+			description="To fetch data for Strategy Analysis - Stacked bar chart by selected roles">
+          <![CDATA[ select a.role_title, b.existing_count, b.required_count from hcms_ti_role_details a,
+						(select role_id_id, existing_count, required_count from
+						(select role_id_id, COALESCE(count(role_id_id), null, 0) as existing_count from employee_info where role_id_id in %s group by role_id_id order by role_id_id)a,
+						(select wf_profile_role_id, sum(wf_profile_required) as required_count from hcms_wp_strategy_workforce_profile 
+						where wf_profile_strategy_id = %s and wf_profile_role_id in %s and is_active='TRUE' group by wf_profile_role_id order by wf_profile_role_id)b
+						where role_id_id = wf_profile_role_id) b
+						where a.id = b.role_id_id; ]]>
+		</query>
+		<query id="wfp_stgy_multi_grade_data_qry" query_name="wfp_stgy_multi_grade_data_qry"
+			description="To fetch data for Structure Analysis - Stacked bar chart by selected grades">
+          <![CDATA[ select ri.refitems_name as grade, gd.count from reference_items ri,
+						(select grade, count(role_title) from
+						(select id, role_title, unnest(role_grade) as grade from hcms_ti_role_details) a
+						where grade in %s
+						group by grade)gd
+						where gd.grade = ri.id
+						order by grade; ]]>
+		</query>
+		
+		 <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Map Details Start -->    
+        <query id="wfp_system_step5_map_details" query_name="wfp_system_step5_map_details"
+                description="Fetch System Analysis Map Details">
+              <![CDATA[select org_name.name as org_name , org_unit.latitude ,org_unit.longitude,sum(resreq.resource_request_count) as resreq_total_count,
+                            org_unit.orgunit_name, array_agg(rd.role_title) as role_name , array_agg(resreq.resource_request_count) as resreq_count
+                            from hcms_wp_system_resource_request resreq inner join organization_info org_name on resreq.resource_request_org_id = org_name.id  
+                            inner join organization_unit_info org_unit on  resreq.resource_request_org_unit_id = org_unit.id  
+                            inner join hcms_ti_role_details rd on rd.id = resreq.resource_request_role_id where resreq.is_active='True'
+                            group by org_unit.orgunit_name,resreq.resource_request_org_id, org_name.name,org_unit.latitude,org_unit.longitude ]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Map Details End --> 
+         
+        <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Range Details For Donut Chart Start -->    
+        <query id="wfp_system_step5_piechart_details" query_name="wfp_system_step5_piechart_details"
+                description="Fetch System Analysis Range Details For Donut Chart">
+              <![CDATA[select sum(case when resource_request_count between 1 and 5 then 1 else 0 end) as minrange,
+                        sum(case when resource_request_count between 6 and 10 then 1 else 0 end) as midrange,
+                        sum(case when resource_request_count > 10 then 1 else 0 end) as maxrange
+                        from  hcms_wp_system_resource_request  where resource_request_org_id =%s and  
+                        resource_request_org_unit_id=%s and is_active = 'True' ]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Range Details For Donut Chart End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Role Details Between Range For Donut Chart Click Start -->    
+        <query id="sys_step5_chart_click_details" query_name="sys_step5_chart_click_details"
+                description="Fetch System Analysis Role  Details Between Range For Donut Chart Click">
+              <![CDATA[select * from(select  r1.id,r1.role_title , resreq.resource_request_count,resreq.resource_request_count*1500  
+                      as required_cost from hcms_wp_system_resource_request resreq
+                      inner join hcms_ti_role_details r1 on r1.id = resource_request_role_id
+                      where resreq.resource_request_org_id =%s and resreq.resource_request_org_unit_id=%s and
+                      resreq.resource_request_count between %s and %s  and resreq.is_active='True')a,
+                      (select  r1.id,r1.role_title,COUNT(r1.role_title)*1500 as existing_cost from employee_info em
+                      inner join hcms_ti_role_details r1 on r1.id = em.role_id_id  where em.org_id_id=%s and
+                      em.org_unit_id_id = %s and em.is_active='True' group by  r1.id,r1.role_title having COUNT(r1.role_title)
+                      between %s and %s)b
+                      where a.id = b.id ]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch System Analysis Role Details Between Range For Donut Chart Click End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch Single Role Select Details For Bar Chart Start -->    
+        <query id="sys_step5_fetch_rolesinglesel_details" query_name="sys_step5_fetch_rolesinglesel_details"
+                description="Fetch System Analysis Single Role Select  Details For Bar Chart  ">
+              <![CDATA[select * from(select  r1.id,r1.role_title , resreq.resource_request_count,resreq.resource_request_count*1500  
+                      as required_cost from hcms_wp_system_resource_request resreq
+                      inner join hcms_ti_role_details r1 on r1.id = resource_request_role_id
+                      where resreq.resource_request_org_id =%s and resreq.resource_request_org_unit_id=%s and
+                      resreq.resource_request_count between %s and %s  and resreq.is_active='True')a,
+                      (select  r1.id,r1.role_title,COUNT(r1.role_title)*1500 as existing_cost from employee_info em
+                      inner join hcms_ti_role_details r1 on r1.id = em.role_id_id  where em.org_id_id=%s and
+                      em.org_unit_id_id = %s and em.is_active='True' group by  r1.id,r1.role_title having COUNT(r1.role_title)
+                      between %s and %s)b
+                      where a.id = b.id ]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch Single Role Select Details For Bar Chart  Click End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch Single Role Select Details For Bar Chart Start -->    
+        <query id="sys_step5_bar_singlerole_details" query_name="sys_step5_bar_singlerole_details"
+                description="Fetch System Analysis Single Role Select  Details For Bar Chart  ">
+              <![CDATA[select  a.role_title,a.resource_cost as required_cost,
+                        b.resource_cost as available_cost
+                        from ( select  r1.id,r1.role_title , resreq.resource_request_count,resreq.resource_request_count*1500  
+                        as resource_cost from hcms_wp_system_resource_request resreq
+                        inner join hcms_ti_role_details r1 on r1.id = resource_request_role_id
+                        where resreq.resource_request_org_id =%s and resreq.resource_request_org_unit_id=%s and
+                        r1.id = %s and resreq.is_active = 'True')a,(select  r1.id,r1.role_title,COUNT(r1.role_title)*1500 as resource_cost
+                        from employee_info em
+                        inner join hcms_ti_role_details r1 on r1.id = em.role_id_id  where em.org_id_id=%s and
+                        em.org_unit_id_id = %s and em.role_id_id = %s and em.is_active='True'  group by  r1.id,r1.role_title)b
+                        where a.id = b.id]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch Single Role Select Details For Bar Chart  Click End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch Multi Role Select Details For Bar Chart Start -->    
+        <query id="sys_step5_bar_multilerole_details" query_name="sys_step5_bar_multilerole_details"
+                description="Fetch System Analysis Multi Role Select  Details For Bar Chart  ">
+              <![CDATA[select a.role_title,a.required_count as required_count,b.available_count
+                          from(select  r1.id,r1.role_title , resreq.resource_request_count as required_count
+                          from hcms_wp_system_resource_request resreq inner join hcms_ti_role_details r1 on
+                          r1.id = resource_request_role_id where resreq.resource_request_org_id =%s and
+                          resreq.resource_request_org_unit_id=%s and r1.id IN %s and resreq.is_active = 'True')a,
+                          (select  em.role_id_id,r1.role_title,COUNT(r1.role_title)as available_count
+                          from employee_info em inner join hcms_ti_role_details r1 on r1.id = em.role_id_id  
+                          where em.org_id_id=%s and  em.org_unit_id_id =%s and em.role_id_id IN %s
+                          and em.is_active = 'True'group by em.role_id_id,r1.role_title )b where a.id = b.role_id_id]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch Multi Role Select Details For Bar Chart  Click End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch Grade Select Details For Bar Chart Start -->    
+        <query id="sys_step5_bar_grade_details" query_name="sys_step5_bar_grade_details"
+                description="Fetch System Analysis Grade Select  Details For Bar Chart  ">
+              <![CDATA[select rf.refitems_name as grade ,resreq.resource_request_count
+                        from hcms_wp_system_resource_request resreq inner join
+                        reference_items rf on rf.id = resreq.resource_request_grade_id
+                        where resreq.resource_request_org_id =%s and resreq.resource_request_org_unit_id=%s
+                        and resreq.resource_request_grade_id IN %s and resreq.is_active='True']]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To Fetch Grade Select Details For Bar Chart  Click End -->
+        
+        <!-- 22-AUG-2018 || KAV || To Fetch  MultiRole Dropdown Append  -->    
+        <query id="sys_step5_multirole_details" query_name="sys_step5_multirole_details"
+                description="Fetch System Analysis MultiRole Dropdown Append ">
+              <![CDATA[select a.role_id,a.role_title from (select DISTINCT(resreq.resource_request_role_id) as role_id ,rl.role_title as role_title
+                        from hcms_wp_system_resource_request resreq inner join hcms_ti_role_details rl
+                        on rl.id = resreq.resource_request_role_id  where resreq.resource_request_org_id =%s
+                        and resreq.resource_request_org_unit_id=%s and resreq.is_active='True')a,(select  em.role_id_id,r1.role_title
+                        from employee_info em inner join hcms_ti_role_details r1 on r1.id = em.role_id_id  
+                        where em.org_id_id=%s and  em.org_unit_id_id =%s 
+                        and em.is_active = 'True'group by em.role_id_id,r1.role_title)b where a.role_id = b.role_id_id]]>
+        </query>
+        <!-- 22-AUG-2018 || KAV || To FetchMultiRole Dropdown Append  End -->
+        
+        <!-- 12-NOV-2018 || KAV || To Fetch  Role Name start  -->    
+        <query id="fetch_role_name" query_name="fetch_role_name" description="Fetch Role Name ">
+              <![CDATA[select name from hcms_role where id=%s;]]>
+        </query>
+        <!-- 12-NOV-2018 || KAV || To Fetch  Role Name End -->
+        
+        <!-- 12-NOV-2018 || KAV || To Fetch  User Details start  -->    
+        <query id="fetch_user_details" query_name="fetch_user_details" description="Fetch User Details ">
+              <![CDATA[select team_name_id, org_unit_id_id, org_id_id   from employee_info  where related_user_id_id  = %s;]]>
+        </query>
+        <!-- 12-NOV-2018 || KAV || To Fetch  User Details End -->
+	</queries>
+</data>

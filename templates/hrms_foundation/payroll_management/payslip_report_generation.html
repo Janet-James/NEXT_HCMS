@@ -1,0 +1,617 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- datatable css -->
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- select2 css -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- datetime css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- tagsinput css -->
+<link
+	href="{% static '/ui/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- form wizard css -->
+<link
+	href="{% static '/dev/hrms_foundation/lib/bootstrap-wizard/js/form-wizard.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- dev css -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="PayslipReport" %} 
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container formwizard_reports" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered" id="form_wizard_1">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject  bold uppercase"> <span
+										class="step-title"> Reports </span></span>
+								</div>
+							</div>
+							<div class="form-horizontal" action="#" id="formwizard_payslip"
+								method="POST">
+								<div class="form-wizard">
+									<div class="form-body">
+										<ul class="nav nav-pills nav-justified steps payslip_report_tab">
+											<!-- <li class="dtBox"><a class="step" href="#pills-tab1" id='pay_report_tab' data='pills-tab1'
+												data-toggle="tab"><span class="number "> <i
+														class="nf nf-employee-portal"></i>
+												</span><span class="desc"> <i class="fa fa-check"></i>
+														Payslip Report Details
+												</span></a></li> -->
+												<li class="dtBox"><a class="step" href="#pills-tab2" id='non_com_report_tab' data='pills-tab2'
+												data-toggle="tab"><span class="number "> <i
+														class="nf nf-attendane-1"></i>
+												</span><span class="desc"> <i class="fa fa-check"></i>
+														Non-Compliance Details
+												</span></a></li>
+												<li><a class="step" href="#pills-tab3" id='project_hr_tab' data='pills-tab3'
+												data-toggle="tab"><span class="number "> <i
+														class="nf nf-attendane-1"></i>
+												</span><span class="desc"> <i class="fa fa-check"></i>
+														Project Hours Details
+												</span></a></li>
+											<!-- <li><a class="step" href="#pills-tab2" id='tab2'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-attendane-1"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Employee Attendance
+												</span></a></li>
+											<li><a class="step" href="#pills-tab3" id='tab3'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-leave-days"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Employee Leave
+												</span> </a></li>
+											<li><a class="step" href="#pills-tab4" id='tab4'
+												data-toggle="tab"><span class="number"> <i
+														class="nf nf-document"></i>
+												</span> <span class="desc"> <i class="fa fa-check"></i>
+														Employee Document
+												</span></a></li> -->
+										</ul>
+										<div class="clearfix"></div>
+										<br>
+										
+										<!-- <div class="row">
+										<div class="col-md-12">
+										<div class="form-group tab1f">
+											<label>Selected Filters:</label>
+											<div class="input-icon">
+												<input class="form-control" placeholder="Selected Filters"
+													id='employee_searchtags'>
+											</div>
+										</div>
+										</div>
+										
+										</div> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-content">
+						<!-- tab1 content start -->
+						<!-- <div class="tab-pane report" id="pills-tab1">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1"
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Filters </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="payslip_report_search()" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="payslip_report_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="search_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="payslip_report_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-12 ">
+												<div class="form-group">
+													<label>Organization <span class="asterisk">*</span>
+													</label>
+													<div class="input-icon">
+														<select id="organization_id" name="organization_id"
+															class="form-control select2" required
+															data-error=".errorTxt0">
+															<option value="0">--Select Organization--</option> 
+															{% for i in organization_data %}
+																<option value={{i.id}}>{{i.name}}</option> 
+															{% endfor %}
+														</select> <span class="errorTxt0 errormessage errorTxts"></span>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Organization Unit </label> <select
+														id="organization_unit_id" name="organization_unit_id"
+														onchange="employeeOrgUnitFunction(this);"
+														class="form-control select2">
+														<option value="0">--Select Organization Unit--</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Division </label> <select id="employee_department"
+														name="employee_department" onchange="employeeDepartmentFunction(this);" class="form-control select2">
+														<option value="0">--Select Division--</option> 
+													</select>
+												</div>
+													<div class="form-group">
+														<label for="multiple" class="control-label black_font">Employee
+															</label> <select id="report_employee_name"
+															name="employee_id_id" onchange="employeeFunction(this);"
+															class="form-control select2-multiple" multiple>
+															<option value="0">--Select Employee--</option> 
+															{% for i in employee_data %} 
+															<option value='{{i.id}}'>{{i.employee_name}}</option> 
+															{% endfor %}
+														</select><span class="errorTxt2 errormessage errorTxts clear3"></span>
+													</div>
+												<div class="form-group">
+													<label for="single" class="control-label black_font">
+														Employee
+													</label> <select id="report_employee_name"
+														name="employee_id_id" onchange="employeeFunction(this);" class="form-control select2"
+														data-error=".errorTxt1">
+														<option value="0">--Select Employee--</option> 
+													</select> <span class="errorTxt1 errormessage errorTxts clear1"></span>
+												</div>
+												<div class="row">
+												<div class="col-md-6 ">
+												<div class="form-group">
+													<label>From Date</label>
+													<div class="input-icon input-icon-att">
+													<i class="fa fa-calendar cicon"></i> <input id='payslip_from'
+														name="afrom" placeholder="From Date" class="form-control form-control-inline"
+														type="text" data-field="date" readonly > 
+													<div class="payslip_to_dt"
+														class="dtpicker-overlay dtpicker-mobile"
+														style="display: none;">
+														<div class="dtpicker-bg">
+															<div class="dtpicker-cont">
+																<div class="dtpicker-content">
+																	<div class="dtpicker-subcontent"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												</div></div>
+												<div class="col-md-6">
+												<div class="form-group">
+													<label>To Date</label>
+													<div class="input-icon input-icon-att">
+													<i class="fa fa-calendar cicon"></i> <input id='payslip_to'
+														name="ato" placeholder="To Date" class="form-control form-control-inline"
+														type="text" data-field="date" readonly > 
+													<div class="payslip_to_dt"
+														class="dtpicker-overlay dtpicker-mobile"
+														style="display: none;">
+														<div class="dtpicker-bg">
+															<div class="dtpicker-cont">
+																<div class="dtpicker-content">
+																	<div class="dtpicker-subcontent"></div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												</div>
+												</div>
+												</div>
+												<div class="gen-btn">
+												<label class="btn btn-success btn-eql-wid btn-animate" id="report_generate" onclick="report_generate(1)" data-dismiss="modal" aria-hidden="true">Report Generation</label>
+												<div id='payslip_export'></div>
+											</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="payslip_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div> -->
+						
+						<div class="tab-pane report" id="pills-tab2">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1" 
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Non-Compliance Report </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="non_compl_search()" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="non_compl_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="non_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="non_compliance_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-6">
+						<div class="form-group">
+							<label for="multiple" class="control-label black_font">Employee<span
+								class="asterisk"> *</span>
+							</label> <select id="non_employee_id_report" name="non_employee_id"
+								class="form-control select2-multiple" multiple="multiple"
+								data-error=".errorTxt2">
+								{% for i in employee_val %}
+								<option value='{{i.id}}'>{{i.employee_name}}</option> 
+								{% endfor %}
+							</select><span class="errorTxt2 errormessage errorTxts clear3"></span>
+						</div>
+						<div class="form-group">
+							<label>From <span
+								class="asterisk"> *</span></label>
+							<div class="input-icon">
+								<i class="nf nf-calendar"></i> <input id="non_report_dtimepicker1"
+									name="non_report_from_date" placeholder="From Date"
+									class="form-control form-control-inline" data-field="date"
+									size="16" value="" type="text" data-error=".errorTxt4"> <span id="dob_error"
+									class="errorTxt4 errormessage"></span>
+								<div class='non_com_date'></div>
+							</div>
+						</div>
+						<div class="form-group">
+											<label>HR Hour &lt 8</label>
+											<div class="mt-radio-inline">
+												<div class="radio">
+													<label> <input name="hr_hour"
+														id="hr_hour_yes" value="Yes" type="radio"> <span
+														class="cr"><i class="cr-icon fa fa-circle"></i>
+															</span>Yes
+													</label>
+												</div>
+												<div class="radio">
+													<label> <input name="hr_hour"
+														id="hr_hour_no" value="No" type="radio">
+														<span class="cr"><i class="cr-icon fa fa-circle"></i>
+															</span>No
+													</label>
+												</div>
+											</div>
+										</div>
+					</div>
+								<div class="col-md-6">
+						<div class="form-group">
+							<div class="mt-checkbox-inline" style="margin-top: 20px;">
+								<label class="label-cbx" style="margin-bottom: 0;"> <input
+									id="non_select_employee" ;" value="1" class="invisible"
+									name="non_applicable" type="checkbox"
+									onclick="non_all_employee(this);">
+
+									<div class="checkbox">
+										<svg width="20px" height="20px" viewBox="0 0 20 20">
+					<path
+												d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+					<polyline points="4 11 8 15 16 6"></polyline>
+				  </svg>
+									</div> <label style="padding-left: 10px; padding-top: 3px;">Select
+										All Employee </label>
+								</label>
+							</div>
+
+							<span style="margin-bottom: 10px;"
+								class="errorTxt35 errormessage errorTxts clear4"></span>
+						</div>
+						<div class="form-group">
+							<label>To <span
+								class="asterisk"> *</span></label>
+							<div class="input-icon">
+								<i class="nf nf-calendar"></i> <input id="non_report_dtimepicker2"
+									name="non_report_to_date" placeholder="To Date"
+									class="form-control form-control-inline" data-field="date"
+									size="16" value="" type="text" data-error=".errorTxt5"> <span
+									id="non__to_error" class="errorTxt5 errormessage"></span>
+								<div class='non_com_date'></div>
+							</div>
+						</div>
+						
+					</div>				
+													
+											
+											
+												<!-- <div class="gen-btn">
+												<label class="btn btn-success btn-eql-wid btn-animate" id="non-compliance" onclick="non_complnce_report(1)" data-dismiss="modal" aria-hidden="true">Report Generation</label>
+												<div id='non_compnce_export'></div>
+											</div> -->
+											
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="non_complnce_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane report" id="pills-tab3">
+							<div class="col-md-5">
+								<div class="portlet light bordered" id="form_wizard_1" 
+									style='overflow: hidden'>
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Project Hours Report Details </span></span>
+										</div>
+										<div class="iconbtn" style="float: right; font-size: 25px;">
+											<a onclick="hr_project_search()" href="#" class="btn btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Search Employee"
+												style="color:; cursor: pointer;" id="role_search_btn"
+												></i></a> <a onclick="project_hr_clear()" href="#"
+												class="btn btn-warning btn-animate"><i
+												class="fa fa-eraser rep_font" title="Cancel / Clear"
+												style="color:; cursor: pointer;" id="project_hr_clear_role"
+												></i></a>
+										</div>
+									</div>
+									<form role="form" id="hr_project_form">
+										<div class="form-body row">
+											{%csrf_token%}
+											<div class="col-md-6">
+						<div class="form-group">
+							<label for="multiple" class="control-label black_font">Employee<span
+								class="asterisk"> *</span>
+							</label> <select id="project_hr_employee_id_report" name="project_hr_employee_id"
+								class="form-control select2-multiple" multiple="multiple"
+								data-error=".errorTxt21">
+								{% for i in employee_val %}
+								<option value='{{i.id}}'>{{i.employee_name}}</option> 
+								{% endfor %}
+							</select><span class="errorTxt21 errormessage errorTxts clear3"></span>
+						</div>
+						<div class="form-group">
+							<label>From <span
+								class="asterisk"> *</span></label>
+							<div class="input-icon">
+								<i class="nf nf-calendar"></i> <input id="project_hr_dtimepicker1"
+									name="project_hr_from_date" placeholder="From Date"
+									class="form-control form-control-inline" data-field="date"
+									size="16" value="" type="text" data-error=".errorTxt22"> <span id="dob_error"
+									class="errorTxt22 errormessage"></span>
+								<div class='project_hr_date'></div>
+							</div>
+						</div>
+						
+					</div>
+								<div class="col-md-6">
+						<div class="form-group">
+							<div class="mt-checkbox-inline" style="margin-top: 20px;">
+								<label class="label-cbx" style="margin-bottom: 0;"> <input
+									id="project_hr_select_employee" ;" value="1" class="invisible"
+									name="project_hr_applicable" type="checkbox"
+									onclick="project_hr_all_employee(this);">
+
+									<div class="checkbox">
+										<svg width="20px" height="20px" viewBox="0 0 20 20">
+					<path
+												d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.8954305 1.8954305,1 3,1 Z"></path>
+					<polyline points="4 11 8 15 16 6"></polyline>
+				  </svg>
+									</div> <label style="padding-left: 10px; padding-top: 3px;">Select
+										All Employee </label>
+								</label>
+							</div>
+
+							<span style="margin-bottom: 10px;"
+								class="errorTxt23 errormessage errorTxts clear4"></span>
+						</div>
+						<div class="form-group">
+							<label>To <span
+								class="asterisk"> *</span></label>
+							<div class="input-icon">
+								<i class="nf nf-calendar"></i> <input id="project_hr_dtimepicker2"
+									name="project_hr_to_date" placeholder="To Date"
+									class="form-control form-control-inline" data-field="date"
+									size="16" value="" type="text" data-error=".errorTxt24"> <span
+									id="project_hrto_error" class="errorTxt24 errormessage"></span>
+								<div class='project_hr_date'></div>
+							</div>
+						</div>
+						
+					</div>				
+													
+											
+											
+												<!-- <div class="gen-btn">
+												<label class="btn btn-success btn-eql-wid btn-animate" id="non-compliance" onclick="non_complnce_report(1)" data-dismiss="modal" aria-hidden="true">Report Generation</label>
+												<div id='non_compnce_export'></div>
+											</div> -->
+											
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="portlet light bordered" id="form_wizard_1">
+									<div class="portlet-title">
+										<div class="caption">
+											<span class="caption-subject  bold uppercase"> <span
+												class="step-title"> Search Results </span></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<table class="table table-striped table-bordered table-hover"
+											id="project_hr_report_details">
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="payslip_report_add_modal" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title"></h4>
+			</div>
+
+
+			<!-- BEGIN EXAMPLE TABLE PORTLET-->
+			<div class="portlet light bordered">
+				<div class="portlet-title">
+					<div class="caption">
+						<span class="caption-subject bold uppercase"
+							id='popupYesNoCallback'> Payslip Report Details</span>
+					</div>
+				</div>
+				<div id='payslip_report_div'></div>
+				<!-- <div class="portlet-body">
+					<table class="table table-striped table-bordered table-hover"
+						id="salary_rules_add_tbl">
+					</table>
+				</div> -->
+			</div>
+			<!-- END EXAMPLE TABLE PORTLET-->
+			<!-- <div class="modal-footer">
+				<button class="btn btn-success btn-eql-wid btn-animate"
+					id="select_salary_rule" data-dismiss="modal" aria-hidden="true">Select</button>
+			</div> -->
+		</div>
+	</div>
+</div>
+{% endblock %}
+<!-- body content end -->
+<!-- custom script start -->
+{% block scripts %}
+<!-- datatable js -->
+<script src="{% static  '/ui/plugins/datatables/js/datatable.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/js/datatables.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}"
+	type="text/javascript"></script>
+<script src="{% static  '/dev/lib/js/datatable_lib.min.js' %}"
+	type="text/javascript"></script>
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<!-- form wizard js -->
+<script
+	src="{% static  '/dev/hrms_foundation/lib/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/formWizards.js' %}"
+	type="text/javascript"></script>
+<!-- tags input js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js' %}"
+	type="text/javascript"></script>
+<!-- datetime js -->
+<script src="{% static '/dev/hrms_foundation/js/payroll/numberToWords.min.js' %}"></script>
+<script
+	src="{% static  '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js'  %}"
+	type="text/javascript"></script>
+	<script>
+	/* $("#payslip_from_dt").DateTimePicker({
+		dateFormat : "dd-mm-YYYY"
+	});
+	$("#payslip_to_dt").DateTimePicker({
+		dateFormat : "dd-mm-YYYY"
+	});
+	$(".non_report_tab").DateTimePicker({
+		dateFormat : "MMM yyyy"
+	});
+	$(".project_hr_tab").DateTimePicker({
+		dateFormat : "MMM yyyy"
+	}); */
+</script>
+<!-- dev js -->
+<script
+	src="{% static  '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}"
+	type="text/javascript"></script>
+
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/payslip_report_generation.js' %}"></script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/non_compliance_report.js' %}">
+</script>
+<script
+	src="{% static  '/dev/hrms_foundation/js/payroll/project_details.js' %}">
+</script>
+{% endblock %}
+<!-- custom script end -->

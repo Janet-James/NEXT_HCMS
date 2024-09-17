@@ -1,0 +1,139 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- custom css -->
+<link href="{% static '/ui/css/employee_offer.css' %}"
+	rel="stylesheet" type="text/css" />
+<style>
+.div_padding{padding:15px;cursor:pointer;}
+.ep_name1 {font-weight: bold;font-size: 15px;color: #3288f9;}
+.ep_name2 span{font-weight:bold;}
+.ep_name3 span{font-weight:bold;}
+.div_padding:hover{ border-left: 3px solid #3288f9;}
+</style>
+{% endblock %}
+{% block content %} {% nav_tags breadcrum_title="HRJobPost" %}
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1>Job Details Posting To LinkedIn</h1>
+				<div class="portlet light bordered" style='overflow: hidden'>
+					<div class="portlet-title">
+						<div class="row">
+							<div class="col-md-12" id='emp_name_filter'>
+								<div class="col-md-3" style='float: right'>
+									<div class="form-group">
+										<!-- 
+										<div class="input-icon">
+											<i class="nf nf-advanced-search"></i> <input
+												class="form-control" placeholder="Search by Posting Job Name"
+												id='job_name' type="text">
+										</div> 
+										-->
+										<input type="button" data-toggle="tooltip"
+											data-placement="bottom" title="Posting to Linked In"
+											style="float: right;" onclick="linkedInPost()"
+											value="LinkedIn General Post"
+											class="btn btn-default btn-success"></input>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12" id='job_posting_details'
+								style="height: 460px; overflow: auto;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end container -->
+<!--  modal start here -->
+<div id="job_post" class="modal fade " style='overflow: hidden'
+	role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">
+					<span class="posting_title"></span>Posting To LinkedIn
+				</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<div class="portlet-body form" style="height: 500px;">
+					<!-- 					
+					<button  class="btn btn-warning" onclick="onLogout()" id='signout'  value="Sign out using LinkedIn ">Sign out using LinkedIn</button></div></br></br>
+ 					-->
+					<div class="col-md-12">
+						<button class="btn btn-success" onclick="onLinkedInLoad()"
+							id='signin' value="Sign in using LinkedIn ">Sign in
+							using LinkedIn</button>
+						<form name="post_content" id="post_content" action=""
+							method="post">
+							<div class="form-group">
+								<label for="title">Title <span class="asterisk">
+										*</span>
+								</label> <input type="text" class="form-control" name="title" id="title"
+									placeholder="Title" required></input><br>
+							</div>
+							<div class="form-group">
+								<label for="description">Description <span
+									class="asterisk"> *</span>
+								</label> <input type="text" class="form-control" name="description"
+									id="description" placeholder="Description" required></input><br>
+							</div>
+							<div class="form-group">
+								<label for="image-content">Link to Content <span
+									class="asterisk"> *</span>
+								</label> <input type="text" class="form-control" name="image-content"
+									id="image_content" placeholder="http://example.com/content"
+									required></input> <span style='color: #57c3ff'>( Note :
+									<span class="posting_title"></span> Posting Content Link )
+								</span>
+							</div>
+							<div class="form-group">
+								<label for="image-location">Image Location <span
+									class="asterisk"> *</span>
+								</label> <input type="text" class="form-control" name="image-url"
+									id="image_url"
+									placeholder="http://example.com/images/example.jpg" required></input><span
+									style='color: #57c3ff'>( Note : <span
+									class="posting_title"></span> Posting Online Image Link is Must
+									)
+								</span>
+							</div>
+							<div class="form-group">
+								<label for="comment">Location <span class="asterisk">
+										*</span>
+								</label> <input type="text" class="form-control" name="comment"
+									id="comment" placeholder="Location" required></input><br>
+
+							</div>
+					</div>
+					<div class="col-md-12"></div>
+				</div>
+				<div class="modal-footer">
+					<input type="button" id="submit_button" value="Submit"
+						class="btn btn-default btn-success"></input>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->
+{% endblock %}
+<!-- script tag start -->
+{% block scripts %}
+<!-- user typed js for form -->
+<script src="/static/dev/talent_acquisition/postscript.js"></script>
+<!-- initialize LinkedIn JS SDK start -->
+<script type="text/javascript" src="https://platform.linkedin.com/in.js">
+	api_key: 81k60a6sav41t0
+	authorize: true
+  //onLoad: onLinkedInLoad
+</script>
+<!-- initialize LinkedIn JS SDK end -->
+{% endblock %}
+<!-- script tag end -->

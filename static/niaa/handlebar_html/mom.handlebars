@@ -1,0 +1,59 @@
+{{#if res}}
+<div class="inner-mail-preview">
+ <div class="row">
+    <div class="col-md-12">
+       <div class="to-point">
+         <span>To: </span>
+         <div class="to-list-sec">
+           {{#if res.users_list}}
+           {{#if res.users_list.length}}
+           {{#each res.users_list}}
+           <p>{{email_id}}<i class="nf-niaa-close" id="mailtoclose"></i></p>
+           {{/each}}
+           {{/if}}
+          {{/if}}
+         </div>
+        </div>
+        <div class="main-sub">
+           <label>Subject:</label> <input type="text" name="Subject" id="subjectname" class="form-control sub-input">
+        </div>
+        <h3>Transcript</h3>
+
+        <div class="form-group">
+                  <div class="mt-radio-inline" id="format_radio">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios4" value="MOM">
+                        <span style="float:none;" class="cr"><i class="cr-icon fa fa-circle"></i></span> MOM Format </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios5" value="Chat">
+                        <span class="cr" style="float:none;"><i class="cr-icon fa fa-circle"></i></span> Chat Transcript Format </label>
+                    </div>
+
+                  </div>
+        </div>
+
+       <div id="transcript_format">
+           <ul>
+             {{#if res.messages}}
+               {{#if res.messages.length}}
+                 {{#each res.messages}}
+              <li class="{{msg-align uid}} message-data">
+                 <img class="sub-point-img" src={{ip username}} alt="">
+                 <div class="date-time">
+                    <div class="send-name">{{username}}</div>
+                    <div class="mesg-bg">{{{msg}}}</div>
+                    <div class="rec-time">{{time_str}}</div>
+                 </div>
+              </li>
+              {{/each}}
+                {{/if}}
+              {{/if}}
+           </ul>
+        </div>
+    </div>
+    </div>
+</div>
+{{/if}}

@@ -1,0 +1,225 @@
+/*  Model window*   Ramesh 15-feb */
+
+/*.modal-dialog-md { width:70%}*/
+ .modal1 {z-index:10050 !important}
+ 
+/*  form validation */
+.asterisk,.error{
+	color:#e73d4a;
+}
+.modal-open .select2-dropdown {    z-index: 99999 !important;}
+.margin-right-3{
+    margin-right: 3px !important;
+}
+    /* end */
+
+#dtBox_new { background: none;}
+#dtBox_new .dtpicker-bg {    height: 70%;}
+
+/*.modal-dialog-md{ width:1200px !important;}*/
+
+.ass_btn{margin: 0px -10px;}
+.text_center{text-align:center;}
+
+.col-2.5{width:19.66667% !important;}
+
+.col-lg-2.col-lg-2.5.col-md-3.col-sm-6.col-xs-12{width:19.66667% !important;}
+.box_height{height: 150px;/* overflow: auto; overflow-x: hidden;*/}
+
+.badge.badge-success.size{background-color: #37bd9c;width: 10px;height: 10px;}
+.badge.badge-primary.size{background-color: #5867dd;width: 10px;height: 10px;}
+
+.border_bottom_div.size{padding: 0px 0;clear: both;position: relative; top: 70px;}
+.ribbon-content.size{font-size:13px;}
+
+.income-height{    min-height: 135px;}
+
+.padding-0{padding:0;}
+
+/*******************************************************
+08 Jan 2018 CSS for loader: Prabu
+*******************************************************/
+#loading{
+height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    margin-top: 0px;
+    top: 0px;
+    background: rgba(0,0,0,0.7);
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  right: -8px;
+  bottom: 0;
+  left: auto;
+  width: 16px;    
+  cursor: col-resize;       
+}
+
+#loading-center{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    }
+#loading-center-absolute {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    height: 200px;
+    width: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+}
+.object{
+width: 200px;
+    height: 200px;
+    background-color: rgba(255,255,255,0);
+    margin-right: auto;
+    margin-left: auto;
+    border: 4px solid #FFF;
+    left: 60px;
+    top: 64px;
+    position: absolute;
+}
+ 
+#first_object{
+    border: 0px solid #46be8a;
+    background-repeat: no-repeat;
+    background-image: url('../../../ui/images/meeting-bg.png');
+    background-size: 200px;
+}
+    
+#second_object{
+    border: 0px solid #ffb517;
+    -webkit-animation: second_object 1s forwards, second_object_animate 2s infinite ease-in-out;
+    animation: second_object 1s forwards, second_object_animate 2s infinite ease-in-out;
+-webkit-animation: rotation 3s infinite linear;
+    width: 30px;
+    height: 30px;
+    left: 145px;
+    top: 100px;
+    }    
+    
+            
+@-webkit-keyframes rotation {
+        from {
+                -webkit-transform: rotate(0deg);
+        }
+        to {
+                -webkit-transform: rotate(359deg);
+        }
+}
+    
+/*******************************************************/
+
+
+.icon_mar{margin: 11px 0px 0px 0px !important;}
+
+.income-height{    min-height: 135px;}
+
+.input-icon.select_height{    height: 60px !important;overflow-x: hidden;overflow-y: scroll;}
+
+.tab_text{     float: right;
+    margin-right: inherit;}
+
+
+.get-level-1 text{text-align:center !important;}
+
+
+/* manage role kpi popup table header alignment  -ESAKKIPREM 12-03-2018 */
+.dataTables_scroll
+{
+    overflow:auto;
+}
+  /*  end */
+  .panel-heading a, .panel-heading a:active, .panel-heading a:focus, .panel-heading a:hover {
+    text-decoration: none;
+    display: block;}
+.bsc_text:hover {
+/*      background: #729fcf;
+     color: #000000; */
+     cursor: pointer;
+}
+
+.tooltip-hvr {
+    /* margin: 0px 15px 5px 3px !important; */
+        margin: 0px 5px 5px -3px !important;
+    position: relative !important;
+    padding: 5px 0px 0px 5px;
+}
+
+.talent-matrix .box-mid-sec ul li img{width: 40px !important; height: 40px !important; object-fit: cover;}
+
+.form-group.bottom_rem{margin-bottom:0px;} 
+
+.div_top{margin-top:-30px;}
+
+span.select2.select2-container.select2-container--bootstrap.select2-container--focus {
+    width: auto !important;
+}
+
+span.select2.select2-container.select2-container--bootstrap {
+    width: auto !important;
+}
+
+.title_head_text{background: #e6f7ff;padding: 5px;border-radius: 2px !important;font-size: 14px;}
+
+
+
+/***************** 17-04-18 ****************************/
+.tabbable-reversed .panel-body p:hover{color:#f50057;}
+.md-max-height{max-height: 650px;overflow-y: scroll;overflow-x: hidden;}
+#select_id, #role_submit_id{    position: absolute;top: 25px;right: 0px;}
+#role_table_id_tbody .nf-trash-o{ color:red; }
+#cascade_objective_model .dataTables_wrapper .dataTables_length{ text-align: left; }
+#cascade_objective_model div.dataTables_wrapper div.dataTables_filter label{ right:0px; top:0px; }
+#cascade_objective_model .table-scrollable td .nf-trash-o{ color:red; }
+#kpi_target-error{ position: absolute;top: 47px;left: 20px;font-size: 10px; }
+.editable-table-sec table tbody td{ position: relative; }
+#assessment_template_table_wrapper .table-scrollable table tr td .nf-violations, #assessment_template_table_wrapper .table-scrollable table tr td .nf-trash-o{ color: red; }
+#employee_select_id{ position: absolute; top:25px; right:0px;}
+#form_kpi_view .caption{ font-size: 16px;}
+.form-group.assessor_detail{ position:relative; }
+.assessor_detail .btn-icon-only{ position: absolute; top: 25px; right:0px; }
+img.pic_ina{ object-fit: cover;}
+#attendance_popup_table_wrapper .dt-buttons{float: left; }
+.input-icon #select_id{ top:0px; }
+
+#manage_role_kpi #manage_role_kpi_table_wrapper .dataTables_filter label{ top:0px; }
+#manage_role_kpi #manage_role_kpi_table_wrapper .dataTables_length{    text-align: left;}
+h3.desk-hide-names {display: none;}
+.input-icon.select_height #role_select_id{position: absolute;right: 0px;top: 0px;}
+#rating_data .mt-radio-inline{padding: 0px;}
+.btn_assesment {padding: 0px 0px;position: absolute;top: 0px;right: 0px;}
+.form-wizard .steps>li>a.step{ text-align:center; }
+#rating_detail_table_wrapper table tr td .nf-trash-o{ color: red; }
+.ribbon-content .badge-success{background:#5ac8fb !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important; }
+.ribbon-content .badge-primary{background: #4cda64 !important; box-shadow: 0px 0px 0px -0px rgba(0, 0, 0, 0.34) !important;}
+#employeePage, #chartPage, #businessObjectivesPage{ padding-top: 30px; }
+.cell-wrapper{white-space: normal;}
+.label_right_table1 {right: 15px;position: absolute;top: -10px;}
+
+
+.selectorg {z-index: 10050 !important}
+.ass_form{margin-top: 21% !important;}
+@media(max-width:992px){
+	
+h3.desk-hide-names {display: block;}
+h3.res-hide-name{ display: none; }
+}
+
+
+
+
+
+.row_margin{margin-right: 0;}
+
+
+
+
+
+
+

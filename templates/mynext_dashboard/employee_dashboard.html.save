@@ -1,0 +1,1891 @@
+{% extends 'mynext_base.html' %}{% load base_tags %} {% load staticfiles %} {%block links %}
+<!---  NIAA Important LINKS ------------->
+<!-- {% include "mynext_dashboard/niaa_index.html" %}-->
+<link href="/static/niaa/ux3.x/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> -->
+ <link rel="stylesheet" href="/static/niaa/ux3.x/plugins/bootstrap/css/bootstrap.min.css"> 
+ <link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}" rel="stylesheet" type="text/css" />
+  <!--- END NIAA Important LINKS -------------> 
+<link href="{% static '/ui/plugins/bootstrap-summernote/css/summernote.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/slick-slider/css/slick.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/intro/introjs.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/mynext_dashboard/mynext_employee_dashboard.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/performance_management/dev/css/jquery.rateyo.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/datatables/css/datatables.min.css'%}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/mynext_dashboard/birthday.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/mynext_dashboard/diwali.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap-fileinput/css/bootstrap-fileinput.css' %}" rel="stylesheet" type="text/css" />
+<!-- <link href="{% static '/dev/mynext_dashboard/summernote.css' %}" rel="stylesheet" type="text/css">
+ --><link href="{% static '/ui/plugins/date-picker-mobile/css/date-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/time-picker-mobile/css/time-picker-mobile.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'%}" rel="stylesheet" type="text/css" />
+
+ <!--  Niaa Css Start -->
+<!-- <link rel='stylesheet prefetch' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>-->
+ <!-- Bootstrap core CSS -->
+<!-- <link rel="stylesheet" href="/static/niaa/assets/css/nfonts.css">-->
+<!-- <link rel="stylesheet" href="/static/niaa/assets/css/style.css">-->
+<!--<link rel="stylesheet" href="/static/niaa/assets/css/CircleMenu.min1.css"> -->
+<!--<link rel="stylesheet" href="/static/niaa/assets/css/doc.css">-->
+<!-- <link rel="stylesheet" href="/static/niaa/assets/css/daterangepicker.min.css" />-->
+ <!-- Owl Stylesheets -->
+<!-- <link rel="stylesheet" href="/static/niaa/assets/css/owl.carousel.min.css">-->
+<!-- <link rel="stylesheet" href="/static/niaa/assets/css/responsive-view.css">-->
+ <!--  Niaa Css  End-->
+ 
+ 
+{% endblock %} {% block content %} {% mynext_nav_tags breadcrum_title="LDTrainingResults" %}
+<style>
+.error_work_summary{ color: #ca5c5c;}
+</style>
+<div class="clearfix"> </div>
+<!-- birthday wrapper -->
+
+<div id="birthday_wish"> </div>
+<!-- birthday wrapper -->
+
+<!-- diwali wrapper -->
+ <div class="diwali-wrapper" id="diwali_wish" style="display: none;">
+    <!-- <div class="bomb-rocket"></div> -->
+<!-- <div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="bomb-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="normal-rocket"></div>
+<div class="text">Happy Diwali</div> -->
+    </div> 
+    
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div>
+				<!-- BEGIN CONTENT BODY -->
+				<div class="page-content" style="min-height: 816px;">
+					<div class="row tlview_dashboard">
+						<p class="welcome-text">
+							Hi<strong> {{ employee}} </strong>Hope this is a
+							golden day to you and make use of it		</p>
+						<div class="row eqheight ">
+                                
+                            <div class="col-md-9 col-sm-12">
+                                    <div id="accordion-2">
+                                        <dl>
+                                            <dt class="firstdiv"> 
+                                             <div class="htext">
+                                            My Task Track <span class="proj_list"><span class="proj_count" id="total_project"></span>Tasks </span> 
+                                            </div></dt>
+                                            <dd>
+                                            <div class="contentarea" data-step="1" data-intro="You can track your task details and it's progress">
+                                            <div class="htext">
+                                            My Task Track <span class="proj_list"><span class="proj_count" id="total_project1"></span>Tasks </span> 
+                                            </div>
+                                                <div class="portlet-body project_accordion">
+                                                
+                                                 <div class="panel-group accordion " id="project_task"></div>
+                                            </div></div>
+                                            </dd>
+                                            <dt class="daytasksmenu" data-step="2" data-intro="You can view allocated tasks in four Quadrants which is separated with MoSCoW priority. Worksummary can be added by playing and pausing the timer of a task.">
+                                            
+                                              <div class="htext">
+                                            My Tasks for the day <span class="proj_list"><span class="proj_count" id="task_count"></span>Tasks </span>
+                                            </div></dt>
+                                            <dd class="daytasksmenu">
+                                             <div class="contentarea">
+                                            <div class="htext">
+                                            My Tasks for the day <span class="proj_list"><span class="proj_count" id="task_count1"></span>Tasks </span>
+                                            </div>
+                                                <div class="row">
+                                                    <div class="row tasksummary" id="showdiv" style="display: none; ">
+                                                        <a id="close_summary" class="close_summary" class="pull-right"><i class="fa fa-close"></i> </a>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <span class="pro-name" id="project_name"> </span>
+                                                           <span id="task_name"> </span>
+                                                            <div class="">
+                                                                <span class="timercount" id="timer_count_id"></span>
+                                                                <a onclick="timer_icon_click(this);" class="timericon" id="html_timer" data-value=""> 
+                                                               <!--  <img src="assets/images/play-icon.png"> --> <i id="icon_data_id"  class="nf" ></i>
+                                                                </a>
+                                                            </div>
+                                                         	<div class="completed_task" id="completed_task">
+                                                         	<span></span><label>Completed</label>
+                                                         	</div>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <div id="gaugechart"></div>
+                                                        </div>
+                                                        <div class="clearfix"> </div>
+                                                        
+                                                           <div class="note_summary">
+                                                                
+                                                                <div class="">
+                                                                    <div class="col-sm-7"> 
+                                                                    <label class="">Notes</label>
+                                                                    <textarea class="form-control" id="summary_content"></textarea>
+                                                                    <span class="error_work_summary" id="error_summary"></span> </div>
+                                                                    <div class="col-sm-5"><button type="button" class="submitbtn btn btn-primary btn-eql-wid btn-animate" id="work_summary">Submit</button> </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        
+                                                        <div class="col-md-12 tasksummary_table">
+                                                          <div class="tableFixHead">
+                                                            <table class="table table-border" id="task_summary_data">
+                                                            </table>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div id="showdiv1" class="taskentry">
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <div class="rotate">
+                                                                <h4 class="bold uppercase animate-txt">High Value (Very Important)</h4>
+                                                                <h4 class="bold uppercase animate-txt" style="display: none;">Quadrant Of Quantity</h4>
+                                                            </div>
+                                                                <div class="rotate-title">
+                                                                    <h4>TARGETED</h4>
+                                                                </div>
+                                                                <div class="highvalue_wrapper" id="high_priority">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <div class="rotate">
+                                                                <h4 class="bold uppercase animate-txt">LOW VALUE (NOT AS IMPORTANT)</h4>
+                                                                <h4 class="bold uppercase animate-txt" style="display: none;">Quadrant Of Quality</h4>
+                                                            </div>
+                                                            <div class="lowvalue_wrapper" id="medium_priority">
+                                                            </div>
+                                                        </div>
+<div class="clearfix"></div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <div class="rotate">
+                                                                <h4 class="bold uppercase animate-txt">I Really Should</h4>
+                                                                <h4 class="bold uppercase animate-txt" style="display: none;">Quadrant Of Deception</h4>
+                                                            </div>
+                                                            <h4 class="bold uppercase"></h4>
+                                                                <div class="rotate-title">
+                                                                    <h4>TARGET NOT DEFINED</h4>
+                                                                </div>
+                                                                <div class="should_wrapper" id="low_priority"></div>
+                                                            <div class="col-sm-12 urg_txt"><h4><b>URGENT</b></h4></div>
+                                                        </div>
+
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <div class="rotate">
+                                                                <h4 class="bold uppercase animate-txt">I Really Need Not</h4>
+                                                                <h4 class="bold uppercase animate-txt" style="display: none;">Quadrant Of Waste</h4>
+                                                            </div>
+                                                            <div class="need_wrapper" id="least_priority"></div>
+                                                            <div class="col-sm-12 urg_txt"><h4><b>NOT URGENT</b></h4></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           </div>
+                                            </dd>
+
+                                            
+                                            <dt data-step="3" data-intro="You can view your goal which is from OKR setup with progress">
+                                            <div class="htext">
+                                            My Goals <span class="proj_goals"><span class="proj_goals_count goal_count_bg" id="total_goals"></span>Goals </span>
+                                            </div>
+                                            </dt>
+                                            <dd>
+                                             <div class="contentarea">
+                                            <div class="htext">
+                                            My Goals <span class="proj_goals"><span class="proj_goals_count goal_count_bg" id="total_goals1"></span>Goals </span>
+                                            </div>
+                                             <div class="goals-wrapper">
+                                                <div class="row ">
+                                               
+                                                
+                                                
+                                                    <div class="col-md-12 col-sm-12 goalsitem">
+                                                        <span>
+                                                            <img src="{% static '/dev/mynext_dashboard/images/goals_user1.png' %}"> My GOALS</span>
+                                                            <div id="individual_goal"></div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </dd>
+                                            <dt onclick="plans_tab();" data-step="4" data-intro="My Plans provide an option to view task plans assigned to you by weekly, monthly and quaterly.">
+                                            <div class="htext">
+                                            My Plans<span  class="proj_metrics"><span
+													class="proj_metrics_count" id="current_quarter_count"></span><span id="duration_month"></span>
+													 </span>
+                                            </div>
+                                            </dt>
+                                            <dd>
+                                             <div class="contentarea">
+                                            <div class="htext">
+                                           My Plans<span class="proj_metrics"><span
+													class="proj_metrics_count" id="current_quarter_count1"></span><span id="duration_month1"></span>
+													 </span>
+                                            </div>
+                                            <div class="plans-wrapper">
+                                                <div class="row">
+                                                
+                                                    <div class="col-md-8 col-sm-12 planitem">
+                                                                                                       
+                                                    
+                                                        <span>
+                                                            <img src="{% static '/dev/mynext_dashboard/images/goals_user1.png' %}">
+                                                            My Plans</span>
+                                                            
+                                                            
+                                                            <div class="col-sm-12 col-md-12">
+                                                            
+                                                             <div class="planlist">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                   <img onclick="week_wise_data();" src="{% static '/dev/mynext_dashboard/images/week-icon.png' %}">
+                                                                    <h5 id="week_number"></h5>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <ul class="planlist-item weekplan" id="pre_indv_week">
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-12">
+                                                            
+                                                             <div class="planlist">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                   <img onclick="month_wise_data();" src="{% static '/dev/mynext_dashboard/images/month-icon.png' %}">
+                                                                    <h5 id="month_number"></h5>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <ul class="planlist-item monthplan" id="pre_indv_month">
+                                                                    </ul>
+                                                                </dYouriv>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                            </div>
+                                                         
+                                                            
+                                                       
+                                                       
+                                                        
+                                                    </div>
+                                                    
+                                                        <div class="col-sm-12 col-md-12">
+                                                            
+                                                            <div class="planlist">
+                                                            <div class="media">
+                                                                <div class="media-left media-middle">
+                                                                   <img onclick="quarter_wise_data();" src="{% static '/dev/mynext_dashboard/images/chart-icon.png' %}">
+                                                                    <h5 id="quarter_number"> </h5>
+                                                                </div>
+                                                                <div class="media-body">
+                                                                    <ul class="planlist-item quarterplan" id="pre_indv_quarter">
+                                                                       <li onclick="indv_prev_quarter(1)">Quarter 01</li>
+                                                                        <li onclick="indv_prev_quarter(2)">Quarter 02</li>
+                                                                        <li onclick="indv_prev_quarter(3)">Quarter 03</li>
+                                                                        <li onclick="indv_prev_quarter(4)">Quarter 04</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                            </div>
+                                                    
+                                                    <div class="col-md-2">
+
+                                                        <section class="members_slider slider" id="plan_members_list">
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                           </div></div>
+                                           </div>
+                                            </dd>
+                                           
+                                            <dt  data-step="5" data-intro="Allows to view your guidelines">
+                                             <div class="htext">
+                                            My guidelines <span class="proj_risk"><span class="proj_risk_count" id="guidelines_count"></span> </span> 
+                                            </div>
+                                            </dt>
+                                            <dd>
+                                            <div class="contentarea">
+                                            <div class="htext">
+                                            My guidelines <span class="proj_risk"><span class="proj_risk_count" id="guidelines_count1"></span> </span> 
+                                            </div>
+                                                <div class="guidelines-wrapper">
+                                                    <ul id="employee_guideline_div">
+                                                    </ul>
+                                                </div>
+                                                </div>
+                                            </dd>
+                                             <dt data-step="6" data-intro="Allows to track the performance metrics of your project.Select the project from the dropdown menu. The performance metrics such as on-time delivery, Schedule variance details will be displayed.">
+                                          <div class="htext">
+                                           Performance Metrics 
+                                           <span class="proj_metrics"><span class="proj_metrics_count" id="perfor_matrix_count"></span>Overdue </span>
+                                           </div>
+                                           </dt>
+                                            <dd>
+                                          <div class="contentarea">
+                                            <div class="htext titleblock">
+                                           Performance Metrics <span class="proj_metrics"><span class="proj_metrics_count" id="perfor_matrix_count1"></span>Overdue </span>
+                                           </div>
+                                            <div class="performance_wrapper"> 
+                                            <div class="row proselect">
+                                            <div class="col-sm-4">
+                                            <div class="form-group per_proj_list margintop15">
+											<label  for="single" class="control-label black_font">Project
+												<span class="asterisk">*</span>
+											</label> 
+										</div>
+                                            </div>
+                                            <div class="col-sm-7">
+                                            	<select id="project_data" name="project_data"
+												class="form-control select2" data-error=".errorTxt0">
+											</select> <span class="errorTxt0 errormessage errorTxts"></span>
+                                            </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            	<div>
+                                            		<div class="col-md-6">
+                                            		<h6 class="text-center">ONTIME DELIVERY</h6>
+                                                    <div id="ontimedelivery" style="height:200px;"></div></div>
+                                                    <div class="col-md-6">
+                                                    <h6  class="text-center">SCHEDULE VARIANCE</h6>
+                                                    <div id="schedulevariance" style="height: 200px;"></div> 
+                                                    </div>
+                                                 </div>
+                                                 <div>
+                                                    <div class="col-md-12">
+                                                    <h6  class="text-center">EFFORT VARIANCE</h6>
+                                                    <div id="effortvariance" style="height: 180px;    width: 98%;"></div>
+                                                    </div></div>
+                                                     </div>
+                                          </div>
+                                            </dd>
+                                            <dt data-step="7" data-intro="Process metrics allows to view your attendance trends">
+                                            <div class="htext">
+                                            Process Metrics <span class="proj_metrics"><span class="proj_metrics_count" id="proc_matrix_count"></span>Late Arrivals  </span>
+                                            </div>
+                                            </dt>
+                                            <dd>
+                                             <div class="contentarea">
+                                             <div class="htext">
+                                            Process Metrics <span class="proj_metrics"><span class="proj_metrics_count" id="proc_matrix_count1"></span>Late Arrivals </span>
+                                            </div>
+                                            <h6 class="text-center">ATTENDANCE TREND</h6>
+                                            <div id="attendance_trend" style="height:350px;"></div>
+                                            </div>
+                                            </dd>
+                                        <dt data-step="8" data-intro="Process metrics allows to view your attendance trends">
+                                            <div class="htext"  onclick="my_query()">
+                                            My Query <span class="proj_metrics"><span class="proj_metrics_count" id="my_query_count"></span>Open Queries</span>
+                                            </div>
+                                            </dt>
+                                            <dd>
+                                             <div class="contentarea" id="my_query_content_scroll">
+                                             <div class="htext">
+                                            My Query <span class="proj_metrics"><span class="proj_metrics_count" id="my_query_count1"></span>Open Queries </span>
+                                            </div>
+                                            <div id="attendance_trend" style="height:350px;overflow:auto">
+                                            			<div class="tabbable-line">
+                  <ul class="nav nav-tabs">
+                    <li id="OPENED" class="query_li"> <a href="#myq_tab1" data-toggle="tab"> Opened (<span id="tick_opn_count">0</span>) </a> </li>
+                    <li id="ANSWERED" class='query_li'> <a href="#myq_tab2" data-toggle="tab"> Answered  (<span id="tick_ans_count">0</span>) </a> </li>
+                    <li id="RESOLVED" class='query_li'> <a href="#myq_tab3" data-toggle="tab"> Resolved  (<span id="tick_res_count">0</span>)</a> </li>
+                    <li id="VERIFIED" class='query_li'> <a href="#myq_tab4" data-toggle="tab"> Verified  (<span id="tick_verf_count">0</span>)</a> </li>
+                    <li id="CLOSED" class='query_li'> <a href="#myq_tab5" data-toggle="tab"> Closed  (<span id="tick_cls_count">0</span>)</a> </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane" id="myq_tab1">
+                    <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="stage_open">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                    </div>
+                    <div class="tab-pane" id="myq_tab2">
+                    <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="stage_answer">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                    </div>
+                    <div class="tab-pane" id="myq_tab3">
+                    <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="stage_resolved">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                    </div>
+                      <div class="tab-pane" id="myq_tab4">
+                      <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="stage_verified">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                    </div>
+                      <div class="tab-pane" id="myq_tab5">
+                      <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="stage_closed">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                    </div>
+                  </div>
+                </div>  </div>
+                                            </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+
+
+                                    <div class="clearfix"></div>
+                                    <div class="row today-schedule">
+                                        <div class="col-md-6" id="firsttab" style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090,1.000);" data-step="8" data-intro="You can view current day's meeting schedules which is fetched from 'NEXT Converge'" >
+                                            <h3 class="caption-subject  bold uppercase"> MY SCHEDULE TODAY</h3>
+                                           <div id="todayschedule"></div> 
+                                        </div>
+                                          <div id="secondtab">
+                                        <div class="col-md-3 mailbox-items " data-step="9" data-intro="Mailbox allows you to view your recent mails from 'NEXT NMail'">
+                                            <h3 class="caption-subject  bold uppercase"> My MAILBOX
+                                                <div class="pull-right">
+                                                    <ul>
+                                                        <li><a href="#" class="first"><i class="fa fa-inbox tooltips" 
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="Inbox" ></i></a> </li>
+                                                        <li><a href="#"><i class="fa fa-pencil-square-o tooltips" 
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="Compose" ></i></a> </li>
+                                                        <li><a href="#"><i class="fa fa-paper-plane tooltips" 
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="Sent Items" ></i></a> </li>
+                                                        <li><a href="#"><i class="fa fa-trash tooltips" 
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="Trash" ></i></a> </li>
+                                                    </ul>
+                                                </div>
+                                            </h3>
+                                            <div class="mail_box">
+                                                <div class="media">
+                                                 <div id="mailfade" class="carousel slide carousel-fade" data-ride="carousel">
+                                                <div class="carousel-inner" role="listbox" id="mail_list">
+                                                </div>
+                                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                          <div class="col-md-3 forum_wrapper" data-step="10" data-intro="Allows to view forum topics from 'NEXT DevTalk'">
+                                            <h3 class="caption-subject  bold uppercase"> My Dev-Talk
+                                                <span class="pull-right"> <a target="_blank" href="http://devtalk.nexttechnosolutions.int"><i class="nf nf-window-restore tooltips" 
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="Navigate to Dev-Talk Forum" ></i></a> </span>
+                                            </h3>
+                                            <div id="dev_talk" class="dev_talk_scroll"></div>
+                                        </div>
+                                         </div>
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="portlet light bordered" data-step="11" data-intro="Performance Standings displays your assessement rating for each parameter">
+                                        <div class="portlet-title">
+                                            <div class="caption"> <span class="caption-subject  bold uppercase">My performance standings </span> </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div id="carouselfade" class="carousel slide carousel-fade" data-ride="carousel">
+                                                <!-- Wrapper for slides -->
+                                                <div class="carousel-inner" role="listbox" id="performance_standings">
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="portlet light bordered" data-step="12" data-intro="This allows to view your accomplishments">
+                                        <div class="portlet-title">
+                                            <div class="caption"> <span class="caption-subject  bold uppercase"> MY ACCOMPLISHMENTS </span>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="col-sm-12 col-lg-4 starperformer_item">
+                                                <i class="staricon"><img src="{% static '/dev/mynext_dashboard/images/staricon1.png' %}"></i>
+                                                <h4>Star Performer</h4>
+                                                <div class="round-text style1">03</div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4 starperformer_item">
+                                                <i class="staricon"><img src="{% static '/dev/mynext_dashboard/images/staricon2.png' %}"></i>
+                                                <h4>Performer</h4>
+                                                <div class="round-text style2">02</div>
+                                            </div>
+                                            <div class="col-sm-12 col-lg-4 starperformer_item">
+                                                <i class="staricon"><img src="{% static '/dev/mynext_dashboard/images/staricon3.png' %}"></i>
+                                                <h4>Contributor</h4>
+                                                <div class="round-text style3">06</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                            <div id="raing-policy" class="carousel slide carousel-fade" data-ride="carousel" data-step="13" data-intro="You can view overall rating percentage of performance assessment">
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                        
+                                        <div class="item active"> 
+                                        
+                                         <div class="portlet light bordered ratings_wrapper_item">
+                                                    <div class="portlet-title">
+                                                        <div class="caption"> <span class="caption-subject  bold uppercase"> MY OVERALL RATINGS </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body">
+                                                        <div class="ratings_wrapper">
+                                                            <div id="rateYo"></div>
+                                                            <span class="starcount" id="rating_vale"> </span>
+                                                        </div>
+                                                    </div>
+                                             </div>
+                                        
+                                        </div>
+                                        
+                                        <div class="item">
+                                        
+                                        <div class="portlet light bordered policy-wrapper">
+                                                    <div class="portlet-title">
+                                                        <div class="caption"> <span class="caption-subject  bold uppercase">My HCM </span> </div>
+                                                    </div>
+ 
+                                                    <div class="portlet-body">
+ <ul>
+                                                        
+                                                        <li class="firsticon"><a href="#"> Derivative Policy</a> </li>
+                                                        
+                                                        <li class="secondicon"><a href="#"> Holiday List </a>  </li>
+                                                        
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                        
+                                         </div>
+                                        </div>
+                                      </div>
+								<div id="cms">
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="portlet light bordered ratings_wrapper_item">
+												<div class="portlet-title">
+													<div class="caption">
+														<span class="caption-subject  bold uppercase"> My
+															Communication Empowerment</span>
+															{% if access == 1 %}
+															<span class="notifictext" id="acc_ctl_sapn"><i class="fa fa-cog setting" data-toggle="modal" data-target="#Access_control" id="acc_ctl" style="cursor: pointer;"></i><label></label>
+															</span>
+															{% endif %}
+													</div>
+												</div>
+												<div class="portlet-body">
+													<div class="cms_wrapper">
+														<div class="col-sm-4" onclick="service_call_type(1)">
+															<img src="{% static '/dev/mynext_dashboard/images/HCM.png' %}" class="tooltips"
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="HCM" />
+														</div>
+														<div class="col-sm-4" onclick="service_call_type(2)">
+															<img src="{% static '/dev/mynext_dashboard/images/GS.png' %}" class="tooltips"
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="PMO" />
+														</div>
+														<div class="col-sm-4" onclick="service_call_type(3)">
+															<img src="{% static '/dev/mynext_dashboard/images/PMO.png' %}" class="tooltips"
+																data-toggle="tooltip" data-placement="top" title=""
+																data-original-title="General Service" />
+														</div>
+														
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+								
+								<!--  Model function -->
+								<div id="Access_control" class="modal fade " tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true"></button>
+												<h4 class="modal-title">
+													Configuration <span id="access_data"></span>
+												</h4>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="portlet light bordered" id="form_wizard_1">
+														<div class="portlet-title">
+															<div class="caption"></div>
+														</div>
+														<div class="">
+                   <ul class="nav nav-tabs ">
+                    <li class="active"> <a href="#tab_15_1" data-toggle="tab">Access Setup </a> </li>
+                    <li> <a href="#tab_15_12" data-toggle="tab"> SLA Configuration </a> </li>
+                    <li> <a href="#tab_15_13" data-toggle="tab"> Default Category </a> </li>
+                  </ul>
+
+                  <div class="tab-content">
+                   <div class="tab-pane active" id="tab_15_1">
+                   <form role="form" id="as_setup_form">
+																	<div class="form-body row">
+																		{%csrf_token%}
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-md-6">
+																					<div class="form-group">
+																						<label for="single"
+																							class="control-label black_font">Group<span
+																							class="required">*</span>
+																						</label> <select id="acc_ctl_role" name="acc_ctl_role"
+																							class="form-control select2" data_placeholder="Access Role" data-error=".errorTxts1">
+																							<option value="0">--Select Group--</option>
+																							<option value="1">HCM</option>
+																							<option value="2">PMO</option>
+																							<option value="3">General Service</option>
+																						</select><span class="errorTxts1 errormessage errorTxts"></span>
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+																					<div class="form-group">
+																						<label for="single"
+																							class="control-label black_font">Employee <span
+																							class="required">*</span></label> <select
+																							class="form-control select2-multiple"
+																							id="acc_ctl_group"
+																							data-placeholder="Select Employee"
+																							name="acc_ctl_group" multiple
+																							data-error=".errorTxts2">
+																							<option value="">--Select Employee--</option> {%for i in role_detail%}
+																							<option value="{{i.id}}">{{i.role_title}}</option>
+																							{%endfor%}
+																						</select><span class="errorTxts2 errormessage errorTxts"></span>
+																					</div>
+																				</div>
+																				<div class="col-md-12">
+																					<div  class="iconbtn" style="float: right; font-size: 25px;">
+																						<button
+																							class="btn btn-width btn-success btn-eql-wid btn-animate"
+																							class="close" aria-hidden="true" type="button"
+																							id="acc_ctl_save">Save</button>
+																						<button
+																							class="btn btn-warning btn-animate"
+																							class="fa fa-eraser rep_font" type="button" type="button" id="acc_ctl_cancel"  onclick="asc_ctrl_cancel_confirmation();"
+																							aria-hidden="true">Cancel / Clear</button>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+                    </div>
+                    <div class="tab-pane" id="tab_15_12">
+                    <form role="form" id="sla_cong_form">
+																	<div class="form-body row">
+																		{%csrf_token%}
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-md-6">
+																					<div class="form-group">
+																						<label for="single"
+																							class="control-label">Group<span
+																							class="required">*</span>
+																						</label> <select id="sla_conf_grp" name="sla_conf_grp"
+																							class="form-control select2" data_placeholder="Access Group" data-error=".errorTxt0">
+																							<option value="0">--Select Group--</option>
+																							<option value="1">HCM</option>
+																							<option value="2">PMO</option>
+																							<option value="3">General Service</option>
+																						</select><span class="errorTxt0 errormessage errorTxts"></span>
+																					</div>
+																				</div>
+																				<div class="col-md-6 col-sm-12">
+																					<div class="form-group">
+																						<label class="control-label">Timelap1
+																						<span class="required">*</span>
+																						</label>
+																						<div class="input-icon">
+																							<i class="fa fa-clock-o cicon"
+																								style="margin-left: 0px;"></i> <input
+																								class="form-control form-control-inline"
+																								name="timetap1"
+																								placeholder="HH:MM (eg.,00:15 - Time)"
+																								id="timetap1" type="text" data-field="time"
+																								readonly data-error=".errorTxt1"> <span
+																								class="errorTxt1 errormessage"
+																								id="error_message"></span>
+																							<div id="timetap_1"></div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-md-6 col-sm-12">
+																					<div class="form-group">
+																						<label class="control-label">Timelap2
+																						<span class="required">*</span>
+																						</label>
+																						<div class="input-icon">
+																							<i class="fa fa-clock-o cicon"
+																								style="margin-left: 0px;"></i> <input
+																								class="form-control form-control-inline"
+																								name="timetap2"
+																								placeholder="HH:MM (eg.,00:15 - Time)"
+																								id="timetap2" type="text" data-field="time"
+																								readonly data-error=".errorTxt2"> <span
+																								class="errorTxt2 errormessage"
+																								id="error_message"></span>
+																							<div id="timetap_2"></div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-md-6 col-sm-12">
+																					<div class="form-group">
+																						<label class="control-label">Timelap3
+																						<span class="required">*</span>
+																						</label>
+																						<div class="input-icon">
+																							<i class="fa fa-clock-o cicon"
+																								style="margin-left: 0px;"></i> <input
+																								class="form-control form-control-inline"
+																								name="timetap3"
+																								placeholder="HH:MM (eg.,00:15 - Time)"
+																								id="timetap3" type="text" data-field="time"
+																								readonly data-error=".errorTxt3"> <span
+																								class="errorTxt3 errormessage"
+																								id="error_message"></span>
+																							<div id="timetap_3"></div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-md-12">
+																					<div  class="iconbtn" style="float: right; font-size: 25px;">
+																					<div class="iconbtn" style="float: right; font-size: 25px;">
+																						<button
+																							class="btn btn-width btn-success btn-eql-wid btn-animate"
+																							class="close" aria-hidden="true" type="button"
+																							id="sla_cnf_save">Save</button>
+																						<button
+																							class="btn btn-warning btn-animate"
+																							class="fa fa-eraser rep_font" type="button" id="sla_cnf_cancel" onclick="sla_cancel_confirmation();"
+																							aria-hidden="true">Cancel / Clear</button>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div></div>
+																</form>
+                    </div>
+                    <div class="tab-pane" id="tab_15_13">
+                   <form role="form" id="def_cat">
+																	<div class="form-body row">
+																		{%csrf_token%}
+																		<div class="col-sm-12">
+																			<div class="row">
+																				<div class="col-md-6">
+																					<div class="form-group">
+																						<label for="single"
+																							class="control-label black_font">Group<span
+																							class="required">*</span>
+																						</label> <select id="ce_group" name="ce_group"
+																							class="form-control select2" data_placeholder="Select Group" data-error=".errorTxtc1">
+																							<option value="0">--Select Group--</option>
+																							<option value="1">HCM</option>
+																							<option value="2">PMO</option>
+																							<option value="3">General Service</option>
+																						</select><span class="errorTxtc1 errormessage errorTxts"></span>
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+																					<div class="form-group">
+																						<label class="control-label">Category<span
+																		class="required">*</span></label> <input type="text"
+																		id="category" name="category" class="form-control"
+																		placeholder="Category" data-error=".errorTxtc2">
+																	<span class="errorTxtc2 errormessage" id="error_message"></span>
+																					</div>
+																				</div>
+																				<div class="col-md-12">
+																					<div  class="iconbtn" style="float: right; font-size: 25px;" id="def_cat_btn">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+																<div class="col-md-12" id="form_kpi_view">
+                                            <div class="portlet">
+                                                <div class="portlet-title">
+                                                    <div class="caption ">
+                                                        <i class="icon-settings "></i> <span
+                                                            class="caption-subject bold uppercase">Default Category Details</span>
+                                                    </div>
+                                                    <div class="tools"></div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <table
+                                                        class="table table-striped table-bordered table-hover"
+                                                        id="default_category_table">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                    </div>
+                  </div>
+                  </div>
+														
+														
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--  Model function end-->
+								                                                             <!-- Model function  -->
+								<div id="HCM_popup" class="modal fade " tabindex="-1"
+									role="dialog" aria-labelledby="myModalLabel1"
+									aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="modal-header">
+												 <button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true"></button>
+												<!--<h4 class="modal-title">
+													YOUR HCM <span id=""></span>
+												</h4> -->
+											</div>
+											<div class="modal-body">
+												<div class="row">
+													<div class="col-sm-12">
+														<form role="form" id="hcms_query_form"> 
+															<div class="form-body">
+																<div class="row">
+<div class="col-sm-2">
+<h4 class="modal-title">
+													Talk To <span id="dynamic_service_group_span"></span>
+												</h4>
+</div>
+																	<div class="col-sm-3">
+																		<div class="form-group">
+																			<label for="single" class="control-label black_font">Default
+																				Category</label> <select id="ce_default_query" anme="ce_default_query"
+																				class="form-control select2" data_placeholder="Default Queries">
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-sm-4">
+
+																		<div class="form-group">
+																			<label>Ask your Query <span class="required"
+																				aria-required="true"> * </span></label> <input id="ce_service_query" name="ce_service_query" type="text" 
+																				class="form-control" placeholder="Enter your Query"  data-error=".errorTxt1">
+																				<span class="errorTxt1 errormessage" id="error_message"></span>
+
+																		</div>
+																	</div>
+																	<div class="col-sm-3">
+																		<div class="form-group">
+																			<label for="single" class="control-label black_font">Priority <span class="required"
+																				aria-required="true"> * </span></label>
+																			<select id="ce_priority" data-error=".errorTxt2" name="ce_priority" class="form-control select2" data_placeholder="Default Queries">
+																			</select>
+																			<span class="errorTxt2 errormessage" id="error_message"></span>
+																		</div>
+																	</div>
+																	<div class="col-sm-12">
+																		<div class="form-group">
+																			<label>Description  <small>(Maximum 5000 Characters)</small><span class="required"
+																				aria-required="true"> * <span class="errorTxt31 errormessage" id="error_message"></span></span></label>
+																			<div id="ce_service_description"  data-error=".errorTxt31" name="ce_service_description"></div>
+																		</div>
+																		
+																	</div>
+																	<div class="col-sm-12">
+																	<div class="col-sm-6">
+																		<div class="form-group">
+																			<label class="control-label">Attachment  <small>(Acceptable File Formats are .doc, .docx, .pdf and Maximum file size limit is 2 MB)</small></label>
+																			<div class="">
+																				<div class="fileinput fileinput-new"
+																					data-provides="fileinput">
+																					<div class="input-group">
+																						<div
+																							class="form-control uneditable-input input-medium input-fixed"
+																							data-trigger="fileinput">
+																							<i class="fa fa-file fileinput-exists"></i>&nbsp;
+																							<span class="fileinput-filename"> </span>
+																						</div>
+																						<span
+																							class="input-group-addon btn btn-success btn-file ">
+																							<span class="fileinput-new"> <i
+																								class="fa fa-upload"></i></span> <span
+																							class="fileinput-exists"> Change </span> <input
+																							type="file" id="hcms_query_document"  name="...">
+																						</span> <a href="javascript:;"
+																							class="input-group-addon btn btn-danger  fileinput-exists"
+																							data-dismiss="fileinput"> Remove </a>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-sm-6" align="right" id="service_call_buttons">
+												</div>
+												</div>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+												<div class="tabbable-line" id="communication_ticket_display_div">
+                  <ul class="nav nav-tabs ">
+                    <li class="active"> <a href="#tab_15_6" data-toggle="tab" id="tik_opn"> Opened (<span id="tik_opn_count"></span>) </a> </li>
+                    <li> <a href="#tab_15_2" data-toggle="tab" id="tik_ans"> Answered (<span id="tik_ans_count"></span>) </a> </li>
+                    <li> <a href="#tab_15_3" data-toggle="tab" id="tik_res"> Resolved (<span id="tik_res_count"></span>) </a> </li>
+                    <li> <a href="#tab_15_4" data-toggle="tab" id="tik_verf"> Verified (<span id="tik_verf_count"></span>) </a> </li>
+                    <li> <a href="#tab_15_5" data-toggle="tab" id="tik_cls"> Closed (<span id="tik_cls_count"></span>) </a> </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active ce_com_tab" id="tab_15_6">
+                      <div class="row">
+                            <div class="col-md-12">
+                            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                            <table class="table table-striped table-bordered table-hover status_based_ticket"
+									id="opn_tkt_table">
+								</table>
+                            <!-- END EXAMPLE TABLE PORTLET-->
+
+                        </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane ce_com_tab" id="tab_15_2">
+                    	<table class="table table-striped table-bordered table-hover status_based_ticket" id="ans_tkt_table"> </table>
+                    </div>
+                    <div class="tab-pane ce_com_tab" id="tab_15_3">
+                        <table class="table table-striped table-bordered table-hover status_based_ticket" id="res_tkt_table"> </table>
+                    </div>
+                      <div class="tab-pane ce_com_tab" id="tab_15_4">
+                          <table class="table table-striped table-bordered table-hover status_based_ticket" id="verf_tkt_table"> </table>
+                    </div>
+                      <div class="tab-pane ce_com_tab" id="tab_15_5">
+                          <table class="table table-striped table-bordered table-hover status_based_ticket"  id="cls_tkt_table"> </table>
+                    </div>
+                  </div>
+                </div>             
+											</div>
+											<div class="modal-footer" >
+
+												 
+													
+													
+												
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- models end -->
+
+
+                                   <!-- Model function  -->
+<div id="HCM_mailthread" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" onclick="close_popup()" ></button>
+				<h4 class="modal-title">
+					Query Response<span id="task_date"></span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+                    <div class="col-sm-12">
+                    <div class="panel-group accordion scrollable" id="accordion2">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title"> <a > <span class="status_icon"><i class="fa fa-cog inprogress_icon tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Service call is in progress"></i></span><span id="ct_query_title">Late coming on Monday</span><span id="ct_query_doc">Late coming on Monday</span>
+<span id="query_document_span_id" class="query_document_span"></span>
+<!--                       <span class="overdue"><i class="nf nf-heat-map tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="OVERDUE"></i></span><span class="overdue-date"> @ 19 Dec 2018, 7:52 PM</span>
+ -->                      <span class="servicerating"><div id="overall_service_call_rate"></div></span></a> </h4>
+                    </div>
+                    <div id="collapse_2_1">
+                      <div class="panel-body">
+                          <div class="mail_panel">
+                        <div class="row eqheight">
+                          <div class="col-sm-7 col-lg-9">
+                                <div class="mail_content">
+                              <div ><ul><li class="mailmember"><img id="ct_call_opened_by_id" src="NEXT__HCMS_files/242.jpg" ></li><li class="mailsender" id="ct_call_opened_by">HCM@nexttechnosolutions.com</li></ul></div>
+                                    <div class="mailmessage"><p id="ct_initiated_query">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p></div>
+                              </div>
+                            </div>
+                            <div class="col-sm-5 col-lg-3">
+                                <div class="mail_detail">
+	                                <ul>
+	                            		<li class="mail_time" id="ct_query_initiated_time">04-12-2018 11:18 AM</li> 
+	                                <!-- <li class="mail_options"><span><i class="fa fa-trash tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"></i></span></li> -->
+	                                </ul>
+                                </div>
+                                <div class="mail-status">
+									<p class="txt-color-green" id="ct_query_stage"></p>
+								</div>
+                            </div>
+                        </div>
+                              </div>
+                              <div id="communication_panel"></div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="write_mail">
+                          <label>Your Reply <small>(Maximum 5000 Characters)</small><span class="required"
+																				aria-required="true"> * <span class="errorTxt32 errormessage" id="error_message"></span></span></label>
+                              <span class="reply_member"><img id="ct_reply_id" src=""></span>
+                              <div  class="summernote">
+                                   <div id="ce_service_call_response" data-error=".errorTxt32"></div>
+                              </div>
+                          </div>
+                          <div class="clearfix"></div>
+                          <div class="clearfix"></div>
+                          </br>
+                          <div class="col-sm-12" id="ct_reply_overall_div">
+                           <div class="col-sm-6" id="ct_rating_div">  
+						 <div class="rate_this">
+                              <label>Give your ratings</label>
+                          <div class="rate_by_you"> <div class="ratings_wrapper">
+                                                            <div id="service_call_rate"></div>
+<!--                                                             <span class="starcount" id="service_call_rating"> </span>
+ -->                                                        </div></div>
+                          </div>
+                          </div>
+                          <div id="status_and_assigned_to_div" >
+                           <div class="col-sm-3" id="ct_change_status_div">
+                       <div class="form-group">
+							<label for="single"
+								class="control-label black_font">Change Status
+							</label> <select id="ct_service_call_status_list" name="ct_service_call_status_list"
+								class="form-control select2" data_placeholder="Change Status">
+							</select>
+						</div> </div>
+                            <div class="col-sm-3" id="ct_assign_to_div">
+                       <div class="form-group">
+							<label for="single"
+								class="control-label black_font">Assign Query To
+							</label> <select id="ct_assign_to_employee" name="ct_assign_to_employee"
+								class="form-control select2" data_placeholder="Assign Query To">
+							</select>
+						</div> </div></div>
+						
+                          </div>
+                          <div class="clearfix"></div>
+                          </br>
+                          <div id="response_button_div" align="right"></div>
+                </div>
+			</div>
+		</div>
+            <div class="modal-footer">
+	</div>
+</div>
+                                </div></div>
+<!-- models end -->                            
+								<div id="carouselfade" class="carousel slide carousel-fade" data-ride="carousel" data-step="14" data-intro="You can rate and provide feedback for survey published. In-House and IT-House news can be viewed">
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item active">
+                                                <div class="portlet light bordered">
+                                        <div class="feedback-wrapper ">
+                                            <h1 class="">YOUR FEEDBACK IS IMPORTANT PLEASE RESPOND TO THE BELOW</h1>
+                                            <div id="survey_div">
+                                            <p>How would you like to rate our coffee supplying machine?</p>
+                                            <div class="servey_content">
+                                                <div class="smily_icon">
+                                                    <a class="sicon" href="#"><i class="fa fa-smile-o " id="smile_1"></i></a>
+                                                    <a class="sicon" href="#"><i class="fa fa-meh-o" id="smile_2"></i></a>
+                                                    <a class="sicon" href="#"><i class="fa fa-frown-o" id="smile_3"></i></a>
+                                                </div>
+                                                <div class="servey_txt">
+                                                <div class="row">
+                                                	<div  class="col-sm-10">
+                                                	<textarea class="form-control" id="survey_text" placeholder="Add your comments"></textarea>
+                                                	</div>
+                                                	<div  class="col-sm-2">
+                                                	<button class="btn btn-sm btn-success tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Submit"> <i class="fa fa-check"></i> </button>
+                                                	</div>
+                                                </div>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            </div>
+                                            <div class="item">
+                                            
+                                            <div class="portlet light bordered">
+                                        <div class="news-events-wrapper">
+                                            <h1 class="">My News & Events</h1>
+                                             <div class="news_events">
+                                                            <div class="tabbable-line">
+                                                                <ul class="nav nav-tabs ">
+                                                                    <li class="active"> <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> In-House </a> </li>
+                                                                    <li class=""> <a href="#tab_15_2" data-toggle="tab" aria-expanded="false"> IT News </a> </li>
+                                                                </ul>
+                                                                <div class="tab-content">
+                                                                    <div class="tab-pane active" id="tab_15_1">
+                                                                        <ul class="news_item" id="In-House">
+                                                                            <!-- <li>Transform Converge latest release <a href="" class="readmore">Read more</a> </li> -->
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="tab-pane" id="tab_15_2">
+                                                                        <ul class="news_item" id="IT_News">
+                                                                            <!-- <li>Converge latest release <a href="" class="readmore">Read more</a></li> -->
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                                    </div>
+                                            
+                                            
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="portlet light bordered ">
+                                        <div class="provideo-wrapper" data-step="15" data-intro="Our Product Videos can be viewed">
+                                            <h1 class="">Our Deliveries </h1>
+                                            <div class="portlet-body">
+                                                
+                                                <div class="product_video">
+                                                    <img src="{% static '/dev/mynext_dashboard/images/product_video.jpg' %}" class="img-responsive">
+                                                </div>
+                                                
+                                                <div class="product_video_title">Video 1 - HCMS</div>
+                                                
+                                                <div class="product_video_des">Video Description for HCMS</div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                              <!-- end -->
+                               </div>
+                            </div>
+                            
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+	</div></div>
+		<!-- Model function  -->
+	<div id="plans_popups" class="modal fade " tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true"></button>
+					<h4 class="modal-title">Task Details  <span id="task_date"></span></h4>
+				</div>
+				<div class="modal-body md-max-height">
+					<form role="form" id='hrms_attendance_popup'>
+						<div class="form-body">
+							<div class="form-group">
+								<table class="table table-striped table-bordered table-hover"
+									id="user_plans">
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- models end -->
+	
+		<!-- NIAA CHAT BOX HTML CODE -->
+<!-- <div class="niaa-info-menu"><a class="pop-up-show-chat hvr-icon-drop" href="#"><img src="../../static/niaa/assets/images/default.gif"> </a></div> -->
+<div class="niaa-wrapper" style="display:none">
+         <!-- Sidebar Holder -->
+         <header>
+            <div class="inner-container">
+               <div id="notification_div"></div>
+               <div class="row">
+                  <div class="col-md-6 col-sm-4 chatheader">
+                  </div>
+                  <div class="col-md-6 col-sm-8">
+                     <div class="srh-circle">
+                        <div class="circle-1 top-create-group">
+                           <a href="#" class="innr-circle">
+                              <i class="fa fa-plus"></i>
+                              <div class="sw-hvr-tooltip"><span>Create Group</span></div>
+                           </a>
+                        </div>
+                        <div class="create-group-box">
+                           <div class="forword-msg-box-inner">
+                              <input type="text" class="form-control user_inputadd_box" id="create_grp_name_ip"placeholder="Enter Group Name">
+                              <i class="fa fa-exclamation-circle" data-toggle="tooltip" data-placement="bottom" title="Group Name"></i>
+                              <div class="input-group stylish-input-group">
+                                 <input type="text" class="form-control user_search_box" id="create_grp_search_user_ip" placeholder="search">
+                                 <span class="input-group-addon">
+                                 <i class="fa fa-search"></i>
+                                 </span>
+                              </div>
+                              <!-- <div id="grp_create_users_list_div"></div> -->
+                              <div class="searc-result-list" id="fwd_selected_room"></div>
+                              <div class="forword-search-result room-search-result" style="display: none">
+                                 <ul id="style-3" class="force-overflow chat_room_list">
+                                 </ul>
+                              </div>
+                              <div class="buttons-btm">
+                                 <span id="group_create_cancel_btn" class="cancle-btnm"><i class="fa fa-times"></i></span>
+                                 <span id="group_create_btn" class="save-btnm"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="circle-1 channels">
+                           <a href="#" class="innr-circle">
+                              <i class="nf nf-niaa-organise"></i>
+                              <div class="sw-hvr-tooltip"><span>Channels</span></div>
+                           </a>
+                        </div>
+                        <div class="circle-1 groups">
+                           <a href="#" class="innr-circle">
+                              <i class="nf nf-user-group-niaa"></i>
+                              <div class="sw-hvr-tooltip"><span>Groups</span></div>
+                           </a>
+                        </div>
+                        <div class="circle-1 users" id="click-show-div">
+                           <a href="#" class="innr-circle">
+                              <i class="nf nf-user-niaa"></i>
+                              <div class="sw-hvr-tooltip"><span>User</span></div>
+                           </a>
+                        </div>
+                        <div style="display: none;" class="owl-carousel owl-theme channels">
+                        </div>
+                        <div style="display: none;" class="owl-carousel owl-theme users">
+                        </div>
+                        <div style="display: none;" class="owl-carousel owl-theme groups">
+                        </div>
+                        <div class="owl-carousel owl-theme searchnames">
+                        </div>
+                        <div class="Exp-serachh searchlist search">
+                           <input class="search_box" type="checkbox" id="search_box">
+                           <label class="icon-search" for="search_box"><i class="fa fa-search"></i></label>
+                           <div class="search_form active">
+                              <input class="ExpInputt search_user" id="search" type="search" placeholder="Search Your Name" autocomplete="off">
+                           </div>
+                        </div>
+                        <div class="chat-close-btn full_chat_close"> <a href="#"><i class="nf-niaa-close"></i></a> </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <div class="inner-wrapper">
+            <div id="sidebar">
+               <div class="tabs">
+                  <a class="close-icon" id="sb_close" href="#"><span aria-hidden="true">×</span></a>
+                  <div class="tab-2">
+                     <label class="sb_for_grp_usrs" for="tab2-1">
+                        <!--All--><i class="fa fa-user-plus" data-toggle="tooltip" data-placement="bottom" title="All Members"></i>
+                     </label>
+                     <label  class="sb_for_msg_srch" for="tab2-1">Message Search</label>
+                     <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                     <div class="sid-bar-sec" id="style-3">
+                        <input type="text" class="form-control user_search_box txtShowDiv" id="add_member_search_user_ip" placeholder="Add Members">
+                        <div class="forword-msg-box group-create-members add_group_member" id="group-create-members">
+
+                        	<div class="forword-msg-box-inner">
+                              <div class="searc-result-list" id="fwd_selected_room"></div>
+                              <div class="forword-search-result room-search-result" style="display: none">
+                                 <ul id="style-3" class="force-overflow forward_msg_list chat_room_list">
+                                 </ul>
+                              </div>
+                              <div class="buttons-btm" id="add_group_members_btns">
+                                 <span id="add_group_member_cancel_btn" class="cancle-btnm"><i class="fa fa-times"></i></span>
+                                 <span id="add_group_member_submit_btn" class="save-btnm"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+                              </div>
+                           </div>
+
+
+                        </div>
+                        <div class="group_all_users sb_for_grp_usrs">
+                        </div>
+                        <div class="search-icon-ipt sb_for_msg_srch">
+                           <div class="mess-search-field">
+                              <input class="form-control" id="msg_search_txt" type="text" placeholder="Search Message">
+                              <a class="search-icon" href="#"><i class="nf nf-search-1"></i></a>
+                           </div>
+                           <div id="search_msg_disp_div">
+                              <div class="inner-loading" style="display: none;"></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-2">
+                     <label class="sb_for_grp_usrs" for="tab2-2"><i class="fa fa-user" data-toggle="tooltip" data-placement="bottom" title="Online Members"></i></label>
+                     <label class="sb_for_msg_srch" for="tab2-2">Timeline Search</label>
+                     <input id="tab2-2" name="tabs-two" type="radio">
+                     <div id="style-3">
+                        <div class="sid-bar-sec sb_for_grp_usrs group_online_users">
+                        </div>
+                        <div class="time-search sb_for_msg_srch">
+                           <div>
+                              <div id="reportrange" style="cursor: pointer; padding: 10px 10px; border: 1px solid #ccc; width: 100% color:black;">
+                                 <i class="fa fa-calendar"></i>&nbsp;
+                                 <span></span> <i class="fa fa-caret-down"></i>
+                              </div>
+                           </div>
+                           <div class="sid-bar-sec timeline_search_div">
+                              <div class="inner-loading" style="display:none"></div>
+                              <ul class="timeline_search_result"></ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-2">
+                     <label class="sb_for_grp_usrs" for="tab2-3" data-toggle="modal" id="sb_leave_group_lbl"><i class="fa fa-sign-out" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Leave Group"></i></label>
+	 					<input id="tab2-3" name="tabs-two" type="radio">
+	 					<div class="sid-bar-sec" id="style-3">
+	 							<div class="sb_for_edit_usrs">
+	 							</div>
+	 					</div>
+                  </div>
+                  <div class="tab-2">
+                     <label class="sb_for_delete_room" for="tab2-4"><i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Delete Group"></i></label>
+                     <input id="tab2-4" name="tabs-two" type="radio">
+                     <div id="style-3">
+                        <div class="sid-bar-sec sb_for_grp_usrs group_delete_users">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Page Content Holder -->
+            <div id="content">
+               <div class="row">
+                  <div class="col-md-9 col-sm-9" id="banner_fullwidth">
+                     <div class="message-section">
+                        <div class="chat-close-btn chat_close" style="display:none"> <a href="#"><i class="nf-niaa-close"></i></a> </div>
+                        <div id="style-3" class="scrollbar messages live-chat-messages">
+                           <div class="inner-loading"></div>
+                           <ul class="force-overflow" id="conv_msg_ul"></ul>
+                           <div class="text-center new_msg_notify" id="focus_msg" style="display:none">
+                              <button class="new-messg hvr-icon-wobble-vertical">New Message</button>
+                           </div>
+                           <div class="text-center recent_msg_notify" id="jump_to_msg_notify" style="display:none">
+                              <button class="new-messg-recent hvr-icon-wobble-vertical">Jump to recent messages</button><span></span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="read-only-chat-room" style="display:none"><h4>This room is read only</h4> </div>
+                     <div class="message-input" style="display:none">
+                        <div class="wrap">
+                           <div class="logo-water-mark"><img src="/static/niaa/assets/images/niaa-logo.png"></div>
+                           <div class="top-replay-icon">
+                              <div id="divShowHide" class="reply_display" style="display: none;">
+                              </div>
+                           </div>
+                           <div class="scrollbar chat-list-details usermentiondiv" style="display:none">
+                              <a class="close-icon usermention_close" href="#"><span aria-hidden="true">×</span></a>
+                              <ul id="style-3" class="force-overflow usersmention"></ul>
+                           </div>
+                           <div class="mesg-txtare">
+                              <textarea class="live-chat-submit-input" id="live-chat-submit-input" placeholder="Type a message here..."></textarea>
+                           </div>
+                           <!-- File Upload  -->
+                           <div>
+                              <div class="attachment file_attachment" href="" for="fileupload_input" ><i class="nf nf-niaa-attch" aria-hidden="true"></i>
+                              </div>
+                              <div id="file-upload-div" class="file-upload-div" style="display: none;"><input id="fileupload_input" type="file" multiple="multiple"/></div>
+                           </div>
+                           <div class="mom-recording"><button id="recButton"><img src="/static/niaa/assets/images/recoding-icon.png"></button></div>
+                           <div class="send-button"> <span class="icon-wrapper">
+                              <i class="icon-1 fa   fa-arrow-circle-right"></i> <span class="icon-2 ion-checkmark"></span> </span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="outer-div-equel items-container fixed-items">
+                     <div class="line-between-circle matchheight-item matchheight-item-0">&nbsp;</div>
+                     <div id="timeline_div" class="time-line-part matchheight-item matchheight-item-1">
+                     </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3" id="chat_box">
+                     <div id="chat_box">
+                        <div id="my-circle-menu" class="cm-container">
+                           <ul class="cm-items">
+                           </ul>
+                           <div class="cm-selected-container">
+                              <div id='cm_selected_item' style="display: none;">
+                                 <div id  class="cm-selected-label img-name">
+                                    <img>
+                                 </div>
+                              </div>
+                              <a class="cm-button cm-button-prev button_prev_menu" type="button" title="Previous"><i class="fa fa-chevron-left"></i></a>
+                              <a class="cm-button cm-button-next button_next_menu" type="button" title="Next"><i class="fa fa-chevron-right"></i></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="ux3menu" class="cirmenu-L-eight">
+                     <div class="ux3menu ux3menu-pos-r">
+                        <input type="checkbox" id="closeicon3">
+                        <a href="#" class="color-red hcolor-white"> <span class="arrows"></span>
+                        </a>
+                        <ul class="niaa-main-menu">
+                           <!-- circle menu group members -->
+                           <li>
+                              <a href="#" id="sidebarCollapse" class="color-white hcolor-red disableCursor" data-toggle="tooltip" title="Group Members" data-original-title="Mail!"><i class="nf nf-user-group-niaa"></i>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" id="sidebarCollapse3" class="color-white hcolor-red" data-toggle="tooltip" title="" data-original-title="Home!"><i class="nf nf-niaa-system"></i>
+                              </a>
+                           </li>
+                           <!-- circle menu Message search -->
+                           <li>
+                              <a href="#" id="sidebarCollapse1" class="color-white hcolor-red disableCursor" data-toggle="tooltip" title="Search Message" data-original-title="Mail!"> <i class="nf nf-niaa-chat"></i>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" id="sidebarCollapse4"> <i class="nf nf-niaa-status"></i></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+            <div class="modal chat-img-nxt" id="exampleModalCenter" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content model-customiz-part">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Do you want to upload this file ?</h5>
+                  <button type="button" id="file_upload_close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"></span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="in-md-body">
+                     <div id="file_upload_preview_div"></div>
+                  </div>
+               </div>
+               <div class="modal-footer"> <a href="#" id="upload_cancel_btn" class="cancle-btnm"><i class="fa fa-times"></i></a><a href="#" class="submit upload_submit_btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal chat-img-nxt" id="remove-member-part" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content model-customiz-part">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Do you want to upload this file ?</h5>
+                  <button type="button" id="file_upload_close" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true"></span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="in-md-body">
+                     <div id="file_upload_preview_div"></div>
+                  </div>
+               </div>
+               <div class="modal-footer"> <a href="#" id="upload_cancel_btn" class="cancle-btnm"><i class="fa fa-times"></i></a><a href="#" class="submit upload_submit_btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> </div>
+            </div>
+         </div>
+      </div>
+
+<!-- ***************************        Set as admin modal ******************************************* -->
+
+  <div class="modal chat-img-nxt" id="remove-search-member" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content model-customiz-part">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Warning</h5>
+            <button type="button" class="close close_set_owner" data-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="popup-info-exit">
+               <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+               <p>You are the last owner. Please set new owner before leaving the room.</p>
+               <p></p>
+               <p>Select room owner from the below list.</p>
+            </div>
+            <div class="choose-another-member">
+               <!-- User search -->
+               <div class="forword-msg-box">
+                  <div class="forword-msg-box-inner">
+                     <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control user_search_box" placeholder="Search">
+                        <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                        </span>
+                     </div>
+                     <div class="searc-result-list" id="fwd_selected_room"></div>
+                     <div class="forword-search-result room-search-result">
+                        <ul id="style-3" class="force-overflow forward_msg_list chat_room_list"></ul>
+                     </div>
+                  </div>
+               </div>
+               <!-- End user search -->
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" id="set_owner_cancel_btn"class="cancle-room-btn btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" id="set_owner_submit_btn" class="btn btn-primary remove-room-btn">OK</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- ***************************  END - Set as admin modal ******************************************* -->
+
+<!-- END NIAA CHAT BOX HTML CODE -->
+	
+	
+	
+	
+	{% endblock %}  {% block scripts %}
+	
+	
+<script src="{% static '/ui/plugins/datatables/js/datatables.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js' %}" type="text/javascript"></script>
+<script src="{% static '/dev/performance_management/dev/jquery.rateyo.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+<script src="/static/dev/NTree/ui/plugins/moment.min.js" type="text/javascript"></script>
+
+ <!--  Link for css single select 2 -->
+<script src="{% static 'ui/plugins/select2/js/select2.full.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'ui/plugins/select2/js/components-select2.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/ui/plugins/date-picker-mobile/js/date-picker-mobile.js' %}" type="text/javascript"></script>
+
+<script src="{% static '/ui/plugins/bootstrap-fileinput/js/bootstrap-fileinput.js' %}" type="text/javascript"></script>
+                                        
+   <script>   
+     $("#timetap_1,timetap_2,timetap_3").DateTimePicker({  dateFormat: "dd-MMM-yyyy" });
+     </script>  
+     <script>
+                                  /*           $(document).on("click",".service_category tr",function(){
+                                               $("#HCM_mailthread").modal("show"); 
+                                            });  */
+         /* 
+         $(window).on('load',function(){
+        $('#HCM_mailthread').modal('show');
+    }); */
+                                            </script>  
+<script src="{% static '/ui/plugins/bootstrap-summernote/js/summernote.min.js' %}" type="text/javascript"></script>
+<script>
+      $('#ce_service_description').summernote({
+        placeholder: '',
+        tabsize: 2,
+        height: 210
+      });
+     $('#ce_service_call_response').summernote({
+        placeholder: '',
+        tabsize: 2,
+        height: 210
+      });
+    </script>
+    <!--summernote-->                                            
+     <!-- Multiple fileupload-->
+<script src="{% static '/ui/plugins/multiple-fileupload/js/multiple-fileupload.js' %}" type="text/javascript"></script>
+<script>
+	$(document).ready(function() {
+		$("#files").kendoUpload();
+	});
+</script>
+
+             <!---  NIAA Important LINKS ------------->
+  <script src="/static/niaa/assets/js/lodash.min.js" type="text/javascript"></script>
+ <script src="/static/niaa/assets/js/TweenMax.min.js" type="text/javascript"></script>
+ <script src="/static/niaa/assets/js/circlemenu.js" type="text/javascript"></script>
+ <script src="/static/niaa/assets/js/site.js" type="text/javascript"></script>
+ <script src="/static/niaa/assets/js/CircleMenu.min.js" type="text/javascript"></script>
+ <script src="/static/niaa/assets/js/owl.carousel.js"></script>
+ <script src="/static/niaa/assets/js/jquery.mousewheel.min.js"></script>
+<!------  <script src="/static/niaa/assets/js/sweetalert-dev.js"></script>----- --> 
+<!--<script src="/static/niaa/assets/js/moment.min.js" type="text/javascript"></script>-->
+<!-- <script src="/static/niaa/assets/js/daterangepicker.min.js" type="text/javascript"></script>-->
+<!-- <script src="/static/niaa/assets/js/autosize.js" type="text/javascript"></script>-->
+<!-- <script src="/static/niaa/assets/js/custom_script.min.js"></script>-->
+<!-- <script src="/static/niaa/util.js"></script>-->
+ 
+ <!--- END NIAA Important LINKS ------------->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{% static '/ui/plugins/intro/intro.js' %}" type="text/javascript"></script>
+    <script>
+		function startTour() {
+			var tour = introJs()
+			tour.setOption('tooltipPosition', 'auto');
+			tour.setOption('positionPrecedence', ['left', 'right', 'top', 'bottom']);
+			tour.start();
+		}
+	
+	</script>
+<script>
+var $i = jQuery.noConflict();
+</script>
+<script src="{% static 'ui/plugins/slick-slider/js/slick.min.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".user_slider").slick({
+                infinite: false,
+                prevArrow: false,
+                nextArrow: false,
+                draggable: true,
+                slidesToShow: 4,
+                slidesToScroll: 1
+            });
+        });
+    </script> 
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".members_slider").slick({
+                dots: false,
+                infinite: false,
+                slidesToShow: 4,
+                vertical: true,
+                centerMode: false,
+                verticalSwiping: true,
+                slidesToScroll: 1,
+            });
+        });
+    </script>
+    
+
+    
+<!-- Horizontal accordion slider -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>  
+<script>
+var $i = jQuery.noConflict();
+</script>
+ <script src="{% static '/dev/mynext_dashboard/js/jquery.easyAccordion.js' %}" type="text/javascript"></script>
+ <script type="text/javascript">
+         $i(document).ready(function () {
+         $i('#accordion-2').easyAccordion({
+            autoStart: false    
+               });
+         });
+</script>
+    <!-- end slider -->
+        
+<script type="text/javascript"  src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+var $ii = jQuery.noConflict();
+</script>
+<script src="{% static '/dev/mynext_dashboard/js/pie-chart.js' %}" type="text/javascript"></script>
+<script type="text/javascript">
+var $j = jQuery.noConflict();
+ 
+              $j(document).ready(function() {
+                 jQuery('.demo-pie').pieChart({
+                barColor: '#2be7c4',
+                trackColor: '#edeaff',
+                lineCap: 'round',
+                lineWidth: 3,
+                onStep: function(from, to, percent) {
+                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+                }
+            });
+ 
+            jQuery('.demopie1').pieChart({
+                barColor: '#2be7c4',
+                trackColor: '#edeaff',
+                lineCap: 'round',
+                lineWidth: 3,
+                onStep: function(from, to, percent) {
+                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
+                }
+            });
+        });
+    </script>
+    <!-- Permance Pie Chart  -->
+    <script src="{% static 'ui/plugins/amchart/js/amcharts.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/serial.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/pie.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/radar.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/gantt.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/light.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/export.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'ui/plugins/amchart/js/chart-script-all.js' %}"></script>
+	<script src="{% static 'ui/plugins/amchart/js/gauge.js' %}" type="text/javascript"></script>
+	<!-- link for dev js start-->
+	<script src="{% static 'dev/lib/js/datatable_lib.min.js' %}" type="text/javascript"></script>
+	<script src="{%  static '/dev/mynext_dashboard/js/document_upload.js'  %}" type="text/javascript"></script>
+	<script src="{% static '/dev/mynext_dashboard/js/employee_dashboard.js' %}" type="text/javascript"></script>
+	<script src="{% static '/dev/mynext_dashboard/js/mynext_timer.js' %}" type="text/javascript"></script>
+	<script src="{% static '/dev/mynext_dashboard/js/ce_service_call.js' %}" type="text/javascript"></script>
+	<!-- link for databales -->
+	<script src="{% static '/dev/mynext_dashboard/js/communication_ticket_view.js' %}" type="text/javascript"></script>
+ <!--Task Summary-->
+    <script type="text/javascript">
+       /*  $("#btn_showdiv").click(function() {
+            $('#showdiv').slideDown('slow');
+            $('#showdiv1').hide();
+        }); */
+ 
+        $("#close_summary").click(function() {
+            $('#showdiv').slideUp('slow');
+            $('#showdiv1').show(100);
+        });
+    </script>
+    <!--End Task Summary-->
+    
+    <!-- Text Animation -->
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            setInterval(function() {
+                fade();
+            }, 2000);
+ 
+            function fade() {
+                jQuery(".animate-txt").fadeToggle(300);
+            }
+ 
+        });
+    </script>
+    <!-- Fade Animation -->
+    <script type="text/javascript">
+        $('#carouselfade').carousel({
+            interval: 3000,
+            pause: false
+        })
+    </script>
+    
+    
+    <script type="text/javascript">
+        $('#mailfade').carousel({
+            interval: 4000,
+            pause: false
+        })
+    </script>
+    
+    <script>
+        $('#raing-policy').carousel({
+        interval: 4000,
+        pause: false
+    })
+       
+    </script>
+    
+    <script type="text/javascript">
+        $("#firsttab").mouseover(function() {
+            $('#firsttab').addClass('col-md-12').removeClass('col-md-6');
+            $('#secondtab').hide();
+ 
+        });
+ 
+        $("#firsttab").mouseout(function() {
+            $('#firsttab').addClass('col-md-6').removeClass('col-md-12');
+            $('#secondtab').show();
+ 
+        });
+    </script>
+    
+    <!-- <script type="text/javascript">
+    $(document).ready(function(){
+        $(".birthday-wrapper").hide();
+        $(".birthday-wrapper").show().delay(10000).queue(function(n) {
+  $(this).hide().delay(3000); n();
+});    
+    });
+    </script> -->
+
+<!--NIAA Important LINKS ------------->
+<script src="/static/niaa/require.js"></script>
+ <script>
+    requirejs.config({
+    	 baseUrl: '/static/niaa/',
+    });
+ </script>
+ <script>
+    require (['niaa_client']);
+ </script>
+ <!--- END NIAA Important LINKS ------------->
+ 
+ <script>
+ $(document).ready(function(){
+   $('.hdr-niaa-icon').css('display','block');	 
+ })
+ </script>
+ <!--  <script>
+ $(document).idle({ 
+	  onIdle: function(){
+	    $(".easy-accordion .active").trigger("click");
+	    $(".daytasksmenu").trigger("click");
+	  },
+	  idle: 3000
+	});	
+ 
+ </script> -->
+    
+{% endblock %}

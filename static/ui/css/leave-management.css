@@ -1,0 +1,133 @@
+.leave-mangmt-inner { margin: 0px 70px;}
+.leave-mangmt-inner h5{text-transform: uppercase;font-weight: 600;font-size: 18px;}
+.leave-quarterly-box{background: rgba(150,218,255,1);
+background: -moz-linear-gradient(left, rgba(150,218,255,1) 0%, rgba(169,247,234,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(150,218,255,1)), color-stop(100%, rgba(169,247,234,1)));
+background: -webkit-linear-gradient(left, rgba(150,218,255,1) 0%, rgba(169,247,234,1) 100%);
+background: -o-linear-gradient(left, rgba(150,218,255,1) 0%, rgba(169,247,234,1) 100%);
+background: -ms-linear-gradient(left, rgba(150,218,255,1) 0%, rgba(169,247,234,1) 100%);
+background: linear-gradient(to right, rgba(150,218,255,1) 0%, rgba(169,247,234,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96daff', endColorstr='#a9f7ea', GradientType=1 );}
+.leave-quarterly-box ul{margin: 0px;padding: 0px 35px 0px 35px;text-align: center;height: 67px;vertical-align: middle;}
+.leave-quarterly-box ul li{display: inline-block;width: 25%;vertical-align: middle;line-height: normal;padding: 7px 0px;font-weight: bold;font-size: 14px;float: left;}
+.leave-quarterly-box ul li span{ display: block;}
+.leave-month-box{text-align: center;background: #fff;}
+.leave-month-box ul{ margin: 0px; padding: 0px 20px; }
+.leave-month-box ul li{ font-weight: bold;margin: 15px 0px 0px 0px; padding: 0px; display: inline-block; width: 8%;    color: #c1c1c1;}
+.past-current-quater {text-align: center; background: #fff;position: relative;}
+.past-current-quater ul {margin: 0px;padding: 0px;}
+.past-current-quater ul li {display: inline-block;width: 24%;color: #418ffb;padding: 15px 0px;font-weight: bold;}
+.past-current-quater ul li:last-child{ color: #08dab3; }
+/*
+.leave-calender-box ul{margin: 0px; padding: 0px;}
+.leave-calender-box ul li{display: inline-block;width: 8%;}
+*/
+.leave-calender-box table tbody tr td{color: #c1c1c1;width: 155px;border: 2px solid #fff;background: #fff;padding: 8px 22px;position: relative;vertical-align: baseline;/* display: inline-block; */}
+/*
+ .leave-calender-box table tbody tr td:first-child, .leave-calender-box table tbody tr td:last-child{color: #0098fe; width: 50px; text-align: center; background: #fff;    font-weight: 600;}
+ */
+ table tbody tr td img{max-width: 100%; }
+.label-leave-list {text-align: center;margin: 15px 0px;}
+.label-leave-list ul {padding: 0px;margin: 0px;}
+.label-leave-list ul li { display: inline-block;width: 12%;font-weight: 500;}
+.list-leave-icon {display: inline-block;float: right;line-height: 25px;vertical-align: top;}
+.unapproved-leave {content: "";position: absolute;top: -6px;border-top: 10px solid #ff000000;border-bottom: 10px solid #ff020200;border-left: 10px solid #fa8d90;left: 0em;transform: rotate(225deg);}
+#quater-one, #quater-two, #quater-three, #quater-four {width: 100%;height: 230px;}
+.amcharts-export-menu-top-right {top: 10px;right: 0;}
+.leave-calender-box{height: 620px;overflow-x: scroll;}
+.chart-box-sec {margin-bottom: 20px;}
+.leave-leave-box {border: 0px solid #f1f1f1;margin: 30px 0px;}
+.past-current-quater ul:after {position: absolute;width: 100%;height: 10px;content: "";display: block;left: 0px;bottom: 5px; /*background-image: url(../images/quater-before-img.png); background-position: bottom; background-repeat: repeat;*/ border-bottom: 2px dashed #DFF2FE;}
+.leave-calender-box table tbody tr td.current-quater{background: #fff;color: #000;    font-weight: 600;}
+.unaproved-leave{ position: absolute;width: 10px;height: 10px;right: 0px;top: 0px;background: #d277fe;border-radius: 50% !important; }
+td.current-quater.current-date {background: #55bafe !important;color: #fff !important;}
+.leave-month-box ul li.current-quater{color: #000; }
+.past-current-quater ul li.current-quater{color: #08dab3;}
+.current-date {background: #55bafe !important;color: #fff !important;}
+/*************************************************************** Hear Responsive Style Only ****************************************************************************/ 
+@media(max-width:1500px){
+    .label-leave-list ul li {width: auto;padding: 0px 20px;}
+}
+
+@media(max-width:1200px){
+    .leave-mangmt-inner {margin: 0px 20px;}
+    .leave-month-box ul{padding: 0px 0px;}
+}
+@media(max-width:950px){
+    .leave-month-box ul li{ width: 7%; }
+    .list-leave-icon {width: 25px;}
+    #quater-one, #quater-two, #quater-three, #quater-four{ height: 250px;} 
+}
+.portlet {
+	        padding: 1px 20px 15px;
+
+}
+.custom-quater{
+	color: #fff;
+	font-size: 34px;
+	padding: 1px 20px 15px;
+}
+.ledgent-area{
+padding: 0px 35px 0px 35px;	
+}
+.leave-sick{
+	color: #d277fe;
+	font-size: 20px;
+	vertical-align: bottom;
+}
+.leave-casual{
+	vertical-align: top;
+	color:#f3bf9d;
+	font-size: 20px;
+}
+.leave-permission{
+	vertical-align: bottom;
+	color: #f6d166;
+	font-size: 20px;
+}
+.leave-combo{
+	vertical-align: bottom;
+	color: #f2bbdf;
+	font-size: 20px;
+}
+.leave-combo-project{
+	vertical-align: bottom;
+	color: #f73c3c;
+	font-size: 20px;
+}  
+
+.leave-absebce{ 
+	vertical-align: bottom;  
+	color: #8fece6; 
+	font-size: 20px;
+}
+.leave-public{
+	vertical-align: top;
+color: #3499e6;
+font-size: 20px;
+line-height: 22px;
+font-weight: normal;
+}
+.leave-paternity {
+	vertical-align: bottom;
+	color: #c5f9a9;
+	font-size: 20px;
+}
+.leave-Maternity{	
+	vertical-align: bottom;
+	color: #efd294;
+	font-size: 20px; 
+}
+.leave-earned{
+		vertical-align: bottom;
+	color: #a57207;
+	font-size: 20px; 
+}
+}
+
+.leave-late{
+	color: #d277fe;
+	font-size: 17px;
+}
+
+     

@@ -1,0 +1,579 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Talent_Management/talent_management">
+
+		<!-- 19-SEP-2018 || MST || Fetch Organization List start -->
+		<query id="tm_fetch_org_list" query_name="tm_fetch_org_list"
+			description="Fetch Organization List">
+	       	<![CDATA[ SELECT id, name from organization_info where is_active = 'True'; ]]>
+		</query>
+		<!-- 19-SEP-2018 || MST || Fetch Organization List end -->
+
+		<!-- 19-SEP-2018 || MST || Fetch Organization Unit List start -->
+		<query id="tm_fetch_org_unit_list" query_name="tm_fetch_org_unit_list"
+			description="Fetch Organization Unit List">
+        	<![CDATA[ SELECT id, orgunit_name from organization_unit_info 
+        				where organization_id = %s and parent_orgunit_id != 0 and is_active = 'True' order by orgunit_name; ]]>
+		</query>
+		<!-- 19-SEP-2018 || MST || Fetch Organization Unit List end -->
+
+		<!-- 19-SEP-2018 || MST || Fetch Department List start -->
+		<query id="tm_fetch_dept_list" query_name="tm_fetch_dept_list"
+			description="Fetch Department List">
+        	<![CDATA[ select id, name from team_details_info where org_id = %s and org_unit_id = %s and is_active = TRUE; ]]>
+		</query>
+		<!-- 19-SEP-2018 || MST || Fetch Department List end -->
+
+		<!-- 19-SEP-2018 || MST || Fetch Employee List start -->
+		<query id="tm_fetch_emp_list" query_name="tm_fetch_emp_list"
+			description="Fetch Employee List">
+        	<![CDATA[ select id, CONCAT (name ,' ', last_name) as full_name from employee_info 
+        				where org_id_id = %s and org_unit_id_id = %s and team_name_id = %s and is_active = TRUE order by id; ]]>
+		</query>
+		<!-- 19-SEP-2018 || MST || Fetch Employee List end -->
+
+		<!-- 19-SEP-2018 || MST || Fetch Employee Profile start -->
+		<query id="tm_emp_profile" query_name="tm_emp_profile"
+			description="Fetch Employee Profile">
+        	<![CDATA[ select ai.name as img_name, CONCAT (ei.name ,' ', ei.last_name) as name, ti.role_title, ei.work_email, 
+       					ei.work_phone, ei.work_mobile, ci.country_name,  to_char(ei.date_of_joining, 'DD/MM/YYYY') as joining_date 
+       					from employee_info ei
+						left join attachment_info ai on ai.id = ei.image_id_id
+						left join hcms_ti_role_details ti on ti.id = ei.role_id_id
+						left join country_info ci on ci.id = ei.country_id
+						where ei.id = %s; ]]>
+		</query>
+		<!-- 19-SEP-2018 || MST || Fetch Employee Profile end -->
+
+		<!-- 20-SEP-2018 || MST || Check if matrix already exists start -->
+		<query id="tm_tp_cat_name" query_name="tm_tp_cat_name"
+			description="Check matrix Already Exists">
+        	<![CDATA[ SELECT tp_range_1_to, tp_range_2_from, tp_range_2_to, tp_range_3_from FROM hcms_tm_per_pot_ranges where tp_cat_name = %s; ]]>
+		</query>
+		<!-- 20-SEP-2018 || MST || Check if matrix already exists end -->
+
+		<!-- 20-SEP-2018 || MST || Insert query for Performance and Potential start -->
+		<query id="tm_tp_per_pot_create" query_name="tm_tp_per_pot_create"
+			description="Performance and Potential matrix Insert">
+        	<![CDATA[ INSERT INTO hcms_tm_per_pot_ranges(
+						created_date, modified_date, is_active, tp_cat_name, tp_range_1_from, 
+						tp_range_1_to, tp_range_2_from, tp_range_2_to, tp_range_3_from, 
+						tp_range_3_to, created_by_id, modified_by_id)
+						VALUES (now(), now(), TRUE, %s, 0, 
+						%s, %s, %s, %s, 
+						100, %s, %s); ]]>
+		</query>
+		<!-- 20-SEP-2018 || MST || Insert query for Performance and Potential end -->
+
+		<!-- 20-SEP-2018 || MST || Update query for Performance and Potential start -->
+		<query id="tm_tp_per_pot_update" query_name="tm_tp_per_pot_update"
+			description="Performance and Potential matrix Update">
+        	<![CDATA[ UPDATE hcms_tm_per_pot_ranges
+						SET modified_date=now(), tp_range_1_to=%s, 
+						tp_range_2_from=%s, tp_range_2_to=%s, 
+						tp_range_3_from=%s,  modified_by_id=%s
+						WHERE tp_cat_name=%s; ]]>
+		</query>
+		<!-- 20-SEP-2018 || MST || Update query for Performance and Potential end -->
+
+		<!-- 20-SEP-2018 || SMI || Fetch Matrix Data start -->
+		<query id="tm_fetch_matrix_data" query_name="tm_fetch_matrix_data"
+			description="Fetch Matrix Data">
+        	<![CDATA[ select tb1.*, CONCAT (ei.name ,' ', ei.last_name) as emp_name, ai.name as img_name from
+						(select t1.employee_id, t1.perf_score, t2.comp_assess_score, t1.assessment_year, t1.assessment_quarter from
+						(select * from 
+						(select ap.employee_id, round((avg(ap.assessment_rating)*100)/5) as perf_score, af.assessment_year, af.assessment_quarter
+						from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where af.id = ap.assessment_form_id
+						group by ap.employee_id, af.assessment_year, af.assessment_quarter)a
+						where employee_id in (select id from employee_info where team_name_id = %s))t1
+						join
+						(select * from 
+						(select comp_assess_employee_id as employee_id, cast(round((avg(comp_assess_score)*100)/6)as integer) as comp_assess_score, 
+						comp_assess_year, comp_assess_quarter from
+						(select comp_assess_employee_id, unnest(comp_assess_score) as comp_assess_score, 
+						comp_assess_year, comp_assess_quarter from hcms_tm_competency_assessment)a
+						group by comp_assess_employee_id, comp_assess_year, comp_assess_quarter)b
+						where employee_id in (select id from employee_info where team_name_id = %s))t2 
+						on t1.employee_id = t2.employee_id 
+						and t1.assessment_year::int = t2.comp_assess_year
+						and t1.assessment_quarter = t2.comp_assess_quarter)tb1, employee_info ei
+						left join attachment_info ai on ai.id = ei.image_id_id
+						where tb1.employee_id = ei.id  
+						and assessment_year::int = %s and assessment_quarter = %s
+						order by tb1.employee_id; ]]>
+		</query>
+		<!-- 20-SEP-2018 || SMI || Fetch Matrix Data end -->
+
+		<!-- 26-SEP-2018 || SMI || Fetch Performance and Potential Matrix Data 
+			for a particular year start -->
+		<query id="tm_fetch_per_pot_year_data" query_name="tm_fetch_per_pot_year_data"
+			description="Fetch Performance and Potential Matrix Data">
+        	<![CDATA[ select * from (select tb1.employee_id, tb1.perf_score, tb1.comp_assess_score, tb1.assessment_quarter from						
+						(select t1.employee_id, t1.perf_score, t2.comp_assess_score, t1.assessment_year, t1.assessment_quarter from						
+						(select * from 
+						(select ap.employee_id, round((avg(ap.assessment_rating)*100)/5) as perf_score, af.assessment_year, 
+						af.assessment_quarter from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where af.id = ap.assessment_form_id
+						group by ap.employee_id, af.assessment_year, af.assessment_quarter)a 
+						where employee_id in (select id from employee_info where team_name_id = %s))t1						
+						join
+						(select * from 
+						(select comp_assess_employee_id as employee_id, cast(round((avg(comp_assess_score)*100)/6)as integer) 
+						as comp_assess_score, comp_assess_year, comp_assess_quarter from
+						(select comp_assess_employee_id, unnest(comp_assess_score) 
+						as comp_assess_score, comp_assess_year, comp_assess_quarter from hcms_tm_competency_assessment)a 
+						group by comp_assess_employee_id, 
+						comp_assess_year, comp_assess_quarter)b 
+						where employee_id in (select id from employee_info where team_name_id = %s))t2
+						on t1.employee_id = t2.employee_id
+						and t1.assessment_year::int = t2.comp_assess_year 
+						and t1.assessment_quarter = t2.comp_assess_quarter)tb1, employee_info ei 
+						left join attachment_info ai on ai.id = ei.image_id_id 
+						where tb1.employee_id = ei.id 
+						and assessment_year::int = %s
+						order by tb1.employee_id) c where c.employee_id=%s; ]]>
+		</query>
+		<!-- 26-SEP-2018 || SMI || Fetch Performance and Potential Matrix Data 
+			for a particular year end -->
+
+		<!-- 26-SEP-2018 || MST || Performance and Potential fetch start -->
+		<query id="tm_per_pot_fetch" query_name="tm_per_pot_fetch"
+			description="Fetching Performance and Potential matrix">
+        	<![CDATA[ SELECT tp_range_1_from, tp_range_1_to, tp_range_2_from, 
+                        tp_range_2_to, tp_range_3_from, tp_range_3_to
+                      	FROM hcms_tm_per_pot_ranges where tp_cat_name=%s; ]]>
+		</query>
+		<!-- 26-SEP-2018 || MST || Performance and Potential fetch end -->
+
+		<!-- 24-SEP-2018 || SMI || Fetch year for matrix start -->
+		<query id="tm_fetch_matrix_years" query_name="tm_fetch_matrix_years"
+			description="Fetch data for roles filter in matrix">
+        	<![CDATA[ select min(date_part('year', date_of_joining)) as year from employee_info where team_name_id = %s; ]]>
+		</query>
+		<!-- 24-SEP-2018 || SMI || Fetch year for matrix end -->
+
+		<!-- Competency Assessment Queries Start -->
+
+		<!-- 19-SEP-2018 || KAV || Fetch Competency Based Employee List start -->
+		<query id="tm_fetch_comp_emp_list" query_name="tm_fetch_comp_emp_list"
+			description="Fetch Competency Based Employee List">
+            <![CDATA[ select a.id,a.full_name  from (select id,role_id_id,org_id_id,org_unit_id_id,team_name_id,is_active,CONCAT (name ,' ', last_name) as
+             full_name from employee_info)a,(select id,skillset_role_id from hcms_ti_role_skillset)b where a.role_id_id = b.skillset_role_id and
+             a.org_id_id = %s and a.org_unit_id_id = %s and a.team_name_id = %s and a.is_active = TRUE group by a.id,a.full_name ]]>
+		</query>
+		<!-- 19-SEP-2018 || KAV || Competency Based Employee List end -->
+
+		<!-- 19-SEP-2018 || KAV || Fetch Employee Year start -->
+		<query id="tm_cmpt_emp_year" query_name="tm_cmpt_emp_year"
+			description="Fetch Employee Year Detail">
+	            <![CDATA[   select  to_char(ei.date_of_joining, 'DD/MM/YYYY') as joining_date
+	                            from employee_info ei where ei.id = %s;]]>
+		</query>
+		<!-- 19-SEP-2018 || KAV || Fetch Employee Year end -->
+
+		<!-- 20-SEP-2018 || KAV || Fetch Employee Detail List start -->
+		<query id="tm_compt_emp_detail" query_name="tm_compt_emp_detail"
+			description="Fetch Employee Detail List ">
+            <![CDATA[ select to_char(date_of_joining, 'DD/MM/YYYY') as joining_date,role_id_id from employee_info where id = %s and is_active = TRUE order by id; ]]>
+		</query>
+		<!-- 20-SEP-2018 || KAV || Fetch Employee Detail List end -->
+
+		<!-- 20-SEP-2018 || KAV || Fetch Technical Competency Summary start -->
+		<query id="tm_tech_compt_details" query_name="tm_tech_compt_details"
+			description="Fetch Technical Competency Summary ">
+            <![CDATA[ select  rs.skillset_competency_id_id as compt_id,rc.refitem_category_code ,r1.refitems_name as
+                               tech_summary from hcms_ti_role_skillset rs
+                               inner join  reference_items r1 on r1.id = rs.skillset_competency_id_id
+                               inner join  reference_item_category rc on rc.id = r1.refitems_category_id
+                               where rs.skillset_role_id = %s and rc.refitem_category_code = 'TECMP' and rs.is_active = TRUE
+                               order by rs.skillset_competency_id_id ; ]]>
+		</query>
+		<!-- 20-SEP-2018 || KAV || Fetch Technical Competency Summary end -->
+
+		<!-- 20-SEP-2018 || KAV || Fetch Functional Competency Summary start -->
+		<query id="tm_func_compt_details" query_name="tm_func_compt_details"
+			description="Fetch Functional Competency Summary ">
+            <![CDATA[ select  rs.skillset_competency_id_id as compt_id,rc.refitem_category_code ,r1.refitems_name as
+                                func_summary from hcms_ti_role_skillset rs
+                                inner join  reference_items r1 on r1.id = rs.skillset_competency_id_id
+                                inner join  reference_item_category rc on rc.id = r1.refitems_category_id
+                                where rs.skillset_role_id = %s and rc.refitem_category_code = 'FNCMP' and rs.is_active = TRUE
+                                order by rs.skillset_competency_id_id ; ]]>
+		</query>
+		<!-- 20-SEP-2018 || KAV || Fetch Functional Competency Summary end -->
+
+		<!-- 20-SEP-2018 || KAV || Fetch Behaviour Competency Summary start -->
+		<query id="tm_behav_compt_details" query_name="tm_behav_compt_details"
+			description="Fetch Behaviour Competency Summary">
+            <![CDATA[ select  rs.skillset_competency_id_id as compt_id,rc.refitem_category_code ,r1.refitems_name as
+                                behav_summary from hcms_ti_role_skillset rs
+                                inner join  reference_items r1 on r1.id = rs.skillset_competency_id_id
+                                inner join  reference_item_category rc on rc.id = r1.refitems_category_id
+                                where rs.skillset_role_id = %s and rc.refitem_category_code = 'BHCMP' and rs.is_active = TRUE  
+                                order by rs.skillset_competency_id_id; ]]>
+		</query>
+		<!-- 20-SEP-2018 || KAV || Fetch Behaviour Competency Summary end -->
+
+		<!-- 20-SEP-2018 || KAV || Fetch Behaviour Competency Summary start -->
+		<query id="tm_ca_details_fetch" query_name="tm_ca_details_fetch"
+			description="Fetch competency assessment details">
+            <![CDATA[ select ca.id,ca.comp_assess_perf_history,ca.comp_assess_work_areas,ca.comp_assess_employee_id,ca.comp_assess_competency,ri.refitem_category_code,
+						comp_assess_score, comp_assess_year,comp_assess_quarter from hcms_tm_competency_assessment ca, reference_item_category ri
+						where ca.comp_assess_comp_type_id = ri.id and ca.is_active = 'True' and ca.comp_assess_employee_id = %s 
+						and ca.comp_assess_year::int = %s and ca.comp_assess_quarter = %s; ]]>
+		</query>
+		<!-- 20-SEP-2018 || KAV || Fetch Behaviour Competency Summary end -->
+
+		<!-- 28-SEP-2018 || SMI || Fetch Competency Type ID start -->
+		<query id="tm_ca_comp_id_fetch" query_name="tm_ca_comp_id_fetch"
+			description="Fetch Competency Type ID">
+            <![CDATA[ select id from reference_item_category where refitem_category_code = %s; ]]>
+		</query>
+		<!-- 28-SEP-2018 || SMI || Fetch Competency Type ID end -->
+
+		<!-- 28-SEP-2018 || SMI || Insert Competencies Assessment start -->
+		<query id="tm_ca_details_insert" query_name="tm_ca_details_insert"
+			description="Insert Competencies Assessment">
+            <![CDATA[ INSERT INTO hcms_tm_competency_assessment(
+                                        created_date, modified_date, is_active, comp_assess_perf_history, 
+                                        comp_assess_work_areas, comp_assess_employee_id, created_by_id, 
+                                        modified_by_id, comp_assess_competency, comp_assess_score, comp_assess_quarter, 
+                                        comp_assess_year, comp_assess_comp_type_id)
+		                                VALUES (now(), now(), TRUE, %s, 
+		                                        %s, %s, %s, 
+		                                        %s, %s, %s, %s, 
+		                                        %s, %s); ]]>
+		</query>
+		<!-- 28-SEP-2018 || SMI || Insert Competencies Assessment end -->
+
+		<!-- 28-SEP-2018 || SMI || Update Competencies Assessment start -->
+		<query id="tm_ca_details_update" query_name="tm_ca_details_update"
+			description="Update Competencies Assessment">
+            <![CDATA[ UPDATE hcms_tm_competency_assessment
+                                SET modified_date=now(), is_active=TRUE, comp_assess_perf_history=%s, 
+                                comp_assess_work_areas=%s, comp_assess_employee_id=%s, modified_by_id=%s,
+                                comp_assess_competency=%s, comp_assess_score=%s
+                                where comp_assess_employee_id = %s and comp_assess_quarter = %s 
+                                and comp_assess_year = %s and comp_assess_comp_type_id = %s; ]]>
+		</query>
+		<!-- 28-SEP-2018 || SMI || Update Competencies Assessment end -->
+
+		<!-- 28-SEP-2018 || SMI || Remove Competencies Assessment start -->
+		<query id="tm_ca_details_remove" query_name="tm_ca_details_remove"
+			description="Delete Competencies Assessment">
+            <![CDATA[ UPDATE hcms_tm_competency_assessment
+                                SET modified_date=now(), is_active=FALSE,  modified_by_id=%s
+                                where comp_assess_employee_id = %s and comp_assess_quarter = %s 
+                                and comp_assess_year = %s; ]]>
+		</query>
+		<!-- 28-SEP-2018 || SMI || Remove Competencies Assessment end -->
+		<!-- Competency Assessment Queries Ends -->
+
+		<!-- Accolades Query Start -->
+		<!-- 27-SEP-2018 || KAV || Insert Accolades Details start -->
+		<query id="tm_insert_accol_details" query_name="tm_insert_accol_details"
+			description="Insert Accolades  Details">
+	            <![CDATA[ insert into hcms_tm_comp_assess_accolades(created_date,modified_date,is_active,ca_accolades_title,
+                                 ca_accolades_year,ca_accolades_quarter,ca_accolades_awarded_by_id,ca_accolades_desc,
+                                 ca_accolades_employee_id,created_by_id,modified_by_id)values(now(),now(),
+                                 True,%s,%s,0,%s,%s,%s,%s,%s); ]]>
+		</query>
+		<!-- 27-SEP-2018 || KAV || Insert Accolades Details end -->
+
+		<!-- 27-SEP-2018 || KAV || Update Accolades Details start -->
+		<query id="tm_update_accol_details" query_name="tm_update_accol_details"
+			description="Update Accolades  Details">
+	            <![CDATA[ update hcms_tm_comp_assess_accolades set ca_accolades_title=%s,ca_accolades_year = %s,
+                            ca_accolades_quarter = 0,ca_accolades_awarded_by_id=%s,
+                            ca_accolades_desc=%s,ca_accolades_employee_id=%s,modified_by_id=%s where id =%s ;]]>
+		</query>
+		<!-- 27-SEP-2018 || KAV || Update Accolades Details end -->
+
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades List Details start -->
+		<query id="tm_accol_details_fetch" query_name="tm_accol_details_fetch"
+			description="Fetch Accolades  List Details">
+	            <![CDATA[ select b.id as emp_id,b.img_name,a.id,a.ca_accolades_title,a.ca_accolades_year,a.org_name,a.ca_accolades_desc
+                            from (select acc.id,acc.is_active,acc.ca_accolades_employee_id,acc.ca_accolades_title,
+                            acc.ca_accolades_year,acc.ca_accolades_desc, org.name as org_name from hcms_tm_comp_assess_accolades 
+                            acc inner join organization_info org on org.id = acc.ca_accolades_awarded_by_id )a , 
+                            (select ei.id as id,  CONCAT (ei.name ,' ', ei.last_name) as name,ai.name as img_name from employee_info ei left join attachment_info ai 
+                            on ai.id = ei.image_id_id where org_id_id =%s and org_unit_id_id =%s and team_name_id = %s)b
+                            where a.ca_accolades_employee_id = b.id and a.is_active = 'True'; ]]>
+		</query>
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades List Details end -->
+
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades Card Click List Details start -->
+		<query id="tm_accol_cardclick_fetch" query_name="tm_accol_cardclick_fetch"
+			description="Fetch Accolades Card Click  List Details">
+	            <![CDATA[ select ca.ca_accolades_title , ca.ca_accolades_year ,
+                                ca.ca_accolades_desc ,ca.ca_accolades_employee_id ,org.name as ca_accolades_awarded_by_id
+                                from hcms_tm_comp_assess_accolades ca inner join organization_info org on org.id = ca.ca_accolades_awarded_by_id
+                                  where ca.id = %s and ca.is_active  = 'True' ; ]]>
+		</query>
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades Card Click List Details end -->
+
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades Card Click List Details start -->
+		<query id="tm_accol_remove" query_name="tm_accol_remove"
+			description="Remove Accolades Details">
+	            <![CDATA[	update hcms_tm_comp_assess_accolades set is_active = 'False' ,modified_by_id=%s where id =%s   ]]>
+		</query>
+		<!-- 27-SEP-2018 || KAV || Fetch Accolades Card Click List Details end -->
+
+		<!-- 01-OCT-2018 || KAV || Fetching My Accolades Details using user id start -->
+		<query id="my_accol_details_fetch" query_name="my_accol_details_fetch"
+			description="Fetching My Accolades Details using user id">
+            <![CDATA[ select b.id as emp_id,b.img_name,a.id,a.ca_accolades_title,a.ca_accolades_year,a.org_name,a.ca_accolades_desc
+                            from (select acc.id,acc.is_active,acc.ca_accolades_employee_id,acc.ca_accolades_title,
+                            acc.ca_accolades_year,acc.ca_accolades_desc, org.name as org_name from hcms_tm_comp_assess_accolades 
+                            acc inner join organization_info org on org.id = acc.ca_accolades_awarded_by_id )a , 
+                            (select ei.id as id,  CONCAT (ei.name ,' ', ei.last_name) as name,ai.name as img_name from employee_info ei left join attachment_info ai 
+                            on ai.id = ei.image_id_id where ei.related_user_id_id = %s)b
+                            where a.ca_accolades_employee_id = b.id and a.is_active = 'True'; ]]>
+		</query>
+		<!-- 01-OCT-2018 || KAV || Fetching Fetching My Accolades Details using user id end -->
+
+		<!-- Accolades Query End -->
+
+		<!-- 01-OCT-2018 || MST || Fetching Employee ID using user id start -->
+		<query id="tm_tp_fetch_eid" query_name="tm_tp_fetch_eid"
+			description="Fetching Employee ID using user id">
+            <![CDATA[ select id, team_name_id from employee_info where related_user_id_id =%s; ]]>
+		</query>
+		<!-- 01-OCT-2018 || MST || Fetching Employee ID using user id end -->
+
+		<!-- 03-OCT-2018 || SMI || Fetching Competency Type Scores start -->
+		<query id="tm_tp_comp_type_scores" query_name="tm_tp_comp_type_scores"
+			description="Fetching Competency Type Scores">
+            <![CDATA[ select employee_id, comp_code, comp_name, comp_assess_year, round(req_score::int) as req_score, comp_assess_score from
+                                (select * from
+                                (select comp_assess_employee_id as employee_id, comp_assess_comp_type_id, cast(round((avg(comp_assess_score)*100)/6)as integer)as comp_assess_score, comp_assess_year from
+                                (select comp_assess_comp_type_id, comp_assess_employee_id, unnest(comp_assess_score)as comp_assess_score, comp_assess_year
+                                from hcms_tm_competency_assessment)a
+                                group by comp_assess_employee_id, comp_assess_comp_type_id,comp_assess_year)b
+                                where employee_id = %s)tbl1,
+                                (select comp_code, comp_id, comp_name,
+                                avg(case when level_code = 'BASIC' then (select tp_range_1_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                when level_code = 'INMDT' then (select tp_range_2_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                when level_code = 'ADVCD' then (select tp_range_3_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                else 0 end) as req_score from
+                                (select e.id as comp_id, e.refitem_category_code as comp_code, e.refitem_category_name as comp_name, c.refitems_code as level_code from
+                                (select a.skillset_competency_id_id, b.refitems_code
+                                from hcms_ti_role_skillset a, reference_items b
+                                where a.skillset_skill_level_refitem_id = b.id and
+                                a.skillset_role_id = (select role_id_id from employee_info where id = %s))c, reference_items d, reference_item_category e
+                                where d.id = c.skillset_competency_id_id and d.refitems_category_id = e.id)t1
+                                group by comp_code, comp_id, comp_name)tbl2
+                                where tbl1.comp_assess_comp_type_id = tbl2.comp_id and comp_assess_year = %s; ]]>
+		</query>
+		<!-- 03-OCT-2018 || SMI || Fetching Competency Type Scores end -->
+
+		<!-- 03-OCT-2018 || SMI || Fetching Competencies Scores start -->
+		<query id="tm_tp_comp_scores" query_name="tm_tp_comp_scores"
+			description="Fetching Competencies Scores">
+            <![CDATA[ select comp_code as comp_type, comp_name, round(req_score::int) as req_score, comp_assess_score from
+                                (select comp_assess_competency, cast(round((avg(comp_assess_score)*100)/6)as integer)as comp_assess_score from
+                                (select unnest(comp_assess_competency) as comp_assess_competency, unnest(comp_assess_score)as comp_assess_score
+                                from hcms_tm_competency_assessment where comp_assess_employee_id = %s and comp_assess_year=%s)a group by comp_assess_competency)tbl1,
+                                (select *,
+                                (case when level_code = 'BASIC' then (select tp_range_1_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                when level_code = 'INMDT' then (select tp_range_2_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                when level_code = 'ADVCD' then (select tp_range_3_to from hcms_tm_per_pot_ranges where tp_cat_name = 'Potential')
+                                else 0 end) as req_score from
+                                (select e.id as comp_id, e.refitem_category_code as comp_code, c.skillset_competency_id_id, d.refitems_name as comp_name, c.refitems_code as level_code from
+                                (select a.skillset_competency_id_id, b.refitems_code
+                                from hcms_ti_role_skillset a, reference_items b
+                                where a.skillset_skill_level_refitem_id = b.id and
+                                a.skillset_role_id = (select role_id_id from employee_info where id = %s))c, reference_items d, reference_item_category e
+                                where d.id = c.skillset_competency_id_id and d.refitems_category_id = e.id)t1)tbl2
+                                where tbl1.comp_assess_competency = tbl2.skillset_competency_id_id; ]]>
+		</query>
+		<!-- 03-OCT-2018 || SMI || Fetching Competencies Scores end -->
+		
+		<!-- 12-OCT-2018 || SMI || Fetching My Performance overall data start -->
+		<query id="tm_my_perf_data" query_name="tm_my_perf_data"
+			description="Fetching My Performance data">
+            <![CDATA[ select concat('OKR_',ok.kr_summary) as kra, a.assessor_types, a.ratings from
+						(select assessment_form_okr_kra_id, assessment_form_role_kra_id, array_agg(assessor_type) as assessor_types, array_agg(rating) as ratings from
+						(select assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name as assessor_type, cast(round((avg(assessment_rating)*100)/5)as integer) as rating
+						from hcms_pm_assessment_process ap left join reference_items ri on ri.id = assessment_process_assessor_type_id
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int = %s and assessment_quarter = %s and assessment_form_employee_id = %s and is_active = TRUE)
+						and ap.is_active = TRUE
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name)a
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id)a, hcms_pm_key_result ok
+						where a.assessment_form_okr_kra_id = ok.id
+						union
+						select concat('Role_',rk.kpi_definition) as kra, a.assessor_types, a.ratings from
+						(select assessment_form_okr_kra_id, assessment_form_role_kra_id, array_agg(assessor_type) as assessor_types, array_agg(rating) as ratings from
+						(select assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name as assessor_type, cast(round((avg(assessment_rating)*100)/5)as integer) as rating
+						from hcms_pm_assessment_process ap left join reference_items ri on ri.id = assessment_process_assessor_type_id
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int = %s and assessment_quarter = %s and assessment_form_employee_id = %s and is_active = TRUE)
+						and ap.is_active = TRUE
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name)a
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id)a, hcms_ti_role_kpi rk
+						where a.assessment_form_role_kra_id = rk.id order by kra; ]]>
+		</query>
+		<!-- 12-OCT-2018 || SMI || Fetching My Performance overall data end -->
+		
+		<!-- 12-OCT-2018 || SMI || Fetching My Performance Selected KRA overall data start -->
+		<query id="tm_my_perf_sel_kra_data" query_name="tm_my_perf_sel_kra_data"
+			description="Fetching My Performance Selected KRA data">
+            <![CDATA[ select * from (select concat(okr_kra_id,role_kra_id) as kra_id, concat('OKR_',ok.kr_summary) as kra, a.assessor_types, a.ratings from
+						(select okr_kra_id, role_kra_id, array_agg(assessor_type) as assessor_types, array_agg(rating) as ratings from
+						(select assessment_form_okr_kra_id as okr_kra_id, assessment_form_role_kra_id as role_kra_id, ri.refitems_name as assessor_type, cast(round((avg(assessment_rating)*100)/5)as integer) as rating
+						from hcms_pm_assessment_process ap left join reference_items ri on ri.id = assessment_process_assessor_type_id
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int = %s and assessment_quarter = %s and assessment_form_employee_id = %s and is_active = TRUE)
+						and ap.is_active = TRUE
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name)a
+						group by okr_kra_id, role_kra_id)a, hcms_pm_key_result ok
+						where a.okr_kra_id = ok.id
+						union
+						select concat(okr_kra_id,role_kra_id) as kra_id, concat('Role_',rk.kpi_definition) as kra, a.assessor_types, a.ratings from
+						(select okr_kra_id, role_kra_id, array_agg(assessor_type) as assessor_types, array_agg(rating) as ratings from
+						(select assessment_form_okr_kra_id as okr_kra_id, assessment_form_role_kra_id as role_kra_id, ri.refitems_name as assessor_type, cast(round((avg(assessment_rating)*100)/5)as integer) as rating
+						from hcms_pm_assessment_process ap left join reference_items ri on ri.id = assessment_process_assessor_type_id
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int = %s and assessment_quarter = %s and assessment_form_employee_id = %s and is_active = TRUE)
+						and ap.is_active = TRUE
+						group by assessment_form_okr_kra_id, assessment_form_role_kra_id, ri.refitems_name)a
+						group by okr_kra_id, role_kra_id)a, hcms_ti_role_kpi rk
+						where a.role_kra_id = rk.id order by kra)t1 where kra_id::int=%s and kra ilike %s; ]]>
+		</query>
+		<!-- 12-OCT-2018 || SMI || Fetching My Performance Selected KRA overall data end -->
+		
+		<!-- 15-OCT-2018 || SMI || Fetching My Performance Assessor Types start -->
+		<query id="tm_perf_assessors" query_name="tm_perf_assessors"
+			description="Fetching My Performance Assessor Types">
+            <![CDATA[ select refitems_name from reference_items where refitems_category_id in 
+            			(select id from reference_item_category where refitem_category_code in ('ASMTY', 'EXAST')) and is_active; ]]>
+		</query>
+		<!-- 15-OCT-2018 || SMI || Fetching My Performance Assessor Types end -->
+		
+		<!-- 16-OCT-2018 || SMI || Fetching My Performance Comparison chart data start -->
+		<query id="tm_perf_comp_data" query_name="tm_perf_comp_data"
+			description="Fetching My Performance Comparison chart data">
+            <![CDATA[ select ft1.kra_id, concat('OKR_',ft1.kr_summary) as kra, ft1.rating, coalesce(ft2.rating,0) as prev_rating, ft1.rating-coalesce(ft2.rating,0) as gap from
+						(select t1.kra_id, kr.kr_summary, t1.rating from
+						(select ap.assessment_form_okr_kra_id as kra_id, cast(round((avg(ap.assessment_rating)*100)/5)as integer) as rating, 
+						af.assessment_year, af.assessment_quarter
+						from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where ap.assessment_form_id = af.id
+						and ap.employee_id = %s and ap.is_active and af.is_active
+						group by ap.assessment_form_okr_kra_id, af.assessment_year, af.assessment_quarter)t1, hcms_pm_key_result kr
+						where t1.kra_id = kr.id
+						and t1.assessment_year::int = %s and t1.assessment_quarter = %s)ft1
+						left join 
+						(select t1.kra_id, kr.kr_summary, t1.rating from
+						(select ap.assessment_form_okr_kra_id as kra_id, cast(round((avg(ap.assessment_rating)*100)/5)as integer) as rating, 
+						af.assessment_year, af.assessment_quarter
+						from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where ap.assessment_form_id = af.id
+						and ap.employee_id = %s and ap.is_active and af.is_active
+						group by ap.assessment_form_okr_kra_id, af.assessment_year, af.assessment_quarter)t1, hcms_pm_key_result kr
+						where t1.kra_id = kr.id
+						and t1.assessment_year::int = %s and t1.assessment_quarter = %s)ft2
+						on ft1.kra_id = ft2.kra_id
+						union
+						select ft1.kra_id, concat('Role_',ft1.kpi_definition) as kra, ft1.rating, coalesce(ft2.rating,0) as prev_rating, ft1.rating-coalesce(ft2.rating,0) as gap from
+						(select t1.kra_id, rk.kpi_definition, t1.rating from
+						(select ap.assessment_form_role_kra_id as kra_id, cast(round((avg(ap.assessment_rating)*100)/5)as integer) as rating, 
+						af.assessment_year, af.assessment_quarter
+						from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where ap.assessment_form_id = af.id
+						and ap.employee_id = %s and ap.is_active and af.is_active
+						group by ap.assessment_form_role_kra_id, af.assessment_year, af.assessment_quarter)t1, hcms_ti_role_kpi rk
+						where t1.kra_id = rk.id
+						and t1.assessment_year::int = %s and t1.assessment_quarter = %s)ft1
+						left join 
+						(select t1.kra_id, rk.kpi_definition, t1.rating from
+						(select ap.assessment_form_role_kra_id as kra_id, cast(round((avg(ap.assessment_rating)*100)/5)as integer) as rating, 
+						af.assessment_year, af.assessment_quarter
+						from hcms_pm_assessment_process ap, hcms_pm_assessment_form af
+						where ap.assessment_form_id = af.id
+						and ap.employee_id = %s and ap.is_active and af.is_active
+						group by ap.assessment_form_role_kra_id, af.assessment_year, af.assessment_quarter)t1, hcms_ti_role_kpi rk
+						where t1.kra_id = rk.id
+						and t1.assessment_year::int = %s and t1.assessment_quarter = %s)ft2
+						on ft1.kra_id = ft2.kra_id
+						order by kra; ]]>
+		</query>
+		<!-- 16-OCT-2018 || SMI || Fetching My Performance Comparison chart data end -->
+		
+		<!-- 09-OCT-2018 || KAV || Fetching My Feedback Details using user id start -->
+		<query id="my_feedback_details_fetch" query_name="my_feedback_details_fetch"
+			description="Fetching My Feedback Details using user id">
+            <![CDATA[ select t1.assessor_type, t2.name as image, t1.assessor_name, t1.assessor_feedback from
+							(select ri.refitems_code as assessor_type, concat(em.name,' ',em.last_name) as assessor_name,
+							em.image_id_id, ai.assessor_feedback,ai.is_active
+							from hcms_pm_assessor_info ai, employee_info em, reference_items ri
+							where assessment_form_id = (select id from hcms_pm_assessment_form
+							where assessment_form_employee_id = (select id from employee_info
+							where related_user_id_id = %s) and assessment_year::int=%s and assessment_quarter = %s)
+							and ai.assessor_type_refitem_id = ri.id
+							and ai.assessor_id = em.id) t1
+							left join attachment_info t2 on t1.image_id_id = t2.id where t1.is_active = 'True' ]]>
+		</query>
+		<!-- 09-OCT-2018 || KAV || Fetching My Feedback Details using user id end -->
+		
+		<!-- 01-NOV-2018 || SMI || Fetching My Performance Comparison Selected KRA overall chart Role data start -->
+		<query id="tm_my_perf_sel_kra_comp_role_data" query_name="tm_my_perf_sel_kra_comp_role_data"
+			description="Fetching My Performance Comparison Selected KRA Role id">
+            <![CDATA[ select ri.refitems_name as assessor_type, t1.current_rating, t1.prev_rating, t1.gap from
+						(select a.assr_tp_id, a.current_rating, coalesce(b.prev_rating, 0)as prev_rating, (a.current_rating - coalesce(b.prev_rating, 0))as gap from
+						(select assessment_process_assessor_type_id as assr_tp_id, cast(round((avg(assessment_rating)*100)/5)as integer)as current_rating
+						from hcms_pm_assessment_process 
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int=%s and assessment_quarter=%s and assessment_form_employee_id=%s and is_active)
+						and assessment_form_role_kra_id = %s and is_active
+						group by assessment_process_assessor_type_id)a
+						left join
+						(select assessment_process_assessor_type_id as assr_tp_id, cast(round((avg(assessment_rating)*100)/5)as integer)as prev_rating
+						from hcms_pm_assessment_process 
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int=%s and assessment_quarter=%s and assessment_form_employee_id=%s and is_active)
+						and assessment_form_role_kra_id = %s and is_active
+						group by assessment_process_assessor_type_id)b
+						on a.assr_tp_id = b.assr_tp_id)t1, reference_items ri
+						where ri.id = t1.assr_tp_id; ]]>
+		</query>
+		<!-- 01-NOV-2018 || SMI || Fetching My Performance Comparison Selected KRA overall chart Role data end -->
+		
+		<!-- 01-NOV-2018 || SMI || Fetching My Performance Comparison Selected KRA overall chart OKR data start -->
+		<query id="tm_my_perf_sel_kra_comp_okr_data" query_name="tm_my_perf_sel_kra_comp_okr_data"
+			description="Fetching My Performance Comparison Selected KRA OKR id">
+            <![CDATA[ select ri.refitems_name as assessor_type, t1.current_rating, t1.prev_rating, t1.gap from
+						(select a.assr_tp_id, a.current_rating, coalesce(b.prev_rating, 0)as prev_rating, (a.current_rating - coalesce(b.prev_rating, 0))as gap from
+						(select assessment_process_assessor_type_id as assr_tp_id, cast(round((avg(assessment_rating)*100)/5)as integer)as current_rating
+						from hcms_pm_assessment_process 
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int=%s and assessment_quarter=%s and assessment_form_employee_id=%s and is_active)
+						and assessment_form_okr_kra_id = %s and is_active
+						group by assessment_process_assessor_type_id)a
+						left join
+						(select assessment_process_assessor_type_id as assr_tp_id, cast(round((avg(assessment_rating)*100)/5)as integer)as prev_rating
+						from hcms_pm_assessment_process 
+						where assessment_form_id = (select id from hcms_pm_assessment_form 
+						where assessment_year::int=%s and assessment_quarter=%s and assessment_form_employee_id=%s and is_active)
+						and assessment_form_okr_kra_id = %s and is_active
+						group by assessment_process_assessor_type_id)b
+						on a.assr_tp_id = b.assr_tp_id)t1, reference_items ri
+						where ri.id = t1.assr_tp_id; ]]>
+		</query>
+		<!-- 01-NOV-2018 || SMI || Fetching My Performance Comparison Selected KRA overall chart OKR data end -->
+		
+		<!-- 13-NOV-2018 || KAV || To Fetch User Details start  -->    
+        <query id="fetch_user_details" query_name="fetch_user_details" description="Fetch User Details ">
+              <![CDATA[select team_name_id, org_unit_id_id, org_id_id   from employee_info  where related_user_id_id  = %s;]]>
+        </query>
+        <!-- 13-NOV-2018 || KAV || To Fetch User Details End -->
+        
+        <!-- 13-NOV-2018 || KAV || To Fetch Employee Details start  -->    
+        <query id="fetch_emp_details" query_name="fetch_emp_details" description="Fetch Employee Details ">
+              <![CDATA[select id,concat(name,' ',last_name)as name from employee_info where reporting_officer_id  = (select id from employee_info  where related_user_id_id = %s);]]>
+        </query>
+        <!-- 13-NOV-2018 || KAV || To Fetch Employee Details End -->
+	</queries>
+</data>

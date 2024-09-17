@@ -1,0 +1,7 @@
+.float-right{float:right !important;}
+.fa-times{cursor:pointer;}
+.asterisk, .error, .data-error{color:#e73d4a;}
+.val_message{     position: absolute;    width: 100%;    bottom: -20px;}
+.highlight-border{border-left: 5px solid #ff4300 !important;}
+#submit_form .form-group {    margin-bottom: 25px; }
+.align-center{text-align:center;};

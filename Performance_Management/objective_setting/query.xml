@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="objective_setting">
+		<query id="fetch_organization_details_view" query_name="fetch_organization_details_view"
+			description="fetch_organization_details_view">
+          <![CDATA[select id,name from organization_info where is_active=TRUE order by name]]>
+		</query>
+		<query id="team_detail_check" query_name="team_detail_check"
+			description="team_detail_check">
+          <![CDATA[select id,name from team_details_info  where org_unit_id =%s and is_active]]>
+		</query>
+		<query id="team_details_query" query_name="team_details_query" description="To fetch team details">
+        	<![CDATA[SELECT nt.team_id as id,td.name,nt.position_top,nt.position_left, nt.height,nt.width,nt.visual_type,nt.order_id from ntree_team nt left join team_details_info td
+on nt.team_id=td.id where nt.order_id !='' and td.org_unit_id=%s and nt.is_active and td.is_active order by nt.order_id asc]]>
+        </query>
+        <query id="tree_department_existcheck_query" query_name="tree_department_existcheck_query" description="To check team Details">
+        	<![CDATA[select id from ntree_team where team_id=%s and is_active=true]]>
+        </query>
+        <query id="update_tree_department_query" query_name="update_tree_department_query" description="To insert team Details">
+        	<![CDATA[UPDATE ntree_team SET position_left=%s,position_top=%s,height=%s,width=%s,order_id=%s,visual_type=%s where team_id=%s]]>
+        </query>
+        <query id="insert_tree_department_query" query_name="insert_tree_department_query" description="To insert team Details">
+        	<![CDATA[insert into ntree_team (position_left,position_top,height,width,order_id,visual_type,team_id,is_active) values(%s,%s,%s,%s,%s,%s,%s,true) returning id]]>
+        </query>
+        <query id="max_orderid_query" query_name="max_orderid_query" description="To fetch maximum order id from the ntree team ">
+        	<![CDATA[SELECT max(order_id) as order_id  FROM ntree_team]]>
+        </query>
+        <query id="already_existteam_query" query_name="already_existteam_query" description="To Check the team already Exist or not">
+        	<![CDATA[SELECT exists(select 1 from ntree_team where name ilike %s)]]>
+        </query>
+        <query id="remove_team_query" query_name="remove_team_query" description="To Update team Details with null values">
+        	<![CDATA[UPDATE ntree_team SET is_active=false where team_id=%s]]>
+        </query>
+        <query id="all_teamname_query" query_name="all_teamname_query" description="All Team Name Details">
+        	<![CDATA[SELECT id,name from team_details_info where is_active order by name]]>
+        </query>
+        <query id="org_unit_id_fetch" query_name="org_unit_id_fetch" description="All Employee Name Details">
+        	<![CDATA[select organization_id, id as org_unit_id from organization_unit_info where id=(select org_unit_id from team_details_info  where id=%s and is_active) and is_active
+ ]]>
+        </query>
+        <query id="allemp_details_query" query_name="allemp_details_query" description="All Employee Details query">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name,
+		tdi.name as team_name,ci.name as title,rd.name as designation from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_role rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id
+		left join team_details_info tdi on tdi.id=ei.team_name_id
+		 where ei.team_name_id=%s and ei.is_active]]>
+        </query>
+        <query id="all_tree_teamname_query" query_name="all_tree_teamname_query" description="All Team Name Details based on the Ntree">
+        	<![CDATA[
+SELECT nt.team_id as id,td.name from ntree_team nt left join team_details_info td
+on nt.team_id=td.id where nt.is_active and nt.order_id !='' and td.org_unit_id=%s and td.is_active order by nt.name asc]]>
+        </query>
+        <query id="allemp_name_query" query_name="allemp_name_query" description="All Employee Name Details">
+        	<![CDATA[SELECT id,concat(name, ' ', last_name) as employee_name from employee_info where is_active order by name]]>
+        </query>
+        <query id="teamview_empinfo_query" query_name="teamview_empinfo_query" description="Team view employee information">
+        	<![CDATA[select id as team_id,name as team_name,to_char((modified_date),'MM/DD/YYYY') as last_update from team_details_info  where is_active and id=%s
+]]>
+        </query>
+        <query id="team_emp_image_query" query_name="team_emp_image_query" description="To view Employee image based on the team">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name,tm.name as team_name from  employee_info  ei
+		left join attachment_info ai on ai.id = ei.image_id_id left join team_details_info tm on ei.team_name_id=tm.id
+		 where ei.team_name_id=%s and ei.is_active]]>
+        </query>
+        <query id="team_emp_fetch" query_name="team_emp_fetch" description="To view the team">
+        	<![CDATA[select name as team_name from team_details_info where id=%s and is_active]]>
+        </query>
+        <query id="already_existobjective_query" query_name="already_existobjective_query" description="To Check the Objective already Exist or not">
+        	<![CDATA[SELECT exists(select 1 from ntree_objective where objective ilike %s and assigned_id=%s)]]>
+        </query> 
+        <query id="create_objective_query" query_name="create_objective_query" description="Create Objective Query">
+        	<![CDATA[INSERT into ntree_objective(objective,team_id,assigned_id,is_active,created_by_id,created_date,modified_by_id,modified_date) values(%s,%s,%s,True,%s,%s,%s,%s) returning id]]>
+        </query>
+        <query id="already_existobjective_update_query" query_name="already_existobjective_update_query" description="To Check the Objective already Exist or not for update">
+        	<![CDATA[SELECT exists(select 1 from ntree_objective where objective ilike %s and assigned_id=%s and id != %s)]]>
+        </query>    
+        <query id="update_objective_query" query_name="update_objective_query" description="Update Objective Query">
+        	<![CDATA[UPDATE ntree_objective set objective=%s,team_id=%s,assigned_id=%s,is_active=%s,modified_by_id=%s,modified_date=%s  where id=%s returning id]]>
+        </query>
+        <query id="select_kr_query" query_name="select_kr_query" description="To select the key results details based on objective">
+        	<![CDATA[SELECT id from hcms_pm_key_result where strategic_objectives_id=%s and is_active]]>
+        </query>
+        <query id="delete_objective_query" query_name="delete_objective_query" description="To Delete Objective Details">
+        	<![CDATA[UPDATE hcms_pm_strategic_objectives set is_active=false where id=%s]]>
+        </query>
+        <query id="individualemp_name_query" query_name="individualemp_name_query" description="Individual Employee Name Details">
+        	<![CDATA[SELECT id,concat(name, ' ', last_name) as employee_name from employee_info where is_active='true' and id=%s order by name]]>
+        </query>
+        <query id="create_keyresult_query" query_name="create_keyresult_query" description="Create Key Result Query">
+        	<![CDATA[INSERT into ntree_keyresults(assigned_id,objective_id,key_result,progress,start_date,due_date,is_active,created_by_id,created_date,modified_by_id,modified_date) values(%s,%s,%s,%s,%s,%s,True,%s,%s,%s,%s) returning id]]>
+        </query>
+        <query id="okr_teamview_query" query_name="okr_teamview_query" description="Team View Details">
+        	<![CDATA[SELECT obj.department_id as team_id,obj.id as objective_id, obj.strategic_objective_description as objective, array_agg(COALESCE(key.id, 0) order by key.id) as keyresult_id,   
+array_agg(COALESCE(key.kr_summary, '')::varchar order by key.id) as key_result,
+array_agg(COALESCE(key.progress, 0) order by key.id) as progress,
+array_agg(COALESCE(key.employee_id, 0) order by key.id) as assigned_id,array_agg(COALESCE(concat(ein.name,' ',ein.last_name), '') order by key.id) as assigned_name,
+array_agg(COALESCE(to_char(key.start_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as start_date,
+array_agg(COALESCE(to_char(key.end_date,'dd-Mon-YYYY')::text,to_char(current_timestamp,'dd-Mon-YYYY')::text)::varchar order by key.id) as due_date,COUNT(DISTINCT key.id) as keyresult_count,
+COALESCE(ROUND(SUM(key.progress ::decimal) / COUNT(key.id) ::decimal,0),0)::text as completion,
+COALESCE(ROUND(SUM(CASE WHEN (current_date::date>=key.end_date::date) THEN 100 ELSE (((((key.end_date::date-key.end_date::date)+1)-(key.end_date::date-current_date::date)) ::decimal 
+/((key.end_date::date-key.start_date::date)+1) ::decimal)*100.00) END) / COUNT(key.id),0) ,0)::text as expectation,
+array_agg(COALESCE(to_char(key.end_date,'YYYY-MM-DD')::text,to_char(current_timestamp,'YYYY-MM-DD')::text)::varchar order by key.id) as due_date_format
+from hcms_pm_strategic_objectives as obj left join hcms_pm_key_result as key on key.strategic_objectives_id = obj.id left join employee_info as ein on key.employee_id=ein.id  where obj.is_active and key.is_active and 
+%s and %s group by obj.id order by obj.id desc
+]]>
+        </query>
+        <query id="individualemp_details_query" query_name="useremp_details_query" description="Particular Employee Details query">
+        	<![CDATA[select ei.id,ai.name as employee_image
+		, concat(ei.name, ' ', ei.last_name) as employee_name,
+		tdi.name as team_name,ci.name as title,rd.name as designation from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_role rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id
+		left join team_details_info tdi on tdi.id=ei.team_name_id
+		 where ei.id=%s]]>
+        </query>
+        <query id="teamview_query" query_name="teamview_query" description="Team View Details">
+        	<![CDATA[select name ,'Division' as sub_name, to_char(modified_date,'DD/MM/YYYY')as last_update from team_details_info where id=%s and is_active]]>
+        </query>
+        <query id="already_existkeyresult_update_query" query_name="already_existkeyresult_update_query" description="To Check the key result already Exist or not for update">
+        	<![CDATA[SELECT exists(select 1 from hcms_pm_key_result where kr_summary ilike  %s and strategic_objectives_id = %s and id != %s)]]>
+        </query>
+        <query id="organization_view_query" query_name="organization_view_query" description="To Check the key result already Exist or not for update">
+        	<![CDATA[select name , 'Organization' as sub_name, to_char(modified_date,'DD/MM/YYYY')as last_update from organization_info where id=%s and is_active]]>
+        </query>
+        <query id="organization_unit_view_query" query_name="organization_unit_view_query" description="To Check the key result already Exist or not for update">
+        	<![CDATA[select orgunit_name as name, 'Organization Unit' as sub_name,to_char(modified_date,'DD/MM/YYYY')as last_update from organization_unit_info where id=%s order by orgunit_name]]>
+        </query>
+        
+        <query id="objective_data_retrieval_query" query_name="objective_data_retrieval_query" description="To Retrieve Objective Data">
+        	<![CDATA[select objective_plan_type,planned_year,planned_month,planned_quarter,strategic_objective_description as objective_description,objective_plan_type,bsc_perspective_id,
+to_char(end_date,'DD-Mon-YYYY') as end_date,to_char(start_date,'DD-Mon-YYYY') as start_date,assigned_type,employee_id,organization_id,organization_unit_id,department_id from hcms_pm_strategic_objectives where id=%s and is_active]]>
+        </query>
+        <query id="role_permission_fetch" query_name="role_permission_fetch" description="role_permission_fetch">
+        	<![CDATA[select array_agg(permission_id) as permission_id from role_permission_rel  where  'Objectives & Key Results' = ANY(access_datas) and role_id=(select role_id from auth_user where id=%s) and is_active]]>
+        </query>
+        <query id="user_role_okr_access" query_name="user_role_okr_access" description="user_role_okr_access">
+        	<![CDATA[select levels from okr_accessrights  where role_id=(select role_id from auth_user where id=%s)]]>
+        </query>
+        <query id="employee_team_detail_fetch" query_name="employee_team_detail_fetch" description="employee_team_detail_fetch">
+        	<![CDATA[select team_name_id as team_id ,id as employee_id from employee_info where related_user_id_id=%s and is_active]]>
+        </query>
+	</queries>
+</data>
+		

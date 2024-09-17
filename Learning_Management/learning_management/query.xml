@@ -1,0 +1,573 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="learning_management">
+									<!--  Cost and Budget creation -->
+		<query id="employee_user" query_name="employee_user" description="employee_user">
+          <![CDATA[select id,role_id_id,org_id_id,org_unit_id_id,team_name_id from employee_info where related_user_id_id=%s and is_active=True]]>
+		</query>
+		<query id="fetch_organization_details_view" query_name="fetch_organization_details_view"
+			description="fetch_organization_details_view">
+          <![CDATA[select id,name from organization_info where is_active=TRUE order by name]]>
+		</query>
+
+		<query id="fetch_organization_unit_details_view" query_name="fetch_organization_unit_details_view"
+			description="fetch_organization_unit_details_view">
+          <![CDATA[select id,orgunit_name from organization_unit_info  where parent_orgunit_id!=0 and is_active=True and organization_id=%s ORDER BY orgunit_name ASC]]>
+		</query>
+		<query id="fetch_division_details_view" query_name="fetch_division_details_view"
+			description="fetch_division_details_view">
+          <![CDATA[select id,name from team_details_info where is_active=True and org_unit_id = %s ORDER BY name ASC]]>
+		</query>
+		<query id="ld_training_details" query_name="ld_training_details" description="ld_training_details">
+          <![CDATA[select tr.training_name,tr.id from hcms_ld_training_division_rel as rel inner join hcms_ld_training_detail as tr on rel.training_id = tr.id where rel.division_id =%s
+and rel.is_active=True and tr.is_active=True]]>
+		</query> 
+		<query id="cost_request_insert_check" query_name="cost_request_insert_check" description="cost_request_insert_check">
+          <![CDATA[select exists(select 1 from hcms_ld_cost_budget where division_id=%s and training_id=%s and is_active=True)as data]]>
+		</query>
+		<query id="cost_request_insert" query_name="cost_request_insert" description="cost_request_insert">
+          <![CDATA[insert into hcms_ld_cost_budget(is_active,created_by_id,created_date,training_id,request_to_role_id,training_hours,cost_per_hour,division_id)
+           values(True,%s,now(),%s,%s,%s,%s,%s)]]>
+		</query>
+		<query id="cost_request_table_view" query_name="cost_request_table_view" description="cost_request_table_view">
+          <![CDATA[select role_title,bug.id,tr.training_name,tr.id as training_id,ref.refitems_name as description,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY')as end_date,
+emp.name as user,emp.last_name,to_char(bug.created_date,'DD-Mon-YYYY')as created_on from hcms_ld_training_detail as tr inner join hcms_ld_cost_budget as bug on bug.training_id = tr.id 
+inner join reference_items as ref on ref.id=tr.training_type_id inner join employee_info as emp on bug.created_by_id=emp.id inner join HCMS_TI_Role_Details as role on role.id=bug.request_to_role_id
+ where bug.is_active=True  and tr.is_active=True]]>
+		</query>
+		 <query id="training_drop" query_name="training_drop" description="training_drop">
+          <![CDATA[select DISTINCT tr.training_name,tr.id from hcms_ld_cost_budget as bug inner join hcms_ld_training_detail as tr on tr.id=bug.training_id where bug.is_active=True 
+ and tr.is_active=True]]>
+		</query>
+			<query id="cost_request_by_name" query_name="cost_request_by_name" description="cost_request_by_name">
+          <![CDATA[select bug.id,tr.training_name,tr.id as training_id,description,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY')as end_date from hcms_ld_training_detail as tr 
+			inner join hcms_ld_cost_budget as bug on bug.training_id = tr.id]]>
+		</query>
+		<query id="fetch_role_details" query_name="fetch_role_details"
+			description="fetch_role_details">
+          <![CDATA[select id,role_title,role_depts from HCMS_TI_Role_Details where is_active=True and %s =ANY(role_depts) ]]>
+		</query>
+		<query id="training_details" query_name="training_details" description="training_details">
+          <![CDATA[select tr.id,tr.training_name,ref1.refitems_name as description,tr.start_date,tr.end_date,ref.id as ref_id,ref.refitems_name from hcms_ld_training_detail as tr inner join reference_items as ref on
+ref.id=tr.training_methodology_id inner join reference_items as ref1 on ref1.id=tr.training_type_id where tr.is_active=True and tr.id=%s]]>
+		</query>
+		<query id="budget_request_table_click" query_name="budget_request_table_click" description="budget_request_table_click">
+          <![CDATA[select tr.id as training_id,ref1.refitems_name as description,emp.name as emp_name,emp.last_name,tr.training_name,to_char(tr.start_date,'DD-Mon-YYYY')as start_date,
+to_char(tr.end_date,'DD-Mon-YYYY')as end_date,ref.id as ref_id,ref.refitems_name,tem.id as team_id,tem.name,tem.org_id,tem.org_unit_id,bug.training_hours,
+bug.cost_per_hour,bug.request_to_role_id,bug.training_hours as training_hours,bug.approval_status,bug.rejection_reason,to_char(bug.created_date,'DD-Mon-YYYY')as created_on,
+role_title from hcms_ld_cost_budget as bug 
+inner join hcms_ld_training_detail as tr on tr.id=bug.training_id inner join reference_items as ref on tr.training_methodology_id=ref.id
+inner join team_details_info as tem on tem.id= bug.division_id inner join  reference_items as ref1 on ref1.id=tr.training_type_id 
+inner join employee_info as emp on bug.created_by_id=emp.related_user_id_id inner join HCMS_TI_Role_Details as role on role.id=bug.request_to_role_id
+where bug.id =%s and bug.is_active=True and tr.is_active=True and tem.is_active=True and ref.is_active=True and ref1.is_active=True and ref.is_active=True]]>
+		</query>
+		<query id="cost_request_update" query_name="cost_request_update" description="cost_request_update">
+          <![CDATA[update hcms_ld_cost_budget set modified_date=now(),training_hours=%s,cost_per_hour=%s,training_id=%s,request_to_role_id=%s,modified_by_id=%s,division_id=%s where id=%s and is_active=True]]>
+		</query>
+		<query id="budget_request_details" query_name="budget_request_details" description="budget_request_details">
+	          <![CDATA[select  row_number() over() as count,bug.id,CASE WHEN (bug.approval_status IS NULL)THEN 'Not Approved' ELSE 'empty' END as approval_status,tr.training_name,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY') as end_date,tem.name from hcms_ld_cost_budget as bug inner join hcms_ld_training_detail as tr on tr.id=bug.training_id 
+inner join team_details_info as tem on tem.id=bug.division_id where bug.is_active=True and bug.approval_status  IS NULL and tem.is_active=True and tr.is_active=True]]>
+		</query>
+		<query id="budget_manager_details" query_name="budget_manager_details" description="budget_manager_details">
+	          <![CDATA[select  row_number() over() as count,bug.id,tr.training_name,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY') as end_date,tem.name,
+CASE WHEN (bug.approval_status IS NULL)THEN 'Not Approved' 
+     WHEN (bug.approval_status='R')THEN 'Rejected' 
+     WHEN (bug.approval_status='A')THEN 'Approved' ELSE 'empty' END as approval_status
+ from hcms_ld_cost_budget as bug inner join hcms_ld_training_detail as tr on tr.id=bug.training_id 
+inner join team_details_info as tem on tem.id=bug.division_id where bug.is_active=True and tr.is_active=True and tem.is_active=True]]>
+		</query>
+		<query id="budget_status_rejected" query_name="budget_status_rejected" description="budget_status_rejected">
+          <![CDATA[select  row_number() over() as count,bug.id,CASE WHEN (bug.approval_status='R') THEN 'Rejected' ELSE 'Empty' END as approval_status,tr.training_name,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY') as end_date,tem.name from hcms_ld_cost_budget as bug inner join hcms_ld_training_detail as tr on tr.id=bug.training_id 
+inner join team_details_info as tem on tem.id=bug.division_id where bug.is_active=True and bug.approval_status='R' and tem.is_active=True and tr.is_active=True]]>
+		</query>
+		<query id="budget_status_approved" query_name="budget_status_approved" description="budget_status_approved">
+          <![CDATA[select  row_number() over() as count,bug.id,CASE WHEN (bug.approval_status='A') THEN 'Approved' ELSE 'Empty' END as approval_status,tr.training_name,to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY') as end_date,tem.name from hcms_ld_cost_budget as bug inner join hcms_ld_training_detail as tr on tr.id=bug.training_id 
+inner join team_details_info as tem on tem.id=bug.division_id where bug.is_active=True and bug.approval_status='A' and tem.is_active=True and tr.is_active=True]]>
+		</query>
+		<query id="budget_remove" query_name="budget_remove" description="budget_remove">
+          <![CDATA[update hcms_ld_cost_budget set is_active=False where id =%s]]>
+		</query>
+		<!-- <query id="budget_status_update" query_name="budget_status_update" description="budget_status_update">
+          <![CDATA[update hcms_ld_cost_budget set approval_status=%s,%s =now(),%s: TEXT NULL,rejection_reason=%s where id=%s and is_active=True]]>
+		</query> -->
+		<query id="budget_status_update" query_name="budget_status_update" description="budget_status_update">
+          <![CDATA[update hcms_ld_cost_budget set approval_status=%s,rejected_on=now(),approved_on= NULL,rejection_reason=%s where id=%s and is_active=True]]>
+		</query>
+		<query id="budget_status_approval" query_name="budget_status_approval" description="budget_status_approval">
+          <![CDATA[update hcms_ld_cost_budget set approval_status=%s,approved_on=now(),rejected_on=NULL,rejection_reason=NULL where id=%s and is_active=True]]>
+		</query>
+
+												<!-- Training creation Start -->
+		<query id="employee_org_id" query_name="employee_org_id"
+			description="employee_org_id">
+          <![CDATA[select org_id_id as org_id ,org_info.name from employee_info 
+			inner join organization_info as org_info on org_info.id=employee_info.org_id_id
+			where employee_info.id={0} and employee_info.is_active='TRUE' and org_info.is_active='TRUE']]>
+		</query>
+		<query id="fetch_training_type" query_name="fetch_training_type"
+			description="fetch_training_type">
+          <![CDATA[select refitems_name,refitems_code,ref_item.id from reference_items as ref_item 
+inner join reference_item_category as ref_cat  on ref_cat.id=ref_item.refitems_category_id
+where  refitem_category_code='LDTTY' and ref_item.is_active='TRUE' and ref_cat.is_active='TRUE' order by refitems_name]]>
+		</query>
+
+		<query id="fetch_training_method" query_name="fetch_training_method"
+			description="fetch_training_method">
+          <![CDATA[select refitems_name,refitems_code,ref_item.id from reference_items as ref_item 
+inner join reference_item_category as ref_cat  on ref_cat.id=ref_item.refitems_category_id
+where  refitem_category_code='LDTME' and ref_item.is_active='TRUE' and ref_cat.is_active='TRUE' order by refitems_name]]>
+		</query>
+		
+		<query id="fetch_training_category" query_name="fetch_training_category"
+			description="fetch_training_category">
+          <![CDATA[select refitems_name,refitems_code,ref_item.id from reference_items as ref_item 
+inner join reference_item_category as ref_cat  on ref_cat.id=ref_item.refitems_category_id
+where  refitem_category_code='LDTCA' and ref_item.is_active='TRUE' and ref_cat.is_active='TRUE' order by refitems_name]]>
+		</query>
+
+		<query id="training_creation_save" query_name="training_creation_save"
+			description="training_creation_save">
+          <![CDATA[insert into hcms_ld_training_detail (created_by_id,training_name,description,start_date,
+          end_date,training_methodology_id,training_type_id,training_category_id,created_date,attachment_id,is_active)
+          values (%s,%s,%s,%s,%s,%s,%s,%s,now(),%s,%s) returning id]]>
+		</query>
+
+		<query id="training_division_save" query_name="training_division_save"
+			description="training_division_save">
+          <![CDATA[insert into hcms_ld_training_division_rel (created_by_id,division_id,training_id,created_date,is_active)
+          values (%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		
+		<query id="training_fetch_training_details" query_name="training_fetch_training_details"
+			description="training_fetch_training_details">
+          <![CDATA[
+select ref_item.refitems_name,tra_det.id,training_name,to_char(start_date,'DD-Mon-YYYY') as start_date,to_char(end_date,'DD-Mon-YYYY') as end_date 
+from hcms_ld_training_detail as tra_det 
+inner join reference_items as ref_item on ref_item.id=tra_det.training_type_id
+where tra_det.is_active='TRUE' and ref_item.is_active='TRUE' order by tra_det.training_name]]>
+		</query>
+		
+		<query id="training_form_remove" query_name="training_form_remove"
+			description="training_form_remove">
+          <![CDATA[update hcms_ld_training_detail set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		
+		<query id="training_division_remove" query_name="training_division_remove"
+			description="training_division_remove">
+          <![CDATA[update hcms_ld_training_division_rel set modified_by_id=%s,is_active='FALSE',modified_date=now() where training_id=%s]]>
+		</query>
+		
+		<query id="selected_training_details" query_name="selected_training_details"
+			description="selected_training_details">
+          <![CDATA[
+select tra_det.attachment_id,array_agg(division_id) as division_id,tra_det.id as training_id,to_char(tra_det.start_date,'dd-mm-yyyy') as start_date,to_char(tra_det.end_date,'dd-mm-yyyy') as end_date,tra_det.training_name,
+tra_det.training_type_id,tra_det.training_methodology_id,tra_det.description,tra_det.training_category_id
+from hcms_ld_training_detail as tra_det
+inner join hcms_ld_training_division_rel as b on b.training_id=tra_det.id
+ where tra_det.is_active='TRUE' and tra_det.id={0} and b.is_active='TRUE' group by b.training_id,tra_det.id,start_date, end_date,tra_det.training_name,
+tra_det.training_type_id,tra_det.training_methodology_id,tra_det.description]]>
+		</query>
+		<query id="division_org_fetch" query_name="division_org_fetch"
+			description="division_org_fetch">
+          <![CDATA[
+WITH bar AS (
+  SELECT array_agg(division_id) as bs from hcms_ld_training_division_rel where training_id={0} and is_active='TRUE')
+SELECT org_id ,org_unit_id
+FROM team_details_info
+WHERE is_active='TRUE' and id = ANY ( SELECT unnest(bs) FROM bar) group by org_id ,org_unit_id]]>
+		</query>
+		
+		<query id="training_division_delete" query_name="training_division_delete"
+			description="training_division_delete">
+          <![CDATA[delete from hcms_ld_training_division_rel where training_id={0}]]>
+		</query>
+		<query id="selected_training_attachment_details" query_name="selected_training_attachment_details"
+			description="selected_training_attachment_details">
+          <![CDATA[select id,name from attachment_info where id={0} and is_active='TRUE']]>
+		</query>
+		
+		<query id="training_attachment_remove" query_name="training_attachment_remove"
+			description="training_attachment_remove">
+          <![CDATA[update attachment_info set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		
+		                              <!-- internship -->
+		<query id="fetch_country_details_view" query_name="fetch_country_details_view"
+			description="fetch_country_details_view">
+          <![CDATA[select id,country_name from country_info where  is_active='TRUE' order by country_name]]>
+		</query>
+		<query id="fetch_org_unit_division_details" query_name="fetch_org_unit_division_details"
+			description="fetch_org_unit_division_details">
+          <![CDATA[ select id,name from team_details_info where org_id=%s and org_unit_id=%s and is_active='TRUE' order by name ]]>
+		</query>
+		
+		<query id="fetch_org_unit_employee_details" query_name="fetch_org_unit_employee_details"
+			description="fetch_org_unit_employee_details">
+          <![CDATA[select id,CONCAT(LTRIM(name),' ',last_name) as name from employee_info where is_active='TRUE' and org_id_id={0} and org_unit_id_id={1} ]]>
+		</query>
+		<query id="fetch_division_training_details" query_name="fetch_division_training_details"
+			description="fetch_division_training_details">
+          <![CDATA[
+select tra_div_rel.training_id,training_name from hcms_ld_training_division_rel as tra_div_rel 
+inner join hcms_ld_training_detail on hcms_ld_training_detail.id=tra_div_rel.training_id
+where tra_div_rel.division_id={0} and tra_div_rel.is_active='TRUE' and hcms_ld_training_detail.is_active='TRUE' order by training_name]]>
+		</query>
+		<query id="internship_training_details" query_name="internship_training_details"
+			description="internship_training_details">
+          <![CDATA[
+select ref_item.refitems_name,tra_det.id,to_char(start_date,'DD-Mon-YYYY') as start_date,to_char(end_date,'DD-Mon-YYYY') as end_date 
+from hcms_ld_training_detail as tra_det 
+inner join reference_items as ref_item on ref_item.id=tra_det.training_type_id
+where tra_det.is_active='TRUE' and ref_item.is_active='TRUE' and tra_det.id={0}]]>
+		</query>
+		
+		<query id="internship_state_details" query_name="internship_state_details"
+			description="internship_state_details">
+          <![CDATA[
+select id,state_name from state_info where country_id={0} and is_active='TRUE'  order by state_name]]>
+		</query>
+		
+		<query id="internship_form_save" query_name="internship_form_save"
+			description="internship_form_save">
+          <![CDATA[insert into hcms_ld_internship_training (created_by_id,candidate_name,institute_name,degree,
+          passed_out_year,address,zip_code,training_id,country_id,state_id,division_id,reporting_authority_id,employee_status,created_date,is_active)
+          values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		
+		<query id="internship_details" query_name="internship_details"
+			description="internship_details">
+          <![CDATA[
+select tra_det.training_name,CONCAT(LTRIM(name),' ',last_name) as name,intern_det.id,intern_det.candidate_name,intern_det.reporting_authority_id,intern_det.employee_status,intern_det.training_id from hcms_ld_internship_training as intern_det
+inner join employee_info as emp_info on emp_info.id=intern_det.reporting_authority_id
+inner join  hcms_ld_training_detail as tra_det on tra_det.id=intern_det.training_id
+where intern_det.is_active='TRUE' and emp_info.is_active='TRUE' and tra_det.is_active='TRUE' ]]>
+		</query>
+		
+		<query id="training_detail_usage_check" query_name="training_detail_usage_check"
+			description="training_detail_usage_check">
+          <![CDATA[select sr.id,it.id,tr.id,cs.id from  hcms_ld_training_detail td left join hcms_ld_self_request sr on td.id=sr.training_id
+left join hcms_ld_internship_training it on td.id=it.training_id left join hcms_ld_training_recommendation tr on td.id=tr.training_id
+left join hcms_ld_cost_budget cs on td.id=cs.training_id where td.id={0} and td.is_active and ( sr.is_active or it.is_active or tr.is_active or cs.is_active)]]>
+		</query>
+
+												<!-- Training creation End -->
+												
+												<!-- Employee Self Request creation Start -->
+		<query id="ld_fetch_employee_data_division" query_name="ld_fetch_employee_data_division"
+			description="Fetch Employee Data based on division for the Learning and Development Module">
+          <![CDATA[select id,concat(name,' ',last_name) as name from employee_info where is_active=True and team_name_id = {0} order by name]]>
+		</query>
+		
+		<query id="ld_fetch_training_detail_division" query_name="ld_fetch_training_detail_division"
+			description="Fetch Training Detail based on division for the Learning and Development Module">
+          <![CDATA[select hltd.id,hltd.training_name as name from hcms_ld_training_detail hltd inner join hcms_ld_training_division_rel hltdr on hltd.id = hltdr.training_id
+          where hltdr.is_active=True and hltd.is_active=True and hltdr.division_id = {0} order by training_name]]>
+		</query>
+		
+		<query id="ld_fetch_organization_detail" query_name="ld_fetch_organization_detail"
+			description="Fetch Organization Detail for the Learning and Development Module">
+          <![CDATA[select id,name from organization_info where is_active=True order by name]]>
+		</query>
+		
+		<query id="ld_fetch_organization_unit_detail_org" query_name="ld_fetch_organization_unit_detail_org"
+			description="Fetch Organization Unit Detail based on the organization for the Learning and Development Module">
+          <![CDATA[select id,orgunit_name as name from organization_unit_info where is_active=True and organization_id = {0} and parent_orgunit_id!=0 order by orgunit_name]]>
+		</query>
+		
+		<query id="ld_fetch_division_detail_orgunit" query_name="ld_fetch_division_detail_orgunit"
+			description="Fetch Division Detail based on the organization unit for the Learning and Development Module">
+          <![CDATA[select id,name from team_details_info where is_active=True and org_unit_id = {0} order by name]]>
+		</query>
+		
+		<query id="ld_fetch_training_detail_based_id" query_name="ld_fetch_training_detail_based_id"
+			description="Fetch Training Detail for the Learning and Development Module Based on Training Id">
+          <![CDATA[select ri.refitems_name as name,to_char(hltd.start_date,'DD-Mon-YYYY') as start_date,to_char(hltd.end_date,'DD-Mon-YYYY') as end_date from 
+          hcms_ld_training_detail hltd inner join reference_items ri on ri.id = hltd.training_type_id where ri.is_active=True and hltd.is_active=True and 
+          hltd.id = {0}]]>
+		</query>
+
+		<query id="ld_employee_request_training_save" query_name="ld_employee_request_training_save"
+			description="Employee Request Training Create">
+          <![CDATA[insert into hcms_ld_self_request (created_by_id,{0},request_type,
+          request_reason,created_date,is_active,manager_id,division_id)
+          values ({1},'{2}','{3}','{4}',now(),TRUE,{5},{6}) returning id]]>
+		</query>
+
+		<query id="ld_employee_request_training_update" query_name="ld_employee_request_training_update"
+			description="Employee Request Training Update">
+          <![CDATA[update hcms_ld_self_request set modified_by_id={0},{1}='{2}',
+         request_type='{3}',request_reason='{4}',is_active=TRUE,approval_status='{5}',manager_id={6},modified_date=now(),rejected_on={7},
+         rejection_reason='{8}',approved_on={9},division_id={10} where id={11} returning id]]>
+		</query>
+
+ 		<query id="ld_fetch_self_training_details" query_name="ld_fetch_self_training_details"
+			description="Employee fetch Request Training Details">
+          <![CDATA[select oi.name as organization_name,oui.orgunit_name as organization_unit_name,tdi.name as team_name,oi.id as organization_id,oui.id as organization_unit_id,CASE WHEN hlsr.request_type='E' THEN hltd.id
+            WHEN hlsr.request_type='N' THEN concat(hlsr.id,hlsr.id)::int END as search_id,
+			tdi.id as team_id,concat(ei.name,' ',ei.last_name) as manager_name,hlsr.id,hlsr.manager_id,hltd.id as training_id,(select concat(name,' ',last_name) from
+			employee_info where related_user_id_id={1}) as requested_by,(select id from
+			employee_info where related_user_id_id={1}) as login_id,
+			CASE WHEN hlsr.request_type='N' Then hlsr.training_name When hlsr.request_type='E' Then hltd.training_name End as training_name,hlsr.request_reason,
+			to_char(hlsr.created_date,'DD-Mon-YYYY') as requested_on,hlsr.request_reason,hlsr.rejection_reason,
+			CASE WHEN hlsr.approval_status is null or hlsr.approval_status = '' THEN 'Not Approved' WHEN hlsr.approval_status = 'A' THEN 'Approved' 
+			WHEN hlsr.approval_status = 'R' THEN 'Rejected' ELSE 'Not Approved' END as approval_status, hlsr.approval_status as approve_status from hcms_ld_self_request hlsr 
+			inner join employee_info ei on ei.id = hlsr.manager_id inner join auth_user au on au.id = hlsr.created_by_id left join hcms_ld_training_detail hltd 
+			on hltd.id = hlsr.training_id inner join team_details_info tdi on tdi.id = hlsr.division_id inner join organization_unit_info oui on oui.id = tdi.org_unit_id inner join 
+			organization_info oi on oi.id = oui.organization_id {0}]]>
+		</query> 
+		
+		<query id="ld_fetch_request_training_count" query_name="ld_fetch_request_training_count"
+			description="Employee fetch Request Training Details Count">
+          <![CDATA[select count(CASE WHEN hlsr.approval_status is null or hlsr.approval_status = '' THEN 'Not Approved' END )as request_count,
+			count(CASE WHEN hlsr.approval_status = 'A' THEN 'Approved' END )as approval_count, count(CASE WHEN hlsr.approval_status = 'R' THEN 'Rejected' END )as rejected_count,
+			count(hlsr.id)as manager_approve_count 
+			from hcms_ld_self_request hlsr inner join employee_info ei on ei.id = hlsr.manager_id left join hcms_ld_training_detail hltd on hltd.id = hlsr.training_id
+			 where CASE WHEN hlsr.request_type='N' Then hlsr.is_active = true 
+			When hlsr.request_type='E' Then (hltd.is_active = true and hlsr.is_active = true) End and ei.is_active = true and (hlsr.created_by_id={0} or hlsr.manager_id = (select id from employee_info where related_user_id_id = {0}))]]>
+		</query> 
+		
+		<query id="ld_fetch_request_training_detail_based_id" query_name="ld_fetch_request_training_detail_based_id"
+			description="Fetch Requsest Training Detail for the Learning and Development Module Based on Id">
+          <![CDATA[select tdi.org_id,tdi.org_unit_id,hlsr.division_id,hlsr.id,hlsr.training_name,hlsr.training_id,hlsr.request_reason,hlsr.manager_id 
+          from hcms_ld_self_request hlsr inner join team_details_info tdi on tdi.id = hlsr.division_id where hlsr.is_active=True and tdi.is_active=True 
+          and hlsr.id = {0}]]>
+		</query>
+
+		<query id="ld_fetch_request_training_detail_search" query_name="ld_fetch_request_training_detail_search"
+            description="Fetch Request Training Detail to search for the Learning and Development Module Based on Id">
+          <![CDATA[ select CASE WHEN  hlsr.request_type='E' THEN hltd.id
+            WHEN hlsr.request_type='N' THEN concat(hlsr.id,hlsr.id)::int END as id, CASE WHEN  hlsr.request_type='E' THEN hltd.training_name 
+            WHEN hlsr.request_type='N' THEN hlsr.training_name END as name from hcms_ld_self_request hlsr left join hcms_ld_training_detail hltd on hlsr.training_id = hltd.id 
+            inner join auth_user au on au.id = hlsr.created_by_id
+            inner join employee_info ei on ei.related_user_id_id = au.id
+            where CASE WHEN hlsr.request_type='N' Then hlsr.is_active = true and (hlsr.manager_id = 
+            (select id from employee_info where related_user_id_id = {0}) or ei.id= (select id from employee_info where related_user_id_id = {0}))
+            When hlsr.request_type='E' Then (hltd.is_active = true and hlsr.is_active = true) = true End]]>
+        </query>
+		
+		<query id="ld_delete_request_training_detail_based_id" query_name="ld_delete_request_training_detail_based_id"
+			description="Delete Requsest Training Detail for the Learning and Development Module Based on Id">
+          <![CDATA[update hcms_ld_self_request set modified_by_id={0},is_active=FALSE,modified_date=now() where id = {1} returning id]]>
+		</query>
+
+												<!-- Employee Self Request creation End -->
+
+		
+		<query id="selected_internship_details" query_name="selected_internship_details"
+			description="selected_internship_details">
+          <![CDATA[
+select reference_items.refitems_name as training_type,to_char(tra_det.start_date,'dd-Mon-yyyy') as start_date ,to_char(tra_det.end_date,'dd-Mon-yyyy') as end_date
+,team_info.org_id,team_info.org_unit_id,hcms_ld_internship_training.id, LTRIM(candidate_name) as cadidate_name,LTRIM(institute_name) as institute_name,division_id,reporting_authority_id,training_id,
+degree,passed_out_year,zip_code,address,employee_status,country_id,state_id
+from hcms_ld_internship_training 
+inner join team_details_info as team_info on team_info.id=hcms_ld_internship_training.division_id
+inner join hcms_ld_training_detail as tra_det on tra_det.id=training_id
+inner join reference_items on reference_items.id=tra_det.training_type_id
+where hcms_ld_internship_training.is_active='TRUE' and tra_det.is_active='TRUE'  and  reference_items.is_active='TRUE' and team_info.is_active='TRUE' and 
+hcms_ld_internship_training.id={0} ]]>
+		</query>
+		
+		<query id="internship_form_remove" query_name="internship_form_remove"
+			description="internship_form_remove">
+          <![CDATA[update hcms_ld_internship_training set modified_by_id={0},is_active='FALSE',modified_date=now() where id={1}]]>
+		</query>
+		
+		<query id="convert_to_employee" query_name="convert_to_employee"
+			description="convert_to_employee">
+          <![CDATA[update hcms_ld_internship_training set modified_by_id=%s,employee_status='TRUE',modified_date=now() where id=%s]]>
+		</query>
+</queries>
+	<queries name="training_recommendation">
+		<query id="ld_division_load" query_name="ld_division_load"
+			description="division_load">
+          <![CDATA[select id as department_id,name as department_name from team_details_info where org_unit_id = {0} order by name]]>
+		</query>
+		<query id="ld_employee_fetch" query_name="ld_employee_fetch"
+			description="ld_employee_fetch">
+          <![CDATA[select concat(name,' ',last_name) as employee_name, id as employee_id from employee_info where team_name_id in (9) and is_active order by name]]>
+		</query>
+		<query id="ld_training_fetch" query_name="ld_training_fetch"
+			description="ld_training_fetch">
+          <![CDATA[select tr.training_name, tr.id as training_id from hcms_ld_training_detail  tr left join hcms_ld_training_division_rel tdr on tr.id=tdr.training_id 
+where tdr.division_id={0} and tdr.is_active and tr.is_active]]>
+		</query>
+		<query id="ld_training_detail_fetch" query_name="ld_training_detail_fetch"
+			description="ld_training_detail_fetch">
+          <![CDATA[select ref.refitems_name as training_type, ref1.refitems_name as training_methodology, to_char(tr.start_date,'DD-Mon-YYYY') as start_date, to_char(tr.end_date,'DD-Mon-YYYY') as end_date from hcms_ld_training_detail tr left join 
+reference_items ref on tr.training_type_id=ref.id left join 
+reference_items ref1 on tr.training_type_id=ref1.id where tr.id={0}]]>
+		</query>
+		<query id="ld_training_recommendation_insert" query_name="ld_training_recommendation_insert"
+			description="ld_training_recommendation_insert">
+          <![CDATA[insert into hcms_ld_training_recommendation (recommendation_type,recommended_by_id,division_id,training_id,is_active,created_by_id,created_date) values(%s,%s,%s,%s,true,%s,now()) returning id ]]>
+		</query>
+		<query id="ld_training_recommendation_rel_insert" query_name="ld_training_recommendation_rel_insert"
+			description="ld_training_recommendation_rel_insert">
+          <![CDATA[insert into hcms_ld_training_recommendation_rel (employee_id,training_recommendation_id,is_active,created_by_id,created_date) values(%s,%s,true,%s,now()) returning id ]]>
+		</query>
+		<query id="ld_training_recommendation_update" query_name="ld_training_recommendation_update"
+			description="ld_training_recommendation_update">
+          <![CDATA[update hcms_ld_training_recommendation set recommendation_type=%s,recommended_by_id=%s,division_id=%s,training_id=%s,is_active=true,modified_by_id=%s,modified_date=now() where id=%s ]]>
+		</query>
+		<query id="ld_training_recommendation_rel_delete" query_name="ld_training_recommendation_rel_delete"
+			description="ld_training_recommendation_rel_delete">
+          <![CDATA[update hcms_ld_training_recommendation_rel set is_active=false where training_recommendation_id={0} ]]>
+		</query>
+		<query id="ld_training_recommendation_detail_fetch" query_name="ld_training_recommendation_detail_fetch"
+			description="ld_training_recommendation_detail_fetch">
+          <![CDATA[select tr.id,tr.training_id,td.training_name,to_char (td.start_date,'DD-Mon-YYYY') as start_date,to_char(td.end_date,'DD-Mon-YYYY') as end_date, te.name as division, to_char(tr.created_date,'DD-Mon-YYYY') as recommended_on from hcms_ld_training_recommendation tr 
+left join hcms_ld_training_detail td on tr.training_id =td.id left join team_details_info te on tr.division_id = te.id where td.is_active and tr.is_active and tr.recommendation_type=%s]]>
+		</query>
+		<query id="ld_training_recommendation_detail_fetch_by_id" query_name="ld_training_recommendation_detail_fetch_by_id"
+			description="ld_training_recommendation_detail_fetch_by_id">
+          <![CDATA[select rec.id, rec.training_id,rec.recommended_by_id,tr.start_date,tr.end_date,rec.division_id,team.org_id,team.org_unit_id,ref1.refitems_name as training_type,ref2.refitems_name as training_methodology, array_agg(rec_rel.employee_id) as employee from hcms_ld_training_recommendation rec left join hcms_ld_training_detail tr
+on rec.training_id=tr.id left join hcms_ld_training_recommendation_rel rec_rel on rec.id=rec_rel.training_recommendation_id left join team_details_info team on rec.division_id=team.id left join reference_items ref1 on tr.training_type_id=ref1.id left join 
+reference_items ref2 on tr.training_methodology_id=ref2.id where rec.id={0} and rec.is_active and tr.is_active group by rec.id,tr.training_name,tr.start_date,tr.end_date,rec.division_id,team.org_id,team.org_unit_id,ref1.refitems_name,
+ref2.refitems_name]]>
+		</query>
+		<query id="ld_training_recommendation_detail_remove" query_name="ld_training_recommendation_detail_remove"
+			description="ld_training_recommendation_detail_remove">
+          <![CDATA[update hcms_ld_training_recommendation set is_active=false, modified_by_id=%s, modified_date=now() where id =%s]]>
+		</query>
+		<query id="ld_training_recommendation_rel_detail_remove" query_name="ld_training_recommendation_rel_detail_remove"
+			description="ld_training_recommendation_rel_detail_remove">
+          <![CDATA[update hcms_ld_training_recommendation_rel set is_active=false, modified_by_id=%s, modified_date=now() where training_recommendation_id =%s]]>
+		</query>
+		<query id="ld_training_recommendation_search_detail_fetch" query_name="ld_training_recommendation_search_detail_fetch"
+			description="ld_training_recommendation_search_detail_fetch">
+          <![CDATA[select distinct tr.training_id,td.training_name from hcms_ld_training_recommendation tr left join hcms_ld_training_detail td on tr.training_id=td.id where tr.recommendation_type =%s and tr.is_active and td.is_active
+]]>
+		</query>
+				<query id="ld_tl_assessment_training_list" query_name="ld_tl_assessment_training_list"
+			description="ld_tl_assessment_training_list">
+          <![CDATA[select learning_pointers, id from hcms_pm_assessor_info  where learning_pointers is not null  and is_active
+]]>
+		</query>
+		<query id="ld_tl_assessment_training_employee_details" query_name="ld_tl_assessment_training_employee_details"
+			description="ld_tl_assessment_training_employee_details">
+          <![CDATA[select ei.org_id_id,ei.org_unit_id_id,ei.team_name_id,ei.id as employee_id,ai.assessor_id from hcms_pm_assessor_info ai 
+left join hcms_pm_assessment_form af on ai.assessment_form_id =af.id 
+left join employee_info ei on af.assessment_form_employee_id=ei.id where ai.id={0} and ai.is_active and af.is_active
+]]>
+		</query>
+		<query id="tl_training_recommendation_insert" query_name="tl_training_recommendation_insert"
+			description="tl_training_recommendation_insert">
+          <![CDATA[insert into hcms_ld_training_recommendation (recommendation_type,assessment_training_id,assessment_org_id,assessment_org_unit_id,assessment_division,training_category_id,training_type_id,
+training_methodology_id,recommended_by_id,start_date,end_date,created_by_id,is_active,created_date) values
+(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,true,now()) returning id]]>
+		</query>
+		<query id="tl_training_recommendation_update" query_name="tl_training_recommendation_update"
+			description="tl_training_recommendation_update">
+          <![CDATA[update hcms_ld_training_recommendation set recommendation_type=%s,assessment_training_id=%s,assessment_org_id=%s,assessment_org_unit_id=%s,assessment_division=%s,training_category_id=%s,
+training_type_id=%s,training_methodology_id=%s,recommended_by_id=%s,start_date=%s,end_date=%s,modified_date=now(),is_active=true,modified_by_id=%s where id=%s]]>
+		</query>
+		<query id="tl_training_recommendation_detail_fetch" query_name="tl_training_recommendation_detail_fetch"
+			description="tl_training_recommendation_detail_fetch">
+          <![CDATA[select tr.id,ai.learning_pointers,concat(name,' ',last_name) as recommended_by, to_char(tr.start_date,'DD-Mon-YYYY') as start_date,to_char(tr.end_date,'DD-Mon-YYYY') as end_date,to_char(tr.created_date,'DD-Mon-YYYY') as recommended_on 
+from hcms_ld_training_recommendation tr left join hcms_pm_assessor_info ai on tr.assessment_training_id=ai.id left join employee_info ei on tr.recommended_by_id=ei.id where tr.is_active and ai.is_active and tr.recommendation_type='T']]>
+		</query>
+				<query id="tl_training_recommendation_search_detail_fetch" query_name="tl_training_recommendation_search_detail_fetch"
+			description="tl_training_recommendation_search_detail_fetch">
+          <![CDATA[select distinct ai.id as assessment_id,tr.id,ai.learning_pointers from hcms_ld_training_recommendation tr left join 
+hcms_pm_assessor_info ai on tr.assessment_training_id=ai.id where tr.is_active and ai.is_active and tr.recommendation_type='T'
+]]>
+		</query>
+				<query id="tl_training_recommendation_detail_fetch_by_id" query_name="tl_training_recommendation_detail_fetch_by_id"
+			description="tl_training_recommendation_detail_fetch_by_id">
+          <![CDATA[
+select rec.id as recommendation_id,ai.training_status,rec.assessment_training_id,rec.assessment_org_id as org_id_id,rec.assessment_org_unit_id as org_unit_id_id,rec.assessment_division as team_name_id,array_agg(rec_rel.employee_id) as employee_id,rec.training_category_id,rec.training_type_id,rec.training_methodology_id,rec.recommended_by_id as assessor_id,to_char(rec.start_date,'DD-MM-YYYY') as start_date,to_char(rec.end_date,'DD-MM-YYYY') as end_date
+from hcms_ld_training_recommendation rec left join hcms_pm_assessor_info ai on rec.assessment_training_id=ai.id left join hcms_ld_training_recommendation_rel rec_rel on rec.id=rec_rel.training_recommendation_id where rec.id={0}  and rec.is_active  group by rec.id,rec.assessment_training_id,rec.recommended_by_id,rec.start_date,rec.end_date,rec.assessment_division,rec.assessment_org_id,
+rec.assessment_org_unit_id,rec.training_type_id,rec.training_methodology_id,rec.training_category_id,ai.training_status]]>
+		</query>
+		<query id="ld_tl_assessment_training_exist_check" query_name="ld_tl_assessment_training_exist_check"
+			description="ld_tl_assessment_training_exist_check">
+          <![CDATA[select id from hcms_ld_training_recommendation where assessment_training_id={0} and is_active  ]]>
+		</query>
+		<query id="ld_tl_recommendation_training_creation" query_name="ld_tl_recommendation_training_creation"
+			description="ld_tl_recommendation_training_creation">
+          <![CDATA[insert into hcms_ld_training_detail (created_by_id,training_name,start_date,
+          end_date,training_methodology_id,training_type_id,training_category_id,created_date,is_active)
+          values (%s,%s,%s,%s,%s,%s,%s,now(),true) returning id]]>
+		</query>
+
+		<query id="ld_tl_recommendation_training_division_update" query_name="ld_tl_recommendation_training_division_update"
+			description="ld_tl_recommendation_training_division_update">
+          <![CDATA[insert into hcms_ld_training_division_rel (created_by_id,division_id,training_id,created_date,is_active)
+          values (%s,%s,%s,now(),true) returning id]]>
+		</query>
+		<query id="ld_tl_assessor_detail_update" query_name="ld_tl_assessor_detail_update"
+			description="ld_tl_assessor_detail_update">
+          <![CDATA[update hcms_pm_assessor_info set training_status=true where id=%s]]>
+		</query>
+		
+		                                <!--    Dashboard -->
+	    <query id="calander_training_details" query_name="calander_training_details"
+			description="calander_training_details">
+          <![CDATA[
+select tra_det.id,training_name,to_char(start_date,'DD-Mon-YYYY') as view_start_date,to_char(end_date,'DD-Mon-YYYY') as view_end_date,tra_det.start_date,tra_det.end_date
+from hcms_ld_training_detail as tra_det 
+inner join hcms_ld_training_division_rel as rel on rel.training_id=tra_det.id
+where tra_det.is_active='TRUE' and rel.is_active='TRUE' and rel.division_id={0} order by tra_det.training_name]]>
+		</query>
+		
+		<query id="calander_training_details_count" query_name="calander_training_details_count"
+			description="calander_training_details_count">
+          <![CDATA[
+select count(id),start_date,end_date from hcms_ld_training_detail where is_active='TRUE' group by start_date,end_date]]>
+		</query>
+		
+		<query id="cost_details" query_name="cost_details"
+			description="cost_details">
+          <![CDATA[
+select tra.training_name,cost.id,cost.training_id,cost.training_hours as training_hour,cost.cost_per_hour from hcms_ld_cost_budget as cost
+inner join hcms_ld_training_detail as tra on tra.id=training_id
+where tra.is_active='TRUE' and  cost.is_active='TRUE' and division_id={0}
+]]>
+		</query>
+		<query id="rec_emp_details" query_name="rec_emp_details"
+			description="rec_emp_details">
+          <![CDATA[
+select count(employee_id) as emp_count,tra_det.training_name,training_id from hcms_ld_training_recommendation as rec
+inner join hcms_ld_training_detail as tra_det on tra_det.id=training_id
+inner join hcms_ld_training_recommendation_rel as rel on rel.training_recommendation_id=rec.id
+where rec.division_id={0} and rec.is_active='TRUE' and tra_det.is_active='TRUE'  
+group by tra_det.training_name,training_id
+]]>
+		</query>
+		<query id="top_rec_person" query_name="top_rec_person"
+			description="top_rec_person">
+          <![CDATA[
+select CONCAT(LTRIM(emp_info.name),' ',emp_info.last_name) as name,count(recommended_by_id) from hcms_ld_training_recommendation as rec
+inner join employee_info as emp_info on emp_info.id=recommended_by_id
+where rec.is_active='TRUE' and emp_info.is_active='TRUE' and division_id={0} group by recommended_by_id,emp_info.name,emp_info.last_name order by count desc
+ limit 5
+]]>
+		</query>
+		<query id="self_request" query_name="self_request"
+			description="self_request">
+          <![CDATA[
+select hlsr.id,(select concat(name,' ',last_name) from
+            employee_info where related_user_id_id=hlsr.created_by_id) as requested_by,to_char(hlsr.created_date,'DD-Mon-YYYY') as requested_on,
+            CASE WHEN hlsr.request_type='N' Then hlsr.training_name When hlsr.request_type='E' Then hltd.training_name End as training_name from hcms_ld_self_request hlsr 
+            inner join employee_info ei on ei.id = hlsr.manager_id left join hcms_ld_training_detail hltd 
+            on hltd.id = hlsr.training_id where ei.is_active = true and CASE WHEN hlsr.request_type='N' Then hlsr.is_active = true 
+            When hlsr.request_type='E' Then hltd.is_active = true End and division_id={0}
+]]>
+		</query>
+		<query id="current_user_detaills" query_name="current_user_detaills"
+			description="current_user_detaills">
+          <![CDATA[
+select org_id_id,org_unit_id_id,team_name_id from employee_info where is_active='TRUE' and related_user_id_id={0}
+]]>
+		</query>
+		<query id="gant_chart" query_name="gant_chart"
+			description="gant_chart">
+          <![CDATA[
+select det.id,det.training_name,to_char(det.start_date,'YYYY-mm-dd') as start_date,to_char(det.end_date,'YYYY-mm-dd') as end_date,to_char(det.start_date,'mm') as start_month from hcms_ld_training_detail as det
+inner join hcms_ld_training_division_rel as rel on rel.division_id={0}
+where det.is_active='TRUE' and rel.is_active='TRUE' and det.start_date>=current_date group by 
+det.id,det.training_name,det.start_date,det.end_date  
+]]>
+		</query>
+	</queries>
+</data> 

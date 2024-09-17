@@ -1,0 +1,715 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="performance_assessment">
+		<query id="fetch_organization_details_view" query_name="fetch_organization_details_view"
+			description="fetch_organization_details_view">
+          <![CDATA[select id,name from organization_info where is_active=TRUE order by name]]>
+		</query>
+		<query id="fetch_org_unit_employee_details_view" query_name="fetch_org_unit_employee_details_view"
+			description="fetch_org_unit_employee_details_view">
+          <![CDATA[select id ,name as first_name,last_name from employee_info where org_unit_id_id={0}  order by first_name]]>
+		</query>
+		<query id="fetch_employee_role_details" query_name="fetch_employee_role_details"
+			description="fetch_employee_role_details">
+          <![CDATA[
+			select role_id_id as role_id,ti_role.role_title from employee_info as emp_info 
+			inner join hcms_ti_role_details as ti_role on ti_role.id=emp_info.role_id_id
+			where emp_info.id={0} and emp_info.is_active=TRUE and ti_role.is_active=TRUE order by role_title ]]>
+		</query>
+		<query id="assessment_form_save" query_name="assessment_form_save"
+			description="assessment_form_save">
+          <![CDATA[insert into hcms_pm_assessment_form (created_by_id,assessment_year,assessment_quarter,organization_id,
+          organization_unit_id,assessment_form_employee_id,created_date,is_active,assessment_form_finalised_status)
+          values (%s,%s,%s,%s,%s,%s,now(),%s,%s) returning id]]>
+		</query>
+		<query id="assessment_selected_data_fetch" query_name="assessment_selected_data_fetch"
+			description="assessment_selected_data_fetch">
+          <![CDATA[
+select organization_id,organization_unit_id,assessment_year,assessment_quarter ,assessment_form_employee_id from hcms_pm_assessment_form
+where is_active=TRUE and id={0}]]>
+		</query>
+		<query id="assessment_form_record" query_name="assessment_form_record"
+			description="assessment_form_record">
+          <![CDATA[
+select form.id as form_id,CONCAT(form.assessment_year,'-' ,'Quarter ',form.assessment_quarter) as quarter,org_info.name as org_name,org_unit_info.orgunit_name,LTRIM(emp_info.name) as firstname,emp_info.last_name,LTRIM(ti_role.role_title) as role
+from hcms_pm_assessment_form as form
+inner join organization_info as org_info on org_info.id=form.organization_id
+inner join organization_unit_info as org_unit_info on org_unit_info.id=form.organization_unit_id
+inner join employee_info as emp_info on emp_info.id=form.assessment_form_employee_id
+inner join hcms_ti_role_details as ti_role on ti_role.id= emp_info.role_id_id
+where form.is_active=TRUE and org_info.is_active=TRUE and org_unit_info.is_active=TRUE and emp_info.is_active=TRUE and ti_role.is_active=TRUE]]>
+		</query>
+		<query id="assessment_form_update" query_name="assessment_form_update"
+			description="assessment_form_update">
+          <![CDATA[update hcms_pm_assessment_form set modified_by_id=%s,assessment_year=%s,
+         assessment_quarter=%s,organization_id=%s,organization_unit_id=%s,assessment_form_employee_id=%s,modified_date=now() where id=%s]]>
+		</query>
+		<query id="assessment_form_remove" query_name="assessment_form_remove"
+			description="assessment_form_remove">
+          <![CDATA[update hcms_pm_assessment_form set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		<query id="fetch_employee_KR_details" query_name="fetch_employee_KR_details"
+			description="fetch_employee_KR_details">
+          <![CDATA[select id as kpi_id,kr_summary,'Cascaded' as orgin from hcms_pm_key_result where start_date>=%s and end_date<=%s and employee_id=%s
+          ]]>
+		</query>
+		<query id="assessment_cascaded_kpi_save" query_name="assessment_cascaded_kpi_save"
+			description="assessment_cascaded_kpi_save">
+          <![CDATA[insert into hcms_pm_assessment_form_kra (created_by_id,assessment_form_id,assessment_form_kpi_weightage,assessment_form_okr_kra_id,
+          created_date,is_active)
+          values (%s,%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		<query id="assessment_role_kpi_save" query_name="assessment_role_kpi_save"
+			description="assessment_role_kpi_save">
+          <![CDATA[insert into hcms_pm_assessment_form_kra (created_by_id,assessment_form_id,assessment_form_kpi_weightage,assessment_form_role_kra_id,
+          created_date,is_active)
+          values (%s,%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		<query id="fetch_employee_exsist_KR_details" query_name="fetch_employee_exsist_KR_details"
+			description="fetch_employee_exsist_KR_details">
+          <![CDATA[
+select case when (assessment_form_okr_kra_id is not null) then (select kr_summary from hcms_pm_key_result where id=assessment_form_okr_kra_id and is_active=TRUE) 
+            when (assessment_form_role_kra_id is not null) then (select kpi_definition from hcms_ti_role_kpi where id=assessment_form_role_kra_id and is_active=TRUE) 
+else ''
+end as kr_summary,
+case when (assessment_form_okr_kra_id is not null) then 'Cascaded'  
+            when (assessment_form_role_kra_id is not null) then 'Role'
+else ''
+end as orgin
+,kra.id as kpi_id,assessment_form_okr_kra_id as kr_id,assessment_form_role_kra_id as role_id,assessment_form_kpi_weightage as weightage,form.id as form_id
+from hcms_pm_assessment_form as form 
+inner join hcms_pm_assessment_form_kra as kra on kra.assessment_form_id=form.id
+where form.is_active=TRUE and form.assessment_form_employee_id=%s and assessment_year=%s and assessment_quarter=%s and kra.is_active=TRUE]]>
+		</query>
+		<query id="assessment_cascaded_kpi_update" query_name="assessment_cascaded_kpi_update"
+			description="assessment_cascaded_kpi_update">
+          <![CDATA[update hcms_pm_assessment_form_kra set modified_by_id=%s,assessment_form_kpi_weightage=%s,is_active='TRUE',modified_date=now() where id=%s returning id]]>
+		</query>
+		<query id="assessment_form_kpi_remove" query_name="assessment_form_kpi_remove"
+			description="assessment_form_kpi_remove">
+          <![CDATA[update hcms_pm_assessment_form_kra set modified_by_id=%s,is_active='FALSE',modified_date=now() where assessment_form_id=%s]]>
+		</query>
+		<query id="assessment_role_kpi_update" query_name="assessment_role_kpi_update"
+			description="assessment_role_kpi_update">
+          <![CDATA[update hcms_pm_assessment_form_kra set modified_by_id=%s,assessment_form_kpi_weightage=%s,is_active='TRUE',modified_date=now() where id=%s returning id]]>
+		</query>
+		<query id="role_kpi_fetch" query_name="role_kpi_fetch"
+			description="role_kpi_fetch">
+          <![CDATA[select id,kpi_definition from hcms_ti_role_kpi where is_active=TRUE and kpi_role_id={0}]]>
+		</query>
+	</queries>
+	                      <!--    balanced scorecard -->
+	<queries name="balance_scorecard">
+		<query id="fetch_org_unit_division_details" query_name="fetch_org_unit_division_details"
+			description="fetch_org_unit_division_details">
+          <![CDATA[ select id,name from team_details_info where org_id=%s and org_unit_id=%s and is_active='TRUE' order by name ]]>
+		</query>
+		  <!--  query for perspective -->
+		<query id="prespective_FINAN_details" query_name="FINAN_details"
+			description="FINAN_details">
+          <![CDATA[   select progress,id,strategic_objective_description from hcms_pm_strategic_objectives
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'FINAN')
+ and is_active=True and (organization_id is not null or organization_id is null) and (organization_unit_id is null and employee_id is null and department_id is null)   
+ and planned_year='{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter='{1}') 
+ order by strategic_objective_description ]]>
+		</query>
+		<query id="prespective_CSTMR_details" query_name="CSTMR_details"
+			description="CSTMR_details">
+          <![CDATA[ select progress,id,strategic_objective_description from hcms_pm_strategic_objectives
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'CSTMR')
+ and is_active=True and (organization_id is not null or organization_id is null) and (organization_unit_id is null and employee_id is null and department_id is null)   
+ and planned_year='{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter='{1}') 
+ order by strategic_objective_description ]]>
+		</query>
+		<query id="prespective_IPRCS_details" query_name="IPRCS_details"
+			description="IPRCS_details">
+          <![CDATA[ select progress,id,strategic_objective_description from hcms_pm_strategic_objectives
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'IPRCS')
+ and is_active=True and (organization_id is not null or organization_id is null) and (organization_unit_id is null and employee_id is null and department_id is null)   
+ and planned_year='{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter='{1}') 
+ order by strategic_objective_description ]]>
+		</query>
+		<query id="prespective_LRNGR_details" query_name="LRNGR_details"
+			description="LRNGR_details">
+          <![CDATA[ select progress,id,strategic_objective_description from hcms_pm_strategic_objectives
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'LRNGR')
+ and is_active=True and (organization_id is not null or organization_id is null) and (organization_unit_id is null and employee_id is null and department_id is null)   
+and planned_year='{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter='{1}') 
+ order by strategic_objective_description ]]>
+		</query>
+		             <!--  query for filter search with organization -->
+		<query id="FINAN_details" query_name="FINAN_details"
+			description="FINAN_details">
+          <![CDATA[ select progress,id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'FINAN')
+ and is_active=True and organization_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="CSTMR_details" query_name="CSTMR_details"
+			description="CSTMR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'CSTMR')
+ and is_active=True and organization_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="IPRCS_details" query_name="IPRCS_details"
+			description="IPRCS_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'IPRCS')
+ and is_active=True and organization_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="LRNGR_details" query_name="LRNGR_details"
+			description="LRNGR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'LRNGR')
+ and is_active=True and organization_id=%s  order by strategic_objective_description ]]>
+		</query>
+		      <!--  query for search with org_unit -->
+		      <query id="org_unit_FINAN_details" query_name="org_unit_FINAN_details"
+			description="org_unit_FINAN_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'FINAN')
+ and is_active=True and organization_unit_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="org_unit_CSTMR_details" query_name="org_unit_CSTMR_details"
+			description="org_unit_CSTMR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'CSTMR')
+ and is_active=True and organization_unit_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="org_unit_IPRCS_details" query_name="org_unit_IPRCS_details"
+			description="org_unit_IPRCS_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'IPRCS')
+ and is_active=True and organization_unit_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="org_unit_LRNGR_details" query_name="org_unit_LRNGR_details"
+			description="org_unit_LRNGR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'LRNGR')
+ and is_active=True and organization_unit_id=%s  order by strategic_objective_description ]]>
+		</query>
+		 <!--  query for search with division -->
+		      <query id="division_FINAN_details" query_name="division_FINAN_details"
+			description="division_FINAN_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'FINAN')
+ and is_active=True and department_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="division_CSTMR_details" query_name="division_CSTMR_details"
+			description="division_CSTMR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'CSTMR')
+ and is_active=True and department_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="division_IPRCS_details" query_name="division_IPRCS_details"
+			description="division_IPRCS_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'IPRCS')
+ and is_active=True and department_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="division_LRNGR_details" query_name="division_LRNGR_details"
+			description="division_LRNGR_details">
+          <![CDATA[ select id,strategic_objective_description from hcms_pm_strategic_objectives 
+where bsc_perspective_id  = (select id from  reference_items  where refitems_code = 'LRNGR')
+ and is_active=True and department_id=%s  order by strategic_objective_description ]]>
+		</query>
+		<query id="cascading_objective_organization" query_name="cascading_objective_organization"
+			description="cascading_objective_organization">
+          <![CDATA[ select CONCAT(oi.id, 'org') as id,name as text,{1} as parent from organization_info oi where oi.id {0} and is_active = true]]>
+		</query>
+		
+		<query id="cascading_organization_unit" query_name="cascading_organization_unit"
+			description="cascading_organization_unit">
+          <![CDATA[ select id,orgunit_name as name from organization_unit_info where parent_orgunit_id!=0 and organization_id = {0} and is_active = true]]>
+		</query>
+		
+		<query id="cascading_team" query_name="cascading_team"
+			description="cascading_team">
+          <![CDATA[ select id,name from team_details_info where org_unit_id = {0} and is_active = true]]>
+		</query>
+		
+		<query id="cascading_objective_organization_unit" query_name="cascading_objective_organization_unit"
+			description="cascading_objective_organization_unit">
+          <![CDATA[ select CONCAT(oui.id, 'orgunit') as id, {2} as parent, oui.orgunit_name as text from organization_unit_info oui 
+          inner join organization_info oi on oi.id = oui.organization_id where oui.parent_orgunit_id!=0 and oui.id {0} and oi.id {1} and oui.is_active = true
+          and oi.is_active = true]]>
+		</query>
+		<query id="cascading_objective_organization_objectives" query_name="cascading_objective_organization_objectives"
+			description="cascading_objective_organization_objectives">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, {1} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join organization_info oi on oi.id = hpso.organization_id where oi.id {0} and oi.is_active = true and hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_organization_objectives_quarter" query_name="cascading_objective_organization_objectives_quarter"
+			description="cascading_objective_organization_objectives_quarter">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, {3} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join organization_info oi on oi.id = hpso.organization_id where hpso.planned_year = '{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}'
+            or planned_quarter={1}) and oi.id {2} and oi.is_active = true and hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_team" query_name="cascading_objective_team"
+			description="cascading_objective_team">
+          <![CDATA[select CONCAT(tdi.id,'team') as id, {3} as parent,tdi.name as text from team_details_info tdi inner join organization_unit_info oui on oui.id = tdi.org_unit_id 
+            inner join organization_info oi on oi.id = oui. organization_id where tdi.id {0} and oi.id {1} and oui.id {2} 
+          and tdi.is_active = true and oi.is_active = true and oui.is_active = true]]>
+		</query>
+		<query id="cascading_objective_team_objectives" query_name="cascading_objective_team_objectives"
+			description="cascading_objective_team_objectives">
+          <![CDATA[select CONCAT(hpso.id ,'obj') as id, {3} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join team_details_info tdi on tdi.id = hpso.department_id inner join organization_unit_info oui on oui.id = tdi.org_unit_id 
+            inner join organization_info oi on oi.id = oui. organization_id where tdi.id {0} and oi.id {1} and oui.id {2} 
+          	and tdi.is_active = true and oi.is_active = true and oui.is_active = true and 
+            hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_team_objectives_quarter" query_name="cascading_objective_team_objectives_quarter"
+			description="cascading_objective_team_objectives_quarter">
+          <![CDATA[select CONCAT(hpso.id ,'obj') as id, {5} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join team_details_info tdi on tdi.id = hpso.department_id inner join organization_unit_info oui on oui.id = tdi.org_unit_id 
+            inner join organization_info oi on oi.id = oui. organization_id where hpso.planned_year = '{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' 
+            or planned_quarter={1}) and tdi.id {2} and oi.id {3} and oui.id {4} 
+	    	and tdi.is_active = true and oi.is_active = true and oui.is_active = true and 
+            hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_organizationUnit_objectives" query_name="cascading_objective_organizationUnit_objectives"
+			description="cascading_objective_organizationUnit_objectives">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, {2} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join organization_unit_info oui on oui.id = hpso.organization_unit_id inner join organization_info oi on oi.id = oui.organization_id 
+            where oui.id {0} and oi.id {1} and oui.is_active = true and oi.is_active = true and
+            hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_organizationUnit_objectives_quarter" query_name="cascading_objective_organizationUnit_objectives_quarter"
+			description="cascading_objective_organizationUnit_objectives_quarter">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, {4} as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join organization_unit_info oui on oui.id = hpso.organization_unit_id inner join organization_info oi on oi.id = oui.organization_id  
+            where hpso.planned_year = '{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter={1}) and 
+            oui.id {2} and oi.id {3} and oui.is_active =true and oi.is_active = true and hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_employee" query_name="cascading_objective_employee"
+			description="cascading_objective_employee">
+          <![CDATA[ select CONCAT(ei.id,'emp') as id, CONCAT('emp',tdi.id,'team') as parent, concat(ei.name,' ',ei.last_name) as text from employee_info ei 
+            inner join team_details_info tdi on tdi.id = ei.team_name_id inner join organization_unit_info oui on oui.id = tdi.org_unit_id 
+            inner join organization_info oi on oi.id = oui. organization_id where tdi.id {0} and oi.id {1} and oui.id {2} 
+            and tdi.is_active = true and oi.is_active = true and oui.is_active = true and ei.is_active = true]]>
+		</query>
+		<query id="cascading_objective_employee_objectives" query_name="cascading_objective_employee_objectives"
+			description="cascading_objective_employee_objectives">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, CONCAT('obj',ei.id,'emp') as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join employee_info ei on ei.id = hpso.employee_id inner join team_details_info tdi on tdi.id = ei.team_name_id inner join organization_unit_info oui on oui.id = tdi.org_unit_id 
+            inner join organization_info oi on oi.id = oui. organization_id where tdi.id {0} and oi.id {1} and oui.id {2} and tdi.is_active = true and 
+            oi.is_active = true and oui.is_active = true and ei.is_active = true and hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_employee_objectives_quarter" query_name="cascading_objective_employee_objectives_quarter"
+			description="cascading_objective_employee_objectives_quarter">
+          <![CDATA[ select CONCAT(hpso.id ,'obj') as id, CONCAT('obj',ei.id,'emp') as parent, hpso.strategic_objective_description as text from hcms_pm_strategic_objectives hpso 
+            inner join employee_info ei on ei.id = hpso.employee_id inner join team_details_info tdi on tdi.id = ei.team_name_id 
+            inner join organization_unit_info oui on oui.id = tdi.org_unit_id inner join organization_info oi on oi.id = oui. organization_id 
+            where hpso.planned_year = '{0}' and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or 
+            planned_quarter={1}) and tdi.id {2} and oi.id {3} and oui.id {4} and tdi.is_active = true and oi.is_active = true and oui.is_active = true and ei.is_active = true
+	    and hpso.is_active = true]]>
+		</query>
+		<query id="cascading_objective_key_result" query_name="cascading_objective_key_result"
+			description="cascading_objective_key_result">
+          <![CDATA[ select concat(id,'kr') as id,kr_summary as text,concat('kr',strategic_objectives_id,'obj') as parent from hcms_pm_key_result where strategic_objectives_id = {0} ]]>
+		</query>
+		<query id="performance_assessment_schedule_update" query_name="performance_assessment_schedule_update"
+			description="Performance Assessment Schedule Update">
+          <![CDATA[update HCMS_PM_Assessment_Schedule set schedule_name='{0}',assessment_cycle_starts='{1}',assessment_cycle_ends='{2}',
+          objective_setting_day_count={3},objective_setting_date='{4}',is_active={5},modified_by_id={6}, modified_date=now(),schedule_quarter={9},schedule_year={8} where id={7}]]>
+		</query>
+		<query id="performance_assessment_schedule_details_delete" query_name="performance_assessment_schedule_details_delete"
+			description="Performance Assessment Schedule Detail Delete">
+          <![CDATA[DELETE FROM HCMS_PM_Assessment_Schedule_Details WHERE assessment_schedule_id={0}]]>
+		</query>
+		<query id="performance_assessment_schedule_detail_insert" query_name="performance_assessment_schedule_detail_insert"
+			description="Performance Assessment Schedule Detail Insert">
+          <![CDATA[insert into HCMS_PM_Assessment_Schedule_Details (assessment_schedule_id,employee_id,assessor_type_id,
+        assess_type_day_count,schedule_start_date,is_active,created_by_id, created_date) values (%s,%s,%s,%s,%s,%s,%s,now())]]>
+		</query>
+		<query id="performance_assessment_schedule_insert" query_name="performance_assessment_schedule_insert"
+			description="Performance Assessment Schedule Insert">
+          <![CDATA[insert into HCMS_PM_Assessment_Schedule (schedule_name,assessment_cycle_starts,assessment_cycle_ends,objective_setting_day_count,objective_setting_date,is_active,created_by_id, created_date,schedule_quarter,schedule_year) values ('{0}','{1}','{2}',{3},'{4}',{5},{6},now(),{8},{7}) returning id]]>
+		</query>
+		<query id="performance_assessment_schedule_detail_fetch" query_name="performance_assessment_schedule_detail_fetch"
+			description="Performance Assessment Schedule Detail Fetch">
+          <![CDATA[select asd.id as schedule_id,asd.schedule_name as schedule_name,to_char(assessment_cycle_starts,'DD-MM-YYYY') as cycle_starts from
+		HCMS_PM_Assessment_Schedule asd where asd.is_active =TRUE and ric.is_active=true order by asd.id desc]]>
+		</query>
+		<query id="performance_assessment_schedule_fetch_by_id" query_name="performance_assessment_schedule_fetch_by_id"
+			description="Performance Assessment Schedule Detail Fetch By Id">
+          <![CDATA[select schedule_name as schedule_name,objective_setting_day_count as objective_day_count,to_char(assessment_cycle_starts, 'DD-MM-YYYY') as cycle_starts from
+		HCMS_PM_Assessment_Schedule where id=%s and is_active =TRUE]]>
+		</query>
+		<query id="performance_assessment_schedule_detail_fetch_by_id" query_name="performance_assessment_schedule_detail_fetch_by_id"
+			description="Performance Assessment Schedule Child Detail Fetch By Id">
+          <![CDATA[select array(select distinct employee_id from hcms_pm_assessment_schedule_details where assessment_schedule_id=%s and is_active=true) 
+		as employee_ids, ri.refitems_name,assessor_type_id,assess_type_day_count,to_char(schedule_start_date, 'DD-MM-YYYY') as schedule_start_date from 
+		hcms_pm_assessment_schedule_details asd inner join reference_items ri on asd.assessor_type_id=ri.id where assessment_schedule_id=%s and employee_id=%s and asd.is_active=true and ri.is_active=true]]>
+		</query>
+			<query id="performance_assessment_schedule_employee_detail" query_name="performance_assessment_schedule_employee_detail"
+			description="Performance Assessment Schedule Employee Detail Fetch By Id">
+          <![CDATA[select distinct sd.employee_id as id, ei.name from hcms_pm_assessment_schedule_details sd left join employee_info ei on sd.employee_id=ei.id where sd.assessment_schedule_id=%s and 
+        ei.is_active=true and sd.is_active=true ]]>
+		</query>
+		<query id="performance_assessment_schedule_remove" query_name="performance_assessment_schedule_remove"
+			description="Performance Assessment Schedule Remove">
+          <![CDATA[UPDATE HCMS_PM_Assessment_Schedule SET is_active = FALSE WHERE id=%s]]>
+		</query>
+		<query id="performance_assessment_schedule_detail_remove" query_name="performance_assessment_schedule_detail_remove"
+			description="Performance Assessment Schedule Detail Remove">
+          <![CDATA[UPDATE HCMS_PM_Assessment_Schedule_Details SET is_active=FALSE where assessment_schedule_id=%s]]>
+		</query>
+		</queries>
+		                  <!--  performance reviewer -->
+		
+		<queries name="performance_reviewer">
+		<query id="excluded_assessor_type_fetch" query_name="excluded_assessor_type_fetch"
+			description="excluded_assessor_type_fetch">
+          <![CDATA[select ri.id,ri.refitems_name,ri.refitems_code from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where (ric.refitem_category_code = 'ASMTY' or ric.refitem_category_code = 'EXAST') and ri.is_active=true and ric.is_active=true order by ri.refitems_code ]]>
+		</query>
+		<query id="form_details" query_name="form_details"
+			description="form_details">
+          <![CDATA[select emp_info.id as employee_id,emp_info.name as first_name,emp_info.last_name,assessment_form_employee_id as emp_id from hcms_pm_assessment_form as form
+inner join employee_info as emp_info on emp_info.id=form.assessment_form_employee_id
+where form.id={0} and form.is_active='TRUE' and emp_info.is_active='TRUE' ]]>
+		</query>
+		<query id="assessor_matrix_detail" query_name="assessor_matrix_detail"
+			description=" To fetch assessor matrix detail">
+        	<![CDATA[select assessor_viewer_role_id,assessor_view_role_id from hcms_pm_assessor_access_matrix where assessment_form_id=%s and is_active='True']]>
+		</query>
+		
+		<!-- <query id="assessor_info_detail" query_name="assessor_info_detail"
+			description=" To fetch assessor_info_detail">
+        	<![CDATA[select assessor_type_refitem_id as assessor_type_id,assessor_id,ei.name as assessor_name,ei.last_name,
+ri.refitems_code as assessor_type_code
+from hcms_pm_assessor_info ai 
+inner join employee_info ei on ai.assessor_id=ei.id 
+inner join reference_items ri on ri.id=ai.assessor_type_refitem_id 
+where ai.assessment_form_id=%s and ai.is_active=true and ri.is_active=true and ei.is_active='True']]>
+		</query> -->
+		
+		<query id="assessor_info_detail" query_name="assessor_info_detail"
+			description=" To fetch assessor_info_detail">
+        	<![CDATA[select assessor_type_refitem_id as assessor_type_id,array_agg(assessor_id)
+from hcms_pm_assessor_info ai 
+inner join employee_info ei on ai.assessor_id=ei.id 
+inner join reference_items ri on ri.id=ai.assessor_type_refitem_id 
+where ai.assessment_form_id=%s and ai.is_active=true and ri.is_active=true and ei.is_active='True'
+group by assessor_type_id]]>
+		</query> 
+		
+		<query id="org_employe_search" query_name="org_employe_search"
+			description=" To fetch org_employe_search detail">
+        	<![CDATA[select id,name,last_name from employee_info where org_id_id={0} and is_active='TRUE' ]]>
+		</query>
+		<query id="org_unit_employe_search" query_name="org_unit_employe_search"
+			description=" To fetch org_unit_employe_search detail">
+        	<![CDATA[select id,name,last_name from employee_info where org_unit_id_id={0} and is_active='TRUE ']]>
+		</query>
+		<query id="dep_employe_search" query_name="dep_employe_search"
+			description=" To fetch dep_employe_search detail">
+        	<![CDATA[select id,name,last_name from employee_info where team_name_id={0} and is_active='TRUE']]>
+		</query>
+		
+		<query id="exsist_assesser_exsist" query_name="exsist_assesser_exsist"
+			description=" To fetch exsist_assesser_exsist">
+        	<![CDATA[select id from hcms_pm_assessor_info where assessment_form_id=%s and assessor_type_refitem_id=%s and assessor_id=%s]]>
+		</query>
+		
+		<query id="assesser_remove" query_name="assesser_remove"
+			description="assesser_remove">
+        	 <![CDATA[update hcms_pm_assessor_info set modified_by_id=%s,is_active='FALSE',modified_date=now() where assessment_form_id=%s]]>
+		</query>
+		
+		<query id="assessor_info_update" query_name="assessor_info_update"
+			description=" To update assessor info detail">
+        	<![CDATA[update hcms_pm_assessor_info set assessment_form_id=%s,assessor_type_refitem_id=%s,assessor_id=%s,modified_by_id=%s,modified_date=now(),is_active='TRUE' where id=%s]]>
+		</query>
+		
+		<query id="assessor_info_insert" query_name="assessor_info_insert"
+			description="To insert assessor info detail">
+        	<![CDATA[insert into hcms_pm_assessor_info(assessment_form_id,assessor_type_refitem_id,assessor_id,training_status,is_active,created_by_id,created_date)
+values (%s,%s,%s,False,TRUE,%s,now())]]>
+		</query>
+		
+		<query id="access_matrix_exsist" query_name="access_matrix_exsist"
+			description="access_matrix_exsist detail">
+        	<![CDATA[select id from hcms_pm_assessor_access_matrix where assessor_viewer_role_id=%s and assessor_view_role_id=%s and assessment_form_id=%s and is_active='TRUE']]>
+		</query>
+		
+		<query id="access_matrix_insert" query_name="access_matrix_insert"
+			description="To insert access_matrix_insert">
+        	<![CDATA[insert into hcms_pm_assessor_access_matrix(assessor_viewer_role_id,assessor_view_role_id,assessment_form_id,assessor_access,is_active,created_by_id,modified_by_id,created_date)
+values (%s,%s,%s,TRUE,TRUE,%s,%s,now())]]>
+		</query>
+		
+		<query id="access_matrix_remove" query_name="access_matrix_remove"
+			description="access_matrix_remove">
+        	 <![CDATA[update hcms_pm_assessor_access_matrix set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		
+		<query id="access_matrix_delete" query_name="access_matrix_delete"
+			description="access_matrix_delete">
+        	 <![CDATA[update hcms_pm_assessor_access_matrix set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		                            <!--   balanced scorecard -->
+		<query id="fetch_ref_bsc" query_name="fetch_ref_bsc"
+			description="fetch_ref_bsc">
+        	 <![CDATA[select id,refitems_name from  reference_items  where refitems_code = 'IPRCS' or refitems_code = 'LRNGR' or  refitems_code = 'FINAN' or refitems_code = 'CSTMR' order by refitems_name
+        	 ]]>
+		</query>
+		
+		<query id="bsc_form_save" query_name="bsc_form_save"
+			description="bsc_form_save">
+        	 <![CDATA[insert into hcms_pm_strategic_objectives (strategic_objective_description,bsc_perspective_id,start_date,
+        end_date,objective_plan_type,organization_id,planned_year,planned_month,planned_quarter,is_active,created_by_id, created_date) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now())
+        	 ]]>
+		</query>
+			<query id="fetch_organization_unit_details_view" query_name="fetch_organization_unit_details_view"
+			description="fetch_organization_unit_details_view">
+          <![CDATA[select id,orgunit_name from organization_unit_info  where parent_orgunit_id!=0 and is_active=True and organization_id=%s ORDER BY orgunit_name ASC]]>
+		</query>
+		<query id="fetch_division_details_view" query_name="fetch_division_details_view"
+			description="fetch_division_details_view">
+          <![CDATA[select id,name from team_details_info where is_active=True and org_unit_id = %s ORDER BY name ASC]]>
+		</query>
+		<query id="fetch_org_employee_details_view" query_name="fetch_org_employee_details_view"
+			description="fetch_org_employee_details_view">
+          <![CDATA[select id,name,last_name from employee_info  where is_active=True and org_id_id =%s ORDER BY name ASC]]>
+		</query>
+		<query id="fetch_org_unit_employee_details" query_name="fetch_org_unit_employee_details"
+			description="fetch_org_unit_employee_details">
+          <![CDATA[select id,name,last_name from employee_info  where is_active=True and org_id_id=%s and org_unit_id_id=%s]]>
+		</query>
+		<query id="fetch_division_employee_details" query_name="fetch_division_employee_details"
+			description="fetch_division_employee_details">
+          <![CDATA[select id,name,last_name from employee_info  where is_active=True and org_id_id=%s and org_unit_id_id=%s and team_name_id=%s]]>
+		</query>
+		<query id="fetch_performance_assessment_table_view" query_name="fetch_performance_assessment_table_view"
+			description="fetch_performance_assessment_table_view">
+          <![CDATA[select pm.id,emp.name as first_name,emp.last_name,unit.orgunit_name,org.name,pm.assessment_year from hcms_pm_assessment_form as pm inner join  employee_info as emp on emp.id=pm.assessment_form_employee_id
+inner join organization_info as org on org.id=pm.organization_id inner join organization_unit_info as unit on unit.id=pm.organization_unit_id
+where pm.assessment_form_employee_id in %s and pm.is_active=True]]>
+		</query>
+		
+		<query id="fetch_performance_assessor_data" query_name="fetch_performance_assessor_data"
+			description="fetch_performance_assessor_data">
+          <![CDATA[select pm.id,pm.assessor_type_refitem_id,pm_fo.assessment_form_employee_id from hcms_pm_assessor_info as pm inner join reference_items as ref on ref.id=pm.assessor_type_refitem_id
+inner join hcms_pm_assessment_form as pm_fo on pm_fo.id=%s
+where pm.assessor_id =%s and pm.assessment_form_id =%s and pm.is_active=True]]>
+		</query>
+		<query id="fetch_performance_kr_data" query_name="fetch_performance_kr_data"
+			description="fetch_performance_kr_data">
+          <![CDATA[select kr.kr_summary,kr.id,kra.assessment_form_id from  hcms_pm_assessment_form_kra as kra inner join hcms_pm_key_result as kr on kr.id=kra.assessment_form_okr_kra_id
+ where  kra.assessment_form_id=%s and kra.is_active=True]]>
+		</query>
+		<query id="fetch_performance_kpi_data" query_name="fetch_performance_kpi_data"
+			description="fetch_performance_kpi_data">
+          <![CDATA[select kpi.kpi_definition,kpi.id,kra.assessment_form_id from  hcms_pm_assessment_form_kra as kra inner join hcms_ti_role_kpi as kpi on kpi.id=kra.assessment_form_role_kra_id
+ where  kra.assessment_form_id=%s and kra.is_active=True]]>
+		</query>
+		<query id="performance_ass_rating_insert" query_name="performance_ass_rating_insert"
+			description="performance_ass_rating_insert">
+          <![CDATA[insert into hcms_pm_assessment_process(is_active,assessment_rating,assessment_form_id,assessment_form_okr_kra_id,assessment_process_assessor_type_id,assessor_id,
+          created_by_id,employee_id,created_date) values(True,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+		<query id="performance_ass_kr_rating_insert" query_name="performance_ass_kr_rating_insert"
+			description="performance_ass_kr_rating_insert">
+          <![CDATA[insert into hcms_pm_assessment_process(is_active,assessment_rating,assessment_form_id,assessment_form_role_kra_id,assessment_process_assessor_type_id,assessor_id,
+          created_by_id,employee_id,created_date) values(True,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+		
+		<query id="performance_kpi_rating_check" query_name="performance_kpi_rating_check"
+			description="performance_kpi_rating_check">
+          <![CDATA[select id as rating_id,assessment_rating,assessment_form_okr_kra_id,assessment_form_id from hcms_pm_assessment_process where assessment_form_id = %s 
+  and is_active=True and assessor_id=%s and assessment_form_okr_kra_id IS NOT NULL]]>
+		</query>
+		<query id="performance_kr_rating_check" query_name="performance_kr_rating_check"
+			description="performance_kr_rating_check">
+          <![CDATA[select id as rating_id,assessment_rating,assessment_form_role_kra_id,assessment_form_id from hcms_pm_assessment_process where assessment_form_id = %s 
+  and is_active=True and assessor_id=%s and assessment_form_role_kra_id IS NOT NULL]]>
+		</query>
+		<query id="performance_ass_rating_update" query_name="performance_ass_rating_update" description="performance_ass_rating_update">
+          <![CDATA[update hcms_pm_assessment_process set assessment_rating=%s,modified_date=now(),modified_by_id=%s where id=%s returning id]]>
+		</query>
+		
+		<query id="performance_ass_kr_rating_update" query_name="performance_ass_kr_rating_update"
+			description="performance_ass_kr_rating_update">
+          <![CDATA[update hcms_pm_assessment_process set assessment_rating=%s,modified_date=now(),modified_by_id=%s where id=%s returning id]]>
+		</query>
+		
+		<query id="objective_data_fetch" query_name="objective_data_fetch"
+			description="objective_data_fetch">
+          <![CDATA[select id,strategic_objective_description,bsc_perspective_id, organization_id,objective_plan_type,start_date,end_date,planned_year,
+               planned_month,planned_quarter,progress from hcms_pm_strategic_objectives where is_active='TRUE' and id=%s]]>
+		</query>
+		
+		<query id="bsc_form_remove" query_name="bsc_form_remove"
+			description="bsc_form_remove">
+          <![CDATA[update hcms_pm_strategic_objectives set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		<query id="ass_feedback_update" query_name="ass_feedback_update" description="ass_feedback_update">
+          <![CDATA[update hcms_pm_assessor_info set assessor_feedback=%s,learning_pointers=%s,modified_by_id=%s,modified_date=now() where assessment_form_id=%s and assessor_id=%s and is_active=True]]>
+		</query>
+		<query id="fetch_ass_feedback" query_name="fetch_ass_feedback" description="fetch_ass_feedback">
+          <![CDATA[select emp.name,emp.last_name,fb.assessor_feedback,fb.learning_pointers from hcms_pm_assessor_info as fb inner join employee_info as emp on emp.id=fb.assessor_id
+  where fb.assessment_form_id =%s and fb.assessor_id=%s and fb.is_active=True]]>
+		</query>
+		<query id="fetch_assessor_id" query_name="fetch_assessor_id" description="fetch_assessor_id">
+          <![CDATA[select id from employee_info  where related_user_id_id =%s]]>
+		</query>
+		<query id="fetch_matrix_viwer_role" query_name="fetch_matrix_viwer_role" description="fetch_matrix_viwer_role">
+	          <![CDATA[select ref.id as ref_id,ref.refitems_name from hcms_pm_assessor_access_matrix as pm inner join reference_items as ref on ref.id=pm.assessor_view_role_id
+	where pm.assessor_viewer_role_id =%s and pm.is_active =True and pm.assessment_form_id=%s]]>
+		</query>
+		<query id="fetch_info_viwer_role" query_name="fetch_info_viwer_role" description="fetch_info_viwer_role">
+          <![CDATA[select ref.refitems_name,pm.assessor_type_refitem_id as ref_id from hcms_pm_assessor_info as pm inner join reference_items as ref on ref.id=pm.assessor_type_refitem_id 
+  where pm.assessor_id=%s and pm.assessment_form_id =%s and pm.is_active=True]]>
+		</query>
+		<query id="fetch_pm_info_employee" query_name="fetch_pm_info_employee" description="fetch_pm_info_employee">
+          <![CDATA[select emp.id as emp_id,emp.name,emp.last_name,pm.assessor_id as ass_id from  hcms_pm_assessor_info as pm inner join employee_info as emp on emp.id=pm.assessor_id
+where pm.assessor_type_refitem_id=%s and pm.is_active=True and pm.assessment_form_id=%s]]>
+		</query>
+		<query id="employe_search" query_name="employe_search"
+			description=" To fetch employe_search detail">
+        	<![CDATA[select id,TRIM(name) as name,TRIM(last_name) as last_name from employee_info where is_active='TRUE' order by name ]]>
+		</query>
+		<query id="fetch_performance_assessment_table_view_year" query_name="fetch_performance_assessment_table_view_year"
+			description="fetch_performance_assessment_table_view_year">
+        	<![CDATA[select pm.id,emp.name as first_name,emp.last_name,unit.orgunit_name,org.name,pm.assessment_year from hcms_pm_assessment_form as pm 
+inner join employee_info as emp on emp.id=pm.assessment_form_employee_id
+inner join organization_info as org on org.id=pm.organization_id inner join organization_unit_info as unit on unit.id=pm.organization_unit_id
+where pm.assessment_form_employee_id in %s and pm.is_active=True and pm.assessment_year=%s ]]>
+		</query>
+		<query id="fetch_performance_assessment_table_view_quarter" query_name="fetch_performance_assessment_table_view_quarter"
+			description="fetch_performance_assessment_table_view_quarter">
+        	<![CDATA[select pm.id,emp.name as first_name,emp.last_name,unit.orgunit_name,org.name,pm.assessment_year from hcms_pm_assessment_form as pm 
+inner join employee_info as emp on emp.id=pm.assessment_form_employee_id
+inner join organization_info as org on org.id=pm.organization_id inner join organization_unit_info as unit on unit.id=pm.organization_unit_id
+where pm.assessment_form_employee_id in %s and pm.is_active=True and pm.assessment_year=%s and pm.assessment_quarter =%s]]>
+		</query>
+		</queries>
+		       <!--  Performance dashboard query -->
+		<queries name="performance_dashboard">
+
+		<query id="performance_employee_data" query_name="performance_employee_data"
+			description="performance_employee_data">
+        	<![CDATA[select array_agg(assessment_form_employee_id)as id from hcms_pm_assessment_form where is_active=True and assessment_year=%s and organization_id=%s and assessment_quarter=%s]]>
+		</query>
+		<query id="performance_employee_top_rating" query_name="performance_employee_top_rating"
+			description="performance_employee_top_rating">
+        	<![CDATA[select ROUND(avg((pm.assessment_rating/5)*100):: numeric,2) as avg_rating,emp.id,emp.name as first_name,emp.last_name,count(pm.assessment_rating)as number,sum(pm.assessment_rating)as total from hcms_pm_assessment_process as pm 
+inner join employee_info as emp on emp.id = pm.employee_id where pm.employee_id in %s GROUP BY emp.id order by avg_rating DESC limit 3]]>
+		</query>
+		<query id="performance_employee_top_rating_division" query_name="performance_employee_top_rating_division"
+			description="performance_employee_top_rating_division">
+        	<![CDATA[select ROUND(avg((pm.assessment_rating/5)*100):: numeric,2) as avg_rating,emp.id,emp.name as first_name,emp.last_name,count(pm.assessment_rating)as number,sum(pm.assessment_rating)as total from hcms_pm_assessment_process as pm 
+inner join employee_info as emp on emp.id = pm.employee_id where pm.employee_id in %s and emp.org_unit_id_id=%s and emp.team_name_id=%s GROUP BY emp.id order by avg_rating DESC limit 3]]>
+		</query>
+		<query id="performance_employee_top_rating_org" query_name="performance_employee_top_rating_org"
+			description="performance_employee_top_rating_org">
+        	<![CDATA[select ROUND(avg((pm.assessment_rating/5)*100):: numeric,2) as avg_rating,emp.id,emp.name as first_name,emp.last_name,count(pm.assessment_rating)as number,sum(pm.assessment_rating)as total from hcms_pm_assessment_process as pm 
+inner join employee_info as emp on emp.id = pm.employee_id where pm.employee_id in %s and emp.org_unit_id_id in %s GROUP BY emp.id order by avg_rating DESC limit 3]]>
+		</query>
+		
+		<query id="employee_org_id" query_name="employee_org_id"
+			description="employee_org_id">
+          <![CDATA[select org_id_id as org_id ,org_info.name,org_unit.id as unit_id,org_unit.orgunit_name,team_info.id as team_id,team_info.name as team_name from employee_info 
+inner join organization_info as org_info on org_info.id=employee_info.org_id_id
+inner join organization_unit_info as org_unit on org_unit.id=employee_info.org_unit_id_id
+inner join team_details_info as team_info on team_info.id=employee_info.team_name_id
+where employee_info.id={0} and employee_info.is_active='TRUE' and org_info.is_active='TRUE']]>
+		</query>
+		<query id="org_perspective_data" query_name="org_perspective_data"
+			description="org_perspective_data">
+          <![CDATA[select ref.refitems_code,bsc_perspective_id,ROUND(avg(progress),0) as progress,
+ref.refitems_name as perspective 
+from hcms_pm_strategic_objectives 
+inner join reference_items as ref on ref.id=bsc_perspective_id
+where hcms_pm_strategic_objectives.is_active=TRUE and ref.is_active=TRUE and organization_id={0} and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{1}' or planned_quarter={1})  and planned_year={2} group by bsc_perspective_id,refitems_code,refitems_name]]>
+		</query>
+
+		<query id="performance_orgunit" query_name="performance_orgunit" description="performance_orgunit">
+        	<![CDATA[select CEIL(count(distinct org.id)/3::float) as org_count,obj.organization_unit_id,array_agg(obj.id)as id,org.orgunit_name from hcms_pm_strategic_objectives as obj inner join organization_unit_info as org on org.id = obj.organization_unit_id
+ where obj.organization_unit_id ={0} and obj.is_active=True and obj.planned_year = {1} and (to_char(to_timestamp(obj.planned_month::text,'MM'),'Q')='{2}' or  obj.planned_quarter={2}) group by  obj.organization_unit_id,org.orgunit_name]]>
+		</query>
+		<query id="performance_orgunit_complition" query_name="performance_orgunit_complition" description="performance_orgunit_complition">
+        	<![CDATA[ select ROUND(AVG(progress):: numeric,2) as competition from hcms_pm_strategic_objectives where organization_unit_id = {0} and is_active=True and planned_year={1}
+ and(to_char(to_timestamp(planned_month::text,'MM'),'Q')='{2}' or planned_quarter={2})]]>
+		</query>
+		<query id="performance_orgunit_expect" query_name="performance_orgunit_expect"
+			description="performance_orgunit_expect">
+        	<![CDATA[select ROUND(avg(a.progress):: numeric,2)as expect from (select id,CASE WHEN (current_date::date < end_date::date) THEN progress ELSE 100 END as progress from hcms_pm_strategic_objectives 
+ where id in %s and  is_active=True) a]]>
+        	</query>
+		<query id="obj_perspective_data" query_name="obj_perspective_data"
+			description="obj_perspective_data">
+          <![CDATA[select hpso.id,hpso.strategic_objective_description as objectives,to_char(hpso.end_date,'DD-MM-YYYY') as target_date,concat(COALESCE(hpso.progress,0),' %') as progress,ri.refitems_name as perspective from hcms_pm_strategic_objectives hpso 
+          inner join reference_items ri on ri.id = hpso.bsc_perspective_id where hpso.planned_year = {0} and (to_char(to_timestamp(hpso.planned_month::text,'MM'),'Q')='{1}' or planned_quarter={1}) 
+          and hpso.is_active=True and ri.is_active=True and hpso.organization_id = {2} {3} order by hpso.progress desc]]>
+		</query>
+		<query id="orgunit_org_division" query_name="orgunit_org_division" description="orgunit_org_division">
+          <![CDATA[select array_agg(id) as id from organization_unit_info  where parent_orgunit_id!=0 and is_active=True and organization_id=%s]]>
+		</query>
+		<query id="org_division" query_name="org_division" description="org_division">
+          <![CDATA[select id,name from team_details_info  where org_unit_id in %s and is_active=True]]>
+		</query>
+		<query id="org_division_complition" query_name="org_division_complition" description="org_division_complition">
+        	<![CDATA[select CEIL(count(distinct obj.department_id)/3::float) as org_count,obj.department_id,array_agg(obj.id)as id,org.name from hcms_pm_strategic_objectives as obj inner join team_details_info as org on org.id = obj.department_id
+ where obj.department_id ={0} and obj.is_active=True and obj.is_active=True and obj.planned_year = {1} and (to_char(to_timestamp(obj.planned_month::text,'MM'),'Q')='{2}' or  obj.planned_quarter={2}) group by  obj.department_id,org.name]]>
+		</query>
+		<query id="perfor_division_complition" query_name="perfor_division_complition"
+			description="perfor_division_complition">
+        	<![CDATA[select ROUND(AVG(progress):: numeric,2) as competition from hcms_pm_strategic_objectives where department_id = {0} and is_active=True and planned_year = {1} and (to_char(to_timestamp(planned_month::text,'MM'),'Q')='{2}' or planned_quarter={2})]]>
+		</query>
+	</queries>
+	                            <!--  MyNext teamLead Dashboard query -->
+		<queries name="performance_dashboard">
+			<query id="reporting_officer_members_fetch" query_name="reporting_officer_members_fetch"
+				description="reporting_officer">
+	        	<![CDATA[
+select related_user_id_id, attachment_info.name,employee_info.id as emp_id,image_id_id as img_id,CONCAT(LTRIM(employee_info.name),' ',last_name) as name from employee_info 
+	left join attachment_info on attachment_info.id=image_id_id
+	where reporting_officer_id =(select id from employee_info where related_user_id_id={0} and is_active) 
+       and attachment_info.is_active and employee_info.is_active
+	order by employee_info.name]]>
+			</query>
+			<query id="team_lead_goals" query_name="team_lead_goals"
+				description="team_lead_goals">
+	        	<![CDATA[select id,strategic_objective_description,progress,to_char(start_date,'DD-Mon-YYYY') as start_date,to_char(end_date,'DD-Mon-YYYY') as end_date from hcms_pm_strategic_objectives where employee_id={0} and is_active order by id DESC]]>
+			</query>
+			<query id="employee_user_rel_id_fetch" query_name="employee_user_rel_id_fetch"
+				description="employee_user_rel_id_fetch">
+	        	<![CDATA[select emp.id,CONCAT(ref1.refitems_name,emp.name, ' ' ,emp.last_name ) as name from employee_info emp inner join reference_items as ref1 on ref1.id=emp.title_id
+where  emp.related_user_id_id ={0}  and emp.is_active and ref1.is_active ]]>
+			</query>
+			<query id="survey_data_fetch" query_name="survey_data_fetch"
+				description="survey_data_fetch">
+	        	<![CDATA[(select sm.id as survey_id,sm.survey_question, sl.rating, sl.comments from hcms_survey_master sm left join hcms_survey_rel sl on sm.id=sl.survey_id
+where sm.is_active and sl.rated_by_id={0} ) union (select sm.id as survey_id,sm.survey_question, null as rating, '' as comments from hcms_survey_master sm left join hcms_survey_rel sl on sm.id=sl.survey_id
+where sm.is_active and sm.id not in(select sm.id from hcms_survey_master sm left join hcms_survey_rel sl on sm.id=sl.survey_id
+where sm.is_active and sl.rated_by_id={0}))]]>
+			</query>
+			<query id="guidelines_data_fetch" query_name="guidelines_data_fetch"
+				description="guidelines_data_fetch">
+	        	<![CDATA[select gu.guidelines,gu.guided_by_id,CONCAT(ei.name, ' ' ,ei.last_name ) as employee_name,ei.related_user_id_id as image_id from  hcms_employee_guidelines gu left join employee_info ei on gu.guided_by_id=ei.id where gu.guided_for_id={0} and gu.is_active
+]]>
+			</query>
+			<query id="employee_rating_exist_check" query_name="employee_rating_exist_check"
+				description="employee_rating_exist_check">
+	        	<![CDATA[select id from hcms_survey_rel where rated_by_id=%s and survey_id=%s and is_active]]>
+			</query>
+			<query id="survey_detail_insert" query_name="survey_detail_insert"
+				description="survey_detail_insert">
+	        	<![CDATA[insert into hcms_survey_rel(is_active,rating,comments,rated_by_id,survey_id,created_by_id,created_date) values (True,{0},'{1}',{2},{3},{4},now()) returning id]]>
+			</query>
+			
+			<query id="survey_detail_update" query_name="survey_detail_update"
+				description="survey_detail_update">
+	        	<![CDATA[update hcms_survey_rel set rating={0},comments='{1}',modified_by_id={2},created_date=now() where survey_id={3} and rated_by_id={4} and is_active]]>
+			</query>
+			
+			<query id="birthday_wish" query_name="birthday_wish"
+				description="birthday_wish">
+	        	<![CDATA[select image_id_id,emp.id,CONCAT(ref1.refitems_name,emp.name, ' ' ,emp.last_name ) as name from employee_info emp inner join reference_items as ref1 on ref1.id=emp.title_id
+where emp.is_active and ref1.is_active and to_char(CURRENT_DATE,'mm-dd')=to_char(emp.date_of_birth,'mm-dd')]]>
+			</query>
+		</queries>
+</data> 

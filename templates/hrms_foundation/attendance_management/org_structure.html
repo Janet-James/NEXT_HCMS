@@ -1,0 +1,200 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+
+<!-- custom css start link-->
+{% block links %}
+<!-- dev custom css start -->
+<!-- Single Select -->
+<link href="{% static '/ui/plugins/select2/css/select2.min.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}" rel="stylesheet" type="text/css" />
+<!-- Org structure -->
+<link href="{%  static '/ui/plugins/org-structure/css/getorgchart_dev.css'  %}" rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}" rel="stylesheet" type="text/css" />
+<!-- Custom css -->
+<link href="{%  static '/dev/hrms_foundation/css/dev_custom.css'  %}" rel="stylesheet" type="text/css" />
+<link href="{%  static '/dev/hrms_foundation/css/org_chart.css'  %}" rel="stylesheet" type="text/css" />
+<!-- dev custom css end -->
+{% endblock %}
+<!-- custom css end link-->
+
+<!-- body content start-->
+{% block content %} {% nav_tags breadcrum_title="HROrganizationChart" %} 
+<!-- body container start -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div id="menuOverlay" class="backgroundfix">
+					<div class="page-container" id="maincontent">
+						<h1>Employee Hierarchy</h1>
+						<div class="row">
+							<div class="col-md-12 ">
+								<div class="portlet light bordered">
+									<div class="portlet-title">
+									<div class="row">
+									<div class="col-md-3" style='float: right'>
+									<div class="row">
+											<div class="col-sm-2" style="margin-top: 10px;">
+										<i data-toggle="tooltip" data-placement="top"
+											title="Organization" 
+											class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+									</div>
+											<div class="col-md-10">
+												<div class="form-group">
+													<select id="organization_id" name="organization_id"
+														class="form-control select2" required
+														data-error=".errorTxt7">
+														<option value="0">--Select Organization--</option> {% for i in organization_info %}
+														<option value={{i.id}}>{{i.name}}</option> {% endfor %}
+													</select> <span class="errorTxt7 errormessage"></span>
+												</div>
+											</div>
+											<div class="col-md-0" style="display:none">
+													<div class="form-group">
+														<select id="organization_unit_id"
+															name="organization_unit_id" class="form-control select2"
+															required data-error=".errorTxt6">
+															<option value="0">--Select Organization Unit--</option>
+														</select> <span class="errorTxt6 errormessage"></span>
+													</div>
+												<!-- <div class="col-md-2">
+												<a href="#" class="btn btn blue btn-success btn-animate"><i
+												class="nf nf-search rep_font" title="Org Unit Search"
+												style="color:; cursor: pointer;" id="org_unit_search"
+												onclick="employee_report_search(1)"></i></a>
+												</div> -->
+											</div>
+										</div>
+										</div>
+									</div>
+										
+									</div>
+									<div class="portlet-body" id='org_structure'></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- body container end -->
+<!-- modal function here start -->
+<div id="orgSelect" class="modal fade " tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Employee Details</h4>
+			</div>
+			<div class="modal-body">
+				<div class="portlet-body form">
+					<form role="form" id='hrms_org_structure_popup'>
+					<div class="clearfix"></div>
+						<div class="form-body">
+							<div class="col-md-6 ">
+								<div class="form-group">
+									<label>Name</label>
+									<div class="input-icon">
+										<i class="fa fa-user"></i> <input
+											class="form-control input_hide" placeholder="Name"
+											id='names' name='names' type="text"
+											data-error=".errorTxt0"> <span
+											class="errorTxt0 errorTxts errormessage"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Mail</label>
+									<div class="input-icon">
+										<i class="fa fa-user"></i> <input class="form-control"
+											placeholder="Mail" id='mail' name='mail' type="text"
+											data-error=".errorTxt1"> <span
+											class="errorTxt1 errorTxts errormessage"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Reporting officer</label> <select id="poi_id"
+										name="poi_id" class="form-control"
+										data-error=".errorTxt2">
+									</select> <span class="errorTxt2 errorTxts errormessage"></span>
+								</div>
+							</div>
+							<div class="col-md-6 ">
+								<div class="form-group">
+									<label>Role</label>
+									<div class="input-icon ">
+										<i class="fa fa-user"></i> <input
+											class="form-control input_hide" placeholder="Title"
+											id='title' name='title' type="text"
+											data-error=".errorTxt3"> <span
+											class="errorTxt3 errorTxts errormessage"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Phone</label>
+									<div class="input-icon">
+										<i class="fa fa-user"></i> <input class="form-control"
+											placeholder="Phone No" id='phone' name='phone'
+											type="text" data-error=".errorTxt4"> <span
+											class="errorTxt4 errorTxts errormessage"></span>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Address</label>
+									<div class="input-icon">
+										<i class="fa fa-user"></i> <input class="form-control"
+											placeholder="Address" id='address' name='address'
+											type="text" data-error=".errorTxt5"> <span
+											class="errorTxt5 errorTxts errormessage"></span>
+									</div>
+								</div>
+
+							</div>
+							<div class="form-group" align="right">
+								<div class="btn-padding">
+									<button type="button"
+										onclick='updateOrgPopupConfirmation()'
+										class="btn-animate btn-eql-wid btn btn-success ">Save</button>
+									<button type="button"
+										onclick='clearOrgPopupConfirmation()'
+										class="btn-animate btn-eql-wid btn btn-warning ">Cancel
+										/ Clear</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn-animate btn-eql-wid btn default"
+					data-dismiss="modal" aria-hidden="true">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal function here end -->
+<!-- org unit modal start-->
+{% include "organization_unit.html" %}
+<!-- org unit modal end-->
+{% endblock %}
+<!-- body content end-->
+
+<!-- custom script start -->
+{% block scripts %} 
+<!-- Select2 --> 
+<script src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}" type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}" type="text/javascript"></script>
+<!-- Org structure --> 
+<script src="{%  static '/ui/plugins/org-structure/js/getorgchart_dev.js'  %}" type="text/javascript"></script> 
+<!-- Export table geo org chart -->
+<script src="{% static  '/ui/plugins/org-structure/js/jspdf.min.js'  %} "></script>
+<!-- Developer functions --> 
+<script src="{%  static '/dev/hrms_foundation/js/employee_management/organization_unit.js' %}" ></script>
+<script src="{%  static '/dev/hrms_foundation/js/attendance_management/org_structure.js'  %}" type="text/javascript"></script>
+ -{% endblock %}
+<!-- custom script end -->
+

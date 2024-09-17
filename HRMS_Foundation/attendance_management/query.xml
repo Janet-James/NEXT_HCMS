@@ -1,0 +1,459 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="HRMS Attendance Management">
+	<!-- Leave details data fetching start -->
+	<!-- <query id="hrms_org_list" query_name="hrms_org_list"
+			description="hrms Org list">
+          <![CDATA[select id,name from organization_info where is_active order by name]]>
+		</query> -->
+		<query id="logged_emp" query_name="logged_emp" description="logged_emp">  
+        	<![CDATA[select id from employee_info where related_user_id_id=%s and is_active=True]]>
+		</query>
+		<query id="leave_employee_query" query_name="leave_employee_query"
+			description="leave_employee_query">
+        	<![CDATA[select id,name from employee_info where is_active=True order by id]]>
+		</query>
+		<query id="leave_employee_role_query" query_name="leave_employee_role_query" 
+			description="leave_employee_role_query">
+        	<![CDATA[select r.id,r.name from hcms_role r inner join auth_user au on au.role_id=r.id where au.id=%s and r.is_active=True order by id ]]>
+		</query>
+		<query id="leave_employee_query_email" query_name="leave_employee_query_email"  
+			description="leave_employee_query_email">
+        	<![CDATA[select {} from employee_info where id =%s and is_active=True order by id]]>
+		</query>
+		<query id="leave_days_list" query_name="leave_days_list"
+			description="leave_days_list"> 
+        	<![CDATA[select holiday_date::text from holiday_list_info where holiday_date between '%s' and '%s' and  org_id_id=%s and org_unit_id_id=%s and  is_active=True]]>
+		</query>
+		<query id="leave_role_check" query_name="leave_role_check" description="Roll check based on User login">
+        	<![CDATA[select * from role where id = %s and code='USERR' and is_active ]]>  
+        </query> 
+        <query id="leave_request_table_user" query_name="leave_request_table_user"    
+			description="leave_request_table">  
+        	<![CDATA[    
+			select a.id,a.rno,a.refitems_desc,a.from_date,a.to_date,a.number_of_days,a.state,a.from_type_id,a.to_type_id,
+			CASE  
+			  WHEN (a.reject_reason_name = 'Others(Please specify)') THEN initcap(a.reason)
+			ELSE a.reject_reason_name   
+			 END AS reject_reason   
+			from
+			(select leave_info.id,row_number() over(order by leave_info.id asc) rno,coalesce(leave_info.description,'') descr,coalesce(leave_info.description,'') description,
+			to_char(leave_info.created_date, 'DD-MM-YYYY HH24:MI:SS') AS raised_date,
+			rftms.refitems_desc,to_char(leave_info.from_date, 'DD-MM-YYYY ') AS from_date, 
+			to_char(leave_info.to_date, 'DD-MM-YYYY') AS to_date,leave_info.number_of_days , ref.refitems_name as state,
+			a.refitems_name as reject_reason_name,leave_info.reason,leave_info.from_type_id,leave_info.to_type_id
+			from leave_info inner join      
+			employee_info on employee_info.id=leave_info.leave_employee_id_id 
+			inner join reference_items rftms on leave_info.type_id_id=rftms.id
+			left join (select id,refitems_name from reference_items)a on a.id=leave_info.reject_reason_id_id 
+			inner join reference_items ref on leave_info.state_id::int=ref.id
+			where (employee_info.related_user_id_id =%s or leave_info.created_by_id= %s)and leave_info.is_active=True order by leave_info.created_date DESC
+			)a order by a.rno
+		]]>
+		</query>	
+        
+		<query id="leave_request_table_row_click" query_name="leave_request_table_row_click"
+			description="leave_request_table_row_click">
+        	<![CDATA[
+			select leave_info.id ,leave_info.leave_employee_id_id,leave_info.leave_org_id_id,leave_info.description,to_char(leave_info.from_date, 'DD/MM/YYYY hh24:MI') AS from_date,
+        	to_char(leave_info.to_date, 'DD/MM/YYYY hh24:MI') AS to_date,leave_info.number_of_days ,leave_info.type_id_id,ly.refitems_name as leave_type,ref.refitems_name as state ,leave_info.from_type_id,leave_info.to_type_id  from leave_info inner join reference_items ref on state_id=ref.id 	 
+			inner join reference_items ly on ly.id=leave_info.type_id_id
+        	 where leave_info.id=%s  and leave_info.is_active 
+			    ]]>
+		</query>   
+        <query id="create_leave_balance_query" query_name="create_leave_balance_query" description="Create Leave Balance">
+        	<![CDATA[insert into leave_balance_info (leave_type_id_id,leave_company_id_id,leave_days,created_by,modified_by,modified_date,created_date,is_active,employee_id_id) values %s returning id]]>
+        </query> 
+        <query id="create_leave_balance_table" query_name="create_leave_balance_table" description="Create Leave Balance Table">
+        	<![CDATA[select hrlb.id,ROW_NUMBER () OVER (order by hrlb.id asc),hrcmp.name as company_name,hremp.name as employee_name,reftim.refitems_name,hrlb.leave_days,hrcmp.country from hr_leave_balance hrlb
+					inner join hr_company_info hrcmp on hrlb.leave_company_id_id = hrcmp.id
+					inner join employee_info hremp on hrlb.employee_id_id = hremp.id
+					inner join reference_items reftim on hrlb.leave_type_id_id = reftim.id where hrlb.is_active = True]]>
+        </query> 
+        
+        <query id="leave_balance_query" query_name="leave_balance_query" 
+			description="leave_balance_query">   
+        	<![CDATA[select leave_days from leave_balance_info where employee_id_id=%s and leave_type_id_id=%s and year_id=%s and is_active]]> 
+		</query> 
+        <query id="leave_balance_update" query_name="leave_balance_update"  
+			description="leave_balance_update">    
+        	<![CDATA[update leave_balance_info set %s where employee_id_id = %s and leave_type_id_id=%s]]>
+		</query> 
+		<query id="leave_employee_list" query_name="leave_employee_list"
+			description="leave_employee list">    
+        	<![CDATA[
+        	    select leave_info.id,row_number() over(order by leave_info.id asc),emp.name ,to_char(leave_info.created_date, 'DD-MM-YYYY HH24:MI:SS') AS raised_date,rftms.refitems_desc as leave_type,to_char(leave_info.from_date, 'DD-MM-YYYY HH24:MI:SS') AS from_date,to_char(leave_info.to_date, 'DD-MM-YYYY HH24:MI:SS') AS to_date,leave_info.number_of_days,leave_info.description,row_number() over() from employee_info emp inner join  leave_info on emp.id=leave_info.leave_employee_id_id inner join reference_items rftms on leave_info.type_id_id=rftms.id inner join
+			(select ei.id,ei.name,oi.id as org_id,oui.id as org_unit_id from employee_info ei inner join auth_user au on au.id=ei.related_user_id_id inner join organization_info oi on oi.id=ei.org_id_id  
+			inner join organization_unit_info oui on oui.id=ei.org_unit_id_id  where  au.id=%s) as s
+			on s.org_unit_id=emp.org_unit_id_id and s.org_id=emp.org_id_id  inner join reference_items ref on state_id=ref.id where ref.refitems_code='OPENN' and emp.name ilike '%s' and 
+			leave_info.type_id_id=rftms.id  and leave_info.is_active=True group  by leave_info.id,emp.name,rftms.refitems_desc
+						]]> 
+		</query>
+		<query id="leave_employee_list_past" query_name="leave_employee_list_past"
+             description="leave_employee list_past">
+            <![CDATA[
+        select leave_info.id,row_number() over(order by leave_info.id asc),emp.name, to_char(leave_info.created_date, 'DD-MM-YYYY') AS raised_date,rftms.refitems_desc as type,leave_info.number_of_days,ref.refitems_desc as state_id,leave_info.description
+                    from employee_info emp inner join leave_info
+                    on emp.id= leave_info.leave_employee_id_id
+                    inner join reference_items rftms   on  leave_info.type_id_id=rftms.id inner join
+                    (select ei.id,ei.name,oi.id as org_id,oui.id as org_unit_id from employee_info ei inner join auth_user au on au.id=ei.related_user_id_id inner join organization_info oi on oi.id=ei.org_id_id  
+inner join organization_unit_info oui on oui.id=ei.org_unit_id_id  where  au.id= %s) as s
+	on s.org_unit_id=emp.org_unit_id_id and s.org_id=emp.org_id_id  inner join reference_items ref on leave_info.state_id::int=ref.id  where emp.name ilike '%s'and
+                     leave_info.is_active=True group  by leave_info.id,emp.name,rftms.refitems_desc,ref.refitems_desc
+                        ]]>
+        </query>
+		<!-- Attendance details data fetching start -->
+		<query id="hrms_org_list_current" query_name="hrms_org_list_current"
+			description="hrms_org_list_current">
+          <![CDATA[select au.id as user_id,oi.id ,oi.name, ei.id as emp_id,oui.id as org_unit_id from employee_info ei inner join auth_user au on au.id=ei.related_user_id_id 
+inner join organization_info oi on oi.id=ei.org_id_id
+inner join organization_unit_info   oui on oui.id=ei.org_unit_id_id  where au.id=%s]]> 
+		</query>
+		
+		<query id="hrms_org_list" query_name="hrms_org_list"
+			description="hrms Org list">
+          <![CDATA[select id,name from organization_info where is_active order by name]]>
+		</query>
+		<query id="hrms_employee_search_list_multi" query_name="hrms_employee_search_list_multi"
+			description="hrms employee search multi list">
+          <![CDATA[select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id asc),'<label class="label-cbx"><input class="invisible" type="checkbox" id="'||ei.id||'" /><div class="checkbox checkbox-append"><svg width="20px" height="20px" viewBox="0 0 20 20"><path d="M3,1 L17,1 L17,1 C18.1045695,1 19,1.8954305 19,3 L19,17 L19,17 C19,18.1045695 18.1045695,19 17,19 L3,19 L3,19 C1.8954305,19 1,18.1045695 1,17 L1,3 L1,3 C1,1.89543051.8954305,1 3,1 Z"></path><polyline points="4 11 8 15 16 6"></polyline></svg></div></label>',
+	coalesce('<img class="img-circle img-circle-fit img-inline pic_ina" src="http://mynext.nexttechnosolutions.com/media/user_profile/'||ai.name||'" alt="Image Loction Not found" width="35px" height="30px"/>','<img class="img-circle-fit" src="http://mynext.nexttechnosolutions.com/media/profile/no_data.png"  alt="Not found" width="35px" height="30px"/>') as profile
+	,ei.name,ei.last_name,coalesce(ri.refitems_name,''),ci.name,rd.role_title as name from organization_info ci
+	inner join employee_info  ei on ci.id = ei.org_id_id
+	left join attachment_info ai on ai.id = ei.image_id_id 
+	left join hcms_ti_role_details rd on rd.id = ei.role_id_id
+	left join reference_items ri on ri.id = ei.employee_gender_id
+		 ]]>
+		</query> 
+		<query id="hrms_employee_search_list_single" query_name="hrms_employee_search_list_single"
+			description="hrms employee search multi list">
+          <![CDATA[select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id asc),
+		coalesce('<img class="img-circle img-circle-fit img-inline pic_ina" src="http://mynext.nexttechnosolutions.com/media/user_profile/'||ai.name||'" alt="Image Loction Not found" width="35px" height="30px"/>','<img class="img-circle-fit" src="http://mynext.nexttechnosolutions.com/media/profile/no_data.png"  alt="Not found" width="35px" height="30px"/>') as profile
+		,ei.name,ei.last_name,coalesce(ri.refitems_name,''),ci.name,rd.role_title as name from organization_info ci
+		inner join employee_info  ei on ci.id = ei.org_id_id
+		left join attachment_info ai on ai.id = ei.image_id_id 
+		left join hcms_ti_role_details rd on rd.id = ei.role_id_id
+		left join reference_items ri on ri.id = ei.employee_gender_id]]>
+		</query> 
+		<query id="hrms_attendance_list" query_name="hrms_attendance_list"
+			description="hrms attendance list">
+          <![CDATA[select ai.id,ROW_NUMBER () OVER (ORDER BY ai.id asc),ci.name,coalesce(ou.orgunit_name,'') ouname,coalesce(ei.name||' '||ei.last_name) as name,to_char(ai.check_in,'DD-MM-YYYY HH24:MI:SS') as check_in,
+			to_char(ai.check_out,'DD-MM-YYYY HH24:MI:SS') as check_out from attendance_info ai
+			inner join employee_info ei on ai.employee_id_id = ei.id
+			inner join organization_info ci on ai.org_id_id = ci.id
+			left join organization_unit_info ou on ou.id = ei.org_unit_id_id   
+			where ci.is_active and ei.is_active and ai.is_active ]]>    
+		</query>
+		<query id="hrms_event_attendance_list" query_name="hrms_event_attendance_list"
+			description="hrms event attendance list">
+          <![CDATA[select ai.id as aid,to_char(ai.check_in,'DD-MM-YYYY HH24:MI:SS') as check_in,to_char(ai.check_out,'DD-MM-YYYY HH24:MI:SS') as check_out,ci.id as cid
+			,ou.id as org_unt_id_id,tm.id as org_team_id_id, ei.name as ename,ei.id as eid from attendance_info ai
+                        inner join employee_info ei on ai.employee_id_id = ei.id
+                        inner join organization_info ci on ai.org_id_id = ci.id
+                        left join organization_unit_info ou on ou.id =ei.org_unit_id_id  
+                        left join team_details_info tm on tm.id =ei.team_name_id
+                        
+                        where ci.is_active and ei.is_active and ai.is_active and  ai.id=%s ]]> 
+		</query>
+		<query id="leave_allocation_data" query_name="leave_allocation_data"
+			description="leave_allocation_data">
+        	<![CDATA[
+        	select leave_info.id,row_number() over(ORDER BY leave_info.id asc),employee_info.name,to_char(leave_info.created_date, 'DD-MM-YYYY') AS raised_date,rftms.refitems_desc as leave_type,to_char(leave_info.from_date, 'DD-MM-YYYY') AS from_date,to_char(leave_info.to_date, 'DD-MM-YYYY ') AS to_date,leave_info.number_of_days,leave_info.description
+			      from leave_info inner join employee_info on employee_info.id=leave_info.leave_employee_id_id inner join reference_items rftms  
+			    on  leave_info.type_id_id=rftms.id inner join reference_items ref on state_id=ref.id where ref.refitems_code='OPENN' and
+			      employee_info.reporting_officer_id=%s  and  leave_info.is_active=True order by id  DESC
+]]>
+		</query>	
+		<query id="leave_process_org" query_name="leave_process_org"  
+			description="leave_process_org">
+        	<![CDATA[select he.id ,he.org_id_id,r.role_title as name from employee_info he inner join auth_user au on au.id = he.related_user_id_id
+inner join hcms_ti_role_details r on r.id=au.role_id where au.id =%s  and he.is_active=True order by id DESC]]>
+		</query>
+			<query id="leave_allocation_data_company" query_name="leave_allocation_data_company"
+			description="leave_allocation_data_company">
+        	<![CDATA[ 
+        	  select leave_info.id,row_number() over(order by leave_info.id asc),employee_info.name ,to_char(leave_info.created_date, 'DD-MM-YYYY HH24:MI:SS') AS raised_date,rftms.refitems_desc as leave_type,to_char(leave_info.from_date, 'DD-MM-YYYY ') AS from_date,to_char(leave_info.to_date, 'DD-MM-YYYY ') AS to_date,leave_info.number_of_days,leave_info.description,row_number() over()
+			      from leave_info inner join employee_info on employee_info.id=leave_info.leave_employee_id_id inner join reference_items rftms  
+			    on  leave_info.type_id_id=rftms.id inner join reference_items ref on state_id=ref.id where ref.refitems_code='OPENN' and leave_info.is_active=True and leave_info.leave_org_id_id=%s and leave_info.is_active {}]]>
+		</query>
+		<query id="leave_allocation_data_all_company" query_name="leave_allocation_data_all_company"
+			description="leave_allocation_data_all_company">
+        	<![CDATA[ 
+        	  select leave_info.id,row_number() over(order by leave_info.id asc),employee_info.name ,to_char(leave_info.created_date, 'DD-MM-YYYY HH24:MI:SS') AS raised_date,rftms.refitems_desc as leave_type,to_char(leave_info.from_date, 'DD-MM-YYYY ') AS from_date,to_char(leave_info.to_date, 'DD-MM-YYYY ') AS to_date,leave_info.number_of_days,leave_info.description,row_number() over()
+			      from leave_info inner join employee_info on employee_info.id=leave_info.leave_employee_id_id inner join reference_items rftms  
+			    on  leave_info.type_id_id=rftms.id inner join reference_items ref on state_id=ref.id where ref.refitems_code='OPENN' and leave_info.is_active=True and leave_info.is_active {}]]>
+		</query>
+		<query id="leave_all_request_data" query_name="leave_all_request_data" description="leave_all_request_data">
+        	<![CDATA[ 
+				select leave_info.id,row_number() over(order by leave_info.id asc),employee_info.name, to_char(leave_info.created_date, 'DD-MM-YYYY') AS raised_date,rftms.refitems_desc as type,leave_info.number_of_days,refs.refitems_desc as  state_id,leave_info.description
+			      	from leave_info  inner join employee_info 
+			    	on employee_info.id= leave_info.leave_employee_id_id inner join reference_items rftms   on  leave_info.type_id_id=rftms.id 
+			    	inner join reference_items refs on refs.id=leave_info.state_id
+					where leave_info.is_active=True and employee_info.reporting_officer_id=%s  
+					]]>   
+		</query> 
+		<query id="leave_all_request_data_company" query_name="leave_all_request_data_company" description="leave_all_request_data"> 
+        	<![CDATA[
+        	select leave_info.id,row_number() over(order by leave_info.id asc),employee_info.name, to_char(leave_info.created_date, 'DD-MM-YYYY') AS raised_date,rftms.refitems_desc as type,leave_info.number_of_days,refs.refitems_desc as  state_id,leave_info.description,
+        	 to_char(leave_info.from_date, 'DD-MM-YYYY') AS from_date, to_char(leave_info.to_date, 'DD-MM-YYYY') AS to_date
+			    	from leave_info  inner join employee_info  
+				    on employee_info.id= leave_info.leave_employee_id_id
+			    	inner join reference_items rftms   on  leave_info.type_id_id=rftms.id inner join reference_items refs on refs.id=leave_info.state_id 
+					where leave_info.is_active=True and leave_info.leave_org_id_id=%s  {} order by id DESC 
+        	 
+					]]>
+		</query>    
+		<query id="leave_allocation_row_click" query_name="leave_allocation_row_click" description="leave_allocation_row_click">
+        	<![CDATA[ select leave_info.id,employee_info.name,hrcinfo.name as company_name,leave_info.leave_employee_id_id,leave_info.description,to_char(leave_info.from_date, 'DD-MM-YYYY HH24:MI:SS') AS from_date,leave_info.state_id,
+ 					to_char(leave_info.to_date, 'DD-MM-YYYY HH24:MI:SS') AS to_date ,leave_info.number_of_days ,rftms.refitems_desc,rftms.id as leave_type_id,lb.leave_days as leave_balance  from leave_info 
+ 					inner join  
+ 					employee_info on employee_info.id= leave_info.leave_employee_id_id 
+ 					inner join 
+ 					reference_items rftms on leave_info.type_id_id=rftms.id 
+					inner join 
+					organization_info hrcinfo on hrcinfo.id = leave_info.leave_org_id_id  
+					inner join leave_balance_info  lb on lb.leave_type_id_id =leave_info.type_id_id and lb.employee_id_id=leave_info.leave_employee_id_id
+					where leave_info.id=%s and leave_info.is_active
+        	 ]]>
+		</query>
+		<query id="leave_allocation_row_click_permission" query_name="leave_allocation_row_click_permission" description="leave_allocation_row_click_permission">
+        	<![CDATA[ select leave_info.id,employee_info.name,hrcinfo.name as company_name,leave_info.leave_employee_id_id,leave_info.description,to_char(leave_info.from_date, 'DD-MM-YYYY HH24:MI:SS') AS from_date,leave_info.state_id,
+ 					to_char(leave_info.to_date, 'DD-MM-YYYY HH24:MI:SS') AS to_date ,leave_info.number_of_days ,rftms.refitems_desc,rftms.id as leave_type_id, 0 as leave_balance  from leave_info 
+ 					inner join 
+ 					employee_info on employee_info.id= leave_info.leave_employee_id_id 
+ 					inner join 
+ 					reference_items rftms on leave_info.type_id_id=rftms.id 
+					inner join 
+					organization_info hrcinfo on hrcinfo.id = leave_info.leave_org_id_id  
+					where leave_info.id=%s and leave_info.is_active
+        	 ]]>
+		</query>
+		
+		<!-- Attendance details data fetching end -->
+		<!-- Past Attendance details data fetching start -->
+		<query id="employee_list_fetch_sel" query_name="employee_list_fetch_sel" description="Fetch data for employee list selection field">
+        	<![CDATA[ select id, employee_id,(name||' '||last_name) as emp_name, is_active from employee_info where is_active order by name; ]]>
+        </query>
+		<query id="hrms_employee_list" query_name="hrms_employee_list"
+			description="hrms employee list">
+          <![CDATA[select id,name from employee_info where is_active order by name]]>
+		</query>
+		<query id="hrms_attendance_employee_search_list" query_name="hrms_attendance_employee_search_list"
+			description="hrms attendance employee list">
+          <![CDATA[select id,coalesce(name||' '||last_name) as name from employee_info where is_active and org_id_id=%s and org_unit_id_id=%s]]>
+		</query>
+		<!-- Past Attendance details data fetching end -->
+		<!-- Employee Kiosk details data fetching start -->
+		<query id="hrms_employee_list" query_name="hrms_employee_list"
+			description="hrms employee list">
+          <![CDATA[select id,name from employee_info where is_active order by name]]>
+		</query>
+		<query id="hrms_kiosk_employee_list" query_name="hrms_kiosk_employee_list"
+			description="hrms kiosk employee list">
+          <![CDATA[select ei.id eid,UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as ename,coalesce(
+		(select ai.name from attachment_info ai left join employee_info eio on ei.image_id_id=ai.id where eio.id = ei.id) ,'no_data.png') as profile,
+		coalesce((select oui.orgunit_name from employee_info  eif left join organization_unit_info oui on ei.org_unit_id_id=oui.id where oui.is_active and eif.id=ei.id),'') as unit,
+		coalesce((select oi.name from organization_info  oi left join employee_info eio on  ei.org_id_id = oi.id where eio.id=ei.id ),'') as position,aa.aid aid,aa.status from employee_info ei left join 
+		((select ei.id,0 as aid,1 as status from employee_info ei
+		left join attendance_info ai on ai.employee_id_id  = ei.id 
+		where ei.is_active and ei.id not in (select a.eid from
+		((select id aid,employee_id_id eid,org_id_id oid,1 as status,check_in,check_out from attendance_info 
+		where check_in::date = (select current_date) and check_out::date = (select current_date) and is_active  order by employee_id_id)
+		UNION ALL
+		(select id aid,employee_id_id eid,org_id_id oid,2 as status,check_in,check_out from attendance_info 
+		where check_in::date = (select current_date) and check_out::date is null and is_active  order by employee_id_id )) a
+		group by a.eid) 
+		group by ei.id order by id)
+		UNION ALL
+		(select a.eid eid,a.aid,a.status from
+		((select id aid,employee_id_id eid,org_id_id oid,1 as status,check_in,check_out from attendance_info 
+		where check_in::date = (select current_date) and check_out::date = (select current_date) and is_active order by employee_id_id)
+		UNION ALL
+		(select id aid,employee_id_id eid,org_id_id oid,2 as status,check_in,check_out from attendance_info 
+		where check_in::date = (select current_date) and check_out::date is null and is_active order by employee_id_id )) a))
+		aa on ei.id=aa.id where ei.is_active
+			 ]]>
+		</query>
+		<query id="hrms_kiosk_status_employee_list" query_name="hrms_kiosk_status_employee_list"
+			description="hrms kiosk status employee list">
+          <![CDATA[select id from attendance_info where is_active and employee_id_id=%s and check_in::date in (select current_date)]]>
+		</query>
+		<!--  Employee Kiosk details data fetching end -->
+		<!-- Holiday details data fetching start -->
+		<query id="hrms_holiday_list" query_name="hrms_holiday_list"
+			description="hrms holiday list">
+          <![CDATA[select hi.id,ROW_NUMBER () OVER (ORDER BY hi.id asc),hi.holiday_information,to_char(hi.holiday_date,'DD-MM-YYYY'),oi.name,coalesce(ou.orgunit_name,'') ouname 
+			,coalesce(ri.refitems_name,'') holiday_type from holiday_list_info hi
+			inner join organization_info oi on oi.id = hi.org_id_id 
+			left join organization_unit_info ou on ou.id = hi.org_unit_id_id
+			left join reference_items ri on ri.id = hi.holiday_type_id
+			where oi.is_active and ou.is_active and hi.is_active ]]>
+		</query>
+		<query id="hrms_holiday_list_event" query_name="hrms_holiday_list_event"
+			description="hrms holiday Event list">
+          <![CDATA[select hi.id,ROW_NUMBER () OVER (ORDER BY hi.id asc),hi.holiday_information,to_char(hi.holiday_date,'DD-MM-YYYY') date,hi.year_id,oi.name,hi.org_id_id,coalesce(hi.org_unit_id_id,0) org_unit_id_id,holiday_type_id  from holiday_list_info hi
+			inner join organization_info oi on oi.id = hi.org_id_id where oi.is_active and oi.is_active and hi.is_active and hi.id=%s]]>
+		</query>
+		<!-- Holiday details data fetching end -->
+		<!-- Org details data fetching start -->
+		<query id="hrms_org_struct_list" query_name="hrms_org_struct_list"
+			description="hrms org list">
+          <![CDATA[
+		    select ei.id,UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name,coalesce(ei.work_email,'') email,coalesce(ei.employee_id,'') eid,
+			coalesce(ei.home_address,'') as address,(ei.parent_id)::int as "parentId",coalesce(hrd.role_title,'') as title,coalesce(ai.name,'no_data.png') as image 
+			from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+			left join hcms_ti_role_details hrd on hrd.id = ei.role_id_id
+			left join auth_user au on au.id = ei.role_id_id
+			where ei.is_active and ei.org_id_id=%s and ei.id not in (141,158,107,156,46) order by ei.parent_id::int  
+          ]]>
+		</query>
+		<query id="hrms_org_employee_list" query_name="hrms_org_employee_list"
+			description="hrms org employee list">
+          <![CDATA[select id,name from employee_info where is_active and org_id_id=%s order by name]]>
+		</query>
+		<query id="hrms_org_unit_employee_list" query_name="hrms_org_unit_employee_list"
+			description="hrms org unit employee list">
+          <![CDATA[select id,orgunit_name as name from organization_unit_info where is_active and organization_id = %s and parent_orgunit_id != 0 order by name]]>
+		</query>
+		<query id="hrms_org_unit_data_employee_list" query_name="hrms_org_unit_data_employee_list"
+			description="hrms org unit data employee list">
+          <![CDATA[select oui.id,oui.orgunit_name,ei.id,UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name,
+        coalesce(ei.work_email,'') email,coalesce(ei.employee_id,'') eid,coalesce(ei.home_address,'') as address,
+        (ei.parent_id)::int as "parentId",coalesce(hrd.role_title,'') as title,coalesce(ai.name,'no_data.png') as image 
+		from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+		left join organization_unit_info oui on oui.id=ei.org_unit_id_id
+		left join hcms_ti_role_details hrd on hrd.id = ei.role_id_id
+		where ei.is_active and oui.is_active and hrd.is_active and ei.org_id_id=%s and ei.org_unit_id_id=%s  order by ei.name]]>
+				</query>
+		<!-- Org details data fetching end -->
+		<!-- Leave balance details data fetching start -->
+		<query id="hrms_leave_balalance_list" query_name="hrms_leave_balalance_list"
+			description="hrms leave balance list">
+          <![CDATA[
+
+			select lbi.id,ROW_NUMBER () OVER (ORDER BY lbi.id asc),oi.name,coalesce(ou.orgunit_name,'') ouname ,UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name,coalesce(ri.refitems_name,'') rname,coalesce(lbi.leave_days,0),ei.team_name_id from leave_balance_info lbi
+			left join organization_info oi on oi.id = lbi.leave_company_id_id
+			left join employee_info ei on ei.id = lbi.employee_id_id
+			left join organization_unit_info ou on ou.id = lbi.org_unit_id_id
+			left join reference_items ri on ri.id = lbi.leave_type_id_id 
+			where lbi.is_active and ei.is_active order by ei.name
+          ]]>
+		</query>
+		<query id="hrms_leave_event_balalance_list" query_name="hrms_leave_event_balalance_list"
+			description="hrms leave event balance list">
+          <![CDATA[
+			select lbi.id lbid,ROW_NUMBER () OVER (ORDER BY lbi.id asc),oi.id oid,ei.id eid,oi.name,lbi.leave_type_id_id as ltid,ei.name,lbi.leave_days,coalesce(ei.employee_gender_id,0) as gender_id,lbi.org_unit_id_id,lbi.year_id,ei.team_name_id from leave_balance_info lbi
+			left join organization_info oi on oi.id = lbi.leave_company_id_id
+			left join employee_info ei on ei.id = lbi.employee_id_id
+			where lbi.is_active and ei.is_active and oi.is_active and lbi.id=%s order by ei.name
+          ]]>
+		</query>
+		<query id="leave_type" query_name="leave_type"
+			description="hrms leave type">
+          <![CDATA[select ri.id,ri.refitems_name as name from reference_item_category  ric
+			inner join reference_items ri on ric.id = ri.refitems_category_id
+			where ric.refitem_category_code='LEVTY' and ri.refitems_code!='LEABS'and ri.refitems_code!='PEMSN' and ric.is_active order by name ]]>
+		</query>
+		<query id="leave_employee_list_org" query_name="leave_employee_list_org"
+			description="hrms employee org type">
+          <![CDATA[select id,UPPER(coalesce(name,'')||' '||coalesce(last_name,'')) as name from employee_info where is_active and org_id_id=%s and employee_gender_id=%s and org_unit_id_id=%s order by name]]>
+		</query>
+		<query id="leave_employee_list_org_unit" query_name="leave_employee_list_org_unit"
+			description="hrms employee org and unit type">
+          <![CDATA[select id,UPPER(coalesce(name,'')||' '||coalesce(last_name,'')) as name  from employee_info where is_active and org_id_id=%s and org_unit_id_id=%s]]>
+		</query>
+		<!-- Leave balance details data fetching end -->
+		<!-- Employee Report details data fetching start -->
+		<query id="hrms_employee_report_list" query_name="hrms_employee_report_list"
+			description="hrms employee report list">
+          <![CDATA[
+			select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id desc),UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name ,coalesce(ei.work_email,'') as email,
+coalesce(ei.work_mobile,'') as mobile,
+coalesce(ei.emergency_contact_no,'') as emergency_contact_no,
+coalesce(ei.home_address,'') as address,coalesce(ri.refitems_name,'') as name,
+coalesce(to_char(date_of_joining,'dd-mm-yyyy')) as doj,
+coalesce(to_char(date_of_releaving,'dd-mm-yyyy')) as dor,
+coalesce(ei.employee_id,'') as employee_id,
+coalesce(case when ei.is_active = true then 'Active' else 'In-Acive' end,'') as status ,
+coalesce(ei.role_id_id,0) as role_id
+from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+left join reference_items ri on ei.employee_gender_id=ri.id
+			where 
+          ]]>
+		</query>
+		<query id="hrms_employee_attendance_report_list" query_name="hrms_employee_attendance_report_list"
+			description="hrms employee attendance report list">
+          <![CDATA[ 
+			select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id desc),UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name,
+
+coalesce(to_char(ati.check_in,'dd-mm-yyyy  HH24:MI:SS'),'') as check_in,coalesce(to_char(ati.check_out,'dd-mm-yyyy  HH24:MI:SS'),'') as check_out,
+coalesce((fn_min_to_hrs(work_time))::text,'0') as work_time
+from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+inner join attendance_info ati on ati.employee_id_id=ei.id
+			where  
+          ]]>
+		</query>
+		<query id="hrms_employee_leave_report_list" query_name="hrms_employee_leave_report_list"
+			description="hrms employee leave report list">
+          <![CDATA[
+			select ei.id,ROW_NUMBER () OVER (ORDER BY ei.id desc),UPPER(coalesce(ei.name,'')||' '||coalesce(ei.last_name,'')) as name,
+			coalesce((select refitems_name from reference_items where id=li.type_id_id),'') as state_id,coalesce(li.number_of_days,0) as description,coalesce(ri.refitems_name,'') as name
+			,coalesce(to_char(li.from_date,'dd-mm-yyyy'),'') as from,coalesce(to_char(li.to_date,'dd-mm-yyyy'),'') as to  
+			from employee_info ei left join attachment_info ai on ai.id = ei.image_id_id
+			inner join leave_info li on ei.id=leave_employee_id_id
+			left join reference_items ri on li.type_id_id::int=ri.id
+			where 
+          ]]>
+		</query>
+		<query id="hrms_employee_doc_report_list" query_name="hrms_employee_doc_report_list"
+			description="hrms employee doc report list">
+          <![CDATA[
+           select doc.id,ROW_NUMBER () OVER (ORDER BY doc.id desc),UPPER(doc.names),doc.email,doc.type,doc.file_name,coalesce(doc.doc,''),doc.team_name_id from 
+(select * from (select * from (select ei.id,coalesce(ei.name,'')||' '||coalesce(ei.last_name,'') as names ,coalesce(ei.work_email,'') as email,
+coalesce(ei.work_phone,'') as phone,coalesce(ei.home_address,'') as address,coalesce(ri.refitems_name,'') as name,coalesce(ei.role_id_id,0) as role_id,
+ai.name as doc,ei.org_id_id,ei.org_unit_id_id,'Skill Document' as type,ei.employee_gender_id,hs.file_name,ei.employee_id,team_name_id
+from employee_info ei inner join hrms_skills hs on hs.emp_id_id = ei.id
+inner join attachment_info ai on ai.id = hs.upload_id left join reference_items ri on ei.employee_gender_id=ri.id where ei.is_active)a
+union all 
+(select ei.id,coalesce(ei.name,'')||' '||coalesce(ei.last_name,'') as name ,coalesce(ei.work_email,'') as email,
+coalesce(ei.work_phone,'') as phone,coalesce(ei.home_address,'') as address,coalesce(ri.refitems_name,'') as names,coalesce(ei.role_id_id,0) as role_id,
+ai.name as doc,ei.org_id_id,ei.org_unit_id_id,'Education Document' as type,ei.employee_gender_id,hed.file_name,ei.employee_id,team_name_id
+from employee_info ei inner join hrms_education_details hed on hed.emp_id_id = ei.id
+inner join attachment_info ai on ai.id = hed.upload_id left join reference_items ri on ei.employee_gender_id=ri.id where ei.is_active))aa
+union all 
+(select * from(select ei.id,coalesce(ei.name,'')||' '||coalesce(ei.last_name,'') as name ,coalesce(ei.work_email,'') as email,
+coalesce(ei.work_phone,'') as phone,coalesce(ei.home_address,'') as address,coalesce(ri.refitems_name,'') as names,coalesce(ei.role_id_id,0) as role_id,
+ai.name as doc,ei.org_id_id,ei.org_unit_id_id,'Certification Document' as type,ei.employee_gender_id,hc.file_name,ei.employee_id,team_name_id
+from employee_info ei inner join hrms_certifications hc on hc.emp_id_id = ei.id
+inner join attachment_info ai on ai.id = hc.upload_id left join reference_items ri on ei.employee_gender_id=ri.id where ei.is_active)b
+union all 
+(select ei.id,coalesce(ei.name,'')||' '||coalesce(ei.last_name,'') as name ,coalesce(ei.work_email,'') as email,
+coalesce(ei.work_phone,'') as phone,coalesce(ei.home_address,'') as address,coalesce(ri.refitems_name,'') as names,coalesce(ei.role_id_id,0) as role_id,
+ai.name as doc,ei.org_id_id,ei.org_unit_id_id,'Experience Document' as type,ei.employee_gender_id,hpe.file_name,ei.employee_id,team_name_id
+from employee_info ei inner join hrms_professional_experience hpe on hpe.emp_id_id = ei.id
+inner join attachment_info ai on ai.id = hpe.upload_id left join reference_items ri on ei.employee_gender_id=ri.id where ei.is_active)))doc 
+  ]]>
+		</query>
+		<!-- Employee Report details data fetching end -->
+		<!-- Org Unit details Structure data fetching start -->
+		<query id="hrms_org_unit_list_strut" query_name="hrms_org_unit_list_strut"
+			description="hrms org unit structure report list">
+          <![CDATA[select coalesce(org_unit_details,'[]') as org_unit_details,coalesce(team_details,'[]') as team_details from
+			(select array_to_json(array_agg(a)) as org_unit_details from 
+			(
+			select oui.id id,oui.parent_orgunit_id parent,oui.orgunit_name as name,ri.refitems_name title,'no_data.png' as profile
+			from organization_unit_info  oui
+			left join reference_items ri on ri.id=oui.orgunit_type_id
+			where oui.is_active and oui.organization_id= {0} 
+			)a)aa, 
+			(select array_to_json(array_agg(b)) as team_details from 
+			(
+			select org_unit_id,json_agg(row_to_json( (SELECT r FROM (SELECT id,name) r) )) as teams from team_details_info 
+			where org_id = {0}
+			group by org_unit_id
+			)b)bb
+		       ]]>
+		</query>
+		<!-- Org Unit details Structure data fetching end -->
+	</queries>
+</data>

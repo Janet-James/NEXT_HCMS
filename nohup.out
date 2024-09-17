@@ -1,0 +1,67 @@
+/home/next/HCMS/hcms_env/local/lib/python2.7/site-packages/cryptography/hazmat/primitives/constant_time.py:26: CryptographyDeprecationWarning: Support for your Python version is deprecated. The next version of cryptography will remove support. Please upgrade to a 2.7.x release that supports hmac.compare_digest as soon as possible.
+  utils.DeprecatedIn23,
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 19, 2019 - 09:02:58
+Django version 1.11.5, using settings 'HCMS.settings'
+Starting development server at http://192.168.11.132:8001/
+Quit the server with CONTROL-C.
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+CommandError: "192.168.11.132:8001/dev/null" is not a valid port number or address:port pair.
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: --output /home/next/mycommand.log /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: --output /home/next/mycommand.log /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+CommandError: "192.168.11.132:8001/dev/null" is not a valid port number or address:port pair.
+CommandError: "192.168.11.132:8001/dev/null" is not a valid port number or address:port pair.
+CommandError: "192.168.11.132:8001/dev/null" is not a valid port number or address:port pair.
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null
+usage: manage.py runserver [-h] [--version] [-v {0,1,2,3}]
+                           [--settings SETTINGS] [--pythonpath PYTHONPATH]
+                           [--traceback] [--no-color] [--ipv6] [--nothreading]
+                           [--noreload] [--nostatic] [--insecure]
+                           [addrport]
+manage.py runserver: error: unrecognized arguments: /dev/null

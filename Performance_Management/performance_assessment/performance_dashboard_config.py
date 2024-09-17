@@ -1,0 +1,35 @@
+performance_dashboard='performance_management/performance_dashboard.html'
+
+performance_employee_data='performance_employee_data'
+performance_employee_top_rating = 'performance_employee_top_rating'
+
+content_type_value='application/json'
+performance_assessment_module='Performance_Management/performance_assessment'
+org_perspective_data='org_perspective_data'
+fetch_organization_details_view='fetch_organization_details_view'
+organization='organization'
+employee_org_id='employee_org_id'
+fetch_organization_unit_details_view = 'fetch_organization_unit_details_view'
+status_objective = 'status_objective'
+performance_orgunit = 'performance_orgunit'
+performance_orgunit_complition = 'performance_orgunit_complition'
+status_complition = 'status_complition'
+performance_orgunit_expect = 'performance_orgunit_expect'
+obj_perspective_data = 'obj_perspective_data'
+perspective_data = 'perspective_data'
+bsc_perspective_data = 'bsc_perspective_data'
+condition = """ and ri.refitems_name ilike '{0}'"""
+year = "year"
+quarter = "quarter"
+bsc_perspective = "bsc_perspective"
+status = 'status'
+status_org = 'status_org'
+org_result = 'org_result'
+orgunit_org_division = 'orgunit_org_division'
+organization = 'organization'
+org_division = 'org_division'
+org_division_complition= 'org_division_complition'
+perfor_division_complition = 'perfor_division_complition'
+employee_rating = 'employee_rating'
+performance_employee_top_rating_division = 'performance_employee_top_rating_division'
+performance_employee_top_rating_org = 'performance_employee_top_rating_org'

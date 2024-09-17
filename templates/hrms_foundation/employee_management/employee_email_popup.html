@@ -1,0 +1,82 @@
+<!--  modal start here -->
+<div id="employeeEmailId" class="modal fade " style='overflow: hidden'
+	role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Add More Email Ids.</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<div class="portlet-body form">
+					<form role="form" id='employee_email_ids_form'>
+						{%csrf_token%}
+						<div class="form-body ">
+							<div class="row ">
+								<div class="col-md-6 ">
+									<div class="form-group">
+										<label>Emergency Email Id Name 1</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Email Id Name 1" name='emp_add_email_name1' id='emp_add_email_name1' maxlength="50" minlength="5" type="text" data-error=".errorTxt107">
+										</div>
+										<span class="errorTxt107 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Email Id Name 2</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Email Id Name 2" name='emp_add_email_name2' id='emp_add_email_name2' maxlength="50" minlength="5" type="text" data-error=".errorTxt108">
+										</div>
+										<span class="errorTxt108 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Email Id Name 2</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Emergency Email Id Name 3" name='emp_add_email_name3' id='emp_add_email_name3' maxlength="50" minlength="5" type="text" data-error=".errorTxt109">
+										</div>
+										<span class="errorTxt109 errormessage"></span>
+									</div>
+								</div>
+								<div class="col-md-6 ">
+									<div class="form-group">
+										<label>Emergency Email Id No. 1</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Email Id 1" name='emp_add_email_id1' id='emp_add_email_id1' maxlength="100" type="text" data-error=".errorTxt110">
+										</div>
+										<span class="errorTxt110 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Email Id No. 2</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Email Id 2" name='emp_add_email_id2'  id='emp_add_email_id2' maxlength="100"  type="text" data-error=".errorTxt111">
+										</div>
+										<span class="errorTxt111 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Emergency Email Id No. 3</label> 
+										<div class="input-icon">
+											<i class="nf nf-pan-number"></i> <input class="form-control"
+												placeholder="Emergency Email Id 3" name='emp_add_email_id3'  id='emp_add_email_id3' maxlength="100" type="text" data-error=".errorTxt112">
+										</div>
+										<span class="errorTxt112 errormessage"></span>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn-animate btn-eql-wid  btn btn-success"
+					 onclick="addMoreEmailIds()">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->

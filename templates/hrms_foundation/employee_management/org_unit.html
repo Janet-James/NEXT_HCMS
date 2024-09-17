@@ -1,0 +1,241 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+<!-- custom css link start -->
+{% block links %}
+<!-- select2 css link -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<!-- modal css -->
+<link href="{% static '/ui/css/default/plugins.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- custom css link -->
+<link href="{% static '/dev/hrms_foundation/css/dev_custom.css' %}"
+	rel="stylesheet" type="text/css" />
+		<style>
+.select2-container--open {
+    z-index: 20052 !important;
+}
+</style>
+{% endblock %}
+<!-- custom css link end -->
+<!-- body content start -->
+{% block content %} {% nav_tags breadcrum_title="HROrganizationUnit" %}  {% include "organization_unit.html" %}
+<!-- begin container -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<h1>Organization Unit Structure</h1>
+				<div class="row eqheight" id="org_unit_main_div">
+					<div class="col-md-12" style="transition: all 500ms cubic-bezier(0.645, 0.575, 0.090,1.000);" id="animation_div">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+							<div class="row">
+								<div class="col-md-9 col-sm-12 ">
+								{% if "Organization Unit" in request.session.Create %}
+									<div class="form-group ">
+										<div id="org_unit_add_btn"  
+											class="btn blue float-right  btn-animate" data-toggle="tooltip" data-placement="top" title="Add Organization Unit" ><i class="nf nf-plus"></i></div>
+									</div>
+								{% endif %}
+								</div>
+								<div id="org_select_drp" class="col-md-3">
+										<div class="row">
+											<div class="col-sm-2" style="margin-top: 10px;">
+												<i data-toggle="tooltip" data-placement="top"
+													title="Search here"
+													class="hr_animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div>
+											<div class="col-sm-10">
+												<div class="form-group">
+													<select id="tree3_organization_id" name="organization_id"
+														class="form-control select2" required
+														data-error=".errorTxt0">
+														<option value="0">--Select Organization--</option> {% for i in organization_info %}
+														<option value={{i.id}}>{{i.name}}</option> {% endfor %}
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div> 
+							</div>
+							<!-- Employee list content start -->
+							<div class="row" style="clear: both;">   
+								<div class="portlet-body col-md-12 col-sm-12" id='org_unit_main_tree' >
+								<!-- table dev start -->
+					<div class="col-md-12">
+						<div style='overflow: hidden'>
+							<!-- <div class="portlet-title">
+								<div class="caption ">
+									<span class="caption-subject bold uppercase">Organization
+										Unit Structure</span>
+								</div>
+							</div> -->
+							<div class="form-body row">
+							<div class="row">
+							   <div class="col-md-4" id="left_main_tree">
+							   
+							</div>
+							<div class="col-md-8" id="right_main_tree">
+								<div class="col-md-12" id="no_data">
+							 		<div class="form-group">
+									<div id="tree_3" class="bottom_tree1"></div>
+								</div>
+							</div>
+							</div>
+							</div>
+							</div>
+						</div>
+					</div>   
+				<!-- table dev end -->
+								</div>
+								<div class="portlet-body col-md-12 col-sm-12" id='org_unit_main_tree_empty' >
+								</div>
+							</div>
+							<!-- Employee list content end -->
+						</div> 
+					</div>
+					<div class="col-md-12" id="org_unit_add_form_div" style="display:none;">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="col-md-6 col-sm-6 padding-0">
+									<div class="form-group">
+										<h3 class="margin-top-0 " style="margin-top: 0px;">Organization Unit Details</h3>
+									</div>
+								</div>
+								<div class="col-md-6 col-sm-6 padding-0">
+									<div class="form-group ">
+										<i class="fa fa-times" style="float: right;cursor:pointer;" id="org_unit_form_close"></i>
+									</div>
+								</div>
+							</div>
+								<div class="portlet-body">
+							<form role="form" id="organization_unit">
+							{%csrf_token%}
+							<div class="row ">
+								<div class="col-md-12 padding-0">
+								<div class="col-md-12 ">
+											<div class="form-group">
+												<label for="single" class="control-label black_font">Organization<span class="asterisk">*</span>
+												</label> <select id="organization" name="organization"
+													class="form-control select2 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true" required
+													data-error=".errorTxt0">
+													<option value="0">--Select Organization--</option>
+													{% for i in data %}
+														<option value="{{i.id}}">{{i.name}}</option> 
+													{% endfor %}
+												</select> <span class="errorTxt0 errorTxts errormessage"></span>
+											</div>
+											<div class="form-group">
+												<label> Organization Unit Code <span
+													class="asterisk">*</span>   
+												</label>
+												<div class="input-icon">
+													<i class="nf nf-organization"></i> <input
+														class="form-control" id="organization_unit_code"
+
+														name="organization_unit_code" placeholder="Organization Unit Code"
+														type="text" required data-error=".errorTxt1" disabled>
+													<span class="errorTxt1 errorTxts errormessage"></span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label> Organization Unit Name <span
+													class="asterisk">*</span></label>
+												<div class="input-icon">
+													<i class="nf nf-organization"></i> <input
+														class="form-control" id="organization_unit_name"
+														name="org_unit_name" placeholder="Organization Unit Name" type="text"
+														required data-error=".errorTxt2"> <span
+														class="errorTxt2 errorTxts errormessage"></span>
+												</div> 
+											</div> 
+											<div class="form-group">
+												<label for="single" class="control-label black_font">
+													Organization Unit Type <span class="asterisk">*</span>
+												</label> <select id="org_organization_unit_type"
+													name="org_organization_unit_type"
+													class="form-control select2 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true" required
+													data-error=".errorTxt3">
+												</select> <span class="errorTxt3 errorTxts errormessage"></span>
+											</div>
+											<div class="form-group">
+												<label>Organization Unit Address <span class="asterisk">*</span></label>
+												<div class="input-icon">
+													<i class="nf nf-organization"></i> 
+															<textarea class="form-control" id="org_unit_address"
+															name="org_unit_address" placeholder="Organization Unit Address" rows="3"
+															data-error=".errorTxt4" maxlength="250"></textarea>			
+														<span
+														class="errorTxt4 errorTxts errormessage"></span>
+												</div>
+											</div>
+												
+											<div class="form-group">
+												<label> Parent Organization Unit <span class="asterisk">*</span></label>
+												<select id="organization_unit_id" name="organization_unit_id"
+													class="form-control select2 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true" required data-error=".errorTxt5">
+													<option value="0"></option>
+												</select> 
+												
+												<a id='select_org_unit' href="#"
+																	class="btn blue btn-animate right-side-search"><i
+																	class="nf nf-search" title='Search by Org Unit'></i></a>
+																	<span
+														class="errorTxt5 errorTxts errormessage"></span>
+											</div>
+											<!-- <div class="margin-top-30">
+												<p class="txt-info">Note: Parent organization should be created here.</p></div> -->
+											</div>	
+											</div>
+											</div>
+											<!-- <div class="form-group">
+												<div id="tree_2" class="bottom_tree2"></div>
+											</div> -->
+											<div class="row">
+											<div class="col-md-12 text-right">
+												<div class="" id="org_unit_btn">
+													<div></div>
+												</div>
+											</div>
+											</div>
+											
+											<div class="clearfix"></div>
+									<div class="form-group" align="right">
+											<div class="btn-padding" id='hrms_organization_btn'></div>
+								</div>	
+						</form>
+						</div>
+					</div></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end container -->
+{% endblock %} 
+<!-- custom script start -->
+{% block scripts %}
+<!-- select2 js -->
+<script
+	src="{% static  '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script src="{% static  '/ui/plugins/select2/js/select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static  '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+	<!-- dev js -->	
+<script
+	src='/static/dev/hrms_foundation/js/employee_management/org_unit.js'></script>
+	<script
+	src="{% static  '/dev/hrms_foundation/js/employee_management/organization_unit.js'  %}"
+	type="text/javascript"></script>	
+{% endblock %}
+<!-- custom script end -->

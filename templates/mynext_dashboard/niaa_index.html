@@ -1,0 +1,106 @@
+{% load static %}
+
+          <!-- JS Scripts files  -->
+          <script src="/static/niaa/jquery.min.js"></script>
+          <script src="/static/niaa/handlebars.runtime-v4.0.11.js"></script>
+          <!-- <script src="/static/niaa/util.js"></script> -->
+          <script src="/static/niaa/handlebars_helper.js"></script>
+
+          <script src="/static/niaa/assets/js/jquery.fancybox.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="/static/niaa/assets/css/jquery.fancybox.min.css" media="screen">
+
+<!--
+          <script type="text/javascript" src="/js/fancybox-1.3.4/jquery.easing-1.3.pack.js"></script>
+          <script type="text/javascript" src="/js/fancybox-1.3.4/jquery.mousewheel-3.0.4.pack.js"></script>
+          <script type="text/javascript" src="/js/fancybox-1.3.4/jquery.fancybox-1.3.4.js"></script>
+
+          <link rel="stylesheet" type="text/css" href="/js/fancybox-1.3.4/jquery.fancybox-1.3.4.css" media="screen">
+          <link rel="stylesheet" type="text/css" href="/css/style.css?v=4" media="screen"> -->
+
+          <!-- <link rel="stylesheet" href="live-chat-app-client.css"> -->
+          <!-- handlebar files -->
+
+          <script type="text/javascript" src="/static/niaa/handlebar_js/users.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/groups.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/channels.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/chat_window.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/group_users.js"></script>
+	        <script type="text/javascript" src="/static/niaa/handlebar_js/roomsearch.js"></script>
+	        <script type="text/javascript" src="/static/niaa/handlebar_js/chatheader.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/usersmention.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/search_message.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/timeline_search.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/mom.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/mom_message.js"></script>
+          <script type="text/javascript" src="/static/niaa/handlebar_js/mom_format.js"></script>
+	  <script type="text/javascript" src="/static/niaa/handlebar_js/forward_msg_user.js"></script>
+
+          <div class='msg_link'></div>
+          <!-- Light box Collection of images modal -->
+          <div id="myModal" class="modal chat-img-nxt" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <span class="close cursor lb_close">&times;</span>
+                          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                              <div class="modal-content">
+                                    <div class=lightBoxImagesDiv>
+                                    </div>
+                                  <div class="caption-container">
+                                      <p id="caption"></p>
+                                  </div>
+                              </div>
+                          </div>
+                          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                      </div>
+
+<!-- File upload modal -->
+
+
+
+<!--
+<div id="PreviewModal" class="modal">
+
+
+  <div class="modal-content">
+    <span class="close">×</span>
+    <h1>Upload file?</h1>
+    <div id="file_upload_preview_div"></div>
+    <button id="upload_submit_btn">OK</button>
+  </div>
+
+</div>
+ -->
+
+
+
+
+
+<!-- Mail preview modal -->
+
+<div class="modal chat-img-nxt mom-rec-popup" id="mailPreviewModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+   <div class="modal-content model-customiz-part">
+    <div class="modal-header">
+     <h5 class="modal-title" id="exampleModalLongTitle">Chat Transcript Mail Preview</h5>
+
+     <button type="button" class="close" id="mail_preview_close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true"></span>
+     </button>
+   </div>
+   <div class="modal-body">
+    <div class="in-md-body">
+      <div id="mail_preview_div">
+
+     </div>
+      <!-- <div id="mail_preview_div">
+
+
+
+
+      </div> -->
+
+    </div>
+   </div>
+   <div class="modal-footer"> <a href="#" class="submit mail_submit_btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></a> </div>
+   </div>
+  </div>
+</div>

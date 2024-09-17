@@ -1,0 +1,208 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} {% block links %}
+<link href="{% static '/ui/plugins/select2/css/select2.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/select2/css/select2-bootstrap.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css' %}"
+	type="text/javascript" />
+<link
+	href="{% static 'ui/plugins/bootstrap-multiselect/css/bootstrap-multiselect.css' %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{% static '/ui/plugins/datatables/css/datatables.min.css' %}"
+	rel="stylesheet" type="text/css" />
+<!-- Custom CSS -->
+<link
+	href="{%  static '/dev/talent_management/css/tm_accolades.css'  %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TMCompetencyAssessment" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN REPORT FORM -->
+				<div class="row eqheight">
+					<!-- BEGIN PANELS PORTLET-->
+					<div class="col-md-12">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<h1>Accolades</h1>
+								</div>
+								<div class="row">
+									<div class="col-md-12 col-sm-12">
+										<div class="row">
+											<div id="add_btns" class="col-md-2 col-sm-2"></div>
+											<div class="col-md-1 col-sm-2"
+												style="margin-top: 10px; text-align: right;">
+												<i data-toggle="tooltip" data-placement="top" title=""
+													class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="form-group">
+													<select id="tm_accolades_sel_org"
+														name="tm_accolades_sel_org"
+														class="form-control select2 hide_error"
+														onchange="get_org_unit_list($(this).val());">
+														<option></option> 
+														{% for data in tm_org %}
+														<option value="{{ data.id }}">{{ data.name }}</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="form-group">
+													<select id="tm_accolades_sel_org_unit"
+														name="tm_accolades_sel_org_unit"
+														class="form-control select2 hide_error"
+														disabled="disabled"
+														onchange="get_division_list($(this).val());">
+														<option></option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-6">
+												<div class="form-group">
+													<select id="tm_accolades_sel_dept"
+														name="tm_accolades_sel_dept"
+														class="form-control select2 hide_error"
+														disabled="disabled"
+														onchange="get_emp_list($(this).val());">
+														<option></option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12 col-small-12 col-lg-12"
+									id="tm_accolt_nodata_div" style="display: block;">
+									<h3 class="no-data">No data available</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="portlet-body">
+									<div id="accolades_main_div">
+										<div id="accolades_list_div" style="cursor: pointer;"></div>
+									</div>
+								</div>
+							</div>
+							<!--  modal start here -->
+							<div id="myModal1" class="modal fade" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel1" aria-hidden="true">
+								<div class="modal-dialog modal-md">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true"></button>
+											<h4 class="modal-title">Add Accolades</h4>
+										</div>
+										<div class="modal-body">
+											<div class="portlet-body form">
+												<form role="form" id='add_new_accolades'>
+													<div class="form-body">
+														<div class="row ">
+															<div class="col-md-12 col-sm-12">
+																<div class="col-md-6 col-sm-6">
+																	<div class="form-group">
+																		<label>Employee <span class="required">
+																				* </span></label> <select id="modal_accol_employee"
+																			name="modal_accol_employee"
+																			class="form-control select2 hide_error"
+																			required="required" data-error=".errorTxt0">
+																			<option></option>
+																		</select> <span class="errorTxt0 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-6">
+																	<div class="form-group">
+																		<label>Title <span class="required"> *
+																		</span></label>
+																		<div class="input-icon">
+																			<i class="nf nf-user-1"></i> <input type="text"
+																				class="form-control" placeholder="Title"
+																				id="modal_accol_title" name="modal_accol_title"
+																				data-error=".errorTxt2"> <span
+																				class="errorTxt2 error val_message"></span>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-6">
+																	<div class="form-group">
+																		<label>Year <span class="required"> * </span></label>
+																		<select id="modal_accol_year" required="required"
+																			name="modal_accol_year"
+																			class="form-control select2 hide_error"
+																			data-error=".errorTxt3">
+																			<option></option>
+																		</select> <span class="errorTxt3 error val_message"></span>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-6">
+																	<div class="form-group">
+																		<label>Awarded By </label>
+																		<div class="input-icon">
+																			<i class="nf nf-user-1"></i> <input type="text"
+																				class="form-control" readonly="readonly"
+																				placeholder="Awarded By" id="modal_accol_awarded_by"
+																				name="modal_accol_awarded_by" value="" />
+																			<!-- <span class="errorTxt3 error val_message"></span> -->
+																		</div>
+																	</div>
+																</div>
+																<div class="col-md-6 col-sm-6">
+																	<div class="form-group">
+																		<label>Description </label>
+																		<textarea class="form-control" rows="3"
+																			name="modal_accol_desc" id="modal_accol_desc"
+																			value="" placeholder="Enter Description">
+																		</textarea>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										<div class="modal-footer"></div>
+									</div>
+								</div>
+							</div>
+							<!--  modal end here -->
+						</div>
+					</div>
+					<!-- END PANELS PORTLET-->
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<!-- Single and multi select Dropdown-->
+<script
+	src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/bootstrap-wizard/js/jquery.bootstrap.wizard.min.js' %}"
+	type="text/javascript"></script>
+<script src="{% static '/dev/talent_management/js/tm_accolades.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

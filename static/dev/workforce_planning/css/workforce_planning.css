@@ -1,0 +1,355 @@
+/* 12-JUL-2018 || SMI || Form Wizard Style Start */
+.form-wizard .steps, .form-wizard .steps>li>a.step {
+	background-color: #fff;
+	background-image: none;
+	border: 0;
+	box-shadow: none;
+	filter: none
+}
+
+.nav-justified>li, .nav-tabs.nav-justified>li {
+	display: table-cell;
+	width: 1%;
+	vertical-align: top;
+}
+
+.toast-top-center {
+	top: 12px;
+	margin: 0 auto 0 -150px;
+	left: 50%
+}
+
+.toast-top-center .toast {
+	margin: 0 !important
+}
+
+.toast-bottom-center {
+	bottom: 12px;
+	margin: 0 auto 0 -150px;
+	left: 50%
+}
+
+.toast-bottom-center .toast {
+	margin: 0 !important
+}
+
+.form-wizard .progress {
+	margin-bottom: 30px
+}
+
+.form-wizard .steps {
+	padding: 10px 0;
+	margin-bottom: 15px
+}
+
+.form-wizard .steps>li>a.step:hover {
+	background: 0 0
+}
+
+.form-wizard .steps>li>a.step>.number {
+	background-color: #eee;
+	text-align: center !important;
+	padding: 11px 15px 13px;
+	margin-right: 10px;
+	height: 45px;
+	width: 45px;
+	-webkit-border-radius: 50% !important;
+	-moz-border-radius: 50% !important;
+	border-radius: 50% !important;
+	margin: 5px auto;
+}
+
+.form-wizard .steps>li>a.step>.desc>i {
+	display: none
+}
+
+.form-wizard .steps>li.active>a.step .number {
+	background-color: #36c6d3;
+	color: #fff
+}
+
+.form-wizard .steps>li.active>a.step .desc {
+	color: #1b1c1c
+}
+
+.form-wizard .steps>li.done>a.step .number {
+	background-color: #F1C40F;
+	color: #fff
+}
+
+.form-wizard .steps>li.done>a.step .desc {
+	color: #1b1c1c
+}
+
+.form-wizard .steps>li.done>a.step .desc i {
+	font-size: 14px;
+	font-weight: 400;
+	color: #999;
+	display: inline-block
+}
+
+@media ( min-width :768px) and (max-width:1200px) {
+	.form-wizard .step .desc {
+		margin-top: 10px;
+		display: block
+	}
+}
+
+@media ( max-width :768px) {
+	.form-wizard .steps>li>a {
+		text-align: left
+	}
+}
+
+.input_hide {
+	pointer-events: none;
+}
+
+.form-wizard .steps>li>a.step>.number {
+	padding: 7px 8px 13px !important;
+	display: block;
+	text-align: center !important;
+	margin: 10px auto;
+}
+
+.form-wizard .nav>li>a {
+	padding: 15px 0 !important;
+	padding-top: 0 !important;
+}
+
+.form-wizard .steps {
+	padding: 0 !important;
+	margin-bottom: 0 !important;
+	border-bottom: 1px solid #efefef;
+	""
+}
+
+.number i {
+	font-size: 30px;
+	line-height: 20px;
+}
+
+.form-wizard .steps>li>a.step>.number {
+	padding: 10px 8px 13px !important
+}
+
+.form-wizard .nav-pills>li.active>a, .form-wizard.nav-pills>li.active>a:focus,
+	.form-wizard .nav-pills>li.active>a:hover {
+	border-bottom: 1px solid #fb8551 !important;
+	padding: 15px 0 !important;
+	padding-top: 0 !important;
+}
+/* 12-JUL-2018 || SMI || Form Wizard Style End */
+
+/* 05-JUL-2018 || SMI || Common Styles Start */
+.margin-top-0 {
+	margin-top: 0px !important;
+}
+
+.float-right {
+	float: right !important;
+}
+
+.inline_input {
+	font-size: 12px;
+	background-color: #fff;
+	width: 94%;
+	color: #262626;
+	box-shadow: none;
+	height: 34px;
+	border: 1px solid #efefef;
+}
+
+.asterisk, .error, .data-error {
+	color: #e73d4a;
+}
+
+.wfp_animate_arrows {
+	color: #d277fe;
+	display: inline-block;
+	margin-left: 30px;
+}
+
+.no-data {
+	text-align: center;
+	color: #e73d4a
+}
+
+;
+/* 05-JUL-2018 || SMI || Common Styles End */
+
+/* 05-JUL-2018 || SMI || Reporting Structure Custom CSS Start */
+.get-org-chart .get-text-2 {
+	font-size: 20px !important;
+}
+
+.get-org-chart .get-text-3, .get-org-chart .get-text-4, .get-org-chart .get-text-5
+	{
+	font-size: 24px !important;
+}
+/* 05-JUL-2018 || SMI || Reporting Structure Custom CSS End */
+.margin_10 {
+	margin: 10px !important;
+}
+div#wfp_struct_s3_tbl_wrapper, div#wfp_struct_s4_tbl_wrapper, div#wfp_struct_s5_tbl_wrapper
+	{
+	margin-top: 50px !important;
+}
+div#wfp_strategy_s3_tbl_wrapper, div#wfp_strategy_s4_tbl_wrapper{
+	margin-top: 30px !important;
+}
+div#step4_details_table_wrapper{
+	margin-top: 20px !important;
+}
+#struct_donut_chart, #struct_bar_chart, #struct_multi_bar_chart, #struct_multi_grade_chart {
+	height: 400px;
+}
+#strategy_donut_chart, #strategy_bar_chart, #strategy_multi_bar_chart, #strategy_multi_grade_chart,#system_donut_chart,#wpf_system_bar_chart,
+#wpf_system_bar_chart_multi,#wpf_system_bar_chart_grade {
+	height: 400px;
+}
+/* 07-AUG-2018 || SMI || Added Styles for Map */
+.map{height:400px;width:100%;}
+
+/* Reporting Structure - CSS */
+#ti_reporting_struct{
+	height: 700px;
+}
+.select2-container--open {
+	z-index: 20052 !important;
+}
+.input_hide {
+	pointer-events: none;
+}
+.get-oc-tb {
+	margin-top: -5px;
+}
+.get-oc-c {
+	overflow: auto !important;
+}
+.get-org-chart .get-text {
+	font-size: 18px ;
+	stroke: none;
+}
+.get-level-1 {
+	fill: white;
+	stroke: #5c5c64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+.get-level-2 {
+	fill: #fff;
+	stroke: #d277fe;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-3 {
+	fill: #fff;
+	stroke: #5856d6;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-4 {
+	fill: #fff;
+	stroke: #ff9501;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-5 {
+	fill: #fff;
+	stroke: #4cda64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-6 {
+	fill: #fff;
+	stroke: #5ac8fb;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-7 {
+	fill: #fff;
+	stroke: #50c9f6;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-8 {
+	fill: #fff;
+	stroke: #f6d167;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-9 {
+	fill: #fff;
+	stroke: #92aafe;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-10 {
+	fill: #fff;
+	stroke: #ff9501;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-11 {
+	fill: #fff;
+	stroke: #5c5c64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-12 {
+	fill: #fff;
+	stroke: #4cda64;
+	stroke-width: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+}
+
+.get-level-1:hover, .get-level-2:hover, .get-level-3:hover, .get-level-4:hover,
+	.get-level-5:hover, .get-level-6:hover, .get-level-7:hover,
+	.get-level-8:hover, .get-level-9:hover, .get-level-10:hover, .get-level-11:hover, .get-level-12:hover {
+	fill: #ffeffa !important;
+	stroke: white;
+	stroke-width: 0.5px;cursor:pointer;
+}
+
+/* org employee chart text color change */
+.get-text-3 {
+    font-size: 14px !important;
+    fill: #000 !important;
+}
+.get-text-2 {
+    font-size: 14px !important;
+    fill: #000 !important;
+}
+.get-text-1 {
+    font-size: 18px !important;
+    fill: #000 !important;
+    text-transform: uppercase;
+}
+.get-text-0 {
+        font-size: 20px !important;
+        stroke: none !important;
+        fill: #000 !important;
+}

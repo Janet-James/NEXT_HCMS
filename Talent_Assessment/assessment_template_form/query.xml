@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="assessment_template">
+		<query id="assessment_form_employee" query_name="assessment_form_employee"
+			description="employee List">
+        	<![CDATA[select DISTINCT id,name,last_name from employee_info where is_active='TRUE' ORDER BY name]]>
+		</query>
+		<query id="assessment_ti_role_details" query_name="assessment_ti_role_details"
+			description="role_kpi List">
+        	<![CDATA[select id,role_title from hcms_ti_role_details where is_active='TRUE']]>
+		</query>
+		<query id="assessment_ta_kpi_details" query_name="assessment_ta_kpi_details"
+			description="ta kpi List">
+        	<![CDATA[select id,kpi_description from hcms_ta_kpi where is_active='TRUE']]>
+		</query>
+		<query id="assessment_category_list" query_name="assessment_category_list"
+			description="assessment category  List">
+        	<![CDATA[select refitems_name,refitems_code,ref_item.id from reference_items as ref_item inner join reference_item_category as ref_cat  on ref_cat.id=ref_item.refitems_category_id
+where  refitem_category_code='ASCAT' and ref_item.is_active='TRUE' and ref_cat.is_active='TRUE']]>
+		</query>
+		<query id="template_table_view" query_name="template_table_view"
+			description="template_table_view List">
+        	<![CDATA[select ref_item.refitems_name as category_name,asst_temp.assessment_category_refitem_id as category_id, asst_temp.id as id,assessment_template_name as template_name,assessment_template_code as assessment_code,assessment_template_active_status as template_status ,
+    ti_role_det.role_title as role_details from hcms_ta_assessment_template as asst_temp
+    inner join hcms_ti_role_details as ti_role_det  on ti_role_det.id=asst_temp.assessment_template_role_id 
+    inner join reference_items as ref_item on ref_item.id=asst_temp.assessment_category_refitem_id 
+    where asst_temp.is_active='TRUE' and ti_role_det.is_active='TRUE' and ref_item.is_active='TRUE']]>
+		</query>
+		
+		<query id="assessment_template_data" query_name="assessment_template_data"
+			description="assessment_template_data List">
+        	<![CDATA[select asst_temp.id as id,assessment_template_name as template_name,assessment_template_code as assessment_code,assessment_template_active_status 
+    as template_status,asst_temp.assessment_category_refitem_id as category_id,asst_temp.assessment_template_role_id as role_id
+    from hcms_ta_assessment_template as asst_temp
+    where asst_temp.is_active='TRUE' and asst_temp.id=%s]]>
+		</query>
+		
+		
+		<query id="checked_assessment_template_data" query_name="checked_assessment_template_data"
+			description="assessment_template_data List">
+        	<![CDATA[select asst_temp.id as id,assessment_template_name as template_name,assessment_template_code as assessment_code,assessment_template_active_status 
+    as template_status,asst_temp.assessment_category_refitem_id as category_id,asst_temp.assessment_template_role_id as role_id
+    from hcms_ta_assessment_template as asst_temp
+    where asst_temp.is_active='TRUE' and asst_temp.id=%s and asst_temp.assessment_template_role_id=%s and assessment_category_refitem_id=%s]]>
+		</query>
+		
+		
+		
+		<query id="template_role_kpi_dict" query_name="template_role_kpi_dict"
+			description="template_role_kpi_dict List">
+        	<![CDATA[select role_kpi.kpi_units as target_type,role_kpi.kpi_definition,temp_kpi.assessment_template_kpi_type,temp_kpi.assessment_template_role_kpi_id,
+    temp_kpi.assessment_template_kpi_expected,temp_kpi.assessment_template_kpi_measurement_criteria 
+    from hcms_ta_assessment_template_kpi as temp_kpi
+    inner join hcms_ti_role_kpi as role_kpi on role_kpi.id=temp_kpi.assessment_template_role_kpi_id
+    where temp_kpi.is_active='True' and role_kpi.is_active='True' and temp_kpi.assessment_template_kpi_type='Role' and temp_kpi.assessment_template_id=%s]]>
+		</query>
+		<query id="template_cascade_kpi_dict" query_name="template_cascade_kpi_dict"
+			description="template_cascade_kpi_dict List">
+        	<![CDATA[select ta_kpi.kpi_target_type as target_type, ta_kpi.kpi_description,temp_kpi.assessment_template_kpi_type,temp_kpi.assessment_template_cascaded_kpi_id,
+    temp_kpi.assessment_template_kpi_expected,temp_kpi.assessment_template_kpi_measurement_criteria 
+    from hcms_ta_assessment_template_kpi as temp_kpi
+    inner join hcms_ta_kpi as ta_kpi on ta_kpi.id=temp_kpi.assessment_template_cascaded_kpi_id
+    where temp_kpi.is_active='True' and temp_kpi.assessment_template_kpi_type='Cascaded' and temp_kpi.assessment_template_id=%s]]>
+		</query>
+		<query id="template_remove" query_name="template_remove"
+			description="template_remove">
+        	<![CDATA[delete from hcms_ta_assessment_template_kpi where assessment_template_id=%s]]>
+		</query>
+		
+		<query id="cascad_template_Kpi_fetch" query_name="cascad_template_Kpi_fetch"
+			description="cascad_template_Kpi_fetch">
+        	<![CDATA[select ta_kpi.kpi_target_type as target_type,ta_kpi.id,ta_kpi.kpi_description,ta_kpi.kpi_target_value,ta_kpi.kpi_target_type as type from hcms_ta_objective_orgunit_rel  
+    inner join hcms_ta_kpi as ta_kpi on ta_kpi.id=hcms_ta_objective_orgunit_rel.strategic_objective_id
+     where ta_kpi.is_active='TRUE'and hcms_ta_objective_orgunit_rel.is_active='TRUE'  and strategic_objective_role_id_id=%s]]>
+		</query>
+		
+		<query id="template_exsist_check" query_name="template_exsist_check"
+			description="template_exsist_check">
+          <![CDATA[select id,assessment_template_name from hcms_ta_assessment_template where (assessment_template_name ilike %s or assessment_template_code ilike %s) and is_active=TRUE]]>
+		</query>
+		
+		<query id="update_template_exsist_check" query_name="update_template_exsist_check"
+			description="update_template_exsist_check">
+          <![CDATA[select id,assessment_template_name from hcms_ta_assessment_template where (assessment_template_name ilike %s or assessment_template_code ilike %s)  and id!=%s and is_active=TRUE]]>
+		</query>
+	</queries>
+	
+	<queries name='objective_settings'>
+	    <query id="objective_type" query_name="objective_type"
+			description="objective_type List">
+        	 <![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id 
+           where refitem_category_code = 'BSCRD' and rfitm.is_active='TRUE' and rfctg.is_active='TRUE' order by rfitm.refitems_name]]>
+		</query>
+		 <query id="target_type" query_name="target_type"
+			description="target_type List">
+        	<![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm 
+inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  where refitem_category_code = 'TARGT' 
+and  rfctg.is_active='TRUE' and rfitm.is_active='TRUE' order by  rfitm.refitems_name]]>
+		</query>
+		<query id="tracking_type" query_name="tracking_type"
+			description="tracking_type List">
+        	<![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm 
+inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  where refitem_category_code = 'KPITY' 
+and rfitm.is_active='TRUE' and rfctg.is_active='TRUE' order by  rfitm.refitems_name]]>
+		</query>
+		<query id="currency_type" query_name="currency_type"
+			description="currency_type List">
+        	<![CDATA[select rfitm.id,rfitm.refitems_name from reference_items  rfitm 
+inner join reference_item_category rfctg on rfitm.refitems_category_id = rfctg.id  where refitem_category_code = 'CUREN' 
+and rfitm.is_active='TRUE' and rfctg.is_active='TRUE' order by  rfitm.refitems_name]]>
+		</query>
+		
+		<query id="objective_driver" query_name="objective_driver"
+			description="objective_driver List">
+        	<![CDATA[ select id,strategic_objective_driver from HCMS_TA_Strategic_Objectives where is_active=True]]>
+		</query>
+		
+		<query id="employee_org_unit" query_name="employee_org_unit"
+			description="employee_org_unit List">
+        	<![CDATA[select emp_info.org_unit_id_id, org_info.id as org_id,org_info.orgunit_name as org_name from employee_info as emp_info
+inner join organization_unit_info as org_info on org_info.id=emp_info.org_unit_id_id
+where emp_info.id=%s and emp_info.is_active='TRUE' and org_info.is_active='TRUE' ]]>
+		</query>
+	</queries>
+	
+	<queries name='assessment_form'>
+	    <query id="assessment_table_view" query_name="assessment_table_view"
+			description="assessment_table_ List">
+        	<![CDATA[select asset_temp.assessment_template_name as template_name,asset_form.id as form_id,ref_item.refitems_name as category_name,emp_info.id as employee_id,emp_info.name as employee_name,emp_info.last_name,role_det.role_title as employee_role
+    from employee_info as emp_info  
+    inner join hcms_ti_role_details as role_det on role_det.id=emp_info.role_id_id
+    inner join hcms_ta_assessment_form as asset_form on asset_form.assessment_form_employee_id=emp_info.id
+    inner join reference_items as ref_item on ref_item.id=asset_form.assessment_category_refitem_id
+    inner join hcms_ta_assessment_template as asset_temp on asset_temp.id=asset_form.assessment_form_template_id
+    where asset_form.is_active='True' and emp_info.is_active='TRUE' and role_det.is_active='TRUE' and ref_item.is_active='TRUE' and asset_temp.is_active='TRUE' ]]>
+		</query>
+		<query id="employee_based_data" query_name="employee_based_data"
+			description="employee_based_data List">
+        	<![CDATA[select role_det.id as role_id,asset_temp.id as template_id,ref_item.refitems_name as category_name,emp_info.id as employee_id,emp_info.name as employee_name,role_det.role_title as employee_role,asset_temp.assessment_template_name as template_name,
+    asset_temp.assessment_category_refitem_id as category_id  from employee_info as emp_info
+    inner join hcms_ti_role_details as role_det on role_det.id=emp_info.role_id_id
+    inner join hcms_ta_assessment_template as asset_temp on asset_temp.assessment_template_role_id=role_det.id
+    inner join reference_items as ref_item on ref_item.id=asset_temp.assessment_category_refitem_id
+    where emp_info.is_active='True'  and role_det.is_active='True' and asset_temp.is_active='True' and ref_item.is_active='True' and emp_info.id=%s]]>
+		</query>
+		<query id="template_based_data" query_name="template_based_data"
+			description="template_based_data List">
+        	<![CDATA[select case when assessment_template_kpi_type='Cascaded' then assessment_template_cascaded_kpi_id
+ else assessment_template_role_kpi_id end as kpi_id,assessment_template_kpi_type as kpi_type,assessment_template_kpi_expected as expected,
+ assessment_template_kpi_measurement_criteria as measurement from hcms_ta_assessment_template_kpi where is_active='True' and assessment_template_id=%s]]>
+		</query>
+		<query id="form_data" query_name="form_data"
+			description="form_data List">
+        	<![CDATA[select  role_det.id as role_id, asset_temp.id as template_id,asset_temp.assessment_template_name as template_name,asset_form.id as form_id,ref_item.refitems_name as category_name,emp_info.id as employee_id,emp_info.name as employee_name,role_det.role_title as employee_role
+        ,asset_temp.assessment_category_refitem_id as category_id from employee_info as emp_info  
+        inner join hcms_ti_role_details as role_det on role_det.id=emp_info.role_id_id
+        inner join hcms_ta_assessment_form as asset_form on asset_form.assessment_form_employee_id=emp_info.id
+        inner join reference_items as ref_item on ref_item.id=asset_form.assessment_category_refitem_id
+        inner join hcms_ta_assessment_template as asset_temp on asset_temp.id=asset_form.assessment_form_template_id
+        where asset_form.is_active='True' and emp_info.is_active='TRUE' and role_det.is_active='TRUE' and ref_item.is_active='TRUE' and asset_temp.is_active='TRUE' and asset_form.id=%s]]>
+		</query>
+		<query id="role_kpi_dict" query_name="role_kpi_dict"
+			description="role_kpi_dict List">
+        	<![CDATA[select role_kpi.kpi_units as target_type,role_kpi.kpi_definition,form_kpi.assessment_form_kpi_expected as expected,form_kpi.assessment_form_kpi_measurement_criteria as measurement,
+    form_kpi.assessment_form_kpi_weightage as weightage,form_kpi.assessment_form_id as form_id,form_kpi.assessment_form_role_kpi_id as form_kpi_id,
+    form_kpi.assessment_form_kpi_type as type
+    from hcms_ta_assessment_form_kpi as form_kpi
+    inner join hcms_ti_role_kpi as role_kpi on role_kpi.id=form_kpi.assessment_form_role_kpi_id
+    where form_kpi.is_active='True' and role_kpi.is_active='TRUE' and form_kpi.assessment_form_kpi_type='Role' and form_kpi.assessment_form_id=%s]]>
+		</query>
+		
+		<query id="cascade_kpi_dict" query_name="role_kpi_dict"
+			description="role_kpi_dict List">
+        	<![CDATA[select ta_kpi.kpi_target_type as target_type,ta_kpi.kpi_description,form_kpi.assessment_form_kpi_expected as expected,form_kpi.assessment_form_kpi_measurement_criteria as measurement,
+    form_kpi.assessment_form_kpi_weightage as weightage,form_kpi.assessment_form_id as form_id,form_kpi.assessment_form_cascaded_kpi_id as form_kpi_id,
+    form_kpi.assessment_form_kpi_type as type
+    from hcms_ta_assessment_form_kpi as form_kpi
+    inner join hcms_ta_kpi as ta_kpi on ta_kpi.id=form_kpi.assessment_form_cascaded_kpi_id
+    where form_kpi.is_active='True' and ta_kpi.is_active='TRUE' and form_kpi.assessment_form_kpi_type='Cascaded' and form_kpi.assessment_form_id=%s]]>
+		</query>
+		<query id="form_role_kpi" query_name="form_role_kpi"
+			description="form_role_kpi List">
+
+        	<![CDATA[select id, kpi_definition as kpi_description,kpi_units as kpi_target_value,kpi_units as type from hcms_ti_role_kpi where id=%s and is_active='True']]>
+		</query>
+		<query id="form_cascaded_kpi" query_name="form_cascaded_kpi"
+			description="form_cascaded_kpi List">
+        	<![CDATA[select id,kpi_description,kpi_target_value,kpi_target_type as type from hcms_ta_kpi where is_active='TRUE' and id=%s]]>
+		</query>
+		<query id="objective_ta_kpi" query_name="objective_ta_kpi"
+			description="objective_ta_kpi List">
+        	<![CDATA[select id,kpi_description,kpi_target_value,kpi_target_type as target_type from hcms_ta_kpi where is_active=True and id=%s]]>
+		</query>
+		<query id="form_delete" query_name="form_delete"
+			description="form_delete List">
+        	<![CDATA[delete from hcms_ta_assessment_form_kpi where assessment_form_id=%s]]>
+		</query>
+		<query id="form_data_save" query_name="form_data_save"
+			description="form_data_save List">
+        	<![CDATA[insert into hcms_ta_assessment_form (created_by_id,assessment_form_employee_id,assessment_form_role_id,assessment_form_template_id,assessment_category_refitem_id,created_date,	
+        	assessment_form_finalised_status,is_active) values (%s,%s,%s,%s,%s,now(),%s,%s) returning id]]>
+		</query>
+		
+		<query id="kpi_form_save" query_name="kpi_form_save"
+			description="kpi_form_save List">
+        	<![CDATA[insert into hcms_ta_assessment_form_kpi (created_by_id,assessment_form_kpi_expected,assessment_form_kpi_measurement_criteria,assessment_form_kpi_weightage,assessment_form_id,assessment_form_cascaded_kpi_id,is_active,assessment_form_kpi_type,created_date) 
+        	values (%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+		
+		<query id="role_kpi_form_save" query_name="kpi_form_save"
+			description="kpi_form_save List">
+        	<![CDATA[insert into hcms_ta_assessment_form_kpi (created_by_id,assessment_form_kpi_expected,assessment_form_kpi_measurement_criteria,assessment_form_kpi_weightage,assessment_form_id,assessment_form_role_kpi_id,is_active,assessment_form_kpi_type,created_date) 
+        	values (%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+		
+		<query id="update_kpi_form" query_name="update_kpi_form"
+			description="update_kpi_form List">
+        	<![CDATA[insert into hcms_ta_assessment_form_kpi (created_by_id,assessment_form_kpi_expected,assessment_form_kpi_measurement_criteria,assessment_form_kpi_weightage,assessment_form_id,assessment_form_cascaded_kpi_id,is_active,assessment_form_kpi_type,created_date)
+        	values (%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+		
+		<query id="role_update_kpi_form" query_name="update_kpi_form"
+			description="update_kpi_form List">
+        	<![CDATA[insert into hcms_ta_assessment_form_kpi (created_by_id,assessment_form_kpi_expected,assessment_form_kpi_measurement_criteria,assessment_form_kpi_weightage,assessment_form_id,assessment_form_role_kpi_id,is_active,assessment_form_kpi_type,created_date)
+        	values (%s,%s,%s,%s,%s,%s,%s,%s,now()) returning id]]>
+		</query>
+	</queries>
+	
+	
+	
+	<queries name="assessment_reviewer">
+		<query id="assessor_type_fetch" query_name="assessor_type_fetch"
+			description="Assessor type detail fetch">
+        	<![CDATA[select ri.id,ri.refitems_name,ri.refitems_code from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where ric.refitem_category_code = 'ASMTY' and ri.is_active=true and ric.is_active=true order by ri.refitems_code]]>
+		</query>
+		
+		<query id="role_detail_fetch" query_name="role_detail_fetch"
+			description="Role detail fetch">
+        	<![CDATA[select role_title,id from hcms_ti_role_details where is_active=true]]>
+		</query>
+		<query id="assessor_info_detail" query_name="assessor_info_detail"
+			description=" To fetch assessor detail">
+        	<![CDATA[select ai.assessor_assessment_type,assessor_type_refitem_id as assessor_type_id,ri.refitems_code as assessor_type_code,assessor_id,ei.name as assessor_name from hcms_ta_assessor_info ai 
+inner join employee_info ei on ai.assessor_id=ei.id inner join reference_items ri on ri.id=ai.assessor_type_refitem_id where ai.assessor_assessment_form_id=%s and ai.is_active=true and ri.is_active=true and ei.is_active='True']]>
+		</query>
+		<query id="assessor_matrix_detail" query_name="assessor_matrix_detail"
+			description=" To fetch assessor matrix detail">
+        	<![CDATA[select assessor_viewer_role_id,assessor_view_role_id from hcms_ta_assessor_access_matrix where hcms_tm_assessment_form_id=%s and is_active='True']]>
+		</query>
+		<query id="assessor_info_update" query_name="assessor_info_update"
+			description=" To update assessor info detail">
+        	<![CDATA[update hcms_ta_assessor_info set assessor_assessment_form_id=%s,assessor_assessment_type=%s,assessor_type_refitem_id=%s,assessor_id=%s,modified_by_id=%s,modified_date=now() where id=%s]]>
+		</query>
+		<query id="assessor_info_insert" query_name="assessor_info_insert"
+			description=" To insert assessor info detail">
+        	<![CDATA[insert into hcms_ta_assessor_info(assessor_assessment_form_id,assessor_assessment_type,assessor_type_refitem_id,assessor_id,is_active,created_by_id,created_date)
+values (%s,%s,%s,%s,TRUE,%s,now())]]>
+		</query>
+		<query id="excluded_assessor_type_fetch" query_name="excluded_assessor_type_fetch"
+			description=" To fetch excluded assessor list">
+        	<![CDATA[select ri.id,ri.refitems_name,ri.refitems_code from reference_items ri inner join reference_item_category ric on ric.id= ri.refitems_category_id
+where (ric.refitem_category_code = 'ASMTY' or ric.refitem_category_code = 'EXAST') and ri.is_active=true and ric.is_active=true order by ri.refitems_code]]>
+		</query>
+		</queries>
+</data>

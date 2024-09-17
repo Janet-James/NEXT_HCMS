@@ -1,0 +1,142 @@
+{% load static %} {% load base_tags %}
+<!-- BEGIN HEADER -->
+{% if not tags_active %}
+	{% include "tags/side_menu.html" %}
+{% endif %} 
+<div class="page-header navbar navbar-fixed-bottom" id="nav_div">
+	<div class="dreadcrumb-theam">
+		<!-- Page Name Start -->
+		{% include "tags/dev_page_name.html" %}
+		<!-- Page Name End -->
+		
+		<!-- Theme Change Start -->
+		<div id="switcher">
+			<div class="colors theme-panel">
+				<ul class="theme-colors">
+					<li id="btn1" data-toggle="tooltip" data-placement="top"
+						title="Gradient Theme"
+						class="tooltips theme-color theme-color-default active scolor gradient"
+						data-theme="default" style="display: none;"
+						onClick="changefunc(this.id)"></li>
+					<li id="btn2" data-toggle="tooltip" data-placement="top"
+						title="Flat Theme"
+						class="tooltips theme-color b theme-color-light scolor flat"
+						data-theme="flat" onClick="changefunc(this.id)"></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Theme Change END -->
+	</div> 
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="http://www.nexttechnosolutions.com" class="logo-default"><img
+				alt="Next Logo" src="{% static '/ui/images/nlogo.png' %}" /></a>
+		</div>
+		{% include "tags/mynext_footer.html" %}
+		{% include "tags/btm_menu.html" %}
+		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+		<a href="javascript:;" class="menu-toggler responsive-toggler"
+			data-toggle="collapse" data-target=".navbar-collapse"> </a>
+		<!-- END RESPONSIVE MENU TOGGLER -->
+
+		<!-- BEGIN PAGE TOP -->
+		<div class="page-top">
+			<!-- BEGIN HEADER SEARCH BOX -->
+			<!-- <div class="mobilesearch">
+				<form class="search-form" action="#" method="GET">
+					<div class="input-group">
+						<input type="text" class="form-control input-sm"
+							placeholder="Search..." name="query"> <span
+							class="input-group-btn"> <a href="javascript:;"
+							class="btn submit"> <i class="icon-magnifier"></i>
+						</a>
+						</span>
+					</div>
+				</form>
+			</div> -->
+			<div class="Nassist" ><a data-toggle="tooltip" data-placement="top" title="" data-original-title="NAssist" class="" href="javascript:void(0);" onclick="javascript:startTour();"><i class="fa fa-question-circle"></i></a>
+                         </div>
+			
+			<!--  NIAA CHAT ICONS -->
+			
+			<div class="hdr-niaa-icon" style="display:none">
+			<div class="niaa-info-menu"><a data-toggle="tooltip" data-placement="top" title="NIAA" class="pop-up-show-chat hvr-pulse hvr-icon-drop" href="#"><i class="fa fa-comments" aria-hidden="true"></i> </a></div>
+			</div>
+			<!--  END NIAA CHAT ICONS -->
+			<div class="searchwrap">
+				<div class="cd-search animate-search">
+					<nav class="cd-main-nav-wrapper">
+						<a href="#search" class="cd-search-trigger cd-text-replace"></a>
+					</nav>
+					<a href="" class="cd-nav-trigger cd-text-replace">Menu<span></span></a>
+				</div>
+				<div id="search" class="cd-main-search">
+					<div class="cd-search-suggestions">
+						<div class="news">
+							<h3>Search Results</h3>
+							<ul id="search_result_str">
+							</ul>
+						</div>
+						<form class="formValidate" id="search_form" novalidate>
+							{% csrf_token %}
+							<div class="col-md-10">
+								<input type="search" id="search_content" name="search_content"
+									placeholder="Type here...">
+							</div>
+							<div class="col-md-2">
+								<button type="button" class="btn btn-success btn-animate"
+									onclick="search_data_management()">Search</button>
+							</div>
+						</form>
+					</div>
+					<a href="#0" class="close cd-text-replace">Close Form</a>
+				</div>
+			</div>
+			<!-- END HEADER SEARCH BOX -->
+
+			<!-- BEGIN TOP NAVIGATION MENU -->
+			<div class="top-menu">
+				<ul class="nav navbar-nav pull-right">
+					<!-- BEGIN USER LOGIN DROPDOWN -->
+					<li class="dropdown dropdown-user dropdown-dark"><a
+						href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
+						data-hover="dropdown" data-close-others="true"> <span
+							class="username username-hide-on-mobile"> {{ user }} </span> <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+							<img alt="" class="img-circle"
+							src="https://192.168.10.60/media/user_profile/{{ uimage }}"/>
+					</a>
+						<ul class="dropdown-menu dropdown-menu-default ">
+							<!-- <li><a href="page_user_profile_1.html"> <i
+									class="icon-user"></i> My Profile
+							</a></li>
+							<li><a href="#"> <i class="icon-rocket"></i> My Tasks <span
+									class="badge badge-success"> 7 </span>
+							</a></li>
+							<li class="divider"></li> -->
+							<li><a href="{% url 'login:logout' %}"> <i
+									class="icon-key"></i> Log Out
+							</a></li>
+						</ul></li>
+					<!-- END USER LOGIN DROPDOWN -->
+				</ul>
+				<!-- Reposnive view -->
+				<div class="nav_trigger">
+					<span class="line1"></span> <span class="line2"></span> <span
+						class="line3"></span>
+				</div>
+				<!--End Responsive view-->
+				<div class="flip-logo"></div>
+			</div>
+			<!-- END TOP NAVIGATION MENU -->
+		</div>
+		<!-- END PAGE TOP -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->

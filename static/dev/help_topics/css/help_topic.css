@@ -1,0 +1,113 @@
+.subsection {
+    margin-bottom: 16px;
+}
+.subsection h3 {
+    margin-top: 0;
+    padding-top: 12px;
+}
+.subsection header {
+    position: relative;
+}
+.subsection header.small-logo {
+    height: 70px;
+}
+.subsection header.large-logo {
+    height: 200px;
+}
+.subsection header.large-logo {
+    background-color: #f6cdc7;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: lightgray 1px solid;
+    border-bottom-width: 0;
+    border-bottom-style: none;
+}
+.subsection header.small-logo > div.bar {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #f6cdc7;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border: lightgray 1px solid;
+}
+.subsection header > div.outerlogo {
+    background-color: #e85e70;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+}
+.subsection header img.logo {
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+}
+.subsection header.small-logo > div.outerlogo {
+    width: 60px;
+    height: 60px;
+}
+.subsection header.small-logo img.logo {
+    width: 42px;
+    height: 42px;
+}
+.subsection header.large-logo > div.outerlogo {
+    width: 150px;
+    height: 150px;
+}
+.subsection header.large-logo img.logo {
+    width: 64px;
+    height: 64px;
+}
+
+/* Site Heading */
+.site-heading h3{
+    font-size : 40px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.border {
+    background: #e8e8e8 ;
+    height: 1px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 45px;
+    float:left;
+}
+
+/* Feature-CSS */
+.icon {
+    color: #002451;
+    padding: 5px;
+    /* background:#323232; */
+    font-size:30px;
+    border-radius:90px;
+    border: 1px solid #f1f1f1;
+}
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    transition: .5s;
+    margin-bottom: 30px;
+    border: 1px solid #e8e8e8;
+}
+.feature-box:hover {
+   
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.feature-box h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 15px;
+}
+
+.table-scrollable, #sample_1_col_1 {overflow-x: hidden !important;  overflow-y: auto !important;}

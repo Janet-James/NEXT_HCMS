@@ -1,0 +1,14 @@
+
+.bullet-chart {width: 100%;height: 100px;}
+.legend{margin: 0px;float: right;padding: 10px 30px 0px 0px;}
+.legend li span{width:15px;height: 12px;display: inline-block;float: left;border:0px !important;margin-right: 5px;}
+.legend li label{font-weight: normal;font-size: 12px;color: #000;line-height: 14px;vertical-align: top;}
+.legend li {list-style: none;display: inline-block;padding-left:10px;}
+.legend-1 {background: #d5fcde;}
+.legend-2 {background: #86d6fb;}
+.legend-3 {background: #fef4ce;}
+.legend-4 {background: #88f3a0;}
+.legend-5 {background: #ffe1b6;}
+.legend-6 {background: #c6c5ff;}
+.legend-7 {background: #d7f2ff;}
+.legend-8 {background: #ffa4a2;}

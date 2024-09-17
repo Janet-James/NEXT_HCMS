@@ -1,0 +1,84 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<link href="{% static '/dev/help_topics/css/help_topic.css' %}"
+	rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix">
+	<div class="page-container margin-0" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="portlet light bordered"
+							id="blockui_sample_1_portlet_body">
+							<div class="portlet-title">
+								<div class="caption">
+									<span class="caption-subject bold">NEXT
+										Human Capital Management System</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<h3 class="panel-title">Get Started</h3>
+										</div>
+										<div class="panel-body">Our NEXT Human Capital Management System is a collection of resources—all the knowledge, talents, skills, abilities, experience, intelligence, training, judgment, and wisdom possessed individually and collectively by individuals in an organization. HCMS would enable and empower the Organization to manage the talent and the talent pool to have a progressive career build in the organization.</div>
+									</div>
+								</div>
+							</div>
+							<!-- End Col -->
+							<div class="row">
+								<div class="col-sm-6 col-md-4">
+									<div class="col-md-12 feature-box">
+										<span class="glyphicon glyphicon-user icon"></span>
+										<h4>Start Your Subscription</h4>
+										<p>Order NEXT Applications</p>
+										<p>Activate your order</p>
+										
+										<button type="button" class="btn btn-success btn-animate site-btn" onclick="location.href='{% url 'help_content:help_content_page1' %}'">Start
+											Right Now</button>
+
+									</div>
+								</div>
+								<!-- End Col -->
+								<div class="col-sm-6 col-md-4">
+									<div class="col-md-12 feature-box">
+										<span class="glyphicon glyphicon-cog icon"></span>
+										<h4>Learn What's New</h4>
+										<p>Review New Features</p>
+										<p>Learn More</p>
+										<button type="button" class="btn btn-primary btn-animate site-btn" onclick="location.href='{% url 'help_content:help_content_page1' %}'">Start
+											Right Now</button>
+									</div>
+								</div>
+								<!-- End Col -->
+								<div class="col-sm-6 col-md-4">
+									<div class="feature-box">
+										<span class="glyphicon glyphicon-bell icon"></span>
+										<h4>Join Communities</h4>
+										<p>Join NEXT Support Community</p>
+										<p>Join NEXT Customer Connect</p>
+										<button type="button" class="btn btn-danger btn-animate site-btn" onclick="location.href='{% url 'help_content:help_content_page1' %}'">Start
+											Right Now</button>
+									</div>
+								</div>
+								<!-- End Col -->
+							</div>
+							<!-- End row -->
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+<!-- END CONTAINER -->
+{% endblock %}

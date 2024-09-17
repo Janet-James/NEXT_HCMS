@@ -1,0 +1,2 @@
+id,created_date,modified_date,is_active,university,year_of_passed_out,institution_name,duration,cgpa,percentage,course_name,certificate_status,file_name,created_by_id,emp_id_id,modified_by_id,upload_id
+1,2018-09-28 00:31:59.264344+05:30,2018-09-28 00:31:59.264377+05:30,f,University of Madras,1995,Presidency College,24,0,63.3,M.SC Geography,t,MSc_1995_161.pdf,,22,,161

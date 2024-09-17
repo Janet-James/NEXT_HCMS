@@ -1,0 +1,488 @@
+<div class="row">
+	<span id="table_view" 
+		class="animated fadeIn infinite  datatable_viewbtn viewIcons"
+		data-toggle="tooltip" data-placement="bottom" title="Table View"><i
+		class="nf nf-moscow-table"></i></span> <span id="form_view"
+		class="animated fadeIn infinite  datatable_viewbtn viewIcons"
+		data-toggle="tooltip" data-placement="bottom" title="Form View"
+		style="display: none"><i class="nf nf-apparisal-form"></i></span>
+
+	<div class="clearfix"></div>
+	<!-- form dev start -->
+	<div class="col-md-8" id='ta_job_open_main_div1'>
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject bold uppercase">Job Opening Form</span>
+				</div>
+				<div class="col-md-1 caption " style="float: right;">
+					<span
+						class="ta_nav hr_animate_arrows caption-subject bold uppercase"
+						id='left' data-toggle="tooltip" data-placement="bottom"
+						title="Job Opening Details View"><i
+						class="nf nf-angle-left"></i></span> <span
+						class="ta_nav hr_animate_arrows animated flash infinite caption-subject bold uppercase"
+						id='right' data-toggle="tooltip" data-placement="bottom"
+						title="Job Opening Form View"><i class="nf nf-angle-right"></i></span>
+				</div>
+			</div>
+
+			<div class="portlet-body form">
+				<form role="form" id="job_opening_form">
+					<div class="form-body ">
+						{%csrf_token%}
+						<div class="row ">
+							<div class="col-md-12 col-sm-12">
+								<div class="col-md-4" style="padding-left: 0px;">
+									<div class="form-group">
+										<label for="single" class="control-label black_font">Job
+											Requisition </label> <select id="job_resource_config"
+											name="job_resource_config" class="form-control select2">
+											<option value="0">--Select Job Requisition--</option> 
+											{% for i in job_approve %}
+											<option value="{{ i.id }}">{{ i.name }}</option> {% endfor %}
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Organization<span class="asterisk"> *</span>
+										</label> <select id="organization" name="organization" required
+											data-error=".errorTxt5"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Organization--</option>
+										</select> <span class="errorTxt5 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Organization Unit<span class="asterisk"> *</span>
+										</label> <select id="organization_unit" name="organization_unit"
+											required data-error=".errorTxt6"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Organization Unit--</option>
+										</select> <span class="errorTxt6 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Division<span class="asterisk"> *</span>
+										</label> <select id="department" name="department" required
+											data-error=".errorTxt7"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Division--</option>
+										</select> <span class="errorTxt7 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											HR Contact Name<span class="asterisk"> *</span>
+										</label> <select id="recruiter" name="recruiter" required
+											data-error=".errorTxt19"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select HR Contact Name--</option>
+										</select> <span class="errorTxt19 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Assigned Recruiter<span class="asterisk"> *</span>
+										</label> <select id="assigned_recruiter" name="assigned_recruiter"
+											required data-error=".errorTxt2"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Recruiter Name--</option>
+										</select> <span class="errorTxt2 errormessage"></span>
+									</div>
+									<div class="form-group">
+									<label for="single" class="control-label black_font">
+										Contact Name & Number<span class="asterisk"> *</span>
+									</label> <select id="contact_number" name="contact_number" required
+										data-error=".errorTxt3"
+										class="form-control select2 select2-hidden-accessible"
+										tabindex="-1" aria-hidden="true">
+										<option value="0">--Select Contact Name & Number--</option>
+									</select> <span class="errorTxt3 errormessage"></span>
+								</div>
+								</div>
+								<div class="col-md-4" style="padding-right: 0;">
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Work Experience<span class="asterisk"> *</span>
+										</label> <select id="work_experience" name="work_experience" required
+											data-error=".errorTxt11"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Work Experience--</option>
+										</select> <span class="errorTxt11 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Number
+												of Vacancies <span class="asterisk"> *</span>
+											</label> <input id="no_positions" name="no_positions"
+												class="form-control" placeholder="Number of Vacancies"
+												type="text" required maxlength=5 data-error=".errorTxt12">
+											<span class="errorTxt12 errormessage"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Shift<span class="asterisk"> *</span>
+										</label> <select id="shifts" name="shifts" required
+											data-error=".errorTxt17" 
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Shift--</option> 
+										</select> <span class="errorTxt17 errormessage"></span>
+									</div>
+									<div class="form-group"> 
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Job
+												Location
+											</label> <input id="job_location" name="job_location" 
+												class="form-control" placeholder="Job Location"
+												maxlength=100 type="text" data-error=".errorTxt16">
+											<span class="errorTxt16 errormessage"></span> 
+										</div> 
+									</div> 
+									<div class="form-group">
+										<label>Created Date<span class="asterisk"> *</span></label>
+										<div class="input-icon">
+											<!-- <i class="fa fa-calendar cicon"></i> <input
+												placeholder="Opening Date"
+												class="form-control form-control-inline" type="text"
+												data-field="date" id="date_opened" name="date_opened"
+												readonly required data-error=".errorTxt15">
+										</div>
+										<span class="errorTxt15 errormessage"></span> -->
+										<i class="fa fa-calendar cicon"></i> <span
+															style="cursor: text" placeholder="Opening Date"
+															id="date_opened_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Opening Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="date_opened"
+															placeholder="Opening Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="date_opened" type="hidden" readonly
+															data-error=".errorTxt15">
+														<div id="start_date"></div>
+														<span class="errorTxt15 errormessage"></span>
+									</div></div>
+									
+									<div class="form-group">
+										<div class="jo_date" class="dtpicker-overlay dtpicker-mobile"
+											style="display: none;">
+											<div class="dtpicker-bg">
+												<div class="dtpicker-cont">
+													<div class="dtpicker-content">
+														<div class="dtpicker-subcontent"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<span class="errorTxt1 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<label>Target Date<span class="asterisk"> *</span></label>
+										<div class="input-icon">
+
+											<!-- <i class="fa fa-calendar cicon"></i> <input
+												placeholder="Target Date "
+												class="form-control form-control-inline" type="text"
+												data-field="date" id="target_date" name="target_date"
+												readonly="" required data-error=".errorTxt9">
+										</div> -->
+										<i class="fa fa-calendar cicon"></i> <span
+															style="cursor: text" placeholder="Target Date"
+															id="target_date_span" data-field="date"
+															class="form-control datetime"
+															onchange="DatePickerUpdate(this)"
+															class="form-control datetime test-span"
+															contentEditable="false" data-text="Target Date"></span>
+														<input
+															class="form-control form-control-inline date_input_class "
+															name="target_date"
+															placeholder="Target Date"
+															onchange="DatePickerInputUpdate(this)"
+															id="target_date" type="hidden" readonly
+															data-error=".errorTxt9">
+														<div id="end_date"></div>
+														<span class="errorTxt9 errormessage"></span>
+									</div>
+
+									</div>
+									<div class="form-group">
+										<div class="jo_date" class="dtpicker-overlay dtpicker-mobile"
+											style="display: none;">
+											<div class="dtpicker-bg">
+												<div class="dtpicker-cont">
+													<div class="dtpicker-content">
+														<div class="dtpicker-subcontent"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div> 
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Logo Type<span class="asterisk"> *</span>
+										</label> <select id="logo_type_id" name="logo_type_id" required
+											data-error=".errorTxt29"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Job Type--</option>
+											<option value="1">Angular</option>
+											<option value="2">UI/UX</option>
+											<option value="3">Web Developer</option>
+											<option value="4">Python Developer</option>
+											<option value="5">Django Developer</option>
+											<option value="6">HR</option>
+											<option value="7">Big Data</option>
+											<option value="8">Data Analytics</option>
+											<option value="9">Cloud Analytics</option>
+											<option value="10">Geo Developer</option>
+											<option value="11">Business Analytics</option>
+											<option value="12">Manager</option>
+											<option value="13">QA</option>
+											<option value="14">HR Manager</option>
+											<option value="15">Other</option>
+										</select> <span class="errorTxt29 errormessage"></span>
+								</div>
+								</div> 
+								<div class="col-md-4" style="padding-left: 0px;">
+									<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Job
+												Title <span class="asterisk"> *</span>
+											</label> <input id="job_title" name="job_title" class="form-control"
+												placeholder="Job Position" type="text" maxlength=100 required
+												data-error=".errorTxt0"> <span
+												class="errorTxt0 errormessage"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Job Category<span class="asterisk"> *</span>
+										</label> <select id="job_cat_id" name="job_cat_id" required
+											data-error=".errorTxt30"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											
+											<option value="0">--Select Job Category--</option>
+											{% for i in job_category %}
+												<option value="{{ i.id }}">{{ i.name }}</option> 
+											{% endfor %}
+										</select> <span class="errorTxt30 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<div class="input-icon">
+											<label>Key
+												Skills 
+											</label> 
+											<select id="key_skills" class="form-control mt-multiselect btn btn-default" multiple="multiple" data-label="left" data-select-all="true" data-width="100%" data-filter="true" data-action-onchange="true"
+													name="key_skills" data-placeholder="--Skills Filter--"
+													data-error=".errorTxt18" >
+													{% for data in job_skills %}
+														<option value="{{ data.id }}">{{ data.name }}</option> 
+													{% endfor %}
+												</select >
+												<span
+												class="errorTxt18 errormessage"></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Job Type<span class="asterisk"> *</span>
+										</label> <select id="job_type" name="job_type" required
+											data-error=".errorTxt10"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Job Type--</option>
+										</select> <span class="errorTxt10 errormessage"></span>
+									</div>
+
+									<div class="form-group">
+										<label for="single" class="control-label black_font">
+											Job Opening Status
+										</label> <select id="job_status" name="job_status" required
+											data-error=".errorTxt4"
+											class="form-control select2 select2-hidden-accessible"
+											tabindex="-1" aria-hidden="true">
+											<option value="0">--Select Job Status--</option>
+										</select> <span class="errorTxt4 errormessage"></span>
+									</div>
+									<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Salary
+											</label> <input id="salary" name="salary" class="form-control"
+												placeholder="Salary" type="text" maxlength=15 
+												data-error=".errorTxt8"> <span
+												class="errorTxt8 errormessage"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Job Short
+												Description <span class="asterisk"> *</span> </label> 
+												<textarea class="form-control "
+																name="job_short_description" id="job_short_description"
+																placeholder="Job Short Description" rows="2" 
+																data-error=".errorTxt20"></textarea>
+												 <span
+												class="errorTxt20 errormessage"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+									<div class="form-group">
+										<label>Document Upload</label>
+										<div class="clearfix"></div>
+										<div class="fileinput fileinput-new padding-0"
+											data-provides="fileinput">
+											<div class="input-group">
+												<div
+													class="form-control uneditable-input input-medium input-fixed"
+													data-trigger="fileinput">
+													<i class="fa fa-file fileinput-exists"></i>&nbsp; <span
+														class="fileinput-filename"> </span>
+												</div>
+												<span class="input-group-addon btn btn-success btn-file ">
+													<span class="fileinput-new"> <i class="fa fa-upload"></i></span>
+													<span class="fileinput-exists"> Change </span> <input
+													name="..." type="file" id="job_opening_doc"
+													onchange="encodeDoctoBase64(this)">
+												</span> <a href="javascript:;"
+													class="document_remove_btn input-group-addon btn btn-danger  fileinput-exists"
+													data-dismiss="fileinput"> Remove </a>
+											</div>
+										</div>
+										<span><p class="txt-info">( Note : Please upload
+												doc,docx or pdf and file size should be less than 2MB )</p></span>
+									</div>
+								</div>
+								<div class="col-sm-6">
+								<div class="form-group">
+										<div class="input-icon">
+											<i class="nf nf-leave-days" style="margin-top: 35px;"></i> <label>Job Details
+												Description <span class="asterisk"> *</span><span class="addmore_popup" data-toggle="tooltip" data-placement="bottom" title="You Want Detail Description. Click Here" onclick="taJobDescription();"><i class="nf nf-add"></i></span></label> 
+												<textarea class="form-control "
+																name="job_description" id="job_description"
+																placeholder="Job Details Description" rows="3" 
+																data-error=".errorTxt13" ></textarea>
+												 <span
+												class="errorTxt13 errormessage"></span>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="form-group" align="right">
+								<div id="job_opening_btn"></div>
+							</div>
+						</div> 
+					</div>
+			</div>
+			</form>
+		</div>
+	</div>
+	<!-- form dev end -->  
+	<!-- list dev start -->
+	<div class="col-md-4 job_details tabdetails_height" id='ta_job_open_main_div2'
+		style="display: none; transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);border-left: 1px solid rgb(195, 227, 247);">
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption ">
+					<span class="caption-subject bold uppercase">Job Opening
+						Details</span>
+					<div class="col-sm-5" style="float: right; margin-top: -10px;">
+						<div class="form-group">
+							<div class="form-group">
+								<div class="input-icon">
+									<i class="nf nf-advanced-search"></i> <input
+										class="form-control" placeholder="Search by Job"
+										id='job_name_search' type="text">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" id="ta_job_opening_details_vertical_view"></div>
+			</div>
+		</div>
+	</div>
+	<!-- list dev end -->
+	<!-- table dev start -->
+	<div class="col-md-12" id='ta_main_div2'
+		style="display: none; transition: all 600ms cubic-bezier(0.645, 0.575, 0.090, 1.000);">
+		<div class="datatable_view">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject bold uppercase">Job Opening
+						Details</span>
+				</div>
+				<div class="tools"></div>
+				<div class="portlet-body">
+					<table class="table table-striped table-bordered table-hover"
+						id="ta_job_opening_table">
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- table dev end -->
+</div>
+<!-- modal start here -->
+<div id="publishModal" class="modal1 modal fade" role="dialog"
+	aria-labelledby="myModalLabel1" aria-hidden="true"
+	style="display: none;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Job Publish</h4>
+			</div>
+			<div class="modal-body  modal-min-height">
+				<form role="form" id="job_opening_form">
+					<div class="col-sm-12" id='offer_content_generate_div'></div>
+					<div class="col-sm-6" id='offer_generate_div'>
+						<div class="form-group">
+							<label for="single" class="control-label black_font"> Job
+								Boards<span class="asterisk"> *</span>
+							</label> <select id="job_borads"
+								class="form-control mt-multiselect btn btn-default"
+								multiple="multiple" data-label="left" data-select-all="true"
+								data-width="100%" data-filter="true" data-action-onchange="true"
+								name="job_borads" data-error=".errorTxt14"> {% for i in job_boards %}
+								<option value="{{ i.id }}">{{ i.name }}</option> {% endfor %}
+							</select> <span class="errorTxt14 errormessage"></span>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group" id='ta_tools_render'>
+							<span data-toggle="tooltip" data-placement="top" title="New Job Boards Add"><a href='/ta_tools_tech/' ><i id='ta_tools_render_font' class="nf nf-job-location"></i></a></span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button class='btn  btn-primary btn-eql-wid btn-animate'
+					id="jobPublishId" onclick="jobPublish()" aria-hidden="true">Publish</button>
+				<span class="alreadyPublish" id="alreadyPublishId"></span>
+			</div>
+		</div>
+	</div>
+</div>

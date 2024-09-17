@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Shift Master">
+		<!--Shift details save -->
+		<query id="shift_master_save" query_name="shift_master_save"
+			description="shift_master_save">
+          <![CDATA[insert into hcms_shift_master (created_by_id,shift_name,shift_description,shift_start_time,
+          shift_end_time,shift_half_day_time,shift_full_day_time,
+          shift_org_id,created_date,shift_active,is_active,shift_weekend_definition,shift_orgunit_ids)
+          values (%s,%s,%s,%s,%s,%s,%s,%s,now(),%s,%s,%s,%s) returning id]]>
+		</query>
+		<query id="shift_master_details" query_name="shift_master_details"
+			description="shift_master_details">
+          <![CDATA[
+			select shift_active,organization_info.name as org_name,shift_master.id as id,
+			shift_name,shift_description,to_char(shift_start_time,'HH24:MI') as shift_start_time,to_char(shift_end_time,'HH24:MI') as shift_end_time from hcms_shift_master as shift_master
+			inner join organization_info on organization_info.id=shift_org_id
+			where shift_master.is_active='TRUE' AND organization_info.is_active='TRUE']]>
+		</query>
+		
+		<query id="fetch_shift_details" query_name="fetch_shift_details"
+			description="fetch_shift_details">
+          <![CDATA[
+			select string_to_array(regexp_replace(shift_orgunit_ids, '[()]', '', 'g'), ',')::text[] as shift_orgunit_ids,hcms_shift_master.shift_active, hcms_shift_master.is_active as is_active,shift_weekend_definition as weekend_data,organization_info.id as organization_id,organization_info.name, 
+			hcms_shift_master.id,shift_name,shift_description,to_char(shift_start_time,'HH24:MI') as shift_start_time,to_char(shift_end_time,'HH24:MI') as shift_end_time,
+			to_char(shift_half_day_time,'HH24:MI') as shift_half_day_time,to_char(shift_full_day_time,'HH24:MI') as shift_full_day_time,
+          	shift_org_id  from hcms_shift_master
+          	inner join organization_info on organization_info.id=shift_org_id
+           	where hcms_shift_master.is_active='TRUE' and organization_info.is_active='TRUE' and  hcms_shift_master.id={0} ]]>
+		</query>
+		
+		<query id="shift_master_update" query_name="shift_master_update"
+			description="shift_master_update">
+          <![CDATA[update hcms_shift_master set modified_by_id=%s,shift_name=%s,
+          shift_description=%s,shift_start_time=%s,shift_end_time=%s,shift_half_day_time=%s,shift_full_day_time=%s,
+          shift_org_id=%s,shift_weekend_definition=%s,shift_orgunit_ids=%s,modified_date=now(),shift_active=%s,is_active=%s where id=%s]]>
+		</query>
+		
+		<query id="shift_master_remove" query_name="shift_master_remove"
+			description="shift_master_remove">
+          <![CDATA[update hcms_shift_master set modified_by_id=%s,is_active='FALSE',modified_date=now() where id=%s]]>
+		</query>
+		
+		<query id="org_unit_details" query_name="org_unit_details"
+			description="org_unit_details">
+          <![CDATA[select id,orgunit_name from organization_unit_info where is_active='TRUE' and organization_id={0} and parent_orgunit_id!=0 order by orgunit_name]]>
+		</query>
+		
+		<query id="shift_roster_insert" query_name="shift_roster_insert"
+			description="shift_roster_insert">
+          <![CDATA[insert into hcms_shift_roster (roster_name,roster_description,roster_repeat_mode,roster_weekly_pattern,
+          roster_monthly_pattern,roster_end_mode,roster_end_shift_occurence,
+          roster_end_date,roster_rotation_from_id,roster_rotation_to_id,created_by_id,created_date,is_active)
+          values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,now(),%s)]]>
+		</query>
+		<query id="shift_roster_detail_fetch" query_name="shift_roster_detail_fetch"
+			description="shift_roster_detail_fetch">
+          <![CDATA[select roster_name,roster_description,roster_repeat_mode,id from hcms_shift_roster where is_active]]>
+		</query>
+		
+		<query id="shift_roster_detail_fetch_by_id" query_name="shift_roster_detail_fetch_by_id"
+			description="shift_roster_detail_fetch_by_id">
+          <![CDATA[select roster_name,roster_description,roster_repeat_mode,roster_weekly_pattern,
+          roster_monthly_pattern,roster_end_mode,roster_end_shift_occurence,
+          to_char(roster_end_date,'DD-Mon-YYYY') as roster_end_date,roster_rotation_from_id,roster_rotation_to_id from hcms_shift_roster where id=%s and is_active ]]>
+		</query>
+		<query id="shift_roster_update" query_name="shift_roster_update"
+			description="shift_roster_update">
+          <![CDATA[update hcms_shift_roster set roster_name=%s,roster_description=%s,roster_repeat_mode=%s,roster_weekly_pattern=%s,
+          roster_monthly_pattern=%s,roster_end_mode=%s,roster_end_shift_occurence=%s,
+          roster_end_date=%s,roster_rotation_from_id=%s,roster_rotation_to_id=%s,modified_by_id=%s,modified_date=now() where id=%s ]]>
+		</query>
+		<query id="shift_roster_detail_remove" query_name="shift_roster_detail_remove"
+			description="shift_roster_detail_remove">
+          <![CDATA[update hcms_shift_roster set is_active=false ,modified_by_id=%s,modified_date=now() where id=%s ]]>
+		</query>
+		
+		<query id="exsist_shift_details" query_name="exsist_shift_details"
+			description="exsist_shift_details">
+          <![CDATA[select id from hcms_shift_master where shift_name ilike %s and shift_org_id=%s and is_active=True]]>
+		</query>
+		
+		<query id="update_exsist_shift_details" query_name="update_exsist_shift_details"
+			description="update_exsist_shift_details">
+          <![CDATA[select id from hcms_shift_master where  shift_name ilike %s and shift_org_id=%s and id!=%s and is_active=True]]>
+		</query>
+		
+		<query id="role_based_employee_details" query_name="role_based_employee_details"
+			description="role_based_employee_details">
+          <![CDATA[select id,concat(name,' ',last_name) as name from employee_info where role_id_id {0} and is_active = TRUE]]>
+		</query>
+		
+		<query id="delete_shift_based_employee" query_name="delete_shift_based_employee"
+			description="delete_shift_based_employee">
+          <![CDATA[delete from HCMS_Shift_Employee_Rel where shift_employee_id = {0} returning id]]>
+		</query>
+		
+		<query id="delete_shift_based_employees" query_name="delete_shift_based_employees"
+			description="delete_shift_based_employees">
+          <![CDATA[delete from HCMS_Shift_Employee_Rel where shift_employee_id in {0} returning id]]>
+		</query>
+		
+		<query id="insert_shift_employee_rel" query_name="insert_shift_employee_rel"
+			description="insert_shift_employee_rel">
+          <![CDATA[insert into HCMS_Shift_Employee_Rel (shift_master_id,shift_employee_id,is_active,created_by_id,created_date) 
+                    values ({0},{1},{2},{3},now()) returning id]]>
+		</query>
+		
+		<query id="delete_shift_rel_based_shift" query_name="delete_shift_rel_based_shift"
+			description="delete_shift_rel_based_shift">
+          <![CDATA[delete from HCMS_Shift_Employee_Rel where shift_master_id={0} returning id]]>
+		</query>
+		
+		<query id="divison_fetch_based_org_unit" query_name="divison_fetch_based_org_unit"
+			description="divison_fetch_based_org_unit">
+          <![CDATA[select id,name from team_details_info where is_active = true and org_unit_id {0}]]>
+		</query>
+		
+		<query id="shift_employee_based_employee_details" query_name="shift_employee_based_employee_details"
+			description="shift_employee_based_employee_details">
+          <![CDATA[select ei.id,concat(ei.name,' ',ei.last_name) as name from hcms_shift_employee_rel hser inner join employee_info ei on ei.id = hser.shift_employee_id 
+                    where hser.shift_employee_id {0} and shift_master_id != {1}]]>
+		</query>
+		
+		<query id="shift_division_based_shift_details" query_name="shift_division_based_shift_details"
+                        description="shift_division_based_shift_details">
+          <![CDATA[select distinct hsm.id,hsm.shift_name from hcms_shift_master hsm inner join hcms_shift_division_rel hsdl on hsm.id = hsdl.shift_id 
+          where hsdl.is_active=TRUE and hsdl.division_id {0} and hsm.is_active=TRUE order by hsm.shift_name]]>
+                </query>
+		
+		<query id="employee_based_employee_details" query_name="employee_based_employee_details"
+			description="employee_based_employee_details">
+          <![CDATA[select ei.id,concat(ei.name,' ',ei.last_name) as name from hcms_shift_employee_rel hser inner join employee_info ei on ei.id = hser.shift_employee_id 
+                    where hser.shift_employee_id {0}]]>
+		</query>
+		
+		<query id="shift_details_view_based_shift" query_name="shift_details_view_based_shift"
+			description="shift_details_view_based_shift">
+	          <![CDATA[select oi.id as org_id_id,oui.id as org_unit_id,tdi.id as team_name_id,ei.id from hcms_shift_employee_rel hser 
+                inner join hcms_shift_master hsm on hsm.id = hser.shift_master_id
+                inner join employee_info ei on ei.id = hser.shift_employee_id 
+		inner join team_details_info tdi on tdi.id = ei.team_name_id
+		inner join organization_unit_info oui on oui.id = tdi.org_unit_id
+		inner join organization_info oi on oi.id = oui.organization_id
+                where hsm.id = {0} and hsm.is_active=TRUE and hser.is_active=TRUE 
+                and ei.is_active=TRUE and oi.is_active = TRUE and oui.is_active = TRUE 
+                and tdi.is_active = TRUE]]>
+		</query>
+	
+		
+		<query id="shift_details_table_view_based_shift" query_name="shift_details_table_view_based_shift"
+			description="shift_details_table_view_based_shift">
+          <![CDATA[select hsm.id,ROW_NUMBER () OVER (ORDER BY hsm.id),oi.name,hsm.shift_name,hsm.shift_start_time,
+          hsm.shift_end_time from hcms_shift_master hsm inner join organization_info oi on oi.id = hsm.shift_org_id 
+          where hsm.is_active=TRUE and oi.is_active=TRUE and hsm.id {0}]]>
+		</query>
+		
+		<query id="fetch_shift_details_id" query_name="fetch_shift_details_id"
+			description="fetch_shift_details_id">
+          <![CDATA[select shift_master_id from hcms_shift_employee_rel where is_active=TRUE]]>
+		</query>
+		
+		<query id="fetch_shift_details_based_orgunit" query_name="fetch_shift_details_based_orgunit"
+			description="fetch_shift_details_based_orgunit">
+          <![CDATA[select id,shift_name from hcms_shift_master where is_active=TRUE and shift_orgunit_id = {0} order by shift_name]]>
+		</query>
+		
+		<query id="fetch_role_details_based_orgunit" query_name="fetch_role_details_based_orgunit"
+			description="fetch_role_details_based_orgunit">
+          <![CDATA[select id,role_title as name from hcms_ti_role_details where is_active=TRUE and {0} = ANY (role_org_unit) order by role_title]]>
+		</query>
+		
+		<query id="fetch_employee_details_based_division" query_name="fetch_employee_details_based_division"
+			description="fetch_employee_details_based_division">
+          <![CDATA[select id,concat(name,' ',last_name) as name from employee_info where team_name_id {0} and is_active = TRUE order by name]]>
+		</query>
+		
+		<query id="fetch_employee_details_view" query_name="fetch_employee_details_view"
+			description="fetch_employee_details_view">
+          <![CDATA[select id,concat(name,' ',last_name) as name from employee_info where is_active=TRUE order by name]]>
+		</query>
+		
+		<query id="fetch_shift_details_view" query_name="fetch_shift_details_view"
+			description="fetch_shift_details_view">
+          <![CDATA[select id,shift_name from hcms_shift_master where is_active=TRUE order by shift_name]]>
+		</query>
+		
+		<query id="fetch_organization_details_view" query_name="fetch_organization_details_view"
+			description="fetch_organization_details_view">
+          <![CDATA[select id,name from organization_info where is_active=TRUE order by name]]>
+		</query>
+		
+		<query id="fetch_role_details_view" query_name="fetch_role_details_view"
+			description="fetch_role_details_view">
+          <![CDATA[select id,role_title as name from hcms_ti_role_details where is_active=TRUE order by role_title]]>
+		</query>
+		
+		<query id="division_details" query_name="division_details"
+			description="division_details">
+          <![CDATA[select id,name from team_details_info where is_active=True and org_unit_id in %s ORDER BY name ASC]]>
+		</query>
+		
+		<query id="shift_master_division_save" query_name="shift_master_division_save"
+			description="shift_master_division_save">
+          <![CDATA[insert into hcms_shift_division_rel (created_by_id,division_id,shift_id,created_date,is_active)
+          values (%s,%s,%s,now(),%s) returning id]]>
+		</query>
+		
+		<query id="fetch_shift_division_details" query_name="fetch_shift_division_details"
+			description="fetch_shift_division_details">
+          <![CDATA[select division_id  from hcms_shift_division_rel where is_active='TRUE' and shift_id={0} ]]>
+		</query>
+		
+		<query id="shift_master_division_remove" query_name="shift_master_division_remove"
+			description="shift_master_division_remove">
+          <![CDATA[update hcms_shift_division_rel set modified_by_id=%s,is_active='FALSE',modified_date=now() where shift_id=%s]]>
+		</query>
+		
+		<query id="shift_master_division_delete" query_name="shift_master_division_delete"
+			description="shift_master_division_delete">
+          <![CDATA[delete from hcms_shift_division_rel where shift_id ={0}]]>
+		</query>
+		
+		<query id="check_exsist_shift_details_save" query_name="check_exsist_shift_details_save"
+			description="check_exsist_shift_details_save">
+          <![CDATA[select team_info.name, shift.id as shift_id,rel.id as rel_id,rel.division_id from hcms_shift_master as shift
+inner join hcms_shift_division_rel as rel on shift.id=rel.shift_id
+inner join team_details_info as team_info on team_info.id =rel.division_id 
+where   shift.shift_org_id=%s and shift_start_time=%s and  shift_end_time=%s 
+and shift_half_day_time=%s and shift_full_day_time=%s and shift.is_active=True and rel.is_active=TRUE 
+and team_info.is_active=TRUE and  rel.division_id in %s and shift.shift_weekend_definition ilike {} ]]>
+		</query>
+		<query id="shift_master_division_rel_delete" query_name="shift_master_division_rel_delete"
+			description="shift_master_division_rel_delete">
+          <![CDATA[delete from hcms_shift_division_rel where id in %s]]>
+		</query>
+		<query id="check_update_exsist_shift_details" query_name="check_update_exsist_shift_details"
+			description="check_update_exsist_shift_details">
+          <![CDATA[select team_info.name, shift.id as shift_id,rel.id as rel_id,rel.division_id from hcms_shift_master as shift
+inner join hcms_shift_division_rel as rel on shift.id=rel.shift_id
+inner join team_details_info as team_info on team_info.id =rel.division_id 
+where   shift.shift_org_id=%s and shift_start_time=%s and  shift_end_time=%s 
+and shift_half_day_time=%s and shift_full_day_time=%s and shift.is_active=True and rel.is_active=TRUE 
+and team_info.is_active=TRUE and shift.id!=%s and rel.division_id in %s and shift.shift_weekend_definition ilike {} ]]>
+		</query>
+		</queries>
+</data>

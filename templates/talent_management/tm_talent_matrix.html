@@ -1,0 +1,280 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{% block links %}
+<!-- Select2 css -->
+<link href="{%  static '/ui/plugins/select2/css/select2.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link
+	href="{%  static '/ui/plugins/select2/css/select2-bootstrap.min.css'  %}"
+	rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/talent_management/css/talent-matrix.css' %}"
+    rel="stylesheet" type="text/css" />
+<link href="{% static '/dev/talent_management/css/talent_management.css' %}"
+    rel="stylesheet" type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="TMTalentMatrix" %}
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated fadeInRight">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper" style="margin-bottom: 0;">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<h1>Talent Matrix</h1>
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<div class="row">
+							<div class="col-md-3 col-sm-2" style="margin-top: 10px; text-align:right;">
+								<i data-toggle="tooltip" data-placement="top" title=""
+									class="animate_arrows nf nf-double-arrow-left animated slideInLeft infinite"></i>
+							</div>
+							<div class="col-md-3 col-sm-10">
+								<div class="form-group">
+									<select id="tm_matrix_sel_org" name="tm_matrix_sel_org"
+										class="form-control select2"
+										onchange="get_org_unit_list($(this).val());">
+										<option></option>
+										{% for data in tm_org %}
+										<option value="{{ data.id }}">{{ data.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<select id="tm_matrix_sel_org_unit" name="tm_matrix_sel_org_unit"
+										class="form-control select2" disabled="disabled"
+										onchange="get_division_list($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<select id="tm_matrix_sel_dept" name="tm_matrix_sel_dept"
+										class="form-control select2" disabled="disabled"
+										onchange="get_emp_matrix_year($(this).val());">
+										<option></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-lg-12" id="tm_matrix_year_qtr"
+						style="display: none;">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-lg-6"></div>
+							<div class="col-md-3 col-sm-3 col-lg-3">
+								<div class="form-group">
+									<select id="tm_matrix_year" name="tm_matrix_year"
+										class="form-control select2"
+										onchange="get_emp_matrix_month($(this).val());">
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3 col-lg-3">
+								<div class="form-group">
+									<select id="tm_matrix_quarter" name="tm_matrix_quarter"
+										class="form-control select2" onchange="get_emp_matrix_info();">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-lg-12" id="tm_matrix_main_div"
+						style="display: none;">
+						<div
+							class="col-md-offset-1 col-md-11 col-small-11 col-lg-11 talent-matrix">
+							<div class="row txt-alg-ctn">
+								<div class="col-md-12">
+									<h4>
+										<b>Potential</b>
+									</h4>
+								</div>
+							</div>
+							<div class="row txt-alg-ctn">
+								<div class="col-md-4">
+									<h3>
+										<b>Low</b>
+									</h3>
+								</div>
+								<div class="col-md-4">
+									<h3>
+										<b>Medium</b>
+									</h3>
+								</div>
+								<div class="col-md-4">
+									<h3>
+										<b>High</b>
+									</h3>
+								</div>
+							</div>
+							<h4 class="rotate-txt">
+								<b>Performance</b>
+							</h4>
+							<div class="row">
+								<div class="box-one-outer row-eq-height">
+									<h3 class="rotate-txt">Exceeds</h3>
+									<div class="col-sm-12 col-md-4 box-border border1">
+										<div class="box-top-sec">
+											<span>Workers</span> <span class="badge badge-primary pe_po_span"
+												id="pe1_po1_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Low</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe1_po1" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-4 box-border border2">
+										<div class="box-top-sec">
+											<span>Contributors</span> <span class="badge badge-primary pe_po_span"
+												id="pe1_po2_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Medium</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe1_po2" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-4 box-border border3">
+										<div class="box-top-sec">
+											<span>Stars</span> <span class="badge badge-primary pe_po_span"
+												id="pe1_po3_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>High</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe1_po3" class="pe_po_ul"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="box-one-outer row-eq-height">
+									<h3 class="rotate-txt">Meets</h3>
+									<div class="col-sm-12 col-md-4 box-border border1">
+										<div class="box-top-sec">
+											<span>Blockers</span> <span class="badge badge-primary pe_po_span"
+												id="pe2_po1_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Low</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe2_po1" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-4 box-border border2">
+										<div class="box-top-sec">
+											<span>Transitionals</span> <span class="badge badge-primary pe_po_span"
+												id="pe2_po2_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Medium</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe2_po2" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-4 box-border border3">
+										<div class="box-top-sec">
+											<span>Emergers</span> <span class="badge badge-primary pe_po_span"
+												id="pe2_po3_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>High</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe2_po3" class="pe_po_ul"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="box-one-outer row-eq-height">
+									<h3 class="rotate-txt">Below</h3>
+									<div class="col-sm-12 col-md-4 box-border border1">
+										<div class="box-top-sec">
+											<span>Detractors</span> <span class="badge badge-primary pe_po_span"
+												id="pe3_po1_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Low</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe3_po1" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-4 box-border border2">
+										<div class="box-top-sec">
+											<span>Placeholders</span> <span class="badge badge-primary pe_po_span"
+												id="pe3_po2_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>Medium</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe3_po2" class="pe_po_ul"></ul>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-4 box-border border3">
+										<div class="box-top-sec">
+											<span>Latents</span> <span class="badge badge-primary pe_po_span"
+												id="pe3_po3_span"></span>
+											<div class="hide-txt">
+												<h3>
+													<b>High</b>
+												</h3>
+											</div>
+										</div>
+										<div class="box-mid-sec">
+											<ul id="pe3_po3" class="pe_po_ul"></ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-lg-12"
+						id="tm_matrix_nodata_div" style="display: block;">
+						<h3 class="no-data">No data available</h3>
+					</div>
+				</div>
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script
+	src="{% static '/ui/plugins/select2/js/select2.full.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/ui/plugins/select2/js/components-select2.min.js'  %}"
+	type="text/javascript"></script>
+<script
+	src="{% static '/dev/talent_management/js/talent_matrix.js' %}"
+	type="text/javascript"></script>
+{% endblock %}

@@ -1,0 +1,91 @@
+<!--  modal start here -->
+<div id="employeeSelect" class="modal fade " style='overflow: hidden'
+	role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">Employee List</h4>
+			</div>
+			<div class="modal-body md-max-height">
+				<div class="portlet-body form">
+					<form role="form" id='hrms_attendance_popup'>
+						<div class="form-body ">
+							<div class="row ">
+								<div class="col-md-6 ">
+									<div class="form-group employeeAdvancedSearch">
+										<label>Organization</label> <select id="organization"
+											class="form-control select2">
+											<option value="0">--Select Organization--</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label>First Name</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="First Name" id='first_name' type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Gender</label> <select id="gender_name"
+											class="form-control select2">
+											<option value="0">--Select Gender--</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 ">
+									<div class="form-group employeeAdvancedSearch">
+										<label>Organization Unit</label> <select
+											id="organization_unit" class="form-control select2">
+											<option value="0">--Select Organization Unit--</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label>Last Name</label>
+										<div class="input-icon">
+											<i class="fa fa-user"></i> <input class="form-control"
+												placeholder="Last Name" id='last_name' type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Role </label>
+										<div class="input-icon">
+											<select id="employee_role" name="employee_role"
+												class="form-control select2">
+												<option value="0">--Select Role--</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12" align="right">
+									<button type="button" onclick='searchPopupConfirmation()'
+										class="btn-animate btn-eql-wid  btn btn-success  ">Search</button>
+									<button type="button" onclick='clearPopupConfirmation()'
+										class="btn-animate btn-eql-wid  btn btn-warning">Cancel
+										/ Clear</button>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="row">
+							<div class="popup-table employee_mulit_search">
+								<table class="table table-striped table-bordered table-hover"
+									id="attendance_popup_table">
+								</table>
+								<div class="form-group" align="right"></div>
+							</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" id="getMultiSelectAllValues"
+										class="btn-animate btn-eql-wid  btn btn-success  ">Select All Employees</button>
+				<button class="btn-animate btn-eql-wid  btn btn-success"
+					data-dismiss="modal" aria-hidden="true" id="getMultiValues">Select Employees</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  modal end here -->

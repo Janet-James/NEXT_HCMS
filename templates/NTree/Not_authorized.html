@@ -1,0 +1,64 @@
+{% extends "NTree_base.html" %}
+
+<!-- CUSTOM CSS LINK START --> 
+{% block link %}
+<style>
+.txt-center { text-align: center }
+</style>
+{% endblock %}
+<!-- CUSTOM CSS LINK END--> 
+
+<!-- BODY CONTENT START --> 
+{% block content %}
+<div id="menuOverlay" class="access-denied-page">
+	<div class="page-container" id="maincontent">
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<div class="container-fluid no-padding level-one">
+					<div class="row">
+						<div class="col-sm-12 no-padding">
+						<div class="col-sm-2">
+						</div>
+							<div class="col-sm-8 access-denied-panel">
+								<div class="caption txt-center">
+									<img src="/static/dev/NTree/ui/images/logo-desktop1.png"></img>
+									</div>
+								<div class="portlet light bordered quote-box">
+									<div class="txt-center col-sm-12 no-padding">
+										<h1>
+											<i class="nf nf-manage-permissions warning-icon"></i>
+										</h1>
+									</div>
+									<div class="col-sm-12">
+									<div class="caption">
+										<h1 class="txt-center animated flash infinite caption-subject bold uppercase blue_txt">Access Denied</h1>
+										</div>
+									</div>
+									<div class="portlet-body">
+										<div class="quote-wizard txt-center ">
+											<p>This Message is being displayed because you attempted to access a page that requires authorization that is not part of your team.</p>
+											<a class="btn btn-warning back-btn margin-top-30 tooltips" href="/OKR/information-view/" data-toggle="tooltip" data-placement="top" title="Go back to previous screen"><i class="nf nf-angle-left"></i> Back</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}
+<!-- BODY CONTENT END --> 
+
+<!-- CUSTOM JS LINK START--> 
+{% block script %}
+<script>
+$(".nav_trigger").hide()
+</script>
+{% endblock %} 
+<!-- CUSTOM JS LINK END---> 
+

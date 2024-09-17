@@ -1,0 +1,143 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %} 
+{% block links %}
+<!-- Single and multi select Dropdown-->
+<link href="{% static '/ui/css/hcms.css' %}" rel="stylesheet"
+	type="text/css" />
+{% endblock %} {% block content %} {% nav_tags breadcrum_title="AppAdmin" %}
+<!-- BEGIN CONTAINER -->
+<div id="menuOverlay" class="backgroundfix RS-data animated">
+	<div class="page-container" id="maincontent">
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<!-- BEGIN CONTENT BODY -->
+			<div class="page-content">
+				<!-- BEGIN PAGE BASE CONTENT -->
+				<div class="row">
+					<div class="show-grid">
+						<div class="col-sm-6 col-md-3">
+							<div class="dashboard-stat2 primary-border">
+								<div class="display">
+									<div class="number">
+									<h3 class="font-green-sharp">
+											<span data-counter="counterup" data-value="{{ active_usr }}">{{ active_usr }}</span>
+										</h3>
+										<small>Active Users</small>
+									</div>
+									<div class="icon">
+										<i class="nf nf-user"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="dashboard-stat2 success-border">
+								<div class="display">
+									<div class="number">
+										<h3 class="font-green-sharp">
+											<span data-counter="counterup" data-value="{{ roles }}">{{ roles }}</span>
+										</h3>
+										<small>UNIQUE ROLES</small>
+									</div>
+									<div class="icon">
+										<i class="nf nf-orientation"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="dashboard-stat2 info-border">
+								<div class="display">
+									<div class="number">
+										<h3 class="font-green-sharp">
+											<span data-counter="counterup" data-value="{{ permissions }}">{{ permissions }}</span>
+										</h3>
+										<small>PERMISSIONS</small>
+									</div>
+									<div class="icon">
+										<i class="nf nf-insurance"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="dashboard-stat2 warning-border">
+								<div class="display">
+									<div class="number">
+										<h3 class="font-green-sharp">
+											<span data-counter="counterup" data-value="{{ modules_data }}">{{ modules_data }}</span>
+										</h3>
+										<small>MODULES</small>
+									</div>
+									<div class="icon">
+										<i class="nf nf-organization-chart"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 ">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span
+										class="caption-subject bold uppercase"> Recent Logs</span>
+								</div>
+							</div>
+							<div class="portlet-body form dash_recent_logs">
+								{% if file_datas %} 
+									{% for data in file_datas %}
+										<div class="note note-success">
+											<span>Log File Dated {{ data.file_name }} - {{ data.file_size }}</span>
+											<span class="down_right"><i class="nf nf-download" id="{{ data.file_name }}"
+												onclick="attachment_download(this.id)"></i></span>
+										</div>
+									{% endfor %} 
+								{% else %}
+								<div class="note note-success">
+									<p>There is no log file found.</p>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6 ">
+						<div class="portlet light bordered">
+							<div class="portlet-title">
+								<div class="caption">
+									<span
+										class="caption-subject bold uppercase"> Quick Links</span>
+								</div>
+							</div>
+							<div class="portlet-body form dash_recent_logs">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">User Analytics</h3>
+									</div>
+									<div class="panel-body">
+										<a href=""> uam.nexttechnosolutions.com </a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+	function attachment_download(file_name) {
+		var currurl = window.location.href;
+		var actionurl = currurl.replace('sysadmin_page/', 'file_download/');
+		window.location.href= actionurl + '?file_name=' + file_name;
+	}
+</script>
+{% endblock %}

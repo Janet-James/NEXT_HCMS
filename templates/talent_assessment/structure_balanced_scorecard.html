@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load base_tags %} {% load staticfiles %}
+{% block content %}
+ 
+{% block links %}
+<!--  <link href="{% static '/ui/plugins/org_chart/css/ti_getorgchart.css' %}"  rel="stylesheet" type="text/css" /> -->
+<link href="{% static '/dev/talent_assessment/css/ti_get.css' %}"  rel="stylesheet" type="text/css" /> 
+{% endblock %}  {% side_nav user=request.user menu_name="Talent Assessment" %} {% nav_tags %}
+
+<!-- <div id="menuOverlay" class="backgroundfix"> -->
+  <div class="page-container" id="maincontent">
+    {% side_bar_tags %}
+    <div class="page-content-wrapper">
+      <div class="page-content">
+       <form>
+       {%csrf_token%}
+       <div class="form-actions right">
+       <button type="button" class="btn btn-success animate_btn" id="" onclick="balanced_card_back();"> Back </button>
+			 
+		<input type="hidden" class="form-control" readonly="true"
+					placeholder="Balance Card" id="hidden_balance_id"  name="hidden_balance_id" value={{id}}> 
+			
+			</div>
+			<div class="col-md-12 ">
+				<div id="balance_score_dev"></div>
+			</div>
+		</form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %} {% block scripts %} 
+<script src="{% static '/dev/talent_assessment/css/ti_edit_get.js' %}" type="text/javascript"></script>
+<!--  <script src="{% static '/ui/plugins/org_chart/js/ti_getorgchart.js' %}" type="text/javascript"></script> --> 
+<!-- <script src="{% static '/dev/talent_assessment/js/ta_balanced_scorecard.js' %}" type="text/javascript"></script> 
+ -->
+{% endblock %}
+
+{% footer build_num=request.session.build_no build_date=request.session.build_date %}

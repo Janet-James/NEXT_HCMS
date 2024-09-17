@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="Talent_Inventory/talent_inventory">
+		
+		<!-- 26-JUL-2018 || SMI || Fetch Organization List start -->
+		<query id="ti_fetch_org_list" query_name="ti_fetch_org_list"
+			description="Fetch Organization List">
+        	<![CDATA[ SELECT id, name from organization_info where is_active = 'True'; ]]>
+		</query>
+		<!-- 26-JUL-2018 || SMI || Fetch Organization List end -->
+		
+		<!-- 26-JUL-2018 || SMI || Fetch Organization Unit List start -->
+		<query id="ti_fetch_org_unit_list" query_name="ti_fetch_org_unit_list"
+			description="Fetch Organization Unit List">
+        	<![CDATA[ SELECT id, orgunit_name from organization_unit_info where organization_id = %s and parent_orgunit_id != 0 and is_active = 'True' order by orgunit_name; ]]>
+		</query>
+		<!-- 26-JUL-2018 || SMI || Fetch Organization Unit List end -->
+		
+		<!-- 06-SEPL-2018 || MST || Fetch Department List start -->
+		<query id="ti_fetch_dept_list" query_name="ti_fetch_dept_list"
+			description="Fetch Department List">
+        	<![CDATA[ select id, name from team_details_info where org_unit_id in %s and is_active = TRUE; ]]>
+		</query>
+		<!-- 06-SEP-2018 || MST || Fetch Department List end -->
+
+		<!-- 15-Feb-2018 || MST || Role Details display function fetching start -->
+		<query id="ti_role_details_fetch" query_name="ti_role_details_fetch" description="TI Role details fetching">
+          <![CDATA[ SELECT rd_ri.id, rd_ri.role_title, rd_ri.type, rd_ri.role_req_work_exp, rd_ri.role_pref_edu, 
+                      trd.role_title as reports_to from (SELECT rd.id, rd.role_title, ri.refitems_name as type, 
+                      rd.role_req_work_exp, rd.role_pref_edu, rd.role_reports_to_id from hcms_ti_role_details as rd, 
+                      reference_items as ri where rd.role_type_refitem_id = ri.id and rd.is_active = TRUE) rd_ri, hcms_ti_role_details as trd
+                      where rd_ri.role_reports_to_id = trd.id order by rd_ri.id ]]>
+		</query>
+		<!-- 15-Feb-2018 || MST || Role Details display function fetching end -->
+
+		<!-- 23-Feb-2018 || SMI || Role Details ID fetch function start -->
+	    <query id="ti_role_details_id" query_name="ti_role_details_id" description="Role Details ID fetch Query">
+	          <![CDATA[ select id from hcms_ti_role_details where role_title = %s ]]>
+	    </query>
+	    <!-- 23-Feb-2018 || SMI || Role Details ID fetch function end -->
+	
+	    <!-- 15-Feb-2018 || MST || Role Details View function start -->
+		<query id="ti_role_details_view" query_name="ti_role_details_view" description="Role Details View Query">
+        	<![CDATA[ SELECT id,role_title,role_req_work_exp,role_org_id, role_org_unit,role_req_no_of_resource,
+		      			role_grade, role_pref_edu,role_need,role_resp,role_travel,
+                        role_depts,role_reports_to_id,role_type_refitem_id
+                        from hcms_ti_role_details  where id=%s order by id ]]>
+        </query>
+		<!-- 15-Feb-2018 || MST || Role Details View function end -->
+
+		<!-- 20-Feb-2018 || KAV || Skill Set View function start -->
+		<query id="ti_skill_set_view" query_name="ti_skill_set_view" description="Skill Set View Query">
+        	<![CDATA[ SELECT id,skillset_applicable,skillset_competency_id_id,skillset_skill_level_refitem_id, skillset_depts 
+                      from hcms_ti_role_skillset where skillset_role_id = %s order by id ]]>
+        </query>
+		<!-- 20-Feb-2018 || KAV || Skill Set View function end -->
+
+		<!-- 20-Feb-2018 || KAV || Critical Succes Factor View function start -->
+		<query id="ti_critical_suc_fac_view" query_name="ti_critical_suc_fac_view" description="Critical Succes Factor View Query">
+        	<![CDATA[ SELECT id,factors_crit_succ_fact from 
+                      hcms_ti_role_critical_success_factor where factors_role_id = %s order by id ]]>
+        </query>
+		<!-- 20-Feb-2018 || KAV || Critical Succes Factor View function end -->
+
+		<!-- 20-Feb-2018 || MST || KPO View function start -->
+		<query id="ti_kpo_view" query_name="ti_kpo_view" description="TI KPO View Query">
+        	<![CDATA[ SELECT id, kpo_statement, kpo_outcome, kpo_target_date, kpo_performance_std, kpo_plan
+            		  FROM hcms_ti_role_kpo WHERE kpo_role_id=%s order by id]]>
+        </query>
+		<!-- 20-Feb-2018 || MST || KPO View function end -->
+
+		<!-- 20-Feb-2018 || MST || KPI View function start -->
+		<query id="ti_kpi_view" query_name="ti_kpi_view" description="TI KPI View Query">
+        	<![CDATA[ SELECT id, kpi_definition, kpi_plan, kpi_starting_perf, (SELECT refitems_name as 
+                      kpi_measure_frequency_refitem_id from reference_items where refitems_category_id = (SELECT id from 
+                      reference_item_category where refitem_category_code = 'MFRNY') and  id = kpi_measure_frequency_refitem_id),
+                      kpi_units, (SELECT custom_rating_scheme_name as kpi_custom_rating_scheme_id_id from hcms_ti_custom_rating_scheme where 
+                      id =  kpi_custom_rating_scheme_id_id) FROM hcms_ti_role_kpi 
+                      WHERE kpi_role_id=%s order by id ]]>
+        </query>
+		<!-- 20-Feb-2018 || MST || KPI View function end -->
+
+		<!-- 20-Feb-2018 || MST || KPI headers fetch function start -->
+		<query id="ti_kpi_headers" query_name="ti_kpi_headers" description="TI KPI Headers Fetch Query">
+        	<![CDATA[ SELECT id, custom_rating_scheme_name from hcms_ti_custom_rating_scheme ]]>
+        </query>
+        <!-- 20-Feb-2018 || MST || KPI headers fetch function end -->
+
+        <!-- 22-Feb-2018 || MST || KPI Measure Freq id fetch function start -->
+		<query id="kpi_measure_freq_id" query_name="kpi_measure_freq_id" description="KPI Measure Frequency ID Fetch Query">
+        	<![CDATA[ SELECT id as kpi_measure_freq_id from reference_items where 
+                      refitems_category_id = (SELECT id from reference_item_category where 
+                      refitem_category_code = 'MFRNY') and refitems_name = %s ]]>
+        </query>
+        <!-- 22-Feb-2018 || MST || KPI Measure Freq id fetch function end -->
+
+        <!-- 22-Feb-2018 || MST || KPI Custom Rate id fetch function start -->
+		<query id="custom_rate_id" query_name="custom_rate_id" description="KPI Custom Rate ID Fetch Query">
+        	<![CDATA[ SELECT id as custom_rate_id from hcms_ti_custom_rating_scheme where 
+                      custom_rating_scheme_name = %s ]]>
+        </query>
+        <!-- 22-Feb-2018 || MST || KPI Custom Rate id fetch function end -->
+        
+        <!-- 23-Feb-2018 || SMI || KPI delete start -->
+		<query id="KPI_update_delete" query_name="KPI_update_delete" description="KPI Record Delete for Update">
+        	<![CDATA[ delete from hcms_ti_role_kpi where kpi_role_id = %s ]]>
+        </query>
+        <!-- 23-Feb-2018 || SMI || KPI delete end -->
+        
+        <!-- 23-Feb-2018 || SMI || Fetch data for reports to field start -->
+		<query id="ti_reports_to_data" query_name="ti_reports_to_data" description="Fetch data for reports to field">
+        	<![CDATA[ select id, role_title from hcms_ti_role_details where is_active = True order by id ]]>
+        </query>
+        <!-- 23-Feb-2018 || SMI || Fetch data for reports to field end -->
+        
+        <!-- 23-Feb-2018 || SMI || Fetch data for reporting structure start -->
+		<query id="ti_reports_struct_data" query_name="ti_reports_struct_data" description="Fetch data for reporting structure">
+        	<![CDATA[ select rd.id, rd.role_title, ri.refitems_name as role_type, rd.role_reports_to_id, rd.role_req_no_of_resource as res_count
+						from hcms_ti_role_details rd, reference_items ri
+						where rd.role_type_refitem_id = ri.id 
+						and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+						and rd.is_active = True
+						order by case when rd.role_title = 'Chief Executive Officer' then 0 else 1 end,
+						rd.id ]]>
+        </query>
+        <!-- 23-Feb-2018 || SMI || Fetch data for reporting structure end -->
+        <!-- 01-Mar-2018 || KAV || Fetch data for filtering role detail in report Start -->
+        <query id="ti_compt_type" query_name="ti_compt_type" description="Fetch data for Competencies Type">
+            <![CDATA[ select id,refitem_category_name from reference_item_category where refitem_category_code in ('TECMP','FNCMP','BHCMP')]]>
+        </query>
+        <!-- 01-Mar-2018 || KAV || Fetch data for filtering role detail in report end -->
+        
+        <!-- 05-Mar-2018 || SMI || Data fetch for headers in Dashboard start -->
+        
+        <query id="ti_org_unit_types_count" query_name="ti_org_unit_types_count" description="Fetch count of org unit types">
+            <![CDATA[select count(id) from reference_items where refitems_category_id = (select id from reference_item_category where refitem_category_code = 'OUNTY')]]>
+        </query>
+        
+        <query id="ti_uniq_emp_roles_count" query_name="ti_uniq_emp_roles_count" description="Fetch count of unique employee roles">
+            <![CDATA[select count(id) from hcms_ti_role_details]]>
+        </query>
+        
+        <query id="ti_tech_comp_count" query_name="ti_tech_comp_count" description="Fetch count of technical competencies">
+            <![CDATA[select count(id) from reference_items where refitems_category_id = (select id from reference_item_category where refitem_category_code = 'TECMP')]]>
+        </query>
+        
+        <query id="ti_func_comp_count" query_name="ti_func_comp_count" description="Fetch count of functional competencies">
+            <![CDATA[select count(id) from reference_items where refitems_category_id = (select id from reference_item_category where refitem_category_code = 'FNCMP')]]>
+        </query>
+        
+        <query id="ti_behv_comp_count" query_name="ti_behv_comp_count" description="Fetch count of behavioral competencies">
+            <![CDATA[select count(id) from reference_items where refitems_category_id = (select id from reference_item_category where refitem_category_code = 'BHCMP')]]>
+        </query>
+        
+        <!-- 05-Mar-2018 || SMI || Data fetch for headers in Dashboard end -->
+        
+        <!-- 07-Mar-2018 || SMI || Data fetch for charts in Dashboard start -->
+        
+        <query id="dash_chart1_all" query_name="dash_chart1_all" description="All Data fetch for role design chart in Dashboard">
+            <![CDATA[;WITH rdt1
+						AS
+						(
+						   SELECT role_year, SUM(role_count) as role_count
+						   FROM (select extract(year from created_date) as role_year, count(*) as role_count from hcms_ti_role_details group by role_year)a
+						   gROUP BY role_year
+						), rdt2 AS
+						(
+						   SELECT role_count, role_year, ROW_NUMBER() OVER(ORDER BY role_year) rownum
+						   FROM rdt1
+						) 
+						SELECT role_year::int, (SELECT SUM(role_count)::int as role_count FROM rdt2 c2 WHERE c2.rownum <= c1.rownum)
+						FROM rdt2 c1;]]>
+        </query>
+        
+        <query id="dash_chart1" query_name="dash_chart1" description="Data fetch with selected org unit type for role design chart in Dashboard">
+            <![CDATA[;WITH rdt1
+						AS
+						(
+						   SELECT role_year, SUM(role_count) as role_count
+						   FROM (select extract(year from created_date) as role_year, count(*) as role_count 
+						   from (select created_date, id from hcms_ti_role_details where role_org_unit_type_id = %s)t1
+						   group by role_year)a
+						   gROUP BY role_year
+						), rdt2 AS
+						(
+						   SELECT role_count, role_year, ROW_NUMBER() OVER(ORDER BY role_year) rownum
+						   FROM rdt1
+						) 
+						SELECT role_year::int, (SELECT SUM(role_count)::int as role_count FROM rdt2 c2 WHERE c2.rownum <= c1.rownum)
+						FROM rdt2 c1;]]>
+        </query>
+        
+        <query id="tcc_dash_chart2" query_name="tcc_dash_chart2" description="Data fetch for technical competency definition chart in Dashboard">
+            <![CDATA[;WITH cct1
+						AS
+						(
+						   SELECT tc_year, SUM(tc_count) as tc_count
+						   FROM (select extract(year from created_date) as tc_year, count(*) as tc_count
+						   from reference_items where refitems_category_id = 
+						   (select id from reference_item_category where refitem_category_code = 'TECMP') 
+						   group by tc_year)a
+						   gROUP BY tc_year
+						
+						), cct2 AS
+						(
+						   SELECT tc_count, tc_year, ROW_NUMBER() OVER(ORDER BY tc_year) rownum
+						   FROM cct1
+						) 
+						SELECT tc_year::int, (SELECT SUM(tc_count)::int as tc_count FROM cct2 c2 WHERE c2.rownum <= c1.rownum)
+						FROM cct2 c1;]]>
+        </query>
+        
+        <query id="fcc_dash_chart2" query_name="fcc_dash_chart2" description="Data fetch for functional competency definition chart in Dashboard">
+            <![CDATA[;WITH cct1
+						AS
+						(
+						   SELECT tc_year, SUM(tc_count) as tc_count
+						   FROM (select extract(year from created_date) as tc_year, count(*) as tc_count
+						   from reference_items where refitems_category_id = 
+						   (select id from reference_item_category where refitem_category_code = 'FNCMP') 
+						   group by tc_year)a
+						   gROUP BY tc_year
+						
+						), cct2 AS
+						(
+						   SELECT tc_count, tc_year, ROW_NUMBER() OVER(ORDER BY tc_year) rownum
+						   FROM cct1
+						) 
+						SELECT tc_year::int, (SELECT SUM(tc_count)::int as tc_count FROM cct2 c2 WHERE c2.rownum <= c1.rownum)
+						FROM cct2 c1;]]>
+        </query>
+        
+        <query id="bcc_dash_chart2" query_name="bcc_dash_chart2" description="Data fetch for behavioral competency definition chart in Dashboard">
+            <![CDATA[;WITH cct1
+						AS
+						(
+						   SELECT tc_year, SUM(tc_count) as tc_count
+						   FROM (select extract(year from created_date) as tc_year, count(*) as tc_count
+						   from reference_items where refitems_category_id = 
+						   (select id from reference_item_category where refitem_category_code = 'BHCMP') 
+						   group by tc_year)a
+						   gROUP BY tc_year
+						
+						), cct2 AS
+						(
+						   SELECT tc_count, tc_year, ROW_NUMBER() OVER(ORDER BY tc_year) rownum
+						   FROM cct1
+						) 
+						SELECT tc_year::int, (SELECT SUM(tc_count)::int as tc_count FROM cct2 c2 WHERE c2.rownum <= c1.rownum)
+						FROM cct2 c1;]]>
+        </query>
+        
+        <!-- 07-Mar-2018 || SMI || Data fetch for charts in Dashboard end -->
+        
+        <!-- 09-Mar-2018 || SMI || To check whether the role is mapped to other role or not start -->
+        
+        <query id="role_exist_check" query_name="role_exist_check" description="To check whether the role is mapped to other role or not">
+        	<![CDATA[select id from hcms_ti_role_details where role_reports_to_id = %s]]>
+        </query>
+        
+		<!-- 09-Mar-2018 || SMI || To check whether the role is mapped to other role or not end -->
+		
+		<!-- 09-Mar-2018 || MST || Role type display function fetching start -->
+        <query id="ti_role_type_fetch" query_name="ti_role_type_fetch" description="TI Role type fetching">
+          <![CDATA[ SELECT rd_ri.id, rd_ri.role_title, rd_ri.type, rd_ri.role_req_work_exp, rd_ri.role_pref_edu, 
+                      trd.role_title as reports_to from (SELECT rd.id, rd.role_title, ri.refitems_name as type, 
+                      rd.role_req_work_exp, rd.role_pref_edu, rd.role_reports_to_id from hcms_ti_role_details as rd, 
+                      reference_items as ri where rd.role_type_refitem_id = ri.id and rd.is_active = TRUE) rd_ri, hcms_ti_role_details as trd
+                      where rd_ri.role_reports_to_id = trd.id ]]>
+        </query>
+        <!-- 09-Mar-2018 || MST || Role Type display function fetching end -->
+        
+        <!-- 13-Mar-2018 || MST || Role title already exists check start -->
+        <query id="ti_role_title_check" query_name="ti_role_title_check" description="TI Role Title Check">
+          <![CDATA[ SELECT role_title from hcms_ti_role_details where role_title = %s and is_active = 't' ]]>
+        </query>
+        <!-- 13-Mar-2018 || MST || Role title already exists check end -->
+        
+        <!-- 28-Mar-2018 || MST || GIS Reports Query starts-->
+        <query id="ti_gis_reports" query_name="ti_gis_reports" description="GIS Reports Query">
+          <![CDATA[ select a.id, a.orgunit_name, a.role_id, a.role_title, a.emp_count as role_count, 
+                      b.gen_xyz, b.count as gen_count, a.latitude, a.longitude from 
+                      (select org.id, org.orgunit_name, array_agg(tb1.role_id_id) as role_id, 
+                      array_agg(rd.role_title) as role_title, array_agg(tb1.count) as emp_count, org.latitude, org.longitude
+                      from (select ei.org_unit_id_id, ei.role_id_id, count(ei.id) from employee_info ei 
+                      group by ei.org_unit_id_id, ei.role_id_id order by ei.org_unit_id_id) tb1, 
+                      organization_unit_info org, hcms_ti_role_details rd
+                      where org.id = tb1.org_unit_id_id and rd.id = tb1.role_id_id and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+                      group by org.id, org.orgunit_name, org.latitude, org.longitude order by org.id)a,
+
+                      (select org.id, org.orgunit_name, array_agg(tb1.refitems_name) as gen_xyz, array_agg(tb1.count) as count, 
+                      org.latitude, org.longitude
+                      from (select ei.org_unit_id_id, ri.refitems_name, count(ei.id) from employee_info ei
+                      inner join reference_items ri on ri.id = ei.gentype_refitem_no_id
+                      group by ei.org_unit_id_id,  ri.refitems_name order by ei.org_unit_id_id) tb1, 
+                      organization_unit_info org, hcms_ti_role_details rd
+                      where org.id = tb1.org_unit_id_id and rd.id = tb1.org_unit_id_id and rd.role_org_id = %s and %s = any(rd.role_org_unit)
+                      group by org.id, org.orgunit_name, org.latitude, org.longitude order by org.id)b
+                      where a.id = b.id ]]>
+        </query>
+        <!-- 28-Mar-2018 || MST || GIS Reports Query end -->
+
+        <!-- 28-Mar-2018 || MST || GIS Reports Query role title fetch starts-->
+        <query id="ti_gis_reports_role_title" query_name="ti_gis_reports_role_title" description="GIS Reports Query for role title">
+          <![CDATA[  select role_title from hcms_ti_role_details where role_org_id = %s and %s = any(role_org_unit)]]>
+        </query>
+        <!-- 28-Mar-2018 || MST || GIS Reports Query role title fetch end -->
+		
+	</queries>
+</data>

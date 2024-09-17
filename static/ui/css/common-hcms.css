@@ -1,0 +1,199 @@
+.form-group{ position: relative; }
+.fileinput-filename{ position:absolute; top:10px; left:30px; }
+.asterisk, .span-error { color: #e73d4a; }
+/*.form-group { position: relative; }*/
+.span-error { position: absolute; bottom: -17px; left: 0px; font-size: 11px; }
+.formValidate button.btn-success{ position: relative;top: 8px;}
+#search_result_str ul li a img{ width:50px; height:50px; }
+.dashboard-stat2 .display .number h3{ float:none; }
+.display .icon{top: calc(50% - 35px);right: 30px;left: inherit;}
+.dashboard-stat2 .display .icon>i{ color:#fff;font-size: 30px; }
+.dashboard-stat2 { padding: 15px 15px 5px 0px !important; } 
+.dash_recent_logs h3.panel-title{ padding-left:15px; }
+input[type=file]::-webkit-file-upload-button { border: 1px solid grey; background: red; }
+.tablefixed { word-wrap: break-word !important; table-layout:fixed !important; width: 100% !important; }
+#page_name{ float: left; line-height: 30px; }
+#page_name p{margin:0px;  }
+/* 17.05.2018 */
+.tablestyle{background-color: #ffffff!important;text-align: center;color: #3f8ffa;font-weight: bold;}
+.tablestyle-head{ color: #3f8ffa; font-weight: bold; text-align: center; vertical-align: top !important;}
+.tablecheck{ text-align: center;}
+.tablewidth{ width:33%;vertical-align: middle !important;}
+.table-responsive  .multiselect-native-select .dropdown-menu{    height: 180px !important;   overflow: scroll  !important;}
+.table-responsive .dropdown-menu>li>a {    padding: 8px 0px !important;}
+.table-responsive  .multiselect-container>li>a>label.checkbox {    margin: 0;    margin-left: 30px;}
+a.multiselect-all .checkbox {      margin-left: 0 !important;}
+.txt-info {color:#55bbff;margin:0px !important; } /* 07-JUN-2018 || SMI || Added by Mathi */
+.table-striped.user-access-details>tbody>tr.thead-table {background-color: #fff !important;}
+.user-access-details .text-left {text-align:left !important;}
+.user-access-details .table-icons i {color: #d277fe;font-size: 16px;}
+.multiselect-native-select .btn:not(.btn-sm):not(.btn-lg) {/*-webkit-box-shadow:0px -4px 11px -4px rgba(0, 0, 0, 0.34) !important;-moz-box-shadow:0px -4px 11px -4px rgba(0, 0, 0, 0.34) !important;box-shadow:0px -4px 11px -4px rgba(0, 0, 0, 0.34) !important;*/border: 1px solid #efefef !important;background: transparent;}
+/*Preloader CSS Mathi 06/12/2018 */
+.loader-wrapper {align-items: center;background: rgba(0, 0, 0, 0.65);display: flex;justify-content: center;position: absolute;z-index: 10051;left: 0px;right: 0px;top: 0px;bottom: 0px;}
+.loader{animation: rotate 1s infinite;height: 50px;width: 50px;}
+.loader:before, .loader:after {border-radius: 50%; content: '';display: block;height: 20px;width: 20px;}
+.loader:before {animation: ball1 1s infinite;background-color: #2ce7c7;box-shadow: 30px 0 0 #f6d166;margin-bottom: 10px;}
+.loader:after {animation: ball2 1s infinite;background-color: #55bbff;box-shadow: 30px 0 0 #ea8ecc;}
+@keyframes rotate {
+  0% {-webkit-transform: rotate(0deg) scale(0.8);-moz-transform: rotate(0deg) scale(0.8);}
+  50% {-webkit-transform: rotate(360deg) scale(1.2);-moz-transform: rotate(360deg) scale(1.2);}
+  100% {-webkit-transform: rotate(720deg) scale(0.8);-moz-transform: rotate(720deg) scale(0.8);}
+}
+@keyframes ball1 {
+  0% {box-shadow: 30px 0 0 #f6d166;}
+  50% {box-shadow: 0 0 0 #f6d166;margin-bottom: 0;-webkit-transform: translate(15px,15px);-moz-transform: translate(15px, 15px);}
+  100% {box-shadow: 30px 0 0 #f6d166;margin-bottom: 10px;}
+}
+@keyframes ball2 {
+  0% {box-shadow: 30px 0 0 #ea8ecc;}
+  50% {box-shadow: 0 0 0 #ea8ecc;margin-top: -20px;-webkit-transform: translate(15px,15px);-moz-transform: translate(15px, 15px);}
+    100% {box-shadow: 30px 0 0 #ea8ecc;margin-top: 0;}
+}
+/*==============================================================================================================================================================================
+
+CSS for Access Denied
+
+============================================================================================================================================================================== */
+.warning-icon { background: linear-gradient(to right, #ea8ecc 0%, #fa8e8f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 100px; }
+.blue_txt { color: #57c3ff; }
+/*==============================================================================================================================================================================
+
+CSS for DOW logo background
+
+============================================================================================================================================================================== */
+
+.portlet.light {    background-color: transparent;}
+.dow-logo { background-repeat: no-repeat; background-attachment: fixed;background-position: center;    overflow-x: hidden !important; }    
+
+/*==============================================================================================================================================================================
+
+CSS for Menu access master table
+
+============================================================================================================================================================================== */
+
+.user_access_table {    min-height: 300px;padding-bottom: 50px;}
+
+/*==============================================================================================================================================================================
+
+CSS common for all Select boxes
+
+============================================================================================================================================================================== */
+
+.form-group .select2-container--bootstrap .select2-selection,
+.form-group .select2-container--bootstrap .select2-selection--single .select2-selection__rendered
+ {color: #262626;font-size: 12px;}
+
+/*==============================================================================================================================================================================
+
+CSS for Profile image in footer menu
+
+============================================================================================================================================================================== */
+
+.navi-icon i {font-size: 30px; color: #d277fe;}
+.navi-icon i:hover {font-size: 30px; color: #000;}
+/* #profile_image img {border:1px solid #ddd;} */
+#profile_name {font-size: 14px;color: #000;padding-left: 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 200px;display: inline-block;text-transform: uppercase;}
+a.navi-icon {display: inline-block;	margin: -1px 10px 0px 4px;float: left;}
+
+/*==============================================================================================================================================================================
+
+CSS for Access Rights table
+
+============================================================================================================================================================================== */
+
+table.table-bordered.dataTable.user-access-details th, table.table-bordered.dataTable.user-access-details td {border:1px solid #e4e4e4 !important;}
+table.table-bordered.dataTable.user-access-details td {border-top:0px solid #ddd !important; border-left:0px solid #ddd !important;}
+/*==============================================================================================================================================================================
+
+CSS for add button position in data table
+
+============================================================================================================================================================================== */
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {top: 15px;}
+/*==============================================================================================================================================================================
+
+ONLY FOR RESPONSIVE VIEW DONT PAST STYLE BOTTOM ON RESPONSIVE VIEW. USE ONLY BEFOE SPACE
+
+============================================================================================================================================================================== */
+@media(min-width:1900px){
+    div.dataTables_wrapper div.dataTables_filter label{right: 150px;top: -42px;}
+}
+@media(max-width:1900px){
+    div.dataTables_wrapper div.dataTables_filter label{right: 125px;top: -41px;}
+}
+@media(max-width:1500px){
+    div.dataTables_wrapper div.dataTables_filter label { right: 125px; }
+}
+@media(max-width:530px){
+    div.dataTables_wrapper div.dataTables_filter label {right: 125px;}
+}
+@media (max-width: 768px)
+{
+.tablefixed {    table-layout: auto !important;  }        
+}
+/*==============================================================================================================================================================================
+
+EEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+
+============================================================================================================================================================================== */
+
+/* 15-06-2018 Css change for modal Mathi start */
+.modal-dialog{
+	margin-bottom:100px;
+}
+/* 15-06-2018 Css change for modal Mathi end*/
+.employee_mulit_search{
+	margin-top: 35px;
+}
+
+.logo1 {
+    float: left;
+    position: relative;
+    margin-top: -15px;
+    width: auto;
+    z-index: 1;
+    margin-left: 40px;
+}
+
+.logo img {
+    max-width: 180px;
+    margin-top: -10px;
+}
+.logo1 img {
+    max-width: 60px;
+    margin-top: -20px;
+}
+
+.dateTables_length_custom{
+margin-top:10px !important;
+} 
+.dateTables_pagination_custom{
+margin-top:-6px;
+}
+.document_remove_btn{
+	padding: 10px !important;
+}
+.uneditable-input .fileinput-exists {
+    top: 6px !important;
+}
+table.dataTable tbody tr.selected {
+    background-color: #bee8ff !important;
+}
+
+
+.rating_text{    float: left;    width: 10%;    margin-top: 10px;    margin-left: 10px;     padding-top: 10px;}
+.rateYo, .rateYoo{ float:left;padding-top: 10px;}
+.rating_content{width: 70%;float: left;}
+
+table.dataTable tbody tr.selected {   color: #000 !important;    background-color: #d3ecf7 !important;}
+ 
+/*.table-hover>tbody>tr:hover, .table-hover>tbody>tr:hover>td { background-color: #b8e4f7 !important;}*/
+
+/* 06-02-2019 Css change for MYNEXT popup datatable*/
+#user_plans_wrapper div.dataTables_filter label {top: -25px;}
+/* 06-02-2019 Css change for MYNEXT popup datatable*/
+
+ 
+ /* Datepicker placholder for span */
+[contentEditable=false]:empty:not(:focus):before{
+    content:attr(data-text)
+}

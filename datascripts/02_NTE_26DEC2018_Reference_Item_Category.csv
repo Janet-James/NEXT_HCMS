@@ -1,0 +1,138 @@
+id,created_date,modified_date,is_active,refitem_category_name,refitem_category_code,refitem_category_desc,created_by_id,modified_by_id
+1,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Salary Category,SRUCT,Salary Category,1,1
+2,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Salary Structure Amount Type,SRUAT,Salary Structure Amount Type,1,1
+3,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Payment Mode,PYMOD,Payment Mode,1,1
+4,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Payment Frequency,PYFQY,Payment Frequency,1,1
+5,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Contract Type,CONTY,Contract Type,1,1
+6,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Wage Type,WAGTY,Wage Type,1,1
+7,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Benefit Category,BENFT,Employee Benefit Category,1,1
+8,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Benefit Type,BENTY,Employee Benefit Type,1,1
+9,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Salary Component Value,BENVA,Salary Component Value,1,1
+10,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Deduction,DEDUC,Deduction,1,1
+11,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Marital Status,MARST,Marital Status,1,1
+12,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Religion,RELGN,Religion,1,1
+13,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Blood Group,BLGRP,Blood Group,1,1
+14,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Attendance Session,ATSSN,Attendance Session,1,1
+15,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Attendance Status,ATTST,Attendance Status,1,1
+16,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Relationship Type,RSPTY,Relationship Type,1,1
+17,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Degree,DGREE,Degree,1,1
+18,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Communication Medium,CMNMD,Communication Medium,1,1
+19,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Communication Origin,CMNOR,Communication Origin,1,1
+20,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Gender,GENDR,Gender,1,1
+21,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Job Position Status,JOBST,Job Position Status,1,1
+22,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Expense Type,EXPTY,Expense Type,1,1
+23,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Currency,CUREN,Currency,1,1
+24,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Expense Approval Status,STATS,Expense Approval Status,1,1
+25,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Expense Reject Reasons,RJRSN,Expense Reject Reasons,1,1
+26,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Leave Approval Status,LEVST,Leave Approval Status,1,1
+27,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Leave Type,LEVTY,Leave Type,1,1
+28,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Leave Request Reject Reasons,LEVRS,Leave Request Reject Reasons,1,1
+29,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Person title,TITLE,Person title,1,1
+30,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Candidate Notice Period,NTCPD,Candidate Notice Period,1,1
+31,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Candidate Status,CNDST,Candidate Status,1,1
+32,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Bank Name,BANKN,Bank Name,1,1
+33,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Periodicity,PERCT,Periodicity,1,1
+34,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Role Type,ROTYP,Role Type,1,1
+35,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Technical Competencies,TECMP,Technical Competencies,1,1
+36,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Behavioural Competencies,BHCMP,Behavioural Competencies,1,1
+37,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Balanced Scorecard,BSCRD,Balanced Scorecard,1,1
+38,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Organization Unit Type,OUNTY,Organization Unit Type,1,1
+39,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,KPI target type,KPITY,KPI target type,1,1
+40,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Assessment category,ASCAT,Assessment category,1,1
+41,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Assessor type,ASMTY,Assessor type,1,1
+42,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee type,EMPTY,Employee type,1,1
+43,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Functional Competencies,FNCMP,Functional Competencies,1,1
+44,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Assessment Field Type,FETYP,Assessment Field Type,1,1
+45,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Tracking Type,TRATY,Tracking Type,1,1
+46,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Measure Frequency,MFRNY,Measure Frequency,1,1
+47,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Skill Set Level,SSLVL,Skill Set Level,1,1
+48,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Excluded Assessor Type,EXAST,Excluded Assessor Type,1,1
+49,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Document Type,EDCTY,Employee Document Type,1,1
+50,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Document Type Removal Reasons,EDRMV,Employee Document Type Removal Reasons,1,1
+51,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Assessment Schedule Status,ESCST,Employee Assessment Schedule Status,1,1
+52,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Employee Grade,GRADE,Employee Grade,1,1
+53,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Attendance Options,ATOPN,Attendance Options,1,1
+54,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Disability Details,DISDT,Disability Details,1,1
+55,2018-02-13 22:01:00+05:30,2018-02-13 22:01:00+05:30,t,Generation Type,GENTY,Generation Type,1,1
+56,2018-02-14 22:01:00+05:30,2018-02-14 22:01:00+05:30,t,System Entity Type,SENTY,System Entity Type,1,1
+57,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,System Entity Status,SENST,System Entity Status,1,1
+58,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,System Entity Category,SENCT,System Entity Category,1,1
+59,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,System Entity SubCategory,SSBCT,System Entity SubCategory,1,1
+60,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Data Dictionary Category,DDNCT,Data Dictionary Category,1,1
+61,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Data Dictionary  Type,DDNTY,Data Dictionary  Type,1,1
+62,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Data Dictionary Element Type,DENTY,Data Dictionary Element Type,1,1
+63,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Data Dictionary Status,DDNST,Data Dictionary Status,1,1
+64,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Data Dictionary SubCategory,DDNSC,Data Dictionary SubCategory,1,1
+65,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Incident Severity,ISVTY,Incident Severity,1,1
+66,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Incident Type,INCTY,Incident Type,1,1
+67,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Incident Category,INCCT,Incident Category,1,1
+68,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Reporting Mode,RPMOD,Reporting Mode,1,1
+69,2018-02-15 22:01:00+05:30,2018-02-15 22:01:00+05:30,t,Employee Assets,ASSET,Employee Assets,1,1
+70,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Holiday List,HOLDY,Holiday List,1,1
+71,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Disability Percentage,DIPER,Disability Percentage,1,1
+72,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Skill Type,STYPE,Skill Type,1,1
+73,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Shift Type,SHTYP,Shift Type,1,1
+74,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Reason For Leaving,RFLEV,Reason For Leaving,1,1
+75,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Exit Checklists,EXTCL,Exit Checklists,1,1
+76,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Asset Type,ASTYP,Asset Type,1,1
+77,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Asset Status,ASTST,Asset Status,1,1
+78,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Country,CNTRY,Country,1,1
+79,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Country Code,CCODE,Country Code,1,1
+80,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Province,PVNCE,Province,1,1
+81,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Asset Make,ASTMK,Asset Make,1,1
+82,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Asset Model,ASTMD,Asset Model,1,1
+83,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Holiday List,YEARS,Holiday List,1,1
+84,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Attendance Period,ALPER,Attendance Period,1,1
+85,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,f,Strategy Analysis,WFPA1,Strategy Analysis,1,1
+86,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,f,Structure Analysis,WFPA2,Structure Analysis,1,1
+87,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,f,System Analysis,WFPA3,System Analysis,1,1
+88,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Tools & Technology,TATS1,Tools & Technology,1,1
+89,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Job Type,JOBTY,Job Type,1,1
+90,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Work Experience,WRKEX,Work Experience,1,1
+91,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Job Board,JBOAD,Job Board,1,1
+92,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Job Opening Status,JOPEN,Job Opening Status,1,1
+93,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Offer Release,OFFRE,Offer Release,1,1
+94,2018-05-16 22:01:00+05:30,2018-05-16 22:01:00+05:30,t,Cost to Company,COSTE,Cost to Company,1,1
+95,2018-07-10 22:01:00+05:30,2018-07-10 22:01:00+05:30,t,Interview Type,INTYP,Interview Type,1,1
+96,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Interview Status,INSTS,Interview Status,1,1
+97,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Candidate Status,CASTS,Candidate Status,1,1
+98,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Candidate Screening,CASCG,Candidate Screening,1,1
+99,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Candidate Interview,CAINT,Candidate Interview,1,1
+100,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Candidate Hired,CAHRD,Candidate Hired,1,1
+101,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Source of Hire,SOHRE,Source of Hire,1,1
+102,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Employee Award,AWARD,Employee Award,1,1
+103,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Job Position Status,JBOST,Job Position Status,1,1
+104,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Connection,CONCN,Connection,1,1
+105,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Culture,CULTR,Culture,1,1
+106,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Clarification,CLRFN,Clarification,1,1
+107,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Compliance,COMPS,Compliance,1,1
+108,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Job Request Reason,JBRSN,Job Request Reason,1,1
+109,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Role Grade,RLGRD,Role Grade,1,1
+110,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Polices & Procedure,POLPR,Polices & Procedure,1,1
+111,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Organization Standard,ORGST,Organization Standard,1,1
+112,2018-07-13 22:01:00+05:30,2018-07-13 22:01:00+05:30,t,Recruiting Instruction,REINS,Recruiting Instruction,1,1
+113,2018-08-20 22:01:00+05:30,2018-08-20 22:01:00+05:30,t,Interview Rating,INRAT,Inteview Rating,1,1
+114,2018-08-20 22:01:00+05:30,2018-08-20 22:01:00+05:30,t,Department Clearance,DPTCL,Department Clearance,1,1
+115,2018-08-20 22:01:00+05:30,2018-08-20 22:01:00+05:30,t,Network Clearance,NTWCL,Network Clearance,1,1
+116,2018-08-20 22:01:00+05:30,2018-08-20 22:01:00+05:30,t,Account Clearance,ACCCL,Account Clearance,1,1
+117,2018-08-20 22:01:00+05:30,2018-08-20 22:01:00+05:30,t,Admin Clearance,ADMCL,Admin Clearance,1,1
+118,2018-09-13 22:01:00+05:30,2018-09-13 22:01:00+05:30,t,Transfer Category,TRCAT,Transfer Category,1,1
+119,2018-09-13 22:01:00+05:30,2018-09-13 22:01:00+05:30,t,Transfer Type,TRTYP,Transfer Type,1,1
+120,2018-09-13 22:01:00+05:30,2018-09-13 22:01:00+05:30,t,Transfer Reason,TRRSN,Transfer Reason,1,1
+121,2018-09-13 22:01:00+05:30,2018-09-13 22:01:00+05:30,t,Demotion Reason,DERSN,Demotion Reason,1,1
+122,2018-09-20 22:01:00+05:30,2018-09-20 22:01:00+05:30,t,Succession Planning Key & Roles,KEROS,Succession Planning Key & Roles,1,1
+123,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Age of Worker,AGEWR,Age of Worker,1,1
+124,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Time in Current Role,TIMCR,Time in Current Role,1,1
+125,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Salary Level,SALEL,Salary Level,1,1
+126,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Work Load,WRKLD,Work Load,1,1
+127,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Pay Rise,PAYRE,Pay Rise,1,1
+128,2018-09-26 22:01:00+05:30,2018-09-26 22:01:00+05:30,t,Training Type,LDTTY,Training Type,1,1
+129,2018-09-26 22:01:00+05:30,2018-09-26 22:01:00+05:30,t,Training Methodology,LDTME,Training Methodology,1,1
+130,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Career Direction,CARDR,Career Direction,1,1
+131,2018-09-22 22:01:00+05:30,2018-09-22 22:01:00+05:30,t,Readiness for Promotion,RDYPO,Readiness for Promotion,1,1
+132,2018-10-03 22:01:00+05:30,2018-10-03 22:01:00+05:30,t,Training Category,LDTCA,Training Category,1,1
+133,2018-10-03 22:01:00+05:30,2018-10-03 22:01:00+05:30,t,Day type,DTYPE,Day type,1,1
+134,2018-12-11 22:01:00+05:31,2018-12-11 22:01:00+05:31,t,Service Call Priority,SCPRI,Service Call Priority,1,1
+135,2018-12-11 22:01:00+05:31,2018-12-11 22:01:00+05:31,t,LVR Period,LVRPD,LVR Period,1,1
+136,2018-12-11 22:01:00+05:31,2018-12-11 22:01:00+05:31,t,Arrear Type,ARRTP,Arrear Type,1,1
+137,2018-12-24 22:01:00+05:31,2018-12-24 22:01:00+05:31,t,Cadidate Portal Job Category,JCATG,Cadidate Portal Job Category,1,1

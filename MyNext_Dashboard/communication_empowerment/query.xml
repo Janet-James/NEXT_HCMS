@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<data>
+	<queries name="communication_empowerment">
+	
+		<query id="service_default_query" query_name="service_default_query" description="service_default_query">
+          <![CDATA[select id,query from hcms_ce_default_query where service_call_group={0} and is_active]]>
+	</query>
+	<query id="group_based_employee_fetch" query_name="group_based_employee_fetch" description="group_based_employee_fetch">
+          <![CDATA[select id , concat(name,' ',last_name) as employee_name from employee_info where is_active and id in( select service_group_employee_id from hcms_ce_access_setup where service_call_group={0} and is_active) order by name]]>
+	</query>
+	<!-- <query id="employee_group_check_query" query_name="employee_group_check_query" description="employee_group_check_query">
+          <![CDATA[select id from auth_user where is_active and role_id in( select service_group_role_id from hcms_ce_access_setup where service_call_group={0} and is_active) and id={1}]]>
+	</query> -->
+	<query id="employee_group_check_query" query_name="employee_group_check_query" description="employee_group_check_query">
+          <![CDATA[select id from auth_user 
+where is_active and id in( select employee_info.related_user_id_id  from hcms_ce_access_setup 
+inner join employee_info on employee_info.id=service_group_employee_id
+where service_call_group={0} and hcms_ce_access_setup.is_active and employee_info.is_active) and id={1}]]>
+	</query>
+	<query id="service_call_insert" query_name="service_call_insert" description="service_call_insert">
+          <![CDATA[insert into hcms_ce_service_call (default_query_id,query,description,priority_id,service_call_status,attachment_id,opened_by_id,opened_date,service_call_group,created_by_id,created_date,is_active)
+          values (%s,%s,%s,%s,%s,%s,%s,now(),%s,%s,now(),true) returning id]]>
+	</query>
+	<query id="communication_thread_display" query_name="communication_thread_display" description="communication_thread_display">
+          <![CDATA[select attach_info.id as attatch_id,attach_info.name,attach_info.path,attach_info.format,sc.id,sc.assigned_to_id,ei.image_id_id,sc.query_code,query,description,service_call_status,concat(ei.name,' ',ei.last_name) as opened_by,sc.opened_by_id,sc.opened_date as opened_on ,ri.refitems_name as priority,rating from
+hcms_ce_service_call sc left join employee_info ei on sc.opened_by_id= ei.id 
+left join reference_items ri on sc.priority_id=ri.id 
+left join attachment_info as attach_info on attach_info.id=sc.attachment_id where sc.id={0} and sc.is_active ]]>
+	</query>
+	<query id="response_thread_retrieval" query_name="response_thread_retrieval" description="response_thread_retrieval">
+          <![CDATA[
+select response_content,  concat(ei.name,' ',ei.last_name) as responded_by,ei.image_id_id,responded_on,responded_by_id,status_changed_to from hcms_ce_response_thread rt left join employee_info ei
+on rt.responded_by_id =ei.id where service_call_id={0} and rt.is_active order by rt.id]]>
+	</query>
+	<query id="service_overdue_log_insert" query_name="service_overdue_log_insert" description="service_overdue_log_insert">
+          <![CDATA[insert into hcms_ce_service_call_overdue_log (service_call_id,overdue_stage,overdue_date,sla_timelap,sla_timelap_time,created_date,is_active)
+          values (%s,%s,now(),%s,%s,now(),true) returning id]]>
+	</query>
+	
+	<query id="update_service_timelap" query_name="update_service_timelap" description="update_service_timelap">
+          <![CDATA[update hcms_ce_service_call set sla_timelap=%s where id=%s]]>
+	</query>
+	<query id="communication_response_submit" query_name="communication_response_submit" description="communication_response_submit">
+          <![CDATA[insert into hcms_ce_response_thread (service_call_id,response_content,responded_by_id,responded_on,service_call_status,status_changed_to,assigned_to_id,created_by_id,created_date,is_active)
+          values (%s,%s,%s,now(),%s,%s,%s,%s,now(),true) returning id
+          ]]>
+          </query>
+          <!-- <query id="service_group_member_mail_fetch" query_name="service_group_member_mail_fetch" description="service_group_member_mail_fetch">
+          <![CDATA[select array_agg(email) as group_mail from auth_user where is_active and role_id in( select service_group_role_id from hcms_ce_access_setup where service_call_group=%s and is_active)
+          ]]>
+          </query> -->
+          <query id="service_group_member_mail_fetch" query_name="service_group_member_mail_fetch" description="service_group_member_mail_fetch">
+          <![CDATA[select array_agg(email) as group_mail from auth_user 
+where is_active and id in( select employee_info.related_user_id_id  from hcms_ce_access_setup 
+inner join employee_info on employee_info.id=service_group_employee_id
+where service_call_group=%s and hcms_ce_access_setup.is_active and employee_info.is_active)
+          ]]>
+          </query>
+    <query id="employee_id_fetch" query_name="employee_id_fetch" description="employee_id_fetch">
+          <![CDATA[select ei.id ,concat(name,' ',ei.last_name) as name,image_id_id,au.email from employee_info ei left join auth_user au on ei.related_user_id_id=au.id where related_user_id_id={0} and ei.is_active
+          ]]>
+	</query>
+	 <query id="employee_detail_fetch" query_name="employee_detail_fetch" description="employee_detail_fetch">
+          <![CDATA[select id,concat(name,' ',last_name) as name, work_email as email from employee_info where id={0}
+          ]]>
+	</query>
+	 <query id="call_assigned_update" query_name="call_assigned_update" description="call_assigned_update">
+          <![CDATA[update hcms_ce_service_call set service_call_status=%s,assigned_to_id =%s,rating=%s,modified_by_id=%s,modified_date=now() where id=%s
+          ]]>
+          </query>
+	<query id="query_code" query_name="query_code" description="query_code_insert">
+          <![CDATA[update hcms_ce_service_call set query_code=%s where id=%s]]>
+		</query>
+	<query id="def_cat_insert" query_name="def_cat_insert" description="def_cat_insert">
+          <![CDATA[insert into hcms_ce_default_query (service_call_group,query,created_date,created_by_id,is_active)
+          values (%s,%s,now(),%s,true) returning id]]>
+	</query>
+	
+	<query id="def_cat_remove" query_name="def_cat_remove" description="def_cat_remove">
+          <![CDATA[update hcms_ce_default_query set modified_by_id=%s,is_active=False where id=%s]]>
+		</query>
+		
+	<query id="fetch_def_cat_data" query_name="fetch_def_cat_data" description="fetch_def_cat_data">
+          <![CDATA[select id,query,service_call_group from hcms_ce_default_query where is_active]]>
+	</query>
+	
+	<query id="def_cat_update" query_name="def_cat_update" description="def_cat_update">
+          <![CDATA[update hcms_ce_default_query set service_call_group=%s,query=%s,modified_date=now(),modified_by_id=%s where id=%s returning id]]>
+		</query>
+	
+	<query id="service_attachment_fetch" query_name="service_attachment_fetch" description="service_attachment_fetch">
+          <![CDATA[select path from attachment_info where id={0} and is_active='TRUE']]>
+		</query>
+	<query id="open_service_call_details_fetch" query_name="service_call_details_fetch" description="service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where (a.service_call_status=1 or a.service_call_status=6) and opened_by_id={0} ]]>
+		</query>
+		<query id="ans_service_call_details_fetch" query_name="ans_service_call_details_fetch" description="ans_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where a.service_call_status=2 and opened_by_id={0} ]]>
+		</query>
+		<query id="resolve_service_call_details_fetch" query_name="resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where a.service_call_status=3 and opened_by_id={0} ]]>
+		</query>
+		<query id="verify_service_call_details_fetch" query_name="resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where a.service_call_status=4 and opened_by_id={0} ]]>
+		</query>
+		<query id="close_service_call_details_fetch" query_name="resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where a.service_call_status=5 and opened_by_id={0} ]]>
+		</query>
+		<query id="ticket_count" query_name="ticket_count" description="ticket_count">
+          <![CDATA[select count(id) from hcms_ce_service_call where (service_call_status=1 or service_call_status=6)  and opened_by_id={0}]]>
+		</query>
+		<query id="rating_check_query" query_name="rating_check_query" description="rating_check_query">
+          <![CDATA[select id from hcms_ce_service_call where service_call_status =5 and (rating is null or rating=0) and created_by_id={0} and service_call_group={1} and is_active]]>
+		</query>
+		<query id="api_fetch_auth_user" query_name="api_fetch_auth_user" description="api_fetch_auth_user">
+          <![CDATA[select auth_user.email,auth_user.id,concat(employee_info.name,' ', employee_info.last_name) as employee_name from auth_user 
+inner join employee_info on auth_user.id=employee_info.related_user_id_id
+where auth_user.is_active and auth_user.id in (select related_user_id_id from employee_info 
+where employee_info.id ={0} and employee_info.is_Active)]]>
+		</query>
+		<query id="api_employee_check" query_name="api_employee_check" description="api_employee_check">
+          <![CDATA[select id from auth_user where id in ( select related_user_id_id from employee_info where employee_info.id ={0} and employee_info.is_Active)]]>
+		</query>
+		
+		<query id="api_service_search" query_name="api_service_search" description="api_service_search">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,
+            case when a.service_call_status=1 then (opened_date ) when a.service_call_status=2 then (answered_date ) 
+            when a.service_call_status=3 then (resolved_date )
+            when a.service_call_status=4 then (verified_date )
+            when a.service_call_status=5 then (closed_date )
+            when a.service_call_status=6 then (reopened_date )
+            END as date,
+            case when a.service_call_status=1 then 'opened'  when a.service_call_status=2 then 'answered'
+            when a.service_call_status=3 then 'resolved'
+            when a.service_call_status=4 then 'verified'
+            when a.service_call_status=5 then 'closed'
+            when a.service_call_status=6 then 'reopened'
+            END as stage,
+            case when a.service_call_status=1 then (select concat(name,' ',last_name)  from employee_info where id=opened_by_id)  
+            when a.service_call_status=2 then (select concat(name,' ',last_name)  from employee_info where id=answered_by_id)
+            when a.service_call_status=3 then (select concat(name,' ',last_name)  from employee_info where id=resolved_by_id)
+            when a.service_call_status=4 then (select concat(name,' ',last_name)  from employee_info where id=verified_by_id)
+            when a.service_call_status=5 then (select concat(name,' ',last_name)  from employee_info where id=closed_by_id)
+            when a.service_call_status=6 then (select concat(name,' ',last_name)  from employee_info where id=reopened_by_id)
+            END as responsed_by,
+            a.created_date,
+            a.id as ticket_no,
+            a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id where a.query ilike '%{0}%' and a.created_by_id={1} and a.is_active order by date desc]]>
+		</query>
+		<query id="api_thred_employee_fetch" query_name="api_thred_employee_fetch" description="api_thred_employee_fetch">
+          <![CDATA[select ei.id ,concat(name,' ',ei.last_name) as name,image_id_id,au.email 
+from employee_info ei left join auth_user au on ei.related_user_id_id=au.id where ei.id={0} and ei.is_active]]>
+		</query>
+		<!-- <query id="api_open_service_call_details_fetch" query_name="api_service_call_details_fetch" description="service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,
+         a.assigned_to_id,concat(employee_info.name,' ',employee_info.last_name) as assign_to,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id 
+left join   employee_info on  employee_info.id=a.assigned_to_id 
+where (a.service_call_status=1 or a.service_call_status=6) and opened_by_id={0} ]]>
+		</query> -->
+		<!-- <query id="api_ans_service_call_details_fetch" query_name="api_ans_service_call_details_fetch" description="ans_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, 
+        a.query_code, a.assigned_to_id,concat(employee_info.name,' ',employee_info.last_name) as assign_to,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id 
+left join   employee_info on  employee_info.id=a.assigned_to_id 
+where a.service_call_status=2 and opened_by_id={0} ]]>
+		</query> -->
+		<!-- <query id="api_resolve_service_call_details_fetch" query_name="api_resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, a.query_code,
+         a.assigned_to_id,concat(employee_info.name,' ',employee_info.last_name) as assign_to,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id 
+left join   employee_info on  employee_info.id=a.assigned_to_id 
+where a.service_call_status=3 and opened_by_id={0} ]]>
+		</query>
+		<query id="api_verify_service_call_details_fetch" query_name="api_resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, 
+         a.assigned_to_id,concat(employee_info.name,' ',employee_info.last_name) as assign_to,a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id 
+left join   employee_info on  employee_info.id=a.assigned_to_id 
+where a.service_call_status=4 and opened_by_id={0} ]]>
+		</query>
+		<query id="api_close_service_call_details_fetch" query_name="api_resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age, 
+         a.assigned_to_id,concat(employee_info.name,' ',employee_info.last_name) as assign_to,a.query_code,case when a.service_call_group=1 then 'HCM' 
+            when a.service_call_group=2 then 'PMO' 
+            when a.service_call_group=3 then 'General' else 'no' END as service_group,a.id as ticket_no,row_number() over() as s_no,a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority from hcms_ce_service_call as a 
+inner join reference_items ref on ref.id=a.priority_id 
+left join   employee_info on  employee_info.id=a.assigned_to_id 
+where a.service_call_status=5 and opened_by_id={0} ]]>
+		</query> -->
+		<query id="api_hcm_group_query" query_name="api_hcm_group_query" description="api_hcm_group_query">
+          <![CDATA[
+select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+        case when a.service_call_status=1 then 'opened'
+        when a.service_call_status=1 then 'opened'
+        when a.service_call_status=2 then 'answered'
+        when a.service_call_status=3 then 'resolved'
+        when a.service_call_status=4 then 'veriied'
+        when a.service_call_status=5 then 'closed'
+        when a.service_call_status=6 then 'reopened' end as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.opened_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active  and service_call_group={0} order by a.id desc ]]>
+		</query>
+		<query id="api_group_check_query" query_name="api_group_check_query" description="api_group_check_query">
+          <![CDATA[
+		select service_call_group from  hcms_ce_access_setup where service_group_employee_id={0} and is_Active 
+	]]>
+	</query>
+	
+		<query id="api_open_service_call_details_fetch" query_name="api_service_call_details_fetch" description="service_call_details_fetch">
+          <![CDATA[
+select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+         'opened'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.opened_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active  and service_call_group={0} and  opened_by_id={1}  and (a.service_call_status=1 or a.service_call_status=6) order by a.id desc ]]>
+		</query>
+		<query id="api_ans_service_call_details_fetch" query_name="api_ans_service_call_details_fetch" description="ans_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+         'answered'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(eri.name,' ',eri.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.answered_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+left join employee_info eri on a.opened_by_id =eri.id
+where a.is_active  and service_call_group={0} and  opened_by_id={1}  and a.service_call_status=2 order by a.id desc ]]>
+		</query>
+		<query id="api_resolve_service_call_details_fetch" query_name="api_resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+         'resolved'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.resolved_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active  and service_call_group={0} and  opened_by_id={1}  and a.service_call_status=3 order by a.id desc ]]>
+		</query>
+		<query id="api_verify_service_call_details_fetch" query_name="api_verify_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+         'verified'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.verified_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active  and service_call_group={0} and  opened_by_id={1}  and a.service_call_status=4 order by a.id desc ]]>
+		</query>
+		<query id="api_close_service_call_details_fetch" query_name="api_close_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code,
+         'verified'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.closed_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active  and service_call_group={0} and  opened_by_id={1}  and a.service_call_status=5 order by a.id desc ]]>
+		</query>
+		
+		
+		
+		<query id="group_api_open_service_call_details_fetch" query_name="group_api_open_service_call_details_fetch" description="service_call_details_fetch">
+          <![CDATA[
+select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code as ticket_no,'answered' as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(ei.name,' ',ei.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.opened_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id
+where a.is_active and (a.service_call_status=1 or a.service_call_status=6) and service_call_group={0} order by a.id desc ]]>
+		</query>
+		<query id="group_api_ans_service_call_details_fetch" query_name="api_ans_service_call_details_fetch" description="ans_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code as ticket_no,'answered'
+         as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(eri.name,' ',eri.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.answered_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id left join employee_info eri on a.opened_by_id =eri.id
+where a.is_active and a.service_call_status=2 and service_call_group={0} order by a.id desc]]>
+		</query>
+		<query id="group_api_resolve_service_call_details_fetch" query_name="api_resolve_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code as ticket_no,'resolved' as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(eri.name,' ',eri.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.resolved_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id left join employee_info eri on a.opened_by_id =eri.id
+where a.is_active and a.service_call_status=3 and service_call_group={0} order by a.id desc]]>
+		</query>
+		<query id="group_api_verify_service_call_details_fetch" query_name="api_verify_service_call_details_fetch" description="resolve_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to, (concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code as ticket_no,'verified' as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(eri.name,' ',eri.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.verified_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id left join employee_info eri on a.opened_by_id =eri.id
+where a.is_active and a.service_call_status=4 and service_call_group={0} order by a.id desc ]]>
+		</query>
+		<query id="group_api_close_service_call_details_fetch" query_name="api_close_service_call_details_fetch" description="api_close_service_call_details_fetch">
+          <![CDATA[select case when a.assigned_to_id is null and a.service_call_group=1 then 'HCM Group' 
+            when a.assigned_to_id is null and a.service_call_group=2 then 'PMO Group' 
+            when a.assigned_to_id is null and a.service_call_group=3 then 'GS Group'
+            when a.assigned_to_id is not null then concat(eai.name,' ',eai.last_name) end as assigned_to,(concat(DATE_PART('day',now()::timestamp - a.created_date::timestamp),' Days:') ||
+        concat(DATE_PART('hours',now()::timestamp - a.created_date::timestamp),' Hours:') ||
+        concat(DATE_PART('minutes',now()::timestamp - a.created_date::timestamp),' Minutes')) as age,a.id,a.query_code as ticket_no,'closed' as ticket_status,
+        a.created_date as date,a.query,a.service_call_status,ref.refitems_name as priority, concat(ei.name,' ',ei.last_name) as status_changed_by,concat(eri.name,' ',eri.last_name) as raised_by  from hcms_ce_service_call as a 
+left join reference_items ref on ref.id=a.priority_id left join employee_info ei on a.closed_by_id = ei.id left join employee_info eai on a.assigned_to_id =eai.id left join employee_info eri on a.opened_by_id =eri.id
+where a.is_active and a.service_call_status=5 and service_call_group={0} order by a.id desc ]]>
+		</query>
+		
+		<query id="def_cat_insert_check" query_name="def_cat_insert_check" description="def_cat_insert_check">
+          <![CDATA[
+		select query,case when service_call_group=1 then 'HCM'
+when service_call_group=2 then 'General Service'
+when service_call_group=3 then 'PMO' end as service_group
+ from hcms_ce_default_query where is_active and query ilike '%{0}%'
+	]]>
+	</query>
+	
+		<query id="def_cat_update_check" query_name="def_cat_update_check" description="def_cat_update_check">
+          <![CDATA[
+		select query,case when service_call_group=1 then 'HCM'
+when service_call_group=2 then 'General Service'
+when service_call_group=3 then 'PMO' end as service_group
+ from hcms_ce_default_query where is_active and query ilike '%{0}%' and id!={1}
+	]]>
+	</query>
+	</queries>
+</data>
+	
